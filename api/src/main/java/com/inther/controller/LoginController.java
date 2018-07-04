@@ -89,7 +89,7 @@ public class LoginController {
 
     /*
     *
-    * 
+    *
     * */
     @RequestMapping("/player_exist")
     public Map<String, String> playerExist(@RequestParam(name = "login", defaultValue = "kek") String login) {
