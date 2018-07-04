@@ -1,4 +1,4 @@
-package com.inther;
+package com.inther.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
