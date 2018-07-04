@@ -30,21 +30,21 @@ public class LoginController {
         if (!(login.equals("null")) && !(password.equals("null"))) {
             Player player = playerRepository.findByLogin(login);
             if (player == null) {
-                map.put("result", "failed");
+                map.put("status", "failed");
                 map.put("message", "no such player exist");
             } else {
                 if (player.getPassword().equals(password)) {
-                    map.put("result", "success");
+                    map.put("status", "success");
                     map.put("id", player.getID().toString());
                     map.put("points", player.getPoints().toString());
                     //Put all Strength
                 } else {
-                    map.put("result", "error");
+                    map.put("status", "failed");
                     map.put("message", "wrong password");
                 }
             }
         } else {
-            map.put("result", "error");
+            map.put("result", "failed");
             map.put("message", "no login and/or password");
         }
         return map;
@@ -60,18 +60,18 @@ public class LoginController {
         if (!(login.equals("null")) && !(password.equals("null"))) {
             try {
                 playerRepository.save(player);
-                map.put("result", "success");
+                map.put("status", "success");
                 playerRepository.findByLogin(login);
                 map.put("id", player.getID().toString());
                 map.put("points", player.getPoints().toString());
                 return map;
             } catch (Exception e) {
-                map.put("result", "error");
+                map.put("status", "failed");
                 map.put("message", "exception occurred");
                 return map;
             }
         } else {
-            map.put("result", "stopped");
+            map.put("status", "failed");
             map.put("message", "no login and/or password");
             return map;
         }
@@ -81,9 +81,11 @@ public class LoginController {
     public Map<String, String> playerExist(@RequestParam(name = "login", defaultValue = "kek") String login) {
         TreeMap<String, String> map = new TreeMap<>();
         if (playerRepository.findByLogin(login) == null) {
+            map.put("status", "success");
             map.put("result", "false");
             return map;
         }
+        map.put("status", "success");
         map.put("result", "true");
         return map;
     }
