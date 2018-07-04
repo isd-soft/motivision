@@ -2,10 +2,7 @@ package com.inther.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Character {
@@ -14,9 +11,6 @@ public class Character {
     @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
     private Long ID;
-
-    @ManyToOne
-    private Long playerId;
 
     private Long headType;
 
@@ -30,6 +24,10 @@ public class Character {
 
     private int team_id;
 
+    @ManyToOne
+    @JoinColumn(name = "player_id")
+    private Player player;
+
     public Character() {
     }
 
@@ -39,10 +37,6 @@ public class Character {
 
     public Long getID() {
         return ID;
-    }
-
-    public Long getPlayerId() {
-        return playerId;
     }
 
     public int getTeam_id() {
@@ -87,5 +81,9 @@ public class Character {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

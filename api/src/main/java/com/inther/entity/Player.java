@@ -23,7 +23,8 @@ public class Player {
 
     private Integer points;
 
-    //private List<Character> characters;
+    @OneToMany(mappedBy = "player")
+    private List<Character> characters;
 
     public Player() {
         points = 0;
@@ -61,5 +62,13 @@ public class Player {
 
     public void setPoints(Integer points) {
         this.points = points;
+    }
+
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
+    }
+
+    public List<Character> getCharacters() {
+        return characters;
     }
 }

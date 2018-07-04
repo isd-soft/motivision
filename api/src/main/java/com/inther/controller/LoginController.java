@@ -28,6 +28,7 @@ public class LoginController {
     * @param password - user password
     * @return Json data
     * */
+
     @RequestMapping("/login")
     public Map<String, String> login(@RequestParam(value = "login", defaultValue = "null") String login,
                                      @RequestParam(value = "password", defaultValue = "null") String password) {
