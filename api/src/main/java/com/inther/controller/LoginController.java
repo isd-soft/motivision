@@ -22,7 +22,12 @@ public class LoginController {
     @Autowired
     PlayerRepository playerRepository;
 
-
+    /*
+    * Login controller
+    * @param login - user login
+    * @param password - user password
+    * @return Json data
+    * */
     @RequestMapping("/login")
     public Map<String, String> login(@RequestParam(value = "login", defaultValue = "null") String login,
                                      @RequestParam(value = "password", defaultValue = "null") String password) {
@@ -48,8 +53,13 @@ public class LoginController {
             map.put("message", "no login and/or password");
         }
         return map;
-}
+    }
 
+    /*
+    * @param login - user login to register
+    * @param password - user password to register
+    * @return Json representation of result logs
+    * */
     @RequestMapping("/register_player")
     public Map<String, String> newPlayer(@RequestParam(value = "login", defaultValue = "null") String login,
                                          @RequestParam(value = "password", defaultValue = "null") String password) {
@@ -77,6 +87,10 @@ public class LoginController {
         }
     }
 
+    /*
+    *
+    * 
+    * */
     @RequestMapping("/player_exist")
     public Map<String, String> playerExist(@RequestParam(name = "login", defaultValue = "kek") String login) {
         TreeMap<String, String> map = new TreeMap<>();
