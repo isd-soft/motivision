@@ -1,12 +1,15 @@
 package com.inther.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 @Entity
 public class Activities {
 
+    @Id
+    @GenericGenerator(name = "kaugen", strategy = "increment")
+    @GeneratedValue(generator = "kaugen")
     private Long ID;
 
     private String name;
@@ -15,7 +18,7 @@ public class Activities {
 
     @ManyToOne
     @JoinColumn(name = "team_id")
-    private Team team_activities;
+    private Team teamActivities;
 
     public Activities() {}
 
@@ -40,10 +43,10 @@ public class Activities {
     }
 
     public Team getTeam_activities() {
-        return team_activities;
+        return teamActivities;
     }
 
-    public void setTeam_activities(Team team_activities) {
-        this.team_activities = team_activities;
+    public void setTeam_activities(Team teamActivities) {
+        this.teamActivities = teamActivities;
     }
 }

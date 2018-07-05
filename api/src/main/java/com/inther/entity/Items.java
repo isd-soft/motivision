@@ -1,15 +1,22 @@
 package com.inther.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Items {
 
+    @Id
+    @GenericGenerator(name = "kaugen", strategy = "increment")
+    @GeneratedValue(generator = "kaugen")
     private Long ID;
 
-    private Long type_id;
+    private Long typeId;
 
-    private String image_url;
+    private String imageUrl;
 
     private int price;
 
@@ -19,20 +26,20 @@ public class Items {
         return ID;
     }
 
-    public Long getType_id() {
-        return type_id;
+    public Long getTypeId() {
+        return typeId;
     }
 
-    public void setType_id(Long type_id) {
-        this.type_id = type_id;
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public int getPrice() {
