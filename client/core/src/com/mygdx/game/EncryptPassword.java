@@ -1,6 +1,6 @@
-//package com.mygdx.game;
+package com.mygdx.game;
 
-/*
+
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;

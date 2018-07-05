@@ -16,10 +16,10 @@ private LoadingScreen loadingScreen;
 private SettingsScreen settingsScreen;
 private AppPreferences preferences;
 private MenuScreen menuScreen;
-private GameScreen gameScreen;
+private BattleScreen battleScreen;
 private LoginScreen loginScreen;
 private RegisterScreen registerScreen;
-private CharacterSelect characterSelect;
+private CharacterSelectScreen characterSelectScreen;
  
 
 
@@ -37,8 +37,12 @@ public int getMenu(){
 private final static int SETTINGS = 3;
 public int getSettings(){ return SETTINGS;}
 
-private final static int GAME = 4;
-public int getGame(){return GAME;}
+private final static int CHARACTERSELECT = 4;
+public int getCharacterSelect(){ return CHARACTERSELECT;}
+
+
+private final static int BATTLE = 5;
+public int getGame(){return BATTLE;}
         
 //PREFERENCES - preferencessScreen - settingScreen
 //APPLICATION - mainScreen - gameScreen
@@ -62,9 +66,13 @@ public void changeScreen(int screen){
 			if(settingsScreen == null) settingsScreen = new SettingsScreen(this);
 					this.setScreen(settingsScreen);
 			break;
-		case GAME:
-			if(gameScreen == null) gameScreen = new GameScreen(this);
-					this.setScreen(gameScreen);
+		case CHARACTERSELECT:
+			if(characterSelectScreen == null) characterSelectScreen = new CharacterSelectScreen(this);
+			this.setScreen(characterSelectScreen);
+			break;
+		case BATTLE:
+			if(battleScreen == null) battleScreen = new BattleScreen(this);
+					this.setScreen(battleScreen);
 			break;
 	}
 }
@@ -81,15 +89,15 @@ public void changeScreen(int screen){
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
                 //this.setScreen(new )
-              loadingScreen = new LoadingScreen(this);
-                setScreen(loadingScreen);
+			  menuScreen = new MenuScreen(this);
+                setScreen(menuScreen);
 //			  characterSelect = new CharacterSelect(this);
 //			  setScreen(characterSelect);
 	}
 
           @Override
 	public void render() {
-		super.render(); // important!
+		super.render(); 
 	}
         
         class TextInput implements Input.TextInputListener{

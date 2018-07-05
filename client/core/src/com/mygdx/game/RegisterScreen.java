@@ -116,14 +116,14 @@ public class RegisterScreen  implements Screen {
                         else {
                             passwordField.setText("");
                             PlayerAccount.setPlayer(player);
-                            parent.changeScreen(parent.getMenu());
+                            parent.changeScreen(parent.getLogin());
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
-                        label.setText("e.printStackTrace()");
+                        label.setText("Something went wrong");
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        label.setText("e.printStackTrace()");
+                        label.setText("Something went wrong");
                     }
                 }
 
