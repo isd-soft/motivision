@@ -2,7 +2,9 @@ package com.inther.controller;
 
 import com.inther.entity.Activities;
 import com.inther.entity.Team;
+import com.inther.entity.TeamActivities;
 import com.inther.repo.ActivitiesRepository;
+import com.inther.repo.TeamActivitiesRepository;
 import com.inther.repo.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,28 +22,34 @@ public class ActivitiesController {
     @Autowired
     ActivitiesRepository activitiesRepository;
 
-    @RequestMapping(value = "/get_activities")
-    public Map<String, Object> addActivity(@RequestParam(value = "teamId")Long teamId){
+    @Autowired
+    TeamActivitiesRepository teamActivitiesRepository;
+
+   /**/
+    @RequestMapping(value = "/add_activity")
+    private Map<String, Object> addActivity(@RequestParam(value = "teamId") Long teamId,
+                                            @RequestParam(value = "activityId") Long activityId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Team> optionalTeam = teamRepository.findById(teamId);
-        if(!optionalTeam.isPresent()){
+        if (!optionalTeam.isPresent()) {
             map.put("status", "failed");
             map.put("message", "no such team with teamId exist");
             return map;
         }
-        List<Activities> activitiesList = activitiesRepository.findAllByTeamID(teamId);
-        Iterator<Activities> iterator = activitiesList.iterator();
-        ArrayList<Map<String, Object>> result = new ArrayList<>();
-        map.put("status", "success");
-        while(iterator.hasNext()){
-            Map<String, Object> activitiesMap = new TreeMap<>();
-            Activities activities = iterator.next();
-            activitiesMap.put("activityId", activities.getID());
-            activitiesMap.put("activityName", activities.getName());
-            activitiesMap.put("reward", activities.getReward());
-            result.add(activitiesMap);
+        Optional<Activities> optionalActivities = activitiesRepository.findById(activityId);
+        if (!optionalActivities.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "no such activity with activityId exist");
+            return map;
         }
-        map.put("activities", result);
+        Team team = optionalTeam.get();
+        Activities activities = optionalActivities.get();
+        map.put("status", "success");
+
+        TeamActivities teamActivities = new TeamActivities();
+        teamActivities.setTeam(team);
+        teamActivities.setActivities(activities);
+        teamActivitiesRepository.save(teamActivities);
         return map;
     }
 }

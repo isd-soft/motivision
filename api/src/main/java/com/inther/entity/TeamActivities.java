@@ -13,13 +13,14 @@ public class TeamActivities {
     @GeneratedValue(generator = "kaugen")
     private Long ID;
 
-    @OneToOne
-    @JoinColumn(name = "item_id")
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
     private Team team;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "activity_id")
-    private List<Activities> activities;
+    private Activities activities;
 
     public TeamActivities() {}
 
@@ -35,11 +36,11 @@ public class TeamActivities {
         this.team = team;
     }
 
-    public List<Activities> getActivities() {
+    public Activities getActivities() {
         return activities;
     }
 
-    public void setActivities(List<Activities> activities) {
+    public void setActivities(Activities activities) {
         this.activities = activities;
     }
 }

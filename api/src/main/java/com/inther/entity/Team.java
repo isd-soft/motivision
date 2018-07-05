@@ -27,16 +27,10 @@ public class Team {
     @JoinColumn(name = "lider_id")
     private Character admin;
 
-    @OneToMany
-    @JoinTable(name = "team_activities",
-            joinColumns = {
-                    @JoinColumn(name = "team_id", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "activity_id", referencedColumnName = "id", unique = true)
-            }
-    )
-    private List<Activities> activities;
+    @OneToMany(mappedBy = "team")
+    private List<TeamActivities> teamActivities;
+
+
 
     public Team() {
     }
@@ -84,4 +78,5 @@ public class Team {
     public void setAdmin(Character admin) {
         this.admin = admin;
     }
+
 }
