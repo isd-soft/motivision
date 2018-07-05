@@ -9,6 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 public class RegisterScreen  implements Screen {
 
     private GGame parent;
@@ -25,6 +29,42 @@ public class RegisterScreen  implements Screen {
         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
     }
 
+    private void     setErrorMessage(String message) {
+        label.setText(message);
+    }
+
+    private boolean  validateLogin(String login) {
+        if (login == null) {
+            setErrorMessage("Login field is empty");
+            return false;
+        }
+        if (login.equals("")) {
+            setErrorMessage("Login field is empty");
+            return false;
+        }
+        else if (login.length() < 6) {
+            setErrorMessage("Login must contain at least 6 characters");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean  validatePassword(String password) {
+        if (password == null) {
+            setErrorMessage("Password field is empty");
+            return false;
+        }
+        if (password.equals("")) {
+            setErrorMessage("Password field is empty");
+            return false;
+        }
+        else if (password.length() < 6) {
+            setErrorMessage("Password must contain at least 6 characters");
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
@@ -39,9 +79,9 @@ public class RegisterScreen  implements Screen {
         label = new Label("Register new account", skin);
 
         //add text fields login/password
-        TextField loginField = new TextField(null,skin);
+        final TextField loginField = new TextField(null,skin);
         loginField.setMessageText("Login goes here");
-        TextField passwordField = new TextField(null, skin);
+        final TextField passwordField = new TextField(null, skin);
         passwordField.setMessageText("Password goes here");
         passwordField.setPasswordMode(true);
 
@@ -55,7 +95,37 @@ public class RegisterScreen  implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 //sends data into DB
-                label.setText("Registered!");
+                Player	player;
+
+                if (validateLogin(loginField.getText()) == false)
+                    return;
+                else if (validatePassword(passwordField.getText()) == false)
+                    return;
+                else {
+                    String	encryptedPassword;
+
+                    encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+                    try {
+                        player = Player.registerNewPlayer(loginField.getText(), encryptedPassword);
+                        encryptedPassword = "";
+                        if (player == null) {
+                            label.setText(JsonHandler.errorMessage);
+                        }
+                        else {
+                            passwordField.setText("");
+                            PlayerAccount.setPlayer(player);
+                            parent.changeScreen(parent.getMenu());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        label.setText("e.printStackTrace()");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        label.setText("e.printStackTrace()");
+                    }
+                }
+
+                //label.setText("Registered!");
             }
         });
 
