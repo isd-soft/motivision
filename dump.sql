@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.3
--- Dumped by pg_dump version 10.3
+-- Dumped from database version 10.4
+-- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -384,6 +384,12 @@ ALTER TABLE ONLY public.team_activities ALTER COLUMN id SET DEFAULT nextval('pub
 --
 
 COPY public.activities (id, name, reward) FROM stdin;
+6	volleyball game	40
+5	swim 1 km	10
+1	1 push up	5
+3	1 km Run	70
+4	1 sit up	2
+2	1 pull up	8
 \.
 
 
@@ -410,6 +416,18 @@ COPY public.character_item (id, character_id, item_id) FROM stdin;
 --
 
 COPY public.items (id, type, image_url, price) FROM stdin;
+1	iron sword	1	333
+2	steel sword	2	555
+3	diamond sword	3	777
+4	iron shield	4	333
+5	steel shield	5	555
+6	diamond shield	6	777
+7	iron armor	7	333
+8	steel armor	8	555
+9	diamond armor	9	777
+10	iron leggins	10	333
+11	steel leggins	11	555
+12	diamond leggins	12	777
 \.
 
 
@@ -465,7 +483,7 @@ SELECT pg_catalog.setval('public.character_id_seq', 16, true);
 -- Name: character_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.character_item_id_seq', 1, false);
+SELECT pg_catalog.setval('public.character_item_id_seq', 2, true);
 
 
 --
