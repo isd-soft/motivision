@@ -2,9 +2,8 @@ package com.inther.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Items {
@@ -14,7 +13,8 @@ public class Items {
     @GeneratedValue(generator = "kaugen")
     private Long ID;
 
-    private Long typeId;
+    @OneToOne(mappedBy = "items")
+    private CharacterItem characterItem;
 
     private String imageUrl;
 
@@ -26,12 +26,8 @@ public class Items {
         return ID;
     }
 
-    public Long getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
+    public CharacterItem getCharacterItem() {
+        return characterItem;
     }
 
     public String getImageUrl() {
