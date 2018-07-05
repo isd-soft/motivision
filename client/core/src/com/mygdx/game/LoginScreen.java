@@ -107,7 +107,7 @@ class LoginScreen implements Screen{
 						else {
 							passwordField.setText("");
 							PlayerAccount.setPlayer(player);
-							parent.changeScreen(parent.getMenu());
+							parent.changeScreen(parent.getCharacterSelect());
 						}
 					} catch (IOException e) {
 						e.printStackTrace();

@@ -39,6 +39,9 @@ public int getSettings(){ return SETTINGS;}
 
 private final static int GAME = 4;
 public int getGame(){return GAME;}
+
+private final static int CHARACTERSELECT = 5;
+public int getCharacterSelect() { return CHARACTERSELECT; }
         
 //PREFERENCES - preferencessScreen - settingScreen
 //APPLICATION - mainScreen - gameScreen
@@ -65,6 +68,10 @@ public void changeScreen(int screen){
 		case GAME:
 			if(gameScreen == null) gameScreen = new GameScreen(this);
 					this.setScreen(gameScreen);
+			break;
+		case CHARACTERSELECT:
+			if(characterSelect == null) characterSelect = new CharacterSelect(this);
+					this.setScreen(characterSelect);
 			break;
 	}
 }
