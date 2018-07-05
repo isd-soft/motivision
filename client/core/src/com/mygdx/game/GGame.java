@@ -89,8 +89,8 @@ public void changeScreen(int screen){
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
                 //this.setScreen(new )
-			  menuScreen = new MenuScreen(this);
-                setScreen(menuScreen);
+			  loadingScreen = new LoadingScreen(this);
+                setScreen(loadingScreen);
 //			  characterSelect = new CharacterSelect(this);
 //			  setScreen(characterSelect);
 	}
