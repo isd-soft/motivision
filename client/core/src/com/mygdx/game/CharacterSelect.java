@@ -65,11 +65,11 @@ public class CharacterSelect implements Screen {
         scrollPane.setPosition(gameWidth * 3 / 4 - scrollPane.getWidth(), image.getY()+image.getHeight()-scrollPane.getHeight()*2);
 
         // add text field to insert new character
-        TextField textField = new TextField("Create new", skin);
+        //TextField textField = new TextField("Create new", skin);
 
         // remove and add buttons
         TextButton remove = new TextButton("Remove selected", skin, "small");
-        TextButton create = new TextButton("+", skin, "small");
+        TextButton create = new TextButton("Create new", skin, "small");
 
         // add event listeners
         create.addListener(new ChangeListener() {
@@ -99,10 +99,9 @@ public class CharacterSelect implements Screen {
         table.setPosition(scrollPane.getX()+scrollPane.getWidth(), scrollPane.getY() - remove.getHeight()*0.7f);
 
         // add table elements
-        table.add(remove).colspan(2).width(scrollPane.getWidth()*2).height(remove.getHeight()/1.9f);
+        table.add(remove).width(scrollPane.getWidth()*2).height(remove.getHeight()/2f);
         table.row();
-        table.add(textField).fill();
-        table.add(create).width(50).height(remove.getHeight()/1.5f).fill();
+        table.add(create).width(scrollPane.getWidth()*2).height(remove.getHeight()/2f);
 
         // add the elements to stage
         stage.addActor(scrollPane);

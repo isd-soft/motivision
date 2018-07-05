@@ -19,6 +19,7 @@ private MenuScreen menuScreen;
 private GameScreen gameScreen;
 private LoginScreen loginScreen;
 private RegisterScreen registerScreen;
+private CharacterSelect characterSelect;
  
 
 
@@ -78,6 +79,8 @@ public void changeScreen(int screen){
                 //this.setScreen(new )
 		loadingScreen = new LoadingScreen(this);
                 setScreen(loadingScreen);
+//			  characterSelect = new CharacterSelect(this);
+//			  setScreen(characterSelect);
 	}
 
           @Override
