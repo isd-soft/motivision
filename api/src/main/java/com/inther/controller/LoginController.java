@@ -35,7 +35,7 @@ public class LoginController {
      * @param password - user password
      * @return Json data
      * */
-    @RequestMapping(value = "/login")
+    @RequestMapping(name = "/login", method = RequestMethod.POST)
     public Map<String, Object> login(@RequestParam(value = "login", defaultValue = "null") String login,
                                      @RequestParam(value = "password", defaultValue = "null") String password) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -109,7 +109,7 @@ public class LoginController {
      *
      *
      * */
-    @RequestMapping("/player_exist")
+    @RequestMapping(name = "/player_exist", method = RequestMethod.POST)
     public Map<String, String> playerExist(@RequestParam(name = "login", defaultValue = "kek") String login) {
         TreeMap<String, String> map = new TreeMap<>();
         if (playerRepository.findByLogin(login) == null) {

@@ -2,8 +2,6 @@ package com.inther.repo;
 
 
 import com.inther.entity.Character;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
