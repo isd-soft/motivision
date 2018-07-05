@@ -51,6 +51,7 @@ public class MenuScreen implements Screen {
         */
 	@Override
 	public void render(float delta) {
+		Gdx.input.setInputProcessor(stage);
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		// tell our stage to do actions and draw itself
@@ -89,13 +90,13 @@ public class MenuScreen implements Screen {
 		// Create a table that fills the screen. Everything else will go inside this table.
 		Table table = new Table();
 		table.setFillParent(true);
-		table.setDebug(true);
+		//table.setDebug(true);
 		stage.addActor(table);
 
 		//add buttons to table
 		TextButton selectCharacter = new TextButton("Select Character", skin);
 		TextButton createCharacter = new TextButton("Create Character", skin);
-		TextButton back = new TextButton("Back", skin);
+		TextButton back = new TextButton("Back", skin, "small");
                 
 		TextButton back2 = new TextButton("Back2", skin);
 
@@ -126,10 +127,8 @@ public class MenuScreen implements Screen {
 		table.add(selectCharacter).fillX().uniformX();
 		table.row().pad(10, 0, 10, 0);
 		table.add(createCharacter).fillX().uniformX();
-		table.row();
-		table.add(back).fillX().uniformX();
-		table.row();
-		table.add(back2).fillX().uniformX();
+		table.row().pad(10, 0, 10, 0);
+		table.add(back).colspan(2);
 
         //TextInput listener = new TextInput();
         //Gdx.input.getTextInput(listener, "MonkaS", "Type here", "alo");

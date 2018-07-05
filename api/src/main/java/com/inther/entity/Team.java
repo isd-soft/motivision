@@ -27,6 +27,17 @@ public class Team {
     @JoinColumn(name = "lider_id")
     private Character admin;
 
+    @OneToMany
+    @JoinTable(name = "team_activities",
+            joinColumns = {
+                    @JoinColumn(name = "team_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "activity_id", referencedColumnName = "id", unique = true)
+            }
+    )
+    private List<Activities> activities;
+
     public Team() {
     }
 
