@@ -20,10 +20,10 @@ public class Team {
 
     private int battleFrequency;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<Character> characters;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "lider_id")
     private Character admin;
 

@@ -31,7 +31,8 @@ public class CharacterController {
                                                @RequestParam(value = "headType") Long headType,
                                                @RequestParam(value = "bodyType") Long bodyType,
                                                @RequestParam(value = "gender") char gender,
-                                               @RequestParam(value = "name") String name
+                                               @RequestParam(value = "name") String name,
+                                               @RequestParam(value = "isAdmin") Boolean isAdmin
     ) {
 
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -56,6 +57,8 @@ public class CharacterController {
         character.setBodyType(bodyType);
         character.setGender(gender);
         character.setName(name);
+        if(isAdmin)
+            team.setAdmin(character);
         characterRepository.save(character);
         map.put("status", "success");
         map.put("id", character.getID());
