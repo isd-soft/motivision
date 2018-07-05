@@ -91,7 +91,8 @@ class LoginScreen implements Screen{
 				else {
 					String	encryptedPassword;
 
-					encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+					//encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+					encryptedPassword = passwordField.getText();
 					try {
 						try {
 							player = Player.loginPlayer(loginField.getText(), encryptedPassword);
