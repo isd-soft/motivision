@@ -17,9 +17,9 @@ public class CharacterItem {
     @JoinColumn(name = "character_id")
     private Character character;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "item_id")
-    private Items items;
+    private List<Items> items;
 
     public CharacterItem() {
     }
@@ -28,7 +28,7 @@ public class CharacterItem {
         return character;
     }
 
-    public Items getItems() {
+    public List<Items> getItems() {
         return items;
     }
 }
