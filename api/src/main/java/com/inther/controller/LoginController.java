@@ -78,7 +78,7 @@ public class LoginController {
      * @param password - user password to register
      * @return Json representation of result logs
      * */
-    @RequestMapping("/register_player")
+    @RequestMapping(name = "/register_player", method = RequestMethod.POST)
     public Map<String, String> newPlayer(@RequestParam(value = "login", defaultValue = "null") String login,
                                          @RequestParam(value = "password", defaultValue = "null") String password) {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
