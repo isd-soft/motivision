@@ -83,6 +83,7 @@ public class RegisterScreen  implements Screen {
         loginField.setMessageText("Login goes here");
         final TextField passwordField = new TextField(null, skin);
         passwordField.setMessageText("Password goes here");
+        passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
 
         //add buttons to table

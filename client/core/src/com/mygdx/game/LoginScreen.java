@@ -45,12 +45,21 @@ class LoginScreen implements Screen{
 		loginField.setMessageText("Login goes here");
 		final TextField passwordField = new TextField(null, skin);
 		passwordField.setMessageText("Password goes here");
+		passwordField.setPasswordCharacter('*');
 		passwordField.setPasswordMode(true);
 
 		//add buttons to table
 		TextButton register = new TextButton("Register", skin);
 		TextButton submit = new TextButton("Submit", skin);
 		TextButton settings = new TextButton("Settings", skin);
+
+//		passwordField.addListener(new ChangeListener() {
+//			@Override
+//			public void changed(ChangeEvent event, Actor actor) {
+//				passwordField.setPasswordCharacter('*');
+//
+//			}
+//		});
 
 		register.addListener(new ChangeListener() {
 			@Override
