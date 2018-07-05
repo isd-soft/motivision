@@ -24,26 +24,26 @@ public class ItemsController {
     CharacterRepository characterRepository;
 
 
-    @RequestMapping(value = "/create_item", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_item", method = RequestMethod.GET)
     public Map<String, Object> createItem(@RequestParam(value = "characterId") Long characterId,
-                                          @RequestParam(value = "type") Long type,
-                                          @RequestParam(value = "imageUrl") String imageUrl,
-                                          @RequestParam(value = "price") int price
+                                          @RequestParam(value = "itemsId") Long itemsId
     ) {
 
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
-
+        Optional<Items> optionalItems = itemsRepository.findById(itemsId);
         if (!optionalCharacter.isPresent()) {
             map.put("status", "failed");
             map.put("message", "No such character exist with characterId");
             return map;
         }
-
+        if (!optionalItems.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "No such item exist with itemsId");
+            return map;
+        }
         Character character = optionalCharacter.get();
-        Items items = new Items();
-        items.setCharacter(character);
-        //items.setType(type);
+        map.put("status", "success");
         return map;
     }
 

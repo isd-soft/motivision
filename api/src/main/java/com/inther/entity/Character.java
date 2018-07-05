@@ -32,7 +32,7 @@ public class Character {
     @JoinColumn(name = "player_id")
     private Player player;
 
-    @OneToMany
+    /*@OneToMany
     @JoinTable(name = "character_item",
             joinColumns = {
                     @JoinColumn(name = "character_id", referencedColumnName = "id")
@@ -41,7 +41,10 @@ public class Character {
                     @JoinColumn(name = "item_id", referencedColumnName = "id", unique = true)
             }
     )
-    private List<Items> items;
+    private List<Items> items;*/
+
+    @OneToOne(mappedBy = "character")
+    private CharacterItem characterItems;
 
     public Character() {
     }
@@ -106,11 +109,7 @@ public class Character {
         this.player = player;
     }
 
-    public List<Items> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Items> items) {
-        this.items = items;
+    public CharacterItem getCharacterItems() {
+        return characterItems;
     }
 }
