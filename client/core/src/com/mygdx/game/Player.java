@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,14 +46,21 @@ public class Player {
     }
 
     public static boolean	loginExists(String login) throws IOException, JSONException {
-        ArrayList<BasicNameValuePair> urlParameters;
+       // ArrayList<BasicNameValuePair> urlParameters;
+        String      urlParameters;
         String		url;
         JSONObject  jsonObject;
         String		result;
 
+
+     //   new NameValuePair("234324", "323432");
         url = JsonHandler.domain + "/player_exist";
-        urlParameters = new ArrayList<BasicNameValuePair>();
-        urlParameters.add(new BasicNameValuePair("login", login + ""));
+
+        //String urlParameters = "name=Jack&occupation=programmer";
+        urlParameters = "login=" + login;
+
+        /*urlParameters = new ArrayList<BasicNameValuePair>();
+        urlParameters.add(new BasicNameValuePair("login", login + ""));*/
         //url = JsonHandler.domain;
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters);
         if (jsonObject == null)
@@ -67,7 +75,7 @@ public class Player {
         JsonHandler.errorMessage = message;
     }
 
-    private static Player	getPlayerFromUrl(String url, List<BasicNameValuePair> urlParameters) throws JSONException, IOException {
+    private static Player	getPlayerFromUrl(String url, String urlParameters) throws JSONException, IOException {
         Player      player;
         String		field;
         String      characterName;
@@ -110,7 +118,8 @@ public class Player {
 
     public static Player	loginPlayer(String login, String password) throws IOException, JSONException {
         String url;
-        List<BasicNameValuePair> urlParameters;
+      //  String  urlParameters;
+       // List<BasicNameValuePair> urlParameters;
 
         if (loginExists(login) == false) {
             setErrorMessage("Player does not exist");
@@ -118,14 +127,17 @@ public class Player {
         }
 
         url = JsonHandler.domain + "/login";
-        urlParameters = new ArrayList<BasicNameValuePair>();
-        urlParameters.add(new BasicNameValuePair("login", login + ""));
-        urlParameters.add(new BasicNameValuePair("password", password + ""));
+//        urlParameters = new ArrayList<BasicNameValuePair>();
+//        urlParameters.add(new BasicNameValuePair("login", login + ""));
+//        urlParameters.add(new BasicNameValuePair("password", password + ""));
+        String urlParameters = "login=" + login + "&password=" + password;
+
+        //String urlParameters = "name=Jack&occupation=programmer";
         return getPlayerFromUrl(url, urlParameters);
     }
 
     public static Player	registerNewPlayer(String login, String password) throws IOException, JSONException {
-        List<BasicNameValuePair>    urlParameters;
+       // List<BasicNameValuePair>    urlParameters;
         String                      url;
 
         if (loginExists(login)) {
@@ -133,9 +145,11 @@ public class Player {
             return null;
         }
         url = JsonHandler.domain + "/register_player";
-        urlParameters = new ArrayList<BasicNameValuePair>();
-        urlParameters.add(new BasicNameValuePair("login", login + ""));
-        urlParameters.add(new BasicNameValuePair("password", password + ""));
+//        urlParameters = new ArrayList<BasicNameValuePair>();
+//        urlParameters.add(new BasicNameValuePair("login", login + ""));
+//        urlParameters.add(new BasicNameValuePair("password", password + ""));
+
+        String urlParameters = "login=" + login + "&password=" + password;
         return getPlayerFromUrl(url, urlParameters);
     }
 }

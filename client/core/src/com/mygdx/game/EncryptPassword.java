@@ -21,6 +21,7 @@ public class EncryptPassword {
     private static final String initVector = "encryptionIntVec";
 
     public static String encrypt(String valuetToEncrypt) {
+        return valuetToEncrypt;/*
         try {
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
             SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
@@ -31,7 +32,7 @@ public class EncryptPassword {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
+        return null;*/
     }
 
     /*

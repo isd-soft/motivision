@@ -11,13 +11,22 @@ eclipse.project {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/commons-codec/commons-codec
-    compile group: 'commons-codec', name: 'commons-codec', version: '1.7'
     // https://mvnrepository.com/artifact/org.json/json
     compile group: 'org.json', name: 'json', version: '20090211'
     // https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient
     compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
+   // compile group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
+// https://mvnrepository.com/artifact/commons-codec/commons-codec
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.6'
+
+        //compile 'org.apache.httpcomponents:httpclient:4.5'
+  //      compile 'org.apache.httpcomponents:httpmime:4.3.3'
+        //compile 'org.apache.httpcomponents:httpcore:4.3.2'
+        compile files('libs/httpclient-4.2.1.jar')
+        compile group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
+
+
 
 }
