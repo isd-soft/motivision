@@ -27,13 +27,12 @@ public class RegisterScreen  implements Screen {
 
     @Override
     public void show() {
-        stage.clear();
         Gdx.input.setInputProcessor(stage);
 
         // Create a table that fills the screen. Everything else will go inside this table.
         Table table = new Table();
         table.setFillParent(true);
-        //table.setDebug(true);
+        table.setDebug(true);
         stage.addActor(table);
 
         //add label
@@ -42,13 +41,13 @@ public class RegisterScreen  implements Screen {
         //add text fields login/password
         TextField loginField = new TextField(null,skin);
         loginField.setMessageText("Login goes here");
-        TextField passwordField = new TextField("", skin);
-        passwordField.setPasswordMode(true);
+        TextField passwordField = new TextField(null, skin);
         passwordField.setMessageText("Password goes here");
+        passwordField.setPasswordMode(true);
 
         //add buttons to table
         TextButton register = new TextButton("Register", skin);
-        TextButton back = new TextButton("Back", skin, "small");
+        TextButton back = new TextButton("Back", skin);
 
 
         //add listeners to buttons
@@ -71,12 +70,12 @@ public class RegisterScreen  implements Screen {
         table.add(label).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(loginField).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
+        table.row();
         table.add(passwordField).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
+        table.row();
         table.add(register).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
-        table.add(back).colspan(2);
+        table.row();
+        table.add(back).fillX().uniformX();
 
     }
 
