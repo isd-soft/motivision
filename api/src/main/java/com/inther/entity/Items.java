@@ -19,10 +19,29 @@ public class Items {
 
     private int price;
 
+    @ManyToOne
+    @JoinTable(name = "character_item",
+            joinColumns = {
+                    @JoinColumn(name = "item_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "character_id", referencedColumnName = "id", unique = true)
+            }
+    )
+    private Character character;
+
     public Items() {}
 
     public Long getID() {
         return ID;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getImageUrl() {
@@ -39,5 +58,13 @@ public class Items {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public Character getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
     }
 }

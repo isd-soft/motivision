@@ -3,6 +3,7 @@ package com.inther.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Character {
@@ -30,6 +31,17 @@ public class Character {
     @ManyToOne
     @JoinColumn(name = "player_id")
     private Player player;
+
+    @OneToMany
+    @JoinTable(name = "character_item",
+            joinColumns = {
+                    @JoinColumn(name = "character_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "item_id", referencedColumnName = "id", unique = true)
+            }
+    )
+    private List<Items> items;
 
     public Character() {
     }
@@ -70,14 +82,6 @@ public class Character {
         this.power = power;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
     public String getName() {
         return name;
     }
@@ -86,10 +90,27 @@ public class Character {
         this.name = name;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {        this.player = player;
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public List<Items> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Items> items) {
+        this.items = items;
     }
 }
