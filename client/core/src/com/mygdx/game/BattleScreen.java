@@ -18,7 +18,8 @@ import com.badlogic.gdx.math.Vector3;
 
   
 
-public class GameScreen implements Screen {
+public class BattleScreen implements Screen {
+
         /*final GGame game;
         private OrthographicCamera  camera;
 	private Texture warriorImage;
@@ -31,7 +32,7 @@ public class GameScreen implements Screen {
         private GGame parent;
         
         
-        public GameScreen(GGame g){
+        public BattleScreen(GGame g){
             parent = g;
         }
         

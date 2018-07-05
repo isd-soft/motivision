@@ -28,6 +28,10 @@ public class Player {
         this.characterList = null;
     }
 
+    public ArrayList<String>     getCharactersName() {
+        return (ArrayList<String>) characterList.values();
+    }
+
     public void	addCharacter(String name, int id) {
         if (name == null)
             return;

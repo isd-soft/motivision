@@ -40,6 +40,7 @@ class LoginScreen implements Screen{
 
     @Override
         public void show() {
+    	stage.clear();
 
     	camera = new OrthographicCamera();
 		viewport = new StretchViewport(100,100,camera);
@@ -56,8 +57,8 @@ class LoginScreen implements Screen{
 		stage.addActor(table);
 
 		//add label
-		label = new Label("Login into account", skin);
-
+		label = new Label(null, skin);
+		label.setText("Login into account");
 		//add text fields login/password
 		final TextField loginField = new TextField(null,skin);
 		loginField.setMessageText("Login goes here");
@@ -102,7 +103,7 @@ class LoginScreen implements Screen{
 						}
 						encryptedPassword = "";
 						if (player == null) {
-							label.setText(JsonHandler.errorMessage);
+							label.setText("Something went wrong");
 						}
 						else {
 							passwordField.setText("");
@@ -111,7 +112,7 @@ class LoginScreen implements Screen{
 						}
 					} catch (IOException e) {
 						e.printStackTrace();
-						label.setText("e.printStackTrace()");
+						label.setText("Something went wrong");
 					}
 				}
 			}

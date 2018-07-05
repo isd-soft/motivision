@@ -21,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import java.util.ArrayList;
 
-public class CharacterSelect implements Screen {
+public class CharacterSelectScreen implements Screen {
     private GGame parent;
     private Stage stage;
     private Skin skin;
@@ -31,7 +31,7 @@ public class CharacterSelect implements Screen {
     List<String> list;
     float gameWidth, gameHeight;
 
-    public CharacterSelect(GGame g) {
+    public CharacterSelectScreen(GGame g) {
         parent = g;
         stage = new Stage(new ScreenViewport());
         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
