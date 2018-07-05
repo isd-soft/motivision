@@ -1,11 +1,9 @@
 
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.TextInputListener;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -19,11 +17,11 @@ public class MenuScreen implements Screen {
         //final GGame game;
 		//OrthographicCamera camera;
         private Stage stage;
-        private GGame parent;
+        private com.mygdx.game.screens.GGame parent;
         private Skin skin;
         
         
-        public MenuScreen(GGame g){
+        public MenuScreen(com.mygdx.game.screens.GGame g){
             parent = g;
             stage = new Stage (new ScreenViewport());
 

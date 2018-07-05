@@ -1,7 +1,6 @@
-package com.mygdx.game;
+package com.mygdx.game.requests;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerAccount {
     private static Player  player = null;

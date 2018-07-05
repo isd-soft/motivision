@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -10,9 +10,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 
-public class LoadingScreen implements Screen{
+public class  LoadingScreen implements Screen{
     
-    private GGame parent;
+    private com.mygdx.game.screens.GGame parent;
 
 	private SpriteBatch batch;
 	private Texture  img;
@@ -28,7 +28,7 @@ public class LoadingScreen implements Screen{
 	private ExtendViewport viewport;
 	private Texture texture = null;
     
-    public LoadingScreen(GGame game){
+    public LoadingScreen(com.mygdx.game.screens.GGame game){
         parent = game;
     }
     

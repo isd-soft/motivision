@@ -1,12 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.game.requests;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
 
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

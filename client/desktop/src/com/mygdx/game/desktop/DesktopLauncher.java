@@ -2,13 +2,7 @@ package com.mygdx.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.GGame;
-import com.mygdx.game.JsonHandler;
-import com.mygdx.game.Player;
-
-import org.json.JSONException;
-
-import java.io.IOException;
+import com.mygdx.game.screens.GGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
