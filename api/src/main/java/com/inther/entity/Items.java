@@ -13,8 +13,7 @@ public class Items {
     @GeneratedValue(generator = "kaugen")
     private Long ID;
 
-    @OneToOne(mappedBy = "items")
-    private CharacterItem characterItem;
+    private String type;
 
     private String imageUrl;
 
@@ -24,10 +23,6 @@ public class Items {
 
     public Long getID() {
         return ID;
-    }
-
-    public CharacterItem getCharacterItem() {
-        return characterItem;
     }
 
     public String getImageUrl() {

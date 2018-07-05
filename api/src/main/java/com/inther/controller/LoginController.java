@@ -71,6 +71,7 @@ public class LoginController {
     }
 
     /*
+     * Register player controller
      * @param login - user login to register
      * @param password - user password to register
      * @return Json representation of result logs
@@ -103,11 +104,12 @@ public class LoginController {
     }
 
     /*
-     *
-     *
+     * Check if player exist controller
+     * @param login - login to check in the database
+     * @param Json representation of the result logs
      * */
     @RequestMapping(value = "/player_exist", method = RequestMethod.POST)
-    public Map<String, String> playerExist(@RequestParam(name = "login", defaultValue = "kek") String login) {
+    public Map<String, String> playerExist(@RequestParam(name = "login") String login) {
         TreeMap<String, String> map = new TreeMap<>();
         if (playerRepository.findByLogin(login) == null) {
             map.put("status", "success");

@@ -18,6 +18,12 @@ public class TeamController {
     @Autowired
     TeamRepository teamRepository;
 
+    /*
+    * Get team info controller
+    * @param teamId - id of the team to get data
+    * @return if such team exist return Json info about the team
+    * @return if no such team exist return Json fail message
+    * */
     @RequestMapping(value = "/get_team", method = RequestMethod.GET)
     public Map<String, Object> getTeam(@RequestParam(value = "teamId") Long teamId){
         Optional<Team> optionalTeam = teamRepository.findById(teamId);
