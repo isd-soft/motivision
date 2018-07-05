@@ -24,7 +24,7 @@ public class CharacterController {
 
     @Autowired
     CharacterRepository characterRepository;
-    
+
     @RequestMapping(value = "/create_character", method = RequestMethod.POST)
     public Map<String, Object> createCharacter(@RequestParam(value = "playerId") Long playerId,
                                                @RequestParam(value = "teamId") Long teamId,

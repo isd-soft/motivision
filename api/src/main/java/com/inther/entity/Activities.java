@@ -16,10 +16,6 @@ public class Activities {
 
     private int reward;
 
-    @ManyToOne
-    @JoinColumn(name = "team_id")
-    private Team teamActivities;
-
     public Activities() {}
 
     public Long getID() {
@@ -41,12 +37,5 @@ public class Activities {
     public void setReward(int reward) {
         this.reward = reward;
     }
-
-    public Team getTeam_activities() {
-        return teamActivities;
-    }
-
-    public void setTeam_activities(Team teamActivities) {
-        this.teamActivities = teamActivities;
-    }
+    
 }
