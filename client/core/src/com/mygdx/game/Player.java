@@ -1,11 +1,12 @@
 package com.mygdx.game;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeMap;
 
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,12 +45,16 @@ public class Player {
     }
 
     public static boolean	loginExists(String login) throws IOException, JSONException {
+        ArrayList<BasicNameValuePair> urlParameters;
         String		url;
         JSONObject  jsonObject;
         String		result;
 
-        url = JsonHandler.domain + "/player_exist?login=" + login;
-        jsonObject = JsonHandler.readJsonFromUrl(url);
+        url = JsonHandler.domain + "/player_exist";
+        urlParameters = new ArrayList<BasicNameValuePair>();
+        urlParameters.add(new BasicNameValuePair("login", login + ""));
+        //url = JsonHandler.domain;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters);
         if (jsonObject == null)
             return true;
         result = jsonObject.getString("result");
@@ -62,13 +67,16 @@ public class Player {
         JsonHandler.errorMessage = message;
     }
 
-    private static Player	getPlayerFromUrl(String url) throws JSONException, IOException {
+    private static Player	getPlayerFromUrl(String url, List<BasicNameValuePair> urlParameters) throws JSONException, IOException {
+        Player      player;
         String		field;
+        String      characterName;
         JSONObject	jsonObject;
         int			points;
         int			id;
+        int         characterId;
 
-        jsonObject = JsonHandler.readJsonFromUrl(url);
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters);
         if (jsonObject == null)
             return null;
         try {
@@ -85,47 +93,50 @@ public class Player {
             setErrorMessage("Invalid number format for \"points\" field");
             return null;
         }
-        return new Player(id, points);
-    }
+        player = new Player(id, points);
+        if (jsonObject.has("posts") == false)
+            return player;
+        JSONArray arr = jsonObject.getJSONArray("characters");
 
-    private static boolean  validateLogin(String login) {
-        if (login == null) {
-            setErrorMessage("Login field is empty");
-            return false;
+        for (int i = 0; i < arr.length(); i++)
+        {
+            field = arr.getJSONObject(i).getString("id");
+            characterId = Integer.parseInt(field);
+            characterName = arr.getJSONObject(i).getString("nickname");
+            player.addCharacter(characterName, characterId);
         }
-        if (login.equals("")) {
-            setErrorMessage("Login field is empty");
-            return false;
-        }
-        else if (login.length() < 6) {
-            setErrorMessage("Login must contain at least 6 characters");
-            return false;
-        }
-        return true;
+        return player;
     }
 
     public static Player	loginPlayer(String login, String password) throws IOException, JSONException {
-        String		url;
+        String url;
+        List<BasicNameValuePair> urlParameters;
 
         if (loginExists(login) == false) {
             setErrorMessage("Player does not exist");
             return null;
         }
-        url = JsonHandler.domain + "/login?login=" + login;
-        url += "&password=" + password;
-        return getPlayerFromUrl(url);
+
+        url = JsonHandler.domain + "/login";
+        urlParameters = new ArrayList<BasicNameValuePair>();
+        urlParameters.add(new BasicNameValuePair("login", login + ""));
+        urlParameters.add(new BasicNameValuePair("password", password + ""));
+        return getPlayerFromUrl(url, urlParameters);
     }
 
     public static Player	registerNewPlayer(String login, String password) throws IOException, JSONException {
-        String		url;
+        List<BasicNameValuePair>    urlParameters;
+        String                      url;
 
         if (loginExists(login)) {
             setErrorMessage("Login already exist");
             return null;
         }
-        url = JsonHandler.domain + "/register_player?login=" + login;
-        url += "&password=" + password;
-        return getPlayerFromUrl(url);
+        url = JsonHandler.domain + "/register_player";
+        urlParameters = new ArrayList<BasicNameValuePair>();
+        urlParameters.add(new BasicNameValuePair("login", login + ""));
+        urlParameters.add(new BasicNameValuePair("password", password + ""));
+        return getPlayerFromUrl(url, urlParameters);
     }
 }
 

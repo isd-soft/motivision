@@ -9,6 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 class LoginScreen implements Screen{
     
     private GGame parent;
@@ -37,9 +41,9 @@ class LoginScreen implements Screen{
 		label = new Label("Login into account", skin);
 
 		//add text fields login/password
-		TextField loginField = new TextField(null,skin);
+		final TextField loginField = new TextField(null,skin);
 		loginField.setMessageText("Login goes here");
-		TextField passwordField = new TextField(null, skin);
+		final TextField passwordField = new TextField(null, skin);
 		passwordField.setMessageText("Password goes here");
 		passwordField.setPasswordMode(true);
 
@@ -60,10 +64,35 @@ class LoginScreen implements Screen{
 		submit.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				Player	player;
 
-				//Here should go an  if/else check if the data is valid
-				parent.changeScreen(parent.getMenu());
+				if (loginField.getText() == "")
+					label.setText("Write the login please");
+				else if (passwordField.getText() == "")
+					label.setText("Write the password please");
+				else {
+					String	encryptedPassword;
 
+					encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+					try {
+						player = Player.loginPlayer(loginField.getText(), encryptedPassword);
+						encryptedPassword = "";
+						if (player == null) {
+							label.setText(JsonHandler.errorMessage);
+						}
+						else {
+							passwordField.setText("");
+							PlayerAccount.setPlayer(player);
+							parent.changeScreen(parent.getMenu());
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+						label.setText("e.printStackTrace()");
+					} catch (JSONException e) {
+						e.printStackTrace();
+						label.setText("e.printStackTrace()");
+					}
+				}
 			}
 		});
 
