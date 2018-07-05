@@ -105,7 +105,8 @@ public class RegisterScreen  implements Screen {
                 else {
                     String	encryptedPassword;
 
-                    encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+                    //encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+                    encryptedPassword = passwordField.getText();
                     try {
                         player = Player.registerNewPlayer(loginField.getText(), encryptedPassword);
                         encryptedPassword = "";
