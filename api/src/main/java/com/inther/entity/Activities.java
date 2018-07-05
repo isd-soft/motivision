@@ -3,6 +3,7 @@ package com.inther.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Activities {
@@ -15,6 +16,17 @@ public class Activities {
     private String name;
 
     private int reward;
+
+    @ManyToOne
+    @JoinTable(name = "team_activities",
+            joinColumns = {
+                    @JoinColumn(name = "activity_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "team_id", referencedColumnName = "id", unique = true)
+            }
+    )
+    private Team team;
 
     public Activities() {}
 

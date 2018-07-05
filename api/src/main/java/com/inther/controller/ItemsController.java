@@ -26,10 +26,9 @@ public class ItemsController {
 
     @RequestMapping(value = "/create_item", method = RequestMethod.POST)
     public Map<String, Object> createItem(@RequestParam(value = "characterId") Long characterId,
-                                          @RequestParam(value = "typeId") Long typeId,
+                                          @RequestParam(value = "type") Long type,
                                           @RequestParam(value = "imageUrl") String imageUrl,
                                           @RequestParam(value = "price") int price
-
     ) {
 
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -43,7 +42,8 @@ public class ItemsController {
 
         Character character = optionalCharacter.get();
         Items items = new Items();
-        //items.setCharacter(); creating this method...
+        items.setCharacter(character);
+        //items.setType(type);
         return map;
     }
 
