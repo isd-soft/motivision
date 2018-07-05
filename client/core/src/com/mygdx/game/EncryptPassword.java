@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+/*
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -10,13 +11,13 @@ import javax.crypto.spec.SecretKeySpec;
  *  Encrypts and decrypts the password using
  *  AES cypher, CDC mode and PKCS5PADDING
  *  Encryption KEY and IV are fixed
- * */
+ *
 public class EncryptPassword {
 
     /*
      * @param value - string to be encrypted
      * @return encrypted string as byte[]
-     * */
+     *
     private static final String key = "aesEncryptionKey";
     private static final String initVector = "encryptionIntVec";
 
@@ -37,7 +38,7 @@ public class EncryptPassword {
     /*
      * @param value - encrypted string up for decryption
      * @return decrypted string
-     * */
+     *
     public static String decrypt(String valueToDecrypt) {
         try {
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
@@ -52,3 +53,4 @@ public class EncryptPassword {
         return null;
     }
 }
+*/

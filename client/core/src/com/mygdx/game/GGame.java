@@ -9,12 +9,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GGame extends Game {
 
-  	SpriteBatch batch;
-	BitmapFont font;
-        
-        
+  	private SpriteBatch batch;
+	private BitmapFont font;
+
 private LoadingScreen loadingScreen;
 private SettingsScreen settingsScreen;
+private AppPreferences preferences;
 private MenuScreen menuScreen;
 private GameScreen gameScreen;
 private LoginScreen loginScreen;
@@ -33,11 +33,10 @@ public int getMenu(){
     return MENU;
 }
 
-
 private final static int SETTINGS = 3;
 public int getSettings(){ return SETTINGS;}
 
-public final static int GAME = 4;
+private final static int GAME = 4;
 public int getGame(){return GAME;}
         
 //PREFERENCES - preferencessScreen - settingScreen
@@ -69,14 +68,19 @@ public void changeScreen(int screen){
 	}
 }
 
+	public AppPreferences getPreferences(){
+		return this.preferences;
+	}
 
           @Override
 	public void create() {
+
+		preferences = new AppPreferences();
 		batch = new SpriteBatch();
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
                 //this.setScreen(new )
-		loadingScreen = new LoadingScreen(this);
+              loadingScreen = new LoadingScreen(this);
                 setScreen(loadingScreen);
 	}
 
