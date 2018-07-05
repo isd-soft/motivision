@@ -82,6 +82,7 @@ public class RegisterScreen  implements Screen {
         final TextField loginField = new TextField(null,skin);
         loginField.setMessageText("Login goes here");
         final TextField passwordField = new TextField("", skin);
+        passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
         passwordField.setMessageText("Password goes here");
 
@@ -104,7 +105,8 @@ public class RegisterScreen  implements Screen {
                 else {
                     String	encryptedPassword;
 
-                    encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+                    //encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+                    encryptedPassword = passwordField.getText();
                     try {
                         player = Player.registerNewPlayer(loginField.getText(), encryptedPassword);
                         encryptedPassword = "";
