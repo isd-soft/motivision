@@ -7,10 +7,7 @@ import com.inther.repo.CharacterRepository;
 import com.inther.repo.PlayerRepository;
 import com.inther.repo.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -35,17 +32,17 @@ public class CharacterController {
                                                @RequestParam(value = "bodyType") Long bodyType,
                                                @RequestParam(value = "gender") char gender,
                                                @RequestParam(value = "name") String name
-                                               ){
+    ) {
 
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Player> optionalPlayer = playerRepository.findById(playerId);
-        if(!optionalPlayer.isPresent()){
+        if (!optionalPlayer.isPresent()) {
             map.put("status", "failed");
             map.put("message", "No such player exist with playerId");
             return map;
         }
         Optional<Team> optionalTeam = teamRepository.findById(teamId);
-        if(!optionalTeam.isPresent()){
+        if (!optionalTeam.isPresent()) {
             map.put("status", "failed");
             map.put("message", "No such team exist with teamId");
             return map;
@@ -62,6 +59,42 @@ public class CharacterController {
         characterRepository.save(character);
         map.put("status", "success");
         map.put("id", character.getID());
+        return map;
+    }
+
+    @RequestMapping(value = "/get_character", method = RequestMethod.GET)
+    public Map<String, Object> getCharacter(@RequestParam(value = "characterId") Long characterId) {
+        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        if (!optionalCharacter.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "No such character exist with playerId");
+            return map;
+        }
+        Character character = optionalCharacter.get();
+        map.put("status", "success");
+        map.put("characterId", character.getID());
+        map.put("playerId", character.getPlayer().getID());
+        map.put("teamId", character.getTeam().getID());
+        map.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getID().equals(characterId)));
+        map.put("headType", character.getHeadType());
+        map.put("bodyType", character.getBodyType());
+        map.put("gender", character.getGender());
+        map.put("power", character.getPower());
+        return map;
+    }
+
+    @RequestMapping(value = "/delete_character", method = RequestMethod.DELETE)
+    private Map<String, Object> deleteCharacter(@RequestParam(value = "characterId") Long characterId){
+        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        if(!optionalCharacter.isPresent()){
+            map.put("status", "failed");
+            map.put("message", "no such character exist");
+            return map;
+        }
+        characterRepository.deleteById(characterId);
+        map.put("status", "success");
         return map;
     }
 }
