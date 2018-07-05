@@ -35,6 +35,7 @@ public class Player {
         if (characterList == null)
             characterList = new TreeMap<Integer, String>();
         characterList.put(id, name);
+        System.out.println("Added + " + name);
     }
 
     public int	getId() {
@@ -63,7 +64,7 @@ public class Player {
         /*urlParameters = new ArrayList<BasicNameValuePair>();
         urlParameters.add(new BasicNameValuePair("login", login + ""));*/
         //url = JsonHandler.domain;
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters);
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, true);
         if (jsonObject == null)
             return true;
         result = jsonObject.getString("result");
@@ -76,7 +77,7 @@ public class Player {
         JsonHandler.errorMessage = message;
     }
 
-    private static Player	getPlayerFromUrl(String url, String urlParameters) throws JSONException, IOException {
+    private static Player	getPlayerFromUrl(String url, String urlParameters, boolean isPostMethod) throws JSONException, IOException {
         Player      player;
         String		field;
         String      characterName;
@@ -85,7 +86,7 @@ public class Player {
         int			id;
         int         characterId;
 
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters);
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, isPostMethod);
         if (jsonObject == null)
             return null;
         try {
@@ -103,7 +104,7 @@ public class Player {
             return null;
         }
         player = new Player(id, points);
-        if (jsonObject.has("posts") == false)
+        if (jsonObject.has("characters") == false)
             return player;
         JSONArray arr = jsonObject.getJSONArray("characters");
 
@@ -134,7 +135,7 @@ public class Player {
         String urlParameters = "login=" + login + "&password=" + password;
 
         //String urlParameters = "name=Jack&occupation=programmer";
-        return getPlayerFromUrl(url, urlParameters);
+        return getPlayerFromUrl(url, urlParameters, true);
     }
 
     public static Player	registerNewPlayer(String login, String password) throws IOException, JSONException {
@@ -151,7 +152,7 @@ public class Player {
 //        urlParameters.add(new BasicNameValuePair("password", password + ""));
 
         String urlParameters = "login=" + login + "&password=" + password;
-        return getPlayerFromUrl(url, urlParameters);
+        return getPlayerFromUrl(url, urlParameters, true);
     }
 }
 
