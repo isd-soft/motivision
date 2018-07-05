@@ -14,7 +14,7 @@ import org.json.JSONException;
 import java.io.IOException;
 
 public class RegisterScreen  implements Screen {
-
+    // New version
     private GGame parent;
     private Stage stage;
     private Skin skin;

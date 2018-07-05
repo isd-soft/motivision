@@ -17,15 +17,15 @@ public class DesktopLauncher {
 		config.height = 480;
 		config.width = 800;
 
-		try {
-			if (Player.registerNewPlayer("alex7", "123") == null)
-				System.out.println(JsonHandler.errorMessage);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Finished");
+//		try {
+//			if (Player.registerNewPlayer("alex7", "123") == null)
+//				System.out.println(JsonHandler.errorMessage);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("Finished");
 		new LwjglApplication(new GGame(), config);
 	}
 }
