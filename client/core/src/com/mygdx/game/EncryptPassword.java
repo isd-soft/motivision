@@ -1,4 +1,4 @@
-package com.mygdx.game;
+//package com.mygdx.game;
 
 /*
 import org.apache.commons.codec.binary.Base64;
@@ -33,7 +33,7 @@ public class EncryptPassword {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;*/
+        return null;
     }
 
     /*
