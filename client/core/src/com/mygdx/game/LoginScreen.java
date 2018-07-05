@@ -62,6 +62,7 @@ class LoginScreen implements Screen{
 		final TextField loginField = new TextField(null,skin);
 		loginField.setMessageText("Login goes here");
 		final TextField passwordField = new TextField(null, skin);
+		passwordField.setPasswordCharacter('*');
 		passwordField.setPasswordMode(true);
 		passwordField.setMessageText("Password goes here");
 
