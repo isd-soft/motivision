@@ -32,9 +32,6 @@ public class Character {
     @JoinColumn(name = "player_id")
     private Player player;
 
-    @OneToOne(mappedBy = "character")
-    private CharacterItem characterItems;
-
     public Character() {
     }
 
@@ -96,9 +93,5 @@ public class Character {
 
     public void setPlayer(Player player) {
         this.player = player;
-    }
-
-    public CharacterItem getCharacterItems() {
-        return characterItems;
     }
 }
