@@ -77,6 +77,7 @@ public class CharacterController {
         Character character = optionalCharacter.get();
         map.put("status", "success");
         map.put("characterId", character.getID());
+        map.put("name", character.getName());
         map.put("playerId", character.getPlayer().getID());
         map.put("teamId", character.getTeam().getID());
         map.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getID().equals(characterId)));
