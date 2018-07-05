@@ -21,7 +21,14 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import static org.apache.commons.httpclient.params.HttpMethodParams.USER_AGENT;
+
+import java.io.DataOutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static org.apache.http.HttpHeaders.USER_AGENT;
+
 
 public class JsonHandler {
     static final String domain = "http://172.17.41.110:8080/";
@@ -68,6 +75,56 @@ public class JsonHandler {
 
 */
 
+
+    private static String POSTMethod(String url, String urlParameters) throws IOException {
+
+       // String url = "https://httpbin.org/post";
+        //String urlParameters = "name=Jack&occupation=programmer";
+        byte[] postData = urlParameters.getBytes();
+
+        HttpURLConnection con = null;
+        try {
+
+            URL myurl = new URL(url);
+            con = (HttpURLConnection) myurl.openConnection();
+
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("User-Agent", "Java client");
+            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            try {
+                wr.write(postData);
+            } finally {
+                if (wr != null) wr.close();
+            }
+
+            StringBuilder content;
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+            if (bufferedReader == null) {
+                System.out.println("Stream is null");
+                throw new IOException();
+            }
+            return readAll(bufferedReader);
+            //return in;
+
+            //System.out.println(content.toString());
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (con != null)
+                con.disconnect();
+        }
+        return null;
+    }
+
+
     public static BufferedReader getRequestResult(String url, List<BasicNameValuePair> urlParameters) {
         //String url = "https://selfsolve.apple.com/wcResults.do";
 
@@ -110,14 +167,17 @@ public class JsonHandler {
         */
     }
 
-    public static JSONObject readJsonFromUrl(String url, List<BasicNameValuePair> urlParameters) throws IOException, JSONException {
+    public static JSONObject readJsonFromUrl(String url, String urlParameters) throws IOException, JSONException {
         InputStream is;
 
         //is = new URL(url).openStream();
         try {
-            BufferedReader rd = getRequestResult(url, urlParameters);
+            System.out.println(urlParameters);
+           // BufferedReader rd = POSTMethod(url, urlParameters);
+
+            //BufferedReader rd = getRequestResult(url, urlParameters);
             //BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);
+            String jsonText = POSTMethod(url, urlParameters);
             JSONObject json = new JSONObject(jsonText);
             readErrorMessage(json);
             System.out.println(json);
