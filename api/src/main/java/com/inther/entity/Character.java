@@ -32,17 +32,6 @@ public class Character {
     @JoinColumn(name = "player_id")
     private Player player;
 
-    /*@OneToMany
-    @JoinTable(name = "character_item",
-            joinColumns = {
-                    @JoinColumn(name = "character_id", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "item_id", referencedColumnName = "id", unique = true)
-            }
-    )
-    private List<Items> items;*/
-
     @OneToOne(mappedBy = "character")
     private CharacterItem characterItems;
 
