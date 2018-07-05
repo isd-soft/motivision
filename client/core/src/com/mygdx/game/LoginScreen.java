@@ -14,6 +14,10 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 class LoginScreen implements Screen{
     // New version
 
@@ -55,9 +59,9 @@ class LoginScreen implements Screen{
 		label = new Label("Login into account", skin);
 
 		//add text fields login/password
-		TextField loginField = new TextField(null,skin);
+		final TextField loginField = new TextField(null,skin);
 		loginField.setMessageText("Login goes here");
-		TextField passwordField = new TextField(null, skin);
+		final TextField passwordField = new TextField(null, skin);
 		passwordField.setPasswordMode(true);
 		passwordField.setMessageText("Password goes here");
 
@@ -78,7 +82,7 @@ class LoginScreen implements Screen{
 		submit.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				Player	player;
+				Player	player = null;
 
 				if (loginField.getText() == "")
 					label.setText("Write the login please");
@@ -89,7 +93,11 @@ class LoginScreen implements Screen{
 
 					encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
 					try {
-						player = Player.loginPlayer(loginField.getText(), encryptedPassword);
+						try {
+							player = Player.loginPlayer(loginField.getText(), encryptedPassword);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
 						encryptedPassword = "";
 						if (player == null) {
 							label.setText(JsonHandler.errorMessage);
@@ -100,9 +108,6 @@ class LoginScreen implements Screen{
 							parent.changeScreen(parent.getMenu());
 						}
 					} catch (IOException e) {
-						e.printStackTrace();
-						label.setText("e.printStackTrace()");
-					} catch (JSONException e) {
 						e.printStackTrace();
 						label.setText("e.printStackTrace()");
 					}
