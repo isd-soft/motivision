@@ -167,17 +167,33 @@ public class JsonHandler {
         */
     }
 
-    public static JSONObject readJsonFromUrl(String url, String urlParameters) throws IOException, JSONException {
+    public static JSONObject    readJsonFromUrl(String url, String urlParameters, boolean isPostMethod) throws IOException, JSONException {
+        String              jsonText;
+        InputStream   inputStream;
+        BufferedReader      bufferedReader;
+
+        if (isPostMethod) {
+            jsonText = POSTMethod(url, urlParameters);
+        }
+        else {
+            inputStream = new URL(url + "?" + urlParameters).openStream();
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            jsonText = readAll(bufferedReader);
+        }
+        return readJsonFromUrl(jsonText);
+    }
+
+    public static JSONObject readJsonFromUrl(String jsonText) throws IOException, JSONException {
         InputStream is;
 
         //is = new URL(url).openStream();
         try {
-            System.out.println(urlParameters);
+          //  System.out.println(urlParameters);
            // BufferedReader rd = POSTMethod(url, urlParameters);
 
             //BufferedReader rd = getRequestResult(url, urlParameters);
             //BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            String jsonText = POSTMethod(url, urlParameters);
+            //String jsonText = POSTMethod(url, urlParameters);
             JSONObject json = new JSONObject(jsonText);
             readErrorMessage(json);
             System.out.println(json);
