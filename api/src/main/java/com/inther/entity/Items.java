@@ -3,7 +3,6 @@ package com.inther.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Items {
@@ -18,6 +17,9 @@ public class Items {
     private String imageUrl;
 
     private int price;
+
+    @OneToMany(mappedBy = "items")
+    private CharacterItems characterItems;
 
     public Items() {}
 
@@ -36,5 +38,4 @@ public class Items {
     public int getPrice() {
         return price;
     }
-
 }

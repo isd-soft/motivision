@@ -32,6 +32,9 @@ public class Character {
     @JoinColumn(name = "player_id")
     private Player player;
 
+    @OneToMany(mappedBy = "character")
+    private List<CharacterItems> characterItems;
+
     public Character() {
     }
 

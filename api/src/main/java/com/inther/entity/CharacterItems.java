@@ -6,29 +6,37 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class CharacterItem {
+public class CharacterItems {
 
     @Id
     @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
     private Long ID;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "character_id")
     private Character character;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "item_id")
-    private List<Items> items;
+    private Items items;
 
-    public CharacterItem() {
+    public CharacterItems() {
     }
 
     public Character getCharacter() {
         return character;
     }
 
-    public List<Items> getItems() {
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
+
+    public Items getItems() {
         return items;
+    }
+
+    public void setItems(Items items) {
+        this.items = items;
     }
 }

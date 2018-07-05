@@ -30,8 +30,6 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private List<TeamActivities> teamActivities;
 
-
-
     public Team() {
     }
 
