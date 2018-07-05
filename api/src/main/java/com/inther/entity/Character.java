@@ -22,7 +22,10 @@ public class Character {
 
     private String name;
 
-    private int team_id;
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    @OneToOne(mappedBy = "admin")
+    private Team team;
 
     @ManyToOne
     @JoinColumn(name = "player_id")
@@ -31,16 +34,8 @@ public class Character {
     public Character() {
     }
 
-    public Character(int team_id) {
-        this.team_id = team_id;
-    }
-
     public Long getID() {
         return ID;
-    }
-
-    public int getTeam_id() {
-        return team_id;
     }
 
     public Long getHeadType() {
