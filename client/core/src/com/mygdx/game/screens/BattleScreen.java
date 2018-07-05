@@ -1,22 +1,12 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 
 
 
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 
-
-
-
-  
 
 public class BattleScreen implements Screen {
 
@@ -29,10 +19,10 @@ public class BattleScreen implements Screen {
         private Rectangle warria;
         private Rectangle evilWarria;
         */
-        private GGame parent;
+        private com.mygdx.game.screens.GGame parent;
         
         
-        public BattleScreen(GGame g){
+        public BattleScreen(com.mygdx.game.screens.GGame g){
             parent = g;
         }
         

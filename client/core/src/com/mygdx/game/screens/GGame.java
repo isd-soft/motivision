@@ -1,5 +1,5 @@
 
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 
 import com.badlogic.gdx.Game;
@@ -13,12 +13,12 @@ public class GGame extends Game {
 	private BitmapFont font;
 
 private LoadingScreen loadingScreen;
-private SettingsScreen settingsScreen;
-private AppPreferences preferences;
+private com.mygdx.game.screens.SettingsScreen settingsScreen;
+private com.mygdx.game.screens.AppPreferences preferences;
 private MenuScreen menuScreen;
 private BattleScreen battleScreen;
 private LoginScreen loginScreen;
-private RegisterScreen registerScreen;
+private com.mygdx.game.screens.RegisterScreen registerScreen;
 private CharacterSelectScreen characterSelectScreen;
  
 
@@ -55,7 +55,7 @@ public void changeScreen(int screen){
 					this.setScreen(loginScreen);
 			break;
 		case REGISTER:
-			if (registerScreen == null) registerScreen = new RegisterScreen(this);
+			if (registerScreen == null) registerScreen = new com.mygdx.game.screens.RegisterScreen(this);
 					this.setScreen(registerScreen);
 			break;
 		case MENU:
@@ -63,7 +63,7 @@ public void changeScreen(int screen){
 					this.setScreen(menuScreen);
 			break;
 		case SETTINGS:
-			if(settingsScreen == null) settingsScreen = new SettingsScreen(this);
+			if(settingsScreen == null) settingsScreen = new com.mygdx.game.screens.SettingsScreen(this);
 					this.setScreen(settingsScreen);
 			break;
 		case CHARACTERSELECT:
@@ -77,27 +77,27 @@ public void changeScreen(int screen){
 	}
 }
 
-	public AppPreferences getPreferences(){
+	public com.mygdx.game.screens.AppPreferences getPreferences(){
 		return this.preferences;
 	}
 
           @Override
 	public void create() {
 
-		preferences = new AppPreferences();
+		preferences = new com.mygdx.game.screens.AppPreferences();
 		batch = new SpriteBatch();
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
                 //this.setScreen(new )
-			  menuScreen = new MenuScreen(this);
-                setScreen(menuScreen);
+			  loadingScreen = new LoadingScreen(this);
+                setScreen(loadingScreen);
 //			  characterSelect = new CharacterSelect(this);
 //			  setScreen(characterSelect);
 	}
 
           @Override
 	public void render() {
-		super.render(); 
+		super.render();
 	}
         
         class TextInput implements Input.TextInputListener{

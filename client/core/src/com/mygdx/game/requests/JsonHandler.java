@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.requests;
 
 /*
 import com.google.gwt.thirdparty.json.JSONArray;
