@@ -1,5 +1,111 @@
 package com.mygdx.game.Screens;
 
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.mygdx.game.GameSets.GGame;
+import com.mygdx.game.GameSets.GameModel;
+
+public class BattleScreen implements Screen {
+    private GGame parent;
+    private GameModel model;
+    private Box2DDebugRenderer debugRenderer;
+    private OrthographicCamera cam;
+    //private KeyboardController controller;
+    private Texture playerTex;
+    private SpriteBatch sb;
+
+
+    public BattleScreen(GGame g) {
+        parent = g;
+        model = new GameModel();
+        cam = new OrthographicCamera(32,24);
+        debugRenderer = new Box2DDebugRenderer(true,true,true,true,true,true);
+        //controller = new KeyboardController();
+        //model = new GameModel(controller,cam,parent.assMan);
+        //debugRenderer = new Box2DDebugRenderer(true,true,true,true,true,true);
+
+        //sb = new SpriteBatch();
+        //sb.setProjectionMatrix(cam.combined);
+
+
+        // tells our asset manger that we want to load the images set in loadImages method
+        //parent.assMan.queueAddImages();
+        // tells teh asset manager to load the images and wait until finsihed loading.
+        //parent.assMan.manager.finishLoading();
+        // gets the images as a texture
+        //playerTex = parent.assMan.manager.get("images/player.png");
+
+
+    }
+
+    @Override
+    public void show() {
+
+        //Gdx.input.setInputProcessor(controller);
+    }
+
+    @Override
+    public void render(float delta) {
+
+        model.logicStep(delta);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        debugRenderer.render(model.world, cam.combined);
+
+
+        /*
+        model.logicStep(delta);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        sb.begin();
+        sb.draw(playerTex,model.player.getPosition().x -1,model.player.getPosition().y -1,2,2);
+        sb.end();
+
+
+        debugRenderer.render(model.world, cam.combined);
+*/
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void pause() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void resume() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void hide() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void dispose() {
+        // TODO Auto-generated method stub
+
+    }
+
+}
+
+
 /*
 
 import com.badlogic.gdx.Gdx;

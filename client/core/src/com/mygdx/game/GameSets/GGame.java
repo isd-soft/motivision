@@ -17,7 +17,7 @@ private LoadingScreen loadingScreen;
 private SettingsScreen settingsScreen;
 private AppPreferences preferences;
 private MenuScreen menuScreen;
-//private BattleScreen battleScreen;
+private BattleScreen battleScreen;
 private LoginScreen loginScreen;
 private RegisterScreen registerScreen;
 private CharacterSelectScreen characterSelectScreen;
@@ -42,8 +42,8 @@ private final static int CHARACTERSELECT = 4;
 public int getCharacterSelect(){ return CHARACTERSELECT;}
 
 
-//private final static int BATTLE = 5;
-//public int getGame(){return BATTLE;}
+private final static int BATTLE = 5;
+public int getGame(){return BATTLE;}
         
 //PREFERENCES - preferencessScreen - settingScreen
 //APPLICATION - mainScreen - gameScreen
@@ -71,12 +71,12 @@ public void changeScreen(int screen){
 			if(characterSelectScreen == null) characterSelectScreen = new CharacterSelectScreen(this);
 			this.setScreen(characterSelectScreen);
 			break;
-		/*
+
 		case BATTLE:
 			if(battleScreen == null) battleScreen = new BattleScreen(this);
 					this.setScreen(battleScreen);
 			break;
-			*/
+
 	}
 }
 
