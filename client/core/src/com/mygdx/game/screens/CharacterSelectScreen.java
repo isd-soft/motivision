@@ -25,10 +25,7 @@ public class CharacterSelectScreen implements Screen {
     private Stage stage;
     private Skin skin;
 
-    OrthographicCamera camera;
     ScrollPane scrollPane;
-    List<String> list;
-    float gameWidth, gameHeight;
 
     public CharacterSelectScreen(GGame g) {
         parent = g;
@@ -39,33 +36,54 @@ public class CharacterSelectScreen implements Screen {
     @Override
     public void show() {
 
-        gameWidth = Gdx.graphics.getWidth();
-        gameHeight = Gdx.graphics.getHeight();
+        float gameWidth = Gdx.graphics.getWidth();
+        float gameHeight = Gdx.graphics.getHeight();
 
         // add the character image
         Texture texture = new Texture("monster.png");
         Image image = new Image(texture);
 
-        // add the list of already created characters
-        list = new List<String>(skin);
-        ArrayList<String> strings = PlayerAccount.getCharactersName();//new ArrayList<String>();
+        // remove and add buttons
+        TextButton create = new TextButton("Create new +", skin, "square");
+        TextButton remove1 = new TextButton("Logout", skin, "small");
+        TextButton remove2 = new TextButton("Back", skin, "small");
 
-        list.setItems(strings.toArray(new String[strings.size()]));
-        list.setDebug(true);
+        // add the list of already created characters
+        ArrayList<String> strings = new ArrayList<String>();
+        ArrayList<String> characterNames = PlayerAccount.getCharactersName();
+        if (characterNames != null)
+            strings = PlayerAccount.getCharactersName();
+        else
+            for (int i = 0, k = 0; i < 10; i++) {
+                strings.add("String: " + i);
+            }
+
+        Table list = new Table();
+        for (String elem : strings) {
+            list.add(new TextButton(elem, skin, "square")).fill();
+            list.add(new TextButton("X", skin, "square")).fill();
+            list.row();
+
+        }
+        list.add(create).colspan(2).fill();
+//        list = new List<String>(skin);
+//        list.setItems(strings.toArray(new String[strings.size()]));
 
         scrollPane = new ScrollPane(list);
         scrollPane.setSmoothScrolling(false);
+        scrollPane.setScrollingDisabled(true, false);
 
-        // remove and add buttons
-        TextButton remove = new TextButton("Remove selected", skin, "small");
-        TextButton create = new TextButton("Create new", skin, "small");
-        TextButton remove1 = new TextButton("Create new", skin, "small");
-        TextButton remove2 = new TextButton("Create new", skin, "small");
         // add event listeners
-        create.addListener(new ChangeListener() {
+        remove1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //parent.changeScreen(parent.getMenu());
+                parent.changeScreen(parent.getLogin());
+            }
+        });
+        remove2.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.changeScreen(parent.getLogin());
             }
         });
 
@@ -82,27 +100,21 @@ public class CharacterSelectScreen implements Screen {
             }
         });
 
-        // add the wrapper table
+        // add the list and buttons table
         Table buttonTable = new Table();
-        buttonTable.setDebug(true);
-
-        // add table elements
         buttonTable.add(remove1);
         buttonTable.add(remove2);
         buttonTable.row();
-        buttonTable.add(scrollPane).colspan(2).fill().expand();
-        buttonTable.row();
-        buttonTable.add(remove).colspan(2);
-        buttonTable.row();
-        buttonTable.add(create).colspan(2);
+        buttonTable.add(scrollPane).colspan(2).width(gameWidth/2.5f).padLeft(10).padRight(10);
 
+        // add wrapper table
         Table screen = new Table();
         screen.setFillParent(true);
-        screen.add(image).width(gameHeight*0.95f).height(gameHeight*0.95f).expand();
-        screen.add(buttonTable).expand();
+        screen.add(image).width(gameHeight * 0.95f).height(gameHeight * 0.95f).expand();
+        screen.add(buttonTable).expand().padBottom(10).padTop(10);
 
         stage.addActor(screen);
-        stage.setDebugAll(true);
+        //stage.setDebugAll(true);
 
         Gdx.input.setInputProcessor(stage);
     }

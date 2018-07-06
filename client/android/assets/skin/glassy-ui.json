@@ -180,6 +180,12 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		up: button-small
 		down: button-small-down
 	}
+	square: {
+		font: font
+		fontColor: black
+		up: list
+		down: slider-vertical
+	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {
