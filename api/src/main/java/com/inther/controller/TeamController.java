@@ -82,9 +82,9 @@ public class TeamController {
             teamActivitiesList.add(teamActivities);
         }
         team.setTeamActivities(teamActivitiesList);
-        for (TeamActivities activities : teamActivitiesList){
+        /*for (TeamActivities activities : teamActivitiesList){
             teamActivitiesRepository.save(activities);
-        }
+        }*/
         teamRepository.save(team);
         map.put("status", "success");
         return map;
