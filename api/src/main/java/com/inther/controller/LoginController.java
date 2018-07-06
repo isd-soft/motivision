@@ -88,7 +88,7 @@ public class LoginController {
                 playerRepository.save(player);
                 map.put("status", "success");
                 playerRepository.findByLogin(login);
-                map.put("id", player.getID().toString());
+                map.put("characterId", player.getID().toString());
                 map.put("points", player.getPoints().toString());
                 return map;
             } catch (Exception e) {
