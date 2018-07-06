@@ -114,7 +114,7 @@ public class CharacterController {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         if (!optionalCharacter.isPresent()) {
             map.put("status", "failed");
-            map.put("message", "no such character exist");
+            map.put("message", "No such character exist");
             return map;
         }
         characterRepository.deleteById(characterId);
@@ -143,7 +143,7 @@ public class CharacterController {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         if (!optionalCharacter.isPresent()) {
             map.put("status", "failed");
-            map.put("message", "no such character with characterId exist");
+            map.put("message", "No such character with characterId exist");
             return map;
         }
         Optional<List<Items>> optionalItemsList = itemsRepository.findAllByCharacterId(characterId);
@@ -230,7 +230,7 @@ public class CharacterController {
         Optional<Character> optionalCharacter = characterRepository.findById(charId);
         if (!optionalCharacter.isPresent()) {
             map.put("status", "failed");
-            map.put("message", "no such character with characterId");
+            map.put("message", "No such character with characterId");
             return map;
         }
         Character character = optionalCharacter.get();
@@ -238,7 +238,7 @@ public class CharacterController {
         Optional<Items> optionalItems = itemsRepository.findById(itemId);
         if (!optionalItems.isPresent()) {
             map.put("status", "failed");
-            map.put("message", "no such item with itemId");
+            map.put("message", "No such item with itemId");
             return map;
         }
         Items items = optionalItems.get();
@@ -251,7 +251,7 @@ public class CharacterController {
             return map;
         } else {
             map.put("status", "failed");
-            map.put("message", "not enough points");
+            map.put("message", "Not enough points");
             return map;
         }
     }
