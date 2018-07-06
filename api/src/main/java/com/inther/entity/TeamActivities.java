@@ -12,16 +12,20 @@ public class TeamActivities {
     @GeneratedValue(generator = "kaugen")
     private Long ID;
 
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "activity_id")
     private Activities activities;
 
     public TeamActivities() {
+    }
+
+    public TeamActivities(Team team, Activities activities) {
+        this.team = team;
+        this.activities = activities;
     }
 
     public Long getID() {
