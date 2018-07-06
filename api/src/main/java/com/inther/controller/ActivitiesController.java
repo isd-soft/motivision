@@ -106,6 +106,29 @@ public class ActivitiesController {
         teamActivitiesRepository.deleteById(activityId);
         map.put("status", "success");
         return map;
+    }
 
+    @RequestMapping(value = "/create_activity")
+    public Map<String, Object> createActivity(  @RequestParam(value = "teamId") Long teamId,
+                                                @RequestParam(value = "name") String activityName,
+                                                @RequestParam(value = "reward") Integer activityReward){
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+        if (!optionalTeam.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "no such team with teamId exist");
+            return map;
+        }
+        Team team = optionalTeam.get();
+        Activities activities = new Activities();
+        activities.setName(activityName);
+        activities.setReward(activityReward);
+        activitiesRepository.save(activities);
+        addActivity(team.getID(), activities.getID());
+        map.put("status", "success");
+        map.put("activityId", activities.getID().toString());
+        map.put("activityName", activities.getName());
+        map.put("activityReward", String.valueOf(activities.getReward()));
+        return map;
     }
 }

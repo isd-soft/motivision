@@ -1,6 +1,7 @@
 package com.inther.controller;
 
 import com.inther.entity.Team;
+import com.inther.repo.TeamActivitiesRepository;
 import com.inther.repo.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,9 @@ public class TeamController {
 
     @Autowired
     TeamRepository teamRepository;
+
+    @Autowired
+    TeamActivitiesRepository teamActivitiesRepository;
 
     /*
     * Get team info controller
@@ -42,6 +46,8 @@ public class TeamController {
         return map;
     }
 
+
+
     @RequestMapping(value = "/create_team", method = RequestMethod.POST)
     public Map<String, Object> createTeam(@RequestParam(value = "name") String name,
                                            @RequestParam(value = "teamLogo") String logo,
@@ -58,6 +64,7 @@ public class TeamController {
         team.setTeamLogo(logo);
         team.setBattleFrequency(battleFrequency);
         teamRepository.save(team);
+
         map.put("status", "success");
         return map;
     }
