@@ -11,25 +11,28 @@ import javax.crypto.spec.SecretKeySpec;
  *  Encrypts and decrypts the password using
  *  AES cypher, CDC mode and PKCS5PADDING
  *  Encryption KEY and IV are fixed
- *
+ */
 public class EncryptPassword {
 
     /*
      * @param value - string to be encrypted
      * @return encrypted string as byte[]
-     *
+     */
     private static final String key = "aesEncryptionKey";
     private static final String initVector = "encryptionIntVec";
 
     public static String encrypt(String valuetToEncrypt) {
-        return valuetToEncrypt;/*
         try {
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
             SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, iv);
             byte[] encrypted = cipher.doFinal(valuetToEncrypt.getBytes());
-            return Base64.encodeBase64String(encrypted);
+           // String  ec = Base64.encodeBase64String(encrypted);
+            String ec = new String(Base64.encodeBase64(encrypted));
+
+            System.out.println(ec);
+            return ec;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -39,8 +42,8 @@ public class EncryptPassword {
     /*
      * @param value - encrypted string up for decryption
      * @return decrypted string
-     *
-    public static String decrypt(String valueToDecrypt) {
+     */
+    public static String decrypt (String valueToDecrypt){
         try {
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
             SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
@@ -54,4 +57,3 @@ public class EncryptPassword {
         return null;
     }
 }
-*/
