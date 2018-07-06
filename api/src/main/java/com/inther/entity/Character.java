@@ -33,7 +33,7 @@ public class Character {
     private Player player;
 
     @OneToMany(mappedBy = "character")
-    private List<CharacterItems> characterItems;
+    private List<CharacterItem> characterItems;
 
     public Character() {
     }

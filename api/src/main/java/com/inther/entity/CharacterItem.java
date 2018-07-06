@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class CharacterItems {
+public class CharacterItem {
 
     @Id
     @GenericGenerator(name = "kaugen", strategy = "increment")
@@ -21,7 +21,7 @@ public class CharacterItems {
     @JoinColumn(name = "item_id")
     private Items items;
 
-    public CharacterItems() {
+    public CharacterItem() {
     }
 
     public Character getCharacter() {

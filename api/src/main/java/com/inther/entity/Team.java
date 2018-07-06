@@ -77,4 +77,11 @@ public class Team {
         this.admin = admin;
     }
 
+    public List<TeamActivities> getTeamActivities() {
+        return teamActivities;
+    }
+
+    public void setTeamActivities(List<TeamActivities> teamActivities) {
+        this.teamActivities = teamActivities;
+    }
 }

@@ -3,6 +3,7 @@ package com.inther.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Items {
@@ -19,7 +20,7 @@ public class Items {
     private int price;
 
     @OneToMany(mappedBy = "items")
-    private CharacterItems characterItems;
+    private List<CharacterItem> characterItems;
 
     public Items() {}
 
