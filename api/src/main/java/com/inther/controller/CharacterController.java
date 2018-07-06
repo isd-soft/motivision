@@ -1,17 +1,12 @@
 package com.inther.controller;
 
+import com.inther.entity.*;
 import com.inther.entity.Character;
-import com.inther.entity.Player;
-import com.inther.entity.Team;
-import com.inther.repo.CharacterRepository;
-import com.inther.repo.PlayerRepository;
-import com.inther.repo.TeamRepository;
+import com.inther.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class CharacterController {
@@ -24,6 +19,12 @@ public class CharacterController {
 
     @Autowired
     CharacterRepository characterRepository;
+
+    @Autowired
+    ItemsRepository itemsRepository;
+
+    @Autowired
+    CharacterItemRepository characterItemRepository;
 
     @RequestMapping(value = "/create_character", method = RequestMethod.POST)
     public Map<String, Object> createCharacter(@RequestParam(value = "playerId") Long playerId,
@@ -57,7 +58,7 @@ public class CharacterController {
         character.setBodyType(bodyType);
         character.setGender(gender);
         character.setName(name);
-        if(isAdmin)
+        if (isAdmin)
             team.setAdmin(character);
         characterRepository.save(character);
         map.put("status", "success");
@@ -85,14 +86,33 @@ public class CharacterController {
         map.put("bodyType", character.getBodyType());
         map.put("gender", character.getGender());
         map.put("power", character.getPower());
+
+        Optional<List<Items>> optionalItemsList = itemsRepository.findAllByCharacterId(characterId);
+        if (!optionalItemsList.isPresent()) {
+            map.put("items", "null");
+            return map;
+        }
+        List<Items> itemsList = optionalItemsList.get();
+        Iterator<Items> iterator = itemsList.iterator();
+        ArrayList<Map<String, Object>> result = new ArrayList<>();
+        while (iterator.hasNext()) {
+            Map<String, Object> itemsMap = new TreeMap<>();
+            Items items = iterator.next();
+            itemsMap.put("itemId", items.getID());
+            itemsMap.put("itemType", items.getType());
+            itemsMap.put("itemImageUrl", items.getImageUrl());
+            itemsMap.put("itemPrice", items.getPrice());
+            result.add(itemsMap);
+        }
+        map.put("items", result);
         return map;
     }
 
     @RequestMapping(value = "/delete_character", method = RequestMethod.DELETE)
-    private Map<String, Object> deleteCharacter(@RequestParam(value = "characterId") Long characterId){
+    private Map<String, Object> deleteCharacter(@RequestParam(value = "characterId") Long characterId) {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        if(!optionalCharacter.isPresent()){
+        if (!optionalCharacter.isPresent()) {
             map.put("status", "failed");
             map.put("message", "no such character exist");
             return map;
@@ -103,7 +123,7 @@ public class CharacterController {
     }
 
     @RequestMapping(value = "/character_exist")
-    public Map<String, Object> chatacterExist(@RequestParam(value = "characterName") String characterName){
+    public Map<String, Object> chatacterExist(@RequestParam(value = "characterName") String characterName) {
         Optional<Character> optionalCharacter = characterRepository.findByName(characterName);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         if (!optionalCharacter.isPresent()) {
@@ -117,4 +137,122 @@ public class CharacterController {
         return map;
     }
 
+    @RequestMapping(value = "/get_items", method = RequestMethod.GET)
+    public Map<String, Object> getItems(@RequestParam(value = "characterId") Long characterId) {
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
+        if (!optionalCharacter.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "no such character with characterId exist");
+            return map;
+        }
+        Optional<List<Items>> optionalItemsList = itemsRepository.findAllByCharacterId(characterId);
+        if (!optionalItemsList.isPresent()) {
+            map.put("status", "success");
+            map.put("items", "null");
+            return map;
+        }
+        List<Items> itemsList = optionalItemsList.get();
+        Iterator<Items> iterator = itemsList.iterator();
+        ArrayList<Map<String, Object>> result = new ArrayList<>();
+        map.put("status", "success");
+        while (iterator.hasNext()) {
+            Map<String, Object> itemsMap = new TreeMap<>();
+            Items items = iterator.next();
+            itemsMap.put("itemId", items.getID());
+            itemsMap.put("itemType", items.getType());
+            itemsMap.put("itemImageUrl", items.getImageUrl());
+            itemsMap.put("itemPrice", items.getPrice());
+            result.add(itemsMap);
+        }
+        map.put("items", result);
+        return map;
+    }
+
+
+    @RequestMapping(value = "/add_item", method = RequestMethod.POST)
+    public Map<String, Object> addItem(@RequestParam(value = "characterId") Long characterId,
+                                       @RequestParam(value = "itemId") Long itemId
+    ) {
+
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
+        Optional<Items> optionalItems = itemsRepository.findById(itemId);
+        if (!optionalCharacter.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "No such character exist with characterId");
+            return map;
+        }
+
+        if (!optionalItems.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "No such item exist with itemsId");
+            return map;
+        }
+        Character character = optionalCharacter.get();
+        Items items = optionalItems.get();
+        CharacterItem characterItem = new CharacterItem();
+        characterItem.setCharacter(character);
+        characterItem.setItems(items);
+        characterItemRepository.save(characterItem);
+        map.put("status", "success");
+        return map;
+    }
+
+    @RequestMapping(value = "/delete_item", method = RequestMethod.DELETE)
+    public Map<String, Object> deleteObject(@RequestParam(value = "characterId") Long characterId,
+                                            @RequestParam(value = "itemId") Long itemId
+    ) {
+
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
+        Optional<Items> optionalItems = itemsRepository.findItemsByCharacterId(characterId, itemId);
+        if (!optionalCharacter.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "No such character exist with characterId");
+            return map;
+        }
+
+        if (!optionalItems.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "Player doesn't have this item");
+            return map;
+        }
+        characterItemRepository.deleteById(itemId);
+        map.put("status", "success");
+        return map;
+    }
+
+    @RequestMapping(value = "/buy_item")
+    public Map<String, Object> buyItem(@RequestParam(value = "characterId") Long charId,
+                                       @RequestParam(value = "itemId") Long itemId) {
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Character> optionalCharacter = characterRepository.findById(charId);
+        if (!optionalCharacter.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "no such character with characterId");
+            return map;
+        }
+        Character character = optionalCharacter.get();
+        Player player = character.getPlayer();
+        Optional<Items> optionalItems = itemsRepository.findById(itemId);
+        if (!optionalItems.isPresent()) {
+            map.put("status", "failed");
+            map.put("message", "no such item with itemId");
+            return map;
+        }
+        Items items = optionalItems.get();
+        if (player.getPoints() >= items.getPrice()) {
+            player.setPoints(player.getPoints() - items.getPrice());
+            this.addItem(character.getID(), items.getID());
+            character.setPower(character.getPower() + items.getPrice());
+            characterRepository.save(character);
+            map.put("status", "success");
+            return map;
+        } else {
+            map.put("status", "failed");
+            map.put("message", "not enough points");
+            return map;
+        }
+    }
 }
