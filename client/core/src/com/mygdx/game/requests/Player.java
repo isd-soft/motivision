@@ -85,7 +85,7 @@ public class Player {
 
         url = JsonHandler.domain + "/player_exist";
         urlParameters = "login=" + login;
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
         if (jsonObject == null)
             return true;
         result = jsonObject.getString("message");
@@ -176,16 +176,16 @@ public class Player {
         url = JsonHandler.domain + "/login";
         String urlParameters = "login=" + login + "&password=" + password;
         player = getPlayerFromUrl(url, urlParameters, "POST");
-        PlayerAccount.setPlayer(player);
+//        PlayerAccount.setPlayer(player);
 
 
  //Delete this please
-        if (player != null) {
-            Profile profile = createNewProfile(player.getId());
-
-            Profile.getProfile("Vasea");
-            PlayerAccount.prinProfile();
-        }
+//        if (player != null) {
+//            Profile profile = createNewProfile(player.getId());
+//
+//            Profile.getProfile("Vasea");
+//            PlayerAccount.prinProfile();
+//        }
  //Stop deleting
 
         return player;
@@ -202,7 +202,7 @@ public class Player {
         url = JsonHandler.domain + "/register_player";
         String urlParameters = "login=" + login + "&password=" + password;
         player = getPlayerFromUrl(url, urlParameters, "POST");
-        PlayerAccount.setPlayer(player);
+//        PlayerAccount.setPlayer(player);
         return player;
     }
 }

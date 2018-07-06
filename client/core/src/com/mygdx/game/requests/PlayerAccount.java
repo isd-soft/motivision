@@ -1,14 +1,17 @@
 package com.mygdx.game.requests;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class PlayerAccount {
     private static Player   player = null;
     private static Profile  profile = null;
 
-    public static void setPlayer(Player player) {
-        PlayerAccount.player = player;
-    }
+//    public static void setPlayer(Player player) {
+//        PlayerAccount.player = player;
+//    }
 
     public static void setProfile(Profile profile) {
         PlayerAccount.profile = profile;
@@ -35,5 +38,26 @@ public class PlayerAccount {
     public static void  prinProfile() {
         if (profile != null)
             profile.printProfile();
+    }
+
+    public static void logOut() {
+        player = null;
+        profile = null;
+    }
+
+    public static boolean   registerNewPlayer(String login, String encryptedPassword) throws IOException, JSONException {
+        Player  player = null;
+
+        player = Player.registerNewPlayer(login, encryptedPassword);
+        PlayerAccount.player = player;
+        return (player != null);
+    }
+
+    public static boolean loginPlayer(String login, String encryptedPassword) throws IOException, JSONException {
+        Player  player = null;
+
+        player = Player.loginPlayer(login, encryptedPassword);
+        PlayerAccount.player = player;
+        return (player != null);
     }
 }
