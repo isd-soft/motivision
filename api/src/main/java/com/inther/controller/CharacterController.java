@@ -85,7 +85,7 @@ public class CharacterController {
         map.put("headType", character.getHeadType());
         map.put("bodyType", character.getBodyType());
         map.put("gender", character.getGender());
-        map.put("power", character.getPower());
+        map.put("points", character.getPoints());
 
         Optional<List<Items>> optionalItemsList = itemsRepository.findAllByCharacterId(characterId);
         if (!optionalItemsList.isPresent()) {
@@ -245,7 +245,7 @@ public class CharacterController {
         if (player.getPoints() >= items.getPrice()) {
             player.setPoints(player.getPoints() - items.getPrice());
             this.addItem(character.getID(), items.getID());
-            character.setPower(character.getPower() + items.getPrice());
+            character.setPoints(character.getPoints() + items.getPrice());
             characterRepository.save(character);
             map.put("status", "success");
             return map;

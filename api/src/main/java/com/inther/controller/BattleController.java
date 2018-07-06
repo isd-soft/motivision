@@ -62,12 +62,12 @@ public class BattleController {
 
         while (iterator1.hasNext()){
             Character character = iterator1.next();
-            team1Power += character.getPower();
+            team1Power += character.getPoints();
         }
 
         while (iterator2.hasNext()){
             Character character = iterator2.next();
-            team2Power += character.getPower();
+            team2Power += character.getPoints();
         }
         lastBattleRepository.deleteByTeam1ID(team1.getID());
         lastBattleRepository.deleteByTeam1ID(team2.getID());
@@ -95,12 +95,12 @@ public class BattleController {
         while (iterator1.hasNext()){
             Character character = iterator1.next();
             characterItemRepository.deleteAllByCharacterID(character.getID());
-            character.setPower(0);
+            character.setPoints(0);
         }
         while (iterator2.hasNext()){
             Character character = iterator2.next();
             characterItemRepository.deleteAllByCharacterID(character.getID());
-            character.setPower(0);
+            character.setPoints(0);
         }
         return map;
     }
