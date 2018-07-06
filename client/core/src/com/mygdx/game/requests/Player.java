@@ -29,7 +29,11 @@ public class Player {
     }
 
     public ArrayList<String>     getCharactersName() {
-        return (ArrayList<String>) characterList.values();
+        ArrayList<String> charName;
+
+        charName = new ArrayList<String>();
+        charName.addAll(characterList.values());
+        return charName;
     }
 
     public int                  getProfileId(String name) {

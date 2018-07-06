@@ -1,4 +1,4 @@
-package com.mygdx.game.Screens;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -15,8 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
 import com.mygdx.game.GameSets.GGame;
+import com.mygdx.game.requests.PlayerAccount;
 
 import java.util.ArrayList;
 
@@ -45,31 +45,22 @@ public class CharacterSelectScreen implements Screen {
         // add the character image
         Texture texture = new Texture("monster.png");
         Image image = new Image(texture);
-        image.setSize(gameWidth * 0.95f / 2f, gameWidth * 0.95f / 2f);
-        image.setPosition(gameWidth * 0.05f, gameHeight / 2f - image.getHeight() / 2);
-        stage.addActor(image);
 
         // add the list of already created characters
         list = new List<String>(skin);
-        ArrayList<String> strings = new ArrayList<String>();
-        for (int i = 0, k = 0; i < 50; i++) {
-            strings.add("String: " + i);
-        }
+        ArrayList<String> strings = PlayerAccount.getCharactersName();//new ArrayList<String>();
+
         list.setItems(strings.toArray(new String[strings.size()]));
         list.setDebug(true);
+
         scrollPane = new ScrollPane(list);
         scrollPane.setSmoothScrolling(false);
-        scrollPane.setTransform(true);
-        scrollPane.setScale(2f);
-        scrollPane.setPosition(gameWidth * 3 / 4 - scrollPane.getWidth(), image.getY()+image.getHeight()-scrollPane.getHeight()*2);
-
-        // add text field to insert new character
-        //TextField textField = new TextField("Create new", skin);
 
         // remove and add buttons
         TextButton remove = new TextButton("Remove selected", skin, "small");
         TextButton create = new TextButton("Create new", skin, "small");
-
+        TextButton remove1 = new TextButton("Create new", skin, "small");
+        TextButton remove2 = new TextButton("Create new", skin, "small");
         // add event listeners
         create.addListener(new ChangeListener() {
             @Override
@@ -92,19 +83,25 @@ public class CharacterSelectScreen implements Screen {
         });
 
         // add the wrapper table
-        Table table = new Table();
-        table.setDebug(true);
-        table.setTransform(true);
-        table.setPosition(scrollPane.getX()+scrollPane.getWidth(), scrollPane.getY() - remove.getHeight()*0.7f);
+        Table buttonTable = new Table();
+        buttonTable.setDebug(true);
 
         // add table elements
-        table.add(remove).width(scrollPane.getWidth()*2).height(remove.getHeight()/2f);
-        table.row();
-        table.add(create).width(scrollPane.getWidth()*2).height(remove.getHeight()/2f);
+        buttonTable.add(remove1);
+        buttonTable.add(remove2);
+        buttonTable.row();
+        buttonTable.add(scrollPane).colspan(2).fill().expand();
+        buttonTable.row();
+        buttonTable.add(remove).colspan(2);
+        buttonTable.row();
+        buttonTable.add(create).colspan(2);
 
-        // add the elements to stage
-        stage.addActor(scrollPane);
-        stage.addActor(table);
+        Table screen = new Table();
+        screen.setFillParent(true);
+        screen.add(image).width(gameHeight*0.95f).height(gameHeight*0.95f).expand();
+        screen.add(buttonTable).expand();
+
+        stage.addActor(screen);
         stage.setDebugAll(true);
 
         Gdx.input.setInputProcessor(stage);

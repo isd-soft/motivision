@@ -6,7 +6,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Screens.*;
+//import com.mygdx.game.Screens;
+import com.mygdx.game.screens.BattleScreen;
+import com.mygdx.game.screens.CharacterSelectScreen;
+import com.mygdx.game.screens.LoadingScreen;
+import com.mygdx.game.screens.LoginScreen;
+import com.mygdx.game.screens.MenuScreen;
+import com.mygdx.game.screens.RegisterScreen;
+import com.mygdx.game.screens.SettingsScreen;
 
 public class GGame extends Game {
 
@@ -94,8 +101,8 @@ public void changeScreen(int screen){
                 //this.setScreen(new )
 			  loadingScreen = new LoadingScreen(this);
                 setScreen(loadingScreen);
-//			  characterSelect = new CharacterSelect(this);
-//			  setScreen(characterSelect);
+//			  characterSelectScreen = new CharacterSelectScreen(this);
+//			  setScreen(characterSelectScreen);
 	}
 
           @Override
