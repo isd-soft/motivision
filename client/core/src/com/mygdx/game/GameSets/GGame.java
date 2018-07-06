@@ -43,7 +43,7 @@ public int getCharacterSelect(){ return CHARACTERSELECT;}
 
 
 private final static int BATTLE = 5;
-public int getGame(){return BATTLE;}
+public int getBattle(){return BATTLE;}
         
 //PREFERENCES - preferencessScreen - settingScreen
 //APPLICATION - mainScreen - gameScreen
@@ -63,6 +63,7 @@ public void changeScreen(int screen){
 			if(menuScreen == null) menuScreen = new MenuScreen(this);
 					this.setScreen(menuScreen);
 			break;
+			//тут измененно
 		case SETTINGS:
 			if(settingsScreen == null) settingsScreen = new SettingsScreen(this);
 					this.setScreen(settingsScreen);
@@ -92,8 +93,8 @@ public void changeScreen(int screen){
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
                 //this.setScreen(new )
-			  loadingScreen = new LoadingScreen(this);
-                setScreen(loadingScreen);
+			  battleScreen = new BattleScreen(this);
+                setScreen(battleScreen);
 //			  characterSelect = new CharacterSelect(this);
 //			  setScreen(characterSelect);
 	}

@@ -6,29 +6,31 @@ import com.badlogic.gdx.physics.box2d.*;
 public class GameModel {
     public World world;
     private Body bodyd;
+    private Body bodys;
+    private Body bodyk;
     public GameModel(){
+
         world = new World(new Vector2(0,-10f), true);
+        createFloor();
+        createObject();
+        createMovingObject();
     }
 
-    //game logic
-    public void logicStep(float delta){
-        world.step(delta , 3, 3);
-    }
 
-    private void createObject(){
+    private void createObject() {
 
-        //create a new body definition (type and location)
+        //create a new body definition
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(0,0);
+        bodyDef.position.set(0, 0);
 
 
         // add it to the world
         bodyd = world.createBody(bodyDef);
 
-        // set the shape (here we use a box 50 meters wide, 1 meter tall )
+        // set the shape (here we use a box 1 meters wide, 1 meter tall )
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1,1);
+        shape.setAsBox(2, 1);
 
         // set the properties of the object ( shape, weight, restitution(bouncyness)
         FixtureDef fixtureDef = new FixtureDef();
@@ -37,10 +39,67 @@ public class GameModel {
 
         // create the physical object in our body)
         // without this our body would just be data in the world
-        bodyd.createFixture(shape, 0.0f);
+        bodyd.createFixture(shape, 1.0f);
 
         // we no longer use the shape object here so dispose of it.
         shape.dispose();
+    }
+
+
+    private void createFloor() {
+        // create a new body definition (type and location)
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(0, -10f);
+
+        // add it to the world
+        bodys = world.createBody(bodyDef);
+
+        // set the shape (here we use a box 50 meters wide, 1 meter tall )
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(50, 1);
+
+        // create the physical object in our body)
+        // without this our body would just be data in the world
+        bodys.createFixture(shape, 0.0f);
+
+        // we no longer use the shape object here so dispose of it.
+        shape.dispose();
+    }
+
+    private void createMovingObject(){
+
+        //create a new body definition (type and location)
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
+        bodyDef.position.set(-14.5f,-7f);
+
+
+        // add it to the world
+        bodyk = world.createBody(bodyDef);
+
+        // set the shape (here we use a box 50 meters wide, 1 meter tall )
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(1,2f);
+
+        // set the properties of the object ( shape, weight, restitution(bouncyness)
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = 1f;
+
+        // create the physical object in our body)
+        // without this our body would just be data in the world
+        bodyk.createFixture(shape, 0.0f);
+
+        // we no longer use the shape object here so dispose of it.
+        shape.dispose();
+
+        bodyk.setLinearVelocity(1, 0f);
+    }
+
+    //game logic
+    public void logicStep(float delta){
+        world.step(delta , 3, 3);
     }
 
 }
