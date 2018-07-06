@@ -64,7 +64,7 @@ public class LoginController {
                 }
             }
         } else {
-            map.put("result", "failed");
+            map.put("status", "failed");
             map.put("message", "no login and/or password");
         }
         return map;
@@ -88,7 +88,7 @@ public class LoginController {
                 playerRepository.save(player);
                 map.put("status", "success");
                 playerRepository.findByLogin(login);
-                map.put("id", player.getID().toString());
+                map.put("characterId", player.getID().toString());
                 map.put("points", player.getPoints().toString());
                 return map;
             } catch (Exception e) {
@@ -113,11 +113,11 @@ public class LoginController {
         TreeMap<String, String> map = new TreeMap<>();
         if (playerRepository.findByLogin(login) == null) {
             map.put("status", "success");
-            map.put("result", "false");
+            map.put("message", "false");
             return map;
         }
         map.put("status", "success");
-        map.put("result", "true");
+        map.put("message", "true");
         return map;
     }
 }

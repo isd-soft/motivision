@@ -113,7 +113,7 @@ public class CharacterController {
         }
         Character character = optionalCharacter.get();
         map.put("status", "success");
-        map.put("result", "true");
+        map.put("message", "true");
         return map;
     }
 
