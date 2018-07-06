@@ -31,7 +31,7 @@ public class CharacterController {
                                                @RequestParam(value = "headType") Long headType,
                                                @RequestParam(value = "bodyType") Long bodyType,
                                                @RequestParam(value = "gender") char gender,
-                                               @RequestParam(value = "name") String name,
+                                               @RequestParam(value = "characterName") String name,
                                                @RequestParam(value = "isAdmin") Boolean isAdmin
     ) {
 
