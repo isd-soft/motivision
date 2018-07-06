@@ -36,11 +36,12 @@ public class LoginController {
     public Map<String, Object> login(@RequestParam(value = "login", defaultValue = "null") String login,
                                      @RequestParam(value = "password", defaultValue = "null") String password) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        System.out.println("Started login with login = " + login + ", pass = " + password);
         if (!(login.equals("null")) && !(password.equals("null"))) {
             Player player = playerRepository.findByLogin(login);
             if (player == null) {
                 map.put("status", "failed");
-                map.put("message", "no such player exist");
+                map.put("message", "Player does not exist");
             } else {
                 if (player.getPassword().equals(password)) {
                     map.put("status", "success");
@@ -60,12 +61,12 @@ public class LoginController {
 
                 } else {
                     map.put("status", "failed");
-                    map.put("message", "wrong password");
+                    map.put("message", "Wrong password");
                 }
             }
         } else {
             map.put("status", "failed");
-            map.put("message", "no login and/or password");
+            map.put("message", "No login and/or password provided");
         }
         return map;
     }
@@ -93,12 +94,12 @@ public class LoginController {
                 return map;
             } catch (Exception e) {
                 map.put("status", "failed");
-                map.put("message", "exception occurred");
+                map.put("message", "An exception occurred");
                 return map;
             }
         } else {
             map.put("status", "failed");
-            map.put("message", "no login and/or password");
+            map.put("message", "No login and/or password provided");
             return map;
         }
     }
