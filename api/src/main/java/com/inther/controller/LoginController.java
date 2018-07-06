@@ -109,7 +109,7 @@ public class LoginController {
      * @param login - login to check in the database
      * @param Json representation of the result logs
      * */
-    @RequestMapping(value = "/player_exist", method = RequestMethod.POST)
+    @RequestMapping(value = "/player_exist", method = RequestMethod.GET)
     public Map<String, String> playerExist(@RequestParam(name = "login") String login) {
         TreeMap<String, String> map = new TreeMap<>();
         if (playerRepository.findByLogin(login) == null) {

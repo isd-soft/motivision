@@ -44,7 +44,7 @@ public class CharacterController {
             return map;
         }
         Optional<Team> optionalTeam = teamRepository.findById(teamId);
-        if (!optionalTeam.isPresent()) {
+        if (optionalTeam.isPresent() == false) {
             map.put("status", "failed");
             map.put("message", "No such team exist with teamId");
             return map;
@@ -108,7 +108,7 @@ public class CharacterController {
         return map;
     }
 
-    @RequestMapping(value = "/delete_character", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete_character", method = RequestMethod.DELETE)
     private Map<String, Object> deleteCharacter(@RequestParam(value = "characterId") Long characterId) {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
