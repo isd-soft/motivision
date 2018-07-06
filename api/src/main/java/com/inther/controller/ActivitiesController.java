@@ -135,7 +135,7 @@ public class ActivitiesController {
     @RequestMapping(value = "/update_activity")
     public Map<String, Object> updateActivity(@RequestParam(value = "activityId") Long activityId,
                                               @RequestParam(value = "activityName") String activityName,
-                                              @RequestParam(value = "activityRewar") Integer activityReward) {
+                                              @RequestParam(value = "activityReward") Integer activityReward) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Activities> optionalActivities = activitiesRepository.findById(activityId);
         if(!optionalActivities.isPresent()){
@@ -146,6 +146,7 @@ public class ActivitiesController {
         Activities activities = optionalActivities.get();
         activities.setName(activityName);
         activities.setReward(activityReward);
+        activitiesRepository.save(activities);
         map.put("status", "success");
         return map;
     }

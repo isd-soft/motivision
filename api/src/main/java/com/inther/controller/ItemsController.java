@@ -3,6 +3,7 @@ package com.inther.controller;
 import com.inther.entity.CharacterItem;
 import com.inther.entity.Items;
 import com.inther.entity.Character;
+import com.inther.entity.Player;
 import com.inther.repo.CharacterItemRepository;
 import com.inther.repo.ItemsRepository;
 import com.inther.repo.CharacterRepository;
@@ -60,7 +61,7 @@ public class ItemsController {
 
 
     @RequestMapping(value = "/add_item", method = RequestMethod.POST)
-    public Map<String, Object> createItem(@RequestParam(value = "characterId") Long characterId,
+    public Map<String, Object> addItem(@RequestParam(value = "characterId") Long characterId,
                                           @RequestParam(value = "itemId") Long itemId
     ) {
 
@@ -110,5 +111,38 @@ public class ItemsController {
         characterItemRepository.deleteById(itemId);
         map.put("status", "success");
         return map;
+    }
+
+    @RequestMapping(value = "/buy_item")
+    public Map<String, Object> buyItem(@RequestParam(value = "characterId") Long charId,
+                                       @RequestParam(value = "itemId") Long itemId){
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Character> optionalCharacter = characterRepository.findById(charId);
+        if (!optionalCharacter.isPresent()){
+            map.put("status", "failed");
+            map.put("message", "no such character with characterId");
+            return map;
+        }
+        Character character = optionalCharacter.get();
+        Player player = character.getPlayer();
+        Optional<Items> optionalItems = itemsRepository.findById(itemId);
+        if(!optionalItems.isPresent()){
+            map.put("status", "failed");
+            map.put("message", "no such item with itemId");
+            return map;
+        }
+        Items items = optionalItems.get();
+        if(player.getPoints() >= items.getPrice()){
+            player.setPoints(player.getPoints() - items.getPrice());
+            this.addItem(character.getID(), items.getID());
+            character.setPower(character.getPower() + items.getPrice());
+            characterRepository.save(character);
+            map.put("status", "success");
+            return map;
+        }else {
+            map.put("status", "failed");
+            map.put("message", "not enough points");
+            return map;
+        }
     }
 }
