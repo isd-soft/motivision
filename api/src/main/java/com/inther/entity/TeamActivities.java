@@ -3,7 +3,6 @@ package com.inther.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class TeamActivities {
@@ -22,7 +21,8 @@ public class TeamActivities {
     @JoinColumn(name = "activity_id")
     private Activities activities;
 
-    public TeamActivities() {}
+    public TeamActivities() {
+    }
 
     public Long getID() {
         return ID;

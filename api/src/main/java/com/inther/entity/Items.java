@@ -19,6 +19,9 @@ public class Items {
 
     private int price;
 
+    @OneToMany(mappedBy = "items")
+    private List<CharacterItem> characterItems;
+
     public Items() {}
 
     public Long getID() {
@@ -36,5 +39,4 @@ public class Items {
     public int getPrice() {
         return price;
     }
-
 }

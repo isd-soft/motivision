@@ -40,5 +40,12 @@ public class Activities {
     public void setReward(int reward) {
         this.reward = reward;
     }
-    
+
+    public List<TeamActivities> getTeamActivities() {
+        return teamActivities;
+    }
+
+    public void setTeamActivities(List<TeamActivities> teamActivities) {
+        this.teamActivities = teamActivities;
+    }
 }
