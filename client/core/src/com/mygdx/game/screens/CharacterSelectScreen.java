@@ -30,7 +30,7 @@ public class CharacterSelectScreen implements Screen {
     public CharacterSelectScreen(GGame g) {
         parent = g;
         stage = new Stage(new ScreenViewport());
-        skin = new Skin(Gdx.files.internal("C:\\Users\\User\\Downloads\\SkinComposer\\app\\projects\\cloud\\export\\glassy-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
     }
 
     @Override
