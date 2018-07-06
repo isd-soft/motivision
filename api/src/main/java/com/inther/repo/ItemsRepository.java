@@ -24,4 +24,6 @@ public interface ItemsRepository extends JpaRepository<Items, Long> {
             "where ci.character.id = :characterId and ci.items.id = :itemId")
     Optional<Items> findItemsByCharacterId(@Param("characterId") Long characterId,
                                            @Param("itemId") Long itemId);
+
+
 }
