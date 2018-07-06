@@ -108,7 +108,7 @@ public class CharacterController {
         return map;
     }
 
-    @RequestMapping(value = "/delete_character", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete_character", method = RequestMethod.POST)
     private Map<String, Object> deleteCharacter(@RequestParam(value = "characterId") Long characterId) {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -122,7 +122,7 @@ public class CharacterController {
         return map;
     }
 
-    @RequestMapping(value = "/character_exist")
+    @RequestMapping(value = "/character_exist", method = RequestMethod.GET)
     public Map<String, Object> chatacterExist(@RequestParam(value = "characterName") String characterName) {
         Optional<Character> optionalCharacter = characterRepository.findByName(characterName);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -199,7 +199,7 @@ public class CharacterController {
         return map;
     }
 
-    @RequestMapping(value = "/delete_item", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete_item", method = RequestMethod.POST)
     public Map<String, Object> deleteObject(@RequestParam(value = "characterId") Long characterId,
                                             @RequestParam(value = "itemId") Long itemId
     ) {
