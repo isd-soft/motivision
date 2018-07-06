@@ -178,10 +178,12 @@ public class Player {
 
 
  //Delete this please
-        Profile profile = createNewProfile(player.getId());
+        if (player != null) {
+            Profile profile = createNewProfile(player.getId());
 
-        Profile.getProfile("Vasea");
-        PlayerAccount.prinProfile();
+            Profile.getProfile("Vasea");
+            PlayerAccount.prinProfile();
+        }
  //Stop deleting
 
         return player;
