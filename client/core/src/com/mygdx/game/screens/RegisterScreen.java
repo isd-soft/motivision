@@ -245,13 +245,7 @@ public class RegisterScreen  implements Screen {
                 else {
                     label.setText(JsonHandler.errorMessage);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-                if (JsonHandler.errorMessage != null)
-                    label.setText(JsonHandler.errorMessage);
-                else
-                    label.setText("Something went wrong");
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 if (JsonHandler.errorMessage != null)
                     label.setText(JsonHandler.errorMessage);

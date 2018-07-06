@@ -35,9 +35,11 @@ public class PlayerAccount {
         return player.getId();
     }
 
-    public static void  prinProfile() {
+    public static void  printProfile() {
         if (profile != null)
             profile.printProfile();
+        else
+            System.out.println("    is null");
     }
 
     public static void logOut() {
@@ -58,6 +60,16 @@ public class PlayerAccount {
 
         player = Player.loginPlayer(login, encryptedPassword);
         PlayerAccount.player = player;
+
+
+        //Delete this please
+//        if (player != null) {
+//            Profile profile = createNewProfile(player.getId());
+//            System.out.println("Profile:");
+//            Profile.getProfile("Vasea");
+//            PlayerAccount.printProfile();
+//        }
+        //Stop deleting
         return (player != null);
     }
 }

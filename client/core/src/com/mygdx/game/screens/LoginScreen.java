@@ -225,13 +225,7 @@ public class LoginScreen implements Screen{
 							label.setText(JsonHandler.errorMessage);
 					}
 						//player = Player.loginPlayer(loginField.getText(), encryptedPassword);
-				} catch (JSONException e) {
-					e.printStackTrace();
-					if (JsonHandler.errorMessage != null)
-						label.setText(JsonHandler.errorMessage);
-					else
-						label.setText("Something went wrong");
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 					if (JsonHandler.errorMessage != null)
 						label.setText(JsonHandler.errorMessage);

@@ -5,7 +5,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Set;
@@ -18,14 +17,14 @@ public class Profile {
     public static final String  HEAD_TYPE = "headType";
     public static final String  BODY_TYPE = "bodyType";
     public static final String  GENDER = "gender";
-    public static final String  POWER = "power";
+    public static final String  POINTS = "points";
     public static final String  PLAYER_ID = "playerId";
     private String  name;
     private int     id;
     private int     headType;
     private int     bodyType;
     private char    gender;
-    private int     power;
+    private int     points;
     private int     teamId;
     private boolean isAdmin;
     private ArrayList<Item>     itemList;
@@ -37,7 +36,7 @@ public class Profile {
         this.headType = 0;
         this.bodyType = 0;
         this.gender = 'N';
-        this.power = 0;
+        this.points = 0;
         this.teamId = teamId;
         this.isAdmin = false;
         this.itemList = null;
@@ -106,9 +105,9 @@ public class Profile {
                 gender = field.toCharArray()[0];    
             profile.setGender(gender);
 
-            field = jsonObject.getString(POWER);
+            field = jsonObject.getString(POINTS);
             number = Integer.parseInt(field);
-            profile.setPower(number);
+            profile.setPoints(number);
             profile.loadProfiles(jsonObject);
 
             return profile;
@@ -186,9 +185,9 @@ public class Profile {
                 gender = field.toCharArray()[0];
             profile.setGender(gender);
 
-            field = profileParams.get(POWER);
+            field = profileParams.get(POINTS);
             number = Integer.parseInt(field);
-            profile.setPower(number);
+            profile.setPoints(number);
 
             return profile;
         } catch (NumberFormatException e) {
@@ -275,7 +274,7 @@ public class Profile {
         System.out.println("headType: " + this.headType);
         System.out.println("bodyType: " + this.bodyType);
         System.out.println("gender: " + this.gender);
-        System.out.println("power: " + this.power);
+        System.out.println("points: " + this.points);
         System.out.println("teamId: " + this.teamId);
         System.out.println("isAdmin: " + this.isAdmin);
         if (itemList != null) {
@@ -317,12 +316,12 @@ public class Profile {
         return name;
     }
 
-    public int getPower() {
-        return power;
+    public int getPoints() {
+        return points;
     }
 
-    public void setPower(int power) {
-        this.power = power;
+    public void setPoints(int power) {
+        this.points = points;
     }
 
     public int getTeamId() {
