@@ -1,32 +1,37 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.Screens;
 
+/*
 
-
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.screens.GGame;
 
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 
 
 public class BattleScreen implements Screen {
 
-        /*final GGame game;
-        private OrthographicCamera  camera;
-	private Texture warriorImage;
+        private GGame parent;
+        private OrthographicCamera camera;
+	    private Texture warriorImage;
         private Texture monsterImage;
         private Texture warriorCastleImage;
         private Texture monsterCastleImage;
         private Rectangle warria;
         private Rectangle evilWarria;
-        */
-        private com.mygdx.game.screens.GGame parent;
+
         
         
         public BattleScreen(com.mygdx.game.screens.GGame g){
             parent = g;
         }
         
-        /*
+
         public GameScreen(final GGame game){
                 this.game = game;
                 
@@ -56,13 +61,12 @@ public class BattleScreen implements Screen {
                 
                 
 	}
-        
-*/
+
 
 	@Override
 	public void render (float delta) {
             
-            /*
+
                 // clear the screen with a dark blue color. The
 		// arguments to glClearColor are the red, green
 		// blue and alpha component in the range [0,1]
@@ -96,7 +100,7 @@ public class BattleScreen implements Screen {
                     evilWarria.x = warria.x + 50;
                 }
                 
-        */        
+
 	}
         
             
@@ -129,12 +133,12 @@ public class BattleScreen implements Screen {
         
 	@Override
 	public void dispose () {
-            /*
-		warriorImage.dispose();
+
+				warriorImage.dispose();
                 warriorCastleImage.dispose();
                 monsterImage.dispose();
                 monsterCastleImage.dispose();
-*/
+
 	}
         
 }
@@ -147,3 +151,5 @@ public class BattleScreen implements Screen {
 
 //  rainMusic.setLooping(true);
 //  rainMusic.play();
+
+*/

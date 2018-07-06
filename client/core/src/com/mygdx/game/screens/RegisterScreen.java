@@ -1,13 +1,18 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.GameSets.GGame;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
@@ -22,14 +27,19 @@ public class RegisterScreen  implements Screen {
     private Stage stage;
     private Skin skin;
     private Label label;
+    private Viewport viewport;
+    private Sound registerSound;
 
     public RegisterScreen(GGame g){
 
         parent = g;
 
-        stage = new Stage (new ScreenViewport());
+        stage = new Stage();
+        viewport = new StretchViewport(800,480, stage.getCamera());
 
-        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        stage.setViewport(viewport);
+
+
     }
     private void     setErrorMessage(String message) {
         label.setText(message);
@@ -70,7 +80,13 @@ public class RegisterScreen  implements Screen {
     @Override
     public void show() {
         stage.clear();
-        Gdx.input.setInputProcessor(stage);
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+
+        registerSound = Gdx.audio.newSound(Gdx.files.internal("data/BruceU.mp3"));
+
+        registerSound.play();
+
+
 
         // Create a table that fills the screen. Everything else will go inside this table.
         Table table = new Table();
@@ -152,6 +168,7 @@ public class RegisterScreen  implements Screen {
         table.row().pad(10, 0, 10, 0);
         table.add(back).colspan(2);
 
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -165,7 +182,7 @@ public class RegisterScreen  implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        // TODO Auto-generated method stub
+        stage.getViewport().update(width,height,true);
     }
 
     @Override
@@ -185,6 +202,7 @@ public class RegisterScreen  implements Screen {
 
     @Override
     public void dispose() {
+        registerSound.dispose();
         stage.dispose();
     }
 }

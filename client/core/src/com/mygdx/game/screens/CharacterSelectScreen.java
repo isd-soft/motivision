@@ -1,4 +1,4 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -16,10 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import com.mygdx.game.GameSets.GGame;
+
 import java.util.ArrayList;
 
 public class CharacterSelectScreen implements Screen {
-    private com.mygdx.game.screens.GGame parent;
+    private GGame parent;
     private Stage stage;
     private Skin skin;
 
@@ -28,7 +30,7 @@ public class CharacterSelectScreen implements Screen {
     List<String> list;
     float gameWidth, gameHeight;
 
-    public CharacterSelectScreen(com.mygdx.game.screens.GGame g) {
+    public CharacterSelectScreen(GGame g) {
         parent = g;
         stage = new Stage(new ScreenViewport());
         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));

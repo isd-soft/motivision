@@ -1,18 +1,20 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.mygdx.game.GameSets.GGame;
 
 
 public class  LoadingScreen implements Screen{
     
-    private com.mygdx.game.screens.GGame parent;
+    private GGame parent;
 
 	private SpriteBatch batch;
 	private Texture  img;
@@ -27,8 +29,9 @@ public class  LoadingScreen implements Screen{
 	private OrthographicCamera camera = null;
 	private ExtendViewport viewport;
 	private Texture texture = null;
-    
-    public LoadingScreen(com.mygdx.game.screens.GGame game){
+    private Music loadingMusic;
+
+    public LoadingScreen(GGame game){
         parent = game;
     }
     
@@ -37,6 +40,9 @@ public class  LoadingScreen implements Screen{
 	public void show() {
 		int w;
 		int h;
+		//loadingMusic = Gdx.audio.newMusic(Gdx.files.internal("Gwe.mp3"));
+		//loadingMusic.setLooping(true);
+		//loadingMusic.play();
 
 		batch = new SpriteBatch();
 		texture = new Texture(Gdx.files.internal("isd_logo-500x500.png"));
