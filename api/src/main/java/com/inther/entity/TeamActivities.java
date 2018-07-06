@@ -12,11 +12,11 @@ public class TeamActivities {
     @GeneratedValue(generator = "kaugen")
     private Long ID;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "activity_id")
     private Activities activities;
 
