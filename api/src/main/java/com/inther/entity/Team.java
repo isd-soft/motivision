@@ -27,7 +27,7 @@ public class Team {
     @JoinColumn(name = "lider_id")
     private Character admin;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<TeamActivities> teamActivities;
 
     @OneToOne(mappedBy = "team1")

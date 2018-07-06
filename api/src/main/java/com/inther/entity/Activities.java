@@ -16,7 +16,7 @@ public class Activities {
 
     private int reward;
 
-    @OneToMany(mappedBy = "activities")
+    @OneToMany(mappedBy = "activities", cascade = CascadeType.ALL)
     private List<TeamActivities> teamActivities;
 
     public Activities() {}

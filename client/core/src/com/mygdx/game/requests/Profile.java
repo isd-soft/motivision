@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
@@ -27,6 +28,7 @@ public class Profile {
     private int     power;
     private int     teamId;
     private boolean isAdmin;
+    private ArrayList<Item>     itemList;
 
 
     private Profile(int id, int teamId, boolean isAdmin) {
@@ -38,6 +40,7 @@ public class Profile {
         this.power = 0;
         this.teamId = teamId;
         this.isAdmin = false;
+        this.itemList = null;
     }
 
     public static boolean	nameExist(String name) throws IOException, JSONException {
@@ -75,6 +78,7 @@ public class Profile {
         char        gender = 'N';
 
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
+        System.out.println(url + "?" + urlParameters);
         if (jsonObject == null)
             return null;
         try {
@@ -105,10 +109,48 @@ public class Profile {
             field = jsonObject.getString(POWER);
             number = Integer.parseInt(field);
             profile.setPower(number);
+            profile.loadProfiles(jsonObject);
+
             return profile;
         } catch (NumberFormatException e) {
             setErrorMessage("Invalid number format");
             return null;
+        }
+    }
+
+    private void     loadProfiles(JSONObject jsonObject) throws JSONException {
+        Item    item;
+        String  field;
+        String  itemType;
+        int     itemId;
+        int     itemImage;
+        int     itemPrice;
+
+        if (jsonObject.has("items") == false)
+            return;
+        if (jsonObject.isNull("items"))
+            return;
+
+        if (jsonObject.get("items") == null)
+            return;
+        JSONArray arr;
+        try {
+            arr = jsonObject.getJSONArray("items");
+        } catch (JSONException e) {
+            return;
+        }
+        if (arr == null)
+            return;
+        itemList = new ArrayList<Item>();
+
+        for (int i = 0; i < arr.length(); i++)
+        {
+            itemId = arr.getJSONObject(i).getInt(Item.ITEM_ID);
+            itemImage = arr.getJSONObject(i).getInt(Item.ITEM_IMAGE);
+            itemPrice = arr.getJSONObject(i).getInt(Item.ITEM_PRICE);
+            itemType = arr.getJSONObject(i).getString(Item.ITEM_TYPE);
+            item = new Item(itemId, itemImage, itemPrice, itemType);
+            itemList.add(item);
         }
     }
 
@@ -225,6 +267,8 @@ public class Profile {
         return profile;
     }
 
+
+
     public void     printProfile() {
         System.out.println("Id: " + this.id);
         System.out.println("Name: " + this.name);
@@ -234,6 +278,11 @@ public class Profile {
         System.out.println("power: " + this.power);
         System.out.println("teamId: " + this.teamId);
         System.out.println("isAdmin: " + this.isAdmin);
+        if (itemList != null) {
+            for (Item item: itemList) {
+                item.print();
+            }
+        }
     }
 
     public void setName(String name) {

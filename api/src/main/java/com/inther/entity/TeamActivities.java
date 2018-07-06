@@ -12,7 +12,6 @@ public class TeamActivities {
     @GeneratedValue(generator = "kaugen")
     private Long ID;
 
-
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
@@ -22,6 +21,11 @@ public class TeamActivities {
     private Activities activities;
 
     public TeamActivities() {
+    }
+
+    public TeamActivities(Team team, Activities activities) {
+        this.team = team;
+        this.activities = activities;
     }
 
     public Long getID() {
