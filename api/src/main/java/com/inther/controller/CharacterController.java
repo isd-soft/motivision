@@ -61,7 +61,7 @@ public class CharacterController {
             team.setAdmin(character);
         characterRepository.save(character);
         map.put("status", "success");
-        map.put("id", character.getID());
+        map.put("characterId", character.getID());
         return map;
     }
 
@@ -77,7 +77,7 @@ public class CharacterController {
         Character character = optionalCharacter.get();
         map.put("status", "success");
         map.put("characterId", character.getID());
-        map.put("name", character.getName());
+        map.put("characterName", character.getName());
         map.put("playerId", character.getPlayer().getID());
         map.put("teamId", character.getTeam().getID());
         map.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getID().equals(characterId)));

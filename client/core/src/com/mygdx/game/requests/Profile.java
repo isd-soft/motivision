@@ -13,11 +13,12 @@ public class Profile {
     public static final String  PROFILE_ID = "characterId";
     public static final String  TEAM_ID = "teamId";
     public static final String  IS_ADMIN = "isAdmin";
-    public static final String  NAME = "name";
+    public static final String  NAME = "characterName";
     public static final String  HEAD_TYPE = "headType";
     public static final String  BODY_TYPE = "bodyType";
     public static final String  GENDER = "gender";
     public static final String  POWER = "power";
+    public static final String  PLAYER_ID = "playerId";
     private String  name;
     private int     id;
     private int     headType;
@@ -46,11 +47,11 @@ public class Profile {
         String		result;
 
         url = JsonHandler.domain + "/character_exist";
-        urlParameters = "login=" + name;
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, false);
+        urlParameters = NAME + "=" + name;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
         if (jsonObject == null)
             return true;
-        result = jsonObject.getString("result");
+        result = jsonObject.getString("message");
         if (result.equals("false"))
             return false;
         return true;
@@ -60,7 +61,7 @@ public class Profile {
         JsonHandler.errorMessage = message;
     }
 
-    private static Profile      getProfileFromUrl(String url, String urlParameters, boolean isPostMethod)
+    private static Profile      getProfileFromUrl(String url, String urlParameters, String requestMethod)
             throws JSONException, IOException {
         Profile     profile;
         String		field;
@@ -73,8 +74,7 @@ public class Profile {
         int         number;
         char        gender = 'N';
 
-
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, isPostMethod);
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
         if (jsonObject == null)
             return null;
         try {
@@ -112,12 +112,58 @@ public class Profile {
         }
     }
 
+    private static Profile  createProfileWithId(int characterId, LinkedHashMap<String, String> profileParams) {
+        try {
+            Profile         profile;
+            String          field;
+            int             teamId;
+            int             number;
+            boolean         isAdmin;
+            char            gender = 'N';
+
+            field = profileParams.get(TEAM_ID);
+            teamId = Integer.parseInt(field);
+
+            field = profileParams.get(IS_ADMIN);
+            isAdmin = field.equals("true");
+            profile = new Profile(characterId, teamId, isAdmin);
+
+            field = profileParams.get(NAME);
+            profile.setName(field);
+
+            field = profileParams.get(HEAD_TYPE);
+            number = Integer.parseInt(field);
+            profile.setHeadType(number);
+
+            field = profileParams.get(BODY_TYPE);
+            number = Integer.parseInt(field);
+            profile.setBodyType(number);
+
+            field = profileParams.get(GENDER);
+            if (field.length() == 1)
+                gender = field.toCharArray()[0];
+            profile.setGender(gender);
+
+            field = profileParams.get(POWER);
+            number = Integer.parseInt(field);
+            profile.setPower(number);
+
+            return profile;
+        } catch (NumberFormatException e) {
+            setErrorMessage("Invalid number format");
+            return null;
+        }
+    }
+
     public static Profile	createNewProfile(LinkedHashMap<String, String> profileParams) throws IOException, JSONException {
         // List<BasicNameValuePair>    urlParameters;
+        Profile         profile;
         String          url;
         String          urlParameters = null;
         String          name;
         Set<String>     keySet;
+        JSONObject      jsonObject;
+        int             characterId;
 
         name = profileParams.get(NAME);
         if (nameExist(name)) {
@@ -138,7 +184,56 @@ public class Profile {
 //        urlParameters.add(new BasicNameValuePair("password", password + ""));
 
         //String urlParameters = "login=" + login + "&password=" + password;
-        return getProfileFromUrl(url, urlParameters, true);
+
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
+        if (jsonObject == null)
+            return null;
+        System.out.println(jsonObject);
+
+        characterId = jsonObject.getInt(PROFILE_ID);
+        profile = createProfileWithId(characterId, profileParams);
+        PlayerAccount.setProfile(profile);
+        return profile;
+        //return getProfileFromUrl(url, urlParameters, true);
+    }
+
+    public static Profile	getProfile(String name) throws IOException, JSONException {
+        String  url;
+        int     profileId;
+        Profile profile;
+        //  String  urlParameters;
+        // List<BasicNameValuePair> urlParameters;
+
+        if (nameExist(name) == false) {
+            setErrorMessage("Character does not exist");
+            return null;
+        }
+
+        url = JsonHandler.domain + "/get_character";
+//        urlParameters = new ArrayList<BasicNameValuePair>();
+//        urlParameters.add(new BasicNameValuePair("login", login + ""));
+//        urlParameters.add(new BasicNameValuePair("password", password + ""));
+        profileId = PlayerAccount.getProfileId(name);
+        if (profileId == -1)
+            return null;
+        String urlParameters = PROFILE_ID + "=" + profileId;
+
+        //String urlParameters = "name=Jack&occupation=programmer";
+        System.out.println("Start get profile from URL");
+        profile = getProfileFromUrl(url, urlParameters, "GET");
+        PlayerAccount.setProfile(profile);
+        return profile;
+    }
+
+    public void     printProfile() {
+        System.out.println("Id: " + this.id);
+        System.out.println("Name: " + this.name);
+        System.out.println("headType: " + this.headType);
+        System.out.println("bodyType: " + this.bodyType);
+        System.out.println("gender: " + this.gender);
+        System.out.println("power: " + this.power);
+        System.out.println("teamId: " + this.teamId);
+        System.out.println("isAdmin: " + this.isAdmin);
     }
 
     public void setName(String name) {

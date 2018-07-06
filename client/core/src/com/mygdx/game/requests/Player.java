@@ -2,6 +2,9 @@ package com.mygdx.game.requests;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.json.JSONArray;
@@ -11,7 +14,7 @@ import org.json.JSONObject;
 public class Player {
     private	int	id;
     private int	points;
-    private TreeMap<Integer, String>	characterList;
+    private LinkedHashMap<Integer, String>	characterList;
 
     private Player(int id) {
         this.id = id;
@@ -29,11 +32,32 @@ public class Player {
         return (ArrayList<String>) characterList.values();
     }
 
+    public int                  getProfileId(String name) {
+        Set<Integer>    keySet;
+        String          profileName;
+
+        if (characterList == null) {
+            JsonHandler.errorMessage = "No characters finded";
+            return -1;
+        }
+        if (characterList.containsValue(name) == false) {
+            JsonHandler.errorMessage = "Character not found";
+            return -1;
+        }
+        keySet = characterList.keySet();
+        for (Integer key: keySet) {
+            profileName = characterList.get(key);
+            if (profileName.equals(name))
+                return key;
+        }
+        return -1;
+    }
+
     public void	addCharacter(String name, int id) {
         if (name == null)
             return;
         if (characterList == null)
-            characterList = new TreeMap<Integer, String>();
+            characterList = new LinkedHashMap<Integer, String>();
         characterList.put(id, name);
         System.out.println("Added + " + name);
     }
@@ -48,26 +72,17 @@ public class Player {
     }
 
     public static boolean	loginExists(String login) throws IOException, JSONException {
-       // ArrayList<BasicNameValuePair> urlParameters;
         String      urlParameters;
         String		url;
         JSONObject  jsonObject;
         String		result;
 
-
-     //   new NameValuePair("234324", "323432");
         url = JsonHandler.domain + "/player_exist";
-
-        //String urlParameters = "name=Jack&occupation=programmer";
         urlParameters = "login=" + login;
-
-        /*urlParameters = new ArrayList<BasicNameValuePair>();
-        urlParameters.add(new BasicNameValuePair("login", login + ""));*/
-        //url = JsonHandler.domain;
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, true);
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
         if (jsonObject == null)
             return true;
-        result = jsonObject.getString("result");
+        result = jsonObject.getString("message");
         if (result.equals("false"))
             return false;
         return true;
@@ -77,7 +92,7 @@ public class Player {
         JsonHandler.errorMessage = message;
     }
 
-    private static Player	getPlayerFromUrl(String url, String urlParameters, boolean isPostMethod) throws JSONException, IOException {
+    private static Player	getPlayerFromUrl(String url, String urlParameters, String requestMethod) throws JSONException, IOException {
         Player      player;
         String		field;
         String      characterName;
@@ -86,7 +101,7 @@ public class Player {
         int			id;
         int         characterId;
 
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, isPostMethod);
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
         if (jsonObject == null)
             return null;
         try {
@@ -118,8 +133,32 @@ public class Player {
         return player;
     }
 
+    private static Profile    createNewProfile(int playerId) {
+        LinkedHashMap<String, String>   profileParams;
+        Profile                         profile = null;
+
+        profileParams = new LinkedHashMap<String, String>();
+        profileParams.put(Profile.NAME, "Vasea5");
+        profileParams.put(Profile.PLAYER_ID, playerId + "");
+        profileParams.put(Profile.TEAM_ID, "2");
+        profileParams.put(Profile.HEAD_TYPE, "7");
+        profileParams.put(Profile.BODY_TYPE, "7");
+        profileParams.put(Profile.GENDER, "F");
+        profileParams.put(Profile.IS_ADMIN, "true");
+        try {
+            profile = Profile.createNewProfile(profileParams);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return profile;
+    }
+
     public static Player	loginPlayer(String login, String password) throws IOException, JSONException {
-        String url;
+        String  url;
+        Player  player;
       //  String  urlParameters;
        // List<BasicNameValuePair> urlParameters;
 
@@ -129,30 +168,34 @@ public class Player {
         }
 
         url = JsonHandler.domain + "/login";
-//        urlParameters = new ArrayList<BasicNameValuePair>();
-//        urlParameters.add(new BasicNameValuePair("login", login + ""));
-//        urlParameters.add(new BasicNameValuePair("password", password + ""));
         String urlParameters = "login=" + login + "&password=" + password;
+        player = getPlayerFromUrl(url, urlParameters, "POST");
+        PlayerAccount.setPlayer(player);
 
-        //String urlParameters = "name=Jack&occupation=programmer";
-        return getPlayerFromUrl(url, urlParameters, true);
+
+ //Delete this please
+        Profile profile = createNewProfile(player.getId());
+
+        Profile.getProfile("Vasea");
+        PlayerAccount.prinProfile();
+ //Stop deleting
+
+        return player;
     }
 
     public static Player	registerNewPlayer(String login, String password) throws IOException, JSONException {
-       // List<BasicNameValuePair>    urlParameters;
-        String                      url;
+        String  url;
+        Player  player;
 
         if (loginExists(login)) {
             setErrorMessage("Login already exist");
             return null;
         }
         url = JsonHandler.domain + "/register_player";
-//        urlParameters = new ArrayList<BasicNameValuePair>();
-//        urlParameters.add(new BasicNameValuePair("login", login + ""));
-//        urlParameters.add(new BasicNameValuePair("password", password + ""));
-
         String urlParameters = "login=" + login + "&password=" + password;
-        return getPlayerFromUrl(url, urlParameters, true);
+        player = getPlayerFromUrl(url, urlParameters, "POST");
+        PlayerAccount.setPlayer(player);
+        return player;
     }
 }
 

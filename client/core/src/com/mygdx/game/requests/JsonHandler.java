@@ -31,7 +31,7 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 
 public class JsonHandler {
-    static final String domain = "http://172.17.41.110:8080/";
+    static final String domain = "http://172.17.41.110:8080";
     public static String	errorMessage = null;
 
 
@@ -89,9 +89,10 @@ public class JsonHandler {
             con = (HttpURLConnection) myurl.openConnection();
 
             con.setDoOutput(true);
-            con.setRequestMethod("POST");
-            con.setRequestProperty("User-Agent", "Java client");
-            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                con.setRequestMethod("POST");
+            //System.out.println(urlParameters);
+           // con.setRequestProperty("User-Agent", "Java client");
+           // con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             try {
@@ -167,12 +168,16 @@ public class JsonHandler {
         */
     }
 
-    public static JSONObject    readJsonFromUrl(String url, String urlParameters, boolean isPostMethod) throws IOException, JSONException {
+    public static JSONObject    readJsonFromUrl(String url, String urlParameters, String requestMethod) throws IOException, JSONException {
         String              jsonText;
         InputStream   inputStream;
         BufferedReader      bufferedReader;
 
-        if (isPostMethod) {
+//        System.out.println();
+//        System.out.println(url + "?" + urlParameters);
+   //     jsonText = POSTMethod(url, urlParameters, isPostMethod);
+     //   System.out.println(jsonText);
+        if (requestMethod.equals("POST")) {
             jsonText = POSTMethod(url, urlParameters);
         }
         else {
@@ -195,8 +200,8 @@ public class JsonHandler {
             //BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             //String jsonText = POSTMethod(url, urlParameters);
             JSONObject json = new JSONObject(jsonText);
-            readErrorMessage(json);
             System.out.println(json);
+            readErrorMessage(json);
             if (errorMessage != null)
                 return null;
             return json;
@@ -226,12 +231,20 @@ public class JsonHandler {
             status = jsonObject.getString("status");
             if (status.equals("success")) {
                 errorMessage = null;
+                //System.out.println(errorMessage);
             }
             else if (status.equals("failed")){
                 errorMessage = jsonObject.getString("message");
+                System.out.println(errorMessage);
+            }
+            else if (jsonObject.has("error")) {
+                errorMessage = jsonObject.getString("error");
+                System.out.println(errorMessage);
+                System.out.println(jsonObject.getString("message"));
             }
             else {
                 errorMessage = "No valid information from server received";
+                System.out.println(errorMessage);
             }
         } catch (JSONException e) {
             // TODO Auto-generated catch block

@@ -3,15 +3,37 @@ package com.mygdx.game.requests;
 import java.util.ArrayList;
 
 public class PlayerAccount {
-    private static Player  player = null;
+    private static Player   player = null;
+    private static Profile  profile = null;
 
     public static void setPlayer(Player player) {
         PlayerAccount.player = player;
+    }
+
+    public static void setProfile(Profile profile) {
+        PlayerAccount.profile = profile;
     }
 
     public static ArrayList<String> getCharactersName() {
         if (player == null)
             return null;
         return player.getCharactersName();
+    }
+
+    public static int   getProfileId(String name) {
+        if (player == null) {
+            JsonHandler.errorMessage = "Player is not logged yet";
+            return -1;
+        }
+        return player.getProfileId(name);
+    }
+
+    public static int getPlayerId() {
+        return player.getId();
+    }
+
+    public static void  prinProfile() {
+        if (profile != null)
+            profile.printProfile();
     }
 }
