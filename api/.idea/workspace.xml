@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -190,7 +187,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="257" />
     <option name="y" value="-20" />
     <option name="width" value="655" />
@@ -479,7 +476,7 @@
       <workItem from="1530739483536" duration="5671000" />
       <workItem from="1530800119435" duration="19672000" />
       <workItem from="1530796759141" duration="4593000" />
-      <workItem from="1530857520132" duration="12618000" />
+      <workItem from="1530857520132" duration="13219000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Refactor&quot;">
       <created>1530734533025</created>
@@ -576,7 +573,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47614000" />
+    <option name="totallyTimeSpent" value="48215000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -588,7 +585,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />

@@ -31,6 +31,8 @@ public class Player {
     public ArrayList<String>     getCharactersName() {
         ArrayList<String> charName;
 
+        if (characterList == null)
+            return null;
         charName = new ArrayList<String>();
         charName.addAll(characterList.values());
         return charName;
