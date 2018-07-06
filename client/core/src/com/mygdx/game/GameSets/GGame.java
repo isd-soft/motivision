@@ -1,11 +1,12 @@
 
-package com.mygdx.game.screens;
+package com.mygdx.game.GameSets;
 
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Screens.*;
 
 public class GGame extends Game {
 
@@ -13,12 +14,12 @@ public class GGame extends Game {
 	private BitmapFont font;
 
 private LoadingScreen loadingScreen;
-private com.mygdx.game.screens.SettingsScreen settingsScreen;
-private com.mygdx.game.screens.AppPreferences preferences;
+private SettingsScreen settingsScreen;
+private AppPreferences preferences;
 private MenuScreen menuScreen;
 private BattleScreen battleScreen;
 private LoginScreen loginScreen;
-private com.mygdx.game.screens.RegisterScreen registerScreen;
+private RegisterScreen registerScreen;
 private CharacterSelectScreen characterSelectScreen;
  
 
@@ -55,7 +56,7 @@ public void changeScreen(int screen){
 					this.setScreen(loginScreen);
 			break;
 		case REGISTER:
-			if (registerScreen == null) registerScreen = new com.mygdx.game.screens.RegisterScreen(this);
+			if (registerScreen == null) registerScreen = new RegisterScreen(this);
 					this.setScreen(registerScreen);
 			break;
 		case MENU:
@@ -63,28 +64,30 @@ public void changeScreen(int screen){
 					this.setScreen(menuScreen);
 			break;
 		case SETTINGS:
-			if(settingsScreen == null) settingsScreen = new com.mygdx.game.screens.SettingsScreen(this);
+			if(settingsScreen == null) settingsScreen = new SettingsScreen(this);
 					this.setScreen(settingsScreen);
 			break;
 		case CHARACTERSELECT:
 			if(characterSelectScreen == null) characterSelectScreen = new CharacterSelectScreen(this);
 			this.setScreen(characterSelectScreen);
 			break;
+
 		case BATTLE:
 			if(battleScreen == null) battleScreen = new BattleScreen(this);
 					this.setScreen(battleScreen);
 			break;
+
 	}
 }
 
-	public com.mygdx.game.screens.AppPreferences getPreferences(){
+	public AppPreferences getPreferences(){
 		return this.preferences;
 	}
 
           @Override
 	public void create() {
 
-		preferences = new com.mygdx.game.screens.AppPreferences();
+		preferences = new AppPreferences();
 		batch = new SpriteBatch();
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();

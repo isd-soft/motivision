@@ -1,8 +1,9 @@
 
-package com.mygdx.game.screens;
+package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -11,17 +12,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.GameSets.GGame;
 
 
 public class MenuScreen implements Screen {
         //final GGame game;
 		//OrthographicCamera camera;
         private Stage stage;
-        private com.mygdx.game.screens.GGame parent;
+        private GGame parent;
         private Skin skin;
+        private Music menuMusic;
         
         
-        public MenuScreen(com.mygdx.game.screens.GGame g){
+        public MenuScreen(GGame g){
             parent = g;
             stage = new Stage (new ScreenViewport());
 
@@ -83,6 +86,9 @@ public class MenuScreen implements Screen {
 
 	@Override
 	public void show() {
+
+		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("Action.mp3"));
+		menuMusic.play();
 		Gdx.input.setInputProcessor(stage);
 
 		// Create a table that fills the screen. Everything else will go inside this table.
@@ -96,7 +102,7 @@ public class MenuScreen implements Screen {
 		TextButton createCharacter = new TextButton("Create Character", skin);
 		TextButton back = new TextButton("Back", skin, "small");
                 
-		TextButton back2 = new TextButton("Back2", skin);
+		//TextButton back2 = new TextButton("Back2", skin);
 
 		selectCharacter.addListener(new ChangeListener() {
 			@Override

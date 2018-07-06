@@ -1,4 +1,4 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -9,12 +9,15 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.GameSets.GGame;
 
 public class SettingsScreen implements Screen{
     
     private GGame parent;
 	private Stage stage;
+	private Viewport viewport;
 	private Skin skin;
 	private Label titleLabel;
 	private Label volumeMusicLabel;
@@ -26,15 +29,18 @@ public class SettingsScreen implements Screen{
 
     	parent = g;
 
-		stage = new Stage (new ScreenViewport());
+		stage = new Stage();
+		viewport = new StretchViewport(800,480, stage.getCamera());
 
-		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+		stage.setViewport(viewport);
+
         }
     
     @Override
 	public void show() {
 		stage.clear();
-		Gdx.input.setInputProcessor(stage);
+		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+
 
 		// Create a table that fills the screen. Everything else will go inside this table.
 		Table table = new Table();
@@ -100,8 +106,8 @@ public class SettingsScreen implements Screen{
 		//making labels
 		titleLabel = new Label( "Preferences", skin, "big" );
 		volumeMusicLabel = new Label( "Music Volume", skin );
-		volumeSoundLabel = new Label( "Music", skin  );
-		musicOnOffLabel = new Label( "Sound Volume", skin  );
+		volumeSoundLabel = new Label( "Sound Volume", skin  );
+		musicOnOffLabel = new Label( "Music Effect", skin  );
 		soundOnOffLabel = new Label( "Sound Effect", skin  );
 
 		//adding everything into table
@@ -121,7 +127,7 @@ public class SettingsScreen implements Screen{
 		table.row().pad(10,0,0,10);
 		table.add(back).colspan(2).fillX().uniformX();
 
-
+		Gdx.input.setInputProcessor(stage);
 
 
 	}
@@ -141,7 +147,7 @@ public class SettingsScreen implements Screen{
 	@Override
 	public void resize(int width, int height) {
 
-        stage.getViewport().update(width, height, true);
+		stage.getViewport().update(width,height,true);
 	}
  
 	@Override

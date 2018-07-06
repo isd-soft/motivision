@@ -30,6 +30,9 @@ public class Team {
     @OneToMany(mappedBy = "team")
     private List<TeamActivities> teamActivities;
 
+    @OneToMany(mappedBy = "team1")
+    private List<LastBattle> lastBattles;
+
     public Team() {
     }
 

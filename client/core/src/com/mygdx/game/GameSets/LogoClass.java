@@ -1,5 +1,5 @@
 /*
-package com.mygdx.game;
+package com.mygdx.game.GameSets;
 
 
 import com.badlogic.gdx.ApplicationAdapter;

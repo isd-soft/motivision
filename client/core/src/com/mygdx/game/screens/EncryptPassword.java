@@ -1,4 +1,4 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.Screens;
 
 
 import org.apache.commons.codec.binary.Base64;

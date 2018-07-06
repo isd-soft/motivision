@@ -1,13 +1,13 @@
-package com.mygdx.game.screens;
+package com.mygdx.game.GameSets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 public class AppPreferences {
-    private static final String PREF_MUSIC_VOLUME = "volume";
-    private static final String PREF_MUSIC_ENABLED = "music_enabled";
-    private static final String PREF_SOUND_ENABLED = "sound";
-    private static final String PREF_SOUND_VOL = "sound_enabled";
+    private static final String PREF_MUSIC_VOLUME = "music";
+    private static final String PREF_MUSIC_ENABLED = "music.enabled";
+    private static final String PREF_SOUND_ENABLED = "sound.enabled";
+    private static final String PREF_SOUND_VOLUME = "sound";
     private static final String PREFS_NAME = "zulul";
     private Preferences preferences;
 
@@ -38,11 +38,11 @@ public class AppPreferences {
     }
 
     public boolean isSoundEnabled() {
-        return getPrefs().getBoolean(PREF_SOUND_VOL, true);
+        return getPrefs().getBoolean(PREF_SOUND_VOLUME, true);
     }
 
     public void setSoundEnabled(boolean soundEffectsEnabled) {
-        getPrefs().putBoolean(PREF_SOUND_VOL, soundEffectsEnabled);
+        getPrefs().putBoolean(PREF_SOUND_VOLUME, soundEffectsEnabled);
         getPrefs().flush();
     }
 

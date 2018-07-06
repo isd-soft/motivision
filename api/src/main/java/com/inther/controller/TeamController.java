@@ -63,6 +63,7 @@ public class TeamController {
         team.setName(name);
         team.setTeamLogo(logo);
         team.setBattleFrequency(battleFrequency);
+        
         teamRepository.save(team);
 
         map.put("status", "success");
