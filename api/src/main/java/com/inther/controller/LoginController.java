@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
-
     @Autowired
     PlayerRepository playerRepository;
 
@@ -28,6 +25,7 @@ public class LoginController {
 
     /*
      * Login controller
+     * Used to login to database with a valid username and password
      * @param login - user login
      * @param password - user password
      * @return Json data
@@ -46,7 +44,6 @@ public class LoginController {
                 if (player.getPassword().equals(password)) {
                     map.put("status", "success");
                     map.put("id", player.getID().toString());
-                    map.put("points", player.getPoints().toString());
                     ArrayList<Character> characters = characterRepository.findByPlayerID(player.getID());
                     Iterator<Character> iterator = characters.iterator();
                     ArrayList<Map<String, Object>> result = new ArrayList<>();
@@ -73,9 +70,12 @@ public class LoginController {
 
     /*
      * Register player controller
+     * Used to register a new player in the database
+     * with a unique name
      * @param login - user login to register
      * @param password - user password to register
-     * @return Json representation of result logs
+     * @return status - failed if no data was provided
+     * @return status - success and playerId if player was registered
      * */
     @RequestMapping(value = "/register_player", method = RequestMethod.POST)
     public Map<String, String> newPlayer(@RequestParam(value = "login", defaultValue = "null") String login,
@@ -88,9 +88,7 @@ public class LoginController {
             try {
                 playerRepository.save(player);
                 map.put("status", "success");
-                playerRepository.findByLogin(login);
                 map.put("id", player.getID().toString());
-                map.put("points", player.getPoints().toString());
                 return map;
             } catch (Exception e) {
                 map.put("status", "failed");
@@ -106,8 +104,10 @@ public class LoginController {
 
     /*
      * Check if player exist controller
+     * Used to check if a player exist in the database
      * @param login - login to check in the database
-     * @param Json representation of the result logs
+     * @return message false if player doesn't exist
+     * @return message true if player does exist
      * */
     @RequestMapping(value = "/player_exist", method = RequestMethod.GET)
     public Map<String, String> playerExist(@RequestParam(name = "login") String login) {

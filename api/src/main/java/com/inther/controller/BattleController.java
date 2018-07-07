@@ -30,7 +30,7 @@ public class BattleController {
     @Autowired
     CharacterItemRepository characterItemRepository;
 
-    @Transactional
+    /*    @Transactional
     @RequestMapping(value = "/battle")
     public Map<String, Object> battle(@RequestParam(value = "team1Id") Long team1Id,
                                       @RequestParam(value = "team2Id") Long team2Id){
@@ -103,6 +103,6 @@ public class BattleController {
             character.setPoints(0);
         }
         return map;
-    }
+    }*/
 
 }

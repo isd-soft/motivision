@@ -21,19 +21,16 @@ public class Player {
 
     private String password;
 
-    private Integer points;
 
     @OneToMany(mappedBy = "player")
     private List<Character> characters;
 
     public Player() {
-        points = 0;
     }
 
     public Player(String login, String password) {
         this.login = login;
         this.password = password;
-        this.points = 0;
     }
 
     public Long getID() {
@@ -54,14 +51,6 @@ public class Player {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Integer getPoints() {
-        return points;
-    }
-
-    public void setPoints(Integer points) {
-        this.points = points;
     }
 
     public void setCharacters(List<Character> characters) {
