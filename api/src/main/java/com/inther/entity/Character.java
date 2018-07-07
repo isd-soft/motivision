@@ -19,7 +19,7 @@ public class Character {
 
     private char gender;
 
-    private int power;
+    private int points;
 
     private String name;
 
@@ -66,12 +66,12 @@ public class Character {
         this.gender = gender;
     }
 
-    public int getPower() {
-        return power;
+    public int getPoints() {
+        return points;
     }
 
-    public void setPower(int power) {
-        this.power = power;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public String getName() {

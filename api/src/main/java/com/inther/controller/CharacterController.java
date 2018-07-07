@@ -44,7 +44,7 @@ public class CharacterController {
             return map;
         }
         Optional<Team> optionalTeam = teamRepository.findById(teamId);
-        if (!optionalTeam.isPresent()) {
+        if (optionalTeam.isPresent() == false) {
             map.put("status", "failed");
             map.put("message", "No such team exist with teamId");
             return map;
@@ -85,7 +85,7 @@ public class CharacterController {
         map.put("headType", character.getHeadType());
         map.put("bodyType", character.getBodyType());
         map.put("gender", character.getGender());
-        map.put("power", character.getPower());
+        map.put("points", character.getPoints());
 
         Optional<List<Items>> optionalItemsList = itemsRepository.findAllByCharacterId(characterId);
         if (!optionalItemsList.isPresent()) {
@@ -108,7 +108,7 @@ public class CharacterController {
         return map;
     }
 
-    @RequestMapping(value = "/delete_character", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete_character", method = RequestMethod.DELETE)
     private Map<String, Object> deleteCharacter(@RequestParam(value = "characterId") Long characterId) {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -245,7 +245,7 @@ public class CharacterController {
         if (player.getPoints() >= items.getPrice()) {
             player.setPoints(player.getPoints() - items.getPrice());
             this.addItem(character.getID(), items.getID());
-            character.setPower(character.getPower() + items.getPrice());
+            character.setPoints(character.getPoints() + items.getPrice());
             characterRepository.save(character);
             map.put("status", "success");
             return map;

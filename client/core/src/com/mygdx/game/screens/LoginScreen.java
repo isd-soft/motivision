@@ -11,10 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.GameSets.GGame;
@@ -85,6 +87,8 @@ public class LoginScreen implements Screen{
 
 
 		//add listeners to buttons
+		submit.addListener(new SubmitListener(loginField, passwordField));
+		/*
 		submit.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
@@ -107,7 +111,10 @@ public class LoginScreen implements Screen{
 						}
 						encryptedPassword = "";
 						if (player == null) {
-							label.setText("Something went wrong");
+							if (JsonHandler.errorMessage != null)
+								label.setText(JsonHandler.errorMessage);
+							else
+								label.setText("Something went wrong");
 						}
 						else {
 							passwordField.setText("");
@@ -116,11 +123,14 @@ public class LoginScreen implements Screen{
 						}
 					} catch (IOException e) {
 						e.printStackTrace();
-						label.setText("Something went wrong");
+						if (JsonHandler.errorMessage != null)
+							label.setText(JsonHandler.errorMessage);
+						else
+							label.setText("Something went wrong");
 					}
 				}
 			}
-		});
+		});*/
 
 		settings.addListener(new ChangeListener() {
 			@Override
@@ -184,6 +194,49 @@ public class LoginScreen implements Screen{
         public void dispose() {
 			stage.dispose();
 	}
+
+	class SubmitListener extends ChangeListener {
+    	private TextField	loginField;
+    	private TextField	passwordField;
+
+		public SubmitListener(TextField loginField, TextField passwordField) {
+			this.loginField = loginField;
+			this.passwordField = passwordField;
+		}
+
+		@Override
+		public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+			Player player = null;
+
+			if (loginField.getText() == "")
+				label.setText("Write the login please");
+			else if (passwordField.getText() == "")
+				label.setText("Write the password please");
+			else {
+				String	encryptedPassword;
+
+				encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+				//encryptedPassword = passwordField.getText();
+				try {
+					if (PlayerAccount.loginPlayer(loginField.getText(), encryptedPassword)) {
+							parent.changeScreen(parent.getCharacterSelect());
+					}
+					else {
+							label.setText(JsonHandler.errorMessage);
+					}
+						//player = Player.loginPlayer(loginField.getText(), encryptedPassword);
+				} catch (Exception e) {
+					e.printStackTrace();
+					if (JsonHandler.errorMessage != null)
+						label.setText(JsonHandler.errorMessage);
+					else
+						label.setText("Something went wrong");
+				}
+				passwordField.setText("");
+			}
+		}
+	}
+
 }
     
 

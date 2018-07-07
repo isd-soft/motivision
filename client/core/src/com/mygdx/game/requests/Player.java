@@ -13,18 +13,10 @@ import org.json.JSONObject;
 
 public class Player {
     private	int	id;
-    private int	points;
     private LinkedHashMap<Integer, String>	characterList;
 
     private Player(int id) {
         this.id = id;
-        this.points = 0;
-        this.characterList = null;
-    }
-
-    private Player(int id, int points) {
-        this.id = id;
-        this.points = points;
         this.characterList = null;
     }
 
@@ -65,7 +57,7 @@ public class Player {
         if (characterList == null)
             characterList = new LinkedHashMap<Integer, String>();
         characterList.put(id, name);
-        System.out.println("Added + " + name);
+        System.out.println("Added " + name);
     }
 
     public int	getId() {
@@ -85,7 +77,7 @@ public class Player {
 
         url = JsonHandler.domain + "/player_exist";
         urlParameters = "login=" + login;
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
         if (jsonObject == null)
             return true;
         result = jsonObject.getString("message");
@@ -103,7 +95,6 @@ public class Player {
         String		field;
         String      characterName;
         JSONObject	jsonObject;
-        int			points;
         int			id;
         int         characterId;
 
@@ -117,14 +108,7 @@ public class Player {
             setErrorMessage("Invalid number format for \"id\" field");
             return null;
         }
-        try {
-            field = jsonObject.getString("points");
-            points = Integer.parseInt(field);
-        } catch (NumberFormatException e) {
-            setErrorMessage("Invalid number format for \"points\" field");
-            return null;
-        }
-        player = new Player(id, points);
+        player = new Player(id);
         if (jsonObject.has("characters") == false)
             return player;
         JSONArray arr = jsonObject.getJSONArray("characters");
@@ -176,17 +160,9 @@ public class Player {
         url = JsonHandler.domain + "/login";
         String urlParameters = "login=" + login + "&password=" + password;
         player = getPlayerFromUrl(url, urlParameters, "POST");
-        PlayerAccount.setPlayer(player);
+//        PlayerAccount.setPlayer(player);
 
 
- //Delete this please
-        if (player != null) {
-            Profile profile = createNewProfile(player.getId());
-
-            Profile.getProfile("Vasea");
-            PlayerAccount.prinProfile();
-        }
- //Stop deleting
 
         return player;
     }
@@ -202,7 +178,7 @@ public class Player {
         url = JsonHandler.domain + "/register_player";
         String urlParameters = "login=" + login + "&password=" + password;
         player = getPlayerFromUrl(url, urlParameters, "POST");
-        PlayerAccount.setPlayer(player);
+//        PlayerAccount.setPlayer(player);
         return player;
     }
 }

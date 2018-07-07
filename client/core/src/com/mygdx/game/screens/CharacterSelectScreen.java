@@ -77,12 +77,14 @@ public class CharacterSelectScreen implements Screen {
         remove1.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                PlayerAccount.logOut();
                 parent.changeScreen(parent.getLogin());
             }
         });
         remove2.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                PlayerAccount.logOut();
                 parent.changeScreen(parent.getLogin());
             }
         });

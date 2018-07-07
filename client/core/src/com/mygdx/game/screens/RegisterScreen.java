@@ -111,7 +111,8 @@ public class RegisterScreen  implements Screen {
 
 
         //add listeners to buttons
-        register.addListener(new ChangeListener() {
+        register.addListener(new RegisterListener(loginField, passwordField));
+        /*        register.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 //sends data into DB
@@ -124,8 +125,8 @@ public class RegisterScreen  implements Screen {
                 else {
                     String	encryptedPassword;
 
-                    //encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
-                    encryptedPassword = passwordField.getText();
+                    encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+                    //encryptedPassword = passwordField.getText();
                     try {
                         player = Player.registerNewPlayer(loginField.getText(), encryptedPassword);
                         encryptedPassword = "";
@@ -135,20 +136,26 @@ public class RegisterScreen  implements Screen {
                         else {
                             passwordField.setText("");
                             PlayerAccount.setPlayer(player);
-                            parent.changeScreen(parent.getLogin());
+                            parent.changeScreen(parent.getCharacterSelect());
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
-                        label.setText("Something went wrong");
+                        if (JsonHandler.errorMessage != null)
+                            label.setText(JsonHandler.errorMessage);
+                        else
+                            label.setText("Something went wrong");
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        label.setText("Something went wrong");
+                        if (JsonHandler.errorMessage != null)
+                            label.setText(JsonHandler.errorMessage);
+                        else
+                            label.setText("Something went wrong");
                     }
                 }
 
                 //label.setText("Registered!");
             }
-        });
+        });*/
 
         back.addListener(new ChangeListener() {
             @Override
@@ -204,5 +211,50 @@ public class RegisterScreen  implements Screen {
     public void dispose() {
         registerSound.dispose();
         stage.dispose();
+    }
+
+
+
+    class RegisterListener extends ChangeListener {
+        private TextField	loginField;
+        private TextField	passwordField;
+
+        public RegisterListener(TextField loginField, TextField passwordField) {
+            this.loginField = loginField;
+            this.passwordField = passwordField;
+        }
+
+        @Override
+        public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+            //sends data into DB
+            Player player;
+
+            if (validateLogin(loginField.getText()) == false)
+                return;
+            else if (validatePassword(passwordField.getText()) == false)
+                return;
+
+            String	encryptedPassword;
+
+            encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+            //encryptedPassword = passwordField.getText();
+            try {
+                if (PlayerAccount.registerNewPlayer(loginField.getText(), encryptedPassword)) {
+                    parent.changeScreen(parent.getCharacterSelect());
+                }
+                else {
+                    label.setText(JsonHandler.errorMessage);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                if (JsonHandler.errorMessage != null)
+                    label.setText(JsonHandler.errorMessage);
+                else
+                    label.setText("Something went wrong");
+            }
+            passwordField.setText("");
+
+            //label.setText("Registered!");
+        }
     }
 }

@@ -15,6 +15,11 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/robovm/ios/robovm.xml'
+        exclude 'META-INF/spring.tooling'
+        exclude 'META-INF/spring.handlers'
+        exclude 'META-INF/spring.schemas'
+        exclude 'META-INF/INDEX.LIST'
+
     }
     defaultConfig {
         applicationId "com.mygdx.game"
