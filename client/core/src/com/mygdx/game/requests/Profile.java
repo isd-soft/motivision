@@ -1,13 +1,21 @@
 package com.mygdx.game.requests;
 
+import com.badlogic.gdx.graphics.Texture;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
 
 public class Profile {
     public static final String  PROFILE_ID = "characterId";
@@ -238,35 +246,81 @@ public class Profile {
         //return getProfileFromUrl(url, urlParameters, true);
     }
 
-    public static Profile	getProfile(String name) throws IOException, JSONException {
+    public static Profile	getProfile(int profileId) throws IOException, JSONException {
         String  url;
-        int     profileId;
         Profile profile;
-        //  String  urlParameters;
-        // List<BasicNameValuePair> urlParameters;
+        String urlParameters;
 
-        if (nameExist(name) == false) {
-            setErrorMessage("Character does not exist");
-            return null;
-        }
-
-        url = JsonHandler.domain + "/get_character";
-//        urlParameters = new ArrayList<BasicNameValuePair>();
-//        urlParameters.add(new BasicNameValuePair("login", login + ""));
-//        urlParameters.add(new BasicNameValuePair("password", password + ""));
-        profileId = PlayerAccount.getProfileId(name);
         if (profileId == -1)
             return null;
-        String urlParameters = PROFILE_ID + "=" + profileId;
+
+        url = JsonHandler.domain + "/get_character";
+        urlParameters = PROFILE_ID + "=" + profileId;
 
         //String urlParameters = "name=Jack&occupation=programmer";
         System.out.println("Start get profile from URL");
         profile = getProfileFromUrl(url, urlParameters, "GET");
-        PlayerAccount.setProfile(profile);
+        //PlayerAccount.setProfile(profile);
         return profile;
     }
 
+    private Texture     splitImages(Map<String, String> itemImages) throws IOException {
+        BufferedImage result = new BufferedImage(466, 510, BufferedImage.TYPE_INT_RGB);
+        Graphics g = result.getGraphics();
+        BufferedImage bi;
 
+        bi = ImageIO.read(new File("knight_3.png"));
+        g.drawImage(bi, 0, 0, null);
+
+        bi = ImageIO.read(new File("items/" + itemImages.get("leggins") + ".png"));
+        g.drawImage(bi, 30, 353, null);
+
+        bi = ImageIO.read(new File("items/" + itemImages.get("armor") + ".png"));
+        g.drawImage(bi, 0, 188, null);
+
+        bi = ImageIO.read(new File("items/" + itemImages.get("sword") + ".png"));
+        g.drawImage(bi, 203, 165, null);
+
+
+        bi = ImageIO.read(new File("items/" + itemImages.get("fingers") + ".png"));
+        g.drawImage(bi, 219, 304, null);
+
+//        if (itemImages.get("shield").equals(null) == false) {
+//            bi = ImageIO.read(new File("items/" + itemImages.get("shield") + ".png"));
+//            g.drawImage(bi, 17, 320, null);
+//        }
+
+        ImageIO.write(result,"png",new File("result.png"));
+
+        return new Texture("result.png");
+    }
+
+    public Texture getTexture() throws IOException {
+        Map<String, String> itemImages;
+        Set<String>         itemSet;
+
+        if (itemList == null)
+            return new Texture("default.png");
+        itemImages = new LinkedHashMap<String, String>();
+        itemImages.put("sword", "default_sword");
+        itemImages.put("armor", "default_armor");
+        itemImages.put("fingers", "default_fingers");
+        itemImages.put("leggins", "default_leggins");
+        itemImages.put("shield", null);
+        itemSet = itemImages.keySet();
+        for (Item item: itemList) {
+            for (String itemType: itemSet) {
+                if (item.getType().contains(itemType)) {
+                    //itemImages.remove(itemType);
+                    itemImages.put(itemType, item.getType());
+                    if (itemType.equals("armor")) {
+                        itemImages.put("fingers", item.getType().replaceAll("armor", "fingers"));
+                    }
+                }
+            }
+        }
+        return splitImages(itemImages);
+    }
 
     public void     printProfile() {
         System.out.println("Id: " + this.id);
@@ -327,4 +381,5 @@ public class Profile {
     public int getTeamId() {
         return teamId;
     }
+
 }

@@ -21,4 +21,8 @@ public class Item {
     public void print() {
         System.out.println("item: id(" + id + "), image(" + image + "), price(" + price + "), type(" + type + ")");
     }
+
+    public String getType() {
+        return type;
+    }
 }

@@ -1,5 +1,7 @@
 package com.mygdx.game.requests;
 
+import com.badlogic.gdx.graphics.Texture;
+
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -55,12 +57,32 @@ public class PlayerAccount {
         return (player != null);
     }
 
+    public static Texture getProfileTexture(String name) throws IOException, JSONException {
+        if (player == null)
+            return null;
+        selectProfile(name);
+        return profile.getTexture();
+        //return null;
+    }
+
+    public static Profile   selectProfile(String name) throws IOException, JSONException {
+        int     profileId;
+
+        if (player == null) {
+            JsonHandler.errorMessage = "Player is not logged yet";
+            return null;
+        }
+        profileId = getProfileId(name);
+        profile = Profile.getProfile(profileId);
+        setProfile(profile);
+        return profile;
+    }
+
     public static boolean loginPlayer(String login, String encryptedPassword) throws IOException, JSONException {
         Player  player = null;
 
         player = Player.loginPlayer(login, encryptedPassword);
         PlayerAccount.player = player;
-
 
         //Delete this please
 //        if (player != null) {
