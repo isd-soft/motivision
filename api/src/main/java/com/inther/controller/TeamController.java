@@ -27,7 +27,8 @@ public class TeamController {
     ActivitiesRepository activitiesRepository;
 
     /*
-    * Get team info controller
+    * Get team info request
+    * Used to get team info by teamId
     * @param teamId - id of the team to get data
     * @return if such team exist return Json info about the team
     * @return if no such team exist return Json fail message
@@ -44,12 +45,23 @@ public class TeamController {
         Team team = optionalTeam.get();
         map.put("status", "success");
         map.put("teamId", team.getID());
+        map.put("teamName", team.getName());
         map.put("liderId", team.getAdmin().getID());
         map.put("teamLogo", team.getTeamLogo());
         map.put("battleFrequency", team.getBattleFrequency());
         return map;
     }
 
+    /*
+    *  Create team request
+    *  Used to create new team and add default 6 activities to it
+    *  @param name - team name
+    *  @param logo - team logo
+    *  @param battleFrequency - team battleFrequency
+    *  @return status failed if team name already exists
+    *  @return status failed if somehow default activities are not present
+    *  @return status success if team was successfully created
+    * */
     @RequestMapping(value = "/create_team", method = RequestMethod.POST)
     public Map<String, Object> createTeam(@RequestParam(value = "name") String name,
                                            @RequestParam(value = "teamLogo") String logo,
@@ -82,54 +94,27 @@ public class TeamController {
             teamActivitiesList.add(teamActivities);
         }
         team.setTeamActivities(teamActivitiesList);
-        /*for (TeamActivities activities : teamActivitiesList){
-            teamActivitiesRepository.save(activities);
-        }*/
         teamRepository.save(team);
         map.put("status", "success");
         return map;
     }
-        /* Bad Code for Default Activities 1-6
-        Optional<Activities> optionalActivities1 = activitiesRepository.findActivitiesByID((long) 1);
-        Optional<Activities> optionalActivities2 = activitiesRepository.findActivitiesByID((long) 2);
-        Optional<Activities> optionalActivities3 = activitiesRepository.findActivitiesByID((long) 3);
-        Optional<Activities> optionalActivities4 = activitiesRepository.findActivitiesByID((long) 4);
-        Optional<Activities> optionalActivities5 = activitiesRepository.findActivitiesByID((long) 5);
-        Optional<Activities> optionalActivities6 = activitiesRepository.findActivitiesByID((long) 6);
 
-        if(optionalActivities1.isPresent() && optionalActivities2.isPresent()
-                && optionalActivities3.isPresent() && optionalActivities4.isPresent()
-                && optionalActivities5.isPresent() && optionalActivities6.isPresent()){
-
-            List<TeamActivities> teamActivitiesList = new ArrayList<>();
-            List<Activities> activitiesList = new ArrayList<>();
-
-            activitiesList.add(optionalActivities1.get());
-            activitiesList.add(optionalActivities2.get());
-            activitiesList.add(optionalActivities3.get());
-            activitiesList.add(optionalActivities4.get());
-            activitiesList.add(optionalActivities5.get());
-            activitiesList.add(optionalActivities6.get());
-
-            Iterator<Activities> activitiesIterator = activitiesList.iterator();
-
-            TeamActivities teamActivities = new TeamActivities();
-            while (activitiesIterator.hasNext()) {
-                teamActivities.setTeam(team);
-                teamActivities.setActivities(activitiesIterator.next());
-                teamActivitiesList.add(teamActivities);
-            }
-            team.setTeamActivities(teamActivitiesList);
-            teamRepository.save(team);
-        }
-        map.put("status", "failed");
-        map.put("message", "activity 1-6 doesn't exist");
-        return map;
-        */
-
+    /*
+    * Delete team request
+    * Used to delete a team by teamId
+    * @param teamId - team for deletion
+    * @return status failed if no such team exists
+    * @return status success if team was deleted successfully
+    * */
     @RequestMapping(value = "/delete_team", method = RequestMethod.DELETE)
     public Map<String, Object> deleteTeam(@RequestParam(value = "teamId") Long teamId){
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+        if (!optionalTeam.isPresent()){
+            map.put("status", "failed");
+            map.put("message", "no such team exist");
+            return map;
+        }
         teamRepository.deleteById(teamId);
         map.put("status", "success");
         return map;
