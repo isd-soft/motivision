@@ -7,6 +7,7 @@ import com.inther.repo.CharacterItemRepository;
 import com.inther.repo.CharacterRepository;
 import com.inther.repo.LastBattleRepository;
 import com.inther.repo.TeamRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,9 @@ import java.util.*;
 
 @RestController
 public class BattleController {
+
+
+    private Logger log = Logger.getLogger(BattleController.class);
 
     @Autowired
     CharacterRepository characterRepository;

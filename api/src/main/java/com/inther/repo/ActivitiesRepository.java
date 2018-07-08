@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ActivitiesRepository extends JpaRepository<Activities, Long>{
 
     @Query(nativeQuery = true, value = "select * from activities where id between 1 and 6")
-    Optional<List<Activities>> findAllByActivities_ID();
+    Optional<List<Activities>> findAllByActivitiesID();
 
     @Query("select activities from TeamActivities ta " +
             "join ta.activities activities" +
@@ -27,6 +27,8 @@ public interface ActivitiesRepository extends JpaRepository<Activities, Long>{
                                       @Param("activityId") Long activityId);
 
     @Query(nativeQuery = true, value = "select * from Activities a" +
-            "where a.id = :activityId")
+            " where a.id = :activityId")
     Optional<Activities> findActivitiesByID(@Param("activityId") Long activityId);
+
+
 }

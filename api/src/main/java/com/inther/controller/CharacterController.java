@@ -3,6 +3,7 @@ package com.inther.controller;
 import com.inther.entity.*;
 import com.inther.entity.Character;
 import com.inther.repo.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,9 @@ import java.util.*;
 
 @RestController
 public class CharacterController {
+
+
+    private Logger log = Logger.getLogger(CharacterController.class);
 
     @Autowired
     PlayerRepository playerRepository;
@@ -48,23 +52,26 @@ public class CharacterController {
                                                @RequestParam(value = "characterName") String name,
                                                @RequestParam(value = "isAdmin") Boolean isAdmin
     ) {
-
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Player> optionalPlayer = playerRepository.findById(playerId);
         if (!optionalPlayer.isPresent()) {
+            log.warn("Player with playerId " + playerId + " not found");
             map.put("status", "failed");
             map.put("message", "No such player exist with playerId");
             return map;
         }
         Optional<Team> optionalTeam = teamRepository.findById(teamId);
         if (!optionalTeam.isPresent()) {
+            log.warn("Team with team Id " + teamId + " not found");
             map.put("status", "failed");
             map.put("message", "No such team exist with teamId");
             return map;
         }
+        log.info("Player and Team found, starting to create character");
         Team team = optionalTeam.get();
         Player player = optionalPlayer.get();
         Character character = new Character();
+        log.info("Character created, processing data");
         character.setPlayer(player);
         character.setTeam(team);
         character.setHeadType(headType);
@@ -74,6 +81,7 @@ public class CharacterController {
         if (isAdmin)
             team.setAdmin(character);
         characterRepository.save(character);
+        log.info("Character processed and saved to the database");
         map.put("status", "success");
         map.put("characterId", character.getID());
         return map;
@@ -98,10 +106,12 @@ public class CharacterController {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         if (!optionalCharacter.isPresent()) {
+            log.warn("Character with characterId " + characterId + " not found");
             map.put("status", "failed");
             map.put("message", "No such character exist with playerId");
             return map;
         }
+        log.info("Character found, processing data");
         Character character = optionalCharacter.get();
         map.put("status", "success");
         map.put("characterId", character.getID());
@@ -112,7 +122,6 @@ public class CharacterController {
         map.put("headType", character.getHeadType());
         map.put("bodyType", character.getBodyType());
         map.put("gender", character.getGender());
-
         Optional<List<Items>> optionalItemsList = itemsRepository.findAllByCharacterId(characterId);
         if (!optionalItemsList.isPresent()) {
             map.put("items", "null");
@@ -131,6 +140,7 @@ public class CharacterController {
             result.add(itemsMap);
         }
         map.put("items", result);
+        log.info("Character data process done successfully");
         return map;
     }
 
@@ -146,11 +156,14 @@ public class CharacterController {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         if (!optionalCharacter.isPresent()) {
+            log.warn("Character with characterId " + characterId + " not found");
             map.put("status", "failed");
             map.put("message", "No such character exist");
             return map;
         }
+        log.info("Character found");
         characterRepository.deleteById(characterId);
+        log.info("Character deleted");
         map.put("status", "success");
         return map;
     }
@@ -166,11 +179,12 @@ public class CharacterController {
         Optional<Character> optionalCharacter = characterRepository.findByName(characterName);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         if (!optionalCharacter.isPresent()) {
+            log.info("Character not found");
             map.put("status", "success");
             map.put("message", "false");
             return map;
         }
-        Character character = optionalCharacter.get();
+        log.info("Character found");
         map.put("status", "success");
         map.put("message", "true");
         return map;
@@ -189,16 +203,20 @@ public class CharacterController {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         if (!optionalCharacter.isPresent()) {
+            log.warn("Character with characterId " + characterId + " not found");
             map.put("status", "failed");
             map.put("message", "No such character with characterId exist");
             return map;
         }
+        log.info("Character found");
         Optional<List<Items>> optionalItemsList = itemsRepository.findAllByCharacterId(characterId);
         if (!optionalItemsList.isPresent()) {
+            log.info("Character has no items");
             map.put("status", "success");
             map.put("items", "null");
             return map;
         }
+        log.info("Character has items");
         List<Items> itemsList = optionalItemsList.get();
         Iterator<Items> iterator = itemsList.iterator();
         ArrayList<Map<String, Object>> result = new ArrayList<>();
@@ -213,6 +231,7 @@ public class CharacterController {
             result.add(itemsMap);
         }
         map.put("items", result);
+        log.info("Character items returned");
         return map;
     }
 
@@ -233,17 +252,20 @@ public class CharacterController {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         Optional<Items> optionalItems = itemsRepository.findItemsByCharacterId(characterId, itemId);
         if (!optionalCharacter.isPresent()) {
+            log.warn("Character with characterId " + characterId + " not found");
             map.put("status", "failed");
             map.put("message", "No such character exist with characterId");
             return map;
         }
-
+        log.info("Character found");
         if (!optionalItems.isPresent()) {
+            log.warn("Character doesn't have this item");
             map.put("status", "failed");
             map.put("message", "Character doesn't have this item");
             return map;
         }
         characterItemRepository.deleteById(itemId);
+        log.info("Item successfully deleted");
         map.put("status", "success");
         return map;
     }
@@ -258,33 +280,41 @@ public class CharacterController {
     * @return character pays points equivalent to item price
     * */
     @RequestMapping(value = "/buy_item")
-    public Map<String, Object> buyItem(@RequestParam(value = "characterId") Long charId,
+    public Map<String, Object> buyItem(@RequestParam(value = "characterId") Long characterId,
                                        @RequestParam(value = "itemId") Long itemId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        Optional<Character> optionalCharacter = characterRepository.findById(charId);
+        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         if (!optionalCharacter.isPresent()) {
+            log.warn("Character with cahracterId " + characterId + " not found");
             map.put("status", "failed");
             map.put("message", "No such character with characterId");
             return map;
         }
         Character character = optionalCharacter.get();
+        log.info("Character found");
         Optional<Items> optionalItems = itemsRepository.findById(itemId);
         if (!optionalItems.isPresent()) {
+            log.warn("Item with itemId " + itemId + " not found");
             map.put("status", "failed");
             map.put("message", "No such item with itemId");
             return map;
         }
+        log.info("Item found");
         Items items = optionalItems.get();
         if (character.getPoints() >= items.getPrice()) {
+            log.info("Character has enough points");
             character.setPoints(character.getPoints() - items.getPrice());
+            log.info("Item bought");
             CharacterItem characterItem = new CharacterItem();
             characterItem.setCharacter(character);
             characterItem.setItems(items);
             characterItemRepository.save(characterItem);
             characterRepository.save(character);
+            log.info("Item saved in Character inventory");
             map.put("status", "success");
             return map;
         } else {
+            log.info("Character doesn't have enough points");
             map.put("status", "failed");
             map.put("message", "Not enough points");
             return map;
