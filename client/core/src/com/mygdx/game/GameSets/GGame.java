@@ -21,7 +21,11 @@ private BattleScreen battleScreen;
 private LoginScreen loginScreen;
 private RegisterScreen registerScreen;
 private CharacterSelectScreen characterSelectScreen;
- 
+private CreateCharacterScreen createCharacterScreen;
+private CharacterProfileScreen characterProfileScreen;
+private EarnPointsScreen earnPointsScreen;
+private AdminScreen adminScreen;
+private TeamMembersScreen teamMembersScreen;
 
 
 private final static int LOGIN = 0;
@@ -41,8 +45,24 @@ public int getSettings(){ return SETTINGS;}
 private final static int CHARACTERSELECT = 4;
 public int getCharacterSelect(){ return CHARACTERSELECT;}
 
+private final static int CREATECHARACTER = 5;
+public int getCreateCharacter(){ return CREATECHARACTER;}
 
-private final static int BATTLE = 5;
+private final static int CHARACTERPROFILE = 6;
+public int getCharacterProfile(){ return CHARACTERPROFILE;}
+
+private final static int EARNPOINTS = 7;
+public int getEarnPoints(){ return EARNPOINTS;}
+
+private final static int ADMIN = 8;
+public int getAdmin(){ return ADMIN;}
+
+private final static int TEAMMEMBER = 9;
+public int getTeamMember(){ return TEAMMEMBER;}
+
+
+
+private final static int BATTLE = 10;
 public int getBattle(){return BATTLE;}
         
 //PREFERENCES - preferencessScreen - settingScreen
@@ -72,6 +92,26 @@ public void changeScreen(int screen){
 			if(characterSelectScreen == null) characterSelectScreen = new CharacterSelectScreen(this);
 			this.setScreen(characterSelectScreen);
 			break;
+        case CREATECHARACTER:
+            if(createCharacterScreen == null) createCharacterScreen = new CreateCharacterScreen(this);
+            this.setScreen(createCharacterScreen);
+            break;
+        case CHARACTERPROFILE:
+            if(characterProfileScreen == null) characterProfileScreen = new CharacterProfileScreen(this);
+            this.setScreen(characterProfileScreen);
+            break;
+        case EARNPOINTS:
+            if(earnPointsScreen == null) earnPointsScreen = new EarnPointsScreen(this);
+            this.setScreen(earnPointsScreen);
+            break;
+        case ADMIN:
+            if(adminScreen == null) adminScreen = new AdminScreen(this);
+            this.setScreen(adminScreen);
+            break;
+        case TEAMMEMBER:
+            if(teamMembersScreen == null) teamMembersScreen = new TeamMembersScreen(this);
+            this.setScreen(teamMembersScreen);
+            break;
 
 		case BATTLE:
 			if(battleScreen == null) battleScreen = new BattleScreen(this);
@@ -93,8 +133,8 @@ public void changeScreen(int screen){
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
                 //this.setScreen(new )
-			  battleScreen = new BattleScreen(this);
-                setScreen(battleScreen);
+			  earnPointsScreen = new EarnPointsScreen(this);
+                setScreen(earnPointsScreen);
 //			  characterSelect = new CharacterSelect(this);
 //			  setScreen(characterSelect);
 	}
