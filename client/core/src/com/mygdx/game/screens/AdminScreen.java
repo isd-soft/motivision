@@ -68,7 +68,7 @@ public class AdminScreen implements Screen {
         TextButton settings = new TextButton("Settings", skin, "small");
 
         Label frequencyLabel = new Label("Battle frequency", skin);
-        Label teamLabel = new Label("Team", skin);
+        Label teamLabel = new Label("Image", skin);
         // left-right buttons
         ImageButton arrowCastleLeft = new ImageButton(skin2);
         ImageButton arrowCastleRight = new ImageButton(skin2);
