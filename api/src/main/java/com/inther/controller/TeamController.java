@@ -2,9 +2,11 @@ package com.inther.controller;
 
 import com.inther.aspect.Logging;
 import com.inther.entity.Activities;
+import com.inther.entity.Character;
 import com.inther.entity.Team;
 import com.inther.entity.TeamActivities;
 import com.inther.repo.ActivitiesRepository;
+import com.inther.repo.CharacterRepository;
 import com.inther.repo.TeamActivitiesRepository;
 import com.inther.repo.TeamRepository;
 import org.apache.log4j.Logger;
@@ -29,6 +31,9 @@ public class TeamController {
     @Autowired
     ActivitiesRepository activitiesRepository;
 
+    @Autowired
+    CharacterRepository characterRepository;
+
     /*
     * Get team info request
     * Used to get team info by teamId
@@ -52,6 +57,24 @@ public class TeamController {
         map.put("liderId", team.getAdmin().getID());
         map.put("teamLogo", team.getTeamLogo());
         map.put("battleFrequency", team.getBattleFrequency());
+        List<Character> characterList = characterRepository.findAllByTeamID(teamId);
+        List<Map<String, Object>> result = new ArrayList<>();
+        log.info("Parsing team characters");
+        for(Character character : characterList){
+            Map<String, Object> characterMap = new TreeMap<>();
+            characterMap.put("characterId", character.getID());
+            characterMap.put("characterName", character.getName());
+            characterMap.put("playerId", character.getPlayer().getID());
+            characterMap.put("teamId", character.getTeam().getID());
+            characterMap.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getID().equals(character.getID())));
+            characterMap.put("headType", character.getHeadType());
+            characterMap.put("bodyType", character.getBodyType());
+            characterMap.put("gender", character.getGender());
+            characterMap.put("points", character.getPoints());
+            result.add(characterMap);
+        }
+        log.info("Team characters rexeived");
+        map.put("characters", result);
         log.info("Team data successfully returned");
         return map;
     }

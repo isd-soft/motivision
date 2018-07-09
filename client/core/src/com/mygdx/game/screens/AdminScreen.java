@@ -67,11 +67,13 @@ public class AdminScreen implements Screen {
         TextButton back = new TextButton("Back", skin, "small");
         TextButton settings = new TextButton("Settings", skin, "small");
 
+        Label frequencyLabel = new Label("Battle frequency", skin);
+        Label teamLabel = new Label("Team", skin);
         // left-right buttons
-        ImageButton arrowCastleLeft = new ImageButton(skin);
-        ImageButton arrowCastleRight = new ImageButton(skin);
-        ImageButton arrowFrequencyLeft = new ImageButton(skin);
-        ImageButton arrowFrequencyRight = new ImageButton(skin);
+        ImageButton arrowCastleLeft = new ImageButton(skin2);
+        ImageButton arrowCastleRight = new ImageButton(skin2);
+        ImageButton arrowFrequencyLeft = new ImageButton(skin2);
+        ImageButton arrowFrequencyRight = new ImageButton(skin2);
 
         // add the list of already created characters
         ArrayList<String> strings = new ArrayList<String>();
@@ -79,7 +81,7 @@ public class AdminScreen implements Screen {
         if (characterNames != null)
             strings = PlayerAccount.getCharactersName();
         else
-            strings.add("No Characters");
+            strings.add("No Activities");
 
         Table list = new Table();
 
@@ -119,10 +121,12 @@ public class AdminScreen implements Screen {
         scrollPane.setScrollbarsOnTop(true);
 
         Table selectionTable = new Table();
+        selectionTable.add(teamLabel);
         selectionTable.add(arrowCastleLeft);
         selectionTable.add(imageCastle);
         selectionTable.add(arrowCastleRight);
         selectionTable.row();
+        selectionTable.add(frequencyLabel);
         selectionTable.add(arrowFrequencyLeft);
         selectionTable.add(new Label("freq", skin));
         selectionTable.add(arrowFrequencyRight);

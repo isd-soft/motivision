@@ -8,7 +8,7 @@ import java.util.List;
 public class CharacterItem {
 
     @Id
-    @GenericGenerator(name = " ", strategy = "increment")
+    @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
     private Long ID;
 

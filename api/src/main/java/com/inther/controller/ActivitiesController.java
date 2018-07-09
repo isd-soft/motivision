@@ -1,13 +1,16 @@
 package com.inther.controller;
 
 import com.inther.entity.Activities;
+import com.inther.entity.Character;
 import com.inther.entity.Team;
 import com.inther.entity.TeamActivities;
 import com.inther.repo.ActivitiesRepository;
+import com.inther.repo.CharacterRepository;
 import com.inther.repo.TeamActivitiesRepository;
 import com.inther.repo.TeamRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +32,49 @@ public class ActivitiesController {
 
     @Autowired
     TeamActivitiesRepository teamActivitiesRepository;
+
+    @Autowired
+    CharacterRepository characterRepository;
+
+    /*
+    * Do activity request
+    * Used as a points adding system when activity is done
+    * @param characterId - character for points adding
+    * @param activityId - team activity that the player already did
+    * @return status - failed if character not found
+    * @return status - failed if activity not found
+    * @return status - success if points were assigned successfully
+    * */
+    @RequestMapping(value = "/do_activity", method = RequestMethod.POST)
+    public Map<String, Object> doActivity(@RequestParam(value = "characterId") Long characterId,
+                                          @RequestParam(value = "activityId") Long activityId) {
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
+        if (!optionalCharacter.isPresent()) {
+            log.warn("Character with characterId " + characterId + " not found");
+            map.put("status", "failed");
+            map.put("message", "Character not found");
+            return map;
+        }
+        log.info("Character found");
+        Character character = optionalCharacter.get();
+        Optional<Activities> optionalActivities =
+                activitiesRepository.findActivitiesByTeamId(character.getTeam().getID(), activityId);
+        if (!optionalActivities.isPresent()) {
+            log.warn("Activity with activityId " + activityId
+                    + " in Team with team id " + character.getTeam().getID() + " not found");
+            map.put("status", "failed");
+            map.put("message", "activity not found");
+            return map;
+        }
+        log.info("Activity found");
+        Activities activities = optionalActivities.get();
+        character.setPoints(character.getPoints() + activities.getReward());
+        characterRepository.save(character);
+        log.info("Points assigned to database");
+        map.put("status", "success");
+        return map;
+    }
 
     /*
      * Add activity

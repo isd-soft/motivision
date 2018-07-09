@@ -36,6 +36,7 @@ public class Character {
     private List<CharacterItem> characterItems;
 
     public Character() {
+        points = 0;
     }
 
     public Long getID() {
