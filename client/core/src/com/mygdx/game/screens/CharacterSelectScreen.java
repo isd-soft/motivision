@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
@@ -32,6 +33,7 @@ import javax.imageio.ImageIO;
 public class CharacterSelectScreen implements Screen {
     private GGame parent;
     private Stage stage;
+    private Texture texture = null;
     private Skin skin;
 
     private Viewport viewport;
@@ -89,19 +91,15 @@ public class CharacterSelectScreen implements Screen {
 
         // add the character image
 //        Texture texture = new Texture("default.png");
-        Texture texture = null;
-        try {
-            texture = PlayerAccount.getProfileTexture("Vasea");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if (texture == null) {
-            texture = new Texture("default.png");
-        }
-        Image image = new Image(texture);
+        //texture = null;
+//        try {
+//            texture = PlayerAccount.getProfileTexture("Vasea");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return;
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
         // remove and add buttons
         TextButton create = new TextButton("Create new +", skin, "square");
@@ -110,8 +108,17 @@ public class CharacterSelectScreen implements Screen {
         // add the list of already created characters
         ArrayList<String> strings = new ArrayList<String>();
         ArrayList<String> characterNames = PlayerAccount.getCharactersName();
-        if (characterNames != null)
+        if (characterNames != null) {
+            try {
+                if (texture == null)
+                    texture = PlayerAccount.getProfileTexture(characterNames.get(0));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             strings = PlayerAccount.getCharactersName();
+        }
         else
             strings.add("No Characters");
 
@@ -119,6 +126,12 @@ public class CharacterSelectScreen implements Screen {
 
         ArrayList<TextButton> characterNamesButtons = new ArrayList<TextButton>();
         ArrayList<TextButton> xButtons = new ArrayList<TextButton>();
+
+
+        if (texture == null) {
+            texture = new Texture("default.png");
+        }
+        Image image = new Image(texture);
 
         for (int i = 0; i < strings.size(); i++) {
             characterNamesButtons.add(new TextButton(strings.get(i), skin, "square"));
@@ -128,12 +141,13 @@ public class CharacterSelectScreen implements Screen {
             list.add(xButtons.get(i)).width(Value.percentWidth(0.2f, list)).fillX();
             list.row();
 
-            characterNamesButtons.get(i).addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    System.out.println("Selected character " + actor.getName());
-                }
-            });
+            characterNamesButtons.get(i).addListener(new SelectCharacter(strings.get(i)));
+//            characterNamesButtons.get(i).addListener(new ChangeListener() {
+//                @Override
+//                public void changed(ChangeEvent event, Actor actor) {
+//                    System.out.println("Selected character " + actor.getName());
+//                }
+//            });
 
             xButtons.get(i).addListener(new ChangeListener() {
                 @Override
@@ -226,13 +240,17 @@ public class CharacterSelectScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+            texture = null;
             try {
-                PlayerAccount.getProfileTexture(name);
+                texture = PlayerAccount.getProfileTexture(name);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            if (texture == null)
+                texture = new Texture("default.png");
+            show();
         }
     }
 }
