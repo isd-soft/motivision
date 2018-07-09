@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface LastBattleRepository extends JpaRepository<LastBattle, Long> {
-    Optional<LastBattle> findByTeamID(Long team1Id);
-    void deleteByTeamID(Long team1Id);
+    Optional<LastBattle> findByTeamId(Long team1Id);
+    void deleteByTeamId(Long team1Id);
 }

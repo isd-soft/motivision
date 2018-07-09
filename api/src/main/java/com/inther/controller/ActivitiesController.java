@@ -10,7 +10,6 @@ import com.inther.repo.TeamActivitiesRepository;
 import com.inther.repo.TeamRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,10 +58,10 @@ public class ActivitiesController {
         log.info("Character found");
         Character character = optionalCharacter.get();
         Optional<Activities> optionalActivities =
-                activitiesRepository.findActivitiesByTeamId(character.getTeam().getID(), activityId);
+                activitiesRepository.findActivitiesByTeamId(character.getTeam().getId(), activityId);
         if (!optionalActivities.isPresent()) {
             log.warn("Activity with activityId " + activityId
-                    + " in Team with team id " + character.getTeam().getID() + " not found");
+                    + " in Team with team id " + character.getTeam().getId() + " not found");
             map.put("status", "failed");
             map.put("message", "activity not found");
             return map;
@@ -157,7 +156,7 @@ public class ActivitiesController {
         while (iterator.hasNext()) {
             LinkedHashMap<String, Object> activitiesMap = new LinkedHashMap<>();
             Activities activities = iterator.next();
-            activitiesMap.put("activityId", String.valueOf(activities.getID()));
+            activitiesMap.put("activityId", String.valueOf(activities.getId()));
             activitiesMap.put("activityName", activities.getName());
             activitiesMap.put("activityReward", String.valueOf(activities.getReward()));
             activitiesArrayList.add(activitiesMap);
@@ -186,7 +185,7 @@ public class ActivitiesController {
             map.put("message", "this team doesn't have such activity");
             return map;
         }
-        teamActivitiesRepository.deleteByTeamIDAndActivitiesID(teamId, activityId);
+        teamActivitiesRepository.deleteByTeamIdAndActivitiesId(teamId, activityId);
         log.info("Team Activity deleted successfully");
         map.put("status", "success");
         return map;

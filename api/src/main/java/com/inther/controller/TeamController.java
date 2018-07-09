@@ -1,6 +1,5 @@
 package com.inther.controller;
 
-import com.inther.aspect.Logging;
 import com.inther.entity.Activities;
 import com.inther.entity.Character;
 import com.inther.entity.Team;
@@ -44,36 +43,38 @@ public class TeamController {
     @RequestMapping(value = "/get_team", method = RequestMethod.GET)
     public Map<String, Object> getTeam(@RequestParam(value = "teamId") Long teamId){
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+        Optional<Team> optionalTeam = teamRepository.findTeamById(teamId);
         if(!optionalTeam.isPresent()){
             log.warn("Invalid teamId, Team not found");
+            map.put("status","failed");
+            map.put("message", "team not found");
             return map;
         }
         log.info("Team with teamId found");
         Team team = optionalTeam.get();
         map.put("status", "success");
-        map.put("teamId", team.getID());
+        map.put("teamId", team.getId());
         map.put("teamName", team.getName());
-        map.put("liderId", team.getAdmin().getID());
+        map.put("liderId", team.getAdmin().getId());
         map.put("teamLogo", team.getTeamLogo());
         map.put("battleFrequency", team.getBattleFrequency());
-        List<Character> characterList = characterRepository.findAllByTeamID(teamId);
+        log.info("Team characters received");
+        List<Character> characterList = characterRepository.findAllByTeamId(teamId);
         List<Map<String, Object>> result = new ArrayList<>();
         log.info("Parsing team characters");
         for(Character character : characterList){
             Map<String, Object> characterMap = new TreeMap<>();
-            characterMap.put("characterId", character.getID());
+            characterMap.put("characterId", character.getId());
             characterMap.put("characterName", character.getName());
-            characterMap.put("playerId", character.getPlayer().getID());
-            characterMap.put("teamId", character.getTeam().getID());
-            characterMap.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getID().equals(character.getID())));
+            characterMap.put("playerId", character.getPlayer().getId());
+            characterMap.put("teamId", character.getTeam().getId());
+            characterMap.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getId().equals(character.getId())));
             characterMap.put("headType", character.getHeadType());
             characterMap.put("bodyType", character.getBodyType());
             characterMap.put("gender", character.getGender());
             characterMap.put("points", character.getPoints());
             result.add(characterMap);
         }
-        log.info("Team characters rexeived");
         map.put("characters", result);
         log.info("Team data successfully returned");
         return map;

@@ -78,12 +78,18 @@ public class CharacterController {
         character.setBodyType(bodyType);
         character.setGender(gender);
         character.setName(name);
-        if (isAdmin)
-            team.setAdmin(character);
+        if (isAdmin) {
+            if (team.getAdmin() == null) {
+                log.info("Team doesn't have an admin");
+                team.setAdmin(character);
+            }else {
+                log.info("Already had an admin");
+            }
+        }
         characterRepository.save(character);
         log.info("Character processed and saved to the database");
         map.put("status", "success");
-        map.put("characterId", character.getID());
+        map.put("characterId", character.getId());
         return map;
     }
 
@@ -114,11 +120,11 @@ public class CharacterController {
         log.info("Character found, processing data");
         Character character = optionalCharacter.get();
         map.put("status", "success");
-        map.put("characterId", character.getID());
+        map.put("characterId", character.getId());
         map.put("characterName", character.getName());
-        map.put("playerId", character.getPlayer().getID());
-        map.put("teamId", character.getTeam().getID());
-        map.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getID().equals(characterId)));
+        map.put("playerId", character.getPlayer().getId());
+        map.put("teamId", character.getTeam().getId());
+        map.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getId().equals(characterId)));
         map.put("headType", character.getHeadType());
         map.put("bodyType", character.getBodyType());
         map.put("gender", character.getGender());
@@ -134,7 +140,7 @@ public class CharacterController {
         while (iterator.hasNext()) {
             Map<String, Object> itemsMap = new TreeMap<>();
             Items items = iterator.next();
-            itemsMap.put("itemId", items.getID());
+            itemsMap.put("itemId", items.getId());
             itemsMap.put("itemType", items.getType());
             itemsMap.put("itemImageUrl", items.getImageUrl());
             itemsMap.put("itemPrice", items.getPrice());
@@ -156,7 +162,7 @@ public class CharacterController {
     public Map<String, Object> deleteCharacter(@RequestParam(value = "characterId") Long characterId) {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        if(!optionalCharacter.isPresent()){
+        if (!optionalCharacter.isPresent()) {
             log.warn("Character with characterId " + characterId + " not found");
             map.put("status", "failed");
             map.put("message", "No such character exist with playerId");
@@ -226,7 +232,7 @@ public class CharacterController {
         while (iterator.hasNext()) {
             Map<String, Object> itemsMap = new TreeMap<>();
             Items items = iterator.next();
-            itemsMap.put("itemId", items.getID());
+            itemsMap.put("itemId", items.getId());
             itemsMap.put("itemType", items.getType());
             itemsMap.put("itemImageUrl", items.getImageUrl());
             itemsMap.put("itemPrice", items.getPrice());
@@ -325,7 +331,7 @@ public class CharacterController {
 
     @RequestMapping("/unequipped_item")
     public Map<String, Object> unEquipItem(@RequestParam(value = "characterId") Long characterId,
-                                         @RequestParam(value = "itemId") Long itemId) {
+                                           @RequestParam(value = "itemId") Long itemId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         if (!optionalCharacter.isPresent()) {
@@ -345,15 +351,15 @@ public class CharacterController {
         }
         log.info("Item found");
         Items items = optionalItems.get();
-        Optional<CharacterItem> optionalCharacterItem = characterItemRepository.findCharacterItemsByItemsID(itemId);
-        if(!optionalCharacterItem.isPresent()){
+        Optional<CharacterItem> optionalCharacterItem = characterItemRepository.findCharacterItemsByItemsId(itemId);
+        if (!optionalCharacterItem.isPresent()) {
             log.warn("Character doesn't have this item");
             map.put("status", "failed");
             map.put("message", "character doesn't have this item");
             return map;
         }
         CharacterItem characterItem = optionalCharacterItem.get();
-        if(!characterItem.getEquipped()){
+        if (!characterItem.getEquipped()) {
             log.warn("Item is already unequipped");
             map.put("status", "failed");
             map.put("message", "item already unequipped");
@@ -388,15 +394,15 @@ public class CharacterController {
         }
         log.info("Item found");
         Items items = optionalItems.get();
-        Optional<CharacterItem> optionalCharacterItem = characterItemRepository.findCharacterItemsByItemsID(itemId);
-        if(!optionalCharacterItem.isPresent()){
+        Optional<CharacterItem> optionalCharacterItem = characterItemRepository.findCharacterItemsByItemsId(itemId);
+        if (!optionalCharacterItem.isPresent()) {
             log.warn("Character doesn't have this item");
             map.put("status", "failed");
             map.put("message", "character doesn't have this item");
             return map;
         }
         CharacterItem characterItem = optionalCharacterItem.get();
-        if(characterItem.getEquipped()){
+        if (characterItem.getEquipped()) {
             log.warn("Item is already unequipped");
             map.put("status", "failed");
             map.put("message", "item already equipped");

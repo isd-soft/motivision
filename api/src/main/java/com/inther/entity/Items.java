@@ -11,7 +11,7 @@ public class Items {
     @Id
     @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
-    private Long ID;
+    private Long id;
 
     private String type;
 
@@ -24,8 +24,8 @@ public class Items {
 
     public Items() {}
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
     public String getType() {
