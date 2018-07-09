@@ -122,6 +122,7 @@ public class CharacterController {
         map.put("headType", character.getHeadType());
         map.put("bodyType", character.getBodyType());
         map.put("gender", character.getGender());
+        map.put("points", character.getPoints());
         Optional<List<Items>> optionalItemsList = itemsRepository.findAllByCharacterId(characterId);
         if (!optionalItemsList.isPresent()) {
             map.put("items", "null");
