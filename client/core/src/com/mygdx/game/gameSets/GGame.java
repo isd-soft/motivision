@@ -1,13 +1,10 @@
-
-package com.mygdx.game.GameSets;
-
+package com.mygdx.game.gameSets;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Screens.*;
-import com.mygdx.game.screens.CharacterSelectScreen;
+import com.mygdx.game.screens.*;
 
 public class GGame extends Game {
 
@@ -136,8 +133,10 @@ public void changeScreen(int screen){
                 //this.setScreen(new )
 //			  earnPointsScreen = new EarnPointsScreen(this);
 //                setScreen(earnPointsScreen);
-			  characterSelectScreen = new CharacterSelectScreen(this);
-			  setScreen(characterSelectScreen);
+//			  characterSelectScreen = new CharacterSelectScreen(this);
+//			  	setScreen(characterSelectScreen);
+			  createCharacterScreen = new CreateCharacterScreen(this);
+			  	setScreen(createCharacterScreen);
 	}
 
           @Override

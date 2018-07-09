@@ -12,13 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.GameSets.GGame;
+import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
@@ -36,7 +34,6 @@ public class CharacterSelectScreen implements Screen {
     private Stage stage;
     private Skin skin;
 
-    ScrollPane scrollPane;
     private Viewport viewport;
     private Camera camera;
 
@@ -45,6 +42,7 @@ public class CharacterSelectScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
     }
 
 
@@ -87,10 +85,6 @@ public class CharacterSelectScreen implements Screen {
     @Override
     public void show() {
         stage.clear();
-        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-
-        float gameWidth = Gdx.graphics.getWidth();
-        float gameHeight = Gdx.graphics.getHeight();
         float pad = 5;
 
         // add the character image
@@ -150,7 +144,7 @@ public class CharacterSelectScreen implements Screen {
         }
         list.add(create).fill().uniformY().colspan(2);
 
-        scrollPane = new ScrollPane(list);
+        ScrollPane scrollPane = new ScrollPane(list);
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.setScrollbarsOnTop(true);
