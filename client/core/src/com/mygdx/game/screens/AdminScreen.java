@@ -68,7 +68,7 @@ public class AdminScreen implements Screen {
         TextButton settings = new TextButton("Settings", skin, "small");
 
         Label frequencyLabel = new Label("Battle frequency", skin);
-        Label teamLabel = new Label("Team", skin);
+        Label teamLabel = new Label("Image", skin);
         // left-right buttons
         ImageButton arrowCastleLeft = new ImageButton(skin2);
         ImageButton arrowCastleRight = new ImageButton(skin2);
@@ -87,29 +87,29 @@ public class AdminScreen implements Screen {
 
         ArrayList<TextButton> characterNamesButtons = new ArrayList<TextButton>();
         ArrayList<TextButton> xButtons = new ArrayList<TextButton>();
-        ArrayList<TextButton> pointsButtons = new ArrayList<TextButton>();
+        //ArrayList<TextButton> pointsButtons = new ArrayList<TextButton>();
 
         for (int i = 0; i < strings.size(); i++) {
             characterNamesButtons.add(new TextButton(strings.get(i), skin, "square"));
             xButtons.add(new TextButton("X", skin, "square"));
-            pointsButtons.add(new TextButton("50", skin, "square"));
+            //pointsButtons.add(new TextButton("50", skin, "square"));
 
             list.add(characterNamesButtons.get(i)).fill().expandX();
             list.add(xButtons.get(i)).width(Value.percentWidth(0.2f, list)).fill();
-            list.add(pointsButtons.get(i)).width(Value.percentWidth(0.2f, list)).fillX();
+            list.add(new Label("50", skin)).width(Value.percentWidth(0.2f, list)).fillX();
             list.row();
 
             characterNamesButtons.get(i).addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    System.out.println("Selected character " + actor.getName());
+                    System.out.println("Selected activity " + actor.getName());
                 }
             });
 
             xButtons.get(i).addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    System.out.println("Deleted character " + actor.getName());
+                    System.out.println("Deleted activity " + actor.getName());
                 }
             });
         }

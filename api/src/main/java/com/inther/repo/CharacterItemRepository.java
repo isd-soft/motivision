@@ -12,5 +12,6 @@ import java.util.Optional;
 @Repository
 public interface CharacterItemRepository extends JpaRepository<CharacterItem, Long> {
     Optional<List<CharacterItem>> findAllByCharacterID(Long characterId);
+    Optional<CharacterItem> findCharacterItemsByItemsID(Long itemId);
     void deleteCharacterItemsByCharacter_ID(Long characterId);
 }
