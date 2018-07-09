@@ -59,7 +59,8 @@ class ApiError {
         subErrors.add(subError);
     }
 
-    public void addValidationError(String object, String field, Object rejectedValue, String message) {
+
+    private void addValidationError(String object, String field, Object rejectedValue, String message) {
         addSubError(new ApiValidationError(object, field, rejectedValue, message));
     }
 
@@ -105,13 +106,14 @@ class ApiError {
         constraintViolations.forEach(this::addValidationError);
     }
 
+
+
     abstract class ApiSubError {
 
     }
 
     @Data
     @EqualsAndHashCode(callSuper = false)
-    @AllArgsConstructor
     class ApiValidationError extends ApiSubError {
         private String object;
         private String field;
@@ -120,6 +122,13 @@ class ApiError {
 
         ApiValidationError(String object, String message) {
             this.object = object;
+            this.message = message;
+        }
+
+        public ApiValidationError(String object, String field, Object rejectedValue, String message) {
+            this.object = object;
+            this.field = field;
+            this.rejectedValue = rejectedValue;
             this.message = message;
         }
     }

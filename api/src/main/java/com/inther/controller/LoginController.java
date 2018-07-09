@@ -2,11 +2,14 @@ package com.inther.controller;
 
 
 import java.util.*;
+
+import com.inther.EntityNotFoundException;
 import com.inther.aspect.Logging;
 import com.inther.entity.Character;
 import com.inther.entity.Player;
 import com.inther.repo.CharacterRepository;
 import com.inther.repo.PlayerRepository;
+import com.inther.service.PlayerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,9 @@ public class LoginController {
 
     @Autowired
     CharacterRepository characterRepository;
+
+    @Autowired
+    private PlayerService playerService;
 
     /*
      * Login controller
@@ -123,8 +129,19 @@ public class LoginController {
      * @return message true if player does exist
      * */
     @RequestMapping(value = "/player_exist", method = RequestMethod.GET)
-    public Map<String, String> playerExist(@RequestParam(name = "login") String login) {
+    public Map<String, String> playerExist(@RequestParam(name = "login") String login) throws EntityNotFoundException {
         TreeMap<String, String> map = new TreeMap<>();
+
+        /*-----------------------to be removed-------------------
+         * should be
+         * playerService.getPlayer(login);
+         * instead of "if (playerRepository.findByLogin(login) == null)"
+         * from line 145
+         *
+         * for more details see:
+         * 1)PlayerService.class
+         * 2)EntityNotFoundException.class (first constructor)
+         **/
         if (playerRepository.findByLogin(login) == null) {
             log.info("Player not found");
             map.put("status", "success");

@@ -1,7 +1,9 @@
 package com.inther;
 
 
+import com.inther.service.ExceptionalService;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,6 +25,17 @@ import java.io.UnsupportedEncodingException;
 @EnableAspectJAutoProxy
 @EnableJpaRepositories
 public class Application {
+
+    @Autowired
+    ExceptionalService service;
+
+    public void run(String... args) throws Exception {
+        try {
+            service.throwException();
+        } catch (Exception ex) {
+
+        }
+    }
 
      public static void main(String[] args) {
          SpringApplication.run(Application.class, args);
