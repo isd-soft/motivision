@@ -14,6 +14,4 @@ public interface CharacterRepository extends JpaRepository<Character, Long>{
     ArrayList<Character> findByPlayerID(Long playerId);
     Optional<Character> findByName(String name);
     List<Character> findAllByTeamID(Long teamId);
-
-
 }
