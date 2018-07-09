@@ -23,7 +23,7 @@ public class Character {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id")
     @OneToOne(mappedBy = "admin")
     private Team team;
@@ -32,7 +32,7 @@ public class Character {
     @JoinColumn(name = "player_id")
     private Player player;
 
-    @OneToMany(mappedBy = "character")
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL)
     private List<CharacterItem> characterItems;
 
     public Character() {

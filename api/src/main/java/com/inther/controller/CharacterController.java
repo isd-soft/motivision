@@ -31,18 +31,18 @@ public class CharacterController {
     CharacterItemRepository characterItemRepository;
 
     /*
-    * Create character request
-    * @param playerId - player for which to create character
-    * @param teamId - team for the character to be in
-    * @param headType - character headType
-    * @param bodyType - character bodyType
-    * @param gender - character gender
-    * @param characterName - character name
-    * @param isAdmin - map character as team leader in teamId team
-    * @return Json data with status success and newly created characterId
-    * @return if everything went well and status failed and message if something
-    * @return went wrong
-    * */
+     * Create character request
+     * @param playerId - player for which to create character
+     * @param teamId - team for the character to be in
+     * @param headType - character headType
+     * @param bodyType - character bodyType
+     * @param gender - character gender
+     * @param characterName - character name
+     * @param isAdmin - map character as team leader in teamId team
+     * @return Json data with status success and newly created characterId
+     * @return if everything went well and status failed and message if something
+     * @return went wrong
+     * */
     @RequestMapping(value = "/create_character", method = RequestMethod.POST)
     public Map<String, Object> createCharacter(@RequestParam(value = "playerId") Long playerId,
                                                @RequestParam(value = "teamId") Long teamId,
@@ -89,18 +89,18 @@ public class CharacterController {
 
 
     /*
-    * Get character request
-    * @param characterId - Id of the required character
-    * @return Json data containing status being failed if no
-    * @return such character was found in database and being success
-    * @return if  character was found
-    * @return All info on character:
-    * @return characterId, characterName, playerId, teamId,
-    * @return isAdmin, headType, bodyType, gender, items
-    * @return items - null if character has no items
-    * @return items - list where each element contains item
-    * @return data if character has items
-    * */
+     * Get character request
+     * @param characterId - Id of the required character
+     * @return Json data containing status being failed if no
+     * @return such character was found in database and being success
+     * @return if  character was found
+     * @return All info on character:
+     * @return characterId, characterName, playerId, teamId,
+     * @return isAdmin, headType, bodyType, gender, items
+     * @return items - null if character has no items
+     * @return items - list where each element contains item
+     * @return data if character has items
+     * */
     @RequestMapping(value = "/get_character", method = RequestMethod.GET)
     public Map<String, Object> getCharacter(@RequestParam(value = "characterId") Long characterId) {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
@@ -146,37 +146,38 @@ public class CharacterController {
     }
 
     /*
-    * Delete character request
-    * @param characterId - Id of the character for deletion
-    * @return status - failed, message - no such character exist if
-    * @return no character with characterId was found and
-    * @return status - success if character with characterId was successfully deleted
-    * */
+     * Delete character request
+     * @param characterId - Id of the character for deletion
+     * @return status - failed, message - no such character exist if
+     * @return no character with characterId was found and
+     * @return status - success if character with characterId was successfully deleted
+     * */
     @RequestMapping(value = "/delete_character", method = RequestMethod.DELETE)
-    private Map<String, Object> deleteCharacter(@RequestParam(value = "characterId") Long characterId) {
+    public Map<String, Object> deleteCharacter(@RequestParam(value = "characterId") Long characterId) {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        if (!optionalCharacter.isPresent()) {
+        if(!optionalCharacter.isPresent()){
             log.warn("Character with characterId " + characterId + " not found");
             map.put("status", "failed");
-            map.put("message", "No such character exist");
+            map.put("message", "No such character exist with playerId");
             return map;
         }
+        Character character = optionalCharacter.get();
         log.info("Character found");
-        characterRepository.deleteById(characterId);
+        characterRepository.delete(character);
         log.info("Character deleted");
         map.put("status", "success");
         return map;
     }
 
     /*
-    * Character exist request
-    * @param characterName - name of the character for database search,
-    * @return status - success, message - true if character exists
-    * @return status - success, message - false if character doesn't exists
-    * */
+     * Character exist request
+     * @param characterName - name of the character for database search,
+     * @return status - success, message - true if character exists
+     * @return status - success, message - false if character doesn't exists
+     * */
     @RequestMapping(value = "/character_exist", method = RequestMethod.GET)
-    public Map<String, Object> chatacterExist(@RequestParam(value = "characterName") String characterName) {
+    public Map<String, Object> characterExist(@RequestParam(value = "characterName") String characterName) {
         Optional<Character> optionalCharacter = characterRepository.findByName(characterName);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         if (!optionalCharacter.isPresent()) {
@@ -192,13 +193,13 @@ public class CharacterController {
     }
 
     /*
-    * Get items request
-    * @param characterId - character for items search
-    * @return status - failed if no such character exist
-    * @return status - success items - null if character
-    * @return exists but has no items
-    * @return Items list if character exists and has items
-    * */
+     * Get items request
+     * @param characterId - character for items search
+     * @return status - failed if no such character exist
+     * @return status - success items - null if character
+     * @return exists but has no items
+     * @return Items list if character exists and has items
+     * */
     @RequestMapping(value = "/get_items", method = RequestMethod.GET)
     public Map<String, Object> getItems(@RequestParam(value = "characterId") Long characterId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -237,13 +238,13 @@ public class CharacterController {
     }
 
     /*
-    * Delete item request
-    * @param characterId - character to delete an item from
-    * @param itemId - item for deletion
-    * @return status - failed if no such character exists
-    * @return status - failed if the character already doesn't have the Item
-    * @return status - success if the item was deleted successfully
-    * */
+     * Delete item request
+     * @param characterId - character to delete an item from
+     * @param itemId - item for deletion
+     * @return status - failed if no such character exists
+     * @return status - failed if the character already doesn't have the Item
+     * @return status - success if the item was deleted successfully
+     * */
     @RequestMapping(value = "/delete_item", method = RequestMethod.POST)
     public Map<String, Object> deleteObject(@RequestParam(value = "characterId") Long characterId,
                                             @RequestParam(value = "itemId") Long itemId
@@ -272,14 +273,14 @@ public class CharacterController {
     }
 
     /*
-    * Buy item request
-    * @param charId - character that buys the item
-    * @param itemId - Item to be bought
-    * @return status - failed if no such character exist
-    * @return status - failed if no such item exist
-    * @return if the item was bought then status success and
-    * @return character pays points equivalent to item price
-    * */
+     * Buy item request
+     * @param charId - character that buys the item
+     * @param itemId - Item to be bought
+     * @return status - failed if no such character exist
+     * @return status - failed if no such item exist
+     * @return if the item was bought then status success and
+     * @return character pays points equivalent to item price
+     * */
     @RequestMapping(value = "/buy_item")
     public Map<String, Object> buyItem(@RequestParam(value = "characterId") Long characterId,
                                        @RequestParam(value = "itemId") Long itemId) {
@@ -320,5 +321,91 @@ public class CharacterController {
             map.put("message", "Not enough points");
             return map;
         }
+    }
+
+    @RequestMapping("/unequipped_item")
+    public Map<String, Object> unEquipItem(@RequestParam(value = "characterId") Long characterId,
+                                         @RequestParam(value = "itemId") Long itemId) {
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
+        if (!optionalCharacter.isPresent()) {
+            log.warn("Character with cahracterId " + characterId + " not found");
+            map.put("status", "failed");
+            map.put("message", "No such character with characterId");
+            return map;
+        }
+        Character character = optionalCharacter.get();
+        log.info("Character found");
+        Optional<Items> optionalItems = itemsRepository.findById(itemId);
+        if (!optionalItems.isPresent()) {
+            log.warn("Item with itemId " + itemId + " not found");
+            map.put("status", "failed");
+            map.put("message", "No such item with itemId");
+            return map;
+        }
+        log.info("Item found");
+        Items items = optionalItems.get();
+        Optional<CharacterItem> optionalCharacterItem = characterItemRepository.findCharacterItemsByItemsID(itemId);
+        if(!optionalCharacterItem.isPresent()){
+            log.warn("Character doesn't have this item");
+            map.put("status", "failed");
+            map.put("message", "character doesn't have this item");
+            return map;
+        }
+        CharacterItem characterItem = optionalCharacterItem.get();
+        if(!characterItem.getEquipped()){
+            log.warn("Item is already unequipped");
+            map.put("status", "failed");
+            map.put("message", "item already unequipped");
+            return map;
+        }
+        characterItem.setEquipped(false);
+        log.info("Item unequipped");
+        characterItemRepository.save(characterItem);
+        map.put("status", "success");
+        return map;
+    }
+
+    @RequestMapping("/equip_item")
+    public Map<String, Object> equipItem(@RequestParam(value = "characterId") Long characterId,
+                                         @RequestParam(value = "itemId") Long itemId) {
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
+        if (!optionalCharacter.isPresent()) {
+            log.warn("Character with cahracterId " + characterId + " not found");
+            map.put("status", "failed");
+            map.put("message", "No such character with characterId");
+            return map;
+        }
+        Character character = optionalCharacter.get();
+        log.info("Character found");
+        Optional<Items> optionalItems = itemsRepository.findById(itemId);
+        if (!optionalItems.isPresent()) {
+            log.warn("Item with itemId " + itemId + " not found");
+            map.put("status", "failed");
+            map.put("message", "No such item with itemId");
+            return map;
+        }
+        log.info("Item found");
+        Items items = optionalItems.get();
+        Optional<CharacterItem> optionalCharacterItem = characterItemRepository.findCharacterItemsByItemsID(itemId);
+        if(!optionalCharacterItem.isPresent()){
+            log.warn("Character doesn't have this item");
+            map.put("status", "failed");
+            map.put("message", "character doesn't have this item");
+            return map;
+        }
+        CharacterItem characterItem = optionalCharacterItem.get();
+        if(characterItem.getEquipped()){
+            log.warn("Item is already unequipped");
+            map.put("status", "failed");
+            map.put("message", "item already equipped");
+            return map;
+        }
+        characterItem.setEquipped(true);
+        log.info("Item equipped");
+        characterItemRepository.save(characterItem);
+        map.put("status", "success");
+        return map;
     }
 }

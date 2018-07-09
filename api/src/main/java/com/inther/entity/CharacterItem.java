@@ -20,6 +20,8 @@ public class CharacterItem {
     @JoinColumn(name = "item_id")
     private Items items;
 
+    private Boolean equipped;
+
     public CharacterItem() {
     }
 
@@ -37,5 +39,13 @@ public class CharacterItem {
 
     public void setItems(Items items) {
         this.items = items;
+    }
+
+    public Boolean getEquipped() {
+        return equipped;
+    }
+
+    public void setEquipped(Boolean equipped) {
+        this.equipped = equipped;
     }
 }

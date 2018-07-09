@@ -150,6 +150,7 @@ public class TeamController {
             return map;
         }
         log.info("Valid teamId, Team for deletion found");
+
         teamRepository.deleteById(teamId);
         log.info("Team successfully deleted");
         map.put("status", "success");
