@@ -308,7 +308,7 @@ public class Profile {
         return pixmap;
     }
 
-    public Texture mergeImgages(Map<String, String> itemImages) {
+    private Texture mergeImgages(Map<String, String> itemImages) {
         Texture mergedImage;
         Pixmap pixmap;
 
@@ -349,6 +349,26 @@ public class Profile {
             }
         }
         return mergeImgages(itemImages);
+    }
+
+    public boolean      deleteProfile() throws IOException, JSONException {
+        String  url;
+        String  status;
+        String urlParameters;
+        JSONObject jsonObject;
+
+        if (id == -1)
+            return false;
+        url = JsonHandler.domain + "/delete_character";
+        urlParameters = PROFILE_ID + "=" + id;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "DELETE");
+        //System.out.println(url + "?" + urlParameters);
+        if (jsonObject == null)
+            return false;
+        status = jsonObject.getString("status");
+        if (status.equals("success"))
+            return true;
+        return false;
     }
 
     public void     printProfile() {
