@@ -13,40 +13,41 @@ public class LastBattle {
     private Long ID;
 
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "team1_id")
-    private Team team1;
+    @JoinColumn(name = "team_id")
+    private Team team;
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "team2_id")
-    private Team team2;
+    private Integer enemyPower;
 
-    private Long winnerTeam;
+    private Integer teamPower;
 
     public LastBattle() {
-        setWinnerTeam(null);
     }
 
-    public Team getTeam1() {
-        return team1;
+    public Long getID() {
+        return ID;
     }
 
-    public void setTeam1(Team team1) {
-        this.team1 = team1;
+    public Team getTeam() {
+        return team;
     }
 
-    public Team getTeam2() {
-        return team2;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
-    public void setTeam2(Team team2) {
-        this.team2 = team2;
+    public Integer getEnemyPower() {
+        return enemyPower;
     }
 
-    public Long getWinnerTeam() {
-        return winnerTeam;
+    public void setEnemyPower(Integer enemyPower) {
+        this.enemyPower = enemyPower;
     }
 
-    public void setWinnerTeam(Long winnerTeam) {
-        this.winnerTeam = winnerTeam;
+    public Integer getTeamPower() {
+        return teamPower;
+    }
+
+    public void setTeamPower(Integer teamPower) {
+        this.teamPower = teamPower;
     }
 }

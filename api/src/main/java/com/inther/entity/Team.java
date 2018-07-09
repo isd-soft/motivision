@@ -30,11 +30,12 @@ public class Team {
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<TeamActivities> teamActivities;
 
-    @OneToOne(mappedBy = "team1")
-    private LastBattle team1LastBattles;
+    @OneToOne(mappedBy = "team")
+    private LastBattle teamLastBattles;
 
-    @OneToOne(mappedBy = "team2")
-    private LastBattle team2LastBattles;
+    private Integer teamWins;
+
+    private Integer teamLoss;
 
     public Team() {
     }
@@ -91,20 +92,27 @@ public class Team {
         this.teamActivities = teamActivities;
     }
 
-    public LastBattle getTeam1LastBattles() {
-        return team1LastBattles;
+    public LastBattle getTeamLastBattles() {
+        return teamLastBattles;
     }
 
-    public void setTeam1LastBattles(LastBattle team1LastBattles) {
-        this.team1LastBattles = team1LastBattles;
+    public void setTeamLastBattles(LastBattle teamLastBattles) {
+        this.teamLastBattles = teamLastBattles;
     }
 
-    public LastBattle getTeam2LastBattles() {
-        return team2LastBattles;
+    public Integer getTeamWins() {
+        return teamWins;
     }
 
-    public void setTeam2LastBattles(LastBattle team2LastBattles) {
-        this.team2LastBattles = team2LastBattles;
+    public void setTeamWins(Integer teamWins) {
+        this.teamWins = teamWins;
     }
 
+    public Integer getTeamLoss() {
+        return teamLoss;
+    }
+
+    public void setTeamLoss(Integer teamLoss) {
+        this.teamLoss = teamLoss;
+    }
 }

@@ -64,7 +64,7 @@ CREATE TABLE public."character" (
     head_type integer,
     body_type integer,
     gender character varying(1) NOT NULL,
-    power integer DEFAULT 0,
+    points integer DEFAULT 0,
     name character varying(30) NOT NULL,
     team_id integer NOT NULL
 );
@@ -171,9 +171,9 @@ ALTER SEQUENCE public.items_id_seq OWNED BY public.items.id;
 
 CREATE TABLE public.last_battle (
     id integer NOT NULL,
-    team1_id integer NOT NULL,
-    team2_id integer NOT NULL,
-    winner_team integer DEFAULT '-1'::integer NOT NULL
+    team_id integer NOT NULL,
+    enemy_power integer NOT NULL,
+    team_power integer NOT NULL
 );
 
 
@@ -208,8 +208,7 @@ ALTER SEQUENCE public.last_battle_id_seq OWNED BY public.last_battle.id;
 CREATE TABLE public.player (
     id integer NOT NULL,
     login character varying(30) NOT NULL,
-    password character varying(50) NOT NULL,
-    points integer DEFAULT 0
+    password character varying(50) NOT NULL
 );
 
 
@@ -246,7 +245,9 @@ CREATE TABLE public.team (
     name character varying(30) NOT NULL,
     lider_id integer,
     team_logo character varying(50) NOT NULL,
-    battle_frequency integer NOT NULL
+    battle_frequency integer NOT NULL,
+    team_wins integer DEFAULT 0,
+    team_loss integer DEFAULT 0
 );
 
 
@@ -377,6 +378,8 @@ COPY public.activities (id, name, reward) FROM stdin;
 4	1 sit up	2
 2	1 pull up	8
 7	frontflip	200
+8	Backflip	100
+9	test	10000
 \.
 
 
@@ -384,10 +387,9 @@ COPY public.activities (id, name, reward) FROM stdin;
 -- Data for Name: character; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."character" (id, player_id, head_type, body_type, gender, power, name, team_id) FROM stdin;
+COPY public."character" (id, player_id, head_type, body_type, gender, points, name, team_id) FROM stdin;
 17	4	2	1	m	0	testcharacter	3
 16	4	2	3	F	0	Power woman	3
-19	5	2	3	M	0	Supa Test knight	3
 20	5	1	2	F	0	Warria	4
 \.
 
@@ -424,8 +426,8 @@ COPY public.items (id, type, image_url, price) FROM stdin;
 -- Data for Name: last_battle; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.last_battle (id, team1_id, team2_id, winner_team) FROM stdin;
-1	3	4	-1
+COPY public.last_battle (id, team_id, enemy_power, team_power) FROM stdin;
+1	4	1465	0
 \.
 
 
@@ -433,9 +435,12 @@ COPY public.last_battle (id, team1_id, team2_id, winner_team) FROM stdin;
 -- Data for Name: player; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.player (id, login, password, points) FROM stdin;
-4	ab	123	0
-5	log2	pas3	9998112
+COPY public.player (id, login, password) FROM stdin;
+4	ab	123
+5	log2	pas3
+6	gmail	123456
+7	abgar1332	123123
+8	qwerty	xQYMg PKe0vDcWtmLz lFQ==
 \.
 
 
@@ -443,9 +448,10 @@ COPY public.player (id, login, password, points) FROM stdin;
 -- Data for Name: team; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.team (id, name, lider_id, team_logo, battle_frequency) FROM stdin;
-3	Team1	17	logo	1
-4	Supa team	20	Top kek	1
+COPY public.team (id, name, lider_id, team_logo, battle_frequency, team_wins, team_loss) FROM stdin;
+3	Team1	17	logo	1	0	0
+6	testname	\N	logo	1	0	0
+4	Supa team	20	Top kek	1	2	6
 \.
 
 
@@ -458,6 +464,15 @@ COPY public.team_activities (id, activity_id, team_id) FROM stdin;
 2	2	3
 4	1	3
 5	7	3
+12	6	6
+13	5	6
+14	1	6
+15	3	6
+16	4	6
+17	2	6
+18	8	6
+19	7	6
+20	9	4
 \.
 
 
@@ -648,15 +663,7 @@ ALTER TABLE ONLY public.character_item
 --
 
 ALTER TABLE ONLY public.last_battle
-    ADD CONSTRAINT last_battle___fk FOREIGN KEY (team1_id) REFERENCES public.team(id);
-
-
---
--- Name: last_battle last_battle___fk_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.last_battle
-    ADD CONSTRAINT last_battle___fk_2 FOREIGN KEY (team2_id) REFERENCES public.team(id);
+    ADD CONSTRAINT last_battle___fk FOREIGN KEY (team_id) REFERENCES public.team(id);
 
 
 --
