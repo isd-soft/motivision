@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="Team controller">
+    <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gs-rest-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/gs-rest-service.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inther/ApiError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inther/ApiError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/log/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/log/log.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,7 +41,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
-              <caret line="27" column="36" lean-forward="true" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
+              <caret line="27" column="36" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -68,11 +67,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="92" column="19" lean-forward="true" selection-start-line="92" selection-start-column="19" selection-end-line="92" selection-end-column="19" />
+            <state relative-caret-position="255">
+              <caret line="96" column="15" selection-start-line="96" selection-start-column="15" selection-end-line="96" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApiError.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/ApiError.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="142" column="9" selection-start-line="142" selection-start-column="9" selection-end-line="142" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -152,6 +160,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/inther/ApiError.java" />
       </list>
     </option>
   </component>
@@ -403,7 +412,7 @@
       <workItem from="1530893047392" duration="7724000" />
       <workItem from="1531134173209" duration="183000" />
       <workItem from="1531134376542" duration="391000" />
-      <workItem from="1531144386971" duration="223000" />
+      <workItem from="1531144386971" duration="1271000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Refactor&quot;">
       <created>1530734533025</created>
@@ -503,11 +512,25 @@
       <option name="project" value="LOCAL" />
       <updated>1530886342184</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Added Api Error Handling. To be done in Logging: log.info from ApiError.class">
+      <created>1531144787458</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1531144787458</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added Library for Maven (lombok)">
+      <created>1531144897903</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1531144897903</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63943000" />
+    <option name="totallyTimeSpent" value="64991000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -534,21 +557,21 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.329582" />
+      <window_info anchor="bottom" id="Messages" order="9" visible="true" weight="0.3267974" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="5" />
       <window_info anchor="bottom" id="Java Enterprise" order="9" sideWeight="0.4969743" weight="0.329582" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4969743" weight="0.329582" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49283853" weight="0.39261284" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49283853" weight="0.39215687" />
       <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25416037" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25416037" />
       <window_info anchor="right" id="Bean Validation" order="4" />
       <window_info id="Web" order="6" side_tool="true" />
       <window_info id="Learn" order="1" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.3279743" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -573,7 +596,9 @@
     <MESSAGE value="Refactoring + fixing bugs" />
     <MESSAGE value="Added character name" />
     <MESSAGE value="Team controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="Team controller" />
+    <MESSAGE value="Added Api Error Handling. To be done in Logging: log.info from ApiError.class" />
+    <MESSAGE value="Added Library for Maven (lombok)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Library for Maven (lombok)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -591,7 +616,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/Application.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -868,7 +892,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="27" column="36" lean-forward="true" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
+          <caret line="27" column="36" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -877,8 +901,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="92" column="19" lean-forward="true" selection-start-line="92" selection-start-column="19" selection-end-line="92" selection-end-column="19" />
+        <state relative-caret-position="255">
+          <caret line="96" column="15" selection-start-line="96" selection-start-column="15" selection-end-line="96" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/ApiError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="142" column="9" selection-start-line="142" selection-start-column="9" selection-end-line="142" selection-end-column="9" />
         </state>
       </provider>
     </entry>
