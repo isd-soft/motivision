@@ -134,6 +134,12 @@ public void changeScreen(int screen){
 
 			  loginScreen = new LoginScreen(this);
 			  	setScreen(loginScreen);
+//			  adminScreen = new AdminScreen(this);
+//			  	setScreen(adminScreen);
+//			  earnPointsScreen = new EarnPointsScreen(this);
+//			  	setScreen(earnPointsScreen);
+//			  characterSelectScreen = new CharacterSelectScreen(this);
+//			  	setScreen(characterSelectScreen);
 	}
 
           @Override
