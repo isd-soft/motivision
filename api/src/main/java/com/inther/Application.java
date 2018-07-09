@@ -17,7 +17,8 @@ import java.io.UnsupportedEncodingException;
                 "com.inther.repo",
                 "com.inther.entity",
                 "com.inther.controller",
-                "com.inther.aspect"})
+                "com.inther.aspect",
+               "com.inther.service"})
 @Configuration
 @EnableAspectJAutoProxy
 @EnableJpaRepositories
