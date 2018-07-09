@@ -131,12 +131,9 @@ public void changeScreen(int screen){
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
                 //this.setScreen(new )
-//			  earnPointsScreen = new EarnPointsScreen(this);
-//                setScreen(earnPointsScreen);
-//			  characterSelectScreen = new CharacterSelectScreen(this);
-//			  	setScreen(characterSelectScreen);
-			  createCharacterScreen = new CreateCharacterScreen(this);
-			  	setScreen(createCharacterScreen);
+
+			  loginScreen = new LoginScreen(this);
+			  	setScreen(loginScreen);
 	}
 
           @Override
