@@ -132,8 +132,11 @@ public void changeScreen(int screen){
 		font = new BitmapFont();
                 //this.setScreen(new )
 
-			  loginScreen = new LoginScreen(this);
-			  	setScreen(loginScreen);
+//			  loginScreen = new LoginScreen(this);
+//			  	setScreen(loginScreen);
+			  adminScreen = new AdminScreen(this);
+			  	setScreen(adminScreen);
+
 	}
 
           @Override
