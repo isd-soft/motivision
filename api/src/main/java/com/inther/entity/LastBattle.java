@@ -12,20 +12,18 @@ public class LastBattle {
     @GeneratedValue(generator = "kaugen")
     private Long ID;
 
-    @ManyToOne
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "team1_id")
     private Team team1;
 
-    @ManyToOne
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "team2_id")
     private Team team2;
 
-    @ManyToOne
-    @JoinColumn(name = "winner_team")
-    private Team winnerTeam;
+    private Long winnerTeam;
 
     public LastBattle() {
-
+        setWinnerTeam(null);
     }
 
     public Team getTeam1() {
@@ -44,11 +42,11 @@ public class LastBattle {
         this.team2 = team2;
     }
 
-    public Team getWinnerTeam() {
+    public Long getWinnerTeam() {
         return winnerTeam;
     }
 
-    public void setWinnerTeam(Team winnerTeam) {
+    public void setWinnerTeam(Long winnerTeam) {
         this.winnerTeam = winnerTeam;
     }
 }

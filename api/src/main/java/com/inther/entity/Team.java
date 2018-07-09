@@ -27,11 +27,14 @@ public class Team {
     @JoinColumn(name = "lider_id")
     private Character admin;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
     private List<TeamActivities> teamActivities;
 
-    @OneToMany(mappedBy = "team1")
-    private List<LastBattle> lastBattles;
+    @OneToOne(mappedBy = "team1")
+    private LastBattle team1LastBattles;
+
+    @OneToOne(mappedBy = "team2")
+    private LastBattle team2LastBattles;
 
     public Team() {
     }
@@ -87,4 +90,21 @@ public class Team {
     public void setTeamActivities(List<TeamActivities> teamActivities) {
         this.teamActivities = teamActivities;
     }
+
+    public LastBattle getTeam1LastBattles() {
+        return team1LastBattles;
+    }
+
+    public void setTeam1LastBattles(LastBattle team1LastBattles) {
+        this.team1LastBattles = team1LastBattles;
+    }
+
+    public LastBattle getTeam2LastBattles() {
+        return team2LastBattles;
+    }
+
+    public void setTeam2LastBattles(LastBattle team2LastBattles) {
+        this.team2LastBattles = team2LastBattles;
+    }
+
 }

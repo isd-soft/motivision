@@ -18,4 +18,6 @@ public interface TeamActivitiesRepository extends JpaRepository<TeamActivities, 
 
     @Query(nativeQuery = true, name = "findActivitiesByTeamId")
     List<Activities> findAllByTeamID(@Param("teamId") Long teamId);
+
+    void deleteByTeamIDAndActivitiesID(Long teamId, Long activitiesId);
 }

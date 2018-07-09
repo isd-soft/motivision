@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="Team controller">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inther/entity/CharacterItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inther/entity/CharacterItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_0_7_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/log/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/log/log.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,51 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/Application.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-              <folding>
-                <element signature="e#435#436#0" expanded="true" />
-                <element signature="e#497#498#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Team.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="14" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TeamActivities.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/TeamActivities.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="49" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CharacterRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/CharacterRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            <state relative-caret-position="663">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -68,63 +27,79 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TeamController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TeamController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="26" column="38" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="223">
+              <caret line="131" column="23" selection-start-line="131" selection-start-column="17" selection-end-line="131" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Character.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CharacterItem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/CharacterItem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#614#615#0" expanded="true" />
-                <element signature="e#642#643#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CharacterController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CharacterController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1069">
-              <caret line="28" column="78" selection-start-line="28" selection-start-column="70" selection-end-line="28" selection-end-column="78" />
+            <state relative-caret-position="153">
+              <caret line="115" column="37" lean-forward="true" selection-start-line="115" selection-end-line="116" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="log4j.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-170">
+              <caret line="44" column="45" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="log.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/log/log.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/Application.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#896#897#0" expanded="true" />
+                <element signature="e#959#960#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Items.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Items.java">
+      <file leaf-file-name="Logging.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/aspect/Logging.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#424#425#0" expanded="true" />
-                <element signature="e#449#450#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="578">
+              <caret line="45" selection-start-line="45" selection-end-line="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TeamRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/TeamRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -138,6 +113,15 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>resul</find>
+      <find>&quot;id&quot;</find>
+      <find>result</find>
+      <find>characterId</find>
+      <find>&quot;id</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="MERGE" />
@@ -156,12 +140,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/PlayerRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/Application.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/Player.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/CharacterRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/TeamRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/ItemsRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/ActivitiesRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/ItemsController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/Items.java" />
@@ -170,6 +152,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/Character.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/TeamActivities.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/CharacterItem.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java" />
       </list>
     </option>
@@ -184,7 +168,7 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="257" />
+    <option name="x" value="255" />
     <option name="y" value="-20" />
     <option name="width" value="655" />
     <option name="height" value="620" />
@@ -198,14 +182,41 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+              <item name="dataSources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+              <item name="inspectionProfiles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+              <item name="libraries" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
@@ -232,6 +243,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="inther" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="inther" type="462c0819:PsiDirectoryNode" />
+              <item name="aspect" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
@@ -249,16 +269,14 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="inther" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
+              <item name="repo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="inther" type="462c0819:PsiDirectoryNode" />
-              <item name="repo" type="462c0819:PsiDirectoryNode" />
+              <item name="log" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
@@ -271,6 +289,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -366,7 +386,8 @@
       <workItem from="1530739483536" duration="5671000" />
       <workItem from="1530800119435" duration="19672000" />
       <workItem from="1530796759141" duration="4593000" />
-      <workItem from="1530857520132" duration="1945000" />
+      <workItem from="1530857520132" duration="19176000" />
+      <workItem from="1530893047392" duration="7724000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Refactor&quot;">
       <created>1530734533025</created>
@@ -445,11 +466,32 @@
       <option name="project" value="LOCAL" />
       <updated>1530800937347</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Team controller">
+      <created>1530860317674</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1530860317674</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Team controller">
+      <created>1530861875166</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1530861875166</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Team controller">
+      <created>1530886342184</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1530886342184</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36941000" />
+    <option name="totallyTimeSpent" value="63146000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -462,10 +504,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50716144" side_tool="true" visible="true" weight="0.39261284" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50716144" side_tool="true" weight="0.39261284" />
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info id="Capture Tool" order="2" />
@@ -474,7 +515,7 @@
       <window_info id="Structure" order="8" side_tool="true" weight="0.24962178" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.329582" />
       <window_info anchor="bottom" id="Messages" order="9" weight="0.3279743" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
@@ -485,18 +526,44 @@
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.39261284" />
       <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28125" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17057292" />
       <window_info anchor="right" id="Bean Validation" order="4" />
       <window_info id="Web" order="6" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Learn" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50716144" side_tool="true" weight="0.39261284" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17057292" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Java Enterprise" order="9" sideWeight="0.4969743" weight="0.329582" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.39261284" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
+      <window_info id="Structure" order="8" side_tool="true" weight="0.24962178" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info id="Web" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="Image Layers" order="5" />
+      <window_info anchor="right" id="Bean Validation" order="4" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4969743" weight="0.329582" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.329582" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.3279743" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info id="Designer" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,79 +580,26 @@
     <MESSAGE value="Character controller delete, get and create character is done" />
     <MESSAGE value="CharacterItem, Items entities" />
     <MESSAGE value="Refactoring + fixing bugs" />
-    <MESSAGE value="Team controller" />
     <MESSAGE value="Added character name" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added character name" />
+    <MESSAGE value="Team controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Team controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java</url>
+          <line>69</line>
+          <properties class="com.inther.controller.CharacterController">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Character.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="752">
-          <caret line="61" column="50" selection-start-line="61" selection-start-column="50" selection-end-line="61" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/PlayerRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="54" selection-start-column="54" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/CharacterRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding>
-            <element signature="e#435#436#0" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
@@ -740,13 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="54" selection-start-column="54" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.0.8.RELEASE/spring-data-commons-2.0.8.RELEASE.jar!/org/springframework/data/repository/CrudRepository.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -778,8 +785,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/TeamRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        <state relative-caret-position="68">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -800,19 +807,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        <state relative-caret-position="136">
+          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
           <folding>
-            <element signature="e#435#436#0" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
+            <element signature="e#896#897#0" expanded="true" />
+            <element signature="e#959#960#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/CharacterRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+        <state relative-caret-position="102">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -824,25 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Character.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Items.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#424#425#0" expanded="true" />
-            <element signature="e#449#450#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/TeamActivities.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -850,45 +838,100 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/LoginController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.7.RELEASE/spring-web-5.0.7.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="176">
+          <caret line="34" column="94" selection-start-line="34" selection-start-column="94" selection-end-line="34" selection-end-column="94" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.31/tomcat-embed-core-8.5.31.jar!/org/apache/coyote/AbstractProcessorLight.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="26" column="38" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/CharacterItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        <state relative-caret-position="153">
+          <caret line="11" column="39" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Character.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="80" column="31" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/motivision.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-162" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gs-rest-service.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1437" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="44" column="45" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9486" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Items.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#614#615#0" expanded="true" />
-            <element signature="e#642#643#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1069">
-          <caret line="28" column="78" selection-start-line="28" selection-start-column="70" selection-end-line="28" selection-end-column="78" />
+        <state relative-caret-position="663">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/log/log.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="115" column="37" lean-forward="true" selection-start-line="115" selection-end-line="116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="131" column="23" selection-start-line="131" selection-start-column="17" selection-end-line="131" selection-end-column="23" />
         </state>
       </provider>
     </entry>

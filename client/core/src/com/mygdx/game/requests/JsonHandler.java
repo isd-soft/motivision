@@ -12,6 +12,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,6 +37,7 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 public class JsonHandler {
     static final String domain = "http://172.17.41.110:8080";
+//    static final String domain = "http://192.168.1.15:8080";
     public static String	errorMessage = null;
 
 
@@ -75,8 +81,85 @@ public class JsonHandler {
 
 */
 
+    public  static HttpURLConnection getHttpConnection(String url, String type) throws IOException {
+        /*URL uri = null;
+        HttpURLConnection con = null;
 
-    private static String POSTMethod(String url, String urlParameters) throws IOException {
+        try{
+            uri = new URL(url);
+            con = (HttpURLConnection) uri.openConnection();
+            con.setRequestMethod(type); //type: POST, PUT, DELETE, GET
+            con.setDoOutput(true);
+            con.setDoInput(true);
+            con.setConnectTimeout(60000); //60 secs
+            con.setReadTimeout(60000); //60 secs
+            con.setRequestProperty("Accept-Encoding", "Your Encoding");
+            con.setRequestProperty("Content-Type", "Your Encoding");
+        }catch(Exception e){
+            e.printStackTrace();
+            //logger.info( "connection i/o failed" );
+        }
+        return con;*/
+        URL uri = new URL(url);
+        HttpURLConnection httpCon = (HttpURLConnection) uri.openConnection();
+        httpCon.setDoOutput(true);
+  //      httpCon.setRequestProperty(
+  //              "Content-Type", "application/x-www-form-urlencoded" );
+        httpCon.setRequestMethod(type);
+        httpCon.connect();
+        return httpCon;
+    }
+/*
+    public static void      requestMethod(String urlString, String type) {
+        URL url = null;
+        try {
+            url = new URL(urlString);
+        } catch (MalformedURLException exception) {
+            exception.printStackTrace();
+        }
+        HttpURLConnection httpURLConnection = null;
+        try {
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+
+            httpURLConnection.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded");
+            httpURLConnection.setRequestMethod(type);
+            System.out.println(httpURLConnection.getResponseCode());
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        } finally {
+            if (httpURLConnection != null) {
+                httpURLConnection.disconnect();
+            }
+        }
+    }
+*/
+    public static String    requestMethod(String url, String type){
+        HttpURLConnection   con = null;
+        String              jsonText = null;
+
+        try {
+            con = getHttpConnection(url, type);
+           // con.connect();
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String temp = null;
+            StringBuilder sb = new StringBuilder();
+            while((temp = in.readLine()) != null){
+                sb.append(temp).append(" ");
+            }
+            jsonText = sb.toString();
+            in.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            //logger.error(e.getMessage());
+        }
+        return jsonText;
+//result is the response you get from the remote side
+    }
+
+
+    private static String POSTMethod(String url, String urlParameters, String requestMethod) throws IOException {
 
        // String url = "https://httpbin.org/post";
         //String urlParameters = "name=Jack&occupation=programmer";
@@ -89,12 +172,18 @@ public class JsonHandler {
             con = (HttpURLConnection) myurl.openConnection();
 
             con.setDoOutput(true);
-                con.setRequestMethod("POST");
+                con.setRequestMethod(requestMethod);
             //System.out.println(urlParameters);
            // con.setRequestProperty("User-Agent", "Java client");
            // con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            DataOutputStream wr;
+            try {
+                wr = new DataOutputStream(con.getOutputStream());
+            } catch (java.net.ConnectException e) {
+                errorMessage = "Could not connect to server";
+                return null;
+            }
             try {
                 wr.write(postData);
             } finally {
@@ -178,12 +267,15 @@ public class JsonHandler {
    //     jsonText = POSTMethod(url, urlParameters, isPostMethod);
      //   System.out.println(jsonText);
         if (requestMethod.equals("POST")) {
-            jsonText = POSTMethod(url, urlParameters);
+            jsonText = POSTMethod(url, urlParameters, requestMethod);
         }
-        else {
+        else if (requestMethod.equals("GET")) {
             inputStream = new URL(url + "?" + urlParameters).openStream();
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             jsonText = readAll(bufferedReader);
+        }
+        else {
+            jsonText = requestMethod(url + "?" + urlParameters, requestMethod);
         }
         return readJsonFromUrl(jsonText);
     }
@@ -199,6 +291,8 @@ public class JsonHandler {
             //BufferedReader rd = getRequestResult(url, urlParameters);
             //BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             //String jsonText = POSTMethod(url, urlParameters);
+            if (jsonText == null)
+                return null;
             JSONObject json = new JSONObject(jsonText);
             System.out.println(json);
             readErrorMessage(json);

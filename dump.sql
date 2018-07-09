@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.4
--- Dumped by pg_dump version 10.4
+-- Dumped from database version 10.3
+-- Dumped by pg_dump version 10.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -14,20 +14,6 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
 
 SET default_tablespace = '';
 
@@ -78,7 +64,7 @@ CREATE TABLE public."character" (
     head_type integer,
     body_type integer,
     gender character varying(1) NOT NULL,
-    power integer,
+    power integer DEFAULT 0,
     name character varying(30) NOT NULL,
     team_id integer NOT NULL
 );
@@ -187,7 +173,7 @@ CREATE TABLE public.last_battle (
     id integer NOT NULL,
     team1_id integer NOT NULL,
     team2_id integer NOT NULL,
-    winner_team integer
+    winner_team integer DEFAULT '-1'::integer NOT NULL
 );
 
 
@@ -390,6 +376,7 @@ COPY public.activities (id, name, reward) FROM stdin;
 3	1 km Run	70
 4	1 sit up	2
 2	1 pull up	8
+7	frontflip	200
 \.
 
 
@@ -398,8 +385,10 @@ COPY public.activities (id, name, reward) FROM stdin;
 --
 
 COPY public."character" (id, player_id, head_type, body_type, gender, power, name, team_id) FROM stdin;
-16	4	2	3	F	100	Power woman	3
 17	4	2	1	m	0	testcharacter	3
+16	4	2	3	F	0	Power woman	3
+19	5	2	3	M	0	Supa Test knight	3
+20	5	1	2	F	0	Warria	4
 \.
 
 
@@ -436,6 +425,7 @@ COPY public.items (id, type, image_url, price) FROM stdin;
 --
 
 COPY public.last_battle (id, team1_id, team2_id, winner_team) FROM stdin;
+1	3	4	-1
 \.
 
 
@@ -445,6 +435,7 @@ COPY public.last_battle (id, team1_id, team2_id, winner_team) FROM stdin;
 
 COPY public.player (id, login, password, points) FROM stdin;
 4	ab	123	0
+5	log2	pas3	9998112
 \.
 
 
@@ -454,6 +445,7 @@ COPY public.player (id, login, password, points) FROM stdin;
 
 COPY public.team (id, name, lider_id, team_logo, battle_frequency) FROM stdin;
 3	Team1	17	logo	1
+4	Supa team	20	Top kek	1
 \.
 
 
@@ -462,6 +454,10 @@ COPY public.team (id, name, lider_id, team_logo, battle_frequency) FROM stdin;
 --
 
 COPY public.team_activities (id, activity_id, team_id) FROM stdin;
+1	3	3
+2	2	3
+4	1	3
+5	7	3
 \.
 
 
@@ -476,7 +472,7 @@ SELECT pg_catalog.setval('public.activities_id_seq', 1, false);
 -- Name: character_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.character_id_seq', 16, true);
+SELECT pg_catalog.setval('public.character_id_seq', 20, true);
 
 
 --
@@ -504,21 +500,21 @@ SELECT pg_catalog.setval('public.last_battle_id_seq', 1, false);
 -- Name: player_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.player_id_seq', 4, true);
+SELECT pg_catalog.setval('public.player_id_seq', 5, true);
 
 
 --
 -- Name: team_activities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.team_activities_id_seq', 1, false);
+SELECT pg_catalog.setval('public.team_activities_id_seq', 2, true);
 
 
 --
 -- Name: team_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.team_id_seq', 3, true);
+SELECT pg_catalog.setval('public.team_id_seq', 4, true);
 
 
 --
@@ -661,14 +657,6 @@ ALTER TABLE ONLY public.last_battle
 
 ALTER TABLE ONLY public.last_battle
     ADD CONSTRAINT last_battle___fk_2 FOREIGN KEY (team2_id) REFERENCES public.team(id);
-
-
---
--- Name: last_battle last_battle___fk_3; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.last_battle
-    ADD CONSTRAINT last_battle___fk_3 FOREIGN KEY (winner_team) REFERENCES public.team(id);
 
 
 --

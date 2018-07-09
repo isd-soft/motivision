@@ -1,13 +1,21 @@
 package com.mygdx.game.requests;
 
+import com.badlogic.gdx.graphics.Texture;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
 
 public class Profile {
     public static final String  PROFILE_ID = "characterId";
@@ -17,16 +25,17 @@ public class Profile {
     public static final String  HEAD_TYPE = "headType";
     public static final String  BODY_TYPE = "bodyType";
     public static final String  GENDER = "gender";
-    public static final String  POWER = "power";
+    public static final String  POINTS = "points";
     public static final String  PLAYER_ID = "playerId";
     private String  name;
     private int     id;
     private int     headType;
     private int     bodyType;
     private char    gender;
-    private int     power;
+    private int     points;
     private int     teamId;
     private boolean isAdmin;
+    private ArrayList<Item>     itemList;
 
 
     private Profile(int id, int teamId, boolean isAdmin) {
@@ -35,9 +44,10 @@ public class Profile {
         this.headType = 0;
         this.bodyType = 0;
         this.gender = 'N';
-        this.power = 0;
+        this.points = 0;
         this.teamId = teamId;
         this.isAdmin = false;
+        this.itemList = null;
     }
 
     public static boolean	nameExist(String name) throws IOException, JSONException {
@@ -75,6 +85,7 @@ public class Profile {
         char        gender = 'N';
 
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
+        System.out.println(url + "?" + urlParameters);
         if (jsonObject == null)
             return null;
         try {
@@ -102,13 +113,51 @@ public class Profile {
                 gender = field.toCharArray()[0];    
             profile.setGender(gender);
 
-            field = jsonObject.getString(POWER);
+            field = jsonObject.getString(POINTS);
             number = Integer.parseInt(field);
-            profile.setPower(number);
+            profile.setPoints(number);
+            profile.loadProfiles(jsonObject);
+
             return profile;
         } catch (NumberFormatException e) {
             setErrorMessage("Invalid number format");
             return null;
+        }
+    }
+
+    private void     loadProfiles(JSONObject jsonObject) throws JSONException {
+        Item    item;
+        String  field;
+        String  itemType;
+        int     itemId;
+        int     itemImage;
+        int     itemPrice;
+
+        if (jsonObject.has("items") == false)
+            return;
+        if (jsonObject.isNull("items"))
+            return;
+
+        if (jsonObject.get("items") == null)
+            return;
+        JSONArray arr;
+        try {
+            arr = jsonObject.getJSONArray("items");
+        } catch (JSONException e) {
+            return;
+        }
+        if (arr == null)
+            return;
+        itemList = new ArrayList<Item>();
+
+        for (int i = 0; i < arr.length(); i++)
+        {
+            itemId = arr.getJSONObject(i).getInt(Item.ITEM_ID);
+            itemImage = arr.getJSONObject(i).getInt(Item.ITEM_IMAGE);
+            itemPrice = arr.getJSONObject(i).getInt(Item.ITEM_PRICE);
+            itemType = arr.getJSONObject(i).getString(Item.ITEM_TYPE);
+            item = new Item(itemId, itemImage, itemPrice, itemType);
+            itemList.add(item);
         }
     }
 
@@ -144,9 +193,9 @@ public class Profile {
                 gender = field.toCharArray()[0];
             profile.setGender(gender);
 
-            field = profileParams.get(POWER);
+            field = profileParams.get(POINTS);
             number = Integer.parseInt(field);
-            profile.setPower(number);
+            profile.setPoints(number);
 
             return profile;
         } catch (NumberFormatException e) {
@@ -197,32 +246,80 @@ public class Profile {
         //return getProfileFromUrl(url, urlParameters, true);
     }
 
-    public static Profile	getProfile(String name) throws IOException, JSONException {
+    public static Profile	getProfile(int profileId) throws IOException, JSONException {
         String  url;
-        int     profileId;
         Profile profile;
-        //  String  urlParameters;
-        // List<BasicNameValuePair> urlParameters;
+        String urlParameters;
 
-        if (nameExist(name) == false) {
-            setErrorMessage("Character does not exist");
-            return null;
-        }
-
-        url = JsonHandler.domain + "/get_character";
-//        urlParameters = new ArrayList<BasicNameValuePair>();
-//        urlParameters.add(new BasicNameValuePair("login", login + ""));
-//        urlParameters.add(new BasicNameValuePair("password", password + ""));
-        profileId = PlayerAccount.getProfileId(name);
         if (profileId == -1)
             return null;
-        String urlParameters = PROFILE_ID + "=" + profileId;
+
+        url = JsonHandler.domain + "/get_character";
+        urlParameters = PROFILE_ID + "=" + profileId;
 
         //String urlParameters = "name=Jack&occupation=programmer";
         System.out.println("Start get profile from URL");
         profile = getProfileFromUrl(url, urlParameters, "GET");
-        PlayerAccount.setProfile(profile);
+        //PlayerAccount.setProfile(profile);
         return profile;
+    }
+
+    private Texture     splitImages(Map<String, String> itemImages) throws IOException {
+        BufferedImage result = new BufferedImage(466, 510, BufferedImage.TYPE_INT_RGB);
+        Graphics g = result.getGraphics();
+        BufferedImage bi;
+
+        bi = ImageIO.read(new File("knight_3.png"));
+        g.drawImage(bi, 0, 0, null);
+
+        bi = ImageIO.read(new File("items/" + itemImages.get("leggins") + ".png"));
+        g.drawImage(bi, 30, 353, null);
+
+        bi = ImageIO.read(new File("items/" + itemImages.get("armor") + ".png"));
+        g.drawImage(bi, 0, 188, null);
+
+        bi = ImageIO.read(new File("items/" + itemImages.get("sword") + ".png"));
+        g.drawImage(bi, 203, 165, null);
+
+
+        bi = ImageIO.read(new File("items/" + itemImages.get("fingers") + ".png"));
+        g.drawImage(bi, 219, 304, null);
+
+        if (itemImages.get("shield").equals(null) == false) {
+            bi = ImageIO.read(new File("items/" + itemImages.get("shield") + ".png"));
+            g.drawImage(bi, 17, 320, null);
+        }
+
+        ImageIO.write(result,"png",new File("result.png"));
+
+        return new Texture("result.png");
+    }
+
+    public Texture getTexture() throws IOException {
+        Map<String, String> itemImages;
+        Set<String>         itemSet;
+
+        if (itemList == null)
+            return new Texture("default.png");
+        itemImages = new LinkedHashMap<String, String>();
+        itemImages.put("sword", "default_sword");
+        itemImages.put("armor", "default_armor");
+        itemImages.put("fingers", "default_fingers");
+        itemImages.put("leggins", "default_leggins");
+        itemImages.put("shield", null);
+        itemSet = itemImages.keySet();
+        for (Item item: itemList) {
+            for (String itemType: itemSet) {
+                if (item.getType().contains(itemType)) {
+                    //itemImages.remove(itemType);
+                    itemImages.put(itemType, item.getType());
+                    if (itemType.equals("armor")) {
+                        itemImages.put("fingers", item.getType().replaceAll("armor", "fingers"));
+                    }
+                }
+            }
+        }
+        return splitImages(itemImages);
     }
 
     public void     printProfile() {
@@ -231,9 +328,14 @@ public class Profile {
         System.out.println("headType: " + this.headType);
         System.out.println("bodyType: " + this.bodyType);
         System.out.println("gender: " + this.gender);
-        System.out.println("power: " + this.power);
+        System.out.println("points: " + this.points);
         System.out.println("teamId: " + this.teamId);
         System.out.println("isAdmin: " + this.isAdmin);
+        if (itemList != null) {
+            for (Item item: itemList) {
+                item.print();
+            }
+        }
     }
 
     public void setName(String name) {
@@ -268,15 +370,16 @@ public class Profile {
         return name;
     }
 
-    public int getPower() {
-        return power;
+    public int getPoints() {
+        return points;
     }
 
-    public void setPower(int power) {
-        this.power = power;
+    public void setPoints(int power) {
+        this.points = points;
     }
 
     public int getTeamId() {
         return teamId;
     }
+
 }
