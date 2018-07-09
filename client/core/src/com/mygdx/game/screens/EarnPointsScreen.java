@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.GameSets.GGame;
 import com.mygdx.game.requests.PlayerAccount;
 
 import java.util.ArrayList;
@@ -74,23 +74,16 @@ public class EarnPointsScreen implements Screen {
         // add the list of already created characters
         ArrayList<Integer> numberOfActivities = new ArrayList<Integer>();
 
+        //here should go i< activities and activities should be taken from Data Base
         for (int i = 1; i <12; i++) {
             numberOfActivities.add(i);
         }
 
-        ArrayList<String> characterNames = PlayerAccount.getCharactersName();
-
-
-
         /*
-        if (characterNames != null)
-            strings = PlayerAccount.getCharactersName();
-        else
-            for (int i = 0; i < 10; i++) {
-                strings.add("String: " + i);
+        for (int i = 0; i < 10; i++) {
+                numberOfActivities.add("Activity: " + activity);
             }
         */
-
 
         //create and fill table with buttons and labels
         Table activitiesTable = new Table();

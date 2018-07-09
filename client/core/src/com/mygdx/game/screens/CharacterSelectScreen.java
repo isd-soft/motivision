@@ -12,11 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.GameSets.GGame;
 import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
@@ -34,24 +34,74 @@ public class CharacterSelectScreen implements Screen {
     private Stage stage;
     private Skin skin;
 
+    ScrollPane scrollPane;
     private Viewport viewport;
     private Camera camera;
-    private Texture texture;
 
     public CharacterSelectScreen(GGame g) {
         parent = g;
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+    }
+
+
+    public Texture splitImages() throws IOException {
+        int width;
+        int height;
+        BufferedImage result = new BufferedImage(
+                466, 510, //work these out
+                BufferedImage.TYPE_INT_RGB);
+        Graphics g = result.getGraphics();
+
+        BufferedImage bi;
+
+
+        bi = ImageIO.read(new File("knight_3.png"));
+        g.drawImage(bi, 0, 0, null);
+
+        bi = ImageIO.read(new File("items/default_leggins.png"));
+        g.drawImage(bi, 30, 353, null);
+
+        bi = ImageIO.read(new File("items/default_armor.png"));
+        g.drawImage(bi, 0, 188, null);
+
+        bi = ImageIO.read(new File("items/default_sword.png"));
+        g.drawImage(bi, 203, 165, null);
+
+
+        bi = ImageIO.read(new File("items/default_fingers.png"));
+        g.drawImage(bi, 219, 304, null);
+
+
+//        bi = ImageIO.read(new File("items/default_shield.png"));
+//        g.drawImage(bi, 17, 320, null);
+
+        ImageIO.write(result, "png", new File("result.png"));
+
+        return new Texture("result.png");
     }
 
     @Override
     public void show() {
         stage.clear();
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+
+        float gameWidth = Gdx.graphics.getWidth();
+        float gameHeight = Gdx.graphics.getHeight();
         float pad = 5;
 
         // add the character image
+//        Texture texture = new Texture("default.png");
+        Texture texture = null;
+        try {
+            texture = PlayerAccount.getProfileTexture("Vasea");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         if (texture == null) {
             texture = new Texture("default.png");
         }
@@ -76,14 +126,18 @@ public class CharacterSelectScreen implements Screen {
 
         for (int i = 0; i < strings.size(); i++) {
             characterNamesButtons.add(new TextButton(strings.get(i), skin, "square"));
-
             xButtons.add(new TextButton("X", skin, "square"));
 
             list.add(characterNamesButtons.get(i)).fillX().expandX();
-            list.add(xButtons.get(i)).width(Value.percentWidth(0.2f, list)).fillX();
+            list.add(xButtons.get(i)).fillX();
             list.row();
 
-            characterNamesButtons.get(i).addListener(new SelectCharacter(strings.get(i)));
+            characterNamesButtons.get(i).addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    System.out.println("Selected character " + actor.getName());
+                }
+            });
 
             xButtons.get(i).addListener(new ChangeListener() {
                 @Override
@@ -94,7 +148,7 @@ public class CharacterSelectScreen implements Screen {
         }
         list.add(create).fill().uniformY().colspan(2);
 
-        ScrollPane scrollPane = new ScrollPane(list);
+        scrollPane = new ScrollPane(list);
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.setScrollbarsOnTop(true);
@@ -108,8 +162,8 @@ public class CharacterSelectScreen implements Screen {
         // add wrapper table
         Table screen = new Table();
         screen.setFillParent(true);
-        screen.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
-        screen.add(buttonTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
+        screen.add(image).fill().uniform().pad(pad, pad, pad, pad / 2);
+        screen.add(buttonTable).fill().uniform().pad(pad, pad / 2, pad, pad);
 
         stage.addActor(screen);
         stage.setDebugAll(true);
@@ -126,7 +180,7 @@ public class CharacterSelectScreen implements Screen {
         create.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.changeScreen(parent.getCreateCharacter()); //go to create character screen
+                //parent.changeScreen(parent.getMenu()); //go to create character screen
             }
         });
 
@@ -138,6 +192,7 @@ public class CharacterSelectScreen implements Screen {
         //camera.update();
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         // tell our stage to do actions and draw itself
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
@@ -176,15 +231,12 @@ public class CharacterSelectScreen implements Screen {
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             try {
-                texture = PlayerAccount.getProfileTexture(name);
+                PlayerAccount.getProfileTexture(name);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            if (texture == null)
-                texture = new Texture("default.png");
-            show();
         }
     }
 }

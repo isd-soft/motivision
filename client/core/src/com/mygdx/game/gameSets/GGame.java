@@ -1,4 +1,6 @@
-package com.mygdx.game.gameSets;
+
+package com.mygdx.game.GameSets;
+
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
@@ -18,12 +20,13 @@ private MenuScreen menuScreen;
 private BattleScreen battleScreen;
 private LoginScreen loginScreen;
 private RegisterScreen registerScreen;
-private com.mygdx.game.screens.CharacterSelectScreen characterSelectScreen;
+private CharacterSelectScreen characterSelectScreen;
 private CreateCharacterScreen createCharacterScreen;
 private CharacterProfileScreen characterProfileScreen;
 private EarnPointsScreen earnPointsScreen;
 private AdminScreen adminScreen;
 private TeamMembersScreen teamMembersScreen;
+private LastBattleScreen lastBattleScreen;
 
 
 private final static int LOGIN = 0;
@@ -56,13 +59,14 @@ private final static int ADMIN = 8;
 public int getAdmin(){ return ADMIN;}
 
 private final static int TEAMMEMBER = 9;
-public int getTeamMember(){ return TEAMMEMBER;}
-
-
+public int getTeamMembers(){ return TEAMMEMBER;}
 
 private final static int BATTLE = 10;
 public int getBattle(){return BATTLE;}
 
+private final static int LASTBATTLE = 11;
+public int getLastBattle(){return LASTBATTLE;}
+        
 //PREFERENCES - preferencessScreen - settingScreen
 //APPLICATION - mainScreen - gameScreen
 //MENU - menuScreen - menuScreen
@@ -87,7 +91,7 @@ public void changeScreen(int screen){
 					this.setScreen(settingsScreen);
 			break;
 		case CHARACTERSELECT:
-			if(characterSelectScreen == null) characterSelectScreen = new com.mygdx.game.screens.CharacterSelectScreen(this);
+			if(characterSelectScreen == null) characterSelectScreen = new CharacterSelectScreen(this);
 			this.setScreen(characterSelectScreen);
 			break;
         case CREATECHARACTER:
@@ -110,10 +114,13 @@ public void changeScreen(int screen){
             if(teamMembersScreen == null) teamMembersScreen = new TeamMembersScreen(this);
             this.setScreen(teamMembersScreen);
             break;
-
 		case BATTLE:
 			if(battleScreen == null) battleScreen = new BattleScreen(this);
 					this.setScreen(battleScreen);
+			break;
+		case LASTBATTLE:
+			if(lastBattleScreen == null) lastBattleScreen = new LastBattleScreen(this);
+			this.setScreen(lastBattleScreen);
 			break;
 
 	}
@@ -131,15 +138,10 @@ public void changeScreen(int screen){
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
                 //this.setScreen(new )
-
-			  loginScreen = new LoginScreen(this);
-			  	setScreen(loginScreen);
-//			  adminScreen = new AdminScreen(this);
-//			  	setScreen(adminScreen);
-//			  earnPointsScreen = new EarnPointsScreen(this);
-//			  	setScreen(earnPointsScreen);
-//			  characterSelectScreen = new CharacterSelectScreen(this);
-//			  	setScreen(characterSelectScreen);
+			  teamMembersScreen = new TeamMembersScreen(this);
+                setScreen(teamMembersScreen);
+//			  characterSelect = new CharacterSelect(this);
+//			  setScreen(characterSelect);
 	}
 
           @Override

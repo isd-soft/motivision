@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
-import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.GameSets.GGame;
 
 public class LoginScreen implements Screen{
     // New version
@@ -23,6 +23,9 @@ public class LoginScreen implements Screen{
 	private Stage stage;
 	private Skin skin;
 	private Label label;
+	private Label labelName;
+	private Label labelPassword;
+
 
 	private Viewport viewport;
 	private Camera camera;
@@ -56,7 +59,11 @@ public class LoginScreen implements Screen{
 
 		//add label
 		label = new Label(null, skin);
-		label.setText("Login into account");
+		label.setText("Field");
+		labelName = new Label(null, skin);
+		labelName.setText("User name: ");
+		labelPassword = new Label(null, skin);
+		labelPassword.setText("Password: ");
 		//add text fields login/password
 		final TextField loginField = new TextField(null,skin);
 		loginField.setMessageText("Login goes here");
@@ -134,15 +141,15 @@ public class LoginScreen implements Screen{
 		//add everything into table
 		table.add(label).fillX().uniformX();
 		table.row().pad(5, 0, 5, 0);
-		table.add(loginField).fillX().uniformX();
+		table.add(labelName);
+		table.add(loginField).fillX().uniformX();;
 		table.row().pad(5, 0, 5, 0);
-		table.add(passwordField).fillX().uniformX();
-		table.row().pad(5, 0, 5, 0);
-		table.add(register).fillX().uniformX();
-		table.row().pad(5, 0, 5, 0);
-		table.add(submit).fillX().uniformX();
-		table.row().pad(5, 0, 5, 0);
-		table.add(settings).fillX().uniformX();
+		table.add(labelPassword);
+		table.add(passwordField).fillX().uniformX();;
+		table.row().pad(40, 10, 0, 10);
+		table.add(register);
+		table.add(submit);
+
 
 
 
@@ -207,8 +214,9 @@ public class LoginScreen implements Screen{
 			else {
 				String	encryptedPassword;
 
-				encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+				//encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
 				//encryptedPassword = passwordField.getText();
+				/*
 				try {
 					if (PlayerAccount.loginPlayer(loginField.getText(), encryptedPassword)) {
 							parent.changeScreen(parent.getCharacterSelect());
@@ -223,7 +231,7 @@ public class LoginScreen implements Screen{
 						label.setText(JsonHandler.errorMessage);
 					else
 						label.setText("Something went wrong");
-				}
+				}*/
 				passwordField.setText("");
 			}
 		}
