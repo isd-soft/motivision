@@ -52,10 +52,7 @@ public class CharacterSelectScreen implements Screen {
         float pad = 5;
 
         // add the character image
-        if (texture == null) {
-            texture = new Texture("default.png");
-        }
-        Image image = new Image(texture);
+
 
         // remove and add buttons
         TextButton create = new TextButton("Create new +", skin, "square");
@@ -64,11 +61,25 @@ public class CharacterSelectScreen implements Screen {
         // add the list of already created characters
         ArrayList<String> strings = new ArrayList<String>();
         ArrayList<String> characterNames = PlayerAccount.getCharactersName();
-        if (characterNames != null)
+        if (characterNames != null) {
+            if (texture == null) {
+                try {
+                    texture = PlayerAccount.getProfileTexture(characterNames.get(0));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
             strings = PlayerAccount.getCharactersName();
+        }
         else
             strings.add("No Characters");
 
+        if (texture == null) {
+            texture = new Texture("default.png");
+        }
+        Image image = new Image(texture);
         Table list = new Table();
 
         ArrayList<TextButton> characterNamesButtons = new ArrayList<TextButton>();
