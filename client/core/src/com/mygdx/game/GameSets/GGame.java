@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Screens.*;
+import com.mygdx.game.screens.CharacterSelectScreen;
 
 public class GGame extends Game {
 
@@ -20,7 +21,7 @@ private MenuScreen menuScreen;
 private BattleScreen battleScreen;
 private LoginScreen loginScreen;
 private RegisterScreen registerScreen;
-private CharacterSelectScreen characterSelectScreen;
+private com.mygdx.game.screens.CharacterSelectScreen characterSelectScreen;
 private CreateCharacterScreen createCharacterScreen;
 private CharacterProfileScreen characterProfileScreen;
 private EarnPointsScreen earnPointsScreen;
@@ -64,7 +65,7 @@ public int getTeamMember(){ return TEAMMEMBER;}
 
 private final static int BATTLE = 10;
 public int getBattle(){return BATTLE;}
-        
+
 //PREFERENCES - preferencessScreen - settingScreen
 //APPLICATION - mainScreen - gameScreen
 //MENU - menuScreen - menuScreen
@@ -89,7 +90,7 @@ public void changeScreen(int screen){
 					this.setScreen(settingsScreen);
 			break;
 		case CHARACTERSELECT:
-			if(characterSelectScreen == null) characterSelectScreen = new CharacterSelectScreen(this);
+			if(characterSelectScreen == null) characterSelectScreen = new com.mygdx.game.screens.CharacterSelectScreen(this);
 			this.setScreen(characterSelectScreen);
 			break;
         case CREATECHARACTER:
@@ -133,10 +134,10 @@ public void changeScreen(int screen){
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
                 //this.setScreen(new )
-			  earnPointsScreen = new EarnPointsScreen(this);
-                setScreen(earnPointsScreen);
-//			  characterSelect = new CharacterSelect(this);
-//			  setScreen(characterSelect);
+//			  earnPointsScreen = new EarnPointsScreen(this);
+//                setScreen(earnPointsScreen);
+			  characterSelectScreen = new CharacterSelectScreen(this);
+			  setScreen(characterSelectScreen);
 	}
 
           @Override
