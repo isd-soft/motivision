@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GameSets.GGame;
 
-public class AdminScreen implements Screen {
+public class LastBattleScreen implements Screen {
 
     private GGame parent;
     private Stage stage;
@@ -24,7 +24,7 @@ public class AdminScreen implements Screen {
     private Music loginMusic;
 
 
-    public AdminScreen(GGame g) {
+    public LastBattleScreen(GGame g) {
         parent = g;
 
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
@@ -40,6 +40,8 @@ public class AdminScreen implements Screen {
     public void show() {
         stage.clear();
         stage.setDebugAll(true);
+
+
 
         // Character Sprite
         Texture texture = new Texture("monster.png");

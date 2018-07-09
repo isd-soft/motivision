@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.GameSets.GGame;
 
 public class CreateCharacterScreen   implements Screen {
 
@@ -51,7 +51,7 @@ public class CreateCharacterScreen   implements Screen {
 
 
         //creating table with Character Settings
-        Table tableCS = new Table();
+        Table tableActivities = new Table();
 
         //making labels
         final Label labelName = new Label("Name", skin);
@@ -108,46 +108,64 @@ public class CreateCharacterScreen   implements Screen {
 
         //text button
         TextButton buttonBack = new TextButton("Back", skin);
+        buttonBack.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                parent.changeScreen(parent.getCharacterSelect());
+            }
+        });
+
         TextButton buttonOk = new TextButton("Ok", skin);
+        buttonOk.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                //PLACE_HOLDER for registration
+                parent.changeScreen(parent.getCharacterSelect());
+            }
+        });
 
 
         //put everything into right table
-        tableCS.add(labelName);
-        tableCS.add(nameText);
-        tableCS.row().pad(10, 0, 0, 0);
-        tableCS.add(labelGender);
-        tableCS.add(checkboxMale);
-        tableCS.add(checkboxFemale);
-        tableCS.row().pad(10, 0, 0, 0);
-        tableCS.add(labelHead);
-        tableCS.add(arrowHeadLeft);
-        tableCS.add(labelHeadNumber);
-        tableCS.add(arrowHeadRight);
-        tableCS.row().pad(10, 0, 0, 0);
-        tableCS.add(labelBody);
-        tableCS.add(arrowBodyLeft);
-        tableCS.add(labelBodyNumber);
-        tableCS.add(arrowBodyRight);
-        tableCS.row().pad(10, 0, 0, 0);
-        tableCS.add(labelTeam);
-        tableCS.add(teamText);
-        tableCS.row().pad(10, 0, 0, 0);
-        tableCS.add(checkboxTeam);
-        tableCS.row().pad(10, 0, 0, 0);
-        tableCS.add(arrowCastleLeft);
-        tableCS.add(imageCastle);
-        tableCS.add(arrowCastleRight);
-        tableCS.row().pad(30, 5, 0, 5);
-        tableCS.add(buttonBack);
-        tableCS.add(buttonOk);
+        tableActivities.add(labelName);
+        tableActivities.add(nameText);
+        tableActivities.row().pad(10, 0, 0, 0);
+        tableActivities.add(labelGender);
+        tableActivities.add(checkboxMale);
+        tableActivities.add(checkboxFemale);
+        tableActivities.row().pad(10, 0, 0, 0);
+        tableActivities.add(labelHead);
+        tableActivities.add(arrowHeadLeft);
+        tableActivities.add(labelHeadNumber);
+        tableActivities.add(arrowHeadRight);
+        tableActivities.row().pad(10, 0, 0, 0);
+        tableActivities.add(labelBody);
+        tableActivities.add(arrowBodyLeft);
+        tableActivities.add(labelBodyNumber);
+        tableActivities.add(arrowBodyRight);
+        tableActivities.row().pad(10, 0, 0, 0);
+        tableActivities.add(labelTeam);
+        tableActivities.add(teamText);
+        tableActivities.row().pad(10, 0, 0, 0);
+        tableActivities.add(checkboxTeam);
+        tableActivities.row().pad(10, 0, 0, 0);
+        tableActivities.add(arrowCastleLeft);
+        tableActivities.add(imageCastle);
+        tableActivities.add(arrowCastleRight);
+        tableActivities.row().pad(30, 5, 0, 5);
+        tableActivities.add(buttonBack);
+        tableActivities.add(buttonOk);
 
-
+        //make a scroller
+        ScrollPane scrollPane = new ScrollPane(tableActivities);
+        scrollPane.setSmoothScrolling(false);
+        scrollPane.setScrollingDisabled(true, false);
+        scrollPane.setScrollbarsOnTop(true);
 
         //making table for whole screen in filling it up with image and table
         Table screenTable = new Table();
         screenTable.setFillParent(true);
-        screenTable.add(image).width(gameHeight * 0.95f).height(gameHeight * 0.95f).expand();
-        screenTable.add(tableCS).expand().padBottom(10).padTop(10);
+        screenTable.add(image).width(gameHeight * 0.80f).height(gameHeight * 0.80f).expand();
+        screenTable.add(scrollPane).expand().padBottom(10).padTop(10);
         stage.addActor(screenTable);
 
 

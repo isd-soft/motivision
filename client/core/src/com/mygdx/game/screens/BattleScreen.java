@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.mygdx.game.gameSets.GGame;
-import com.mygdx.game.gameSets.GameModel;
+import com.mygdx.game.GameSets.GGame;
+import com.mygdx.game.GameSets.GameModel;
 
 public class BattleScreen implements Screen {
     private GGame parent;
