@@ -29,8 +29,10 @@ public class LoginController {
     @Autowired
     CharacterRepository characterRepository;
 
+    /*
     @Autowired
     private PlayerService playerService;
+    */
 
     /*
      * Login controller
@@ -53,15 +55,15 @@ public class LoginController {
                 if (player.getPassword().equals(password)) {
                     log.info("Login is successfull, processing data");
                     map.put("status", "success");
-                    map.put("id", player.getID().toString());
-                    ArrayList<Character> characters = characterRepository.findByPlayerID(player.getID());
+                    map.put("id", player.getId().toString());
+                    ArrayList<Character> characters = characterRepository.findByPlayerId(player.getId());
                     Iterator<Character> iterator = characters.iterator();
                     ArrayList<Map<String, Object>> result = new ArrayList<>();
                     log.info("Fetching player characters");
                     while (iterator.hasNext()) {
                         Map<String, Object> characterMap = new TreeMap<>();
                         Character character = iterator.next();
-                        characterMap.put("id", character.getID().toString());
+                        characterMap.put("id", character.getId().toString());
                         characterMap.put("nickname", character.getName());
                         result.add(characterMap);
                     }
@@ -105,7 +107,7 @@ public class LoginController {
                 playerRepository.save(player);
                 log.info("Player saved to the database");
                 map.put("status", "success");
-                map.put("id", player.getID().toString());
+                map.put("id", player.getId().toString());
                 return map;
             } catch (Exception e) {
                 log.error("Exeption occured " + e.getCause());
