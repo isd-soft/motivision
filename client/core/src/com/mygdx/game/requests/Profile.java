@@ -285,10 +285,10 @@ public class Profile {
         bi = ImageIO.read(new File("items/" + itemImages.get("fingers") + ".png"));
         g.drawImage(bi, 219, 304, null);
 
-//        if (itemImages.get("shield").equals(null) == false) {
-//            bi = ImageIO.read(new File("items/" + itemImages.get("shield") + ".png"));
-//            g.drawImage(bi, 17, 320, null);
-//        }
+        if (itemImages.get("shield").equals(null) == false) {
+            bi = ImageIO.read(new File("items/" + itemImages.get("shield") + ".png"));
+            g.drawImage(bi, 17, 320, null);
+        }
 
         ImageIO.write(result,"png",new File("result.png"));
 
