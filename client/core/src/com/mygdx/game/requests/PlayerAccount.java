@@ -58,9 +58,9 @@ public class PlayerAccount {
     }
 
     public static Texture getProfileTexture(String name) throws IOException, JSONException {
-        if (player == null)
-            return null;
         selectProfile(name);
+        if (profile == null)
+            return new Texture("default.png");
         return profile.getTexture();
         //return null;
     }
