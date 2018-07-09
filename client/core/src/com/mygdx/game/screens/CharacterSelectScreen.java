@@ -92,7 +92,7 @@ public class CharacterSelectScreen implements Screen {
         float gameHeight = Gdx.graphics.getHeight();
 
         // add the character image
-//        Texture texture = new Texture("monster.png");
+//        Texture texture = new Texture("default.png");
         Texture texture = null;
         try {
             texture = PlayerAccount.getProfileTexture("Vasea");
@@ -101,6 +101,9 @@ public class CharacterSelectScreen implements Screen {
             return;
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+        if (texture == null){
+            texture = new Texture("default.png");
         }
         Image image = new Image(texture);
 
