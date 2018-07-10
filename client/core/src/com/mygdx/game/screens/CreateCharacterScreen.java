@@ -166,8 +166,8 @@ public class CreateCharacterScreen implements Screen {
                     gender = "F";
 
                 characterParameters.put(Profile.GENDER, gender);
-                characterParameters.put(Profile.HEAD_TYPE, labelHead.toString());
-                characterParameters.put(Profile.BODY_TYPE, labelBody.toString());
+                characterParameters.put(Profile.HEAD_TYPE, labelHeadNumber.getText() + "");
+                characterParameters.put(Profile.BODY_TYPE, labelBodyNumber.getText() + "");
 
                 teamName = teamText.getText();
                 if (teamName.length() < 5) {
@@ -206,7 +206,8 @@ public class CreateCharacterScreen implements Screen {
                 characterParameters.put(Profile.TEAM_ID, teamId + "");
                 characterParameters.put(Profile.PLAYER_ID, PlayerAccount.getPlayerId() + "");
                 try {
-                    PlayerAccount.createNewProfile(characterParameters);
+                    if (PlayerAccount.createNewProfile(characterParameters))
+                        parent.changeScreen(parent.getCharacterSelect());
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -214,7 +215,6 @@ public class CreateCharacterScreen implements Screen {
                 }
 
 
-                parent.changeScreen(parent.getCharacterSelect());
             }
         });
 
