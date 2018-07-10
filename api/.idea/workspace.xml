@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="Fixed Issue with lombok 1.18">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inther/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inther/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/log/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/log/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/JsonHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/JsonHandler.java" afterDir="false" />
-    </list>
+    <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,8 +24,8 @@
       <file leaf-file-name="TeamController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="190" column="49" selection-start-line="190" selection-start-column="49" selection-end-line="190" selection-end-column="49" />
+            <state relative-caret-position="289">
+              <caret line="184" column="40" lean-forward="true" selection-start-line="184" selection-start-column="40" selection-end-line="184" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -336,7 +330,7 @@
       <workItem from="1531156378506" duration="14000" />
       <workItem from="1531203412633" duration="5248000" />
       <workItem from="1531222059441" duration="1310000" />
-      <workItem from="1531224545555" duration="1764000" />
+      <workItem from="1531224545555" duration="2116000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Refactor&quot;">
       <created>1530734533025</created>
@@ -478,11 +472,18 @@
       <option name="project" value="LOCAL" />
       <updated>1531148854983</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Now you can search if Team exist with name using /team_exist controller">
+      <created>1531226880644</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1531226880644</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76894000" />
+    <option name="totallyTimeSpent" value="77246000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -515,7 +516,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" sideWeight="0.4969743" weight="0.329582" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.4969743" weight="0.32843137" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.39052287" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49283853" weight="0.39052287" />
       <window_info anchor="bottom" id="Spring" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26096824" />
@@ -599,7 +600,8 @@
     <MESSAGE value="Changed &quot;,&quot; to &quot;+&quot; in RestExceptionHandler" />
     <MESSAGE value="Added Character/Player/Team Service for Error Handling &amp; findByID in their repositories" />
     <MESSAGE value="Fixed Issue with lombok 1.18" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Issue with lombok 1.18" />
+    <MESSAGE value="Now you can search if Team exist with name using /team_exist controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Now you can search if Team exist with name using /team_exist controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -898,8 +900,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="190" column="49" selection-start-line="190" selection-start-column="49" selection-end-line="190" selection-end-column="49" />
+        <state relative-caret-position="289">
+          <caret line="184" column="40" lean-forward="true" selection-start-line="184" selection-start-column="40" selection-end-line="184" selection-end-column="40" />
         </state>
       </provider>
     </entry>
