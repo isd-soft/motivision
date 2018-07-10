@@ -23,8 +23,8 @@ public class CharacterProfileScreen implements Screen {
     private GGame parent;
     private Stage stage;
     private Skin skin;
+
     private Table itemTable;
-    private ImageButton imageButton;
     private Texture textureImage;
     private TextureRegion textureRegion;
     private TextureRegionDrawable textureRegionDrawable;
@@ -47,14 +47,11 @@ public class CharacterProfileScreen implements Screen {
     @Override
     public void show() {
         stage.clear();
-        stage.setDebugAll(true);
-
-        float gameWidth = Gdx.graphics.getWidth();
-        float gameHeight = Gdx.graphics.getHeight();
-
+//        stage.setDebugAll(true);
+        float pad = 5;
 
         // Character Sprite
-        Texture texture = new Texture("monster.png");
+        Texture texture = new Texture("default.png");
         Image image = new Image(texture);
 
         //create text buttons and give them listeners
@@ -62,6 +59,8 @@ public class CharacterProfileScreen implements Screen {
         TextButton teamMembersButton = new TextButton("Team Members", skin);
         TextButton lastBattleButton = new TextButton("Last battle", skin);
         TextButton manageTeamButton = new  TextButton("Manage Team", skin);
+
+        ImageButton imageButton;
 
         earnPointsButton.addListener(new ChangeListener() {
             @Override
@@ -98,13 +97,6 @@ public class CharacterProfileScreen implements Screen {
         //Create label wich represents points
         Label pointsLabel = new Label("Points: " + pointsNumber, skin);
 
-        //Create table witch holds buttons, label + another table witch holds items
-        //Table allTable = new Table();
-        itemTable = new Table();
-
-
-
-
         // add item list
         ArrayList<Integer> numberOfItems = new ArrayList<Integer>();
 
@@ -119,18 +111,17 @@ public class CharacterProfileScreen implements Screen {
             }
         */
 
-
-
         //create and fill table with buttons and labels
+        itemTable = new Table();
         itemTable.add(earnPointsButton, teamMembersButton, lastBattleButton);
         itemTable.row();
         itemTable.add(pointsLabel);
         itemTable.row();
+
+        Table imageTable = new Table();
         for (Integer e : numberOfItems) {
 
-
             imageButton = new ImageButton(addImage()); //Set the button up
-
             //add listener to image button, so item will replace already equipped item
             imageButton.addListener(new ChangeListener() {
                 @Override
@@ -139,25 +130,23 @@ public class CharacterProfileScreen implements Screen {
                 }
             });
 
-            itemTable.add(imageButton).fill();
+            imageTable.add(imageButton).fill().expand();//.pad(pad, pad, pad, pad);
             if(e%3 == 0) {
-                itemTable.row();
+                imageTable.row();
             }
         }
         //here should go if statement, if user is admin of team
         //if{ }
+        itemTable.add(imageTable).fill().expand().colspan(3);
         itemTable.row();
-        itemTable.add(manageTeamButton).colspan(1);
-
-        //create scrollPane
-        ScrollPane scrollPane = new ScrollPane(itemTable);
-        scrollPane.setSmoothScrolling(false);
-        scrollPane.setScrollingDisabled(true, false);
+        itemTable.add();
+        itemTable.add();
+        itemTable.add(manageTeamButton);
 
         Table screenTable = new Table();
         screenTable.setFillParent(true);
-        screenTable.add(image).width(gameHeight * 0.95f).height(gameHeight * 0.95f).expand();
-        screenTable.add(scrollPane).expand().padBottom(10).padTop(10);
+        screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
         stage.addActor(screenTable);
 
         Gdx.input.setInputProcessor(stage);
