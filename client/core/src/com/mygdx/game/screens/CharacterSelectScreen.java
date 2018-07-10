@@ -68,6 +68,7 @@ public class CharacterSelectScreen implements Screen {
         // remove and add buttons
         TextButton create = new TextButton("Create new +", skin, "square");
         TextButton logout = new TextButton("Logout", skin, "small");
+        TextButton select = new TextButton("Select", skin, "small");
 
         // add the list of already created characters
         ArrayList<String> strings = new ArrayList<String>();
@@ -125,8 +126,9 @@ public class CharacterSelectScreen implements Screen {
         // add the list and buttons table
         Table buttonTable = new Table();
         buttonTable.add(logout).fill().pad(0, 0, pad / 2, 0);
+        buttonTable.add(select).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();
-        buttonTable.add(scrollPane).fillX().expand().top().pad(pad / 2, 0, 0, 0);
+        buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
 
         // add wrapper table
         Table screen = new Table();
@@ -150,6 +152,13 @@ public class CharacterSelectScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 parent.changeScreen(parent.getCreateCharacter()); //go to create character screen
+            }
+        });
+
+        select.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.changeScreen(parent.getCharacterProfile());
             }
         });
 
