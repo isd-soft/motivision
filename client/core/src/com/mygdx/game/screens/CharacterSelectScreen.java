@@ -63,12 +63,26 @@ public class CharacterSelectScreen implements Screen {
         float pad = 5;
 
         // add the character image
+        Image image;
 
+        //Tables
+        Table screenTable = new Table();
+        Table buttonTable = new Table();
+        Table charactersTable = new Table();
 
         // remove and add buttons
         TextButton create = new TextButton("Create new +", skin, "square");
         TextButton logout = new TextButton("Logout", skin, "small");
         TextButton select = new TextButton("Select", skin, "small");
+
+        // eanble scrolling
+        ScrollPane scrollPane = new ScrollPane(charactersTable);
+        scrollPane.setSmoothScrolling(false);
+        scrollPane.setScrollingDisabled(true, false);
+        scrollPane.setScrollbarsOnTop(true);
+
+        ArrayList<TextButton> characterNamesButtons = new ArrayList<TextButton>();
+        ArrayList<TextButton> xButtons = new ArrayList<TextButton>();
 
         // add the list of already created characters
         ArrayList<String> strings = new ArrayList<String>();
@@ -91,47 +105,30 @@ public class CharacterSelectScreen implements Screen {
         if (texture == null) {
             texture = new Texture("default.png");
         }
-        Image image = new Image(texture);
-        Table list = new Table();
-
-        ArrayList<TextButton> characterNamesButtons = new ArrayList<TextButton>();
-        ArrayList<TextButton> xButtons = new ArrayList<TextButton>();
+        image = new Image(texture);
 
         for (int i = 0; i < strings.size(); i++) {
             characterNamesButtons.add(new TextButton(strings.get(i), skin, "square"));
 
             xButtons.add(new TextButton("X", skin, "square"));
 
-            list.add(characterNamesButtons.get(i)).fillX().expandX();
-            list.add(xButtons.get(i)).width(Value.percentWidth(0.2f, list)).fillX();
-            list.row();
+            charactersTable.add(characterNamesButtons.get(i)).fillX().expandX();
+            charactersTable.add(xButtons.get(i)).width(Value.percentWidth(0.2f, charactersTable)).fillX();
+            charactersTable.row();
 
             characterNamesButtons.get(i).addListener(new SelectCharacter(strings.get(i)));
 
-//            xButtons.get(i).addListener(new ChangeListener() {
-//                @Override
-//                public void changed(ChangeEvent event, Actor actor) {
-//                    System.out.println("Deleted character " + actor.getName());
-//                }
-//            });
             xButtons.get(i).addListener(new DeleteCharacter(strings.get(i)));
         }
-        list.add(create).fill().uniformY().colspan(2);
-
-        ScrollPane scrollPane = new ScrollPane(list);
-        scrollPane.setSmoothScrolling(false);
-        scrollPane.setScrollingDisabled(true, false);
-        scrollPane.setScrollbarsOnTop(true);
+        charactersTable.add(create).fill().uniformY().colspan(2);
 
         // add the list and buttons table
-        Table buttonTable = new Table();
         buttonTable.add(logout).fill().pad(0, 0, pad / 2, 0);
         buttonTable.add(select).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
 
         // add wrapper table
-        Table screenTable = new Table();
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);

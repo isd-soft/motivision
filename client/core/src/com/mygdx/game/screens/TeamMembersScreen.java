@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
@@ -30,7 +31,8 @@ public class TeamMembersScreen implements Screen {
     public TeamMembersScreen(GGame g) {
         parent = g;
 
-        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
+//        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
@@ -43,31 +45,41 @@ public class TeamMembersScreen implements Screen {
     public void show() {
         stage.clear();
         stage.setDebugAll(true);
-        float gameWidth = Gdx.graphics.getWidth();
-        float gameHeight = Gdx.graphics.getHeight();
+        float pad = 5.0f;
 
+        // label
+        Label teamName = new Label("Team: \"NAME\"", skin);
 
+        // buttons
+        TextButton settingsButton = new TextButton("Settings", skin, "small");
+        TextButton backButton = new TextButton("Back", skin, "small");
 
-
-        //create button
-        TextButton buttonBack = new TextButton("Back", skin);
-        buttonBack.addListener(new ChangeListener() {
+        backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
 
-
         // Character Sprite
-        Texture texture = new Texture("monster.png");
+        Texture texture = new Texture("default.png");
         Image image = new Image(texture);
+
+        // tables
+        Table screenTable = new Table();
+        Table buttonTable = new Table();
+        Table teamMembersTable = new Table();
+
+        //create scrollPane
+        ScrollPane scrollPane = new ScrollPane(teamMembersTable);
+        scrollPane.setSmoothScrolling(false);
+        scrollPane.setScrollingDisabled(true, false);
 
         // add the list of already created characters
         ArrayList<Integer> numberOfActivities = new ArrayList<Integer>();
 
         //here should go i< team members and members should be taken from Data Base
-        for (int i = 1; i <12; i++) {
+        for (int i = 1; i <22; i++) {
             numberOfActivities.add(i);
         }
 
@@ -78,12 +90,9 @@ public class TeamMembersScreen implements Screen {
         */
 
         //create and fill table with buttons and labels
-        Table teamMembersTable = new Table();
-        teamMembersTable.add(buttonBack);
-        teamMembersTable.row();
         for (Integer e : numberOfActivities) {
             //instead of PLACE_HOLDER there should be name of member
-            TextButton memberName = new TextButton("Member PLACE_HOLDER", skin);
+            TextButton memberName = new TextButton("Member PLACE_HOLDER", skin, "square");
             memberName.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor){
@@ -91,28 +100,23 @@ public class TeamMembersScreen implements Screen {
                 }
             });
 
-            teamMembersTable.add(memberName).fill();
+            teamMembersTable.add(memberName).fillX().expandX();;
             teamMembersTable.row();
         }
 
+        teamName.setAlignment(Align.center);
 
-
-
-        //create scrollPane
-        ScrollPane scrollPane = new ScrollPane(teamMembersTable);
-        scrollPane.setSmoothScrolling(false);
-        scrollPane.setScrollingDisabled(true, false);
-
-
-
-
+        buttonTable.add(settingsButton).fill().pad(0, 0, pad, 0);
+        buttonTable.add(backButton).fill().pad(0, 0, pad, 0);
+        buttonTable.row();
+        buttonTable.add(teamName).fill().colspan(2).padBottom(pad);
+        buttonTable.row();
+        buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);;
 
         //create table for all screen and add into it everything
-        Table screenTable = new Table();
         screenTable.setFillParent(true);
-
-        screenTable.add(image).width(gameHeight * 0.95f).height(gameHeight * 0.95f).expand();
-        screenTable.add(scrollPane).expand().padBottom(10).padTop(10);
+        screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         stage.addActor(screenTable);
 
 
