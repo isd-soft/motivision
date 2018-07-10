@@ -8,11 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 
-public class CreateCharacterScreen   implements Screen {
+public class CreateCharacterScreen implements Screen {
 
     private GGame parent;
     private Stage stage;
@@ -32,7 +33,7 @@ public class CreateCharacterScreen   implements Screen {
     @Override
     public void show() {
         stage.clear();
-//        stage.setDebugAll(true);
+        stage.setDebugAll(true);
         float pad = 5;
 
         // Character Sprite
@@ -45,13 +46,14 @@ public class CreateCharacterScreen   implements Screen {
         final Label labelName = new Label("Name", skin);
         final Label labelGender = new Label("Gender", skin);
         final Label labelHead = new Label("Head", skin);
-        final Label labelHeadNumber = new Label("33", skin);
+        final Label labelHeadNumber = new Label("1", skin);
         final Label labelBody = new Label("Body", skin);
-        final Label labelBodyNumber = new Label("22", skin);
+        final Label labelBodyNumber = new Label("1", skin);
         final Label labelTeam = new Label("Team", skin);
 
         //creating checkboxes
-        final CheckBox checkboxMale = new CheckBox("Male", skin );
+        final CheckBox checkboxMale = new CheckBox("Male", skin);
+        checkboxMale.setChecked(true);
         final CheckBox checkboxFemale = new CheckBox("Female", skin);
         final CheckBox checkboxTeam = new CheckBox("Create new Team", skin);
 
@@ -86,7 +88,6 @@ public class CreateCharacterScreen   implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
 
                 checkboxMale.isChecked();
-                //checkboxMale.setChecked(true);
                 checkboxFemale.setChecked(false);
             }
         });
@@ -102,7 +103,7 @@ public class CreateCharacterScreen   implements Screen {
 
         buttonBack.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
                 parent.changeScreen(parent.getCharacterSelect());
             }
         });
@@ -110,39 +111,102 @@ public class CreateCharacterScreen   implements Screen {
 
         buttonOk.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
                 //PLACE_HOLDER for registration
                 parent.changeScreen(parent.getCharacterSelect());
             }
         });
 
+        arrowHeadLeft.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (Integer.valueOf(labelHeadNumber.getText().toString()) > 1) {
+                    Integer num = Integer.valueOf(labelHeadNumber.getText().toString());
+                    labelHeadNumber.setText(String.valueOf(--num));
+                }
+            }
+        });
+
+        arrowHeadRight.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (Integer.valueOf(labelHeadNumber.getText().toString()) < 3) {
+                    Integer num = Integer.valueOf(labelHeadNumber.getText().toString());
+                    labelHeadNumber.setText(String.valueOf(++num));
+                }
+            }
+        });
+        arrowBodyLeft.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (Integer.valueOf(labelBodyNumber.getText().toString()) > 1) {
+                    Integer num = Integer.valueOf(labelBodyNumber.getText().toString());
+                    labelBodyNumber.setText(String.valueOf(--num));
+                }
+            }
+        });
+
+        arrowBodyRight.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (Integer.valueOf(labelBodyNumber.getText().toString()) < 3) {
+                    Integer num = Integer.valueOf(labelBodyNumber.getText().toString());
+                    labelBodyNumber.setText(String.valueOf(++num));
+                }
+            }
+        });
+
+        arrowCastleLeft.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+
+            }
+        });
+
+        arrowCastleRight.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+
+            }
+        });
+
         tableActivities.add(labelName).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(nameText).fillX().left().colspan(2);
-        tableActivities.row().pad(10, 0, 0, 0) ;
+        tableActivities.row().pad(10, 0, 0, 0);
 
         tableActivities.add(labelGender).left().padLeft(Value.percentWidth(0.1f, tableActivities));
-        tableActivities.add(checkboxMale).expand().fill().getActor().getCells().get(0).size(Value.percentHeight(0.9f, checkboxMale));
-        tableActivities.add(checkboxFemale).expand().fill().getActor().getCells().get(0).size(Value.percentHeight(0.9f, checkboxMale));
+        tableActivities.add(checkboxMale)
+                .expand().fill();
+                //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
+        tableActivities.add(checkboxFemale)
+                .expand().fill();
+                //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.row().pad(10, 0, 0, 0);
 
         headTable.add(arrowHeadLeft);
-        headTable.add(labelHeadNumber);
+        labelHeadNumber.setAlignment(Align.center);
+        headTable.add(labelHeadNumber).width(Value.percentWidth(0.3f, tableActivities));
         headTable.add(arrowHeadRight);
 
         bodyTable.add(arrowBodyLeft);
-        bodyTable.add(labelBodyNumber);
+        labelBodyNumber.setAlignment(Align.center);
+        bodyTable.add(labelBodyNumber).width(Value.percentWidth(0.3f, tableActivities));
         bodyTable.add(arrowBodyRight);
 
-        tableActivities.add(labelHead).left().padLeft(Value.percentWidth(0.1f, tableActivities));
+        tableActivities.add(labelHead)
+                .left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(headTable).colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
-        tableActivities.add(labelBody).left().padLeft(Value.percentWidth(0.1f, tableActivities));
+        tableActivities.add(labelBody)
+                .left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(bodyTable).colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
-        tableActivities.add(labelTeam).left().padLeft(Value.percentWidth(0.1f, tableActivities));
+        tableActivities.add(labelTeam)
+                .left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(teamText).fillX().left().colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
-        tableActivities.add(checkboxTeam).left().colspan(3).padLeft(Value.percentWidth(0.1f, tableActivities));
+        tableActivities.add(checkboxTeam)
+                .left().colspan(3).padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.row().pad(10, 0, 0, 0);
 
         castleTable.add(arrowCastleLeft);
@@ -180,7 +244,7 @@ public class CreateCharacterScreen   implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width,height,true);
+        stage.getViewport().update(width, height, true);
 
     }
 
