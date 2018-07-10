@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -31,12 +32,12 @@ public class EarnPointsScreen implements Screen {
     public EarnPointsScreen(GGame g) {
         parent = g;
 
-        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
+//        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-
     }
 
 
@@ -44,17 +45,55 @@ public class EarnPointsScreen implements Screen {
     public void show() {
         stage.clear();
         stage.setDebugAll(true);
-        float gameWidth = Gdx.graphics.getWidth();
-        float gameHeight = Gdx.graphics.getHeight();
-
-
+        float pad = 5.0f;
 
         // Character Sprite
-        Texture texture = new Texture("monster.png");
+        Texture texture = new Texture("default.png");
         Image image = new Image(texture);
 
         //create buttons Settings, Back and adding them listeners
-        final TextButton settingsButton = new TextButton("Settings", skin);
+        TextButton settingsButton = new TextButton("Settings", skin, "small");
+        TextButton backButton = new TextButton("Back", skin, "small");
+
+        // tables
+        Table activitiesTable = new Table();
+        Table screenTable = new Table();
+        Table buttonTable = new Table();
+
+        // scrollpane
+        ScrollPane scrollPane = new ScrollPane(activitiesTable);
+        scrollPane.setSmoothScrolling(false);
+        scrollPane.setScrollingDisabled(true, false);
+
+        //fill table with buttons and labels
+        for (int i = 1; i <3; i++) {
+            //instead of PLACE_HOLDER there should be name of activity
+            TextButton activityName = new TextButton("Activity PLACE_HOLDER", skin, "square");
+            activityName.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor){
+                    //here should go Yes No pop up screen
+                }
+            });
+
+            activitiesTable.add(activityName).fillX().expandX();
+
+            TextButton points = new TextButton("333", skin, "square");
+            points.setTouchable(Touchable.disabled);
+            activitiesTable.add(points).width(Value.percentWidth(0.2f, activitiesTable));
+            activitiesTable.row();
+        }
+
+        buttonTable.add(settingsButton).fill().pad(0, 0, pad / 2, 0);
+        buttonTable.add(backButton).fill().pad(0, 0, pad / 2, 0);
+        buttonTable.row();
+        buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
+
+        //create table for all screen and add into it everything
+        screenTable.setFillParent(true);
+        screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        stage.addActor(screenTable);
 
         settingsButton.addListener(new ChangeListener() {
             @Override
@@ -63,69 +102,12 @@ public class EarnPointsScreen implements Screen {
             }
         });
 
-        final TextButton backButton = new TextButton("Back", skin);
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
-
-        // add the list of already created characters
-        ArrayList<Integer> numberOfActivities = new ArrayList<Integer>();
-
-        //here should go i< activities and activities should be taken from Data Base
-        for (int i = 1; i <12; i++) {
-            numberOfActivities.add(i);
-        }
-
-        /*
-        for (int i = 0; i < 10; i++) {
-                numberOfActivities.add("Activity: " + activity);
-            }
-        */
-
-        //create and fill table with buttons and labels
-        Table activitiesTable = new Table();
-        activitiesTable.add(settingsButton);
-        activitiesTable.add(backButton);
-        activitiesTable.row();
-        for (Integer e : numberOfActivities) {
-            //instead of PLACE_HOLDER there should be name of activity
-            TextButton activityName = new TextButton("Activity PLACE_HOLDER", skin);
-            activityName.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor){
-                    //here should go Yes No pop up screen
-                }
-            });
-
-            activitiesTable.add(activityName).fill();
-            //label should get number of points of activity
-            activitiesTable.add(new Label("333", skin));
-
-            activitiesTable.row();
-        }
-
-
-        //create scrollPane
-        ScrollPane scrollPane = new ScrollPane(activitiesTable);
-        scrollPane.setSmoothScrolling(false);
-        scrollPane.setScrollingDisabled(true, false);
-
-
-
-
-
-        //create table for all screen and add into it everything
-        Table screenTable = new Table();
-        screenTable.setFillParent(true);
-
-        screenTable.add(image).width(gameHeight * 0.95f).height(gameHeight * 0.95f).expand();
-        screenTable.add(scrollPane).expand().padBottom(10).padTop(10);
-        stage.addActor(screenTable);
-
-
 
         Gdx.input.setInputProcessor(stage);
     }
