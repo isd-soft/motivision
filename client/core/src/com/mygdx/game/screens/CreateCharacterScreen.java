@@ -19,7 +19,6 @@ public class CreateCharacterScreen   implements Screen {
     private Viewport viewport;
     private Skin skin;
 
-
     public CreateCharacterScreen(GGame g) {
         parent = g;
 
@@ -28,19 +27,16 @@ public class CreateCharacterScreen   implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-
-
-
     }
 
     @Override
     public void show() {
         stage.clear();
-        stage.setDebugAll(true);
+//        stage.setDebugAll(true);
         float pad = 5;
 
         // Character Sprite
-        Texture texture = new Texture("monster.png");
+        Texture texture = new Texture("default.png");
         Image image = new Image(texture);
         Texture textureCastle = new Texture("monstercastle.png");
         Image imageCastle = new Image(textureCastle);
@@ -92,7 +88,6 @@ public class CreateCharacterScreen   implements Screen {
         ImageButton arrowCastleLeft = new ImageButton(skin);
         ImageButton arrowCastleRight = new ImageButton(skin);
 
-
         //text button
         TextButton buttonBack = new TextButton("Back", skin);
         buttonBack.addListener(new ChangeListener() {
@@ -111,14 +106,13 @@ public class CreateCharacterScreen   implements Screen {
             }
         });
 
-
         //creating table with Character Settings
         Table tableActivities = new Table();
-        tableActivities.add(labelName);
-        tableActivities.add(nameText).colspan(2);
-        tableActivities.row().pad(10, 0, 0, 0);
+        tableActivities.add(labelName).left().padLeft(Value.percentWidth(0.1f, tableActivities));
+        tableActivities.add(nameText).fillX().left().colspan(2);
+        tableActivities.row().pad(10, 0, 0, 0) ;
 
-        tableActivities.add(labelGender);
+        tableActivities.add(labelGender).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(checkboxMale);
         tableActivities.add(checkboxFemale);
         tableActivities.row().pad(10, 0, 0, 0);
@@ -133,16 +127,16 @@ public class CreateCharacterScreen   implements Screen {
         bodyTable.add(labelBodyNumber);
         bodyTable.add(arrowBodyRight);
 
-        tableActivities.add(labelHead);
+        tableActivities.add(labelHead).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(headTable).colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
-        tableActivities.add(labelBody);
+        tableActivities.add(labelBody).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(bodyTable).colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
-        tableActivities.add(labelTeam);
-        tableActivities.add(teamText).colspan(2);
+        tableActivities.add(labelTeam).left().padLeft(Value.percentWidth(0.1f, tableActivities));
+        tableActivities.add(teamText).fillX().left().colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
-        tableActivities.add(checkboxTeam).left().colspan(3);
+        tableActivities.add(checkboxTeam).left().colspan(3).padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.row().pad(10, 0, 0, 0);
 
         Table castleTable = new Table();
@@ -169,7 +163,7 @@ public class CreateCharacterScreen   implements Screen {
         Table screenTable = new Table();
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
-        screenTable.add(scrollPane).expand().uniform().pad(pad, pad / 2, pad, pad);
+        screenTable.add(tableActivities).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
         stage.addActor(screenTable);
 
         Gdx.input.setInputProcessor(stage);
