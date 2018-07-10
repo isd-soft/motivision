@@ -16,8 +16,7 @@ import java.util.Optional;
 @Repository
 public interface TeamActivitiesRepository extends JpaRepository<TeamActivities, Long> {
 
-    @Query(nativeQuery = true, name = "findActivitiesByTeamId")
-    List<Activities> findAllByTeamId(@Param("teamId") Long teamId);
+    Optional<List<TeamActivities>> findAllByTeamId(Long teamId);
 
     void deleteByTeamIdAndActivitiesId(Long teamId, Long activitiesId);
 }

@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @RestController
@@ -170,7 +171,15 @@ public class CharacterController {
         }
         Character character = optionalCharacter.get();
         log.info("Character found");
-        characterRepository.delete(character);
+        if(character.getTeam().getAdmin().getId().equals(character.getId())){
+            log.warn("Character is team admin");
+            map.put("status", "failed");
+            map.put("message", "character is admin");
+            map.put("teamId", character.getTeam().getId());
+            return map;
+        }
+        log.info("Character is not admin");
+        characterRepository.deleteCharacterById(character.getId());
         log.info("Character deleted");
         map.put("status", "success");
         return map;

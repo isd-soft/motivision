@@ -58,12 +58,14 @@ public class TeamController {
         map.put("liderId", team.getAdmin().getId());
         map.put("teamLogo", team.getTeamLogo());
         map.put("battleFrequency", team.getBattleFrequency());
+        map.put("teamWins", team.getTeamWins());
+        map.put("teamLoss", team.getTeamLoss());
         log.info("Team characters received");
         List<Character> characterList = characterRepository.findAllByTeamId(teamId);
         List<Map<String, Object>> result = new ArrayList<>();
         log.info("Parsing team characters");
         for(Character character : characterList){
-            Map<String, Object> characterMap = new TreeMap<>();
+            Map<String, Object> characterMap = new LinkedHashMap<>();
             characterMap.put("characterId", character.getId());
             characterMap.put("characterName", character.getName());
             characterMap.put("playerId", character.getPlayer().getId());
@@ -130,6 +132,7 @@ public class TeamController {
         teamRepository.save(team);
         log.info("Team saved to the database");
         map.put("status", "success");
+        map.put("teamId", team.getId());
         return map;
     }
 
@@ -151,7 +154,20 @@ public class TeamController {
             return map;
         }
         log.info("Valid teamId, Team for deletion found");
+        Optional<List<TeamActivities>> teamActivities = teamActivitiesRepository.findAllByTeamId(teamId);
+        if(teamActivities.isPresent()) {
+            log.info("Checking team activities for deletion");
+            List<TeamActivities> teamActivitiesList = teamActivities.get();
+            for (TeamActivities teamActivity : teamActivitiesList) {
+                Activities activities = teamActivity.getActivities();
+                if (activities.getId() > 6) {
+                    activitiesRepository.deleteById(activities.getId());
+                    log.info("Activity deleted");
+                }
+            }
 
+        }
+        log.info("Team up for deletion");
         teamRepository.deleteById(teamId);
         log.info("Team successfully deleted");
         map.put("status", "success");

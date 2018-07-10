@@ -38,6 +38,8 @@ public class Team {
     private Integer teamLoss;
 
     public Team() {
+        teamWins = 0;
+        teamLoss = 0;
     }
 
     public Long getId() {
