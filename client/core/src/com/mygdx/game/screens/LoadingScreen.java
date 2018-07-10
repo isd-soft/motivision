@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.mygdx.game.GameSets.GGame;
+import com.mygdx.game.gameSets.GGame;
 
 
 public class LoadingScreen implements Screen{

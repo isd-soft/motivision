@@ -1,11 +1,11 @@
-
-package com.mygdx.game.GameSets;
+package com.mygdx.game.gameSets;
 
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.gameSets.AppPreferences;
 import com.mygdx.game.screens.*;
 
 public class GGame extends Game {
@@ -138,8 +138,10 @@ public void changeScreen(int screen){
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
                 //this.setScreen(new )
-			  teamMembersScreen = new TeamMembersScreen(this);
-                setScreen(teamMembersScreen);
+//			  teamMembersScreen = new TeamMembersScreen(this);
+//                setScreen(teamMembersScreen);
+              loginScreen = new LoginScreen(this);
+              setScreen(loginScreen);
 //			  characterSelect = new CharacterSelect(this);
 //			  setScreen(characterSelect);
 	}

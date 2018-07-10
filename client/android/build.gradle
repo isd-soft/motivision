@@ -139,3 +139,7 @@ idea {
         }
     }
 }
+
+dependencies {
+    compile "de.tomgrill.gdxdialogs:gdx-dialogs-android:1.3.0"
+}

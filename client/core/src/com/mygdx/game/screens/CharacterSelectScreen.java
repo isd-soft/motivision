@@ -29,7 +29,15 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import de.tomgrill.gdxdialogs.core.GDXDialogs;
+import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
+import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
+import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
+
 public class CharacterSelectScreen implements Screen {
+    private static final int    YES = 0;
+    private static final int    NO = 1;
+
     private GGame parent;
     private Stage stage;
     private Skin skin;
@@ -96,12 +104,13 @@ public class CharacterSelectScreen implements Screen {
 
             characterNamesButtons.get(i).addListener(new SelectCharacter(strings.get(i)));
 
-            xButtons.get(i).addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    System.out.println("Deleted character " + actor.getName());
-                }
-            });
+//            xButtons.get(i).addListener(new ChangeListener() {
+//                @Override
+//                public void changed(ChangeEvent event, Actor actor) {
+//                    System.out.println("Deleted character " + actor.getName());
+//                }
+//            });
+            xButtons.get(i).addListener(new DeleteCharacter(strings.get(i)));
         }
         list.add(create).fill().uniformY().colspan(2);
 
@@ -177,6 +186,8 @@ public class CharacterSelectScreen implements Screen {
     }
 
 
+
+
     class SelectCharacter extends ChangeListener {
         String name;
 
@@ -198,4 +209,56 @@ public class CharacterSelectScreen implements Screen {
             show();
         }
     }
+
+    class DeleteCharacter extends ChangeListener {
+        String name;
+
+        public DeleteCharacter(String elem) {
+            this.name = elem;
+        }
+
+        @Override
+        public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+            ConfirmDialog();
+//            try {
+//                PlayerAccount.deleteProfile(name);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            show();
+        }
+
+        public void     ConfirmDialog() {
+            GDXDialogs dialogs = GDXDialogsSystem.install();
+
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+            bDialog.setTitle("Confirmation");
+            bDialog.setMessage("Are you sure you want to delete \"" + name + "\" ?");
+
+            bDialog.setClickListener(new ButtonClickListener() {
+
+                @Override
+                public void click(int button) {
+                    if (button == YES) {
+                        try {
+                            PlayerAccount.deleteProfile(name);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        show();
+                    }
+                }
+            });
+
+            bDialog.addButton("Yes");
+            bDialog.addButton("No");
+
+            bDialog.build().show();
+        }
+    }
+
 }

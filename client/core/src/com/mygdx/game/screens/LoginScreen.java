@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
-import com.mygdx.game.GameSets.GGame;
+import com.mygdx.game.gameSets.GGame;
 
 public class LoginScreen implements Screen{
     // New version
@@ -214,9 +214,8 @@ public class LoginScreen implements Screen{
 			else {
 				String	encryptedPassword;
 
-				//encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+				encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
 				//encryptedPassword = passwordField.getText();
-				/*
 				try {
 					if (PlayerAccount.loginPlayer(loginField.getText(), encryptedPassword)) {
 							parent.changeScreen(parent.getCharacterSelect());
@@ -231,7 +230,7 @@ public class LoginScreen implements Screen{
 						label.setText(JsonHandler.errorMessage);
 					else
 						label.setText("Something went wrong");
-				}*/
+				}
 				passwordField.setText("");
 			}
 		}
