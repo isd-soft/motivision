@@ -2,17 +2,29 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.PlayerAccount;
+import com.mygdx.game.requests.Profile;
+import com.mygdx.game.requests.Team;
 
-public class CreateCharacterScreen   implements Screen {
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+
+import sun.awt.image.ImageWatched;
+
+public class CreateCharacterScreen implements Screen {
 
     private GGame parent;
     private Stage stage;
@@ -31,34 +43,38 @@ public class CreateCharacterScreen   implements Screen {
 
     @Override
     public void show() {
+        Texture texture;
+        Image image;
+        Texture textureCastle;
+
         stage.clear();
-//        stage.setDebugAll(true);
         float pad = 5;
 
         // Character Sprite
-        Texture texture = new Texture("default.png");
-        Image image = new Image(texture);
-        Texture textureCastle = new Texture("monstercastle.png");
+        texture = new Texture("default.png");
+        image = new Image(texture);
+        textureCastle = new Texture("monstercastle.png");
         Image imageCastle = new Image(textureCastle);
 
         //making labels
         final Label labelName = new Label("Name", skin);
         final Label labelGender = new Label("Gender", skin);
         final Label labelHead = new Label("Head", skin);
-        final Label labelHeadNumber = new Label("33", skin);
+        final Label labelHeadNumber = new Label("1", skin);
         final Label labelBody = new Label("Body", skin);
-        final Label labelBodyNumber = new Label("22", skin);
+        final Label labelBodyNumber = new Label("1", skin);
         final Label labelTeam = new Label("Team", skin);
 
         //creating checkboxes
-        final CheckBox checkboxMale = new CheckBox("Male", skin );
+        final CheckBox checkboxMale = new CheckBox("Male", skin);
+        checkboxMale.setChecked(true);
         final CheckBox checkboxFemale = new CheckBox("Female", skin);
         final CheckBox checkboxTeam = new CheckBox("Create new Team", skin);
 
         //textfields for team and name
-        TextField nameText = new TextField(null, skin);
+        final TextField nameText = new TextField(null, skin);
         nameText.setMessageText("Enter character name here");
-        TextField teamText = new TextField(null, skin);
+        final TextField teamText = new TextField(null, skin);
         teamText.setMessageText("Enter team name here");
 
         //making arrow buttons
@@ -86,7 +102,6 @@ public class CreateCharacterScreen   implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
 
                 checkboxMale.isChecked();
-                //checkboxMale.setChecked(true);
                 checkboxFemale.setChecked(false);
             }
         });
@@ -102,7 +117,7 @@ public class CreateCharacterScreen   implements Screen {
 
         buttonBack.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
                 parent.changeScreen(parent.getCharacterSelect());
             }
         });
@@ -111,38 +126,193 @@ public class CreateCharacterScreen   implements Screen {
         buttonOk.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                String  gender;
+                String  profileName;
+                String  teamName;
+                int     teamId;
+                boolean                         nameExist;
+                LinkedHashMap<String, String>   teamParams;
                 //PLACE_HOLDER for registration
+                LinkedHashMap<String, String>   characterParameters;
+
+                characterParameters = new LinkedHashMap<String, String>();
+
+                profileName = nameText.getText();
+                if (profileName.length() < 5) {
+                    nameText.setColor(Color.RED);
+                    return;
+                }
+                try {
+                    nameExist = Profile.nameExist(profileName);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                if (nameExist == true) {
+                    nameText.setColor(Color.RED);
+                    return;
+                }
+                else {
+                    nameText.setColor(Color.WHITE);
+                }
+                characterParameters.put(Profile.NAME, nameText.getText());
+
+                if (checkboxMale.isChecked())
+                    gender = "M";
+                else
+                    gender = "F";
+
+                characterParameters.put(Profile.GENDER, gender);
+                characterParameters.put(Profile.HEAD_TYPE, labelHead.toString());
+                characterParameters.put(Profile.BODY_TYPE, labelBody.toString());
+
+                teamName = teamText.getText();
+                if (teamName.length() < 5) {
+                    teamText.setColor(Color.RED);
+                    return;
+                }
+                try {
+                    teamId = Team.getTeamId(teamName);
+                    if (checkboxTeam.isChecked()) {
+                        if (teamId != -1) {
+                            teamText.setColor(Color.RED);
+                            return;
+                        }
+                        teamParams = new LinkedHashMap<String, String>();
+                        teamParams.put(Team.NAME, teamName);
+                        teamParams.put(Team.LOGO, "default");
+                        teamParams.put(Team.BATTLE, "7");
+                        teamId = Team.createNewTeam(teamParams);
+                        teamText.setColor(Color.WHITE);
+                        characterParameters.put(Profile.IS_ADMIN, "true");
+                    } else if (teamId == -1) {
+                        teamText.setColor(Color.RED);
+                        return;
+                    } else {
+                        characterParameters.put(Profile.IS_ADMIN, "false");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    teamText.setColor(Color.RED);
+                    return;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    teamText.setColor(Color.RED);
+                    return;
+                }
+                characterParameters.put(Profile.TEAM_ID, teamId + "");
+                characterParameters.put(Profile.PLAYER_ID, PlayerAccount.getPlayerId() + "");
+                try {
+                    PlayerAccount.createNewProfile(characterParameters);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
                 parent.changeScreen(parent.getCharacterSelect());
+            }
+        });
+
+        // Previous head type
+        arrowHeadLeft.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (Integer.valueOf(labelHeadNumber.getText().toString()) > 1) {
+                    Integer num = Integer.valueOf(labelHeadNumber.getText().toString());
+                    labelHeadNumber.setText(String.valueOf(--num));
+                }
+            }
+        });
+
+        // Next head type
+        arrowHeadRight.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (Integer.valueOf(labelHeadNumber.getText().toString()) < 3) {
+                    Integer num = Integer.valueOf(labelHeadNumber.getText().toString());
+                    labelHeadNumber.setText(String.valueOf(++num));
+                }
+            }
+        });
+
+        // Previous body type
+        arrowBodyLeft.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (Integer.valueOf(labelBodyNumber.getText().toString()) > 1) {
+                    Integer num = Integer.valueOf(labelBodyNumber.getText().toString());
+                    labelBodyNumber.setText(String.valueOf(--num));
+                }
+            }
+        });
+
+        // Next body type
+        arrowBodyRight.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                if (Integer.valueOf(labelBodyNumber.getText().toString()) < 3) {
+                    Integer num = Integer.valueOf(labelBodyNumber.getText().toString());
+                    labelBodyNumber.setText(String.valueOf(++num));
+                }
+            }
+        });
+
+        arrowCastleLeft.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+
+            }
+        });
+
+        arrowCastleRight.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+
             }
         });
 
         tableActivities.add(labelName).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(nameText).fillX().left().colspan(2);
-        tableActivities.row().pad(10, 0, 0, 0) ;
+        tableActivities.row().pad(10, 0, 0, 0);
 
         tableActivities.add(labelGender).left().padLeft(Value.percentWidth(0.1f, tableActivities));
-        tableActivities.add(checkboxMale).expand().fill().getActor().getCells().get(0).size(Value.percentHeight(0.9f, checkboxMale));
-        tableActivities.add(checkboxFemale).expand().fill().getActor().getCells().get(0).size(Value.percentHeight(0.9f, checkboxMale));
+        tableActivities.add(checkboxMale)
+                .expand().fill();
+                //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
+        tableActivities.add(checkboxFemale)
+                .expand().fill();
+                //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.row().pad(10, 0, 0, 0);
 
         headTable.add(arrowHeadLeft);
-        headTable.add(labelHeadNumber);
+        labelHeadNumber.setAlignment(Align.center);
+        headTable.add(labelHeadNumber).width(Value.percentWidth(0.3f, tableActivities));
         headTable.add(arrowHeadRight);
 
         bodyTable.add(arrowBodyLeft);
-        bodyTable.add(labelBodyNumber);
+        labelBodyNumber.setAlignment(Align.center);
+        bodyTable.add(labelBodyNumber).width(Value.percentWidth(0.3f, tableActivities));
         bodyTable.add(arrowBodyRight);
 
-        tableActivities.add(labelHead).left().padLeft(Value.percentWidth(0.1f, tableActivities));
+        tableActivities.add(labelHead)
+                .left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(headTable).colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
-        tableActivities.add(labelBody).left().padLeft(Value.percentWidth(0.1f, tableActivities));
+        tableActivities.add(labelBody)
+                .left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(bodyTable).colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
-        tableActivities.add(labelTeam).left().padLeft(Value.percentWidth(0.1f, tableActivities));
+        tableActivities.add(labelTeam)
+                .left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(teamText).fillX().left().colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
-        tableActivities.add(checkboxTeam).left().colspan(3).padLeft(Value.percentWidth(0.1f, tableActivities));
+        tableActivities.add(checkboxTeam)
+                .left().colspan(3).padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.row().pad(10, 0, 0, 0);
 
         castleTable.add(arrowCastleLeft);
@@ -180,7 +350,7 @@ public class CreateCharacterScreen   implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width,height,true);
+        stage.getViewport().update(width, height, true);
 
     }
 

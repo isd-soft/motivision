@@ -1,5 +1,6 @@
 package com.inther.controller;
 
+import com.inther.EntityNotFoundException;
 import com.inther.entity.Activities;
 import com.inther.entity.Character;
 import com.inther.entity.Team;
@@ -171,6 +172,23 @@ public class TeamController {
         teamRepository.deleteById(teamId);
         log.info("Team successfully deleted");
         map.put("status", "success");
+        return map;
+    }
+
+    @RequestMapping(value = "/team_exist", method = RequestMethod.GET)
+    public Map<String, String> teamExist(@RequestParam(name = "name") String name) throws EntityNotFoundException {
+        TreeMap<String, String> map = new TreeMap<>();
+        Optional<Team> teamOptional = teamRepository.findByName(name);
+        if (!teamOptional.isPresent()) {
+            log.info("Team not found");
+            map.put("status", "success");
+            map.put("message", "false");
+            return map;
+        }
+        log.info("Team found");
+        map.put("status", "success");
+        Team team = teamOptional.get();
+        map.put("teamId", team.getId().toString());
         return map;
     }
 }
