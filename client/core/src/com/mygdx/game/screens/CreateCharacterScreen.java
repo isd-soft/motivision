@@ -117,6 +117,7 @@ public class CreateCharacterScreen implements Screen {
             }
         });
 
+        // Previous head type
         arrowHeadLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -127,6 +128,7 @@ public class CreateCharacterScreen implements Screen {
             }
         });
 
+        // Next head type
         arrowHeadRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -136,6 +138,8 @@ public class CreateCharacterScreen implements Screen {
                 }
             }
         });
+
+        // Previous body type
         arrowBodyLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -146,6 +150,7 @@ public class CreateCharacterScreen implements Screen {
             }
         });
 
+        // Next body type
         arrowBodyRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
