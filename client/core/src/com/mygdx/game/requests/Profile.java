@@ -1,8 +1,6 @@
 package com.mygdx.game.requests;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -75,12 +73,14 @@ public class Profile {
         JsonHandler.errorMessage = message;
     }
 
-    private static Profile      getProfileFromUrl(String url, String urlParameters, String requestMethod)
-            throws JSONException, IOException {
+    public boolean  isAdmin() {
+        return isAdmin;
+    }
+
+    private static Profile      getProfileFromJson(JSONObject jsonObject) throws JSONException {
         Profile     profile;
         String		field;
         String      characterName;
-        JSONObject	jsonObject;
         int			points;
         int         characterId;
         int         teamId;
@@ -88,8 +88,6 @@ public class Profile {
         int         number;
         char        gender = 'N';
 
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
-        System.out.println(url + "?" + urlParameters);
         if (jsonObject == null)
             return null;
         try {
@@ -114,13 +112,13 @@ public class Profile {
 
             field = jsonObject.getString(GENDER);
             if (field.length() == 1)
-                gender = field.toCharArray()[0];    
+                gender = field.toCharArray()[0];
             profile.setGender(gender);
 
             field = jsonObject.getString(POINTS);
             number = Integer.parseInt(field);
             profile.setPoints(number);
-            profile.loadProfiles(jsonObject);
+            profile.loadItems(jsonObject);
 
             return profile;
         } catch (NumberFormatException e) {
@@ -129,7 +127,17 @@ public class Profile {
         }
     }
 
-    private void     loadProfiles(JSONObject jsonObject) throws JSONException {
+    private static Profile      getProfileFromUrl(String url, String urlParameters, String requestMethod)
+            throws JSONException, IOException {
+        JSONObject	jsonObject;
+
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
+        System.out.println(url + "?" + urlParameters);
+        return getProfileFromJson(jsonObject);
+
+    }
+
+    private void loadItems(JSONObject jsonObject) throws JSONException {
         Item    item;
         String  field;
         String  itemType;

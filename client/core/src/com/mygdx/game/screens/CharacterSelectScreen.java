@@ -38,6 +38,8 @@ public class CharacterSelectScreen implements Screen {
     private static final int    YES = 0;
     private static final int    NO = 1;
 
+    private static GDXDialogs dialogs = null;
+
     private GGame parent;
     private Stage stage;
     private Skin skin;
@@ -48,6 +50,7 @@ public class CharacterSelectScreen implements Screen {
 
     public CharacterSelectScreen(GGame g) {
         parent = g;
+        dialogs = GDXDialogsSystem.install();
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -230,12 +233,10 @@ public class CharacterSelectScreen implements Screen {
 //            show();
         }
 
-        public void     ConfirmDialog() {
-            GDXDialogs dialogs = GDXDialogsSystem.install();
-
+        public void     SelectDialog() {
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
-            bDialog.setMessage("Are you sure you want to delete \"" + name + "\" ?");
+            bDialog.setMessage("Character \"" + name + "\" is the team admin. Deleting team admin will also delete the team and all characters of it's members");
 
             bDialog.setClickListener(new ButtonClickListener() {
 
@@ -249,7 +250,43 @@ public class CharacterSelectScreen implements Screen {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        texture = null;
                         show();
+                    }
+                }
+            });
+
+            bDialog.addButton("Ok");
+            bDialog.addButton("Cancel");
+
+            bDialog.build().show();
+        }
+
+        public void     ConfirmDialog() {
+
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+            bDialog.setTitle("Confirmation");
+            bDialog.setMessage("Are you sure you want to delete \"" + name + "\" ?");
+
+            bDialog.setClickListener(new ButtonClickListener() {
+
+                @Override
+                public void click(int button) {
+                    if (button == YES) {
+                        if (PlayerAccount.isAdmin(name)) {
+                            SelectDialog();
+                        }
+                        else {
+                            try {
+                                PlayerAccount.deleteProfile(name);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            texture = null;
+                            show();
+                        }
                     }
                 }
             });

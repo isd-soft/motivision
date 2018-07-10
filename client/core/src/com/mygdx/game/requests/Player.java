@@ -51,6 +51,28 @@ public class Player {
         return -1;
     }
 
+    public void     updateAllCharacters() throws IOException, JSONException {
+        String      urlParameters;
+        String		url;
+        JSONObject  jsonObject;
+        int         characterId;
+        String      characterName;
+
+        characterList = null;
+        url = JsonHandler.domain + "/get_player_characters";
+        urlParameters = "playerId=" + this.id;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
+        if (jsonObject.has("characters") == false)
+            return;
+        JSONArray arr = jsonObject.getJSONArray("characters");
+        for (int i = 0; i < arr.length(); i++)
+        {
+            characterId = arr.getJSONObject(i).getInt("id");
+            characterName = arr.getJSONObject(i).getString("nickname");
+            addCharacter(characterName, characterId);
+        }
+    }
+
     public void	addCharacter(String name, int id) {
         if (name == null)
             return;

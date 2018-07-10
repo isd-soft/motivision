@@ -97,15 +97,33 @@ public class PlayerAccount {
         return (player != null);
     }
 
-    public static boolean   deleteProfile(String name) throws IOException, JSONException {
-        selectProfile(name);
+    public static boolean   isAdmin(String name) {
+        try {
+            selectProfile(name);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println("profile " + ((profile == null) ? "= null" : "!= null"));
         if (profile == null)
             return false;
-        if (profile.deleteProfile()) {
-            profile = null;
-            return true;
-        }
-        else
+        if (profile.isAdmin())
+            System.out.println("Profile is admin");
+        return profile.isAdmin();
+    }
+
+    public static boolean   deleteProfile(String name) throws IOException, JSONException {
+//        selectProfile(name);
+//        if (profile == null)
+//            return false;
+//        if (profile.deleteProfile()) {
+//            profile = null;
+//            if (player != null)
+//                player.updateAllCharacters();
+//            return true;
+//        }
+//        else
             return false;
     }
 }
