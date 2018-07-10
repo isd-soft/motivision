@@ -1,0 +1,7 @@
+0 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request playerExist
+20 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+24 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: login = vasea;
+332 [http-nio-8080-exec-5] INFO  com.inther.controller.LoginController  - Player not found
+345 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request playerExist
+348 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 385 ms

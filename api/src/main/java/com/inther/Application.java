@@ -5,6 +5,7 @@ import com.inther.service.ExceptionalService;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ import java.io.UnsupportedEncodingException;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableJpaRepositories
+@EnableAutoConfiguration
 public class Application {
 
     @Autowired
