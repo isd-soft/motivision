@@ -115,23 +115,26 @@ public class PlayerAccount {
     }
 
     public static boolean   createNewProfile(LinkedHashMap<String, String> characterParameters) throws IOException, JSONException {
-        if (Profile.createNewProfile(characterParameters) != null)
+        if (Profile.createNewProfile(characterParameters) != null) {
+            if (player != null)
+                player.updateAllCharacters();
             return true;
+        }
         else
             return false;
     }
 
     public static boolean   deleteProfile(String name) throws IOException, JSONException {
-//        selectProfile(name);
-//        if (profile == null)
-//            return false;
-//        if (profile.deleteProfile()) {
-//            profile = null;
-//            if (player != null)
-//                player.updateAllCharacters();
-//            return true;
-//        }
-//        else
+        selectProfile(name);
+        if (profile == null)
+            return false;
+        if (profile.deleteProfile()) {
+            profile = null;
+            if (player != null)
+                player.updateAllCharacters();
+            return true;
+        }
+        else
             return false;
     }
 }

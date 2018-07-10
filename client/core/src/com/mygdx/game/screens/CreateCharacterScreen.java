@@ -137,6 +137,7 @@ public class CreateCharacterScreen   implements Screen {
 
                 characterParameters = new LinkedHashMap<String, String>();
 
+                System.out.println("Start creating the profile");
                 profileName = nameText.getText();
                 if (profileName.length() < 5) {
                     nameText.setColor(Color.RED);
@@ -159,6 +160,7 @@ public class CreateCharacterScreen   implements Screen {
                     nameText.setColor(Color.WHITE);
                 }
                 characterParameters.put(Profile.NAME, nameText.getText());
+                System.out.println("Name is Ok!");
 
                 if (checkboxMale.isChecked())
                     gender = "M";
@@ -166,8 +168,8 @@ public class CreateCharacterScreen   implements Screen {
                     gender = "F";
 
                 characterParameters.put(Profile.GENDER, gender);
-                characterParameters.put(Profile.HEAD_TYPE, labelHead.toString());
-                characterParameters.put(Profile.BODY_TYPE, labelBody.toString());
+                characterParameters.put(Profile.HEAD_TYPE, labelHeadNumber.getText() + "");
+                characterParameters.put(Profile.BODY_TYPE, labelBodyNumber.getText() + "");
 
                 teamName = teamText.getText();
                 if (teamName.length() < 5) {
@@ -203,18 +205,20 @@ public class CreateCharacterScreen   implements Screen {
                     teamText.setColor(Color.RED);
                     return;
                 }
+
+                System.out.println("Team is Ok!");
                 characterParameters.put(Profile.TEAM_ID, teamId + "");
                 characterParameters.put(Profile.PLAYER_ID, PlayerAccount.getPlayerId() + "");
                 try {
                     PlayerAccount.createNewProfile(characterParameters);
+                    parent.changeScreen(parent.getCharacterSelect());
                 } catch (IOException e) {
                     e.printStackTrace();
+                    return;
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    return;
                 }
-
-
-                parent.changeScreen(parent.getCharacterSelect());
             }
         });
 

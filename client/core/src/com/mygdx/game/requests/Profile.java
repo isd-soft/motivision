@@ -245,7 +245,7 @@ public class Profile {
 //        urlParameters.add(new BasicNameValuePair("password", password + ""));
 
         //String urlParameters = "login=" + login + "&password=" + password;
-
+        System.out.println(url + "?" + urlParameters);
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
         if (jsonObject == null)
             return null;
@@ -253,7 +253,7 @@ public class Profile {
 
         characterId = jsonObject.getInt(PROFILE_ID);
         profile = createProfileWithId(characterId, profileParams);
-        PlayerAccount.setProfile(profile);
+        //PlayerAccount.setProfile(profile);
         return profile;
         //return getProfileFromUrl(url, urlParameters, true);
     }

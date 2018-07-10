@@ -57,7 +57,7 @@ public class Team {
             setErrorMessage("Name already exist");
             return -1;
         }
-        url = JsonHandler.domain + "/create_character";
+        url = JsonHandler.domain + "/create_team";
         keySet = teamParams.keySet();
         for (String key: keySet) {
             if (urlParameters == null)
