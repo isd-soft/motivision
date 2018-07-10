@@ -2,6 +2,7 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -11,6 +12,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.PlayerAccount;
+import com.mygdx.game.requests.Profile;
+import com.mygdx.game.requests.Team;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.LinkedHashMap;
+
+import sun.awt.image.ImageWatched;
 
 public class CreateCharacterScreen   implements Screen {
 
@@ -31,14 +42,18 @@ public class CreateCharacterScreen   implements Screen {
 
     @Override
     public void show() {
+        Texture texture;
+        Image image;
+        Texture textureCastle;
+
         stage.clear();
 //        stage.setDebugAll(true);
         float pad = 5;
 
         // Character Sprite
-        Texture texture = new Texture("default.png");
-        Image image = new Image(texture);
-        Texture textureCastle = new Texture("monstercastle.png");
+        texture = new Texture("default.png");
+        image = new Image(texture);
+        textureCastle = new Texture("monstercastle.png");
         Image imageCastle = new Image(textureCastle);
 
         //making labels
@@ -55,10 +70,10 @@ public class CreateCharacterScreen   implements Screen {
         final CheckBox checkboxFemale = new CheckBox("Female", skin);
         final CheckBox checkboxTeam = new CheckBox("Create new Team", skin);
 
+        checkboxMale.setChecked(true);
         checkboxMale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
                 checkboxMale.isChecked();
                 //checkboxMale.setChecked(true);
                 checkboxFemale.setChecked(false);
@@ -75,9 +90,9 @@ public class CreateCharacterScreen   implements Screen {
         });
 
         //textfields for team and name
-        TextField nameText = new TextField(null, skin);
+        final TextField nameText = new TextField(null, skin);
         nameText.setMessageText("Enter character name here");
-        TextField teamText = new TextField(null, skin);
+        final TextField teamText = new TextField(null, skin);
         teamText.setMessageText("Enter team name here");
 
         //making arrow buttons
@@ -101,7 +116,94 @@ public class CreateCharacterScreen   implements Screen {
         buttonOk.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                String  gender;
+                String  profileName;
+                String  teamName;
+                int     teamId;
+                boolean                         nameExist;
+                LinkedHashMap<String, String>   teamParams;
                 //PLACE_HOLDER for registration
+                LinkedHashMap<String, String>   characterParameters;
+
+                characterParameters = new LinkedHashMap<String, String>();
+
+                profileName = nameText.getText();
+                if (profileName.length() < 5) {
+                    nameText.setColor(Color.RED);
+                    return;
+                }
+                try {
+                    nameExist = Profile.nameExist(profileName);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                if (nameExist == true) {
+                    nameText.setColor(Color.RED);
+                    return;
+                }
+                else {
+                    nameText.setColor(Color.WHITE);
+                }
+                characterParameters.put(Profile.NAME, nameText.getText());
+
+                if (checkboxMale.isChecked())
+                    gender = "M";
+                else
+                    gender = "F";
+
+                characterParameters.put(Profile.GENDER, gender);
+                characterParameters.put(Profile.HEAD_TYPE, labelHead.toString());
+                characterParameters.put(Profile.BODY_TYPE, labelBody.toString());
+
+                teamName = teamText.getText();
+                if (teamName.length() < 5) {
+                    teamText.setColor(Color.RED);
+                    return;
+                }
+                try {
+                    teamId = Team.getTeamId(teamName);
+                    if (checkboxTeam.isChecked()) {
+                        if (teamId != -1) {
+                            teamText.setColor(Color.RED);
+                            return;
+                        }
+                        teamParams = new LinkedHashMap<String, String>();
+                        teamParams.put(Team.NAME, teamName);
+                        teamParams.put(Team.LOGO, "default");
+                        teamParams.put(Team.BATTLE, "7");
+                        teamId = Team.createNewTeam(teamParams);
+                        teamText.setColor(Color.WHITE);
+                        characterParameters.put(Profile.IS_ADMIN, "true");
+                    } else if (teamId == -1) {
+                        teamText.setColor(Color.RED);
+                        return;
+                    } else {
+                        characterParameters.put(Profile.IS_ADMIN, "false");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    teamText.setColor(Color.RED);
+                    return;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    teamText.setColor(Color.RED);
+                    return;
+                }
+                characterParameters.put(Profile.TEAM_ID, teamId + "");
+                characterParameters.put(Profile.PLAYER_ID, PlayerAccount.getPlayerId() + "");
+                try {
+                    PlayerAccount.createNewProfile(characterParameters);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
                 parent.changeScreen(parent.getCharacterSelect());
             }
         });

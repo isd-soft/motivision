@@ -6,6 +6,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class PlayerAccount {
     private static Player   player = null;
@@ -111,6 +112,13 @@ public class PlayerAccount {
         if (profile.isAdmin())
             System.out.println("Profile is admin");
         return profile.isAdmin();
+    }
+
+    public static boolean   createNewProfile(LinkedHashMap<String, String> characterParameters) throws IOException, JSONException {
+        if (Profile.createNewProfile(characterParameters) != null)
+            return true;
+        else
+            return false;
     }
 
     public static boolean   deleteProfile(String name) throws IOException, JSONException {

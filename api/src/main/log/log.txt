@@ -381,3 +381,128 @@
 6900919 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character data process done successfully
 6900919 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getCharacter
 6900919 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 20 ms
+7017475 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7017475 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request playerExist
+7017475 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+7017475 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: login = alex
+7017507 [http-nio-8080-exec-8] INFO  com.inther.controller.LoginController  - Player found
+7017507 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request playerExist
+7017507 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 32 ms
+7017523 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7017523 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request login
+7017523 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+7017523 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: login = alex
+7017523 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 2: password = 1V/HEhSFe8gsmlW5LOBqjQ==
+7017533 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+7017547 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Fetching player characters
+7017547 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Characters received
+7017547 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request login
+7017547 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 24 ms
+7017710 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7017710 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+7017710 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+7017710 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 21
+7017724 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character found, processing data
+7017729 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+7017729 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+7017729 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 19 ms
+7107320 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7107320 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request playerExist
+7107320 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+7107320 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: login = alex
+7107335 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Player found
+7107335 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request playerExist
+7107335 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 15 ms
+7107353 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7107354 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request login
+7107354 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+7107354 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: login = alex
+7107354 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 2: password = 1V/HEhSFe8gsmlW5LOBqjQ==
+7107358 [http-nio-8080-exec-3] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+7107373 [http-nio-8080-exec-3] INFO  com.inther.controller.LoginController  - Fetching player characters
+7107373 [http-nio-8080-exec-3] INFO  com.inther.controller.LoginController  - Characters received
+7107373 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request login
+7107373 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 20 ms
+7107537 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7107537 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+7107537 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+7107537 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 21
+7107551 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character found, processing data
+7107557 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+7107557 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+7107557 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 20 ms
+7167156 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7167156 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request playerExist
+7167156 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+7167156 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: login = alex
+7167165 [http-nio-8080-exec-6] INFO  com.inther.controller.LoginController  - Player found
+7167165 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request playerExist
+7167165 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 9 ms
+7167199 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7167199 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request login
+7167199 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+7167199 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: login = alex
+7167199 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: password = 1V/HEhSFe8gsmlW5LOBqjQ==
+7167205 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+7167215 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Fetching player characters
+7167215 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Characters received
+7167215 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request login
+7167215 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 16 ms
+7167366 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7167366 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+7167366 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+7167366 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 21
+7167384 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character found, processing data
+7167388 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+7167388 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+7167388 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 22 ms
+7190978 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7190978 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request playerExist
+7190978 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+7190978 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: login = alex
+7190983 [http-nio-8080-exec-10] INFO  com.inther.controller.LoginController  - Player found
+7190983 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request playerExist
+7190983 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+7191004 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7191004 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request login
+7191004 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+7191005 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: login = alex
+7191005 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: password = 1V/HEhSFe8gsmlW5LOBqjQ==
+7191008 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+7191017 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Fetching player characters
+7191018 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Characters received
+7191018 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request login
+7191018 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 14 ms
+7191483 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7191483 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+7191484 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+7191484 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 21
+7191497 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character found, processing data
+7191502 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+7191502 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+7191502 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 19 ms
+7278458 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7278458 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request playerExist
+7278458 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+7278458 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: login = alex
+7278462 [http-nio-8080-exec-4] INFO  com.inther.controller.LoginController  - Player found
+7278462 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request playerExist
+7278462 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+7278481 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7278481 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request login
+7278481 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+7278481 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: login = alex
+7278481 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 2: password = 1V/HEhSFe8gsmlW5LOBqjQ==
+7278488 [http-nio-8080-exec-5] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+7278497 [http-nio-8080-exec-5] INFO  com.inther.controller.LoginController  - Fetching player characters
+7278497 [http-nio-8080-exec-5] INFO  com.inther.controller.LoginController  - Characters received
+7278497 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request login
+7278497 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 16 ms
+7278733 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+7278734 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+7278734 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+7278734 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 21
+7278744 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character found, processing data
+7278749 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+7278749 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+7278749 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 16 ms
