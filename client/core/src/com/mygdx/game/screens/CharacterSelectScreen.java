@@ -131,12 +131,12 @@ public class CharacterSelectScreen implements Screen {
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
 
         // add wrapper table
-        Table screen = new Table();
-        screen.setFillParent(true);
-        screen.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
-        screen.add(buttonTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
+        Table screenTable = new Table();
+        screenTable.setFillParent(true);
+        screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
 
-        stage.addActor(screen);
+        stage.addActor(screenTable);
         stage.setDebugAll(true);
 
         // add event listeners
