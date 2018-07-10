@@ -48,7 +48,7 @@ public class Profile {
         this.gender = 'N';
         this.points = 0;
         this.teamId = teamId;
-        this.isAdmin = false;
+        this.isAdmin = isAdmin;
         this.itemList = null;
     }
 
@@ -205,10 +205,6 @@ public class Profile {
                 gender = field.toCharArray()[0];
             profile.setGender(gender);
 
-            field = profileParams.get(POINTS);
-            number = Integer.parseInt(field);
-            profile.setPoints(number);
-
             return profile;
         } catch (NumberFormatException e) {
             setErrorMessage("Invalid number format");
@@ -253,6 +249,10 @@ public class Profile {
 
         characterId = jsonObject.getInt(PROFILE_ID);
         profile = createProfileWithId(characterId, profileParams);
+        if (profile == null)
+            System.out.println("Profile is null");
+        else
+            System.out.println("Profile is not null");
         //PlayerAccount.setProfile(profile);
         return profile;
         //return getProfileFromUrl(url, urlParameters, true);
