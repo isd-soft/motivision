@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.3
--- Dumped by pg_dump version 10.3
+-- Dumped from database version 10.4
+-- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -14,6 +14,20 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
 
 SET default_tablespace = '';
 
@@ -371,15 +385,12 @@ ALTER TABLE ONLY public.team_activities ALTER COLUMN id SET DEFAULT nextval('pub
 --
 
 COPY public.activities (id, name, reward) FROM stdin;
-6	volleyball game	40
-5	swim 1 km	10
-1	1 push up	5
+1	10 Push ups	50
+2	10 Pull ups	80
 3	1 km Run	70
-4	1 sit up	2
-2	1 pull up	8
-7	frontflip	200
-8	Backflip	100
-9	test	10000
+4	20 Sit ups	30
+5	Swim 1 hour	100
+6	Volleyball game	40
 \.
 
 
@@ -388,9 +399,7 @@ COPY public.activities (id, name, reward) FROM stdin;
 --
 
 COPY public."character" (id, player_id, head_type, body_type, gender, points, name, team_id) FROM stdin;
-17	4	2	1	m	0	testcharacter	3
-16	4	2	3	F	0	Power woman	3
-20	5	1	2	F	0	Warria	4
+1	1	1	1	M	0	Diamond	1
 \.
 
 
@@ -427,7 +436,6 @@ COPY public.items (id, type, image_url, price) FROM stdin;
 --
 
 COPY public.last_battle (id, team_id, enemy_power, team_power) FROM stdin;
-1	4	1465	0
 \.
 
 
@@ -436,11 +444,7 @@ COPY public.last_battle (id, team_id, enemy_power, team_power) FROM stdin;
 --
 
 COPY public.player (id, login, password) FROM stdin;
-4	ab	123
-5	log2	pas3
-6	gmail	123456
-7	abgar1332	123123
-8	qwerty	xQYMg PKe0vDcWtmLz lFQ==
+1	admin	AIDTAIiCazaQavILI07rtA==
 \.
 
 
@@ -449,9 +453,7 @@ COPY public.player (id, login, password) FROM stdin;
 --
 
 COPY public.team (id, name, lider_id, team_logo, battle_frequency, team_wins, team_loss) FROM stdin;
-3	Team1	17	logo	1	0	0
-6	testname	\N	logo	1	0	0
-4	Supa team	20	Top kek	1	2	6
+1	AdminTeam	1	NoLogo	7	0	0
 \.
 
 
@@ -460,19 +462,6 @@ COPY public.team (id, name, lider_id, team_logo, battle_frequency, team_wins, te
 --
 
 COPY public.team_activities (id, activity_id, team_id) FROM stdin;
-1	3	3
-2	2	3
-4	1	3
-5	7	3
-12	6	6
-13	5	6
-14	1	6
-15	3	6
-16	4	6
-17	2	6
-18	8	6
-19	7	6
-20	9	4
 \.
 
 
@@ -480,28 +469,28 @@ COPY public.team_activities (id, activity_id, team_id) FROM stdin;
 -- Name: activities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.activities_id_seq', 1, false);
+SELECT pg_catalog.setval('public.activities_id_seq', 7, false);
 
 
 --
 -- Name: character_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.character_id_seq', 20, true);
+SELECT pg_catalog.setval('public.character_id_seq', 1, true);
 
 
 --
 -- Name: character_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.character_item_id_seq', 2, true);
+SELECT pg_catalog.setval('public.character_item_id_seq', 1, false);
 
 
 --
 -- Name: items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.items_id_seq', 1, false);
+SELECT pg_catalog.setval('public.items_id_seq', 12, false);
 
 
 --
@@ -515,21 +504,21 @@ SELECT pg_catalog.setval('public.last_battle_id_seq', 1, false);
 -- Name: player_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.player_id_seq', 5, true);
+SELECT pg_catalog.setval('public.player_id_seq', 1, true);
 
 
 --
 -- Name: team_activities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.team_activities_id_seq', 2, true);
+SELECT pg_catalog.setval('public.team_activities_id_seq', 1, false);
 
 
 --
 -- Name: team_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.team_id_seq', 4, true);
+SELECT pg_catalog.setval('public.team_id_seq', 1, true);
 
 
 --
