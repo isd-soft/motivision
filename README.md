@@ -34,7 +34,8 @@ spring.datasource.password = [your_password]
 ```
 ./motivision/dump.sql
 psql --username=[your_username] motivision < dump.sql
-example:
+Example:
+psql --username=postgres motivision < dump.sql
 ```
 
 5. Specify Connection Addres for Database
