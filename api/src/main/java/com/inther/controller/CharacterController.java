@@ -124,7 +124,11 @@ public class CharacterController {
         map.put("characterName", character.getName());
         map.put("playerId", character.getPlayer().getId());
         map.put("teamId", character.getTeam().getId());
-        map.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getId().equals(characterId)));
+        if (character.getTeam().getAdmin() == null) {
+            map.put("isAdmin", false);
+        } else {
+            map.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getId().equals(characterId)));
+        }
         map.put("headType", character.getHeadType());
         map.put("bodyType", character.getBodyType());
         map.put("gender", character.getGender());
@@ -437,7 +441,7 @@ public class CharacterController {
         Optional<List<Character>> optionalCharacterList = characterRepository.findAllByPlayerId(playerId);
         map.put("status", "success");
         map.put("playerId", playerId);
-        if(!optionalCharacterList.isPresent()){
+        if (!optionalCharacterList.isPresent()) {
             log.info("Player has no characters");
             map.put("characters", "null");
             return map;
@@ -445,7 +449,7 @@ public class CharacterController {
         List<Character> characterList = optionalCharacterList.get();
         ArrayList<Map<String, Object>> result = new ArrayList<>();
         log.info("Fetching player characters");
-        for(Character character : characterList) {
+        for (Character character : characterList) {
             Map<String, Object> characterMap = new TreeMap<>();
             characterMap.put("id", character.getId().toString());
             characterMap.put("nickname", character.getName());
