@@ -30,7 +30,7 @@ public class CreateCharacterScreen implements Screen {
     private Stage stage;
     private Viewport viewport;
     private Skin skin;
-    private TextField nameText = null;
+    private TextField nameText;
     private TextField teamText;
     private CheckBox checkboxTeam;
     private CheckBox checkboxMale;
@@ -78,6 +78,9 @@ public class CreateCharacterScreen implements Screen {
         checkboxTeam = new CheckBox("Create new Team", skin);
 
         //textfields for team and name
+
+        nameText = new TextField(null, skin);
+        nameText.setMessageText("Enter name here");
         teamText = new TextField(null, skin);
         teamText.setMessageText("Enter team name here");
 
