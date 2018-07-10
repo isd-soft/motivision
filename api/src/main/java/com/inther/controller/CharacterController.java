@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.*;
 
 @RestController
@@ -83,7 +82,7 @@ public class CharacterController {
             if (team.getAdmin() == null) {
                 log.info("Team doesn't have an admin");
                 team.setAdmin(character);
-            }else {
+            } else {
                 log.info("Already had an admin");
             }
         }
@@ -171,11 +170,11 @@ public class CharacterController {
         }
         Character character = optionalCharacter.get();
         log.info("Character found");
-        if(character.getTeam().getAdmin().getId().equals(character.getId())){
+        if (character.getTeam().getAdmin().getId().equals(character.getId())) {
             log.warn("Character is team admin");
-            map.put("status", "failed");
-            map.put("message", "character is admin");
-            map.put("teamId", character.getTeam().getId());
+            map.put("status", "success");
+            teamRepository.deleteById(character.getTeam().getId());
+            log.info("Deleted team");
             return map;
         }
         log.info("Character is not admin");
@@ -421,6 +420,39 @@ public class CharacterController {
         log.info("Item equipped");
         characterItemRepository.save(characterItem);
         map.put("status", "success");
+        return map;
+    }
+
+    @RequestMapping(value = "/get_player_characters")
+    public Map<String, Object> getPlayerCharacters(@RequestParam(value = "playerId") Long playerId) {
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Player> optionalPlayer = playerRepository.findById(playerId);
+        if (!optionalPlayer.isPresent()) {
+            log.warn("Player with playerId " + playerId + " not found");
+            map.put("status", "failed");
+            map.put("message", "Player not found");
+            return map;
+        }
+        Player player = optionalPlayer.get();
+        Optional<List<Character>> optionalCharacterList = characterRepository.findAllByPlayerId(playerId);
+        map.put("status", "success");
+        map.put("playerId", playerId);
+        if(!optionalCharacterList.isPresent()){
+            log.info("Player has no characters");
+            map.put("characters", "null");
+            return map;
+        }
+        List<Character> characterList = optionalCharacterList.get();
+        ArrayList<Map<String, Object>> result = new ArrayList<>();
+        log.info("Fetching player characters");
+        for(Character character : characterList) {
+            Map<String, Object> characterMap = new TreeMap<>();
+            characterMap.put("id", character.getId().toString());
+            characterMap.put("nickname", character.getName());
+            result.add(characterMap);
+        }
+        log.info("Characters received");
+        map.put("characters", result);
         return map;
     }
 }

@@ -4,12 +4,10 @@ package com.inther.controller;
 import java.util.*;
 
 import com.inther.EntityNotFoundException;
-import com.inther.aspect.Logging;
 import com.inther.entity.Character;
 import com.inther.entity.Player;
 import com.inther.repo.CharacterRepository;
 import com.inther.repo.PlayerRepository;
-import com.inther.service.PlayerService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,8 +54,13 @@ public class LoginController {
                     log.info("Login is successfull, processing data");
                     map.put("status", "success");
                     map.put("id", player.getId().toString());
-                    ArrayList<Character> characters = characterRepository.findByPlayerId(player.getId());
-                    Iterator<Character> iterator = characters.iterator();
+                    Optional<List<Character>> optionalCharacterList = characterRepository.findAllByPlayerId(player.getId());
+                    if(!optionalCharacterList.isPresent()){
+                        map.put("characters", "null");
+                        return map;
+                    }
+                    List<Character> characterList = optionalCharacterList.get();
+                    Iterator<Character> iterator = characterList.iterator();
                     ArrayList<Map<String, Object>> result = new ArrayList<>();
                     log.info("Fetching player characters");
                     while (iterator.hasNext()) {
