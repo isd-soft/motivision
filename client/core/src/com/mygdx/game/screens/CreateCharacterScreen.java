@@ -30,6 +30,12 @@ public class CreateCharacterScreen implements Screen {
     private Stage stage;
     private Viewport viewport;
     private Skin skin;
+    private TextField nameText = null;
+    private TextField teamText;
+    private CheckBox checkboxTeam;
+    private CheckBox checkboxMale;
+    private Label labelHeadNumber;
+    private Label labelBodyNumber;
 
     public CreateCharacterScreen(GGame g) {
         parent = g;
@@ -60,21 +66,19 @@ public class CreateCharacterScreen implements Screen {
         final Label labelName = new Label("Name", skin);
         final Label labelGender = new Label("Gender", skin);
         final Label labelHead = new Label("Head", skin);
-        final Label labelHeadNumber = new Label("1", skin);
+        labelHeadNumber = new Label("1", skin);
         final Label labelBody = new Label("Body", skin);
-        final Label labelBodyNumber = new Label("1", skin);
+        labelBodyNumber = new Label("1", skin);
         final Label labelTeam = new Label("Team", skin);
 
         //creating checkboxes
-        final CheckBox checkboxMale = new CheckBox("Male", skin);
+        checkboxMale = new CheckBox("Male", skin);
         checkboxMale.setChecked(true);
         final CheckBox checkboxFemale = new CheckBox("Female", skin);
-        final CheckBox checkboxTeam = new CheckBox("Create new Team", skin);
+        checkboxTeam = new CheckBox("Create new Team", skin);
 
         //textfields for team and name
-        final TextField nameText = new TextField(null, skin);
-        nameText.setMessageText("Enter character name here");
-        final TextField teamText = new TextField(null, skin);
+        teamText = new TextField(null, skin);
         teamText.setMessageText("Enter team name here");
 
         //making arrow buttons
@@ -122,101 +126,7 @@ public class CreateCharacterScreen implements Screen {
             }
         });
 
-
-        buttonOk.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                String  gender;
-                String  profileName;
-                String  teamName;
-                int     teamId;
-                boolean                         nameExist;
-                LinkedHashMap<String, String>   teamParams;
-                //PLACE_HOLDER for registration
-                LinkedHashMap<String, String>   characterParameters;
-
-                characterParameters = new LinkedHashMap<String, String>();
-
-                profileName = nameText.getText();
-                if (profileName.length() < 5) {
-                    nameText.setColor(Color.RED);
-                    return;
-                }
-                try {
-                    nameExist = Profile.nameExist(profileName);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return;
-                }
-                if (nameExist == true) {
-                    nameText.setColor(Color.RED);
-                    return;
-                }
-                else {
-                    nameText.setColor(Color.WHITE);
-                }
-                characterParameters.put(Profile.NAME, nameText.getText());
-
-                if (checkboxMale.isChecked())
-                    gender = "M";
-                else
-                    gender = "F";
-
-                characterParameters.put(Profile.GENDER, gender);
-                characterParameters.put(Profile.HEAD_TYPE, labelHeadNumber.getText() + "");
-                characterParameters.put(Profile.BODY_TYPE, labelBodyNumber.getText() + "");
-
-                teamName = teamText.getText();
-                if (teamName.length() < 5) {
-                    teamText.setColor(Color.RED);
-                    return;
-                }
-                try {
-                    teamId = Team.getTeamId(teamName);
-                    if (checkboxTeam.isChecked()) {
-                        if (teamId != -1) {
-                            teamText.setColor(Color.RED);
-                            return;
-                        }
-                        teamParams = new LinkedHashMap<String, String>();
-                        teamParams.put(Team.NAME, teamName);
-                        teamParams.put(Team.LOGO, "default");
-                        teamParams.put(Team.BATTLE, "7");
-                        teamId = Team.createNewTeam(teamParams);
-                        teamText.setColor(Color.WHITE);
-                        characterParameters.put(Profile.IS_ADMIN, "true");
-                    } else if (teamId == -1) {
-                        teamText.setColor(Color.RED);
-                        return;
-                    } else {
-                        characterParameters.put(Profile.IS_ADMIN, "false");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    teamText.setColor(Color.RED);
-                    return;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    teamText.setColor(Color.RED);
-                    return;
-                }
-                characterParameters.put(Profile.TEAM_ID, teamId + "");
-                characterParameters.put(Profile.PLAYER_ID, PlayerAccount.getPlayerId() + "");
-                try {
-                    if (PlayerAccount.createNewProfile(characterParameters))
-                        parent.changeScreen(parent.getCharacterSelect());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        });
+        buttonOk.addListener(new CreateCharacter());
 
         // Previous head type
         arrowHeadLeft.addListener(new ChangeListener() {
@@ -373,5 +283,108 @@ public class CreateCharacterScreen implements Screen {
     public void dispose() {
         stage.dispose();
 
+    }
+
+    class CreateCharacter extends ChangeListener {
+        public boolean validateName(String profileName) {
+            boolean nameExist;
+
+            if (profileName.length() < 5) {
+                nameText.setColor(Color.RED);
+                show();
+                return false;
+            }
+            try {
+                nameExist = Profile.nameExist(profileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return false;
+            }
+            if (nameExist == true) {
+                nameText.setColor(Color.RED);
+                return false;
+            }
+            else {
+                nameText.setColor(Color.WHITE);
+                return true;
+            }
+        }
+
+        @Override
+        public void changed(ChangeEvent event, Actor actor){
+            String  gender;
+            String  profileName;
+            String  teamName;
+            int     teamId;
+            boolean                         nameExist;
+            LinkedHashMap<String, String>   teamParams;
+            //PLACE_HOLDER for registration
+            LinkedHashMap<String, String>   characterParameters;
+
+            characterParameters = new LinkedHashMap<String, String>();
+
+            profileName = nameText.getText();
+            if (validateName(profileName) == false)
+                return;
+            characterParameters.put(Profile.NAME, nameText.getText());
+
+            if (checkboxMale.isChecked())
+                gender = "M";
+            else
+                gender = "F";
+            characterParameters.put(Profile.GENDER, gender);
+            characterParameters.put(Profile.HEAD_TYPE, labelHeadNumber.getText() + "");
+            characterParameters.put(Profile.BODY_TYPE, labelBodyNumber.getText() + "");
+
+            teamName = teamText.getText();
+            if (teamName.length() < 5) {
+                teamText.setColor(Color.RED);
+                return;
+            }
+            try {
+                teamId = Team.getTeamId(teamName);
+                if (checkboxTeam.isChecked()) {
+                    if (teamId != -1) {
+                        teamText.setColor(Color.RED);
+                        return;
+                    }
+                    teamParams = new LinkedHashMap<String, String>();
+                    teamParams.put(Team.NAME, teamName);
+                    teamParams.put(Team.LOGO, "default");
+                    teamParams.put(Team.BATTLE, "7");
+                    teamId = Team.createNewTeam(teamParams);
+                    teamText.setColor(Color.WHITE);
+                    characterParameters.put(Profile.IS_ADMIN, "true");
+                } else if (teamId == -1) {
+                    teamText.setColor(Color.RED);
+                    return;
+                } else {
+                    characterParameters.put(Profile.IS_ADMIN, "false");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                teamText.setColor(Color.RED);
+                return;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                teamText.setColor(Color.RED);
+                return;
+            }
+            characterParameters.put(Profile.TEAM_ID, teamId + "");
+            characterParameters.put(Profile.PLAYER_ID, PlayerAccount.getPlayerId() + "");
+            try {
+                if (PlayerAccount.createNewProfile(characterParameters))
+                    parent.changeScreen(parent.getCharacterSelect());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
     }
 }

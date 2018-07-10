@@ -175,7 +175,7 @@ public class TeamController {
         return map;
     }
 
-    @RequestMapping(value = "/team_exist", method = RequestMethod.GET)
+    @RequestMapping(value = "/team_exist", method = RequestMethod.POST)
     public Map<String, String> teamExist(@RequestParam(name = "name") String name) throws EntityNotFoundException {
         TreeMap<String, String> map = new TreeMap<>();
         Optional<Team> teamOptional = teamRepository.findByName(name);
