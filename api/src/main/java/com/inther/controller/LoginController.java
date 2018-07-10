@@ -141,12 +141,13 @@ public class LoginController {
          * should be
          * playerService.getPlayer(login);
          * instead of "if (playerRepository.findByLogin(login) == null)"
-         * from line 145
+         * from line 151
          *
          * for more details see:
          * 1)PlayerService.class
          * 2)EntityNotFoundException.class (first constructor)
          **/
+
         if (playerRepository.findByLogin(login) == null) {
             log.info("Player not found");
             map.put("status", "success");

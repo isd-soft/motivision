@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="Fixed Issue with lombok 1.18">
+      <change afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/Team.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/log/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/log/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/PlayerAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/PlayerAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/CharacterSelectScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/CharacterSelectScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/RegisterScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/RegisterScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/CreateCharacterScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/CreateCharacterScreen.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,8 +32,8 @@
       <file leaf-file-name="TeamController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="170" column="42" selection-start-line="170" selection-start-column="42" selection-end-line="170" selection-end-column="42" />
+            <state relative-caret-position="425">
+              <caret line="97" column="81" selection-start-line="97" selection-start-column="66" selection-end-line="97" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -44,8 +41,8 @@
       <file leaf-file-name="CharacterController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1312">
-              <caret line="105" column="53" lean-forward="true" selection-start-line="105" selection-start-column="53" selection-end-line="105" selection-end-column="53" />
+            <state relative-caret-position="6648">
+              <caret line="429" column="25" selection-start-line="429" selection-start-column="25" selection-end-line="429" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -653,7 +650,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73820000" />
+    <option name="totallyTimeSpent" value="75712000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -665,7 +662,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
@@ -686,21 +683,47 @@
       <window_info anchor="bottom" id="Java Enterprise" order="9" sideWeight="0.4969743" weight="0.329582" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4969743" weight="0.32843137" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.39124486" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.3474692" />
       <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25390625" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25390625" />
       <window_info anchor="right" id="Bean Validation" order="4" />
       <window_info id="Web" order="6" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Learn" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50716144" side_tool="true" weight="0.39215687" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25390625" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Java Enterprise" order="9" sideWeight="0.4969743" weight="0.329582" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.39124486" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
+      <window_info id="Structure" order="8" side_tool="true" weight="0.24962178" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info id="Web" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24962178" />
+      <window_info id="Image Layers" order="5" />
+      <window_info anchor="right" id="Bean Validation" order="4" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4969743" weight="0.32843137" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.329582" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.3267974" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info id="Designer" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -968,9 +991,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/service/CharacterService.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/EntityNotFoundException.java" />
-    <entry file="file://$PROJECT_DIR$/start.bat">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/start.bat" />
     <entry file="file://$PROJECT_DIR$/motivision.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1014,15 +1035,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="170" column="42" selection-start-line="170" selection-start-column="42" selection-end-line="170" selection-end-column="42" />
+        <state relative-caret-position="425">
+          <caret line="97" column="81" selection-start-line="97" selection-start-column="66" selection-end-line="97" selection-end-column="81" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1312">
-          <caret line="105" column="53" lean-forward="true" selection-start-line="105" selection-start-column="53" selection-end-line="105" selection-end-column="53" />
+        <state relative-caret-position="6648">
+          <caret line="429" column="25" selection-start-line="429" selection-start-column="25" selection-end-line="429" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
