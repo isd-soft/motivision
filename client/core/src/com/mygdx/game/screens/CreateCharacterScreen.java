@@ -70,25 +70,6 @@ public class CreateCharacterScreen   implements Screen {
         final CheckBox checkboxFemale = new CheckBox("Female", skin);
         final CheckBox checkboxTeam = new CheckBox("Create new Team", skin);
 
-        checkboxMale.setChecked(true);
-        checkboxMale.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                checkboxMale.isChecked();
-                //checkboxMale.setChecked(true);
-                checkboxFemale.setChecked(false);
-            }
-        });
-
-        checkboxFemale.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-
-                checkboxFemale.isChecked();
-                checkboxMale.setChecked(false);
-            }
-        });
-
         //textfields for team and name
         final TextField nameText = new TextField(null, skin);
         nameText.setMessageText("Enter character name here");
@@ -105,6 +86,35 @@ public class CreateCharacterScreen   implements Screen {
 
         //text button
         TextButton buttonBack = new TextButton("Back", skin);
+        TextButton buttonOk = new TextButton("Ok", skin);
+
+        //creating table with Character Settings
+        Table tableActivities = new Table();
+        Table headTable = new Table();
+        Table bodyTable = new Table();
+        Table castleTable = new Table();
+        Table buttonTable = new Table();
+        Table screenTable = new Table();
+
+        checkboxMale.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+                checkboxMale.isChecked();
+                //checkboxMale.setChecked(true);
+                checkboxFemale.setChecked(false);
+            }
+        });
+
+        checkboxFemale.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+                checkboxFemale.isChecked();
+                checkboxMale.setChecked(false);
+            }
+        });
+
         buttonBack.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
@@ -112,7 +122,7 @@ public class CreateCharacterScreen   implements Screen {
             }
         });
 
-        TextButton buttonOk = new TextButton("Ok", skin);
+
         buttonOk.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
@@ -209,22 +219,20 @@ public class CreateCharacterScreen   implements Screen {
         });
 
         //creating table with Character Settings
-        Table tableActivities = new Table();
+        tableActivities = new Table();
         tableActivities.add(labelName).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(nameText).fillX().left().colspan(2);
         tableActivities.row().pad(10, 0, 0, 0) ;
 
         tableActivities.add(labelGender).left().padLeft(Value.percentWidth(0.1f, tableActivities));
-        tableActivities.add(checkboxMale);
-        tableActivities.add(checkboxFemale);
+        tableActivities.add(checkboxMale).expand().fill().getActor().getCells().get(0).size(Value.percentHeight(0.9f, checkboxMale));
+        tableActivities.add(checkboxFemale).expand().fill().getActor().getCells().get(0).size(Value.percentHeight(0.9f, checkboxMale));
         tableActivities.row().pad(10, 0, 0, 0);
 
-        Table headTable = new Table();
         headTable.add(arrowHeadLeft);
         headTable.add(labelHeadNumber);
         headTable.add(arrowHeadRight);
 
-        Table bodyTable = new Table();
         bodyTable.add(arrowBodyLeft);
         bodyTable.add(labelBodyNumber);
         bodyTable.add(arrowBodyRight);
@@ -241,7 +249,6 @@ public class CreateCharacterScreen   implements Screen {
         tableActivities.add(checkboxTeam).left().colspan(3).padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.row().pad(10, 0, 0, 0);
 
-        Table castleTable = new Table();
         castleTable.add(arrowCastleLeft);
         castleTable.add(imageCastle);
         castleTable.add(arrowCastleRight);
@@ -249,20 +256,12 @@ public class CreateCharacterScreen   implements Screen {
         tableActivities.add(castleTable).colspan(3);
         tableActivities.row().pad(10, 0, 0, 0);
 
-        Table buttonTable = new Table();
         buttonTable.add(buttonBack).fill().expand();
         buttonTable.add(buttonOk).fill().expand();
 
         tableActivities.add(buttonTable).fill().expand().colspan(3);
 
-        //make a scroller
-        ScrollPane scrollPane = new ScrollPane(tableActivities);
-        scrollPane.setSmoothScrolling(false);
-        scrollPane.setScrollingDisabled(true, false);
-        scrollPane.setScrollbarsOnTop(true);
-
         //making table for whole screen in filling it up with image and table
-        Table screenTable = new Table();
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(tableActivities).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
