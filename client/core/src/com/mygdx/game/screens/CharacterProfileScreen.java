@@ -37,6 +37,7 @@ public class CharacterProfileScreen implements Screen {
         parent = g;
 
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
+//        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
@@ -59,8 +60,13 @@ public class CharacterProfileScreen implements Screen {
         TextButton teamMembersButton = new TextButton("Team Members", skin);
         TextButton lastBattleButton = new TextButton("Last battle", skin);
         TextButton manageTeamButton = new  TextButton("Manage Team", skin);
+        TextButton settingsButton = new TextButton("Settings", skin);
+        TextButton backButton = new TextButton("Back", skin);
 
         ImageButton imageButton;
+
+        Table imageTable = new Table();
+        Table screenTable = new Table();
 
         earnPointsButton.addListener(new ChangeListener() {
             @Override
@@ -90,6 +96,20 @@ public class CharacterProfileScreen implements Screen {
             }
         });
 
+        settingsButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                parent.changeScreen(parent.getSettings());
+            }
+        });
+
+        backButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                parent.changeScreen(parent.getCharacterSelect());
+            }
+        });
+
         //take number of points from DB
         //here is just random number
         int pointsNumber = 777;
@@ -113,12 +133,13 @@ public class CharacterProfileScreen implements Screen {
 
         //create and fill table with buttons and labels
         itemTable = new Table();
-        itemTable.add(earnPointsButton, teamMembersButton, lastBattleButton);
+        itemTable.add(earnPointsButton).fill().expand();
+        itemTable.add(teamMembersButton).fill().expand();
+        itemTable.add(lastBattleButton).fill().expand();
         itemTable.row();
-        itemTable.add(pointsLabel);
+        itemTable.add(pointsLabel).fill().expand().padLeft(pad*2);
         itemTable.row();
 
-        Table imageTable = new Table();
         for (Integer e : numberOfItems) {
 
             imageButton = new ImageButton(addImage()); //Set the button up
@@ -139,11 +160,10 @@ public class CharacterProfileScreen implements Screen {
         //if{ }
         itemTable.add(imageTable).fill().expand().colspan(3);
         itemTable.row();
-        itemTable.add();
-        itemTable.add();
-        itemTable.add(manageTeamButton);
+        itemTable.add(settingsButton).fill().expand();
+        itemTable.add(backButton).fill().expand();
+        itemTable.add(manageTeamButton).fill().expand();
 
-        Table screenTable = new Table();
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);

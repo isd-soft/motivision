@@ -137,8 +137,8 @@ public class AdminScreen implements Screen {
 
         // add the list and buttons table
         Table buttonTable = new Table();
-        buttonTable.add(back).fill().pad(0, 0, pad / 2, 0);
         buttonTable.add(settings).fill().pad(0, 0, pad / 2, 0);
+        buttonTable.add(back).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
 

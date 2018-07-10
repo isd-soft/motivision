@@ -54,13 +54,6 @@ public class TeamMembersScreen implements Screen {
         TextButton settingsButton = new TextButton("Settings", skin, "small");
         TextButton backButton = new TextButton("Back", skin, "small");
 
-        backButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                parent.changeScreen(parent.getCharacterProfile());
-            }
-        });
-
         // Character Sprite
         Texture texture = new Texture("default.png");
         Image image = new Image(texture);
@@ -119,7 +112,19 @@ public class TeamMembersScreen implements Screen {
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         stage.addActor(screenTable);
 
+        backButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                parent.changeScreen(parent.getCharacterProfile());
+            }
+        });
 
+        settingsButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                parent.changeScreen(parent.getSettings());
+            }
+        });
 
         Gdx.input.setInputProcessor(stage);
     }
