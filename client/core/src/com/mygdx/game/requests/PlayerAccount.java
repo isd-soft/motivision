@@ -111,6 +111,8 @@ public class PlayerAccount {
             return false;
         if (profile.isAdmin())
             System.out.println("Profile is admin");
+        else
+            System.out.println("Profile is not an admin");
         return profile.isAdmin();
     }
 

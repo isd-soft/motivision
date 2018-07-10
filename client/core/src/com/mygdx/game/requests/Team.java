@@ -27,7 +27,7 @@ public class Team {
 
         url = JsonHandler.domain + "/team_exist";
         urlParameters = NAME + "=" + name;
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
         if (jsonObject == null)
             return -1;
         if (jsonObject.has(TEAM_ID))
