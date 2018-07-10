@@ -1,7 +1,6 @@
 package com.inther.entity;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.LazyCollection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,7 @@ public class Player {
     @Id
     @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
-    private Long ID;
+    private Long id;
 
     private String login;
 
@@ -33,8 +32,8 @@ public class Player {
         this.password = password;
     }
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
     public String getLogin() {

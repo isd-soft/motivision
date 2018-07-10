@@ -10,7 +10,7 @@ public class LastBattle {
     @Id
     @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
-    private Long ID;
+    private Long id;
 
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "team_id")
@@ -23,8 +23,8 @@ public class LastBattle {
     public LastBattle() {
     }
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
     public Team getTeam() {

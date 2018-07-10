@@ -49,7 +49,7 @@ public class BattleController {
     @RequestMapping(value = "/battle", method = RequestMethod.POST)
     public Map<String, Object> battle(@RequestParam(value = "teamId") Long teamId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        Optional<LastBattle> optionalLastBattle = lastBattleRepository.findByTeamID(teamId);
+        Optional<LastBattle> optionalLastBattle = lastBattleRepository.findByTeamId(teamId);
         Optional<Team> optionalTeam = teamRepository.findById(teamId);
         Integer enemyPower;
         int characterNumber = 0;
@@ -60,7 +60,7 @@ public class BattleController {
             return map;
         }
         log.info("Team found");
-        List<Character> characterList = characterRepository.findAllByTeamID(teamId);
+        List<Character> characterList = characterRepository.findAllByTeamId(teamId);
         if (!optionalLastBattle.isPresent()) {
             log.info("Team doesn't have any battles yet");
             for (Character ignored : characterList) {
@@ -83,7 +83,7 @@ public class BattleController {
         log.info("Starting calculating team power");
         for (Character character : characterList) {
             Optional<List<CharacterItem>> optionalCharacterItem
-                    = characterItemRepository.findAllByCharacterID(character.getID());
+                    = characterItemRepository.findAllByCharacterId(character.getId());
             if (optionalCharacterItem.isPresent()) {
                 List<CharacterItem> characterItems = optionalCharacterItem.get();
                 for (CharacterItem characterItem : characterItems){
@@ -98,7 +98,7 @@ public class BattleController {
             log.info("Starting character wipe");
             for (Character character : characterList) {
                 character.setPoints(0);
-                characterItemRepository.deleteCharacterItemsByCharacter_ID(character.getID());
+                characterItemRepository.deleteCharacterItemsByCharacter_Id(character.getId());
                 characterRepository.save(character);
             }
             log.info("Character wipe completed");
@@ -126,7 +126,7 @@ public class BattleController {
             log.info("Starting character wipe");
             for (Character character : characterList) {
                 character.setPoints(0);
-                characterItemRepository.deleteCharacterItemsByCharacter_ID(character.getID());
+                characterItemRepository.deleteCharacterItemsByCharacter_Id(character.getId());
                 characterRepository.save(character);
             }
             log.info("Character wipe completed");
@@ -154,7 +154,7 @@ public class BattleController {
             log.info("Started character wipe");
             for (Character character : characterList) {
                 character.setPoints(0);
-                characterItemRepository.deleteCharacterItemsByCharacter_ID(character.getID());
+                characterItemRepository.deleteCharacterItemsByCharacter_Id(character.getId());
                 characterRepository.save(character);
             }
             log.info("Character wipe completed");

@@ -11,7 +11,7 @@ public class Character {
     @Id
     @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
-    private Long ID;
+    private Long id;
 
     private Long headType;
 
@@ -23,12 +23,12 @@ public class Character {
 
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "team_id")
     @OneToOne(mappedBy = "admin")
     private Team team;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "player_id")
     private Player player;
 
@@ -39,8 +39,8 @@ public class Character {
         points = 0;
     }
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
     public Long getHeadType() {

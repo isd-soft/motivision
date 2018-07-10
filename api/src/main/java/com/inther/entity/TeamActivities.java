@@ -10,9 +10,9 @@ public class TeamActivities {
     @Id
     @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
-    private Long ID;
+    private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "team_id")
     private Team team;
 
@@ -28,8 +28,8 @@ public class TeamActivities {
         this.activities = activities;
     }
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
     public Team getTeam() {

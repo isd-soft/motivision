@@ -12,7 +12,7 @@ public class Team {
     @Id
     @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
-    private Long ID;
+    private Long id;
 
     private String name;
 
@@ -40,8 +40,8 @@ public class Team {
     public Team() {
     }
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

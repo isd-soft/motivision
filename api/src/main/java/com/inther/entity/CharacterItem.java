@@ -10,7 +10,7 @@ public class CharacterItem {
     @Id
     @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
-    private Long ID;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "character_id")
