@@ -327,8 +327,8 @@ public class Profile {
         if (itemImages.get("shield").equals(null) == false) {
             pixmap = addItem(pixmap, itemImages.get("shield"), 17, 320);
         }
-        mergedImage = new Texture(pixmap);
-        pixmap.dispose();
+        mergedImage = getTexture(pixmap, headType, bodyType);
+//        pixmap.dispose();
         return mergedImage;
     }
 
@@ -438,20 +438,30 @@ public class Profile {
         return teamId;
     }
 
-    public static Texture getTexture(int headType, int bodyType) {
+
+    public static Texture getTexture(Pixmap background, int headType, int bodyType) {
         Texture mergedImage;
-        Pixmap  pixmap;
         Pixmap  itemPixmap;
 
-        pixmap = new Pixmap(Gdx.files.internal("default.png"));
+        if (headType <= 0 || headType > 3)
+            headType = 1;
+        if (bodyType <= 0 || bodyType > 3)
+            bodyType = 1;
         itemPixmap = new Pixmap(Gdx.files.internal("head/head" + headType + ".png"));
-        pixmap.drawPixmap(itemPixmap, 0, 0);
+        background.drawPixmap(itemPixmap, 0, 0);
         itemPixmap.dispose();
         itemPixmap = new Pixmap(Gdx.files.internal("head/body" + bodyType + ".png"));
-        pixmap.drawPixmap(itemPixmap, 0, 0);
+        background.drawPixmap(itemPixmap, 0, 0);
         itemPixmap.dispose();
-        mergedImage = new Texture(pixmap);
-        pixmap.dispose();
+        mergedImage = new Texture(background);
+        background.dispose();
         return mergedImage;
+    }
+
+    public static Texture getTexture(int headType, int bodyType) {
+        Pixmap  pixmap;
+
+        pixmap = new Pixmap(Gdx.files.internal("default.png"));
+        return getTexture(pixmap, headType, bodyType);
     }
 }
