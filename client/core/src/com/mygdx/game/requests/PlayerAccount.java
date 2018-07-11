@@ -66,6 +66,12 @@ public class PlayerAccount {
         //return null;
     }
 
+    public static Texture getProfileTexture() throws IOException, JSONException {
+        if (profile == null)
+            return new Texture("default.png");
+        return profile.getTexture();
+    }
+
     public static Profile   selectProfile(String name) throws IOException, JSONException {
         int     profileId;
 
@@ -128,4 +134,19 @@ public class PlayerAccount {
         else
             return false;
     }
+
+    public static Texture   getTexture(int headType, int bodyType) {
+        if (headType <= 0 || headType > 3)
+            return new Texture("default.png");
+        if (bodyType <= 0 || bodyType > 3)
+            return new Texture("default.png");
+        return Profile.getTexture(headType, bodyType);
+    }
+
+    public static int       getProfilePoints() {
+        if (profile == null)
+            return -1;
+        return profile.getPoints();
+    }
+
 }

@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Profile;
 import com.mygdx.game.requests.Team;
@@ -34,6 +35,7 @@ public class CreateCharacterScreen implements Screen {
     private TextField teamText;
     private CheckBox checkboxTeam;
     private CheckBox checkboxMale;
+    private CheckBox checkboxFemale;
     private Label labelHeadNumber;
     private Label labelBodyNumber;
     private Texture textureCastle;
@@ -58,7 +60,8 @@ public class CreateCharacterScreen implements Screen {
         float pad = 5;
 
         // Character Sprite
-        texture = new Texture("default.png");
+//        texture = new Texture("default.png");
+        texture = PlayerAccount.getTexture(2, 3);
         image = new Image(texture);
 
         // Castle sprite
@@ -77,10 +80,17 @@ public class CreateCharacterScreen implements Screen {
         labelBodyNumber = new Label("1", skin);
         final Label labelTeam = new Label("Team", skin);
 
-        //creating checkboxes
+        //creating checkboxes for gender
         checkboxMale = new CheckBox("Male", skin);
         checkboxMale.setChecked(true);
-        final CheckBox checkboxFemale = new CheckBox("Female", skin);
+        checkboxFemale = new CheckBox("Female", skin);
+
+        //group up 2 gender choice checkboxes
+        ButtonGroup genderCheckBoxGroup = new ButtonGroup(checkboxFemale, checkboxMale);
+        genderCheckBoxGroup.setMaxCheckCount(1);
+        genderCheckBoxGroup.setUncheckLast(true);
+
+        //creating checkbox for team
         checkboxTeam = new CheckBox("Create new Team", skin);
 
         //textfields for team and name
@@ -91,12 +101,13 @@ public class CreateCharacterScreen implements Screen {
         teamText.setMessageText("Enter team name here");
 
         //making arrow buttons
-        ImageButton arrowHeadLeft = new ImageButton(skin);
-        ImageButton arrowHeadRight = new ImageButton(skin);
-        ImageButton arrowBodyLeft = new ImageButton(skin);
-        ImageButton arrowBodyRight = new ImageButton(skin);
-        ImageButton arrowCastleLeft = new ImageButton(skin);
-        ImageButton arrowCastleRight = new ImageButton(skin);
+        TextButton arrowHeadLeft = new TextButton("<", skin);
+        TextButton arrowHeadRight = new TextButton(">", skin);
+        TextButton arrowBodyLeft = new TextButton("<", skin);
+        TextButton arrowBodyRight = new TextButton(">", skin);
+        TextButton arrowCastleLeft = new TextButton("<", skin);
+        TextButton arrowCastleRight = new TextButton(">", skin);
+//        ImageButton arrowCastleLeft = new ImageButton(skin);
 
         //text button
         TextButton buttonBack = new TextButton("Back", skin);
@@ -113,18 +124,17 @@ public class CreateCharacterScreen implements Screen {
         checkboxMale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+               // if (checkboxMale.isChecked())
+                 //   checkboxFemale.setChecked(false);
 
-                checkboxMale.isChecked();
-                checkboxFemale.setChecked(false);
             }
         });
 
         checkboxFemale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
-                checkboxFemale.isChecked();
-                checkboxMale.setChecked(false);
+                //if (checkboxFemale.isChecked())
+                  //  checkboxMale.setChecked(false);
             }
         });
 
@@ -185,7 +195,8 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 if(castleChoice == 1) {
-                    textureCastle = new Texture("teamCastle1.png");
+                    castleChoice = 3;
+                    textureCastle = new Texture("teamCastle3.png");
                 }else
                 if(castleChoice == 2){
                     castleChoice--;
@@ -198,7 +209,26 @@ public class CreateCharacterScreen implements Screen {
                 show();
             }
         });
-        //TODO download the image dinamicly withou calling show()
+
+        /*
+         *   TODO download the image dinamicly withou calling show()
+         *
+         *   Работает, иногда палец не попадает т.к кнопка маленькая
+         *   прикол был в логике, выбор castle/body/head можно сделать круговым
+         *   чтоб стрелкой влево или вправо скролнуть весь лист.
+         *
+         *   Можно какбы и без Динамичной подгрузки решить проблему параметрами
+         *   show(labelHead, labelBody, Name...)
+         *   но лучше конечно же динамично подгружать
+         *
+         *   https://stackoverflow.com/questions/7551669/libgdx-spritebatch-render-to-texture
+         *   +
+         *   <code>
+         *       Sprite bird = new Sprite(birdTexture);
+         *       bird.setFlip(true, false);
+         *       bird.rotate(0.45);
+         *    </code>
+         */
         arrowCastleRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -211,7 +241,8 @@ public class CreateCharacterScreen implements Screen {
                     textureCastle = new Texture("teamCastle3.png");
                 }else
                 if(castleChoice == 3){
-                    textureCastle = new Texture("teamCastle3.png");
+                    castleChoice = 1;
+                    textureCastle = new Texture("teamCastle1.png");
                 }
                 show();
             }
@@ -383,7 +414,7 @@ public class CreateCharacterScreen implements Screen {
                     }
                     teamParams = new LinkedHashMap<String, String>();
                     teamParams.put(Team.NAME, teamName);
-                    teamParams.put(Team.LOGO, "default");
+                    teamParams.put(Team.LOGO, "teamCastle" + castleChoice);
                     teamParams.put(Team.BATTLE, "7");
                     teamId = Team.createNewTeam(teamParams);
                     teamText.setColor(Color.WHITE);

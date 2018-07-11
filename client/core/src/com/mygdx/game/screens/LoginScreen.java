@@ -79,7 +79,7 @@ public class LoginScreen implements Screen{
 		passwordField.setMessageText("Password goes here");
 
 		//Forgot password
-        forgotPassword = new TextButton("Forgot password?", skin, "small");
+		forgotPassword = new TextButton("Forgot password?", skin, "small");
 		//add buttons to table
 		TextButton register = new TextButton("Register", skin);
 		TextButton submit = new TextButton("Submit", skin);
@@ -91,7 +91,6 @@ public class LoginScreen implements Screen{
 				parent.changeScreen(parent.getRegister());
 			}
 		});
-
 
 
 		//add listeners to buttons
@@ -156,13 +155,11 @@ public class LoginScreen implements Screen{
 	@Override
         public void hide() {
 	}
-
+ 
 	@Override
         public void dispose() {
 			stage.dispose();
 	}
-
-
 
 	class SubmitListener extends ChangeListener {
     	private TextField	loginField;
@@ -225,7 +222,7 @@ public class LoginScreen implements Screen{
             bDialog.build().show();
     }
 }
-    
+
 
 /*
 
@@ -361,19 +358,11 @@ public class LoginScreen implements Screen {
         setBounds(0, 0, getWidth(), getHeight());
     }
 
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        batch.draw(region, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-    }
+	private void forgotPassword(){
+		final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+		bDialog.setTitle("Lol");
+		bDialog.setMessage("Too bad");
+		bDialog.addButton("Go back");
+		bDialog.build().show();
+	}
 }
-
-}
-/*
-    @Override
-    public void input(String text) {
-    }
-
-    @Override
-    public void canceled() {
-    }
- */
