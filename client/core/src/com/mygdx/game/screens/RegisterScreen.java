@@ -11,12 +11,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.logger.Logger;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegisterScreen  implements Screen {
     // New version
+    private final Logger log = new Logger();
     private GGame parent;
     private Stage stage;
     private Skin skin;
@@ -40,34 +45,56 @@ public class RegisterScreen  implements Screen {
     }
 
     private boolean  validateLogin(String login) {
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-]*");
+        Matcher matcher = pattern.matcher(login);
         if (login == null) {
+            log.warn("Login field is empty");
             setErrorMessage("Login field is empty");
             return false;
         }
         if (login.equals("")) {
+            log.warn("Password field is empty");
             setErrorMessage("Login field is empty");
             return false;
         }
         else if (login.length() < 6) {
+            log.warn("Login field must be at least 6 characters long");
             setErrorMessage("Login must contain at least 6 characters");
             return false;
         }
+        if(!matcher.matches()){
+            log.warn("Login has an illegal character");
+            setErrorMessage("Login has an illegal character");
+            return false;
+        }
+        log.info("Login validated successfully");
         return true;
     }
 
     private boolean  validatePassword(String password) {
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-]*");
+        Matcher matcher = pattern.matcher(password);
         if (password == null) {
+            log.warn("Password field is empty");
             setErrorMessage("Password field is empty");
             return false;
         }
         if (password.equals("")) {
+            log.warn("Password field is empty");
             setErrorMessage("Password field is empty");
             return false;
         }
         else if (password.length() < 6) {
+            log.warn("Password field must be at least");
             setErrorMessage("Password must contain at least 6 characters");
             return false;
         }
+        if(!matcher.matches()){
+            log.warn("Password has an illegal character");
+            setErrorMessage("Password has an illegal character");
+            return false;
+        }
+        log.info("Password validated successfully");
         return true;
     }
 
@@ -106,54 +133,10 @@ public class RegisterScreen  implements Screen {
 
         //add listeners to buttons
         register.addListener(new RegisterListener(loginField, passwordField));
-        /*        register.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                //sends data into DB
-                Player player;
-
-                if (validateLogin(loginField.getText()) == false)
-                    return;
-                else if (validatePassword(passwordField.getText()) == false)
-                    return;
-                else {
-                    String	encryptedPassword;
-
-                    encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
-                    //encryptedPassword = passwordField.getText();
-                    try {
-                        player = Player.registerNewPlayer(loginField.getText(), encryptedPassword);
-                        encryptedPassword = "";
-                        if (player == null) {
-                            label.setText(JsonHandler.errorMessage);
-                        }
-                        else {
-                            passwordField.setText("");
-                            PlayerAccount.setPlayer(player);
-                            parent.changeScreen(parent.getCharacterSelect());
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        if (JsonHandler.errorMessage != null)
-                            label.setText(JsonHandler.errorMessage);
-                        else
-                            label.setText("Something went wrong");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        if (JsonHandler.errorMessage != null)
-                            label.setText(JsonHandler.errorMessage);
-                        else
-                            label.setText("Something went wrong");
-                    }
-                }
-
-                //label.setText("Registered!");
-            }
-        });*/
-
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                log.info("Back button pressed");
                 parent.changeScreen(parent.getLogin());
             }
         });
@@ -222,7 +205,7 @@ public class RegisterScreen  implements Screen {
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             //sends data into DB
             Player player;
-
+            log.info("Register action start");
             if (validateLogin(loginField.getText()) == false)
                 return;
             else if (validatePassword(passwordField.getText()) == false)
@@ -234,12 +217,15 @@ public class RegisterScreen  implements Screen {
             //encryptedPassword = passwordField.getText();
             try {
                 if (PlayerAccount.registerNewPlayer(loginField.getText(), encryptedPassword)) {
+                    log.info("Registered successfully");
                     parent.changeScreen(parent.getCharacterSelect());
                 }
                 else {
+                    log.info("Register failed");
                     label.setText(JsonHandler.errorMessage);
                 }
             } catch (Exception e) {
+                log.error("Exception occurred");
                 e.printStackTrace();
                 if (JsonHandler.errorMessage != null)
                     label.setText(JsonHandler.errorMessage);

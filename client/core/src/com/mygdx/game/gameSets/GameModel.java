@@ -5,9 +5,13 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class GameModel {
     public World world;
-    private Body bodyd;
+    //private Body bodyd;
     private Body bodys;
     private Body bodyk;
+
+
+    public Body knight;
+
     public GameModel(){
 
         world = new World(new Vector2(0,-10f), true);
@@ -26,7 +30,7 @@ public class GameModel {
 
 
         // add it to the world
-        bodyd = world.createBody(bodyDef);
+        knight = world.createBody(bodyDef);
 
         // set the shape (here we use a box 1 meters wide, 1 meter tall )
         PolygonShape shape = new PolygonShape();
@@ -39,7 +43,7 @@ public class GameModel {
 
         // create the physical object in our body)
         // without this our body would just be data in the world
-        bodyd.createFixture(shape, 1.0f);
+        knight.createFixture(shape, 1.0f);
 
         // we no longer use the shape object here so dispose of it.
         shape.dispose();
