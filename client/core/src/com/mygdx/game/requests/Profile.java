@@ -444,10 +444,10 @@ public class Profile {
         Pixmap  itemPixmap;
 
         pixmap = new Pixmap(Gdx.files.internal("default.png"));
-        itemPixmap = new Pixmap(Gdx.files.internal("head/head" + headType + ".png"));
+        itemPixmap = new Pixmap(Gdx.files.internal("head/body" + bodyType + ".png"));
         pixmap.drawPixmap(itemPixmap, 0, 0);
         itemPixmap.dispose();
-        itemPixmap = new Pixmap(Gdx.files.internal("head/body" + bodyType + ".png"));
+        itemPixmap = new Pixmap(Gdx.files.internal("head/head" + headType + ".png"));
         pixmap.drawPixmap(itemPixmap, 0, 0);
         itemPixmap.dispose();
         mergedImage = new Texture(pixmap);
