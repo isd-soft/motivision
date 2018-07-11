@@ -16,13 +16,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: postgres
---
-
-COMMENT ON DATABASE postgres IS 'default administrative connection database';
-
-
---
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -34,20 +27,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
---
--- Name: adminpack; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
 
 
 SET default_tablespace = '';
@@ -136,7 +115,8 @@ ALTER SEQUENCE public.character_id_seq OWNED BY public."character".id;
 CREATE TABLE public.character_item (
     id integer NOT NULL,
     character_id integer NOT NULL,
-    item_id integer
+    item_id integer,
+    equipped boolean DEFAULT false
 );
 
 
@@ -243,7 +223,8 @@ ALTER SEQUENCE public.last_battle_id_seq OWNED BY public.last_battle.id;
 CREATE TABLE public.player (
     id integer NOT NULL,
     login character varying(30) NOT NULL,
-    password character varying(50) NOT NULL
+    password character varying(50) NOT NULL,
+    points integer DEFAULT 0
 );
 
 
@@ -406,15 +387,13 @@ ALTER TABLE ONLY public.team_activities ALTER COLUMN id SET DEFAULT nextval('pub
 --
 
 COPY public.activities (id, name, reward) FROM stdin;
-1	10 Push ups	50
-2	10 Pull ups	80
-3	1 km Run	70
-4	20 Sit ups	30
-5	swim 1 km	100
 6	volleyball game	40
+5	swim 1 km	10
+1	1 push up	5
+3	1 km Run	70
+4	1 sit up	2
+2	1 pull up	8
 7	frontflip	200
-8	Backflip	100
-9	test	10000
 \.
 
 
@@ -423,9 +402,10 @@ COPY public.activities (id, name, reward) FROM stdin;
 --
 
 COPY public."character" (id, player_id, head_type, body_type, gender, points, name, team_id) FROM stdin;
-17	4	2	1	m	0	testcharacter	3
-16	4	2	3	F	0	Power woman	3
-20	5	1	2	F	0	Warria	4
+33	29	1	1	M	0	abgar	14
+21	6	7	7	M	707	Vasea	5
+46	6	2	3	M	0	Mongolets	20
+52	22	1	1	M	0	djkfbsjfd	28
 \.
 
 
@@ -433,7 +413,10 @@ COPY public."character" (id, player_id, head_type, body_type, gender, points, na
 -- Data for Name: character_item; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.character_item (id, character_id, item_id) FROM stdin;
+COPY public.character_item (id, character_id, item_id, equipped) FROM stdin;
+6	21	8	t
+3	21	3	t
+4	21	4	t
 \.
 
 
@@ -442,18 +425,18 @@ COPY public.character_item (id, character_id, item_id) FROM stdin;
 --
 
 COPY public.items (id, type, image_url, price) FROM stdin;
-1	iron sword	1	333
-2	steel sword	2	555
-3	diamond sword	3	777
-4	iron shield	4	333
-5	steel shield	5	555
-6	diamond shield	6	777
-7	iron armor	7	333
-8	steel armor	8	555
-9	diamond armor	9	777
-10	iron leggins	10	333
-11	steel leggins	11	555
-12	diamond leggins	12	777
+6	diamond_shield	6	777
+3	diamond_sword	3	777
+8	steel_armor	8	555
+12	diamond_leggins	12	777
+9	diamond_armor	9	777
+1	iron_sword	1	333
+7	iron_armor	7	333
+2	steel_sword	2	555
+4	iron_shield	4	333
+11	steel_leggins	11	555
+10	iron_leggins	10	333
+5	steel_shield	5	555
 \.
 
 
@@ -462,7 +445,6 @@ COPY public.items (id, type, image_url, price) FROM stdin;
 --
 
 COPY public.last_battle (id, team_id, enemy_power, team_power) FROM stdin;
-1	4	1465	0
 \.
 
 
@@ -470,12 +452,45 @@ COPY public.last_battle (id, team_id, enemy_power, team_power) FROM stdin;
 -- Data for Name: player; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.player (id, login, password) FROM stdin;
-4	ab	123
-5	log2	pas3
-6	gmail	123456
-7	abgar1332	123123
-8	qwerty	xQYMg PKe0vDcWtmLz lFQ==
+COPY public.player (id, login, password, points) FROM stdin;
+4	ab	123	0
+5	log2	pas3	9998112
+7	alex7	123	0
+8	asdasd	dsadsa	0
+9	dndjsjsjdj	xjxjfjfj	0
+10	abgar123	123456	0
+11	122dhxxhxb	dhshzhhhzh	0
+12	123456	123456	0
+13	qqqqqq	qqqqqq	0
+14	654321	654321	0
+15	alex15	alex15	0
+16	098765	098765	0
+17	djdjdjdjd	djxjxjxj	0
+18	liviuu	liviuu	0
+19	vaseok	JYm8SJkl8FmXTN6WiWKDiA==	0
+20	987654	zLkjsnk14xwDbvBxL41Skg==	0
+22	lliviu	mvJjCtKEJiuYKQd/ipDuiw==	0
+23	asdfgh	ZmogiXBxJ12bNP/VvYPRSQ==	0
+24	sghgxbdgbf	oHiSJ1/B383o16oTC0BviQ==	0
+25	nickname	LyCvC65jCgZ JY2o75YbDg==	0
+26	lalala	r0WFlTKXjEbNkXfmACFduQ==	0
+27	jhdjdjdjdjd	EN p/x2XGscb/TNH17aLUQ==	0
+28	qweqwe	r2lALvCNgmogicnZBF5uTQ==	0
+29	abgar1223	rEvhdgrTUaxs/exc 9szkA==	0
+30	qwerty1	xQYMg PKe0vDcWtmLz lFQ==	0
+6	alex	rynKOLSo l80sNx/oDMo/Q==	0
+31	123456yuthgf	BIrXvkH3mUq9Zm4sA/b9oA==	0
+32	fnvbvkjkbfljfdkl	1Z2HLmIYNxRsMWK9Hb9/INeM7Xfzmv4BV/jM95QXkIg=	0
+33	 bchfdgdydydy	socw60q68wxVRhEUEV tDQ==	0
+34	ifjfj   djdj     d	2ImRt 7mz5AmuijayP5bSQ==	0
+35	vjvjv9	rEvhdgrTUaxs/exc 9szkA==	0
+36	vjvjv93	g34Gw2yl4L2DwwX7e3SSOg==	0
+37	shshshsh	FebGRvu0hl3z2T3HzfGR g==	0
+38	figificjcjc	HjB y MJVqd6ULEkfUexH08qgc8IIhPzFtDVmOoTCBs=	0
+39	54e355r	FUxSIO6IYotDcRPpiueWiA==	0
+40	artiom123	I2VfCWumpp5Vb/jzXGtPsw==	0
+44	nullll	SQVTu85MRKDpsANO2QElmA==	0
+45	qwerty	xQYMg PKe0vDcWtmLz lFQ==	0
 \.
 
 
@@ -484,9 +499,13 @@ COPY public.player (id, login, password) FROM stdin;
 --
 
 COPY public.team (id, name, lider_id, team_logo, battle_frequency, team_wins, team_loss) FROM stdin;
-3	Team1	17	logo	1	0	0
-6	testname	\N	logo	1	0	0
-4	Supa team	20	Top kek	1	2	6
+5	Sexy Boys	21	No logo	7	0	0
+26	sdfsdfsdfsd	\N	teamCastle1	7	0	0
+27	sndfdfsdf	\N	teamCastle1	7	0	0
+28	sdfjkdfsjk	52	teamCastle1	7	0	0
+14	Abgar	33	default	7	0	0
+20	Mongoly	46	teamCastle1	7	0	0
+22	sdfsdfdf	\N	teamCastle1	7	0	0
 \.
 
 
@@ -495,19 +514,42 @@ COPY public.team (id, name, lider_id, team_logo, battle_frequency, team_wins, te
 --
 
 COPY public.team_activities (id, activity_id, team_id) FROM stdin;
-1	3	3
-2	2	3
-4	1	3
-5	7	3
-12	6	6
-13	5	6
-14	1	6
-15	3	6
-16	4	6
-17	2	6
-18	8	6
-19	7	6
-20	9	4
+85	6	20
+86	5	20
+87	1	20
+88	3	20
+89	4	20
+90	2	20
+97	6	22
+98	5	22
+99	1	22
+100	3	22
+101	4	22
+102	2	22
+121	6	26
+122	5	26
+123	1	26
+124	3	26
+125	4	26
+126	2	26
+127	6	27
+128	5	27
+129	1	27
+130	3	27
+49	6	14
+50	5	14
+51	1	14
+52	3	14
+53	4	14
+54	2	14
+131	4	27
+132	2	27
+133	6	28
+134	5	28
+135	1	28
+136	3	28
+137	4	28
+138	2	28
 \.
 
 
@@ -522,7 +564,7 @@ SELECT pg_catalog.setval('public.activities_id_seq', 1, false);
 -- Name: character_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.character_id_seq', 20, true);
+SELECT pg_catalog.setval('public.character_id_seq', 23, true);
 
 
 --
@@ -564,7 +606,7 @@ SELECT pg_catalog.setval('public.team_activities_id_seq', 2, true);
 -- Name: team_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.team_id_seq', 4, true);
+SELECT pg_catalog.setval('public.team_id_seq', 6, true);
 
 
 --
@@ -674,7 +716,7 @@ ALTER TABLE ONLY public."character"
 --
 
 ALTER TABLE ONLY public."character"
-    ADD CONSTRAINT character___fk_2 FOREIGN KEY (team_id) REFERENCES public.team(id);
+    ADD CONSTRAINT character___fk_2 FOREIGN KEY (team_id) REFERENCES public.team(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -682,7 +724,7 @@ ALTER TABLE ONLY public."character"
 --
 
 ALTER TABLE ONLY public.character_item
-    ADD CONSTRAINT character_item___fk FOREIGN KEY (character_id) REFERENCES public."character"(id);
+    ADD CONSTRAINT character_item___fk FOREIGN KEY (character_id) REFERENCES public."character"(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -698,7 +740,7 @@ ALTER TABLE ONLY public.character_item
 --
 
 ALTER TABLE ONLY public.last_battle
-    ADD CONSTRAINT last_battle___fk FOREIGN KEY (team_id) REFERENCES public.team(id);
+    ADD CONSTRAINT last_battle___fk FOREIGN KEY (team_id) REFERENCES public.team(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -706,7 +748,7 @@ ALTER TABLE ONLY public.last_battle
 --
 
 ALTER TABLE ONLY public.team
-    ADD CONSTRAINT team___fk FOREIGN KEY (lider_id) REFERENCES public."character"(id) ON DELETE CASCADE;
+    ADD CONSTRAINT team___fk FOREIGN KEY (lider_id) REFERENCES public."character"(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -714,7 +756,7 @@ ALTER TABLE ONLY public.team
 --
 
 ALTER TABLE ONLY public.team_activities
-    ADD CONSTRAINT team_activities___fk FOREIGN KEY (team_id) REFERENCES public.team(id);
+    ADD CONSTRAINT team_activities___fk FOREIGN KEY (team_id) REFERENCES public.team(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

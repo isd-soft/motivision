@@ -98,6 +98,17 @@ public class RegisterScreen  implements Screen {
         return true;
     }
 
+    private boolean validateRetypePassword(String retypePassword, String password) {
+        System.out.println(retypePassword + " " + password);
+        if (retypePassword.equals(password) == false) {
+            log.warn("Password doesn't match");
+            setErrorMessage("Password doesn't match");
+            return false;
+        }
+        log.info("Password match, all is okay");
+        return true;
+    }
+
     @Override
     public void show() {
         stage.clear();
@@ -126,13 +137,18 @@ public class RegisterScreen  implements Screen {
         passwordField.setPasswordMode(true);
         passwordField.setMessageText("Password goes here");
 
+        final TextField retypePasswordField = new TextField("", skin);
+        retypePasswordField.setPasswordCharacter('*');
+        retypePasswordField.setPasswordMode(true);
+        retypePasswordField.setMessageText("Retype your password");
+
         //add buttons to table
         TextButton register = new TextButton("Register", skin);
         TextButton back = new TextButton("Back", skin, "small");
 
 
         //add listeners to buttons
-        register.addListener(new RegisterListener(loginField, passwordField));
+        register.addListener(new RegisterListener(loginField, passwordField, retypePasswordField));
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -147,6 +163,8 @@ public class RegisterScreen  implements Screen {
         table.add(loginField).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(passwordField).fillX().uniformX();
+        table.row().pad(10, 0, 10, 0);
+        table.add(retypePasswordField).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(register).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
@@ -195,10 +213,12 @@ public class RegisterScreen  implements Screen {
     class RegisterListener extends ChangeListener {
         private TextField	loginField;
         private TextField	passwordField;
+        private TextField   retypePasswordField;
 
-        public RegisterListener(TextField loginField, TextField passwordField) {
+        public RegisterListener(TextField loginField, TextField passwordField, TextField retypePasswordField) {
             this.loginField = loginField;
             this.passwordField = passwordField;
+            this.retypePasswordField = retypePasswordField;
         }
 
         @Override
@@ -209,6 +229,8 @@ public class RegisterScreen  implements Screen {
             if (validateLogin(loginField.getText()) == false)
                 return;
             else if (validatePassword(passwordField.getText()) == false)
+                return;
+            else if (validateRetypePassword(retypePasswordField.getText(), passwordField.getText()) == false)
                 return;
 
             String	encryptedPassword;
@@ -233,6 +255,7 @@ public class RegisterScreen  implements Screen {
                     label.setText("Something went wrong");
             }
             passwordField.setText("");
+            retypePasswordField.setText("");
 
             //label.setText("Registered!");
         }
