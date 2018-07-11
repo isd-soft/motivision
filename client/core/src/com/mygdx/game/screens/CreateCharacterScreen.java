@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Profile;
 import com.mygdx.game.requests.Team;
@@ -59,7 +60,8 @@ public class CreateCharacterScreen implements Screen {
         float pad = 5;
 
         // Character Sprite
-        texture = new Texture("default.png");
+//        texture = new Texture("default.png");
+        texture = PlayerAccount.getTexture(2, 3);
         image = new Image(texture);
 
         // Castle sprite
@@ -122,16 +124,17 @@ public class CreateCharacterScreen implements Screen {
         checkboxMale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+               // if (checkboxMale.isChecked())
+                 //   checkboxFemale.setChecked(false);
 
-                checkboxMale.isChecked();
             }
         });
 
         checkboxFemale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
-                checkboxFemale.isChecked();
+                //if (checkboxFemale.isChecked())
+                  //  checkboxMale.setChecked(false);
             }
         });
 
