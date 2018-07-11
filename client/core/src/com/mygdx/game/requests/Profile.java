@@ -447,10 +447,11 @@ public class Profile {
             headType = 1;
         if (bodyType <= 0 || bodyType > 3)
             bodyType = 1;
-        itemPixmap = new Pixmap(Gdx.files.internal("head/head" + headType + ".png"));
+
+        itemPixmap = new Pixmap(Gdx.files.internal("head/body" + bodyType + ".png"));
         background.drawPixmap(itemPixmap, 0, 0);
         itemPixmap.dispose();
-        itemPixmap = new Pixmap(Gdx.files.internal("head/body" + bodyType + ".png"));
+        itemPixmap = new Pixmap(Gdx.files.internal("head/head" + headType + ".png"));
         background.drawPixmap(itemPixmap, 0, 0);
         itemPixmap.dispose();
         mergedImage = new Texture(background);

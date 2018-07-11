@@ -55,7 +55,7 @@ public class CharacterProfileScreen implements Screen {
 // tells the asset manager to load the images and wait until finished loading.
         parent.knightMan.manager.finishLoading();
 // gets the images as a texture
-        knightTex = parent.knightMan.manager.get("assets/knight.png");
+        knightTex = parent.knightMan.manager.get("knight.png");
 
 
 
