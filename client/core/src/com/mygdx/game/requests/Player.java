@@ -131,11 +131,11 @@ public class Player {
             return null;
         }
         player = new Player(id);
+        if (jsonObject.has("characters") == false)
+            return player;
         if (jsonObject.getString("characters").equals("null"))
             return player;
         if (jsonObject.isNull("characters"))
-            return player;
-        if (jsonObject.has("characters") == false)
             return player;
 
         JSONArray arr = jsonObject.getJSONArray("characters");

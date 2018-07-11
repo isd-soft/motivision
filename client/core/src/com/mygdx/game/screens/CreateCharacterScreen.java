@@ -411,7 +411,7 @@ public class CreateCharacterScreen implements Screen {
                     }
                     teamParams = new LinkedHashMap<String, String>();
                     teamParams.put(Team.NAME, teamName);
-                    teamParams.put(Team.LOGO, "default");
+                    teamParams.put(Team.LOGO, "teamCastle" + castleChoice);
                     teamParams.put(Team.BATTLE, "7");
                     teamId = Team.createNewTeam(teamParams);
                     teamText.setColor(Color.WHITE);
