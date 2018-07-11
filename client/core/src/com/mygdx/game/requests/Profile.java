@@ -143,6 +143,7 @@ public class Profile {
         int     itemId;
         int     itemImage;
         int     itemPrice;
+        boolean equipped;
 
         if (jsonObject.has("items") == false)
             return;
@@ -167,7 +168,8 @@ public class Profile {
             itemImage = arr.getJSONObject(i).getInt(Item.ITEM_IMAGE);
             itemPrice = arr.getJSONObject(i).getInt(Item.ITEM_PRICE);
             itemType = arr.getJSONObject(i).getString(Item.ITEM_TYPE);
-            item = new Item(itemId, itemImage, itemPrice, itemType);
+            equipped = arr.getJSONObject(i).getBoolean(Item.ITEM_EQUIPPED);
+            item = new Item(itemId, itemImage, itemPrice, itemType, equipped);
             itemList.add(item);
         }
     }
