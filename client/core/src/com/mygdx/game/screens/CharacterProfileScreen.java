@@ -87,7 +87,7 @@ public class CharacterProfileScreen implements Screen {
         TextButton settingsButton = new TextButton("Settings", skin);
         TextButton backButton = new TextButton("Back", skin);
 
-        ImageButton imageButton;
+        ImageButton imageButton = null;
 
         Table imageTable = new Table();
         Table screenTable = new Table();
@@ -164,9 +164,42 @@ public class CharacterProfileScreen implements Screen {
         itemTable.add(pointsLabel).fill().expand().padLeft(pad*2);
         itemTable.row();
 
-        for (Integer e : numberOfItems) {
-
-            imageButton = new ImageButton(addImage()); //Set the button up
+        for (int i = 1; i<5; i++) {
+            int x = 0;
+            if(i == 1){
+                for(int e = 0; e < 3; e++){
+                    imageButton =  new ImageButton((addImage("store_items/sword_" + (i+e) + ".png")));
+                    imageButton.addListener(new ClickButton("sword_" + (i+e)));
+                    imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
+                }
+                imageTable.row();
+            }else if(i ==2) {
+                for(int e = 0; e < 3; e++){
+                    imageButton =  new ImageButton((addImage("store_items/shield_" + ((i-1)+e) + ".png")));
+                    imageButton.addListener(new ClickButton("shield_" + ((i-1)+e)));
+                    imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
+                }
+                imageTable.row();
+            }else if(i == 3){
+                for(int e = 0; e < 3; e++) {
+                    imageButton = new ImageButton((addImage("store_items/armor_" + ((i-2)+e) + ".png")));
+                    imageButton.addListener(new ClickButton("armor_" + (i-2)+e));
+                    imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
+                }
+                imageTable.row();
+            }else{
+                for(int e = 0; e < 3; e++){
+                    imageButton =  new ImageButton((addImage("store_items/leggins_" + ((i-3)+e) + ".png")));
+                    imageButton.addListener(new ClickButton("leggins_" + (i-3)+e));
+                    imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
+                    x = e;
+                }
+                imageTable.row();
+            }
+            if(imageButton == null){
+                imageButton = new ImageButton((addImage("store_items/sword_default.png")));
+            }
+            //Set the button up
             //add listener to image button, so item will replace already equipped item
             imageButton.addListener(new ChangeListener() {
                 @Override
@@ -175,10 +208,7 @@ public class CharacterProfileScreen implements Screen {
                 }
             });
 
-            imageTable.add(imageButton).fill().expand();//.pad(pad, pad, pad, pad);
-            if(e%3 == 0) {
-                imageTable.row();
-            }
+
         }
         //here should go if statement, if user is admin of team
         //if{ }
@@ -196,9 +226,9 @@ public class CharacterProfileScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
-    public TextureRegionDrawable addImage(){
+    public TextureRegionDrawable addImage(String imagePath){
 
-        textureImage = new Texture(Gdx.files.internal("supaimage.png"));
+        textureImage = new Texture(Gdx.files.internal(imagePath));
         textureRegion = new TextureRegion(textureImage);
         textureRegionDrawable = new TextureRegionDrawable(textureRegion);
         return textureRegionDrawable;
@@ -237,6 +267,17 @@ public class CharacterProfileScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    class ClickButton extends ChangeListener{
+
+        public ClickButton(String name) {
+        }
+
+        @Override
+        public void changed(ChangeEvent changeEvent, Actor actor) {
+
+        }
     }
 }
 
