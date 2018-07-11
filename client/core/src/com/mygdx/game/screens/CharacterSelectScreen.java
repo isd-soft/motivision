@@ -166,10 +166,8 @@ public class CharacterSelectScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        //camera.update();
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        // tell our stage to do actions and draw itself
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
@@ -236,6 +234,24 @@ public class CharacterSelectScreen implements Screen {
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to delete your account ?");
+            bDialog.setClickListener(new ButtonClickListener() {
+
+                @Override
+                public void click(int button) {
+                    if (button == YES) {
+                        try {
+                            PlayerAccount.deletePlayer();
+                            parent.changeScreen(parent.getLogin());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        texture = null;
+                        show();
+                    }
+                }
+            });
             bDialog.addButton("Delete");
             bDialog.addButton("Cancel");
             bDialog.build().show();

@@ -96,6 +96,7 @@ public class PlayerAccount {
     public static boolean   deletePlayer() throws IOException, JSONException {
         if (player == null)
             return false;
+        logOut();
         return player.deletePlayer();
     }
 

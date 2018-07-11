@@ -67,10 +67,10 @@ public class CreateCharacterScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-        onCreate();
+        onScreenCreate();
     }
 
-    public void onCreate() {
+    public void onScreenCreate() {
         defaultNameText = "Enter name here";
         defaultTeamText = "Enter team name here";
         nameText = new TextField(null, skin);
@@ -90,12 +90,6 @@ public class CreateCharacterScreen implements Screen {
         genderCheckBoxGroup.setMaxCheckCount(1);
         checkboxTeam = new CheckBox("Create new Team", skin);
         //making arrow buttons
-        arrowHeadLeft = new TextButton("<", skin);
-        arrowHeadRight = new TextButton(">", skin);
-        arrowBodyLeft = new TextButton("<", skin);
-        arrowBodyRight = new TextButton(">", skin);
-        arrowCastleLeft = new TextButton("<", skin);
-        arrowCastleRight = new TextButton(">", skin);
         buttonBack = new TextButton("Back", skin);
         buttonOk = new TextButton("Ok", skin);
     }
@@ -109,6 +103,7 @@ public class CreateCharacterScreen implements Screen {
         float pad = 5;
 
         // Character Sprite
+        System.out.println("show");
         texture = PlayerAccount.getTexture(headType, bodyType);
         image = new Image(texture);
 
@@ -126,9 +121,13 @@ public class CreateCharacterScreen implements Screen {
 
         //group up 2 gender choice checkboxes
 
-        //creating checkbox for team
-        checkboxTeam.setChecked(checkBoxTeamBoolean);
 
+        arrowHeadLeft = new TextButton("<", skin);
+        arrowHeadRight = new TextButton(">", skin);
+        arrowBodyLeft = new TextButton("<", skin);
+        arrowBodyRight = new TextButton(">", skin);
+        arrowCastleLeft = new TextButton("<", skin);
+        arrowCastleRight = new TextButton(">", skin);
         //textfields for team and name
 
 
@@ -157,17 +156,6 @@ public class CreateCharacterScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 checkboxFemaleBoolean = true;
                 checkboxMaleBoolean = false;
-            }
-        });
-
-        checkboxTeam.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                if (checkBoxTeamBoolean == true){
-                    checkBoxTeamBoolean = false;
-                }
-                else
-                    checkBoxTeamBoolean = true;
             }
         });
 
