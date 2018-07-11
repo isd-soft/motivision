@@ -173,7 +173,8 @@ public class CharacterProfileScreen implements Screen {
     }
 
     public TextureRegionDrawable addImage(){
-        textureImage = new Texture(Gdx.files.internal("supaimage.png"));
+
+        textureImage = new Texture(Gdx.files.internal("result.png"));
         textureRegion = new TextureRegion(textureImage);
         textureRegionDrawable = new TextureRegionDrawable(textureRegion);
         return textureRegionDrawable;
