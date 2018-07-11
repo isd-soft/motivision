@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameSets.AppPreferences;
+import com.mygdx.game.loader.AssetsManager;
 import com.mygdx.game.screens.*;
 
 public class GGame extends Game {
@@ -27,7 +28,9 @@ private EarnPointsScreen earnPointsScreen;
 private AdminScreen adminScreen;
 private TeamMembersScreen teamMembersScreen;
 private LastBattleScreen lastBattleScreen;
+private AnimationScreen animationScreen;
 
+public  AssetsManager knightMan = new AssetsManager();
 
 private final static int LOGIN = 0;
 public int getLogin(){return LOGIN;}
@@ -61,12 +64,17 @@ public int getAdmin(){ return ADMIN;}
 private final static int TEAMMEMBER = 9;
 public int getTeamMembers(){ return TEAMMEMBER;}
 
-private final static int BATTLE = 10;
+private final static int ANIMATION = 10;
+public int getAnimation() {return ANIMATION;}
+
+private final static int BATTLE = 11;
 public int getBattle(){return BATTLE;}
 
-private final static int LASTBATTLE = 11;
+private final static int LASTBATTLE = 12;
 public int getLastBattle(){return LASTBATTLE;}
-        
+
+
+
 //PREFERENCES - preferencessScreen - settingScreen
 //APPLICATION - mainScreen - gameScreen
 //MENU - menuScreen - menuScreen
@@ -114,6 +122,11 @@ public void changeScreen(int screen){
             if(teamMembersScreen == null) teamMembersScreen = new TeamMembersScreen(this);
             this.setScreen(teamMembersScreen);
             break;
+		case ANIMATION:
+			if(animationScreen == null) animationScreen = new AnimationScreen(this);
+			this.setScreen(animationScreen);
+			break;
+
 		case BATTLE:
 			if(battleScreen == null) battleScreen = new BattleScreen(this);
 					this.setScreen(battleScreen);
@@ -140,8 +153,8 @@ public void changeScreen(int screen){
                 //this.setScreen(new )
 //			  teamMembersScreen = new TeamMembersScreen(this);
 //                setScreen(teamMembersScreen);
-              loginScreen = new LoginScreen(this);
-              setScreen(loginScreen);
+              battleScreen = new BattleScreen(this);
+              setScreen(battleScreen);
 //			  characterSelect = new CharacterSelect(this);
 //			  setScreen(characterSelect);
 	}

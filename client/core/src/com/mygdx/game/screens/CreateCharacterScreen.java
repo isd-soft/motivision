@@ -301,10 +301,10 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.add(labelGender).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(checkboxMale)
                 .expand().fill();
-                //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
+        //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.add(checkboxFemale)
                 .expand().fill();
-                //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
+        //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.row().pad(10, 0, 0, 0);
 
         headTable.add(arrowHeadLeft);
