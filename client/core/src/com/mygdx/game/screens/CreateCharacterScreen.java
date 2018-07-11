@@ -245,25 +245,6 @@ public class CreateCharacterScreen implements Screen {
             }
         });
 
-        /*
-         *   TODO download the image dinamicly withou calling show()
-         *
-         *   Работает, иногда палец не попадает т.к кнопка маленькая
-         *   прикол был в логике, выбор castle/body/head можно сделать круговым
-         *   чтоб стрелкой влево или вправо скролнуть весь лист.
-         *
-         *   Можно какбы и без Динамичной подгрузки решить проблему параметрами
-         *   show(labelHead, labelBody, Name...)
-         *   но лучше конечно же динамично подгружать
-         *
-         *   https://stackoverflow.com/questions/7551669/libgdx-spritebatch-render-to-texture
-         *   +
-         *   <code>
-         *       Sprite bird = new Sprite(birdTexture);
-         *       bird.setFlip(true, false);
-         *       bird.rotate(0.45);
-         *    </code>
-         */
         arrowCastleRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -479,8 +460,6 @@ public class CreateCharacterScreen implements Screen {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 }
