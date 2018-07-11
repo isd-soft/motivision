@@ -25,7 +25,7 @@ public class Character {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "team_id")
-    @OneToOne(mappedBy = "admin")
+    @OneToOne(mappedBy = "admin", cascade = CascadeType.ALL)
     private Team team;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

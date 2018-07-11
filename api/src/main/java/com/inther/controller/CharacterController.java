@@ -459,4 +459,30 @@ public class CharacterController {
         map.put("characters", result);
         return map;
     }
+
+    /*
+    * Delete player request
+    * Used to delete player and all player characters
+    * If a character is team admin then the team will be deleted as well
+    * and thus all the characters inside that team
+    * @param playerId - Player to delete
+    * @return status - failed if the player was not found
+    * @return status - success if the player was deleted successfully
+    * */
+    @RequestMapping(value = "/delete_player", method = RequestMethod.DELETE)
+    public Map<String, Object> deletePlayer(@RequestParam("playerId") Long playerId) {
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Player> optionalCharacter = playerRepository.findById(playerId);
+        if (!optionalCharacter.isPresent()) {
+            log.warn("Player with playerId " + playerId + " not found");
+            map.put("status", "failed");
+            map.put("message", "Player not found");
+            return map;
+        }
+        log.info("Player found");
+        playerRepository.deleteById(playerId);
+        log.info("Player deleted");
+        map.put("status", "success");
+        return map;
+    }
 }
