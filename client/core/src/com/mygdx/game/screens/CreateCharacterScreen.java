@@ -30,12 +30,14 @@ public class CreateCharacterScreen implements Screen {
     private Stage stage;
     private Viewport viewport;
     private Skin skin;
-    private TextField nameText = null;
+    private TextField nameText;
     private TextField teamText;
     private CheckBox checkboxTeam;
     private CheckBox checkboxMale;
     private Label labelHeadNumber;
     private Label labelBodyNumber;
+    private Texture textureCastle;
+    private Integer castleChoice = null;
 
     public CreateCharacterScreen(GGame g) {
         parent = g;
@@ -49,9 +51,9 @@ public class CreateCharacterScreen implements Screen {
 
     @Override
     public void show() {
-        Texture texture;
+        final Texture texture;
         Image image;
-        Texture textureCastle;
+
 
         stage.clear();
         float pad = 5;
@@ -59,8 +61,13 @@ public class CreateCharacterScreen implements Screen {
         // Character Sprite
         texture = new Texture("default.png");
         image = new Image(texture);
-        textureCastle = new Texture("monstercastle.png");
-        Image imageCastle = new Image(textureCastle);
+
+        // Castle sprite
+        if (textureCastle == null) {
+            castleChoice = 1;
+            textureCastle = new Texture("teamCastle1.png");
+        }
+        final Image imageCastle = new Image(textureCastle);
 
         //making labels
         final Label labelName = new Label("Name", skin);
@@ -78,6 +85,8 @@ public class CreateCharacterScreen implements Screen {
         checkboxTeam = new CheckBox("Create new Team", skin);
 
         //textfields for team and name
+        nameText = new TextField(null, skin);
+        nameText.setMessageText("Enter name here");
         teamText = new TextField(null, skin);
         teamText.setMessageText("Enter team name here");
 
@@ -97,7 +106,7 @@ public class CreateCharacterScreen implements Screen {
         Table tableActivities = new Table();
         Table headTable = new Table();
         Table bodyTable = new Table();
-        Table castleTable = new Table();
+        final Table castleTable = new Table();
         Table buttonTable = new Table();
         Table screenTable = new Table();
 
@@ -175,14 +184,36 @@ public class CreateCharacterScreen implements Screen {
         arrowCastleLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-
+                if(castleChoice == 1) {
+                    textureCastle = new Texture("teamCastle1.png");
+                }else
+                if(castleChoice == 2){
+                    castleChoice--;
+                    textureCastle = new Texture("teamCastle1.png");
+                }else
+                if(castleChoice == 3){
+                    castleChoice--;
+                    textureCastle = new Texture("teamCastle2.png");
+                }
+                show();
             }
         });
-
+        //TODO download the image dinamicly withou calling show()
         arrowCastleRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-
+                if(castleChoice == 1){
+                    castleChoice++;
+                    textureCastle = new Texture("teamCastle2.png");
+                }else
+                if(castleChoice == 2){
+                    castleChoice++;
+                    textureCastle = new Texture("teamCastle3.png");
+                }else
+                if(castleChoice == 3){
+                    textureCastle = new Texture("teamCastle3.png");
+                }
+                show();
             }
         });
 
@@ -193,10 +224,10 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.add(labelGender).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(checkboxMale)
                 .expand().fill();
-                //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
+        //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.add(checkboxFemale)
                 .expand().fill();
-                //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
+        //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.row().pad(10, 0, 0, 0);
 
         headTable.add(arrowHeadLeft);
@@ -306,23 +337,22 @@ public class CreateCharacterScreen implements Screen {
             if (nameExist == true) {
                 nameText.setColor(Color.RED);
                 return false;
-            }
-            else {
+            } else {
                 nameText.setColor(Color.WHITE);
                 return true;
             }
         }
 
         @Override
-        public void changed(ChangeEvent event, Actor actor){
-            String  gender;
-            String  profileName;
-            String  teamName;
-            int     teamId;
-            boolean                         nameExist;
-            LinkedHashMap<String, String>   teamParams;
+        public void changed(ChangeEvent event, Actor actor) {
+            String gender;
+            String profileName;
+            String teamName;
+            int teamId;
+            boolean nameExist;
+            LinkedHashMap<String, String> teamParams;
             //PLACE_HOLDER for registration
-            LinkedHashMap<String, String>   characterParameters;
+            LinkedHashMap<String, String> characterParameters;
 
             characterParameters = new LinkedHashMap<String, String>();
 
