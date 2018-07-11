@@ -42,7 +42,11 @@ public class CreateCharacterScreen implements Screen {
     private Integer castleChoice = null;
     private Integer bodyType = 1;
     private Integer headType = 1;
-
+    private Boolean checkboxMaleBoolean = true;
+    private Boolean checkboxFemaleBoolean = false;
+    private Boolean checkBoxTeamBoolean = false;
+    private String defaultNameText = "Enter name here";
+    private String defaultTeamText = "Enter team name here";
     public CreateCharacterScreen(GGame g) {
         parent = g;
 
@@ -88,23 +92,23 @@ public class CreateCharacterScreen implements Screen {
 
         //creating checkboxes for gender
         checkboxMale = new CheckBox("Male", skin);
-        checkboxMale.setChecked(true);
+        checkboxMale.setChecked(checkboxMaleBoolean);
         checkboxFemale = new CheckBox("Female", skin);
+        checkboxFemale.setChecked(checkboxFemaleBoolean);
 
         //group up 2 gender choice checkboxes
         ButtonGroup genderCheckBoxGroup = new ButtonGroup(checkboxFemale, checkboxMale);
         genderCheckBoxGroup.setMaxCheckCount(1);
-        genderCheckBoxGroup.setUncheckLast(true);
 
         //creating checkbox for team
         checkboxTeam = new CheckBox("Create new Team", skin);
+        checkboxTeam.setChecked(checkBoxTeamBoolean);
 
         //textfields for team and name
-
         nameText = new TextField(null, skin);
-        nameText.setMessageText("Enter name here");
+        nameText.setMessageText(defaultNameText);
         teamText = new TextField(null, skin);
-        teamText.setMessageText("Enter team name here");
+        teamText.setMessageText(defaultTeamText);
 
         //making arrow buttons
         TextButton arrowHeadLeft = new TextButton("<", skin);
@@ -130,12 +134,41 @@ public class CreateCharacterScreen implements Screen {
         checkboxMale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                checkboxMaleBoolean = true;
+                checkboxFemaleBoolean = false;
             }
         });
 
         checkboxFemale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                checkboxFemaleBoolean = true;
+                checkboxMaleBoolean = false;
+            }
+        });
+
+        checkboxTeam.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (checkBoxTeamBoolean == true){
+                    checkBoxTeamBoolean = false;
+                }
+                else
+                    checkBoxTeamBoolean = true;
+            }
+        });
+
+        nameText.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                defaultNameText = nameText.getText();
+            }
+        });
+
+        teamText.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                defaultTeamText = teamText.getText();
             }
         });
 

@@ -365,4 +365,4 @@ public class LoginScreen implements Screen {
 		bDialog.addButton("Go back");
 		bDialog.build().show();
 	}
-}
+}*/
