@@ -35,6 +35,8 @@ public class PlayerAccount {
     }
 
     public static int getPlayerId() {
+        if (player == null)
+            return -1;
         return player.getId();
     }
 
