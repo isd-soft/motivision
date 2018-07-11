@@ -39,22 +39,33 @@ public class CreateCharacterScreen implements Screen {
     private Label labelHeadNumber;
     private Label labelBodyNumber;
     private Texture textureCastle;
-    private Integer castleChoice = null;
+    private Integer castleChoice = 1;
     private Integer bodyType = 1;
     private Integer headType = 1;
     private Boolean checkboxMaleBoolean = true;
     private Boolean checkboxFemaleBoolean = false;
     private Boolean checkBoxTeamBoolean = false;
-    private String defaultNameText = "Enter name here";
-    private String defaultTeamText = "Enter team name here";
+    private String defaultNameText;
+    private String defaultTeamText;
+
+
     public CreateCharacterScreen(GGame g) {
         parent = g;
-
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
-
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
+        onCreate();
+    }
+
+    public void onCreate() {
+        nameText = new TextField(null, skin);
+        nameText.setMessageText(defaultNameText);
+        teamText = new TextField(null, skin);
+        teamText.setMessageText(defaultTeamText);
+        textureCastle = new Texture("teamCastle1.png");
+        defaultNameText = "Enter name here";
+        defaultTeamText = "Enter team name here";
     }
 
     @Override
@@ -69,11 +80,6 @@ public class CreateCharacterScreen implements Screen {
         texture = PlayerAccount.getTexture(headType, bodyType);
         image = new Image(texture);
 
-        // Castle sprite
-        if (textureCastle == null) {
-            castleChoice = 1;
-            textureCastle = new Texture("teamCastle1.png");
-        }
         final Image imageCastle = new Image(textureCastle);
 
         //making labels
@@ -105,10 +111,7 @@ public class CreateCharacterScreen implements Screen {
         checkboxTeam.setChecked(checkBoxTeamBoolean);
 
         //textfields for team and name
-        nameText = new TextField(null, skin);
-        nameText.setMessageText(defaultNameText);
-        teamText = new TextField(null, skin);
-        teamText.setMessageText(defaultTeamText);
+
 
         //making arrow buttons
         TextButton arrowHeadLeft = new TextButton("<", skin);
@@ -155,20 +158,6 @@ public class CreateCharacterScreen implements Screen {
                 }
                 else
                     checkBoxTeamBoolean = true;
-            }
-        });
-
-        nameText.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                defaultNameText = nameText.getText();
-            }
-        });
-
-        teamText.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                defaultTeamText = teamText.getText();
             }
         });
 
