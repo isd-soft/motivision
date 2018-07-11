@@ -40,9 +40,6 @@ public class LastBattleScreen implements Screen {
     public void show() {
         stage.clear();
         stage.setDebugAll(true);
-
-
-
         // Character Sprite
         Texture texture = new Texture("monster.png");
         Image image = new Image(texture);

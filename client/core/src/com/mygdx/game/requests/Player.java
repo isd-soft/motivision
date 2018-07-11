@@ -1,5 +1,7 @@
 package com.mygdx.game.requests;
 
+import com.mygdx.game.logger.Logger;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -14,7 +16,7 @@ import org.json.JSONObject;
 public class Player {
     private	int	id;
     private LinkedHashMap<Integer, String>	characterList;
-
+    private static Logger log = new Logger();
     private Player(int id) {
         this.id = id;
         this.characterList = null;
@@ -131,11 +133,11 @@ public class Player {
             return null;
         }
         player = new Player(id);
+        if (jsonObject.has("characters") == false)
+            return player;
         if (jsonObject.getString("characters").equals("null"))
             return player;
         if (jsonObject.isNull("characters"))
-            return player;
-        if (jsonObject.has("characters") == false)
             return player;
 
         JSONArray arr = jsonObject.getJSONArray("characters");
@@ -150,36 +152,11 @@ public class Player {
         return player;
     }
 
-    private static Profile    createNewProfile(int playerId) {
-        LinkedHashMap<String, String>   profileParams;
-        Profile                         profile = null;
-
-        profileParams = new LinkedHashMap<String, String>();
-        profileParams.put(Profile.NAME, "Vasea5");
-        profileParams.put(Profile.PLAYER_ID, playerId + "");
-        profileParams.put(Profile.TEAM_ID, "2");
-        profileParams.put(Profile.HEAD_TYPE, "7");
-        profileParams.put(Profile.BODY_TYPE, "7");
-        profileParams.put(Profile.GENDER, "F");
-        profileParams.put(Profile.IS_ADMIN, "true");
-        try {
-            profile = Profile.createNewProfile(profileParams);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return profile;
-    }
-
     public static Player	loginPlayer(String login, String password) throws IOException, JSONException {
         String  url;
         Player  player;
-      //  String  urlParameters;
-       // List<BasicNameValuePair> urlParameters;
-
         if (loginExists(login) == false) {
+            log.warn("Player doesn't exist");
             setErrorMessage("Player does not exist");
             return null;
         }
@@ -187,10 +164,7 @@ public class Player {
         url = JsonHandler.domain + "/login";
         String urlParameters = "login=" + login + "&password=" + password;
         player = getPlayerFromUrl(url, urlParameters, "POST");
-//        PlayerAccount.setPlayer(player);
-
-
-
+        log.info("Player found");
         return player;
     }
 
@@ -205,7 +179,6 @@ public class Player {
         url = JsonHandler.domain + "/register_player";
         String urlParameters = "login=" + login + "&password=" + password;
         player = getPlayerFromUrl(url, urlParameters, "POST");
-//        PlayerAccount.setPlayer(player);
         return player;
     }
 }

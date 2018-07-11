@@ -12,12 +12,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.*;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,8 +31,8 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 public class JsonHandler {
 //    static final String domain = "http://207.154.207.47:8080";
-    static final String domain = "http://192.168.1.23:8080";
-//    static final String domain = "http://172.17.41.110:8080";
+//    static final String domain = "http://192.168.1.23:8080";
+    static final String domain = "http://172.17.41.110:8080";
     public static String	errorMessage = null;
 
 

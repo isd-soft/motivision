@@ -84,17 +84,6 @@ public class PlayerAccount {
 
         player = Player.loginPlayer(login, encryptedPassword);
         PlayerAccount.player = player;
-
-
-        //deleteProfile("Vasea3");
-        //Delete this please
-//        if (player != null) {
-//            Profile profile = createNewProfile(player.getId());
-//            System.out.println("Profile:");
-//            Profile.getProfile("Vasea");
-//            PlayerAccount.printProfile();
-//        }
-        //Stop deleting
         return (player != null);
     }
 
