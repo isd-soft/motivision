@@ -16,6 +16,11 @@ import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.gameSets.GGame;
 
+import de.tomgrill.gdxdialogs.core.GDXDialogs;
+import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
+import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
+import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
+
 public class LoginScreen implements Screen{
     // New version
 
@@ -25,17 +30,17 @@ public class LoginScreen implements Screen{
 	private Label label;
 	private Label labelName;
 	private Label labelPassword;
-
-
+    private TextButton forgotPassword;
 	private Viewport viewport;
 	private Camera camera;
 	private Music loginMusic;
+	private GDXDialogs dialogs;
 
 
 
     public LoginScreen(GGame g){
     	parent = g;
-
+		dialogs = GDXDialogsSystem.install();
 		stage = new Stage();
 		viewport = new StretchViewport(800, 480, stage.getCamera());
 
@@ -72,6 +77,8 @@ public class LoginScreen implements Screen{
 		passwordField.setPasswordMode(true);
 		passwordField.setMessageText("Password goes here");
 
+		//Forgot password
+        forgotPassword = new TextButton("Forgot password?", skin, "small");
 		//add buttons to table
 		TextButton register = new TextButton("Register", skin);
 		TextButton submit = new TextButton("Submit", skin);
@@ -85,8 +92,10 @@ public class LoginScreen implements Screen{
 		});
 
 
+
 		//add listeners to buttons
 		submit.addListener(new SubmitListener(loginField, passwordField));
+		forgotPassword.addListener(new ForgotPassword());
 		/*
 		submit.addListener(new ChangeListener() {
 			@Override
@@ -149,6 +158,8 @@ public class LoginScreen implements Screen{
 		table.row().pad(40, 10, 0, 10);
 		table.add(register);
 		table.add(submit);
+		table.row().pad(20, 0, 0, 0);
+		table.add(forgotPassword);
 
 
 
@@ -188,11 +199,13 @@ public class LoginScreen implements Screen{
 	@Override
         public void hide() {
 	}
- 
+
 	@Override
         public void dispose() {
 			stage.dispose();
 	}
+
+
 
 	class SubmitListener extends ChangeListener {
     	private TextField	loginField;
@@ -236,6 +249,21 @@ public class LoginScreen implements Screen{
 		}
 	}
 
+	class ForgotPassword extends ChangeListener{
+
+        @Override
+        public void changed(ChangeEvent changeEvent, Actor actor) {
+            forgotPassword();
+        }
+    }
+
+    private void forgotPassword(){
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+            bDialog.setTitle("Lol");
+            bDialog.setMessage("Too bad");
+            bDialog.addButton("Go back");
+            bDialog.build().show();
+    }
 }
     
 
@@ -270,7 +298,7 @@ public class LoginScreen implements Screen {
     private TextField.TextFieldStyle textFieldStyle;
     private float densityT = 60 * Gdx.graphics.getDensity();
     private BitmapFont bitmapFont;
-    
+
     private    Table tableMain, tableMenu;
     private    Label title;
     private    TextButton button;
@@ -357,12 +385,12 @@ public class LoginScreen implements Screen {
     @Override
     public void dispose() {
     }
-    
+
     class ButtonClickListener implements {
-        
+
     }
-    
-    
+
+
     public class SimpleActor extends Actor {
 
     private final TextureRegion region;
@@ -378,7 +406,7 @@ public class LoginScreen implements Screen {
         batch.draw(region, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
     }
 }
-    
+
 }
 /*
     @Override
