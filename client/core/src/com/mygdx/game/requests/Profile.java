@@ -319,12 +319,13 @@ public class Profile {
         Texture mergedImage;
         Pixmap pixmap;
 
+        System.out.println("Start creating profile texture");
         pixmap = new Pixmap(Gdx.files.internal("default.png"));
         pixmap = addItem(pixmap, itemImages.get("leggins"), 30, 353);
         pixmap = addItem(pixmap, itemImages.get("armor"), 0, 188);
         pixmap = addItem(pixmap, itemImages.get("sword"), 203, 165);
         pixmap = addItem(pixmap, itemImages.get("fingers"), 219, 304);
-        if (itemImages.get("shield").equals(null) == false) {
+        if (itemImages.get("shield").equals("null") == false) {
             pixmap = addItem(pixmap, itemImages.get("shield"), 17, 320);
         }
         mergedImage = getTexture(pixmap, headType, bodyType);
@@ -332,29 +333,31 @@ public class Profile {
         return mergedImage;
     }
 
-    public Texture getTexture() throws IOException {
+    public Texture getTexture() {
         Map<String, String> itemImages;
         Set<String>         itemSet;
 
-        if (itemList == null)
-            return new Texture("default.png");
+        //System.out.println("procesing...");
         itemImages = new LinkedHashMap<String, String>();
         itemImages.put("sword", "default_sword");
         itemImages.put("armor", "default_armor");
         itemImages.put("fingers", "default_fingers");
         itemImages.put("leggins", "default_leggins");
-        itemImages.put("shield", null);
+        itemImages.put("shield", "null");
         itemSet = itemImages.keySet();
-        for (Item item: itemList) {
-            for (String itemType: itemSet) {
-                if (item.getType().contains(itemType)) {
-                    itemImages.put(itemType, item.getType());
-                    if (itemType.equals("armor")) {
-                        itemImages.put("fingers", item.getType().replaceAll("armor", "fingers"));
+        if (itemList != null) {
+            for (Item item : itemList) {
+                for (String itemType : itemSet) {
+                    if (item.getType().contains(itemType)) {
+                        itemImages.put(itemType, item.getType());
+                        if (itemType.equals("armor")) {
+                            itemImages.put("fingers", item.getType().replaceAll("armor", "fingers"));
+                        }
                     }
                 }
             }
         }
+        System.out.println("procesing...");
         return mergeImgages(itemImages);
     }
 
@@ -455,7 +458,8 @@ public class Profile {
         background.drawPixmap(itemPixmap, 0, 0);
         itemPixmap.dispose();
         mergedImage = new Texture(background);
-        background.dispose();
+        System.out.println("Texture created");
+        // background.dispose();
         return mergedImage;
     }
 

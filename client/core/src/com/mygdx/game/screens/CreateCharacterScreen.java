@@ -47,6 +47,18 @@ public class CreateCharacterScreen implements Screen {
     private Boolean checkBoxTeamBoolean = false;
     private String defaultNameText;
     private String defaultTeamText;
+    private Label labelName;
+    private Label labelGender;
+    private Label labelBody;
+    private Label labelHead;
+    private TextButton arrowHeadLeft;
+    private TextButton arrowHeadRight;
+    private TextButton arrowBodyLeft;
+    private TextButton arrowBodyRight;
+    private TextButton arrowCastleLeft;
+    private TextButton arrowCastleRight;
+    private TextButton buttonBack;
+    private TextButton buttonOk;
 
 
     public CreateCharacterScreen(GGame g) {
@@ -59,13 +71,33 @@ public class CreateCharacterScreen implements Screen {
     }
 
     public void onCreate() {
+        defaultNameText = "Enter name here";
+        defaultTeamText = "Enter team name here";
         nameText = new TextField(null, skin);
         nameText.setMessageText(defaultNameText);
         teamText = new TextField(null, skin);
         teamText.setMessageText(defaultTeamText);
         textureCastle = new Texture("teamCastle1.png");
-        defaultNameText = "Enter name here";
-        defaultTeamText = "Enter team name here";
+        labelHeadNumber = new Label("1", skin);
+        labelName = new Label("Name", skin);
+        labelGender = new Label("Gender", skin);
+        labelBody = new Label("Body", skin);
+        labelBodyNumber = new Label("1", skin);
+        labelHead = new Label("Head", skin);
+        checkboxMale = new CheckBox("Male", skin);
+        checkboxFemale = new CheckBox("Female", skin);
+        ButtonGroup genderCheckBoxGroup = new ButtonGroup(checkboxFemale, checkboxMale);
+        genderCheckBoxGroup.setMaxCheckCount(1);
+        checkboxTeam = new CheckBox("Create new Team", skin);
+        //making arrow buttons
+        arrowHeadLeft = new TextButton("<", skin);
+        arrowHeadRight = new TextButton(">", skin);
+        arrowBodyLeft = new TextButton("<", skin);
+        arrowBodyRight = new TextButton(">", skin);
+        arrowCastleLeft = new TextButton("<", skin);
+        arrowCastleRight = new TextButton(">", skin);
+        buttonBack = new TextButton("Back", skin);
+        buttonOk = new TextButton("Ok", skin);
     }
 
     @Override
@@ -83,48 +115,26 @@ public class CreateCharacterScreen implements Screen {
         final Image imageCastle = new Image(textureCastle);
 
         //making labels
-        final Label labelName = new Label("Name", skin);
-        final Label labelGender = new Label("Gender", skin);
-
-        final Label labelHead = new Label("Head", skin);
-        labelHeadNumber = new Label("1", skin);
         labelHeadNumber.setText(String.valueOf(headType));
-
-        final Label labelBody = new Label("Body", skin);
-        labelBodyNumber = new Label("1", skin);
         labelBodyNumber.setText(String.valueOf(bodyType));
 
         final Label labelTeam = new Label("Team", skin);
 
         //creating checkboxes for gender
-        checkboxMale = new CheckBox("Male", skin);
         checkboxMale.setChecked(checkboxMaleBoolean);
-        checkboxFemale = new CheckBox("Female", skin);
         checkboxFemale.setChecked(checkboxFemaleBoolean);
 
         //group up 2 gender choice checkboxes
-        ButtonGroup genderCheckBoxGroup = new ButtonGroup(checkboxFemale, checkboxMale);
-        genderCheckBoxGroup.setMaxCheckCount(1);
 
         //creating checkbox for team
-        checkboxTeam = new CheckBox("Create new Team", skin);
         checkboxTeam.setChecked(checkBoxTeamBoolean);
 
         //textfields for team and name
 
 
-        //making arrow buttons
-        TextButton arrowHeadLeft = new TextButton("<", skin);
-        TextButton arrowHeadRight = new TextButton(">", skin);
-        TextButton arrowBodyLeft = new TextButton("<", skin);
-        TextButton arrowBodyRight = new TextButton(">", skin);
-        TextButton arrowCastleLeft = new TextButton("<", skin);
-        TextButton arrowCastleRight = new TextButton(">", skin);
 //        ImageButton arrowCastleLeft = new ImageButton(skin);
 
         //text button
-        TextButton buttonBack = new TextButton("Back", skin);
-        TextButton buttonOk = new TextButton("Ok", skin);
 
         //creating table with Character Settings
         Table tableActivities = new Table();

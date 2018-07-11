@@ -93,6 +93,12 @@ public class PlayerAccount {
         return (player != null);
     }
 
+    public static boolean   deletePlayer() throws IOException, JSONException {
+        if (player == null)
+            return false;
+        return player.deletePlayer();
+    }
+
     public static boolean   isAdmin(String name) {
         try {
             selectProfile(name);

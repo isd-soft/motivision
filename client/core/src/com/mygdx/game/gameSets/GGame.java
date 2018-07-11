@@ -103,7 +103,7 @@ public void changeScreen(int screen){
 			this.setScreen(characterSelectScreen);
 			break;
         case CREATECHARACTER:
-            if(createCharacterScreen == null) createCharacterScreen = new CreateCharacterScreen(this);
+            /*if(createCharacterScreen == null)*/ createCharacterScreen = new CreateCharacterScreen(this);
             this.setScreen(createCharacterScreen);
             break;
         case CHARACTERPROFILE:

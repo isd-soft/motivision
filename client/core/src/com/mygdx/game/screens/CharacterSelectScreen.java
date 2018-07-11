@@ -209,6 +209,7 @@ public class CharacterSelectScreen implements Screen {
             if (texture != null)
                 texture.dispose();
             try {
+                System.out.println("Start gettig profile texture");
                 texture = PlayerAccount.getProfileTexture(name);
             } catch (IOException e) {
                 e.printStackTrace();

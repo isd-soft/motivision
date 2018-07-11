@@ -181,5 +181,25 @@ public class Player {
         player = getPlayerFromUrl(url, urlParameters, "POST");
         return player;
     }
+
+    public boolean      deletePlayer() throws IOException, JSONException {
+        String      url;
+        String      status;
+        String      urlParameters;
+        JSONObject  jsonObject;
+
+        if (id == -1)
+            return false;
+        url = JsonHandler.domain + "/delete_player";
+        urlParameters = "playerId=" + id;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "DELETE");
+        //System.out.println(url + "?" + urlParameters);
+        if (jsonObject == null)
+            return false;
+        status = jsonObject.getString("status");
+        if (status.equals("success"))
+            return true;
+        return false;
+    }
 }
 
