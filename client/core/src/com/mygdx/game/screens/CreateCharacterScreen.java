@@ -51,9 +51,8 @@ public class CreateCharacterScreen implements Screen {
 
     @Override
     public void show() {
-        final Texture texture;
+        Texture texture;
         Image image;
-
 
         stage.clear();
         float pad = 5;
@@ -85,6 +84,7 @@ public class CreateCharacterScreen implements Screen {
         checkboxTeam = new CheckBox("Create new Team", skin);
 
         //textfields for team and name
+
         nameText = new TextField(null, skin);
         nameText.setMessageText("Enter name here");
         teamText = new TextField(null, skin);
@@ -224,10 +224,10 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.add(labelGender).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(checkboxMale)
                 .expand().fill();
-        //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
+                //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.add(checkboxFemale)
                 .expand().fill();
-        //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
+                //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.row().pad(10, 0, 0, 0);
 
         headTable.add(arrowHeadLeft);
@@ -344,15 +344,15 @@ public class CreateCharacterScreen implements Screen {
         }
 
         @Override
-        public void changed(ChangeEvent event, Actor actor) {
-            String gender;
-            String profileName;
-            String teamName;
-            int teamId;
-            boolean nameExist;
-            LinkedHashMap<String, String> teamParams;
+        public void changed(ChangeEvent event, Actor actor){
+            String  gender;
+            String  profileName;
+            String  teamName;
+            int     teamId;
+            boolean                         nameExist;
+            LinkedHashMap<String, String>   teamParams;
             //PLACE_HOLDER for registration
-            LinkedHashMap<String, String> characterParameters;
+            LinkedHashMap<String, String>   characterParameters;
 
             characterParameters = new LinkedHashMap<String, String>();
 
