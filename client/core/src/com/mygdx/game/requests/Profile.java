@@ -307,7 +307,7 @@ public class Profile {
         return new Texture("result.png");
     }
 
-    private Pixmap  addItem(Pixmap pixmap, String item, int x, int y) {
+    private static Pixmap  addItem(Pixmap pixmap, String item, int x, int y) {
         Pixmap  itemPixmap;
 
         itemPixmap = new Pixmap(Gdx.files.internal("items/" + item + ".png"));
@@ -439,4 +439,20 @@ public class Profile {
         return teamId;
     }
 
+    public static Texture getTexture(int headType, int bodyType) {
+        Texture mergedImage;
+        Pixmap  pixmap;
+        Pixmap  itemPixmap;
+
+        pixmap = new Pixmap(Gdx.files.internal("default.png"));
+        itemPixmap = new Pixmap(Gdx.files.internal("head/head" + headType + ".png"));
+        pixmap.drawPixmap(itemPixmap, 0, 0);
+        itemPixmap.dispose();
+        itemPixmap = new Pixmap(Gdx.files.internal("head/body" + bodyType + ".png"));
+        pixmap.drawPixmap(itemPixmap, 0, 0);
+        itemPixmap.dispose();
+        mergedImage = new Texture(pixmap);
+        pixmap.dispose();
+        return mergedImage;
+    }
 }

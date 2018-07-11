@@ -139,4 +139,13 @@ public class PlayerAccount {
         else
             return false;
     }
+
+    public static Texture   getTexture(int headType, int bodyType) {
+        if (headType <= 0 || headType > 3)
+            return new Texture("default.png");
+        if (bodyType <= 0 || bodyType > 3)
+            return new Texture("default.png");
+        return Profile.getTexture(headType, bodyType);
+    }
+
 }
