@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -129,6 +130,15 @@ public class CharacterSelectScreen implements Screen {
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(3).pad(pad / 2, 0, 0, 0);
 
+        if (characterNames == null){
+            characterNamesButtons.get(0).setDisabled(true);
+            characterNamesButtons.get(0).setTouchable(Touchable.disabled);
+            xButtons.get(0).setDisabled(true);
+            xButtons.get(0).setTouchable(Touchable.disabled);
+            select.setDisabled(true);
+            select.setTouchable(Touchable.disabled);
+        }
+
         // add wrapper table
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
@@ -193,9 +203,6 @@ public class CharacterSelectScreen implements Screen {
     public void dispose() {
         stage.dispose();
     }
-
-
-
 
     class SelectCharacter extends ChangeListener {
         String name;
