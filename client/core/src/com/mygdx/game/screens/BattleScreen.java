@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.gameSets.GameModel;
 
@@ -17,15 +21,40 @@ public class BattleScreen implements Screen {
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera cam;
     //private KeyboardController controller;
-    private Texture playerTex;
     private SpriteBatch sb;
 
+    private Stage stage;
+    private Viewport viewport;
+    private Skin skin;
+
+    private Texture knightTex;
 
     public BattleScreen(GGame g) {
         parent = g;
         model = new GameModel();
         cam = new OrthographicCamera(32,24);
         debugRenderer = new Box2DDebugRenderer(true,true,true,true,true,true);
+
+
+        stage = new Stage();
+        /*
+        viewport = new StretchViewport(800, 480, stage.getCamera());
+        stage.setViewport(viewport);
+        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
+*/
+
+        sb = new SpriteBatch();
+        sb.setProjectionMatrix(cam.combined);
+
+// tells our asset manger that we want to load the images set in loadImages method
+        parent.knightMan.loadImages();
+// tells the asset manager to load the images and wait until finished loading.
+        parent.knightMan.manager.finishLoading();
+// gets the images as a texture
+        knightTex = parent.knightMan.manager.get("knight.png");
+
+
+
         //controller = new KeyboardController();
         //model = new GameModel(controller,cam,parent.assMan);
         //debugRenderer = new Box2DDebugRenderer(true,true,true,true,true,true);
@@ -46,8 +75,13 @@ public class BattleScreen implements Screen {
 
     @Override
     public void show() {
+        stage.clear();
 
-        //Gdx.input.setInputProcessor(controller);
+
+
+
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -56,7 +90,15 @@ public class BattleScreen implements Screen {
         model.logicStep(delta);
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+        sb.begin();
+        sb.draw(knightTex,model.knight.getPosition().x -1,model.knight.getPosition().y -1,2,2);
+        sb.end();
+
+
         debugRenderer.render(model.world, cam.combined);
+
 
 
         /*
@@ -99,7 +141,9 @@ public class BattleScreen implements Screen {
 
     @Override
     public void dispose() {
-        // TODO Auto-generated method stub
+
+        sb.dispose();
+        stage.dispose();
 
     }
 

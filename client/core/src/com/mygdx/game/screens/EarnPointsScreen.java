@@ -72,6 +72,7 @@ public class EarnPointsScreen implements Screen {
             activityName.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor){
+                    parent.changeScreen(parent.getAnimation());
                     //here should go Yes No pop up screen
                 }
             });

@@ -29,6 +29,8 @@ public class CharacterProfileScreen implements Screen {
     private TextureRegion textureRegion;
     private TextureRegionDrawable textureRegionDrawable;
 
+    private Texture knightTex;
+
     private Viewport viewport;
     private Camera camera;
     private Music loginMusic;
@@ -42,6 +44,16 @@ public class CharacterProfileScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
+
+
+// tells our asset manger that we want to load the images set in loadImages method
+        parent.knightMan.loadImages();
+// tells the asset manager to load the images and wait until finished loading.
+        parent.knightMan.manager.finishLoading();
+// gets the images as a texture
+        knightTex = parent.knightMan.manager.get("assets/knight.png");
+
+
 
     }
 
@@ -114,7 +126,7 @@ public class CharacterProfileScreen implements Screen {
         //here is just random number
         int pointsNumber = 777;
 
-        //Create label wich represents points
+        //Create label witch represents points
         Label pointsLabel = new Label("Points: " + pointsNumber, skin);
 
         // add item list
