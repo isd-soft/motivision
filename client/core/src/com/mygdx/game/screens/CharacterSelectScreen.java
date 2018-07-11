@@ -206,6 +206,8 @@ public class CharacterSelectScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+            if (texture != null)
+                texture.dispose();
             try {
                 texture = PlayerAccount.getProfileTexture(name);
             } catch (IOException e) {

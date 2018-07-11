@@ -80,8 +80,6 @@ public class Profile {
     private static Profile      getProfileFromJson(JSONObject jsonObject) throws JSONException {
         Profile     profile;
         String		field;
-        String      characterName;
-        int			points;
         int         characterId;
         int         teamId;
         boolean     isAdmin;
@@ -115,10 +113,14 @@ public class Profile {
                 gender = field.toCharArray()[0];
             profile.setGender(gender);
 
-            field = jsonObject.getString(POINTS);
-            number = Integer.parseInt(field);
+            //field = jsonObject.getString(POINTS);
+            //System.out.println("Points = " + field);
+            number = jsonObject.getInt(POINTS);
+            System.out.println("Points = " + number);
             profile.setPoints(number);
+            System.out.println("Points = " + profile.getPoints());
             profile.loadItems(jsonObject);
+            System.out.println("Points = " + profile.getPoints());
 
             return profile;
         } catch (NumberFormatException e) {
@@ -272,6 +274,7 @@ public class Profile {
         //String urlParameters = "name=Jack&occupation=programmer";
         System.out.println("Start get profile from URL");
         profile = getProfileFromUrl(url, urlParameters, "GET");
+        System.out.println("Points = " + profile.getPoints());
         //PlayerAccount.setProfile(profile);
         return profile;
     }
@@ -431,7 +434,7 @@ public class Profile {
         return points;
     }
 
-    public void setPoints(int power) {
+    public void setPoints(int points) {
         this.points = points;
     }
 

@@ -15,7 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.PlayerAccount;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CharacterProfileScreen implements Screen {
@@ -52,9 +56,17 @@ public class CharacterProfileScreen implements Screen {
         float pad = 5;
 
         // Character Sprite
-        Texture texture = new Texture("default.png");
+        Texture texture = null;
+        try {
+            texture = PlayerAccount.getProfileTexture();
+        } catch (IOException e) {
+            texture = new Texture("default.png");
+            e.printStackTrace();
+        } catch (JSONException e) {
+            texture = new Texture("default.png");
+            e.printStackTrace();
+        }
         Image image = new Image(texture);
-
         //create text buttons and give them listeners
         TextButton earnPointsButton = new TextButton("Earn Points", skin);
         TextButton teamMembersButton = new TextButton("Team Members", skin);
@@ -112,7 +124,7 @@ public class CharacterProfileScreen implements Screen {
 
         //take number of points from DB
         //here is just random number
-        int pointsNumber = 777;
+        int pointsNumber = PlayerAccount.getProfilePoints();
 
         //Create label wich represents points
         Label pointsLabel = new Label("Points: " + pointsNumber, skin);
@@ -174,7 +186,7 @@ public class CharacterProfileScreen implements Screen {
 
     public TextureRegionDrawable addImage(){
 
-        textureImage = new Texture(Gdx.files.internal("result.png"));
+        textureImage = new Texture(Gdx.files.internal("supaimage.png"));
         textureRegion = new TextureRegion(textureImage);
         textureRegionDrawable = new TextureRegionDrawable(textureRegion);
         return textureRegionDrawable;
