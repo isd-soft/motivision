@@ -80,8 +80,6 @@ public class Profile {
     private static Profile      getProfileFromJson(JSONObject jsonObject) throws JSONException {
         Profile     profile;
         String		field;
-        String      characterName;
-        int			points;
         int         characterId;
         int         teamId;
         boolean     isAdmin;
@@ -115,8 +113,9 @@ public class Profile {
                 gender = field.toCharArray()[0];
             profile.setGender(gender);
 
-            field = jsonObject.getString(POINTS);
-            number = Integer.parseInt(field);
+            //field = jsonObject.getString(POINTS);
+            //System.out.println("Points = " + field);
+            number = jsonObject.getInt(POINTS);
             profile.setPoints(number);
             profile.loadItems(jsonObject);
 
@@ -431,7 +430,7 @@ public class Profile {
         return points;
     }
 
-    public void setPoints(int power) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
@@ -445,10 +444,10 @@ public class Profile {
         Pixmap  itemPixmap;
 
         pixmap = new Pixmap(Gdx.files.internal("default.png"));
-        itemPixmap = new Pixmap(Gdx.files.internal("head/head" + headType + ".png"));
+        itemPixmap = new Pixmap(Gdx.files.internal("head/body" + bodyType + ".png"));
         pixmap.drawPixmap(itemPixmap, 0, 0);
         itemPixmap.dispose();
-        itemPixmap = new Pixmap(Gdx.files.internal("head/body" + bodyType + ".png"));
+        itemPixmap = new Pixmap(Gdx.files.internal("head/head" + headType + ".png"));
         pixmap.drawPixmap(itemPixmap, 0, 0);
         itemPixmap.dispose();
         mergedImage = new Texture(pixmap);

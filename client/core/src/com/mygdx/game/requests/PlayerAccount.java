@@ -66,6 +66,12 @@ public class PlayerAccount {
         //return null;
     }
 
+    public static Texture getProfileTexture() throws IOException, JSONException {
+        if (profile == null)
+            return new Texture("default.png");
+        return profile.getTexture();
+    }
+
     public static Profile   selectProfile(String name) throws IOException, JSONException {
         int     profileId;
 
@@ -84,17 +90,6 @@ public class PlayerAccount {
 
         player = Player.loginPlayer(login, encryptedPassword);
         PlayerAccount.player = player;
-
-
-        //deleteProfile("Vasea3");
-        //Delete this please
-//        if (player != null) {
-//            Profile profile = createNewProfile(player.getId());
-//            System.out.println("Profile:");
-//            Profile.getProfile("Vasea");
-//            PlayerAccount.printProfile();
-//        }
-        //Stop deleting
         return (player != null);
     }
 
@@ -146,6 +141,12 @@ public class PlayerAccount {
         if (bodyType <= 0 || bodyType > 3)
             return new Texture("default.png");
         return Profile.getTexture(headType, bodyType);
+    }
+
+    public static int       getProfilePoints() {
+        if (profile == null)
+            return -1;
+        return profile.getPoints();
     }
 
 }

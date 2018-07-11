@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Profile;
 import com.mygdx.game.requests.Team;
@@ -39,6 +40,8 @@ public class CreateCharacterScreen implements Screen {
     private Label labelBodyNumber;
     private Texture textureCastle;
     private Integer castleChoice = null;
+    private Integer bodyType = 1;
+    private Integer headType = 1;
 
     public CreateCharacterScreen(GGame g) {
         parent = g;
@@ -59,7 +62,7 @@ public class CreateCharacterScreen implements Screen {
         float pad = 5;
 
         // Character Sprite
-        texture = new Texture("default.png");
+        texture = PlayerAccount.getTexture(headType, bodyType);
         image = new Image(texture);
 
         // Castle sprite
@@ -72,10 +75,15 @@ public class CreateCharacterScreen implements Screen {
         //making labels
         final Label labelName = new Label("Name", skin);
         final Label labelGender = new Label("Gender", skin);
+
         final Label labelHead = new Label("Head", skin);
         labelHeadNumber = new Label("1", skin);
+        labelHeadNumber.setText(String.valueOf(headType));
+
         final Label labelBody = new Label("Body", skin);
         labelBodyNumber = new Label("1", skin);
+        labelBodyNumber.setText(String.valueOf(bodyType));
+
         final Label labelTeam = new Label("Team", skin);
 
         //creating checkboxes for gender
@@ -122,16 +130,12 @@ public class CreateCharacterScreen implements Screen {
         checkboxMale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
-                checkboxMale.isChecked();
             }
         });
 
         checkboxFemale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
-                checkboxFemale.isChecked();
             }
         });
 
@@ -148,10 +152,13 @@ public class CreateCharacterScreen implements Screen {
         arrowHeadLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if (Integer.valueOf(labelHeadNumber.getText().toString()) > 1) {
-                    Integer num = Integer.valueOf(labelHeadNumber.getText().toString());
-                    labelHeadNumber.setText(String.valueOf(--num));
+                if(headType == 1) {
+                    headType = 3;
+                }else
+                if(headType == 2 || headType == 3){
+                    headType--;
                 }
+                show();
             }
         });
 
@@ -159,10 +166,13 @@ public class CreateCharacterScreen implements Screen {
         arrowHeadRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if (Integer.valueOf(labelHeadNumber.getText().toString()) < 3) {
-                    Integer num = Integer.valueOf(labelHeadNumber.getText().toString());
-                    labelHeadNumber.setText(String.valueOf(++num));
+                if(headType == 3) {
+                    headType = 1;
+                }else
+                if(headType == 2 || headType == 1){
+                    headType++;
                 }
+                show();
             }
         });
 
@@ -170,10 +180,13 @@ public class CreateCharacterScreen implements Screen {
         arrowBodyLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if (Integer.valueOf(labelBodyNumber.getText().toString()) > 1) {
-                    Integer num = Integer.valueOf(labelBodyNumber.getText().toString());
-                    labelBodyNumber.setText(String.valueOf(--num));
+                if(bodyType == 1) {
+                    bodyType = 3;
+                }else
+                if(bodyType == 2 || bodyType == 3){
+                    bodyType--;
                 }
+                show();
             }
         });
 
@@ -181,10 +194,13 @@ public class CreateCharacterScreen implements Screen {
         arrowBodyRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if (Integer.valueOf(labelBodyNumber.getText().toString()) < 3) {
-                    Integer num = Integer.valueOf(labelBodyNumber.getText().toString());
-                    labelBodyNumber.setText(String.valueOf(++num));
+                if(bodyType == 3) {
+                    bodyType = 1;
+                }else
+                if(bodyType == 2 || bodyType == 1){
+                    bodyType++;
                 }
+                show();
             }
         });
 
@@ -411,7 +427,7 @@ public class CreateCharacterScreen implements Screen {
                     }
                     teamParams = new LinkedHashMap<String, String>();
                     teamParams.put(Team.NAME, teamName);
-                    teamParams.put(Team.LOGO, "default");
+                    teamParams.put(Team.LOGO, "teamCastle" + castleChoice);
                     teamParams.put(Team.BATTLE, "7");
                     teamId = Team.createNewTeam(teamParams);
                     teamText.setColor(Color.WHITE);
