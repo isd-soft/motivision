@@ -66,6 +66,8 @@ public class Player {
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
         if (jsonObject.has("characters") == false)
             return;
+        if (jsonObject.getString("characters").equals("null"))
+            return;
         JSONArray arr = jsonObject.getJSONArray("characters");
         for (int i = 0; i < arr.length(); i++)
         {

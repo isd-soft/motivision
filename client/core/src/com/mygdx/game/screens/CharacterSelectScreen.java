@@ -247,8 +247,6 @@ public class CharacterSelectScreen implements Screen {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        texture = null;
-                        show();
                     }
                 }
             });
