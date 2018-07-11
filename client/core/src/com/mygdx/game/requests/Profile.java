@@ -116,11 +116,8 @@ public class Profile {
             //field = jsonObject.getString(POINTS);
             //System.out.println("Points = " + field);
             number = jsonObject.getInt(POINTS);
-            System.out.println("Points = " + number);
             profile.setPoints(number);
-            System.out.println("Points = " + profile.getPoints());
             profile.loadItems(jsonObject);
-            System.out.println("Points = " + profile.getPoints());
 
             return profile;
         } catch (NumberFormatException e) {
@@ -274,7 +271,6 @@ public class Profile {
         //String urlParameters = "name=Jack&occupation=programmer";
         System.out.println("Start get profile from URL");
         profile = getProfileFromUrl(url, urlParameters, "GET");
-        System.out.println("Points = " + profile.getPoints());
         //PlayerAccount.setProfile(profile);
         return profile;
     }
