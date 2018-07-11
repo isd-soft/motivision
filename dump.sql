@@ -16,6 +16,13 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE postgres IS 'default administrative connection database';
+
+
+--
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -27,6 +34,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: adminpack; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
 
 
 SET default_tablespace = '';
@@ -389,8 +410,11 @@ COPY public.activities (id, name, reward) FROM stdin;
 2	10 Pull ups	80
 3	1 km Run	70
 4	20 Sit ups	30
-5	Swim 1 hour	100
-6	Volleyball game	40
+5	swim 1 km	100
+6	volleyball game	40
+7	frontflip	200
+8	Backflip	100
+9	test	10000
 \.
 
 
@@ -399,7 +423,9 @@ COPY public.activities (id, name, reward) FROM stdin;
 --
 
 COPY public."character" (id, player_id, head_type, body_type, gender, points, name, team_id) FROM stdin;
-1	1	1	1	M	0	Diamond	1
+17	4	2	1	m	0	testcharacter	3
+16	4	2	3	F	0	Power woman	3
+20	5	1	2	F	0	Warria	4
 \.
 
 
@@ -436,6 +462,7 @@ COPY public.items (id, type, image_url, price) FROM stdin;
 --
 
 COPY public.last_battle (id, team_id, enemy_power, team_power) FROM stdin;
+1	4	1465	0
 \.
 
 
@@ -444,7 +471,11 @@ COPY public.last_battle (id, team_id, enemy_power, team_power) FROM stdin;
 --
 
 COPY public.player (id, login, password) FROM stdin;
-1	admin	AIDTAIiCazaQavILI07rtA==
+4	ab	123
+5	log2	pas3
+6	gmail	123456
+7	abgar1332	123123
+8	qwerty	xQYMg PKe0vDcWtmLz lFQ==
 \.
 
 
@@ -453,7 +484,9 @@ COPY public.player (id, login, password) FROM stdin;
 --
 
 COPY public.team (id, name, lider_id, team_logo, battle_frequency, team_wins, team_loss) FROM stdin;
-1	AdminTeam	1	NoLogo	7	0	0
+3	Team1	17	logo	1	0	0
+6	testname	\N	logo	1	0	0
+4	Supa team	20	Top kek	1	2	6
 \.
 
 
@@ -462,6 +495,19 @@ COPY public.team (id, name, lider_id, team_logo, battle_frequency, team_wins, te
 --
 
 COPY public.team_activities (id, activity_id, team_id) FROM stdin;
+1	3	3
+2	2	3
+4	1	3
+5	7	3
+12	6	6
+13	5	6
+14	1	6
+15	3	6
+16	4	6
+17	2	6
+18	8	6
+19	7	6
+20	9	4
 \.
 
 
@@ -469,28 +515,28 @@ COPY public.team_activities (id, activity_id, team_id) FROM stdin;
 -- Name: activities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.activities_id_seq', 7, false);
+SELECT pg_catalog.setval('public.activities_id_seq', 1, false);
 
 
 --
 -- Name: character_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.character_id_seq', 1, true);
+SELECT pg_catalog.setval('public.character_id_seq', 20, true);
 
 
 --
 -- Name: character_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.character_item_id_seq', 1, false);
+SELECT pg_catalog.setval('public.character_item_id_seq', 6, true);
 
 
 --
 -- Name: items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.items_id_seq', 12, false);
+SELECT pg_catalog.setval('public.items_id_seq', 1, false);
 
 
 --
@@ -504,21 +550,21 @@ SELECT pg_catalog.setval('public.last_battle_id_seq', 1, false);
 -- Name: player_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.player_id_seq', 1, true);
+SELECT pg_catalog.setval('public.player_id_seq', 5, true);
 
 
 --
 -- Name: team_activities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.team_activities_id_seq', 1, false);
+SELECT pg_catalog.setval('public.team_activities_id_seq', 2, true);
 
 
 --
 -- Name: team_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.team_id_seq', 1, true);
+SELECT pg_catalog.setval('public.team_id_seq', 4, true);
 
 
 --

@@ -74,7 +74,7 @@ public class CharacterSelectScreen implements Screen {
         TextButton create = new TextButton("Create new +", skin, "square");
         TextButton logout = new TextButton("Logout", skin, "small");
         TextButton select = new TextButton("Select", skin, "small");
-
+        TextButton deletePlayer = new TextButton("Delete", skin, "small");
         // eanble scrolling
         ScrollPane scrollPane = new ScrollPane(charactersTable);
         scrollPane.setSmoothScrolling(false);
@@ -124,9 +124,10 @@ public class CharacterSelectScreen implements Screen {
 
         // add the list and buttons table
         buttonTable.add(logout).fill().pad(0, 0, pad / 2, 0);
+        buttonTable.add(deletePlayer).fill().pad(0,0,pad/2, 0);
         buttonTable.add(select).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();
-        buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
+        buttonTable.add(scrollPane).fillX().expand().top().colspan(3).pad(pad / 2, 0, 0, 0);
 
         // add wrapper table
         screenTable.setFillParent(true);
@@ -159,6 +160,7 @@ public class CharacterSelectScreen implements Screen {
             }
         });
 
+        deletePlayer.addListener(new DeletePlayer());
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -222,6 +224,23 @@ public class CharacterSelectScreen implements Screen {
         }
     }
 
+    class DeletePlayer extends ChangeListener{
+
+
+        @Override
+        public void changed(ChangeEvent changeEvent, Actor actor) {
+            deletePlayer();
+        }
+
+        void deletePlayer(){
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+            bDialog.setTitle("Confirmation");
+            bDialog.setMessage("Are you sure you want to delete your account ?");
+            bDialog.addButton("Delete");
+            bDialog.addButton("Cancel");
+            bDialog.build().show();
+        }
+    }
     class DeleteCharacter extends ChangeListener {
         String name;
 
