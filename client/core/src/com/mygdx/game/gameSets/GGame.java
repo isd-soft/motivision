@@ -153,8 +153,6 @@ public void changeScreen(int screen){
                 //this.setScreen(new )
 //			  teamMembersScreen = new TeamMembersScreen(this);
 //                setScreen(teamMembersScreen);
-//              battleScreen = new BattleScreen(this);
-//              setScreen(battleScreen);
 //			  characterSelect = new CharacterSelect(this);
 //			  setScreen(characterSelect);
 			  loginScreen = new LoginScreen(this);
