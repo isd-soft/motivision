@@ -30,7 +30,7 @@ public class Team {
     private ArrayList<Profile> teamMembers = new ArrayList<Profile>();
     private ArrayList<Activity> teamActivities = new ArrayList<Activity>();
 
-    public Team(Integer teamId, Profile teamLeader) {
+    private Team(Integer teamId, Profile teamLeader) {
         this.teamId = teamId;
         this.teamLeader = teamLeader;
         this.teamName = "";

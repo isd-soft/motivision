@@ -169,28 +169,28 @@ public class CharacterProfileScreen implements Screen {
             if(i == 1){
                 for(int e = 0; e < 3; e++){
                     imageButton =  new ImageButton((addImage("store_items/sword_" + (i+e) + ".png")));
-                    imageButton.addListener(new ClickButton("sword_" + (i+e)));
+                    imageButton.addListener(new ClickButton((i+e) + "_sword"));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
             }else if(i ==2) {
                 for(int e = 0; e < 3; e++){
                     imageButton =  new ImageButton((addImage("store_items/shield_" + ((i-1)+e) + ".png")));
-                    imageButton.addListener(new ClickButton("shield_" + ((i-1)+e)));
+                    imageButton.addListener(new ClickButton(((i-1)+e) + "_shield"));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
             }else if(i == 3){
                 for(int e = 0; e < 3; e++) {
                     imageButton = new ImageButton((addImage("store_items/armor_" + ((i-2)+e) + ".png")));
-                    imageButton.addListener(new ClickButton("armor_" + (i-2)+e));
+                    imageButton.addListener(new ClickButton((i-2)+e + "_armor"));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
             }else{
                 for(int e = 0; e < 3; e++){
                     imageButton =  new ImageButton((addImage("store_items/leggins_" + ((i-3)+e) + ".png")));
-                    imageButton.addListener(new ClickButton("leggins_" + (i-3)+e));
+                    imageButton.addListener(new ClickButton( (i-3)+e + "_leggins"));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                     x = e;
                 }

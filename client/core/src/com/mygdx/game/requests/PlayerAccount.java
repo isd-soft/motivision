@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 public class PlayerAccount {
     private static Player   player = null;
     private static Profile  profile = null;
+    private static Team     team = null;
 
 //    public static void setPlayer(Player player) {
 //        PlayerAccount.player = player;
@@ -50,6 +51,7 @@ public class PlayerAccount {
     public static void logOut() {
         player = null;
         profile = null;
+        team = null;
     }
 
     public static boolean   registerNewPlayer(String login, String encryptedPassword) throws IOException, JSONException {
@@ -159,6 +161,12 @@ public class PlayerAccount {
         if (profile == null)
             return -1;
         return profile.getPoints();
+    }
+
+    public static void      getProfileTeam() throws IOException, JSONException {
+        if (profile == null)
+            return;
+        team = Team.getTeam(profile.getTeamId());
     }
 
 }

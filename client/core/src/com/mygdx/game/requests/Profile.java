@@ -168,7 +168,10 @@ public class Profile {
             itemImage = arr.getJSONObject(i).getInt(Item.ITEM_IMAGE);
             itemPrice = arr.getJSONObject(i).getInt(Item.ITEM_PRICE);
             itemType = arr.getJSONObject(i).getString(Item.ITEM_TYPE);
-            equipped = arr.getJSONObject(i).getBoolean(Item.ITEM_EQUIPPED);
+            if (arr.getJSONObject(i).has(Item.ITEM_EQUIPPED))
+                equipped = arr.getJSONObject(i).getBoolean(Item.ITEM_EQUIPPED);
+            else
+                equipped = true;
             item = new Item(itemId, itemImage, itemPrice, itemType, equipped);
             itemList.add(item);
         }
