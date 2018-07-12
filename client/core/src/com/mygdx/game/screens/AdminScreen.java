@@ -23,6 +23,9 @@ import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.requests.PlayerAccount;
 import com.badlogic.gdx.Input.TextInputListener;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -75,6 +78,19 @@ public class AdminScreen implements Screen {
         stage.clear();
 //        stage.setDebugAll(true);
         float pad = 5;
+
+        // Character Sprite
+        Texture texture = null;
+        try {
+            texture = PlayerAccount.getProfileTexture();
+        } catch (IOException e) {
+            texture = new Texture("default.png");
+            e.printStackTrace();
+        } catch (JSONException e) {
+            texture = new Texture("default.png");
+            e.printStackTrace();
+        }
+        Image image = new Image(texture);
 
         // add the team image
         Image imageCastle = new Image(textureCastle);
@@ -166,7 +182,7 @@ public class AdminScreen implements Screen {
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                PlayerAccount.logOut();
+                //PlayerAccount.logOut();
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
