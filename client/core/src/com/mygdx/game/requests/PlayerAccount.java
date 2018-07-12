@@ -1,6 +1,7 @@
 package com.mygdx.game.requests;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.screens.DialogBox;
 
 import org.json.JSONException;
 
@@ -13,9 +14,6 @@ public class PlayerAccount {
     private static Profile  profile = null;
     private static Team     team = null;
 
-//    public static void setPlayer(Player player) {
-//        PlayerAccount.player = player;
-//    }
 
     public static void setProfile(Profile profile) {
         PlayerAccount.profile = profile;
@@ -169,9 +167,22 @@ public class PlayerAccount {
         team = Team.getTeam(profile.getTeamId());
     }
 
-    public static int getItemStatus(String name) {
+    public static int getItemStatus(int id) {
         if (profile == null)
             return Profile.STORE_ITEM;
-        else return profile.getItemStatus(name);
+        else return profile.getItemStatus(id);
+    }
+
+    public static boolean   buyItem(int id) throws IOException, JSONException {
+        if (profile == null)
+            return false;
+        if (Item.getItemPrice(id) > profile.getPoints()) {
+            JsonHandler.errorMessage = "Not enough points!";
+            return false;
+        }
+        return profile.buyItem(id);
+
+
+
     }
 }

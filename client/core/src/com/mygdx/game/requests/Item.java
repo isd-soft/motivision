@@ -1,5 +1,10 @@
 package com.mygdx.game.requests;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import javax.rmi.CORBA.StubDelegate;
 
 public class Item {
@@ -33,5 +38,27 @@ public class Item {
 
     public boolean isEquipped() {
         return equipped;
+    }
+
+    public int  getId() {
+        return id;
+    }
+
+    public static int   getItemPrice(int itemId) throws IOException, JSONException {
+        String      url;
+        String      urlParameters;
+        JSONObject  jsonObject;
+
+        if (itemId == -1)
+            return -1;
+
+        url = JsonHandler.domain + "/get_item";
+        urlParameters = ITEM_ID + "=" + itemId;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
+        if (jsonObject == null)
+            return -1;
+        if (jsonObject.has("itemPrice"))
+            return jsonObject.getInt(ITEM_PRICE);
+        return -1;
     }
 }

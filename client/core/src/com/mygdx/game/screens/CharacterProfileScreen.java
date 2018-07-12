@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Profile;
 
@@ -23,8 +24,14 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CharacterProfileScreen implements Screen {
+import de.tomgrill.gdxdialogs.core.GDXDialogs;
+import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
+import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
+import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 
+public class CharacterProfileScreen implements Screen {
+    private static final int    YES = 0;
+    private static final int    CANCEL = 1;
     private GGame parent;
     private Stage stage;
     private Skin skin;
@@ -33,6 +40,7 @@ public class CharacterProfileScreen implements Screen {
     private Texture textureImage;
     private TextureRegion textureRegion;
     private TextureRegionDrawable textureRegionDrawable;
+    private static GDXDialogs dialogs = null;
 
     private Texture knightTex;
 
@@ -49,6 +57,7 @@ public class CharacterProfileScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
+        dialogs = GDXDialogsSystem.install();
 
 
 // tells our asset manger that we want to load the images set in loadImages method
@@ -170,28 +179,28 @@ public class CharacterProfileScreen implements Screen {
             if(i == 1){
                 for(int e = 0; e < 3; e++){
                     imageButton =  new ImageButton((addImage("store_items/sword_" + (i+e) + ".png")));
-                    imageButton.addListener(new ClickButton((i+e) + "_sword"));
+                    imageButton.addListener(new ClickButton((i+e) + "_sword", 1 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
             }else if(i ==2) {
                 for(int e = 0; e < 3; e++){
                     imageButton =  new ImageButton((addImage("store_items/shield_" + ((i-1)+e) + ".png")));
-                    imageButton.addListener(new ClickButton(((i-1)+e) + "_shield"));
+                    imageButton.addListener(new ClickButton(((i-1)+e) + "_shield", 4 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
             }else if(i == 3){
                 for(int e = 0; e < 3; e++) {
                     imageButton = new ImageButton((addImage("store_items/armor_" + ((i-2)+e) + ".png")));
-                    imageButton.addListener(new ClickButton((i-2)+e + "_armor"));
+                    imageButton.addListener(new ClickButton((i-2)+e + "_armor", 7 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
             }else{
                 for(int e = 0; e < 3; e++){
                     imageButton =  new ImageButton((addImage("store_items/leggins_" + ((i-3)+e) + ".png")));
-                    imageButton.addListener(new ClickButton( (i-3)+e + "_leggins"));
+                    imageButton.addListener(new ClickButton( (i-3)+e + "_leggins", 10 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                     x = e;
                 }
@@ -271,24 +280,54 @@ public class CharacterProfileScreen implements Screen {
     }
 
     class ClickButton extends ChangeListener{
-        String  name;
+        String  itemType;
+        int     itemId;
 
 
+        public void     confirmDialog() {
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+            bDialog.setTitle("Confirmation");
+            bDialog.setMessage("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\"");
 
-        public ClickButton(String name) {
+            bDialog.setClickListener(new ButtonClickListener() {
+
+                @Override
+                public void click(int button) {
+                    if (button == YES) {
+                        try {
+                            if (PlayerAccount.buyItem(itemId) == false)
+                                DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        show();
+                    }
+                }
+            });
+
+            bDialog.addButton("Ok");
+            bDialog.addButton("Cancel");
+
+            bDialog.build().show();
+        }
+
+        public ClickButton(String name, int id) {
             name = name.replaceFirst("1", "iron");
             name = name.replaceFirst("2", "steel");
             name = name.replaceFirst("3", "diamond");
-            this.name = name;
+            this.itemType = name;
+            this.itemId = id;
         }
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
             int status;
 
-            status = PlayerAccount.getItemStatus(name);
+            status = PlayerAccount.getItemStatus(itemId);
             if (status == Profile.STORE_ITEM) {
-
+                confirmDialog();
             }
 
         }

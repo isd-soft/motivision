@@ -272,14 +272,6 @@ public class CharacterSelectScreen implements Screen {
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             ConfirmDialog();
-//            try {
-//                PlayerAccount.deleteProfile(name);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            show();
         }
 
         public void     SelectDialog() {
@@ -312,7 +304,6 @@ public class CharacterSelectScreen implements Screen {
         }
 
         public void     ConfirmDialog() {
-
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to delete \"" + name + "\" ?");

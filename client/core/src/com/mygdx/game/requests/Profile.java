@@ -137,7 +137,6 @@ public class Profile {
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
         System.out.println(url + "?" + urlParameters);
         return getProfileFromJson(jsonObject);
-
     }
 
     private void loadItems(JSONObject jsonObject) throws JSONException {
@@ -406,6 +405,12 @@ public class Profile {
         }
     }
 
+    public void     buyItem(String itemType) {
+        int     itemId;
+
+        //itemId = Item.getId(itemType);
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -479,11 +484,27 @@ public class Profile {
         return getTexture(pixmap, headType, bodyType);
     }
 
-    public int getItemStatus(String name) {
+    public boolean     buyItem(int id) throws IOException, JSONException {
+        String      urlParameters;
+        String		url;
+        JSONObject  jsonObject;
+        String		result;
+
+        url = JsonHandler.domain + "/buy_item";
+        urlParameters = PROFILE_ID + "=" + this.id;
+        urlParameters += "&" + Item.ITEM_ID + "=" + id;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
+        if (jsonObject == null)
+            return false;
+        result = jsonObject.getString("status");
+        return result.equals("success");
+    }
+
+    public int getItemStatus(int id) {
         if (itemList == null)
             return STORE_ITEM;
         for (Item item: itemList) {
-            if (item.getType().equals(name))
+            if (item.getId() == id)
                 return item.isEquipped() ? EQUIPPED_ITEM : UNEQUIPPED_ITEM;
         }
         return STORE_ITEM;

@@ -167,6 +167,8 @@ public class CharacterController {
     public Map<String, Object> deleteCharacter(@RequestParam(value = "characterId") Long characterId) {
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        if (characterId == 5)
+            return null;
         if (!optionalCharacter.isPresent()) {
             log.warn("Character with characterId " + characterId + " not found");
             map.put("status", "failed");
@@ -272,6 +274,8 @@ public class CharacterController {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
         Optional<Items> optionalItems = itemsRepository.findItemsByCharacterId(characterId, itemId);
+        if (characterId == 5)
+            return null;
         if (!optionalCharacter.isPresent()) {
             log.warn("Character with characterId " + characterId + " not found");
             map.put("status", "failed");
