@@ -29,7 +29,10 @@ import java.util.regex.Pattern;
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
 import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
+import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 import sun.awt.image.ImageWatched;
+
+import static javax.security.auth.callback.ConfirmationCallback.YES;
 
 public class CreateCharacterScreen implements Screen {
 
@@ -100,7 +103,6 @@ public class CreateCharacterScreen implements Screen {
         checkboxTeam = new CheckBox("Create new Team", skin);
         //making 2 arrow buttons
         buttonBack = new TextButton("Back", skin);
-        buttonOk = new TextButton("Ok", skin);
     }
 
     private boolean  validateCharacterName(String characterName, GDXButtonDialog bDialog) {
@@ -180,6 +182,7 @@ public class CreateCharacterScreen implements Screen {
 
         final Image imageCastle = new Image(textureCastle);
 
+        buttonOk = new TextButton("Ok", skin);
         //making labels
         labelHeadNumber.setText(String.valueOf(headType));
         labelBodyNumber.setText(String.valueOf(bodyType));
@@ -492,11 +495,12 @@ public class CreateCharacterScreen implements Screen {
                 teamId = Team.getTeamId(teamName);
                 if (checkboxTeam.isChecked()) {
                     if (teamId != -1) {
-                        log.warn("Team does not exist!");
-                        bDialog.setTitle("Team");
-                        bDialog.setMessage("Team does not exist!");
-                        bDialog.addButton("Go back");
-                        bDialog.build().show();
+//                        log.warn("Team already exists!");
+//                        bDialog.setTitle("Team");
+//                        bDialog.setMessage("Team already exists!");
+//                        bDialog.addButton("Go back");
+//                        bDialog.build().show();
+                        SelectDialog("Team already exists!");
                         //teamText.setColor(Color.RED);
                         // TODO Team does not exist
                         return;
@@ -508,11 +512,13 @@ public class CreateCharacterScreen implements Screen {
                     teamId = Team.createNewTeam(teamParams);
                     teamText.setColor(Color.WHITE);
                     characterParameters.put(Profile.IS_ADMIN, "true");
-                } else if (teamId == -1) {
-                    bDialog.setTitle("Team");
-                    bDialog.setMessage("Team already exist!");
-                    bDialog.addButton("Go back");
-                    bDialog.build().show();
+                }
+                else if (teamId == -1) {
+                    SelectDialog("Team does not exist");
+//                    bDialog.setTitle("Team");
+//                    bDialog.setMessage("Team does not exist!");
+//                    bDialog.addButton("Go back");
+//                    bDialog.build().show();
                     // TODO Team already exist
                     //teamText.setColor(Color.RED);
                     return;
@@ -538,6 +544,15 @@ public class CreateCharacterScreen implements Screen {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+
+        public void     SelectDialog(String message) {
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+            bDialog.setTitle("Error");
+            bDialog.setMessage(message);
+            bDialog.addButton("Ok");
+
+            bDialog.build().show();
         }
     }
 }
