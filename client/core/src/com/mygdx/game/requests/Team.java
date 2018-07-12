@@ -112,6 +112,26 @@ public class Team {
         }
     }
 
+    private static List<Profile> getAllCharactersFromTeamFromUrl(String url, String urlParameters, String requestMethod)
+            throws IOException, JSONException {
+        JSONObject jsonObject;
+
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
+        System.out.println(url + "?" + urlParameters);
+        if (!jsonObject.has("teamMembers")) {
+            return null;
+        } else if (jsonObject.getString("teamMembers").equals("null")) {
+            return null;
+        } else {
+            JSONArray arr = jsonObject.getJSONArray("teamMembers");
+            ArrayList<Profile> profiles = new ArrayList<Profile>();
+            for (int i = 0; i<arr.length(); i++){
+                profiles.add(Profile.getProfileFromJson(arr.getJSONObject(i)));
+            }
+            return profiles;
+        }
+    }
+
     public List<Activity> getTeamActivities(){
         String  url;
         List<Activity> activities = new ArrayList<Activity>();
@@ -140,6 +160,36 @@ public class Team {
             }
             return names;
     }
+
+    public List<Profile> getAllCharactersFromTeam(){
+        String  url;
+        List<Profile> profiles = new ArrayList<Profile>();
+        String urlParameters;
+        if (teamId == -1)
+            return null;
+
+        url = JsonHandler.domain + "/get_team_members";
+        urlParameters = TEAM_ID +"=" + teamId;
+        System.out.println("Start get team members from url");
+        try {
+            profiles = getAllCharactersFromTeamFromUrl(url, urlParameters, "GET");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return profiles;
+    }
+
+    public List<String> getAllCharactersFromTeamName(){
+        List<Profile> profiles = getAllCharactersFromTeam();
+        List<String> names = new ArrayList<String>();
+        for(Profile profile : profiles){
+            names.add(profile.getProfileName());
+        }
+        return names;
+    }
+
     public static Team getTeam(int teamId) throws IOException, JSONException {
         String  url;
         Team team;

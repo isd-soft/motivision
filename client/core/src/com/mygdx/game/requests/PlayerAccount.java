@@ -44,6 +44,17 @@ public class PlayerAccount {
             return null;
         return team.getTeamActivitiesNames();
     }
+    public static List<Profile> getAllCharactersFromTeam() {
+        if (team == null)
+            return null;
+        return team.getAllCharactersFromTeam();
+    }
+
+    public static List<String> getAllCharactersFromTeamName(){
+        if(team == null)
+            return null;
+        return team.getTeamActivitiesNames();
+    }
 
     public static int   getProfileId(String name) {
         if (player == null) {

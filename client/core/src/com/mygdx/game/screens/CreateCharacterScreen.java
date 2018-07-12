@@ -515,6 +515,7 @@ public class CreateCharacterScreen implements Screen {
                     teamParams.put(Team.BATTLE, "7");
                     teamId = Team.createNewTeam(teamParams);
                     teamText.setColor(Color.WHITE);
+                    System.out.println("team id = " + teamId);
                     characterParameters.put(Profile.IS_ADMIN, "true");
                 }
                 else if (teamId == -1) {
