@@ -62,7 +62,6 @@ public class EarnPointsScreen implements Screen {
             e.printStackTrace();
         }
         Image image = new Image(texture);
-
         //create buttons Settings, Back and adding them listeners
         TextButton settingsButton = new TextButton("Settings", skin, "small");
         TextButton backButton = new TextButton("Back", skin, "small");

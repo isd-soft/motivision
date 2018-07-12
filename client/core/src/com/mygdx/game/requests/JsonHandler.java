@@ -30,7 +30,7 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 
 public class JsonHandler {
-    static final String domain = "http://207.154.207.47:8080";
+    static final String domain = "http://172.17.41.148:8080";
 //    static final String domain = "http://192.168.1.23:8080";
 //    static final String domain = "http://172.17.41.110:8080";
     public static String	errorMessage = null;
@@ -243,13 +243,6 @@ public class JsonHandler {
             e.printStackTrace();
             return null;
         }
-/*
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
-        }
-        */
     }
 
     public static JSONObject    readJsonFromUrl(String url, String urlParameters, String requestMethod) throws IOException, JSONException {
@@ -342,21 +335,4 @@ public class JsonHandler {
         };
 
     }
-/*
-    public static void      getUserAccount(String login, String password) {
-        JSONObject  jsonObject;
-        String      url;
-
-        try {
-            url = domain + "/register_player?login=" + login;
-            url += "&password=" + password;
-            jsonObject = readJsonFromUrl(url);
-            System.out.println(jsonObject);
-            parseJson(jsonObject);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }*/
 }

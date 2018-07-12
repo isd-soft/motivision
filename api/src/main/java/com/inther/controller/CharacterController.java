@@ -133,21 +133,22 @@ public class CharacterController {
         map.put("bodyType", character.getBodyType());
         map.put("gender", character.getGender());
         map.put("points", character.getPoints());
-        Optional<List<Items>> optionalItemsList = itemsRepository.findAllByCharacterId(characterId);
-        if (!optionalItemsList.isPresent()) {
+        Optional<List<CharacterItem>> optionalCharacterItems = characterItemRepository.findAllByCharacterId(characterId);
+        if (!optionalCharacterItems.isPresent()) {
             map.put("items", "null");
             return map;
         }
-        List<Items> itemsList = optionalItemsList.get();
-        Iterator<Items> iterator = itemsList.iterator();
+        List<CharacterItem> itemsList = optionalCharacterItems.get();
         ArrayList<Map<String, Object>> result = new ArrayList<>();
-        while (iterator.hasNext()) {
+        for (CharacterItem characterItem : itemsList) {
+            Items items = characterItem.getItems();
             Map<String, Object> itemsMap = new TreeMap<>();
-            Items items = iterator.next();
             itemsMap.put("itemId", items.getId());
             itemsMap.put("itemType", items.getType());
             itemsMap.put("itemImageUrl", items.getImageUrl());
             itemsMap.put("itemPrice", items.getPrice());
+            log.info(characterItem);
+            itemsMap.put("equipped", characterItem.getEquipped());
             result.add(itemsMap);
         }
         map.put("items", result);
@@ -328,6 +329,7 @@ public class CharacterController {
             CharacterItem characterItem = new CharacterItem();
             characterItem.setCharacter(character);
             characterItem.setItems(items);
+            characterItem.setEquipped(false);
             characterItemRepository.save(characterItem);
             characterRepository.save(character);
             log.info("Item saved in Character inventory");
