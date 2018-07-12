@@ -94,7 +94,7 @@ public class TeamController {
     *  @return status success if team was successfully created
     * */
     @RequestMapping(value = "/create_team", method = RequestMethod.POST)
-    public Map<String, Object> createTeam(@RequestParam(value = "name") String name,
+    public Map<String, Object> createTeam(@RequestParam(value = "teamName") String name,
                                            @RequestParam(value = "teamLogo") String logo,
                                            @RequestParam(value = "battleFrequency") Integer battleFrequency) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -176,7 +176,7 @@ public class TeamController {
     }
 
     @RequestMapping(value = "/team_exist", method = RequestMethod.POST)
-    public Map<String, String> teamExist(@RequestParam(name = "name") String name) throws EntityNotFoundException {
+    public Map<String, String> teamExist(@RequestParam(name = "teamName") String name) throws EntityNotFoundException {
         TreeMap<String, String> map = new TreeMap<>();
         Optional<Team> teamOptional = teamRepository.findByName(name);
         if (!teamOptional.isPresent()) {

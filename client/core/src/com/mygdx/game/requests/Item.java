@@ -1,5 +1,7 @@
 package com.mygdx.game.requests;
 
+import javax.rmi.CORBA.StubDelegate;
+
 public class Item {
     public static final String  ITEM_ID = "itemId";
     public static final String  ITEM_IMAGE = "itemImageUrl";
@@ -27,5 +29,9 @@ public class Item {
 
     public String getType() {
         return type;
+    }
+
+    public boolean isEquipped() {
+        return equipped;
     }
 }

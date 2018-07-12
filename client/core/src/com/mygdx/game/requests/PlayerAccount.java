@@ -169,4 +169,9 @@ public class PlayerAccount {
         team = Team.getTeam(profile.getTeamId());
     }
 
+    public static int getItemStatus(String name) {
+        if (profile == null)
+            return Profile.STORE_ITEM;
+        else return profile.getItemStatus(name);
+    }
 }

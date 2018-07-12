@@ -29,6 +29,10 @@ public class Profile {
     public static final String  GENDER = "gender";
     public static final String  POINTS = "points";
     public static final String  PLAYER_ID = "playerId";
+
+    public static final int     STORE_ITEM = 0;
+    public static final int     EQUIPPED_ITEM = 1;
+    public static final int     UNEQUIPPED_ITEM = 2;
     private String  name;
     private int     id;
     private int     headType;
@@ -473,5 +477,15 @@ public class Profile {
 
         pixmap = new Pixmap(Gdx.files.internal("default.png"));
         return getTexture(pixmap, headType, bodyType);
+    }
+
+    public int getItemStatus(String name) {
+        if (itemList == null)
+            return STORE_ITEM;
+        for (Item item: itemList) {
+            if (item.getType().equals(name))
+                return item.isEquipped() ? EQUIPPED_ITEM : UNEQUIPPED_ITEM;
+        }
+        return STORE_ITEM;
     }
 }

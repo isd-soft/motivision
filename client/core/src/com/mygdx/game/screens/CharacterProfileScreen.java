@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.requests.PlayerAccount;
+import com.mygdx.game.requests.Profile;
 
 import org.json.JSONException;
 
@@ -270,12 +271,25 @@ public class CharacterProfileScreen implements Screen {
     }
 
     class ClickButton extends ChangeListener{
+        String  name;
+
+
 
         public ClickButton(String name) {
+            name = name.replaceFirst("1", "iron");
+            name = name.replaceFirst("2", "steel");
+            name = name.replaceFirst("3", "diamond");
+            this.name = name;
         }
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
+            int status;
+
+            status = PlayerAccount.getItemStatus(name);
+            if (status == Profile.STORE_ITEM) {
+
+            }
 
         }
     }
