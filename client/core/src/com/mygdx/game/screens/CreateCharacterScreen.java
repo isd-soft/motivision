@@ -432,12 +432,8 @@ public class CreateCharacterScreen implements Screen {
     class CreateCharacter extends ChangeListener {
         public boolean validateName(String profileName) {
             boolean nameExist;
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
 
-            if (profileName.length() < 5) {
-                nameText.setColor(Color.RED);
-                show();
-                return false;
-            }
             try {
                 nameExist = Profile.nameExist(profileName);
                 // TODO
@@ -449,10 +445,14 @@ public class CreateCharacterScreen implements Screen {
                 return false;
             }
             if (nameExist == true) {
-                nameText.setColor(Color.RED);
+                log.warn("Character name already exist!");
+                bDialog.setTitle("Character Name");
+                bDialog.setMessage("Character name already exist!");
+                bDialog.addButton("Go back");
+                bDialog.build().show();
                 return false;
             } else {
-                nameText.setColor(Color.WHITE);
+                log.info("Character name does not exist, all is okay");
                 return true;
             }
         }
@@ -510,7 +510,7 @@ public class CreateCharacterScreen implements Screen {
                     characterParameters.put(Profile.IS_ADMIN, "true");
                 } else if (teamId == -1) {
                     bDialog.setTitle("Team");
-                    bDialog.setMessage("Team already!");
+                    bDialog.setMessage("Team already exist!");
                     bDialog.addButton("Go back");
                     bDialog.build().show();
                     // TODO Team already exist
