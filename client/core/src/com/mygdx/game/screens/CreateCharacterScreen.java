@@ -128,12 +128,6 @@ public class CreateCharacterScreen implements Screen {
         arrowBodyRight = new TextButton(">", skin);
         arrowCastleLeft = new TextButton("<", skin);
         arrowCastleRight = new TextButton(">", skin);
-        //textfields for team and name
-
-
-//        ImageButton arrowCastleLeft = new ImageButton(skin);
-
-        //text button
 
         //creating table with Character Settings
         Table tableActivities = new Table();
@@ -300,14 +294,20 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.add(checkboxTeam)
                 .left().colspan(3).padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.row().pad(10, 0, 0, 0);
+        if(checkboxTeam.isChecked()) {
+            castleTable.add(arrowCastleLeft);
+            castleTable.add(imageCastle);
+            castleTable.add(arrowCastleRight);
 
-        castleTable.add(arrowCastleLeft);
-        castleTable.add(imageCastle);
-        castleTable.add(arrowCastleRight);
-
-        tableActivities.add(castleTable).colspan(3);
-        tableActivities.row().pad(10, 0, 0, 0);
-
+            tableActivities.add(castleTable).colspan(3);
+            tableActivities.row().pad(10, 0, 0, 0);
+        }
+        checkboxTeam.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                show();
+            }
+        });
         buttonTable.add(buttonBack).fill().expand();
         buttonTable.add(buttonOk).fill().expand();
 
