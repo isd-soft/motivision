@@ -112,19 +112,33 @@ public class Team {
         }
     }
 
-    public static List<Activity> getTeamActivities(int teamId) throws IOException, JSONException {
+    public List<Activity> getTeamActivities(){
         String  url;
-        List<Activity> activities;
+        List<Activity> activities = new ArrayList<Activity>();
         String urlParameters;
-
         if (teamId == -1)
             return null;
 
         url = JsonHandler.domain + "/get_activities";
         urlParameters = TEAM_ID +"=" + teamId;
         System.out.println("Start get activities from url");
-        activities = getTeamActivitiesFromUrl(url, urlParameters, "GET");
+        try {
+            activities = getTeamActivitiesFromUrl(url, urlParameters, "GET");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return activities;
+    }
+
+    public List<String> getTeamActivitiesNames(){
+            List<Activity> activities = getTeamActivities();
+            List<String> names = new ArrayList<String>();
+            for(Activity activity : activities){
+                names.add(activity.getActivityName());
+            }
+            return names;
     }
     public static Team getTeam(int teamId) throws IOException, JSONException {
         String  url;
@@ -159,6 +173,14 @@ public class Team {
         if (jsonObject.has(TEAM_ID))
             return jsonObject.getInt(TEAM_ID);
         return -1;
+    }
+
+    public static void doActivityUrl(Integer characterId, Integer activityId){
+        String      urlParameters;
+        String		url;
+        JSONObject  jsonObject;
+        String		result;
+        int         teamId;
     }
 
     private static void	setErrorMessage(String message) {

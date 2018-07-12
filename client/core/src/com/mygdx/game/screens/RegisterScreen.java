@@ -62,11 +62,6 @@ public class RegisterScreen  implements Screen {
             setErrorMessage("Login must contain at least 6 characters");
             return false;
         }
-        if(!matcher.matches()){
-            log.warn("Login has an illegal character");
-            setErrorMessage("Login has an illegal character");
-            return false;
-        }
         log.info("Login validated successfully");
         return true;
     }
@@ -87,11 +82,6 @@ public class RegisterScreen  implements Screen {
         else if (password.length() < 6) {
             log.warn("Password field must be at least");
             setErrorMessage("Password must contain at least 6 characters");
-            return false;
-        }
-        if(!matcher.matches()){
-            log.warn("Password has an illegal character");
-            setErrorMessage("Password has an illegal character");
             return false;
         }
         log.info("Password validated successfully");
