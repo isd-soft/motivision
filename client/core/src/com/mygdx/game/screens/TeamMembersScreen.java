@@ -14,7 +14,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.PlayerAccount;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TeamMembersScreen implements Screen {
@@ -45,7 +49,21 @@ public class TeamMembersScreen implements Screen {
     public void show() {
         stage.clear();
         stage.setDebugAll(true);
-        float pad = 5.0f;
+        float pad = 5;
+
+        // Character Sprite
+        Texture texture = null;
+        try {
+            texture = PlayerAccount.getProfileTexture();
+        } catch (IOException e) {
+            texture = new Texture("default.png");
+            e.printStackTrace();
+        } catch (JSONException e) {
+            texture = new Texture("default.png");
+            e.printStackTrace();
+        }
+        Image image = new Image(texture);
+        stage.setDebugAll(true);
 
         // label
         Label teamName = new Label("Team: \"NAME\"", skin);
@@ -53,10 +71,6 @@ public class TeamMembersScreen implements Screen {
         // buttons
         TextButton settingsButton = new TextButton("Settings", skin, "small");
         TextButton backButton = new TextButton("Back", skin, "small");
-
-        // Character Sprite
-        Texture texture = new Texture("default.png");
-        Image image = new Image(texture);
 
         // tables
         Table screenTable = new Table();

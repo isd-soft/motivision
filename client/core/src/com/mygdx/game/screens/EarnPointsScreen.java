@@ -16,6 +16,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.requests.PlayerAccount;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class EarnPointsScreen implements Screen {
@@ -44,11 +47,20 @@ public class EarnPointsScreen implements Screen {
     @Override
     public void show() {
         stage.clear();
-        stage.setDebugAll(true);
-        float pad = 5.0f;
+//        stage.setDebugAll(true);
+        float pad = 5;
 
         // Character Sprite
-        Texture texture = new Texture("default.png");
+        Texture texture = null;
+        try {
+            texture = PlayerAccount.getProfileTexture();
+        } catch (IOException e) {
+            texture = new Texture("default.png");
+            e.printStackTrace();
+        } catch (JSONException e) {
+            texture = new Texture("default.png");
+            e.printStackTrace();
+        }
         Image image = new Image(texture);
 
         //create buttons Settings, Back and adding them listeners
