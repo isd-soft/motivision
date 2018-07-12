@@ -1,7 +1,6 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
@@ -9,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -21,7 +21,6 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.requests.PlayerAccount;
-import com.badlogic.gdx.Input.TextInputListener;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -149,6 +148,16 @@ public class AdminScreen implements Screen {
         selectionTable.add(freqChoiceLabel);
         selectionTable.add(arrowFrequencyRight);
 
+        if (serverActivities == null){
+            activityNamesButtons.get(0).setDisabled(true);
+            activityNamesButtons.get(0).setTouchable(Touchable.disabled);
+            xButtons.get(0).setDisabled(true);
+            xButtons.get(0).setTouchable(Touchable.disabled);
+
+            pointsButtons.get(0).setDisabled(true);
+            pointsButtons.get(0).setTouchable(Touchable.disabled);
+        }
+
         // add the list and buttons table
         buttonTable.add(settings).fill().pad(0, 0, pad / 2, 0);
         buttonTable.add(back).fill().pad(0, 0, pad / 2, 0);
@@ -178,12 +187,7 @@ public class AdminScreen implements Screen {
             }
         });
 
-        create.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                //parent.changeScreen(parent.getMenu()); //go to create character screen
-            }
-        });
+        create.addListener(new CreateActivity());
 
         arrowFrequencyLeft.addListener(new ChangeListener() {
             @Override
@@ -388,10 +392,8 @@ public class AdminScreen implements Screen {
     }
 
     class CreateActivity extends ChangeListener {
-        String name;
 
-        public CreateActivity(String elem) {
-            this.name = elem;
+        public CreateActivity() {
         }
 
         @Override
@@ -400,8 +402,8 @@ public class AdminScreen implements Screen {
 
             final GDXTextPrompt textPrompt = dialogs.newDialog(GDXTextPrompt.class);
 
-            textPrompt.setTitle("Edit point");
-            textPrompt.setMessage("Enter points for activity:");
+            textPrompt.setTitle("New activity");
+            textPrompt.setMessage("Enter activity name:");
 
             textPrompt.setCancelButtonLabel("Cancel");
             textPrompt.setConfirmButtonLabel("Save");
