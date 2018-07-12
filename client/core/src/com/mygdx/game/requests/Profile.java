@@ -81,7 +81,7 @@ public class Profile {
         return isAdmin;
     }
 
-    private static Profile      getProfileFromJson(JSONObject jsonObject) throws JSONException {
+    public static Profile      getProfileFromJson(JSONObject jsonObject) throws JSONException {
         Profile     profile;
         String		field;
         int         characterId;
@@ -409,6 +409,14 @@ public class Profile {
         int     itemId;
 
         //itemId = Item.getId(itemType);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getProfileName() {
+        return name;
     }
 
     public void setName(String name) {

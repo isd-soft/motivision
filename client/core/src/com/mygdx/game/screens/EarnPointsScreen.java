@@ -14,12 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.Activity;
 import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EarnPointsScreen implements Screen {
 
@@ -76,21 +78,21 @@ public class EarnPointsScreen implements Screen {
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
 
+        List<Activity> activities = PlayerAccount.getActivities();
         //fill table with buttons and labels
-        for (int i = 1; i <3; i++) {
+        for (final Activity activity: activities){
             //instead of PLACE_HOLDER there should be name of activity
-            TextButton activityName = new TextButton("Activity PLACE_HOLDER", skin, "square");
+            TextButton activityName = new TextButton(activity.getActivityName(), skin, "square");
             activityName.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor){
-                    parent.changeScreen(parent.getAnimation());
                     //here should go Yes No pop up screen
                 }
             });
 
             activitiesTable.add(activityName).fillX().expandX();
 
-            TextButton points = new TextButton("333", skin, "square");
+            TextButton points = new TextButton(activity.getActivityReward().toString(), skin, "square");
             points.setTouchable(Touchable.disabled);
             activitiesTable.add(points).width(Value.percentWidth(0.2f, activitiesTable));
             activitiesTable.row();
@@ -123,6 +125,7 @@ public class EarnPointsScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
     }
+
 
     @Override
     public void render(float delta) {

@@ -8,6 +8,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class PlayerAccount {
     private static Player   player = null;
@@ -23,6 +24,34 @@ public class PlayerAccount {
         if (player == null)
             return null;
         return player.getCharactersName();
+    }
+
+    public static String getTeamName(){
+        if(team == null)
+            return null;
+        return team.getTeamName();
+
+    }
+    public static List<Activity> getActivities(){
+        if(team == null)
+            return null;
+        return team.getTeamActivities();
+    }
+    public static List<String> getActivitiesName(){
+        if(team == null)
+            return null;
+        return team.getTeamActivitiesNames();
+    }
+    public static List<Profile> getAllCharactersFromTeam() {
+        if (team == null)
+            return null;
+        return team.getAllCharactersFromTeam();
+    }
+
+    public static List<String> getAllCharactersFromTeamName(){
+        if(team == null)
+            return null;
+        return team.getTeamActivitiesNames();
     }
 
     public static int   getProfileId(String name) {
@@ -185,4 +214,18 @@ public class PlayerAccount {
 
 
     }
+    public static void      selectProfileTeam() throws IOException, JSONException {
+        if (profile == null)
+            return;
+        team = Team.getTeam(profile.getTeamId());
+    }
+
+    public static String    getProfileTeamName() throws IOException, JSONException {
+        if(team == null)
+            return null;
+        return Team.getTeam(profile.getTeamId()).getTeamName();
+    }
+
+
+
 }
