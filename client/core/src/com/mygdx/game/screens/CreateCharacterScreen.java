@@ -499,7 +499,7 @@ public class CreateCharacterScreen implements Screen {
                 teamId = Team.getTeamId(teamName);
                 if (checkboxTeam.isChecked()) {
                     if (teamId != -1) {
-//                        log.warn("Team already exists!");
+                        log.warn("Team already exists!");
 //                        bDialog.setTitle("Team");
 //                        bDialog.setMessage("Team already exists!");
 //                        bDialog.addButton("Go back");
@@ -519,7 +519,8 @@ public class CreateCharacterScreen implements Screen {
                     characterParameters.put(Profile.IS_ADMIN, "true");
                 }
                 else if (teamId == -1) {
-                    SelectDialog("Team does not exist");
+                    log.warn("Team does not exist!");
+                    SelectDialog("Team does not exist!");
 //                    bDialog.setTitle("Team");
 //                    bDialog.setMessage("Team does not exist!");
 //                    bDialog.addButton("Go back");

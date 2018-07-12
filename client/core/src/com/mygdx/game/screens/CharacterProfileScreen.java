@@ -73,6 +73,12 @@ public class CharacterProfileScreen implements Screen {
 
     @Override
     public void show() {
+        //take number of points from DB
+        //here is just random number
+        int pointsNumber = PlayerAccount.getProfilePoints();
+        if (pointsNumber == -1) {
+            SelectDialog("Please First Select Character From List");
+        }
         stage.clear();
 //        stage.setDebugAll(true);
         float pad = 5;
@@ -144,10 +150,6 @@ public class CharacterProfileScreen implements Screen {
             }
         });
 
-        //take number of points from DB
-        //here is just random number
-        int pointsNumber = PlayerAccount.getProfilePoints();
-
         //Create label witch represents points
         Label pointsLabel = new Label("Points: " + pointsNumber, skin);
 
@@ -164,6 +166,7 @@ public class CharacterProfileScreen implements Screen {
                 numberOfActivities.add("Activity: " + activity);
             }
         */
+
 
         //create and fill table with buttons and labels
         itemTable = new Table();
@@ -234,6 +237,15 @@ public class CharacterProfileScreen implements Screen {
         stage.addActor(screenTable);
 
         Gdx.input.setInputProcessor(stage);
+    }
+
+    public void     SelectDialog(String message) {
+        final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+        bDialog.setTitle("Error");
+        bDialog.setMessage(message);
+        bDialog.addButton("Ok");
+
+        bDialog.build().show();
     }
 
     public TextureRegionDrawable addImage(String imagePath){
