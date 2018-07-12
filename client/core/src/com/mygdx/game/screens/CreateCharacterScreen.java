@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.logger.Logger;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Profile;
@@ -22,11 +23,17 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import de.tomgrill.gdxdialogs.core.GDXDialogs;
+import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
+import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
 import sun.awt.image.ImageWatched;
 
 public class CreateCharacterScreen implements Screen {
 
+    private final Logger log = new Logger();
     private GGame parent;
     private Stage stage;
     private Viewport viewport;
@@ -59,9 +66,11 @@ public class CreateCharacterScreen implements Screen {
     private TextButton arrowCastleRight;
     private TextButton buttonBack;
     private TextButton buttonOk;
+    private GDXDialogs dialogs;
 
 
     public CreateCharacterScreen(GGame g) {
+        dialogs = GDXDialogsSystem.install();
         parent = g;
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
         stage = new Stage();
@@ -89,9 +98,71 @@ public class CreateCharacterScreen implements Screen {
         ButtonGroup genderCheckBoxGroup = new ButtonGroup(checkboxFemale, checkboxMale);
         genderCheckBoxGroup.setMaxCheckCount(1);
         checkboxTeam = new CheckBox("Create new Team", skin);
-        //making arrow buttons
+        //making 2 arrow buttons
         buttonBack = new TextButton("Back", skin);
         buttonOk = new TextButton("Ok", skin);
+    }
+
+    private boolean  validateCharacterName(String characterName, GDXButtonDialog bDialog) {
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-]*");
+        Matcher matcher = pattern.matcher(characterName);
+        if (characterName == null || characterName == "") {
+            log.warn("Character name field is empty");
+            bDialog.setTitle("Character Name");
+            bDialog.setMessage("Character name field is empty");
+            bDialog.addButton("Go back");
+            bDialog.build().show();
+            return false;
+        }
+        else if (characterName.length() < 6) {
+            log.warn("Character name field must be at least 6 characters long");
+            bDialog.setTitle("Character Name");
+            bDialog.setMessage("Character name field must be at least 6 characters long");
+            bDialog.addButton("Go back");
+            bDialog.build().show();
+            return false;
+        }else
+        if(!matcher.matches()){
+            log.warn("Character name has an illegal character");
+            bDialog.setTitle("Character Name");
+            bDialog.setMessage("Character name has an illegal character");
+            bDialog.addButton("Go back");
+            bDialog.build().show();
+            return false;
+        }
+        log.info("Character name validated successfully");
+        return true;
+    }
+
+    private boolean  validateTeamName(String teamName, GDXButtonDialog bDialog) {
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-]*");
+        Matcher matcher = pattern.matcher(teamName);
+        if (teamName == null || teamName == "") {
+            log.warn("Team name field is empty");
+            bDialog.setTitle("Team Name");
+            bDialog.setMessage("Team name field is empty");
+            bDialog.addButton("Go back");
+            bDialog.build().show();
+            return false;
+        }
+        else if (teamName.length() < 6) {
+            log.warn("Team name field must be at least 6 characters long");
+            bDialog.setTitle("Team Name");
+            bDialog.setMessage("Team name field must be at least 6 characters long");
+            bDialog.addButton("Go back");
+            bDialog.build().show();
+            return false;
+        }
+        if(!matcher.matches()){
+            log.warn("Team name has an illegal character");
+            bDialog.setTitle("Team Name");
+            bDialog.setMessage("Team name has an illegal character");
+            bDialog.addButton("Go back");
+            bDialog.build().show();
+            return false;
+        }
+        log.info("Character name validated successfully");
+        return true;
     }
 
     @Override
@@ -118,9 +189,6 @@ public class CreateCharacterScreen implements Screen {
         //creating checkboxes for gender
         checkboxMale.setChecked(checkboxMaleBoolean);
         checkboxFemale.setChecked(checkboxFemaleBoolean);
-
-        //group up 2 gender choice checkboxes
-
 
         arrowHeadLeft = new TextButton("<", skin);
         arrowHeadRight = new TextButton(">", skin);
@@ -364,14 +432,11 @@ public class CreateCharacterScreen implements Screen {
     class CreateCharacter extends ChangeListener {
         public boolean validateName(String profileName) {
             boolean nameExist;
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
 
-            if (profileName.length() < 5) {
-                nameText.setColor(Color.RED);
-                show();
-                return false;
-            }
             try {
                 nameExist = Profile.nameExist(profileName);
+                // TODO
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
@@ -380,10 +445,14 @@ public class CreateCharacterScreen implements Screen {
                 return false;
             }
             if (nameExist == true) {
-                nameText.setColor(Color.RED);
+                log.warn("Character name already exist!");
+                bDialog.setTitle("Character Name");
+                bDialog.setMessage("Character name already exist!");
+                bDialog.addButton("Go back");
+                bDialog.build().show();
                 return false;
             } else {
-                nameText.setColor(Color.WHITE);
+                log.info("Character name does not exist, all is okay");
                 return true;
             }
         }
@@ -401,8 +470,10 @@ public class CreateCharacterScreen implements Screen {
 
             characterParameters = new LinkedHashMap<String, String>();
 
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             profileName = nameText.getText();
-            if (validateName(profileName) == false)
+            System.out.println("Name = [" + profileName + "]");
+            if (validateCharacterName(profileName, bDialog) == false)
                 return;
             characterParameters.put(Profile.NAME, nameText.getText());
 
@@ -415,15 +486,19 @@ public class CreateCharacterScreen implements Screen {
             characterParameters.put(Profile.BODY_TYPE, labelBodyNumber.getText() + "");
 
             teamName = teamText.getText();
-            if (teamName.length() < 5) {
-                teamText.setColor(Color.RED);
+            if (validateTeamName(teamName, bDialog) == false)
                 return;
-            }
             try {
                 teamId = Team.getTeamId(teamName);
                 if (checkboxTeam.isChecked()) {
                     if (teamId != -1) {
-                        teamText.setColor(Color.RED);
+                        log.warn("Team does not exist!");
+                        bDialog.setTitle("Team");
+                        bDialog.setMessage("Team does not exist!");
+                        bDialog.addButton("Go back");
+                        bDialog.build().show();
+                        //teamText.setColor(Color.RED);
+                        // TODO Team does not exist
                         return;
                     }
                     teamParams = new LinkedHashMap<String, String>();
@@ -434,7 +509,12 @@ public class CreateCharacterScreen implements Screen {
                     teamText.setColor(Color.WHITE);
                     characterParameters.put(Profile.IS_ADMIN, "true");
                 } else if (teamId == -1) {
-                    teamText.setColor(Color.RED);
+                    bDialog.setTitle("Team");
+                    bDialog.setMessage("Team already exist!");
+                    bDialog.addButton("Go back");
+                    bDialog.build().show();
+                    // TODO Team already exist
+                    //teamText.setColor(Color.RED);
                     return;
                 } else {
                     characterParameters.put(Profile.IS_ADMIN, "false");
