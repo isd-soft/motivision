@@ -29,7 +29,10 @@ import java.util.regex.Pattern;
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
 import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
+import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 import sun.awt.image.ImageWatched;
+
+import static javax.security.auth.callback.ConfirmationCallback.YES;
 
 public class CreateCharacterScreen implements Screen {
 
@@ -66,6 +69,7 @@ public class CreateCharacterScreen implements Screen {
     private TextButton arrowCastleRight;
     private TextButton buttonBack;
     private TextButton buttonOk;
+    private boolean isTeamChecked;
     private GDXDialogs dialogs;
 
 
@@ -97,10 +101,11 @@ public class CreateCharacterScreen implements Screen {
         checkboxFemale = new CheckBox("Female", skin);
         ButtonGroup genderCheckBoxGroup = new ButtonGroup(checkboxFemale, checkboxMale);
         genderCheckBoxGroup.setMaxCheckCount(1);
-        checkboxTeam = new CheckBox("Create new Team", skin);
+        //making arrow buttons
         //making 2 arrow buttons
         buttonBack = new TextButton("Back", skin);
         buttonOk = new TextButton("Ok", skin);
+        isTeamChecked = false;
     }
 
     private boolean  validateCharacterName(String characterName, GDXButtonDialog bDialog) {
@@ -172,6 +177,8 @@ public class CreateCharacterScreen implements Screen {
 
         stage.clear();
         float pad = 5;
+        checkboxTeam = new CheckBox("Create new Team", skin);
+        checkboxTeam.setChecked(isTeamChecked);
 
         // Character Sprite
         System.out.println("show");
@@ -180,6 +187,7 @@ public class CreateCharacterScreen implements Screen {
 
         final Image imageCastle = new Image(textureCastle);
 
+        buttonOk = new TextButton("Ok", skin);
         //making labels
         labelHeadNumber.setText(String.valueOf(headType));
         labelBodyNumber.setText(String.valueOf(bodyType));
@@ -329,11 +337,9 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.row().pad(10, 0, 0, 0);
 
         tableActivities.add(labelGender).left().padLeft(Value.percentWidth(0.1f, tableActivities));
-        tableActivities.add(checkboxMale)
-                .expand().fill();
+        tableActivities.add(checkboxMale);
         //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
-        tableActivities.add(checkboxFemale)
-                .expand().fill();
+        tableActivities.add(checkboxFemale);
         //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.row().pad(10, 0, 0, 0);
 
@@ -373,11 +379,12 @@ public class CreateCharacterScreen implements Screen {
         checkboxTeam.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                isTeamChecked = checkboxTeam.isChecked();
                 show();
             }
         });
-        buttonTable.add(buttonBack).fill().expand();
-        buttonTable.add(buttonOk).fill().expand();
+        buttonTable.add(buttonBack).bottom().expand().fillX() ;
+        buttonTable.add(buttonOk).bottom().expand().fillX();
 
         tableActivities.add(buttonTable).fill().expand().colspan(3);
 
@@ -492,11 +499,12 @@ public class CreateCharacterScreen implements Screen {
                 teamId = Team.getTeamId(teamName);
                 if (checkboxTeam.isChecked()) {
                     if (teamId != -1) {
-                        log.warn("Team does not exist!");
-                        bDialog.setTitle("Team");
-                        bDialog.setMessage("Team does not exist!");
-                        bDialog.addButton("Go back");
-                        bDialog.build().show();
+//                        log.warn("Team already exists!");
+//                        bDialog.setTitle("Team");
+//                        bDialog.setMessage("Team already exists!");
+//                        bDialog.addButton("Go back");
+//                        bDialog.build().show();
+                        SelectDialog("Team already exists!");
                         //teamText.setColor(Color.RED);
                         // TODO Team does not exist
                         return;
@@ -508,11 +516,13 @@ public class CreateCharacterScreen implements Screen {
                     teamId = Team.createNewTeam(teamParams);
                     teamText.setColor(Color.WHITE);
                     characterParameters.put(Profile.IS_ADMIN, "true");
-                } else if (teamId == -1) {
-                    bDialog.setTitle("Team");
-                    bDialog.setMessage("Team already exist!");
-                    bDialog.addButton("Go back");
-                    bDialog.build().show();
+                }
+                else if (teamId == -1) {
+                    SelectDialog("Team does not exist");
+//                    bDialog.setTitle("Team");
+//                    bDialog.setMessage("Team does not exist!");
+//                    bDialog.addButton("Go back");
+//                    bDialog.build().show();
                     // TODO Team already exist
                     //teamText.setColor(Color.RED);
                     return;
@@ -538,6 +548,15 @@ public class CreateCharacterScreen implements Screen {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+
+        public void     SelectDialog(String message) {
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+            bDialog.setTitle("Error");
+            bDialog.setMessage(message);
+            bDialog.addButton("Ok");
+
+            bDialog.build().show();
         }
     }
 }
