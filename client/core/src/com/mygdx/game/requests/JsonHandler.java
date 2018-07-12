@@ -30,8 +30,8 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 
 public class JsonHandler {
-    static final String domain = "http://207.154.207.47:8080";
-//    static final String domain = "http://172.17.41.148:8080";
+//    static final String domain = "http://207.154.207.47:8080";
+      static final String domain = "http://172.17.41.148:8080";
 //    static final String domain = "http://192.168.1.23:8080";
 //    static final String domain = "http://172.17.41.110:8080";
     public static String	errorMessage = null;
