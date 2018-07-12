@@ -66,6 +66,7 @@ public class CreateCharacterScreen implements Screen {
     private TextButton arrowCastleRight;
     private TextButton buttonBack;
     private TextButton buttonOk;
+    private boolean isTeamChecked;
     private GDXDialogs dialogs;
 
 
@@ -97,10 +98,11 @@ public class CreateCharacterScreen implements Screen {
         checkboxFemale = new CheckBox("Female", skin);
         ButtonGroup genderCheckBoxGroup = new ButtonGroup(checkboxFemale, checkboxMale);
         genderCheckBoxGroup.setMaxCheckCount(1);
-        checkboxTeam = new CheckBox("Create new Team", skin);
+        //making arrow buttons
         //making 2 arrow buttons
         buttonBack = new TextButton("Back", skin);
         buttonOk = new TextButton("Ok", skin);
+        isTeamChecked = false;
     }
 
     private boolean  validateCharacterName(String characterName, GDXButtonDialog bDialog) {
@@ -172,6 +174,8 @@ public class CreateCharacterScreen implements Screen {
 
         stage.clear();
         float pad = 5;
+        checkboxTeam = new CheckBox("Create new Team", skin);
+        checkboxTeam.setChecked(isTeamChecked);
 
         // Character Sprite
         System.out.println("show");
@@ -329,11 +333,9 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.row().pad(10, 0, 0, 0);
 
         tableActivities.add(labelGender).left().padLeft(Value.percentWidth(0.1f, tableActivities));
-        tableActivities.add(checkboxMale)
-                .expand().fill();
+        tableActivities.add(checkboxMale);
         //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
-        tableActivities.add(checkboxFemale)
-                .expand().fill();
+        tableActivities.add(checkboxFemale);
         //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.row().pad(10, 0, 0, 0);
 
@@ -362,6 +364,7 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.add(checkboxTeam)
                 .left().colspan(3).padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.row().pad(10, 0, 0, 0);
+
         if(checkboxTeam.isChecked()) {
             castleTable.add(arrowCastleLeft);
             castleTable.add(imageCastle);
@@ -373,11 +376,12 @@ public class CreateCharacterScreen implements Screen {
         checkboxTeam.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                isTeamChecked = checkboxTeam.isChecked();
                 show();
             }
         });
-        buttonTable.add(buttonBack).fill().expand();
-        buttonTable.add(buttonOk).fill().expand();
+        buttonTable.add(buttonBack).bottom().expand().fillX() ;
+        buttonTable.add(buttonOk).bottom().expand().fillX();
 
         tableActivities.add(buttonTable).fill().expand().colspan(3);
 
