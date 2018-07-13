@@ -138,7 +138,7 @@ public class CreateCharacterScreen implements Screen {
     }
 
     private boolean  validateTeamName(String teamName, GDXButtonDialog bDialog) {
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\s\\-]*");
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_ \\-]*");
         Matcher matcher = pattern.matcher(teamName);
         if (teamName == null || teamName == "") {
             log.warn("Team name field is empty");

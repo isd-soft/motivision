@@ -12,9 +12,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class PlayerAccount {
-    private static Player   player = null;
-    private static Profile  profile = null;
-    private static Team     team = null;
+    private static Player           player = null;
+    private static Profile          profile = null;
+    private static Team             team = null;
+    private static List<Profile>    teamMembers;
 
 
     public static void setProfile(Profile profile) {
@@ -43,10 +44,16 @@ public class PlayerAccount {
             return null;
         return team.getTeamActivitiesNames();
     }
-    public static List<Profile> getAllCharactersFromTeam() {
+    private static LinkedHashMap<String, Integer> getTeamMembersList() {
+        LinkedHashMap<String, Integer>  teamMembersMap;
         if (team == null)
             return null;
-        return team.getAllCharactersFromTeam();
+        teamMembers = team.getAllCharactersFromTeam();
+        teamMembersMap = new LinkedHashMap<String, Integer>();
+        for (Profile member: teamMembers) {
+            teamMembersMap.put(member.getName(), member.getPoints());
+        }
+        return teamMembersMap;
     }
 
     public static List<String> getAllCharactersFromTeamName(){
@@ -323,16 +330,6 @@ public class PlayerAccount {
             }
         }
     }
-    public static void setBattleFrequency(String frequency) {
-        //TODO
-        //PlayerAccount.battleFrequency = frequency
-    }
-
-    public static CharSequence getBattleFrequency() {
-        //TODO
-        //return battleFrequency;
-        return null;
-    }
 
     public static void equipItem(int itemId) {
         if (getItemStatus(itemId) == Item.UNEQUIPPED_ITEM) {
@@ -344,15 +341,5 @@ public class PlayerAccount {
                 e.printStackTrace();
             }
         }
-    }
-    public static void setCastleTexture(Texture teamTexture) {
-        //TODO
-        //PlayerAccount.teamTexture = teamTexture;
-    }
-
-    public static Texture getCastleTexture() {
-        //TODO
-        //return teamTexture;
-        return null;
     }
 }

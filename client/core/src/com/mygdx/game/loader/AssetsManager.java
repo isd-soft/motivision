@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.ParticleEffectLoader.ParticleEffectParameter;
 import com.badlogic.gdx.assets.loaders.SkinLoader.SkinParameter;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -34,5 +35,6 @@ public class AssetsManager {
         aManager.load(spriteAnimation, Texture.class);
         aManager.load(spriteWolfAnimation, Texture.class);
         aManager.load(spriteWalkAnimation, Texture.class);
+        aManager.load(monsterImage, Pixmap.class);
     }
 }
