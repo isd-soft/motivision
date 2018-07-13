@@ -31,9 +31,6 @@ public class Profile {
     public static final String  POINTS = "points";
     public static final String  PLAYER_ID = "playerId";
 
-    public static final int     STORE_ITEM = 0;
-    public static final int     EQUIPPED_ITEM = 1;
-    public static final int     UNEQUIPPED_ITEM = 2;
     private String  name;
     private int     id;
     private int     headType;
@@ -356,6 +353,8 @@ public class Profile {
         itemSet = itemImages.keySet();
         if (itemList != null) {
             for (Item item : itemList) {
+                if (item.isEquipped() == false)
+                    continue;
                 for (String itemType : itemSet) {
                     if (item.getType().contains(itemType)) {
                         itemImages.put(itemType, item.getType());
@@ -511,11 +510,37 @@ public class Profile {
 
     public int getItemStatus(int id) {
         if (itemList == null)
-            return STORE_ITEM;
+            return Item.STORE_ITEM;
         for (Item item: itemList) {
             if (item.getId() == id)
-                return item.isEquipped() ? EQUIPPED_ITEM : UNEQUIPPED_ITEM;
+                return item.isEquipped() ? Item.EQUIPPED_ITEM : Item.UNEQUIPPED_ITEM;
         }
-        return STORE_ITEM;
+        return Item.STORE_ITEM;
+    }
+
+    public void unequipItem(int itemId) {
+        for (Item item: itemList) {
+            if (item.getId() == itemId) {
+                item.unequip();
+            }
+        }
+    }
+    public void equipItem(int itemId) {
+        String  type = null;
+
+        for (Item item: itemList) {
+            if (item.getId() == itemId) {
+                type = item.getType().split("_")[1];
+                item.equip();
+                System.out.println("Item found!");
+                break;
+            }
+
+        }
+        for (Item item: itemList) {
+            if (item.getId() != itemId && item.getType().contains(type)) {
+                item.unequip();
+            }
+        }
     }
 }

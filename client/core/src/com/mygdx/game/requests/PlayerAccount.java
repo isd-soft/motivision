@@ -1,7 +1,8 @@
 package com.mygdx.game.requests;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.screens.DialogBox;
 
 import org.json.JSONException;
 
@@ -206,7 +207,7 @@ public class PlayerAccount {
 
     public static int getItemStatus(int id) {
         if (profile == null)
-            return Profile.STORE_ITEM;
+            return Item.STORE_ITEM;
         else return profile.getItemStatus(id);
     }
 
@@ -229,8 +230,32 @@ public class PlayerAccount {
         team = Team.getTeam(profile.getTeamId());
     }
 
-    public static void      addProfileStatusOnImage() {
+    public static Pixmap addProfileStatusOnImage(Pixmap pixmap, int itemId) throws IOException, JSONException {
+        Pixmap  itemPixmap = null;
+        int     status;
+        int     price;
 
+        if (profile == null)
+            return pixmap;
+
+        status = getItemStatus(itemId);
+        switch (status) {
+            case Item.STORE_ITEM:
+                price = Item.getItemPrice(itemId);
+                itemPixmap = new Pixmap(Gdx.files.internal("store_items/price_" + price + ".png"));
+                break;
+            case Item.EQUIPPED_ITEM:
+                itemPixmap = new Pixmap(Gdx.files.internal("store_items/equipped.png"));
+                break;
+            case Item.UNEQUIPPED_ITEM:
+                itemPixmap = new Pixmap(Gdx.files.internal("store_items/unequipped.png"));
+                break;
+        }
+        if (itemPixmap != null) {
+            pixmap.drawPixmap(itemPixmap, 0, 0);
+            itemPixmap.dispose();
+        }
+        return pixmap;
     }
 
     public static String    getProfileTeamName() throws IOException, JSONException {
@@ -240,5 +265,15 @@ public class PlayerAccount {
     }
 
 
+    public static void unequipItem(int itemId) {
+        if (getItemStatus(itemId) == Item.EQUIPPED_ITEM) {
+            profile.unequipItem(itemId);
+        }
+    }
 
+    public static void equipItem(int itemId) {
+        if (getItemStatus(itemId) == Item.UNEQUIPPED_ITEM) {
+            profile.equipItem(itemId);
+        }
+    }
 }

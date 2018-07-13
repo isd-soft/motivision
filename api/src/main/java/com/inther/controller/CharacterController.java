@@ -347,7 +347,7 @@ public class CharacterController {
         }
     }
 
-    @RequestMapping("/unequipped_item")
+    @RequestMapping("/unequip_item")
     public Map<String, Object> unEquipItem(@RequestParam(value = "characterId") Long characterId,
                                            @RequestParam(value = "itemId") Long itemId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
