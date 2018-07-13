@@ -35,6 +35,6 @@ public class AssetsManager {
         aManager.load(spriteAnimation, Texture.class);
         aManager.load(spriteWolfAnimation, Texture.class);
         aManager.load(spriteWalkAnimation, Texture.class);
-        aManager.load(monsterImage, Pixmap.class);
+//        aManager.load(monsterImage, Pixmap.class);
     }
 }
