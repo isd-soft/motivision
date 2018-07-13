@@ -30,9 +30,9 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 
 public class JsonHandler {
-    static final String domain = "http://207.154.207.47:8080";
+//    static final String domain = "http://207.154.207.47:8080";
 //    static final String domain = "http://192.168.1.23:8080";
-//    static final String domain = "http://172.17.41.148:8080";
+    static final String domain = "http://172.17.41.110:8080";
     public static String	errorMessage = null;
 
 
@@ -271,14 +271,7 @@ public class JsonHandler {
     public static JSONObject readJsonFromUrl(String jsonText) throws IOException, JSONException {
         InputStream is;
 
-        //is = new URL(url).openStream();
         try {
-          //  System.out.println(urlParameters);
-           // BufferedReader rd = POSTMethod(url, urlParameters);
-
-            //BufferedReader rd = getRequestResult(url, urlParameters);
-            //BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            //String jsonText = POSTMethod(url, urlParameters);
             if (jsonText == null)
                 return null;
             JSONObject json = new JSONObject(jsonText);

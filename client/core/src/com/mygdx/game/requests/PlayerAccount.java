@@ -93,6 +93,7 @@ public class PlayerAccount {
         selectProfile(name);
         if (profile == null)
             return new Texture("default.png");
+        PlayerAccount.selectProfileTeam();
         return profile.getTexture();
         //return null;
     }
@@ -117,10 +118,17 @@ public class PlayerAccount {
     }
 
     public static boolean loginPlayer(String login, String encryptedPassword) throws IOException, JSONException {
-        Player  player = null;
+        Player              player = null;
+        ArrayList<String>   charactersName;
 
         player = Player.loginPlayer(login, encryptedPassword);
         PlayerAccount.player = player;
+
+        charactersName = player.getCharactersName();
+        if (charactersName != null) {
+            if (charactersName.size() >= 1)
+                selectProfile(charactersName.get(0));
+        }
         return (player != null);
     }
 
@@ -219,6 +227,10 @@ public class PlayerAccount {
         if (profile == null)
             return;
         team = Team.getTeam(profile.getTeamId());
+    }
+
+    public static void      addProfileStatusOnImage() {
+
     }
 
     public static String    getProfileTeamName() throws IOException, JSONException {

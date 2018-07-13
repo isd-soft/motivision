@@ -220,7 +220,6 @@ public class CharacterSelectScreen implements Screen {
             try {
                 System.out.println("Start getting profile texture");
                 texture = PlayerAccount.getProfileTexture(name);
-                PlayerAccount.selectProfileTeam();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -249,6 +250,8 @@ public class CharacterProfileScreen implements Screen {
     }
 
     public TextureRegionDrawable addImage(String imagePath){
+
+
 
         textureImage = new Texture(Gdx.files.internal(imagePath));
         textureRegion = new TextureRegion(textureImage);

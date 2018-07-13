@@ -3,6 +3,7 @@ package com.mygdx.game.requests;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
