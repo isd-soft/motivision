@@ -518,15 +518,24 @@ public class Profile {
         return Item.STORE_ITEM;
     }
 
-    public void unequipItem(int itemId) {
+    public void unequipItem(int itemId) throws IOException, JSONException {
+        String      url;
+        String      urlParameters;
+
         for (Item item: itemList) {
             if (item.getId() == itemId) {
                 item.unequip();
             }
         }
+        url = JsonHandler.domain + "/unequip_item";
+        urlParameters = PROFILE_ID + "=" + this.id;
+        urlParameters += "&" + Item.ITEM_ID + "=" + itemId;
+        JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
     }
-    public void equipItem(int itemId) {
-        String  type = null;
+    public void equipItem(int itemId) throws IOException, JSONException {
+        String      url;
+        String      urlParameters;
+        String      type = null;
 
         for (Item item: itemList) {
             if (item.getId() == itemId) {
@@ -537,12 +546,18 @@ public class Profile {
             }
 
         }
+        url = JsonHandler.domain + "/equip_item";
+        urlParameters = PROFILE_ID + "=" + this.id;
+        urlParameters += "&" + Item.ITEM_ID + "=" + itemId;
+        JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
         for (Item item: itemList) {
             if (item.getId() != itemId && item.getType().contains(type)) {
                 item.unequip();
             }
         }
     }
+
+
 
     public boolean      doActivity(int activityId) throws IOException, JSONException {
         String      urlParameters;

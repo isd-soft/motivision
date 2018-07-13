@@ -124,7 +124,8 @@ public class PlayerAccount {
 
         player = Player.loginPlayer(login, encryptedPassword);
         PlayerAccount.player = player;
-
+        if (player == null)
+            return false;
         charactersName = player.getCharactersName();
         if (charactersName != null) {
             if (charactersName.size() >= 1)
@@ -297,8 +298,7 @@ public class PlayerAccount {
         return pixmap;
     }
 
-    public static String    getProfileTeamName() throws IOException, JSONException {
-    public static String    getProfileTeamName()  {
+    public static String    getProfileTeamName() {
         if(team == null)
             return null;
         try {
@@ -314,13 +314,25 @@ public class PlayerAccount {
 
     public static void unequipItem(int itemId) {
         if (getItemStatus(itemId) == Item.EQUIPPED_ITEM) {
-            profile.unequipItem(itemId);
+            try {
+                profile.unequipItem(itemId);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public static void equipItem(int itemId) {
         if (getItemStatus(itemId) == Item.UNEQUIPPED_ITEM) {
-            profile.equipItem(itemId);
+            try {
+                profile.equipItem(itemId);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
