@@ -47,11 +47,11 @@ public class BattleScreen implements Screen {
         sb.setProjectionMatrix(cam.combined);
 
 // tells our asset manger that we want to load the images set in loadImages method
-        parent.knightMan.loadImages();
+        parent.assetsManager.loadImages();
 // tells the asset manager to load the images and wait until finished loading.
-        parent.knightMan.manager.finishLoading();
+        parent.assetsManager.aManager.finishLoading();
 // gets the images as a texture
-        knightTex = parent.knightMan.manager.get("knight.png");
+        knightTex = parent.assetsManager.aManager.get("knight.png");
 
 
 

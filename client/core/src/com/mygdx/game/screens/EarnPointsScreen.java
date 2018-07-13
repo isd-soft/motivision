@@ -6,11 +6,14 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
@@ -33,13 +36,27 @@ public class EarnPointsScreen implements Screen {
     private Camera camera;
     private Music loginMusic;
 
+    private Table screenTable;
+
+
+    private AnimationScreen animationScreen;
+    private SpriteBatch batch;
+
+
+    public AnimationScreenTest animationScreenTest;
+
+
 
     public EarnPointsScreen(GGame g) {
         parent = g;
 
+        animationScreenTest = new AnimationScreenTest();
 //        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
+
+
+        batch = new SpriteBatch();
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -70,7 +87,7 @@ public class EarnPointsScreen implements Screen {
 
         // tables
         Table activitiesTable = new Table();
-        Table screenTable = new Table();
+        screenTable = new Table();
         Table buttonTable = new Table();
 
         // scrollpane
@@ -105,7 +122,14 @@ public class EarnPointsScreen implements Screen {
 
         //create table for all screen and add into it everything
         screenTable.setFillParent(true);
-        screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+
+        //lidl strategy
+
+        //
+        //lidlActor.setPosition(0,0);
+
+
+        screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         stage.addActor(screenTable);
 

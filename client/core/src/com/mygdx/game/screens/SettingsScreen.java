@@ -14,7 +14,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 
 public class SettingsScreen implements Screen{
-    
+
+	//123456
+
+
     private GGame parent;
 	private Stage stage;
 	private Viewport viewport;

@@ -17,15 +17,17 @@ import com.mygdx.game.gameSets.GGame;
 public class AssetsManager {
 
 
-    public final AssetManager manager = new AssetManager();
+    public final AssetManager aManager = new AssetManager();
 
     //Textures
     private final String monsterImage = "monster.png";
     private final String knightImage = "knight.png";
+    private final String cloudImage = "background.png";
 
 
     public void loadImages() {
-        manager.load(monsterImage, Texture.class);
-        manager.load(knightImage, Texture.class);
+        aManager.load(monsterImage, Texture.class);
+        aManager.load(knightImage, Texture.class);
+        aManager.load(cloudImage, Texture.class);
     }
 }
