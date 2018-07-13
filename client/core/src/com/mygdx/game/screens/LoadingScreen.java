@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.loader.AssetsManager;
 
 
 public class LoadingScreen implements Screen{
@@ -33,6 +34,10 @@ public class LoadingScreen implements Screen{
 
     public LoadingScreen(GGame game){
         parent = game;
+
+
+		parent.assetsManager.loadImages();
+        parent.assetsManager.aManager.finishLoading();
     }
     
     
@@ -60,13 +65,20 @@ public class LoadingScreen implements Screen{
 		logoImage.y = Gdx.graphics.getHeight() / 2 - logoImage.height / 2;
 
 		status = LOADING_STATUS;
+
+
+
 	}
  
 	@Override
 	public void render(float delta) {
-		if (status == LOADING_STATUS)
+		if (status == LOADING_STATUS){
 			drawLogo();
-		else if (status == STARTED_STATUS) {
+
+
+
+
+	}else if (status == STARTED_STATUS) {
 			parent.changeScreen(parent.getLogin());
 		}
 	}
@@ -84,7 +96,7 @@ public class LoadingScreen implements Screen{
  
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
+
 	}
  
 	@Override
