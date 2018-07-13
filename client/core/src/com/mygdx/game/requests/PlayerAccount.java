@@ -28,6 +28,18 @@ public class PlayerAccount {
         return player.getCharactersName();
     }
 
+    public static Integer getLosses() {
+        if (team == null)
+            return null;
+        return team.getTeamLoss();
+    }
+
+    public static Integer getWins() {
+        if (team == null)
+            return null;
+        return team.getTeamWins();
+    }
+
     public static String getTeamName(){
         if(team == null)
             return null;
