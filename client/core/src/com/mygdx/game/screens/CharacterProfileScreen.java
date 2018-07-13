@@ -43,6 +43,7 @@ public class CharacterProfileScreen implements Screen {
     private TextureRegion textureRegion;
     private TextureRegionDrawable textureRegionDrawable;
 
+    private GDXDialogs selectDialog;
     private GDXDialogs manageTeamDialog;
     private GDXDialogs buyItemDialog;
 
@@ -54,6 +55,7 @@ public class CharacterProfileScreen implements Screen {
 
     public CharacterProfileScreen(GGame g) {
         parent = g;
+        selectDialog = GDXDialogsSystem.install();
         manageTeamDialog = GDXDialogsSystem.install();
         buyItemDialog = GDXDialogsSystem.install();
 
@@ -240,7 +242,7 @@ public class CharacterProfileScreen implements Screen {
     }
 
     public void     SelectDialog(String message) {
-        final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+        final GDXButtonDialog bDialog = selectDialog.newDialog(GDXButtonDialog.class);
         bDialog.setTitle("Error");
         bDialog.setMessage(message);
         bDialog.addButton("Ok");

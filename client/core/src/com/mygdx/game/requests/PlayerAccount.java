@@ -236,7 +236,6 @@ public class PlayerAccount {
         result = profile.buyItem(id);
         selectProfile(profile.getName());
         return result;
-        return profile.buyItem(id);
     }
 
     public static boolean   doActivity(int activityId) throws IOException, JSONException {
@@ -269,12 +268,7 @@ public class PlayerAccount {
         team = Team.getTeam(profile.getTeamId());
     }
 
-    public static String    getProfileTeamName(){
-    public static void      addProfileStatusOnImage() {
-
-    }
-
-    public static String    getProfileTeamName() throws IOException, JSONException {
+    public static String    getProfileTeamName()  {
         if(team == null)
             return null;
         try {
