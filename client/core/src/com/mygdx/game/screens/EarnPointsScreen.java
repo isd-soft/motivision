@@ -129,7 +129,7 @@ public class EarnPointsScreen implements Screen {
             activitiesTable.add(points).width(Value.percentWidth(0.2f, activitiesTable));
             activitiesTable.row();
         }
-        
+
         buttonTable.add(settingsButton).fill().pad(0, 0, pad / 2, 0);
         buttonTable.add(backButton).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();
