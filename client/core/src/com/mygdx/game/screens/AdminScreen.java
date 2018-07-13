@@ -102,7 +102,7 @@ public class AdminScreen implements Screen {
         TextButton back = new TextButton("Back", skin, "small");
         TextButton settings = new TextButton("Settings", skin, "small");
 
-        Label frequencyLabel = new Label("Battle frequency", skin);
+        final Label frequencyLabel = new Label("Battle frequency", skin);
         Label castleLabel = new Label("Team logo", skin);
         Label teamNameLabel;
         if(PlayerAccount.getProfileTeam() == null)
@@ -119,7 +119,16 @@ public class AdminScreen implements Screen {
         int     battleFrequency;
 
         battleFrequency = PlayerAccount.getBattleFrequency();
-        freqChoiceLabel.setText(battleFrequency == -1 ? "Error" : battleFrequency + "");
+
+        if (battleFrequency != -1) {
+            if (battleFrequency == 7)
+                freqChoiceLabel.setText(freqChoices[0]);
+            else
+                freqChoiceLabel.setText(freqChoices[1]);
+        }
+        else
+            freqChoiceLabel.setText("Error!");
+
 
         // add the list of already created characters
         List<Activity> serverActivities = PlayerAccount.getActivities();
@@ -236,8 +245,8 @@ public class AdminScreen implements Screen {
                 }else{
                     freqNumber = 1;
                 }
+                freqChoiceLabel.setText(freqChoices[freqNumber]);
                 PlayerAccount.setBattleFrequency(freqNumber);
-                show();
             }
         });
 
@@ -250,8 +259,8 @@ public class AdminScreen implements Screen {
                 }else{
                     freqNumber = 1;
                 }
+                freqChoiceLabel.setText(freqChoices[freqNumber]);
                 PlayerAccount.setBattleFrequency(freqNumber);
-                show();
             }
         });
 
