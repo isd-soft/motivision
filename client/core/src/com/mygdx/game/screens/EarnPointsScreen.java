@@ -100,11 +100,26 @@ public class EarnPointsScreen implements Screen {
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
 
-        List<Activity> activities = PlayerAccount.getActivities();
+        List<Activity> serverActivities = PlayerAccount.getActivities();
+        List<Activity> teamActivities = new ArrayList<Activity>();
+
+        if (serverActivities == null)
+        {
+            Activity ac = new Activity(0);
+            ac.setActivityName("No Activity");
+            ac.setActivityReward(0);
+            teamActivities.add(ac);
+        } else teamActivities = serverActivities;
+
         //fill table with buttons and labels
-        for (final Activity activity: activities){
+        for (final Activity activity: teamActivities){
             //instead of PLACE_HOLDER there should be name of activity
             TextButton activityName = new TextButton(activity.getActivityName(), skin, "square");
+            if (serverActivities == null){
+                activityName.setDisabled(true);
+                activityName.setTouchable(Touchable.disabled);
+            }
+
             activityName.addListener(new DoActivity(activity.getActivityId(), activity.getActivityName()));
 
             activitiesTable.add(activityName).fillX().expandX();
@@ -114,7 +129,7 @@ public class EarnPointsScreen implements Screen {
             activitiesTable.add(points).width(Value.percentWidth(0.2f, activitiesTable));
             activitiesTable.row();
         }
-
+        
         buttonTable.add(settingsButton).fill().pad(0, 0, pad / 2, 0);
         buttonTable.add(backButton).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();

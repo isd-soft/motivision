@@ -28,7 +28,6 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
@@ -58,7 +57,7 @@ public class AdminScreen implements Screen {
     private Texture textureCastle;
     private Integer castleChoice = 1;
     private Label freqChoiceLabel;
-    private int freqNumber = 0;
+    private Integer freqNumber = 0;
     private String[] freqChoices = {"Weekly", "Monthly"};
 
 
@@ -71,7 +70,7 @@ public class AdminScreen implements Screen {
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
 
-        textureCastle = new Texture("teamCastle1.png");
+        //textureCastle = new Texture("teamCastle1.png");
         freqChoiceLabel = new Label("freq", skin);
     }
 
@@ -92,7 +91,8 @@ public class AdminScreen implements Screen {
             texture = new Texture("default.png");
             e.printStackTrace();
         }
-        Image image = new Image(texture);
+
+        textureCastle = PlayerAccount.getCastleTexture() == null ? new Texture("teamCastle1.png") : PlayerAccount.getCastleTexture();
 
         // add the team image
         Image imageCastle = new Image(textureCastle);
@@ -109,15 +109,18 @@ public class AdminScreen implements Screen {
              teamNameLabel = new Label("Team Name", skin);
         else
             teamNameLabel = new Label(PlayerAccount.getProfileTeamName(), skin);
+
         // left-right buttons
         arrowCastleLeft = new TextButton("<", skin2);
         arrowCastleRight = new TextButton(">", skin2);
         arrowFrequencyLeft = new TextButton("<", skin2);
         arrowFrequencyRight = new TextButton(">", skin2);
-        freqChoiceLabel.setText(freqChoices[freqNumber]);
+
+        freqChoiceLabel.setText(PlayerAccount.getBattleFrequency() == null ? "Error" : PlayerAccount.getBattleFrequency());
 
         // add the list of already created characters
-        List<Activity> teamActivities = PlayerAccount.getActivities();
+        List<Activity> serverActivities = PlayerAccount.getActivities();
+        List<Activity> teamActivities = new ArrayList<Activity>();
 
         Table list = new Table();
         Table selectionTable = new Table();
@@ -132,6 +135,14 @@ public class AdminScreen implements Screen {
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.setScrollbarsOnTop(true);
+
+        if (serverActivities == null)
+        {
+            Activity ac = new Activity(0);
+            ac.setActivityName("No Activity");
+            ac.setActivityReward(0);
+            teamActivities.add(ac);
+        } else teamActivities = serverActivities;
 
         for (Activity activity: teamActivities) {
             activityNamesButtons.add(new TextButton(activity.getActivityName(), skin, "square"));
@@ -173,7 +184,7 @@ public class AdminScreen implements Screen {
         selectionTable.add(freqChoiceLabel);
         selectionTable.add(arrowFrequencyRight);
 
-        if (teamActivities.isEmpty()){
+        if (serverActivities == null){
             activityNamesButtons.get(0).setDisabled(true);
             activityNamesButtons.get(0).setTouchable(Touchable.disabled);
             xButtons.get(0).setDisabled(true);
@@ -222,6 +233,7 @@ public class AdminScreen implements Screen {
                 }else{
                     freqNumber = 1;
                 }
+                PlayerAccount.setBattleFrequency(freqChoices[freqNumber]);
                 show();
             }
         });
@@ -235,6 +247,7 @@ public class AdminScreen implements Screen {
                 }else{
                     freqNumber = 1;
                 }
+                PlayerAccount.setBattleFrequency(freqChoices[freqNumber]);
                 show();
             }
         });
@@ -254,6 +267,7 @@ public class AdminScreen implements Screen {
                     castleChoice--;
                     textureCastle = new Texture("teamCastle2.png");
                 }
+                PlayerAccount.setCastleTexture(textureCastle);
                 show();
             }
         });
@@ -273,6 +287,7 @@ public class AdminScreen implements Screen {
                     castleChoice = 1;
                     textureCastle = new Texture("teamCastle1.png");
                 }
+                PlayerAccount.setCastleTexture(textureCastle);
                 show();
             }
         });
@@ -350,6 +365,7 @@ public class AdminScreen implements Screen {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        show();
                 }
 
                 @Override
@@ -400,6 +416,7 @@ public class AdminScreen implements Screen {
                     } catch (NumberFormatException e){
                         DialogBox.showInfoDialog("Error", "Points cannot be string");
                     }
+                    show();
                 }
 
                 @Override
@@ -434,7 +451,6 @@ public class AdminScreen implements Screen {
 
                 @Override
                 public void click(int button) {
-                    //TODO
                     if(button == 0){
                         try {
                             PlayerAccount.deleteActivity(id);
@@ -444,6 +460,7 @@ public class AdminScreen implements Screen {
                             e.printStackTrace();
                         }
                     }
+                    show();
                 }
             });
 
@@ -481,6 +498,7 @@ public class AdminScreen implements Screen {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    show();
                 }
 
                 @Override
