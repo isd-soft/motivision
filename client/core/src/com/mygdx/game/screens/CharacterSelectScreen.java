@@ -48,6 +48,8 @@ public class CharacterSelectScreen implements Screen {
     private Viewport viewport;
     private Camera camera;
     private Texture texture;
+    private Boolean characterIsSelected = false;
+
     public CharacterSelectScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
@@ -106,7 +108,7 @@ public class CharacterSelectScreen implements Screen {
             texture = new Texture("default.png");
         }
         image = new Image(texture);
-        //TODO
+
         for (int i = 0; i < strings.size(); i++) {
             characterNamesButtons.add(new TextButton(strings.get(i), skin, "square"));
 
@@ -217,8 +219,7 @@ public class CharacterSelectScreen implements Screen {
             try {
                 System.out.println("Start getting profile texture");
                 texture = PlayerAccount.getProfileTexture(name);
-                PlayerAccount.selectProfileTeam();
-            } catch (IOException e) {
+             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();

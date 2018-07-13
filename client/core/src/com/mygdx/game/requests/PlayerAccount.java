@@ -93,6 +93,7 @@ public class PlayerAccount {
         selectProfile(name);
         if (profile == null)
             return new Texture("default.png");
+        PlayerAccount.selectProfileTeam();
         return profile.getTexture();
         //return null;
     }
@@ -117,10 +118,17 @@ public class PlayerAccount {
     }
 
     public static boolean loginPlayer(String login, String encryptedPassword) throws IOException, JSONException {
-        Player  player = null;
+        Player              player = null;
+        ArrayList<String>   charactersName;
 
         player = Player.loginPlayer(login, encryptedPassword);
         PlayerAccount.player = player;
+
+        charactersName = player.getCharactersName();
+        if (charactersName != null) {
+            if (charactersName.size() >= 1)
+                selectProfile(charactersName.get(0));
+        }
         return (player != null);
     }
 
@@ -217,12 +225,17 @@ public class PlayerAccount {
     }
 
     public static boolean   buyItem(int id) throws IOException, JSONException {
+        boolean result;
+
         if (profile == null)
             return false;
         if (Item.getItemPrice(id) > profile.getPoints()) {
             JsonHandler.errorMessage = "Not enough points!";
             return false;
         }
+        result = profile.buyItem(id);
+        selectProfile(profile.getName());
+        return result;
         return profile.buyItem(id);
     }
 
@@ -257,6 +270,11 @@ public class PlayerAccount {
     }
 
     public static String    getProfileTeamName(){
+    public static void      addProfileStatusOnImage() {
+
+    }
+
+    public static String    getProfileTeamName() throws IOException, JSONException {
         if(team == null)
             return null;
         try {

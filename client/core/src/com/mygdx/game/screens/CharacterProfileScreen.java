@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -65,11 +66,11 @@ public class CharacterProfileScreen implements Screen {
 
 
 // tells our asset manger that we want to load the images set in loadImages method
-        parent.knightMan.loadImages();
+        parent.assetsManager.loadImages();
 // tells the asset manager to load the images and wait until finished loading.
-        parent.knightMan.manager.finishLoading();
+        parent.assetsManager.aManager.finishLoading();
 // gets the images as a texture
-        knightTex = parent.knightMan.manager.get("knight.png");
+        knightTex = parent.assetsManager.aManager.get("knight.png");
 
 
 
@@ -77,6 +78,12 @@ public class CharacterProfileScreen implements Screen {
 
     @Override
     public void show() {
+        //take number of points from DB
+        //here is just random number
+        int pointsNumber = PlayerAccount.getProfilePoints();
+        if (pointsNumber == -1) {
+            SelectDialog("Please First Select Character From List");
+        }
         stage.clear();
 //        stage.setDebugAll(true);
         float pad = 5;
@@ -143,10 +150,6 @@ public class CharacterProfileScreen implements Screen {
             }
         });
 
-        //take number of points from DB
-        //here is just random number
-        int pointsNumber = PlayerAccount.getProfilePoints();
-
         //Create label witch represents points
         Label pointsLabel = new Label("Points: " + pointsNumber, skin);
 
@@ -163,6 +166,7 @@ public class CharacterProfileScreen implements Screen {
                 numberOfActivities.add("Activity: " + activity);
             }
         */
+
 
         //create and fill table with buttons and labels
         itemTable = new Table();
@@ -235,7 +239,18 @@ public class CharacterProfileScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
+    public void     SelectDialog(String message) {
+        final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+        bDialog.setTitle("Error");
+        bDialog.setMessage(message);
+        bDialog.addButton("Ok");
+
+        bDialog.build().show();
+    }
+
     public TextureRegionDrawable addImage(String imagePath){
+
+
 
         textureImage = new Texture(Gdx.files.internal(imagePath));
         textureRegion = new TextureRegion(textureImage);

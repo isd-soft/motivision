@@ -30,7 +30,7 @@ private TeamMembersScreen teamMembersScreen;
 private LastBattleScreen lastBattleScreen;
 private AnimationScreen animationScreen;
 
-public  AssetsManager knightMan = new AssetsManager();
+public AssetsManager assetsManager = new AssetsManager();
 
 private final static int LOGIN = 0;
 public int getLogin(){return LOGIN;}

@@ -271,14 +271,7 @@ public class JsonHandler {
     public static JSONObject readJsonFromUrl(String jsonText) throws IOException, JSONException {
         InputStream is;
 
-        //is = new URL(url).openStream();
         try {
-          //  System.out.println(urlParameters);
-           // BufferedReader rd = POSTMethod(url, urlParameters);
-
-            //BufferedReader rd = getRequestResult(url, urlParameters);
-            //BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            //String jsonText = POSTMethod(url, urlParameters);
             if (jsonText == null)
                 return null;
             JSONObject json = new JSONObject(jsonText);

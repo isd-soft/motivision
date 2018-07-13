@@ -84,6 +84,61 @@ public class TeamController {
     }
 
     /*
+     * Get team members request
+     * Used to get a list of all team members
+     * @param teamId - team to search characters in
+     * @return status - failed if no such team exist
+     * @return status - success if request was successfull
+     * @return teamMembers - null if no teamMembers
+     * @return teamMembers - list of all teamMembers
+     * */
+    @RequestMapping(value = "/get_team_members", method = RequestMethod.GET)
+    public Map<String, Object> getTeamMembers(@RequestParam(value = "teamId") Long teamId) {
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+        if (!optionalTeam.isPresent()) {
+            log.warn("Team with teamId " + teamId + " not found");
+            map.put("status", "failed");
+            map.put("message", "no such team with teamId exist");
+            return map;
+        }
+        log.info("Team found");
+        Optional<List<Character>> optionalCharacterList = characterRepository.findByTeamId(teamId);
+        if (!optionalCharacterList.isPresent()) {
+            log.info("Team doesn't have any characters");
+            map.put("status", "success");
+            map.put("teamMembers", "null");
+            return map;
+        }
+        log.info("Team has some characters");
+        List<Character> characterList = optionalCharacterList.get();
+        map.put("status", "success");
+        Iterator<Character> iterator = characterList.iterator();
+        ArrayList<Map<String, Object>> charactersArrayList = new ArrayList<>();
+        while (iterator.hasNext()) {
+            LinkedHashMap<String, Object> characterMap = new LinkedHashMap<>();
+            Character character = iterator.next();
+            characterMap.put("characterId", String.valueOf(character.getId()));
+            characterMap.put("characterName", character.getName());
+            characterMap.put("playerId", character.getPlayer().getId());
+            characterMap.put("teamId", character.getTeam().getId());
+            if (character.getTeam().getAdmin() == null) {
+                characterMap.put("isAdmin", false);
+            } else {
+                characterMap.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getId().equals(character.getId())));
+            }
+            characterMap.put("headType", character.getHeadType());
+            characterMap.put("bodyType", character.getBodyType());
+            characterMap.put("gender", character.getGender());
+            characterMap.put("points", character.getPoints());
+            charactersArrayList.add(characterMap);
+        }
+        log.info("Team members returned successfully");
+        map.put("teamMembers", charactersArrayList);
+        return map;
+    }
+
+    /*
     *  Create team request
     *  Used to create new team and add default 6 activities to it
     *  @param name - team name

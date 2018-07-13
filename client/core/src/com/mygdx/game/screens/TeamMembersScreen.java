@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
@@ -15,11 +16,13 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.requests.PlayerAccount;
+import com.mygdx.game.requests.Profile;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TeamMembersScreen implements Screen {
 
@@ -66,7 +69,8 @@ public class TeamMembersScreen implements Screen {
         stage.setDebugAll(true);
 
         // label
-        Label teamName = new Label("Team: \"NAME\"", skin);
+        Label teamName = new Label("", skin);
+        teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" \t Wins: 0 \t Loss: 0");
 
         // buttons
         TextButton settingsButton = new TextButton("Settings", skin, "small");
@@ -82,36 +86,26 @@ public class TeamMembersScreen implements Screen {
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
 
-        // add the list of already created characters
-        ArrayList<Integer> numberOfActivities = new ArrayList<Integer>();
-
-        //here should go i< team members and members should be taken from Data Base
-        for (int i = 1; i <22; i++) {
-            numberOfActivities.add(i);
-        }
-
-        /*
-        for (int i = 0; i < 10; i++) {
-                numberOfActivities.add("Activity: " + activity);
-            }
-        */
-
-        //create and fill table with buttons and labels
-        for (Integer e : numberOfActivities) {
-            //instead of PLACE_HOLDER there should be name of member
-            TextButton memberName = new TextButton("Member PLACE_HOLDER", skin, "square");
-            memberName.addListener(new ChangeListener() {
+        List<Profile> profiles = PlayerAccount.getAllCharactersFromTeam();
+        //fill table with buttons and labels
+        for (final Profile profile: profiles){
+            //instead of PLACE_HOLDER there should be name of character
+            TextButton profileName = new TextButton(profile.getName(), skin, "square");
+            profileName.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor){
                     //here should go Yes No pop up screen
                 }
             });
 
-            teamMembersTable.add(memberName).fillX().expandX();;
+            teamMembersTable.add(profileName).fillX().expandX();
+
+            //here are points of each teammate
+            TextButton points = new TextButton(String.valueOf(profile.getPoints()), skin, "square");
+            points.setTouchable(Touchable.disabled);
+            teamMembersTable.add(points).width(Value.percentWidth(0.2f, teamMembersTable));
             teamMembersTable.row();
         }
-
-        teamName.setAlignment(Align.center);
 
         buttonTable.add(settingsButton).fill().pad(0, 0, pad, 0);
         buttonTable.add(backButton).fill().pad(0, 0, pad, 0);
