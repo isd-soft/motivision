@@ -14,7 +14,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Steps to Setup the Server
 
-Deployment can be done on Windows/Linux/Mac OS with JDK 8 and Maven installed
+Deployment can be done on Windows/Linux/Mac OS with these components installed:
+
+```
+JDK 8 and above
+Maven
+PostgreSQL
+```
 
 To run the Server just write in cmd/terminal:
 
@@ -33,7 +39,7 @@ mvnw.cmd
 ```
 Install the app from Play Store
 Or
-Build it with Android Studio from the "client" folder under motivision project
+Build it with Android Studio from the "client" folder
 ```
 
 ## Done!
