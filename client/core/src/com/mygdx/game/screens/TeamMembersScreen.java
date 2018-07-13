@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Profile;
 
@@ -72,7 +73,7 @@ public class TeamMembersScreen implements Screen {
 
         // label
         Label teamName = new Label("", skin);
-        teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" \t Wins: 0 \t Loss: 0");
+        teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" \t Wins: " + PlayerAccount.getWins() + " \t Loss: " + PlayerAccount.getLosses());
 
         // buttons
         TextButton settingsButton = new TextButton("Settings", skin, "small");
@@ -89,7 +90,7 @@ public class TeamMembersScreen implements Screen {
         scrollPane.setScrollingDisabled(true, false);
 
 
-        List<Profile> profiles = PlayerAccount.getAllCharactersFromTeam();
+        /*&List<Profile> profiles = PlayerAccount.getAllCharactersFromTeam();
 //
         Collections.sort(profiles);
         //fill table with buttons and labels
@@ -110,7 +111,7 @@ public class TeamMembersScreen implements Screen {
             points.setTouchable(Touchable.disabled);
             teamMembersTable.add(points).width(Value.percentWidth(0.2f, teamMembersTable));
             teamMembersTable.row();
-        }
+        }*/
 
         buttonTable.add(settingsButton).fill().pad(0, 0, pad, 0);
         buttonTable.add(backButton).fill().pad(0, 0, pad, 0);

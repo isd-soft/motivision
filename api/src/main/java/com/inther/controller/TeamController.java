@@ -230,6 +230,29 @@ public class TeamController {
         return map;
     }
 
+
+    @RequestMapping(value = "/update_team", method = RequestMethod.POST)
+    public Map<String, Object> updateTeam(@RequestParam(value = "teamId") Long teamId,
+                                          @RequestParam(value = "teamLogo") String teamLogo,
+                                          @RequestParam(value = "battleFrequency") Integer frequency){
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+        if (!optionalTeam.isPresent()){
+            log.warn("Ivalid teamId, no such Team found in database");
+            map.put("status", "failed");
+            map.put("message", "no such team exist");
+            return map;
+        }
+        log.info("Team found");
+        Team team = optionalTeam.get();
+        team.setTeamLogo(teamLogo);
+        team.setBattleFrequency(frequency);
+        teamRepository.save(team);
+        log.info("Team updated successfully");
+        map.put("status", "success");
+        return map;
+    }
+
     @RequestMapping(value = "/team_exist", method = RequestMethod.POST)
     public Map<String, String> teamExist(@RequestParam(name = "teamName") String name) throws EntityNotFoundException {
         TreeMap<String, String> map = new TreeMap<>();
