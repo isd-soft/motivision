@@ -323,6 +323,16 @@ public class PlayerAccount {
             }
         }
     }
+    public static void setBattleFrequency(String frequency) {
+        //TODO
+        //PlayerAccount.battleFrequency = frequency
+    }
+
+    public static CharSequence getBattleFrequency() {
+        //TODO
+        //return battleFrequency;
+        return null;
+    }
 
     public static void equipItem(int itemId) {
         if (getItemStatus(itemId) == Item.UNEQUIPPED_ITEM) {
@@ -334,5 +344,15 @@ public class PlayerAccount {
                 e.printStackTrace();
             }
         }
+    }
+    public static void setCastleTexture(Texture teamTexture) {
+        //TODO
+        //PlayerAccount.teamTexture = teamTexture;
+    }
+
+    public static Texture getCastleTexture() {
+        //TODO
+        //return teamTexture;
+        return null;
     }
 }
