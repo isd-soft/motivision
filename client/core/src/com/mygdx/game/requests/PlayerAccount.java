@@ -203,16 +203,17 @@ public class PlayerAccount {
     }
 
     public static boolean   buyItem(int id) throws IOException, JSONException {
+        boolean result;
+
         if (profile == null)
             return false;
         if (Item.getItemPrice(id) > profile.getPoints()) {
             JsonHandler.errorMessage = "Not enough points!";
             return false;
         }
-        return profile.buyItem(id);
-
-
-
+        result = profile.buyItem(id);
+        selectProfile(profile.getName());
+        return result;
     }
     public static void      selectProfileTeam() throws IOException, JSONException {
         if (profile == null)

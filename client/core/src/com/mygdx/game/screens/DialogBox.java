@@ -31,6 +31,6 @@ public class DialogBox {
             public void click(int button) {
             }
         });
-        bDialog.show();
+        bDialog.build().show();
     }
 }
