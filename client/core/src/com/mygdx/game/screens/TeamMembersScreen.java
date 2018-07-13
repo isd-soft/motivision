@@ -22,6 +22,8 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TeamMembersScreen implements Screen {
@@ -86,7 +88,10 @@ public class TeamMembersScreen implements Screen {
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
 
+
         List<Profile> profiles = PlayerAccount.getAllCharactersFromTeam();
+//
+        Collections.sort(profiles);
         //fill table with buttons and labels
         for (final Profile profile: profiles){
             //instead of PLACE_HOLDER there should be name of character

@@ -20,7 +20,7 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-public class Profile {
+public class Profile implements Comparable<Profile>{
     public static final String  PROFILE_ID = "characterId";
     public static final String  TEAM_ID = "teamId";
     public static final String  IS_ADMIN = "isAdmin";
@@ -623,5 +623,10 @@ public class Profile {
         if(jsonObject == null)
             return false;
         return jsonObject.getString("status").equals("success");
+    }
+
+    @Override
+    public int compareTo(Profile profile) {
+        return name.compareTo(profile.getName());
     }
 }
