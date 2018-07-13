@@ -114,9 +114,9 @@ public class RegisterScreen  implements Screen {
         stage.clear();
         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
-        registerSound = Gdx.audio.newSound(Gdx.files.internal("data/BruceU.mp3"));
+        //registerSound = Gdx.audio.newSound(Gdx.files.internal("data/BruceU.mp3"));
 
-        registerSound.play();
+        //registerSound.play();
 
 
 

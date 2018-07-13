@@ -17,6 +17,8 @@ public class SettingsScreen implements Screen{
 
 	//123456
 
+	//
+
 
     private GGame parent;
 	private Stage stage;
@@ -131,6 +133,9 @@ public class SettingsScreen implements Screen{
 		table.add(back).colspan(2).fillX().uniformX();
 
 		Gdx.input.setInputProcessor(stage);
+
+
+
 
 
 	}
