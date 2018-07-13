@@ -347,7 +347,7 @@ public class CharacterController {
         }
     }
 
-    @RequestMapping("/unequipped_item")
+    @RequestMapping("/unequip_item")
     public Map<String, Object> unEquipItem(@RequestParam(value = "characterId") Long characterId,
                                            @RequestParam(value = "itemId") Long itemId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -369,7 +369,8 @@ public class CharacterController {
         }
         log.info("Item found");
         Items items = optionalItems.get();
-        Optional<CharacterItem> optionalCharacterItem = characterItemRepository.findCharacterItemsByItemsId(itemId);
+        Optional<CharacterItem> optionalCharacterItem
+                = characterItemRepository.findCharacterItemByItemsIdAndCharacterId(itemId, characterId);
         if (!optionalCharacterItem.isPresent()) {
             log.warn("Character doesn't have this item");
             map.put("status", "failed");
@@ -412,7 +413,8 @@ public class CharacterController {
         }
         log.info("Item found");
         Items items = optionalItems.get();
-        Optional<CharacterItem> optionalCharacterItem = characterItemRepository.findCharacterItemsByItemsId(itemId);
+        Optional<CharacterItem> optionalCharacterItem
+                = characterItemRepository.findCharacterItemByItemsIdAndCharacterId(itemId, characterId);
         if (!optionalCharacterItem.isPresent()) {
             log.warn("Character doesn't have this item");
             map.put("status", "failed");

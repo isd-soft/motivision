@@ -169,7 +169,7 @@ public class Team {
             return null;
 
         url = JsonHandler.domain + "/get_team_members";
-        urlParameters = TEAM_ID +"=" + teamId;
+        urlParameters = TEAM_ID + "=" + teamId;
         System.out.println("Start get team members from url");
         try {
             profiles = getAllCharactersFromTeamFromUrl(url, urlParameters, "GET");

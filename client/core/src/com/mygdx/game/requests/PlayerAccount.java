@@ -1,7 +1,8 @@
 package com.mygdx.game.requests;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.screens.DialogBox;
 
 import org.json.JSONException;
 
@@ -123,7 +124,8 @@ public class PlayerAccount {
 
         player = Player.loginPlayer(login, encryptedPassword);
         PlayerAccount.player = player;
-
+        if (player == null)
+            return false;
         charactersName = player.getCharactersName();
         if (charactersName != null) {
             if (charactersName.size() >= 1)
@@ -220,7 +222,7 @@ public class PlayerAccount {
 
     public static int getItemStatus(int id) {
         if (profile == null)
-            return Profile.STORE_ITEM;
+            return Item.STORE_ITEM;
         else return profile.getItemStatus(id);
     }
 
@@ -268,7 +270,35 @@ public class PlayerAccount {
         team = Team.getTeam(profile.getTeamId());
     }
 
-    public static String    getProfileTeamName()  {
+    public static Pixmap addProfileStatusOnImage(Pixmap pixmap, int itemId) throws IOException, JSONException {
+        Pixmap  itemPixmap = null;
+        int     status;
+        int     price;
+
+        if (profile == null)
+            return pixmap;
+
+        status = getItemStatus(itemId);
+        switch (status) {
+            case Item.STORE_ITEM:
+                price = Item.getItemPrice(itemId);
+                itemPixmap = new Pixmap(Gdx.files.internal("store_items/price_" + price + ".png"));
+                break;
+            case Item.EQUIPPED_ITEM:
+                itemPixmap = new Pixmap(Gdx.files.internal("store_items/equipped.png"));
+                break;
+            case Item.UNEQUIPPED_ITEM:
+                itemPixmap = new Pixmap(Gdx.files.internal("store_items/unequipped.png"));
+                break;
+        }
+        if (itemPixmap != null) {
+            pixmap.drawPixmap(itemPixmap, 0, 0);
+            itemPixmap.dispose();
+        }
+        return pixmap;
+    }
+
+    public static String    getProfileTeamName() {
         if(team == null)
             return null;
         try {
@@ -282,6 +312,17 @@ public class PlayerAccount {
     }
 
 
+    public static void unequipItem(int itemId) {
+        if (getItemStatus(itemId) == Item.EQUIPPED_ITEM) {
+            try {
+                profile.unequipItem(itemId);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public static void setBattleFrequency(String frequency) {
         //TODO
         //PlayerAccount.battleFrequency = frequency
@@ -293,6 +334,17 @@ public class PlayerAccount {
         return null;
     }
 
+    public static void equipItem(int itemId) {
+        if (getItemStatus(itemId) == Item.UNEQUIPPED_ITEM) {
+            try {
+                profile.equipItem(itemId);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public static void setCastleTexture(Texture teamTexture) {
         //TODO
         //PlayerAccount.teamTexture = teamTexture;

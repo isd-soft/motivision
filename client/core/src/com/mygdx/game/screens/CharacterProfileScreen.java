@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.Item;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Profile;
@@ -183,28 +185,28 @@ public class CharacterProfileScreen implements Screen {
             int x = 0;
             if(i == 1){
                 for(int e = 0; e < 3; e++){
-                    imageButton =  new ImageButton((addImage("store_items/sword_" + (i+e) + ".png")));
+                    imageButton =  new ImageButton((addImage("store_items/sword_" + (i+e) + ".png", 1 + e)));
                     imageButton.addListener(new ClickButton((i+e) + "_sword", 1 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
             }else if(i ==2) {
                 for(int e = 0; e < 3; e++){
-                    imageButton =  new ImageButton((addImage("store_items/shield_" + ((i-1)+e) + ".png")));
+                    imageButton =  new ImageButton((addImage("store_items/shield_" + ((i-1)+e) + ".png", 4 + e)));
                     imageButton.addListener(new ClickButton(((i-1)+e) + "_shield", 4 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
             }else if(i == 3){
                 for(int e = 0; e < 3; e++) {
-                    imageButton = new ImageButton((addImage("store_items/armor_" + ((i-2)+e) + ".png")));
+                    imageButton = new ImageButton((addImage("store_items/armor_" + ((i-2)+e) + ".png", 7 + e)));
                     imageButton.addListener(new ClickButton((i-2)+e + "_armor", 7 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
             }else{
                 for(int e = 0; e < 3; e++){
-                    imageButton =  new ImageButton((addImage("store_items/leggins_" + ((i-3)+e) + ".png")));
+                    imageButton =  new ImageButton((addImage("store_items/leggins_" + ((i-3)+e) + ".png", 10 + e)));
                     imageButton.addListener(new ClickButton( (i-3)+e + "_leggins", 10 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                     x = e;
@@ -212,7 +214,7 @@ public class CharacterProfileScreen implements Screen {
                 imageTable.row();
             }
             if(imageButton == null){
-                imageButton = new ImageButton((addImage("store_items/sword_default.png")));
+                imageButton = new ImageButton((addImage("store_items/sword_default.png", -1)));
             }
             //Set the button up
             //add listener to image button, so item will replace already equipped item
@@ -250,13 +252,23 @@ public class CharacterProfileScreen implements Screen {
         bDialog.build().show();
     }
 
-    public TextureRegionDrawable addImage(String imagePath){
+    public TextureRegionDrawable addImage(String imagePath, int itemId) {
+        Pixmap  pixmap;
 
-
-
-        textureImage = new Texture(Gdx.files.internal(imagePath));
+        pixmap = new Pixmap(Gdx.files.internal(imagePath));
+        if (itemId != -1) {
+            try {
+                pixmap = PlayerAccount.addProfileStatusOnImage(pixmap, itemId);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        textureImage = new Texture(pixmap);
         textureRegion = new TextureRegion(textureImage);
         textureRegionDrawable = new TextureRegionDrawable(textureRegion);
+        pixmap.dispose();
         return textureRegionDrawable;
     }
 
@@ -361,9 +373,17 @@ public class CharacterProfileScreen implements Screen {
             int status;
 
             status = PlayerAccount.getItemStatus(itemId);
-            if (status == Profile.STORE_ITEM) {
+            if (status == Item.STORE_ITEM) {
                 confirmDialog();
             }
+            else if (status == Item.EQUIPPED_ITEM) {
+                PlayerAccount.unequipItem(itemId);
+            }
+            else if (status == Item.UNEQUIPPED_ITEM) {
+                System.out.println("Start equipping " + itemType + "(" + itemId + ")");
+                PlayerAccount.equipItem(itemId);
+            }
+            show();
 
         }
     }

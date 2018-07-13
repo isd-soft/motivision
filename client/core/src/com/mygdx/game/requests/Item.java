@@ -14,6 +14,10 @@ public class Item {
     public static final String  ITEM_EQUIPPED = "equipped";
     public static final String  ITEM_TYPE = "itemType";
 
+    public static final int     STORE_ITEM = 0;
+    public static final int     EQUIPPED_ITEM = 1;
+    public static final int     UNEQUIPPED_ITEM = 2;
+
     private int     id;
     private int     image;
     private int     price;
@@ -58,7 +62,17 @@ public class Item {
         if (jsonObject == null)
             return -1;
         if (jsonObject.has("itemPrice"))
-            return jsonObject.getInt(ITEM_PRICE);
+            return jsonObject.getInt(ITEM_PRICE
+
+            );
         return -1;
+    }
+
+    public void equip() {
+        this.equipped = true;
+    }
+
+    public void unequip() {
+        this.equipped = false;
     }
 }

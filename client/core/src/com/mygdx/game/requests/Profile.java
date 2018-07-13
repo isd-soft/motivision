@@ -20,7 +20,7 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-public class Profile {
+public class Profile implements Comparable<Profile>{
     public static final String  PROFILE_ID = "characterId";
     public static final String  TEAM_ID = "teamId";
     public static final String  IS_ADMIN = "isAdmin";
@@ -31,9 +31,6 @@ public class Profile {
     public static final String  POINTS = "points";
     public static final String  PLAYER_ID = "playerId";
 
-    public static final int     STORE_ITEM = 0;
-    public static final int     EQUIPPED_ITEM = 1;
-    public static final int     UNEQUIPPED_ITEM = 2;
     private String  name;
     private int     id;
     private int     headType;
@@ -356,6 +353,8 @@ public class Profile {
         itemSet = itemImages.keySet();
         if (itemList != null) {
             for (Item item : itemList) {
+                if (item.isEquipped() == false)
+                    continue;
                 for (String itemType : itemSet) {
                     if (item.getType().contains(itemType)) {
                         itemImages.put(itemType, item.getType());
@@ -511,13 +510,54 @@ public class Profile {
 
     public int getItemStatus(int id) {
         if (itemList == null)
-            return STORE_ITEM;
+            return Item.STORE_ITEM;
         for (Item item: itemList) {
             if (item.getId() == id)
-                return item.isEquipped() ? EQUIPPED_ITEM : UNEQUIPPED_ITEM;
+                return item.isEquipped() ? Item.EQUIPPED_ITEM : Item.UNEQUIPPED_ITEM;
         }
-        return STORE_ITEM;
+        return Item.STORE_ITEM;
     }
+
+    public void unequipItem(int itemId) throws IOException, JSONException {
+        String      url;
+        String      urlParameters;
+
+        for (Item item: itemList) {
+            if (item.getId() == itemId) {
+                item.unequip();
+            }
+        }
+        url = JsonHandler.domain + "/unequip_item";
+        urlParameters = PROFILE_ID + "=" + this.id;
+        urlParameters += "&" + Item.ITEM_ID + "=" + itemId;
+        JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
+    }
+    public void equipItem(int itemId) throws IOException, JSONException {
+        String      url;
+        String      urlParameters;
+        String      type = null;
+
+        for (Item item: itemList) {
+            if (item.getId() == itemId) {
+                type = item.getType().split("_")[1];
+                item.equip();
+                System.out.println("Item found!");
+                break;
+            }
+
+        }
+        url = JsonHandler.domain + "/equip_item";
+        urlParameters = PROFILE_ID + "=" + this.id;
+        urlParameters += "&" + Item.ITEM_ID + "=" + itemId;
+        JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
+        for (Item item: itemList) {
+            if (item.getId() != itemId && item.getType().contains(type)) {
+                item.unequip();
+            }
+        }
+    }
+
+
 
     public boolean      doActivity(int activityId) throws IOException, JSONException {
         String      urlParameters;
@@ -583,5 +623,10 @@ public class Profile {
         if(jsonObject == null)
             return false;
         return jsonObject.getString("status").equals("success");
+    }
+
+    @Override
+    public int compareTo(Profile profile) {
+        return name.compareTo(profile.getName());
     }
 }
