@@ -44,7 +44,8 @@ public class PlayerAccount {
             return null;
         return team.getTeamActivitiesNames();
     }
-    private static LinkedHashMap<String, Integer> getTeamMembersList() {
+
+    public static LinkedHashMap<String, Integer> getTeamMembersList() {
         LinkedHashMap<String, Integer>  teamMembersMap;
         if (team == null)
             return null;
