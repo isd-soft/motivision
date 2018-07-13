@@ -92,7 +92,7 @@ public class AdminScreen implements Screen {
             e.printStackTrace();
         }
 
-        textureCastle = PlayerAccount.getCastleTexture() == null ? new Texture("teamCastle1.png") : PlayerAccount.getCastleTexture();
+        textureCastle = PlayerAccount.getTeamLogo();
 
         // add the team image
         Image imageCastle = new Image(textureCastle);
@@ -116,7 +116,10 @@ public class AdminScreen implements Screen {
         arrowFrequencyLeft = new TextButton("<", skin2);
         arrowFrequencyRight = new TextButton(">", skin2);
 
-        freqChoiceLabel.setText(PlayerAccount.getBattleFrequency() == null ? "Error" : PlayerAccount.getBattleFrequency());
+        int     battleFrequency;
+
+        battleFrequency = PlayerAccount.getBattleFrequency();
+        freqChoiceLabel.setText(battleFrequency == -1 ? "Error" : battleFrequency + "");
 
         // add the list of already created characters
         List<Activity> serverActivities = PlayerAccount.getActivities();
@@ -233,7 +236,7 @@ public class AdminScreen implements Screen {
                 }else{
                     freqNumber = 1;
                 }
-                PlayerAccount.setBattleFrequency(freqChoices[freqNumber]);
+                PlayerAccount.setBattleFrequency(freqNumber);
                 show();
             }
         });
@@ -247,7 +250,7 @@ public class AdminScreen implements Screen {
                 }else{
                     freqNumber = 1;
                 }
-                PlayerAccount.setBattleFrequency(freqChoices[freqNumber]);
+                PlayerAccount.setBattleFrequency(freqNumber);
                 show();
             }
         });
@@ -257,17 +260,15 @@ public class AdminScreen implements Screen {
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 if(castleChoice == 1) {
                     castleChoice = 3;
-                    textureCastle = new Texture("teamCastle3.png");
                 }else
                 if(castleChoice == 2){
                     castleChoice--;
-                    textureCastle = new Texture("teamCastle1.png");
                 }else
                 if(castleChoice == 3){
                     castleChoice--;
-                    textureCastle = new Texture("teamCastle2.png");
                 }
-                PlayerAccount.setCastleTexture(textureCastle);
+                textureCastle = new Texture("teamCastle" + castleChoice + ".png");
+                PlayerAccount.setTeamLogo("teamCastle" + castleChoice);
                 show();
             }
         });
@@ -277,21 +278,18 @@ public class AdminScreen implements Screen {
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 if(castleChoice == 1){
                     castleChoice++;
-                    textureCastle = new Texture("teamCastle2.png");
                 }else
                 if(castleChoice == 2){
                     castleChoice++;
-                    textureCastle = new Texture("teamCastle3.png");
                 }else
                 if(castleChoice == 3){
                     castleChoice = 1;
-                    textureCastle = new Texture("teamCastle1.png");
                 }
-                PlayerAccount.setCastleTexture(textureCastle);
+                textureCastle = new Texture("teamCastle" + castleChoice + ".png");
+                PlayerAccount.setTeamLogo("teamCastle" + castleChoice);
                 show();
             }
         });
-
         Gdx.input.setInputProcessor(stage);
     }
 
