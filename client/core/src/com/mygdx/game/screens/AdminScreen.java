@@ -29,6 +29,8 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
@@ -231,6 +233,8 @@ public class AdminScreen implements Screen {
         settings.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+
+                parent.setBackFromSettings(8);
                 parent.changeScreen(parent.getSettings());
             }
         });
@@ -365,6 +369,9 @@ public class AdminScreen implements Screen {
                 @Override
                 public void confirm(String text) {
                         try {
+                            if(text.length() < 6){
+                                DialogBox.showInfoDialog("Error", "Activity name must be > 6 letters");
+                            }else
                             if (!PlayerAccount.updateActivity(id, text, reward))
                                 DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
                         } catch (IOException e) {
@@ -414,6 +421,8 @@ public class AdminScreen implements Screen {
                 public void confirm(String text) {
                     try {
                         int points = Integer.valueOf(text);
+                        if(points <= 0)
+                            DialogBox.showInfoDialog("Error", "Points must be > 0");
                         if (!PlayerAccount.updateActivity(id, name, points))
                             DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
                     } catch (IOException e) {
@@ -499,7 +508,10 @@ public class AdminScreen implements Screen {
                 @Override
                 public void confirm(String text) {
                     try{
-                        PlayerAccount.createActivity(text);
+                        if (text.length() < 7)
+                            DialogBox.showInfoDialog("Error", "Activity name must be at least 6 letters");
+                        else
+                            PlayerAccount.createActivity(text);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {

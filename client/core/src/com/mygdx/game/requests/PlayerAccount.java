@@ -379,4 +379,10 @@ public class PlayerAccount {
             return new Texture("teamCastle1.png");
         return new Texture(team.getTeamLogo() + ".png");
     }
+
+    public static String    getProfileName() {
+        if (profile == null)
+            return "No profile";
+        return profile.getName();
+    }
 }

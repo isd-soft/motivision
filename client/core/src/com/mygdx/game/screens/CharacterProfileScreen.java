@@ -132,6 +132,7 @@ public class CharacterProfileScreen implements Screen {
         settingsButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                parent.setBackFromSettings(6);
                 parent.changeScreen(parent.getSettings());
             }
         });

@@ -29,6 +29,7 @@ public class SettingsScreen implements Screen{
 	private Label volumeSoundLabel;
 	private Label musicOnOffLabel;
 	private Label soundOnOffLabel;
+	private int i;
     
     public SettingsScreen(GGame g){
 
@@ -104,7 +105,7 @@ public class SettingsScreen implements Screen{
 		back.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				parent.changeScreen(parent.getLogin());
+				parent.changeScreen(parent.getBackFromSettings());
 			}
 		});
 
@@ -133,12 +134,13 @@ public class SettingsScreen implements Screen{
 		table.add(back).colspan(2).fillX().uniformX();
 
 		Gdx.input.setInputProcessor(stage);
-
-
-
-
-
 	}
+
+
+	public void setBackScreen(int a){
+    	this.i = a;
+	}
+
  
 	@Override
 	public void render(float delta) {
