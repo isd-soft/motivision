@@ -44,7 +44,7 @@ public class PlayerAccount {
             return null;
         return team.getTeamActivitiesNames();
     }
-    private static LinkedHashMap<String, Integer> getTeamMembersList() {
+    public static LinkedHashMap<String, Integer> getTeamMembersList() {
         LinkedHashMap<String, Integer>  teamMembersMap;
         if (team == null)
             return null;
@@ -341,5 +341,29 @@ public class PlayerAccount {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static int getBattleFrequency() {
+        if (team == null)
+            return -1;
+        return team.getBattleFrequency();
+    }
+
+    public static void setBattleFrequency(int frequency) {
+        if (team == null)
+            return;
+        team.setBattleFrequency(frequency);
+    }
+
+    public static void setTeamLogo(String teamLogo) {
+        if (team == null)
+            return;
+        team.setTeamLogo(teamLogo);
+    }
+
+    public static Texture getTeamLogo() {
+        if (team == null)
+            return new Texture("teamCastle1.png");
+        return new Texture(team.getTeamLogo());
     }
 }
