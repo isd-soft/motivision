@@ -44,8 +44,14 @@ public class EarnPointsScreen implements Screen {
     private Table screenTable;
 
 
+    private Texture backgroundTexture;
+
     private AnimationScreen animationScreen;
     private SpriteBatch batch;
+
+
+
+    private static final int FRAME_COLS = 6, FRAME_ROWS = 5;
 
     private GDXDialogs dialogs;
     public AnimationScreenTest animationScreenTest;
@@ -55,7 +61,8 @@ public class EarnPointsScreen implements Screen {
     public EarnPointsScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
-        animationScreenTest = new AnimationScreenTest();
+
+        animationScreenTest = new AnimationScreenTest(parent);
 //        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
@@ -72,7 +79,10 @@ public class EarnPointsScreen implements Screen {
     public void show() {
         stage.clear();
 //        stage.setDebugAll(true);
+        animationScreenTest.changeAnimation(1);
         float pad = 5;
+
+        backgroundTexture = parent.assetsManager.aManager.get("background.png");
 
         // Character Sprite
         Texture texture = null;
@@ -192,6 +202,7 @@ public class EarnPointsScreen implements Screen {
                         try {
                             //wolf animation goes here
                             PlayerAccount.doActivity(id);
+                            animationScreenTest.changeAnimation(2);
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {

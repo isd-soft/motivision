@@ -23,11 +23,16 @@ public class AssetsManager {
     private final String monsterImage = "monster.png";
     private final String knightImage = "knight.png";
     private final String cloudImage = "background.png";
-
+    private final String spriteAnimation = "sprite_animation.png";
+    private final String spriteWolfAnimation = "sprite_animation_wolf.png";
+    private final String spriteWalkAnimation = "sprite_walk.png";
 
     public void loadImages() {
         aManager.load(monsterImage, Texture.class);
         aManager.load(knightImage, Texture.class);
         aManager.load(cloudImage, Texture.class);
+        aManager.load(spriteAnimation, Texture.class);
+        aManager.load(spriteWolfAnimation, Texture.class);
+        aManager.load(spriteWalkAnimation, Texture.class);
     }
 }

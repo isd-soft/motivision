@@ -63,20 +63,9 @@ public class CharacterProfileScreen implements Screen {
 
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
 //        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-
-
-// tells our asset manger that we want to load the images set in loadImages method
-        parent.assetsManager.loadImages();
-// tells the asset manager to load the images and wait until finished loading.
-        parent.assetsManager.aManager.finishLoading();
-// gets the images as a texture
-        knightTex = parent.assetsManager.aManager.get("knight.png");
-
-
 
     }
 

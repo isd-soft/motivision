@@ -120,7 +120,7 @@ public class AnimationScreen extends Actor implements Screen {
         spriteBatch.begin();
         // tell our stage to do actions and draw itself
         stage.act(Gdx.graphics.getDeltaTime());
-        spriteBatch.draw(backgroundTexture, 200 ,200 );
+        spriteBatch.draw(backgroundTexture, 0 ,0 );
         spriteBatch.draw(currentFrame, 50, 50);
         spriteBatch.draw(runAnimation2.getKeyFrame(stateTime), currentPosition, 0, 100, 100);
         if(runAnimation.isAnimationFinished(stateTime)){

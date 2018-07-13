@@ -3,36 +3,76 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.gameSets.GGame;
 
 public class AnimationScreenTest extends Image {
+
     private Animation<TextureRegion> animation;
+    private Animation<TextureRegion> animation1;
+    private Animation<TextureRegion> animation2;
     private float time;
-    private static final int FRAME_COLS = 6, FRAME_ROWS = 5;
     private Texture runTexture;
+    private Texture clodTexture;
+    private Texture wolfTexture;
+    private Texture walkTexture;
+
+    private GGame parent;
+
 
     private TextureRegionDrawable drawable = new TextureRegionDrawable();
 
-    public AnimationScreenTest() {
+    public AnimationScreenTest(GGame g) {
         super();
+        parent = g;
         setDrawable(drawable);
 
-        runTexture = new Texture(Gdx.files.internal("sprite_animation.png"));
-        animation = makeFrames(runTexture);
+        runTexture = parent.assetsManager.aManager.get("sprite_animation.png");
+        clodTexture = parent.assetsManager.aManager.get("background.png");
+        wolfTexture = parent.assetsManager.aManager.get("sprite_animation_wolf.png");
+        walkTexture = parent.assetsManager.aManager.get("sprite_walk.png");
+
+        //animation  = makeFrames(runTexture, 6, 5);
+        animation1 = makeFrames(runTexture, 6, 5);
+        animation2 = makeFrames(wolfTexture, 4, 4);
+
+
     }
 
     public void setAnimation(Animation<TextureRegion> animation) {
+
         this.animation = animation;
     }
+
+    public Animation<TextureRegion> getAnimation(){
+            return animation;
+    }
+
+    public void changeAnimation(int i) {
+        if(i == 1 ){
+            //this.animation = animation1;
+            setAnimation(animation1);
+        }
+        if(i == 2){
+            //this.animation = animation2;
+            setAnimation(animation2);
+
+        }
+
+    }
+
+
+
 
     @Override
     public void act(float delta) {
 
         time += delta;
-        if (animation != null && animation.getAnimationDuration() > 0) {
-            TextureRegion frame = animation.getKeyFrame(time, true);
+        if (getAnimation() != null && getAnimation().getAnimationDuration() > 0) {
+            TextureRegion frame = getAnimation().getKeyFrame(time, true);
             drawable.setRegion(frame);
             setDrawable(drawable);
         } else {
@@ -42,7 +82,7 @@ public class AnimationScreenTest extends Image {
     }
 
 
-    public Animation makeFrames(Texture textureT) {
+    public Animation makeFrames(Texture textureT, final int FRAME_COLS, final int FRAME_ROWS) {
 
         TextureRegion[][] trm = TextureRegion.split(textureT, textureT.getWidth() / FRAME_COLS, textureT.getHeight() / FRAME_ROWS);
 
