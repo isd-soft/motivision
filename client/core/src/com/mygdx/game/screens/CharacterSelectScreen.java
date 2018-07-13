@@ -48,6 +48,7 @@ public class CharacterSelectScreen implements Screen {
     private Viewport viewport;
     private Camera camera;
     private Texture texture;
+    private Boolean characterIsSelected = false;
 
     public CharacterSelectScreen(GGame g) {
         parent = g;
@@ -166,6 +167,7 @@ public class CharacterSelectScreen implements Screen {
         select.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                System.out.println("");
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });

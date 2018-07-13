@@ -25,4 +25,8 @@ public interface CharacterRepository extends JpaRepository<Character, Long> {
     @Modifying
     @Query("delete from Character c where c.id = :characterId")
     void deleteCharacterById(@Param("characterId") Long characterId);
+
+    @Query(nativeQuery = true, value = "select * from character c " +
+            "where c.team_id = :teamId")
+    Optional<List<Character>> findByTeamId(@Param("teamId") Long teamId);
 }

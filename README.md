@@ -1,7 +1,7 @@
 # MotiVision
 
-Here you will find an implementation of Restful API App (Server) & libGdx Android (Client)
 This project is made to encourage practicing sports such as volleyball, swimming, push ups, pull ups and so on.
+Here you will find an implementation of Restful API App (Server) & libGdx Android (Client)
 
 ## Getting Started
 
@@ -15,10 +15,11 @@ These instructions will get you a copy of the project up and running on your loc
 git clone http://github.com/isd-soft/motivision
 ```
 
-2. Create PostgreSQL database
+2. Create PostgreSQL Database
 
 ```
 create database motivision;
+grant all on database motivision to [username];
 ```
 
 3. Change PostgreSQL user and password:
@@ -29,16 +30,17 @@ spring.datasource.username = [your_username]
 spring.datasource.password = [your_password]
 ```
 
-4. Restore the database from Dump
+4. Restore The Database From Dump
 
 ```
 ./motivision/dump.sql
 psql --username=[your_username] motivision < dump.sql
+
 Example:
 psql --username=postgres motivision < dump.sql
 ```
 
-5. Specify Connection Addres for Database
+5. Specify Connection Addres to Database
 
 ```
 ./api/src/main/resources/application.properties
@@ -55,18 +57,26 @@ spring.datasource.url=jdbc:postgresql://localhost:5432/motivision
 
 ## Deployment (Server)
 
-Deployment can be done on Windows/Unix Based Machine with JDK 8 and above
+Deployment can be done on Windows/Linux/Mac OS with JDK 8 and Maven installed
 
-To run the Server just write:
+To run the Server just write in cmd/terminal:
 
 ```
-java -jar ./motivision/api/target/motivision-rest-service-1.0.0.jar
+Linux/Mac OS:
+cd motivision/api
+sh mvnw.sh
+
+Windows:
+cd motivision/api
+mvnw.cmd
 ```
 
-If there is no jar file then just build it and try again:
+## Deployment (Client)
+
 ```
-cd ./motivision/api/
-mvn package
+Install the app from Play Store
+Or
+Build it with Android Studio from the "client" folder under motivision project
 ```
 
 ## Done!
