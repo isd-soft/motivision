@@ -73,6 +73,7 @@ public class ActivitiesController {
         characterRepository.save(character);
         log.info("Points assigned to database");
         map.put("status", "success");
+        map.put("points", character.getPoints());
         return map;
     }
 

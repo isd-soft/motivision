@@ -15,4 +15,5 @@ public interface CharacterItemRepository extends JpaRepository<CharacterItem, Lo
     Optional<CharacterItem> findCharacterItemsByItemsId(Long itemId);
     void deleteCharacterItemsByCharacter_Id(Long characterId);
     Optional<CharacterItem> findCharacterItemByItemsIdAndCharacterId(Long itemId, Long characterId);
+    Optional<List<CharacterItem>> findCharacterItemsByEquipped(boolean equipped);
 }

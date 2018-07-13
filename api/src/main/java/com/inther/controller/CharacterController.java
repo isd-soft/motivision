@@ -369,8 +369,8 @@ public class CharacterController {
         }
         log.info("Item found");
         Items items = optionalItems.get();
-        Optional<CharacterItem> optionalCharacterItem
-                = characterItemRepository.findCharacterItemByItemsIdAndCharacterId(itemId, characterId);
+        Optional<CharacterItem> optionalCharacterItem =
+                characterItemRepository.findCharacterItemByItemsIdAndCharacterId(itemId, characterId);
         if (!optionalCharacterItem.isPresent()) {
             log.warn("Character doesn't have this item");
             map.put("status", "failed");
@@ -413,8 +413,8 @@ public class CharacterController {
         }
         log.info("Item found");
         Items items = optionalItems.get();
-        Optional<CharacterItem> optionalCharacterItem
-                = characterItemRepository.findCharacterItemByItemsIdAndCharacterId(itemId, characterId);
+        Optional<CharacterItem> optionalCharacterItem =
+                characterItemRepository.findCharacterItemsByItemsId(itemId);
         if (!optionalCharacterItem.isPresent()) {
             log.warn("Character doesn't have this item");
             map.put("status", "failed");
@@ -423,10 +423,25 @@ public class CharacterController {
         }
         CharacterItem characterItem = optionalCharacterItem.get();
         if (characterItem.getEquipped()) {
-            log.warn("Item is already unequipped");
+            log.warn("Item is already equpped");
             map.put("status", "failed");
             map.put("message", "item already equipped");
             return map;
+        }
+        Optional<List<CharacterItem>> characterItemsEquipped = characterItemRepository.findCharacterItemsByEquipped(true);
+        if (characterItemsEquipped.isPresent()) {
+            for (CharacterItem characterItemEquip : characterItemsEquipped.get()) {
+                if (itemId < 4 && characterItemEquip.getItems().getId() < 4) {
+                    characterItemEquip.setEquipped(false);
+                    characterItemRepository.save(characterItemEquip);
+                } else if (itemId < 7 && characterItemEquip.getItems().getId() > 3 && characterItemEquip.getItems().getId() < 7) {
+                    characterItemEquip.setEquipped(false);
+                    characterItemRepository.save(characterItemEquip);
+                } else if (itemId < 13 && characterItemEquip.getItems().getId() > 6 && characterItemEquip.getItems().getId() < 13) {
+                    characterItemEquip.setEquipped(false);
+                    characterItemRepository.save(characterItemEquip);
+                }
+            }
         }
         characterItem.setEquipped(true);
         log.info("Item equipped");
@@ -434,6 +449,7 @@ public class CharacterController {
         map.put("status", "success");
         return map;
     }
+
 
     @RequestMapping(value = "/get_player_characters")
     public Map<String, Object> getPlayerCharacters(@RequestParam(value = "playerId") Long playerId) {
@@ -469,14 +485,14 @@ public class CharacterController {
     }
 
     /*
-    * Delete player request
-    * Used to delete player and all player characters
-    * If a character is team admin then the team will be deleted as well
-    * and thus all the characters inside that team
-    * @param playerId - Player to delete
-    * @return status - failed if the player was not found
-    * @return status - success if the player was deleted successfully
-    * */
+     * Delete player request
+     * Used to delete player and all player characters
+     * If a character is team admin then the team will be deleted as well
+     * and thus all the characters inside that team
+     * @param playerId - Player to delete
+     * @return status - failed if the player was not found
+     * @return status - success if the player was deleted successfully
+     * */
     @RequestMapping(value = "/delete_player", method = RequestMethod.DELETE)
     public Map<String, Object> deletePlayer(@RequestParam("playerId") Long playerId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
