@@ -412,7 +412,8 @@ public class CharacterController {
         }
         log.info("Item found");
         Items items = optionalItems.get();
-        Optional<CharacterItem> optionalCharacterItem = characterItemRepository.findCharacterItemsByItemsId(itemId);
+        Optional<CharacterItem> optionalCharacterItem
+                = characterItemRepository.findCharacterItemByItemsIdAndCharacterId(itemId, characterId);
         if (!optionalCharacterItem.isPresent()) {
             log.warn("Character doesn't have this item");
             map.put("status", "failed");
