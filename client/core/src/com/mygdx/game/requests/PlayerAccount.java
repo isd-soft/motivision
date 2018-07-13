@@ -377,6 +377,6 @@ public class PlayerAccount {
     public static Texture getTeamLogo() {
         if (team == null)
             return new Texture("teamCastle1.png");
-        return new Texture(team.getTeamLogo());
+        return new Texture(team.getTeamLogo() + ".png");
     }
 }
