@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
@@ -22,7 +23,9 @@ import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
 
+import java.awt.Event;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -130,6 +133,7 @@ public class CharacterSelectScreen implements Screen {
             characterNamesButtons.get(i).addListener(new SelectCharacter(strings.get(i)));
 
             xButtons.get(i).addListener(new DeleteCharacter(strings.get(i)));
+//            xButtons.get(i).fire(new ChangeListener.ChangeEvent());
         }
         charactersTable.add(create).fill().uniformY().colspan(2);
 

@@ -414,7 +414,7 @@ public class CharacterController {
         log.info("Item found");
         Items items = optionalItems.get();
         Optional<CharacterItem> optionalCharacterItem =
-                characterItemRepository.findCharacterItemsByItemsId(itemId);
+                characterItemRepository.findCharacterItemByItemsIdAndCharacterId(itemId, characterId);
         if (!optionalCharacterItem.isPresent()) {
             log.warn("Character doesn't have this item");
             map.put("status", "failed");
@@ -431,13 +431,20 @@ public class CharacterController {
         Optional<List<CharacterItem>> characterItemsEquipped = characterItemRepository.findCharacterItemsByEquipped(true);
         if (characterItemsEquipped.isPresent()) {
             for (CharacterItem characterItemEquip : characterItemsEquipped.get()) {
-                if (itemId < 4 && characterItemEquip.getItems().getId() < 4) {
+                if (itemId < 4
+                        && characterItemEquip.getItems().getId() < 4) {
                     characterItemEquip.setEquipped(false);
                     characterItemRepository.save(characterItemEquip);
-                } else if (itemId < 7 && characterItemEquip.getItems().getId() > 3 && characterItemEquip.getItems().getId() < 7) {
+                } else if (itemId > 3 &&itemId < 7
+                        && characterItemEquip.getItems().getId() > 3 && characterItemEquip.getItems().getId() < 7) {
                     characterItemEquip.setEquipped(false);
                     characterItemRepository.save(characterItemEquip);
-                } else if (itemId < 13 && characterItemEquip.getItems().getId() > 6 && characterItemEquip.getItems().getId() < 13) {
+                } else if (itemId > 6 && itemId < 10
+                        && characterItemEquip.getItems().getId() > 6 && characterItemEquip.getItems().getId() < 10) {
+                    characterItemEquip.setEquipped(false);
+                    characterItemRepository.save(characterItemEquip);
+                }else if(itemId > 9 && itemId < 13
+                        && characterItemEquip.getItems().getId() > 9 && characterItemEquip.getItems().getId() < 13){
                     characterItemEquip.setEquipped(false);
                     characterItemRepository.save(characterItemEquip);
                 }
