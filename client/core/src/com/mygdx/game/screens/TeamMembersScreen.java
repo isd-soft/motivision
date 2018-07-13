@@ -74,7 +74,7 @@ public class TeamMembersScreen implements Screen {
 
         // label
         Label teamName = new Label("", skin);
-        teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" \t Wins: " + PlayerAccount.getWins() + " \t Loss: " + PlayerAccount.getLosses());
+        teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" Wins: " + PlayerAccount.getWins() + " \t Loss: " + PlayerAccount.getLosses());
 
         // buttons
         TextButton settingsButton = new TextButton("Settings", skin, "small");
