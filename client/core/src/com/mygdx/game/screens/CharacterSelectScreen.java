@@ -48,7 +48,6 @@ public class CharacterSelectScreen implements Screen {
     private Viewport viewport;
     private Camera camera;
     private Texture texture;
-
     public CharacterSelectScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
@@ -107,7 +106,7 @@ public class CharacterSelectScreen implements Screen {
             texture = new Texture("default.png");
         }
         image = new Image(texture);
-
+        //TODO
         for (int i = 0; i < strings.size(); i++) {
             characterNamesButtons.add(new TextButton(strings.get(i), skin, "square"));
 

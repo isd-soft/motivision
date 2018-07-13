@@ -134,6 +134,12 @@ public class PlayerAccount {
         return result;
     }
 
+    public static boolean   isAdmin() {
+        if (profile == null)
+            return false;
+        return isAdmin(profile.getName());
+    }
+
     public static boolean   isAdmin(String name) {
         try {
             selectProfile(name);
@@ -190,10 +196,18 @@ public class PlayerAccount {
         return profile.getPoints();
     }
 
-    public static void      getProfileTeam() throws IOException, JSONException {
+    public static Team      getProfileTeam(){
         if (profile == null)
-            return;
-        team = Team.getTeam(profile.getTeamId());
+            return null;
+        try {
+            team = Team.getTeam(profile.getTeamId());
+            return team;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static int getItemStatus(int id) {
@@ -210,9 +224,31 @@ public class PlayerAccount {
             return false;
         }
         return profile.buyItem(id);
+    }
 
+    public static boolean   doActivity(int activityId) throws IOException, JSONException {
+        if (profile == null)
+            return false;
+        return profile.doActivity(activityId);
+    }
 
-
+    public static boolean   updateActivity(int activityId, String activityName, int activityReward)
+            throws IOException, JSONException {
+        if (profile == null)
+            return false;
+        return profile.updateActivity(activityId, activityName, activityReward);
+    }
+    public static boolean   deleteActivity(int activityId)
+            throws IOException, JSONException {
+        if(profile == null)
+            return false;
+        return profile.deleteActivity(activityId);
+    }
+    public static boolean   createActivity(String name)
+            throws IOException, JSONException {
+        if(profile == null)
+            return false;
+        return profile.createActivity(name);
     }
     public static void      selectProfileTeam() throws IOException, JSONException {
         if (profile == null)
@@ -220,10 +256,17 @@ public class PlayerAccount {
         team = Team.getTeam(profile.getTeamId());
     }
 
-    public static String    getProfileTeamName() throws IOException, JSONException {
+    public static String    getProfileTeamName(){
         if(team == null)
             return null;
-        return Team.getTeam(profile.getTeamId()).getTeamName();
+        try {
+            return Team.getTeam(profile.getTeamId()).getTeamName();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

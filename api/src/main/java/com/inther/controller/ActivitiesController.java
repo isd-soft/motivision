@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @RestController
@@ -36,14 +37,14 @@ public class ActivitiesController {
     CharacterRepository characterRepository;
 
     /*
-    * Do activity request
-    * Used as a points adding system when activity is done
-    * @param characterId - character for points adding
-    * @param activityId - team activity that the player already did
-    * @return status - failed if character not found
-    * @return status - failed if activity not found
-    * @return status - success if points were assigned successfully
-    * */
+     * Do activity request
+     * Used as a points adding system when activity is done
+     * @param characterId - character for points adding
+     * @param activityId - team activity that the player already did
+     * @return status - failed if character not found
+     * @return status - failed if activity not found
+     * @return status - success if points were assigned successfully
+     * */
     @RequestMapping(value = "/do_activity", method = RequestMethod.POST)
     public Map<String, Object> doActivity(@RequestParam(value = "characterId") Long characterId,
                                           @RequestParam(value = "activityId") Long activityId) {
@@ -165,7 +166,7 @@ public class ActivitiesController {
         map.put("teamActivities", activitiesArrayList);
         return map;
     }
-
+    @Transactional
     @RequestMapping(value = "/delete_activity", method = RequestMethod.DELETE)
     public Map<String, Object> deleteActivity(@RequestParam(value = "teamId") Long teamId,
                                               @RequestParam(value = "activityId") Long activityId) {
@@ -185,10 +186,18 @@ public class ActivitiesController {
             map.put("message", "this team doesn't have such activity");
             return map;
         }
-        teamActivitiesRepository.deleteByTeamIdAndActivitiesId(teamId, activityId);
-        log.info("Team Activity deleted successfully");
-        map.put("status", "success");
-        return map;
+        if(activityId <= 6){
+            teamActivitiesRepository.deleteByTeamIdAndActivitiesId(teamId, activityId);
+            log.info("Default activity removed");
+            map.put("status", "success");
+            return map;
+        }else{
+            teamActivitiesRepository.deleteByTeamIdAndActivitiesId(teamId, activityId);
+            activitiesRepository.deleteById(activityId);
+            log.info("Activity deleted successfully");
+            map.put("status", "success");
+            return map;
+        }
     }
 
     /*
@@ -200,7 +209,7 @@ public class ActivitiesController {
      * @return status - failed if no such team exist
      * @return status success if activity was created
      * */
-    @RequestMapping(value = "/create_activity")
+    @RequestMapping(value = "/create_activity", method = RequestMethod.POST)
     public Map<String, Object> createActivity(@RequestParam(value = "teamId") Long teamId,
                                               @RequestParam(value = "activityName") String activityName,
                                               @RequestParam(value = "activityReward") Integer activityReward) {
@@ -228,23 +237,37 @@ public class ActivitiesController {
         return map;
     }
 
-    // TODO check if activity is assigned to our team
-    @RequestMapping(value = "/update_activity")
-    public Map<String, Object> updateActivity(@RequestParam(value = "activityId") Long activityId,
+    @RequestMapping(value = "/update_activity", method = RequestMethod.POST)
+    public Map<String, Object> updateActivity(@RequestParam(value = "teamId") Long teamId,
+                                              @RequestParam(value = "activityId") Long activityId,
                                               @RequestParam(value = "activityName") String activityName,
                                               @RequestParam(value = "activityReward") Integer activityReward) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        Optional<Activities> optionalActivities = activitiesRepository.findById(activityId);
-        if (!optionalActivities.isPresent()) {
+        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+        if (!optionalTeam.isPresent()) {
+            log.warn("Team not found with teamId " + teamId);
             map.put("status", "failed");
-            map.put("message", "no such activity with activityId exist");
+            map.put("message", "no such team found");
+            return map;
+        }
+        Optional<Activities> optionalActivities = activitiesRepository.findActivitiesByTeamId(teamId, activityId);
+        if (!optionalActivities.isPresent()) {
+            log.warn("Activity not found");
+            map.put("status", "failed");
+            map.put("message", "no such activity with activityId exist for team with teamId");
             return map;
         }
         Activities activities = optionalActivities.get();
-        activities.setName(activityName);
-        activities.setReward(activityReward);
-        activitiesRepository.save(activities);
-        map.put("status", "success");
-        return map;
+        if (activities.getId() > 6) {
+            activities.setName(activityName);
+            activities.setReward(activityReward);
+            activitiesRepository.save(activities);
+            map.put("status", "success");
+            return map;
+        }else {
+            map.put("status", "failed");
+            map.put("message", "cannot edit default activity");
+            return map;
+        }
     }
 }

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
 import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
+
 import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 
 public class CharacterProfileScreen implements Screen {
@@ -40,7 +41,9 @@ public class CharacterProfileScreen implements Screen {
     private Texture textureImage;
     private TextureRegion textureRegion;
     private TextureRegionDrawable textureRegionDrawable;
-    private static GDXDialogs dialogs = null;
+
+    private GDXDialogs manageTeamDialog;
+    private GDXDialogs buyItemDialog;
 
     private Texture knightTex;
 
@@ -50,6 +53,8 @@ public class CharacterProfileScreen implements Screen {
 
     public CharacterProfileScreen(GGame g) {
         parent = g;
+        manageTeamDialog = GDXDialogsSystem.install();
+        buyItemDialog = GDXDialogsSystem.install();
 
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
 //        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
@@ -57,7 +62,6 @@ public class CharacterProfileScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-        dialogs = GDXDialogsSystem.install();
 
 
 // tells our asset manger that we want to load the images set in loadImages method
@@ -123,12 +127,7 @@ public class CharacterProfileScreen implements Screen {
             }
         });
 
-        manageTeamButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                parent.changeScreen(parent.getAdmin());
-            }
-        });
+        manageTeamButton.addListener(new ManageTeamButton());
 
         settingsButton.addListener(new ChangeListener() {
             @Override
@@ -279,13 +278,32 @@ public class CharacterProfileScreen implements Screen {
         stage.dispose();
     }
 
+    class ManageTeamButton extends ChangeListener{
+
+        @Override
+        public void changed(ChangeEvent changeEvent, Actor actor) {
+            if(PlayerAccount.isAdmin()){
+                parent.changeScreen(parent.getAdmin());
+            }else{
+                manageRefuse();
+            }
+        }
+
+        private void manageRefuse(){
+            final GDXButtonDialog bDialog = manageTeamDialog.newDialog(GDXButtonDialog.class);
+            bDialog.setTitle("Nah bro");
+            bDialog.setMessage("You are not team admin!");
+            bDialog.addButton("Back");
+            bDialog.build().show();
+        }
+    }
     class ClickButton extends ChangeListener{
         String  itemType;
         int     itemId;
 
 
         public void     confirmDialog() {
-            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+            final GDXButtonDialog bDialog = buyItemDialog.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\"");
 
