@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 public class TeamMembersScreen implements Screen {
@@ -90,28 +91,33 @@ public class TeamMembersScreen implements Screen {
         scrollPane.setScrollingDisabled(true, false);
 
 
-        /*&List<Profile> profiles = PlayerAccount.getAllCharactersFromTeam();
+        HashMap<String, Integer> teamMembers = PlayerAccount.getTeamMembersList();
 //
-        Collections.sort(profiles);
+        //Collections.sort(teamMembers);
         //fill table with buttons and labels
-        for (final Profile profile: profiles){
+        for (final String key: teamMembers.keySet()){
             //instead of PLACE_HOLDER there should be name of character
-            TextButton profileName = new TextButton(profile.getName(), skin, "square");
+            TextButton profileName = new TextButton(key, skin, "square");
+            TextButton points = new TextButton(teamMembers.get(key).toString(), skin, "square");
+
             profileName.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor){
-                    //here should go Yes No pop up screen
                 }
             });
 
             teamMembersTable.add(profileName).fillX().expandX();
 
             //here are points of each teammate
-            TextButton points = new TextButton(String.valueOf(profile.getPoints()), skin, "square");
             points.setTouchable(Touchable.disabled);
+            if (PlayerAccount.isAdmin()) {
+                TextButton xButton = new TextButton("X", skin, "square");
+                teamMembersTable.add(xButton).width(Value.percentWidth(0.2f, teamMembersTable));
+            }
+
             teamMembersTable.add(points).width(Value.percentWidth(0.2f, teamMembersTable));
             teamMembersTable.row();
-        }*/
+        }
 
         buttonTable.add(settingsButton).fill().pad(0, 0, pad, 0);
         buttonTable.add(backButton).fill().pad(0, 0, pad, 0);
