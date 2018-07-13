@@ -292,6 +292,8 @@ public class Team {
     }
 
     public String getTeamLogo() {
+        if (teamLogo.equals("No logo"))
+            return "teamCastle1";
         return teamLogo;
     }
 
