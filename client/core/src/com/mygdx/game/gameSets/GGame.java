@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameSets.AppPreferences;
 import com.mygdx.game.loader.AssetsManager;
+import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.screens.*;
 
 public class GGame extends Game {
@@ -90,16 +91,19 @@ public void changeScreen(int screen){
 					this.setScreen(registerScreen);
 			break;
 		case MENU:
-			if(menuScreen == null) menuScreen = new MenuScreen(this);
-					this.setScreen(menuScreen);
+			if(menuScreen == null)
+				menuScreen = new MenuScreen(this);
+			this.setScreen(menuScreen);
 			break;
 			//тут измененно
 		case SETTINGS:
-			if(settingsScreen == null) settingsScreen = new SettingsScreen(this);
-					this.setScreen(settingsScreen);
+			if(settingsScreen == null)
+				settingsScreen = new SettingsScreen(this);
+			this.setScreen(settingsScreen);
 			break;
 		case CHARACTERSELECT:
-			if(characterSelectScreen == null) characterSelectScreen = new CharacterSelectScreen(this);
+			if(characterSelectScreen == null)
+				characterSelectScreen = new CharacterSelectScreen(this);
 			this.setScreen(characterSelectScreen);
 			break;
         case CREATECHARACTER:

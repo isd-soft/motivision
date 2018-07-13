@@ -99,6 +99,15 @@ public class CharacterSelectScreen implements Screen {
                     e.printStackTrace();
                 }
             }
+            else {
+                try {
+                    texture = PlayerAccount.getProfileTexture();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
             strings = PlayerAccount.getCharactersName();
         }
         else
