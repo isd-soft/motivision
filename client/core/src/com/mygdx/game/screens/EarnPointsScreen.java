@@ -161,6 +161,8 @@ public class EarnPointsScreen implements Screen {
         settingsButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
+
+                parent.setBackFromSettings(7);
                 parent.changeScreen(parent.getSettings());
             }
         });

@@ -135,6 +135,7 @@ public class TeamMembersScreen implements Screen {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
+
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
@@ -142,6 +143,8 @@ public class TeamMembersScreen implements Screen {
         settingsButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
+
+                parent.setBackFromSettings(9);
                 parent.changeScreen(parent.getSettings());
             }
         });

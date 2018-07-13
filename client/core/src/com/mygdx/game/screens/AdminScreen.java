@@ -224,6 +224,8 @@ public class AdminScreen implements Screen {
         settings.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+
+                parent.setBackFromSettings(8);
                 parent.changeScreen(parent.getSettings());
             }
         });

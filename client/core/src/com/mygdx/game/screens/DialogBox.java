@@ -20,7 +20,7 @@ public class DialogBox {
             dialogs = GDXDialogsSystem.install();
     }
 
-    public static void     showInfoDialog(String title, String message) {
+    public static void showInfoDialog(String title, String message) {
         final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
         bDialog.setTitle(title);
         bDialog.setMessage(message);

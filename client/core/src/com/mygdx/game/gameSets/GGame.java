@@ -3,6 +3,7 @@ package com.mygdx.game.gameSets;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gameSets.AppPreferences;
@@ -16,7 +17,7 @@ public class GGame extends Game {
 	private BitmapFont font;
 
 private LoadingScreen loadingScreen;
-private SettingsScreen settingsScreen;
+public SettingsScreen settingsScreen;
 private AppPreferences preferences;
 private MenuScreen menuScreen;
 private BattleScreen battleScreen;
@@ -30,6 +31,7 @@ private AdminScreen adminScreen;
 private TeamMembersScreen teamMembersScreen;
 private LastBattleScreen lastBattleScreen;
 private AnimationScreen animationScreen;
+private int i;
 
 public AssetsManager assetsManager = new AssetsManager();
 
@@ -146,6 +148,17 @@ public void changeScreen(int screen){
 	public AppPreferences getPreferences(){
 		return this.preferences;
 	}
+
+	public void setBackFromSettings(int i){
+			this.i = i;
+	}
+
+	public int getBackFromSettings(){
+		return i;
+	}
+
+
+
 
           @Override
 	public void create() {
