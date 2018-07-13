@@ -26,6 +26,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.tomgrill.gdxdialogs.core.GDXDialogs;
+import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
+import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
+import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
+
 public class EarnPointsScreen implements Screen {
 
     private GGame parent;
@@ -42,14 +47,14 @@ public class EarnPointsScreen implements Screen {
     private AnimationScreen animationScreen;
     private SpriteBatch batch;
 
-
+    private GDXDialogs dialogs;
     public AnimationScreenTest animationScreenTest;
 
 
 
     public EarnPointsScreen(GGame g) {
         parent = g;
-
+        dialogs = GDXDialogsSystem.install();
         animationScreenTest = new AnimationScreenTest();
 //        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
@@ -100,12 +105,7 @@ public class EarnPointsScreen implements Screen {
         for (final Activity activity: activities){
             //instead of PLACE_HOLDER there should be name of activity
             TextButton activityName = new TextButton(activity.getActivityName(), skin, "square");
-            activityName.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor){
-                    //here should go Yes No pop up screen
-                }
-            });
+            activityName.addListener(new DoActivity(activity.getActivityId(), activity.getActivityName()));
 
             activitiesTable.add(activityName).fillX().expandX();
 
@@ -151,6 +151,46 @@ public class EarnPointsScreen implements Screen {
     }
 
 
+    class DoActivity extends ChangeListener{
+
+        private int id;
+        private String name;
+
+        public DoActivity(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        @Override
+        public void changed(ChangeEvent changeEvent, Actor actor) {
+            doActivity();
+        }
+        private void doActivity(){
+            final GDXButtonDialog dialogsSystem = dialogs.newDialog(GDXButtonDialog.class);
+
+            dialogsSystem.setTitle("Confirmation");
+            dialogsSystem.setMessage("Are you sure you did " + name);
+            dialogsSystem.setClickListener(new ButtonClickListener() {
+                @Override
+                public void click(int button) {
+                    if(button == 0){
+                        try {
+                            //wolf animation goes here
+                            PlayerAccount.doActivity(id);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
+            dialogsSystem.addButton("Yes");
+            dialogsSystem.addButton("No");
+            dialogsSystem.build().show();
+        }
+    }
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
