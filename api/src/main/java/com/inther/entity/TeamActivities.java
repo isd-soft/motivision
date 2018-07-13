@@ -12,7 +12,7 @@ public class TeamActivities {
     @GeneratedValue(generator = "kaugen")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "team_id")
     private Team team;
 

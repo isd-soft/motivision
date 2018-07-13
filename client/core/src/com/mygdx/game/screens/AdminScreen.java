@@ -20,6 +20,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.Activity;
+import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
@@ -27,6 +29,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
@@ -101,8 +104,11 @@ public class AdminScreen implements Screen {
 
         Label frequencyLabel = new Label("Battle frequency", skin);
         Label castleLabel = new Label("Team logo", skin);
-        Label teamNameLabel = new Label("TeamName", skin);
-
+        Label teamNameLabel;
+        if(PlayerAccount.getProfileTeam() == null)
+             teamNameLabel = new Label("Team Name", skin);
+        else
+            teamNameLabel = new Label(PlayerAccount.getProfileTeamName(), skin);
         // left-right buttons
         arrowCastleLeft = new TextButton("<", skin2);
         arrowCastleRight = new TextButton(">", skin2);
@@ -111,12 +117,7 @@ public class AdminScreen implements Screen {
         freqChoiceLabel.setText(freqChoices[freqNumber]);
 
         // add the list of already created characters
-        LinkedHashMap<String, Integer> activities = new LinkedHashMap<String, Integer>();
-        LinkedHashMap<String, Integer> serverActivities = null;
-        if (serverActivities != null)
-            activities = serverActivities;
-        else
-            activities.put("ActivityName", 50);
+        List<Activity> teamActivities = PlayerAccount.getActivities();
 
         Table list = new Table();
         Table selectionTable = new Table();
@@ -132,9 +133,9 @@ public class AdminScreen implements Screen {
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.setScrollbarsOnTop(true);
 
-        for (String key : activities.keySet()) {
-            activityNamesButtons.add(new TextButton(key, skin, "square"));
-            pointsButtons.add(new TextButton(activities.get(key).toString(), skin, "square"));
+        for (Activity activity: teamActivities) {
+            activityNamesButtons.add(new TextButton(activity.getActivityName(), skin, "square"));
+            pointsButtons.add(new TextButton(activity.getActivityReward().toString(), skin, "square"));
             xButtons.add(new TextButton("X", skin, "square"));
 
             list.add(activityNamesButtons.get(activityNamesButtons.size()-1)).fill().expandX();
@@ -142,11 +143,19 @@ public class AdminScreen implements Screen {
             list.add(xButtons.get(xButtons.size()-1)).width(Value.percentWidth(0.2f, list)).fill();
             list.row();
 
-            activityNamesButtons.get(activityNamesButtons.size()-1).addListener(new EditActivityName(key));
+            activityNamesButtons.get(activityNamesButtons.size()-1)
+                    .addListener(new EditActivityName(activity.getActivityId(),
+                                                        activity.getActivityName(),
+                                                            activity.getActivityReward()));
 
-            pointsButtons.get(pointsButtons.size()-1).addListener(new EditActivityPoints(activities.get(key)));
+            pointsButtons.get(pointsButtons.size()-1)
+                    .addListener(new EditActivityPoints(activity.getActivityId(),
+                                                            activity.getActivityName(),
+                                                                activity.getActivityReward()));
 
-            xButtons.get(xButtons.size()-1).addListener(new DeleteActivity(key));
+            xButtons.get(xButtons.size()-1)
+                    .addListener(new DeleteActivity(activity.getActivityId(),
+                                                       activity.getActivityName()));
         }
         list.add(create).fill().uniformY().colspan(3);
 
@@ -164,7 +173,7 @@ public class AdminScreen implements Screen {
         selectionTable.add(freqChoiceLabel);
         selectionTable.add(arrowFrequencyRight);
 
-        if (serverActivities == null){
+        if (teamActivities.isEmpty()){
             activityNamesButtons.get(0).setDisabled(true);
             activityNamesButtons.get(0).setTouchable(Touchable.disabled);
             xButtons.get(0).setDisabled(true);
@@ -306,10 +315,14 @@ public class AdminScreen implements Screen {
     }
 
     class EditActivityName extends ChangeListener {
+        int id;
         String name;
+        int reward;
 
-        public EditActivityName(String elem) {
+        public EditActivityName(int id, String elem, int reward) {
+            this.id = id;
             this.name = elem;
+            this.reward = reward;
         }
 
         @Override
@@ -329,7 +342,14 @@ public class AdminScreen implements Screen {
 
                 @Override
                 public void confirm(String text) {
-                    // do something with the user input
+                        try {
+                            if (!PlayerAccount.updateActivity(id, text, reward))
+                                DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                 }
 
                 @Override
@@ -343,12 +363,15 @@ public class AdminScreen implements Screen {
     }
 
     class EditActivityPoints extends ChangeListener {
-        Integer points;
+        int id;
+        String name;
+        int reward;
 
-        public EditActivityPoints(Integer elem) {
-            this.points = elem;
+        public EditActivityPoints(int id, String elem, int reward) {
+            this.id = id;
+            this.name = elem;
+            this.reward = reward;
         }
-
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             GDXDialogs dialogs = GDXDialogsSystem.install();
@@ -357,7 +380,7 @@ public class AdminScreen implements Screen {
 
             textPrompt.setTitle("Edit points");
             textPrompt.setMessage("Enter points for activity:");
-            textPrompt.setValue(points.toString());
+            textPrompt.setValue(String.valueOf(reward));
 
             textPrompt.setCancelButtonLabel("Cancel");
             textPrompt.setConfirmButtonLabel("Save");
@@ -366,7 +389,17 @@ public class AdminScreen implements Screen {
 
                 @Override
                 public void confirm(String text) {
-                    // do something with the user input
+                    try {
+                        int points = Integer.valueOf(text);
+                        if (!PlayerAccount.updateActivity(id, name, points))
+                            DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (NumberFormatException e){
+                        DialogBox.showInfoDialog("Error", "Points cannot be string");
+                    }
                 }
 
                 @Override
@@ -380,10 +413,13 @@ public class AdminScreen implements Screen {
     }
 
     class DeleteActivity extends ChangeListener {
+        int id;
         String name;
 
-        public DeleteActivity(String elem) {
-            this.name = elem;
+
+        public DeleteActivity(int id, String name) {
+            this.id = id;
+            this.name = name;
         }
 
         @Override
@@ -398,6 +434,16 @@ public class AdminScreen implements Screen {
 
                 @Override
                 public void click(int button) {
+                    //TODO
+                    if(button == 0){
+                        try {
+                            PlayerAccount.deleteActivity(id);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             });
 
@@ -428,7 +474,13 @@ public class AdminScreen implements Screen {
 
                 @Override
                 public void confirm(String text) {
-                    // do something with the user input
+                    try{
+                        PlayerAccount.createActivity(text);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override

@@ -167,7 +167,6 @@ public class CharacterSelectScreen implements Screen {
         select.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("");
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
@@ -220,7 +219,7 @@ public class CharacterSelectScreen implements Screen {
             try {
                 System.out.println("Start getting profile texture");
                 texture = PlayerAccount.getProfileTexture(name);
-            } catch (IOException e) {
+             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();

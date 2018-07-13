@@ -29,8 +29,6 @@ import java.util.regex.Pattern;
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
 import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
-import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
-import sun.awt.image.ImageWatched;
 
 import static javax.security.auth.callback.ConfirmationCallback.YES;
 

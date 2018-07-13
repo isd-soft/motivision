@@ -543,4 +543,70 @@ public class Profile {
             }
         }
     }
+
+    public boolean      doActivity(int activityId) throws IOException, JSONException {
+        String      urlParameters;
+        String		url;
+        JSONObject  jsonObject;
+        String		result;
+
+        url = JsonHandler.domain + "/do_activity";
+        urlParameters = Profile.PROFILE_ID + "=" + id;
+        urlParameters += "&" + Activity.ACTIVITY_ID + "=" + activityId;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
+        if(jsonObject == null)
+            return false;
+        return jsonObject.getString("status").equals("success");
+
+    }
+
+    public boolean updateActivity(int activityId, String activityName, int activityReward)
+            throws IOException, JSONException {
+        String      urlParameters;
+        String		url;
+        JSONObject  jsonObject;
+        String		result;
+
+        url = JsonHandler.domain + "/update_activity";
+        urlParameters = Team.TEAM_ID + "=" + teamId;
+        urlParameters += "&" + Activity.ACTIVITY_ID + "=" + activityId;
+        urlParameters += "&" + Activity.ACTIVITY_NAME + "=" + activityName;
+        urlParameters += "&" + Activity.ACTIVITY_REWARD + "=" + activityReward;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
+        if(jsonObject == null)
+            return false;
+        return jsonObject.getString("status").equals("success");
+    }
+
+    public boolean deleteActivity( int activityId)
+            throws IOException, JSONException {
+        String      urlParameters;
+        String		url;
+        JSONObject  jsonObject;
+        String		result;
+
+        url = JsonHandler.domain + "/delete_activity";
+        urlParameters = Team.TEAM_ID + "=" + teamId;
+        urlParameters += "&" + Activity.ACTIVITY_ID + "=" + activityId;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "DELETE");
+        if(jsonObject == null)
+            return false;
+        return jsonObject.getString("status").equals("success");
+    }
+
+    public boolean createActivity(String name) throws IOException, JSONException {
+        String      urlParameters;
+        String		url;
+        JSONObject  jsonObject;
+        String		result;
+
+        url = JsonHandler.domain + "/create_activity";
+        urlParameters = Team.TEAM_ID + "=" + teamId;
+        urlParameters += "&" + Activity.ACTIVITY_NAME + "=" + name;
+        urlParameters += "&" + Activity.ACTIVITY_REWARD + "=" + 0;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
+        if(jsonObject == null)
+            return false;
+        return jsonObject.getString("status").equals("success");
+    }
 }

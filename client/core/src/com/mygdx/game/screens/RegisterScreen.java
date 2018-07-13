@@ -45,7 +45,7 @@ public class RegisterScreen  implements Screen {
     }
 
     private boolean  validateLogin(String login) {
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-]*");
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9._-]*");
         Matcher matcher = pattern.matcher(login);
         if (login == null) {
             log.warn("Login field is empty");
@@ -57,9 +57,13 @@ public class RegisterScreen  implements Screen {
             setErrorMessage("Login field is empty");
             return false;
         }
-        else if (login.length() < 6) {
+        if (login.length() < 6) {
             log.warn("Login field must be at least 6 characters long");
             setErrorMessage("Login must contain at least 6 characters");
+            return false;
+        } else if (!matcher.matches()){
+            log.warn("Login field has invalid characters");
+            setErrorMessage("Login has invalid characters");
             return false;
         }
         log.info("Login validated successfully");
@@ -67,7 +71,7 @@ public class RegisterScreen  implements Screen {
     }
 
     private boolean  validatePassword(String password) {
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-]*");
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9._-]*");
         Matcher matcher = pattern.matcher(password);
         if (password == null) {
             log.warn("Password field is empty");
@@ -79,11 +83,17 @@ public class RegisterScreen  implements Screen {
             setErrorMessage("Password field is empty");
             return false;
         }
-        else if (password.length() < 6) {
+        if (password.length() < 6) {
             log.warn("Password field must be at least");
             setErrorMessage("Password must contain at least 6 characters");
             return false;
         }
+        else if (!matcher.matches()) {
+            log.warn("Password field has invalid characters");
+            setErrorMessage("Password has invalid characters");
+            return false;
+        }
+
         log.info("Password validated successfully");
         return true;
     }
