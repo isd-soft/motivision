@@ -15,7 +15,7 @@ public class PlayerAccount {
     private static Player           player = null;
     private static Profile          profile = null;
     private static Team             team = null;
-    private static List<Profile>    teamMembers;
+    //private static List<Profile>    teamMembers;
 
 
     public static void setProfile(Profile profile) {
@@ -29,18 +29,39 @@ public class PlayerAccount {
     }
 
     public static Integer getLosses() {
+        try {
+            selectProfileTeam();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         if (team == null)
             return null;
         return team.getTeamLoss();
     }
 
     public static Integer getWins() {
+        try {
+            selectProfileTeam();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         if (team == null)
             return null;
         return team.getTeamWins();
     }
 
     public static String getTeamName(){
+        try {
+            selectProfileTeam();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         if(team == null)
             return null;
         return team.getTeamName();
@@ -51,6 +72,7 @@ public class PlayerAccount {
             return null;
         return team.getTeamActivities();
     }
+
     public static List<String> getActivitiesName(){
         if(team == null)
             return null;
@@ -59,13 +81,21 @@ public class PlayerAccount {
 
     public static LinkedHashMap<String, Integer> getTeamMembersList() {
         LinkedHashMap<String, Integer>  teamMembersMap;
+
+        try {
+            selectProfileTeam();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         if (team == null)
             return null;
-        teamMembers = team.getAllCharactersFromTeam();
-        teamMembersMap = new LinkedHashMap<String, Integer>();
-        for (Profile member: teamMembers) {
-            teamMembersMap.put(member.getName(), member.getPoints());
-        }
+        teamMembersMap = team.getTeamMembers();
+//        teamMembersMap = new LinkedHashMap<String, Integer>();
+//        for (Profile member: teamMembers) {
+//            teamMembersMap.put(member.getName(), member.getPoints());
+//        }
         return teamMembersMap;
     }
 
@@ -115,14 +145,14 @@ public class PlayerAccount {
         if (profile == null)
             return new Texture("default.png");
         //PlayerAccount.selectProfileTeam();
-        return profile.getTexture();
+        return profile.getProfileTexture();
         //return null;
     }
 
     public static Texture getProfileTexture() throws IOException, JSONException {
         if (profile == null)
             return new Texture("default.png");
-        return profile.getTexture();
+        return profile.getProfileTexture();
     }
 
     public static Profile   selectProfile(String name) throws IOException, JSONException {
@@ -222,7 +252,7 @@ public class PlayerAccount {
             return new Texture("default.png");
         if (bodyType <= 0 || bodyType > 3)
             return new Texture("default.png");
-        return Profile.getTexture(headType, bodyType);
+        return Profile.changeFaceType(headType, bodyType);
     }
 
     public static int       getProfilePoints() {
@@ -296,6 +326,12 @@ public class PlayerAccount {
         team = Team.getTeam(profile.getTeamId());
     }
 
+    public static void     printAllMembers() {
+        if (team == null)
+            System.out.println("No members found!");
+        team.printAllMembers();
+    }
+
     public static Pixmap addProfileStatusOnImage(Pixmap pixmap, int itemId) throws IOException, JSONException {
         Pixmap  itemPixmap = null;
         int     status;
@@ -335,15 +371,6 @@ public class PlayerAccount {
         if (team == null)
             return null;
         return team.getTeamName();
-//        try {
-//            return team.getTeamName();
-//            //return Team.getTeam(profile.getTeamId()).getTeamName();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
     }
 
     public static void unequipItem(int itemId) {
@@ -398,5 +425,19 @@ public class PlayerAccount {
         if (profile == null)
             return "No profile";
         return profile.getName();
+    }
+
+    public static Texture getTeamMemberTexture(String name) throws IOException, JSONException {
+        try {
+            selectProfileTeam();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (team == null)
+            return new Texture("default.png");
+        //printAllMembers();
+        return team.getTeamMemberTexture(name);
     }
 }

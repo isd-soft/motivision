@@ -251,6 +251,7 @@ public class CharacterController {
             itemsMap.put("itemType", items.getType());
             itemsMap.put("itemImageUrl", items.getImageUrl());
             itemsMap.put("itemPrice", items.getPrice());
+            itemsMap.put("equipped", characterItemRepository.findCharacterItemByItemsIdAndCharacterId(items.getId(), characterId).get().getEquipped());
             result.add(itemsMap);
         }
         map.put("items", result);
@@ -428,8 +429,8 @@ public class CharacterController {
             map.put("message", "item already equipped");
             return map;
         }
-        Optional<List<CharacterItem>> characterItemsEquipped
-                = characterItemRepository.findCharacterItemsByCharacterIdAndEquipped(characterId, true);
+        Optional<List<CharacterItem>> characterItemsEquipped = characterItemRepository.
+                findCharacterItemsByCharacterIdAndEquipped(characterId, true);
         if (characterItemsEquipped.isPresent()) {
             for (CharacterItem characterItemEquip : characterItemsEquipped.get()) {
                 if (itemId < 4
