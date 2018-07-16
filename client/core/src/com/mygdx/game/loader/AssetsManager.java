@@ -27,7 +27,7 @@ public class AssetsManager {
     private final String spriteAnimation = "sprite_animation.png";
     private final String spriteWolfAnimation = "sprite_animation_wolf.png";
     private final String spriteWalkAnimation = "sprite_walk.png";
-
+    private final String backgroundGifAnimation = "background.png";
     public void loadImages() {
         aManager.load(monsterImage, Texture.class);
         aManager.load(knightImage, Texture.class);
@@ -35,6 +35,6 @@ public class AssetsManager {
         aManager.load(spriteAnimation, Texture.class);
         aManager.load(spriteWolfAnimation, Texture.class);
         aManager.load(spriteWalkAnimation, Texture.class);
-//        aManager.load(monsterImage, Pixmap.class);
+        aManager.load(backgroundGifAnimation, Texture.class);
     }
 }

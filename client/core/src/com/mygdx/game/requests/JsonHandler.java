@@ -32,7 +32,7 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 public class JsonHandler {
 //    static final String domain = "http://207.154.207.47:8080";
 //    static final String domain = "http://192.168.1.23:8080";
-    static final String domain = "http://172.17.41.110:8080";
+    static final String domain = "http://172.17.41.64:8080";
     public static String	errorMessage = null;
 
 
@@ -44,91 +44,15 @@ public class JsonHandler {
         }
         return sb.toString();
     }
-/*
-
-    private static InputStream  makePostRequest(String url) {
-        DefaultHttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost("http://jakarata.apache.org/");
-        NameValuePair[] data = {
-                new NameValuePair("user", "joe"),
-                new NameValuePair("user", "joe"),
-                new NameValuePair("password", "bloggs")
-        };
-        post.addHeader("login", "alex");
-        post.addHeader("password", "123");
-        //post.setRequestBody(data);
-        int status;
-        try {
-            status = client.execute(post);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("status = " + status);
-
-        try {
-            InputStream in = post.getResponseBodyAsStream();
-            return in;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-*/
 
     public  static HttpURLConnection getHttpConnection(String url, String type) throws IOException {
-        /*URL uri = null;
-        HttpURLConnection con = null;
-
-        try{
-            uri = new URL(url);
-            con = (HttpURLConnection) uri.openConnection();
-            con.setRequestMethod(type); //type: POST, PUT, DELETE, GET
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setConnectTimeout(60000); //60 secs
-            con.setReadTimeout(60000); //60 secs
-            con.setRequestProperty("Accept-Encoding", "Your Encoding");
-            con.setRequestProperty("Content-Type", "Your Encoding");
-        }catch(Exception e){
-            e.printStackTrace();
-            //logger.info( "connection i/o failed" );
-        }
-        return con;*/
         URL uri = new URL(url);
         HttpURLConnection httpCon = (HttpURLConnection) uri.openConnection();
         httpCon.setDoOutput(true);
-  //      httpCon.setRequestProperty(
-  //              "Content-Type", "application/x-www-form-urlencoded" );
         httpCon.setRequestMethod(type);
         httpCon.connect();
         return httpCon;
     }
-/*
-    public static void      requestMethod(String urlString, String type) {
-        URL url = null;
-        try {
-            url = new URL(urlString);
-        } catch (MalformedURLException exception) {
-            exception.printStackTrace();
-        }
-        HttpURLConnection httpURLConnection = null;
-        try {
-            httpURLConnection = (HttpURLConnection) url.openConnection();
-
-            httpURLConnection.setRequestProperty("Content-Type",
-                    "application/x-www-form-urlencoded");
-            httpURLConnection.setRequestMethod(type);
-            System.out.println(httpURLConnection.getResponseCode());
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        } finally {
-            if (httpURLConnection != null) {
-                httpURLConnection.disconnect();
-            }
-        }
-    }
-*/
     public static String    requestMethod(String url, String type){
         HttpURLConnection   con = null;
         String              jsonText = null;

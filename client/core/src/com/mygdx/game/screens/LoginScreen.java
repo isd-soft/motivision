@@ -5,12 +5,14 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.loader.GameMusic;
 import com.mygdx.game.logger.Logger;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
@@ -36,17 +38,18 @@ public class LoginScreen implements Screen{
 	private Camera camera;
 	private Music loginMusic;
 	private GDXDialogs dialogs;
+	private BackgroundAnimation animationScreenTest;
 
 
 
     public LoginScreen(GGame g){
     	parent = g;
-		dialogs = GDXDialogsSystem.install();
+    	dialogs = GDXDialogsSystem.install();
+		GameMusic.startLoginMusic();
 		stage = new Stage();
 		viewport = new StretchViewport(800, 480, stage.getCamera());
-
 		stage.setViewport(viewport);
-
+        animationScreenTest = new BackgroundAnimation(parent);
 		// tells our asset manger that we want to load the images set in loadImages method
 		parent.assetsManager.loadImages();
 // tells the asset manager to load the images and wait until finished loading.
@@ -55,8 +58,7 @@ public class LoginScreen implements Screen{
 
     @Override
         public void show() {
-    	stage.clear();
-
+		stage.clear();
 		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
 
@@ -66,6 +68,7 @@ public class LoginScreen implements Screen{
 		Table table = new Table();
 		table.setFillParent(true);
 		//table.setDebug(true);
+
 		stage.addActor(table);
 
 		//add label
@@ -108,6 +111,10 @@ public class LoginScreen implements Screen{
 			}
 		});
 
+		animationScreenTest.setFillParent(true);
+		animationScreenTest.setZIndex(0);
+		table.addActor(animationScreenTest);
+
 		//add everything into table
 		table.add(label).fillX().uniformX();
 		table.row().pad(5, 0, 5, 0);
@@ -122,13 +129,13 @@ public class LoginScreen implements Screen{
 		table.row().pad(20, 0, 0, 0);
 		table.add(forgotPassword);
 
+        //screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
 
 
 
 
-		Gdx.input.setInputProcessor(stage);
 
-
+        Gdx.input.setInputProcessor(stage);
 	}
 
 	@Override
@@ -192,6 +199,7 @@ public class LoginScreen implements Screen{
                 try {
                     if (PlayerAccount.loginPlayer(loginField.getText(), encryptedPassword)) {
                         log.info("Login success");
+                        GameMusic.stopAndDisposeLoginOst();
                         parent.changeScreen(parent.getCharacterSelect());
                     } else {
                         log.info("Incorrect login/password");

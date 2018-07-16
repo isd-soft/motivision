@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.loader.GameMusic;
 import com.mygdx.game.logger.Logger;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
@@ -28,11 +29,12 @@ public class RegisterScreen  implements Screen {
     private Label label;
     private Viewport viewport;
     private Sound registerSound;
+    private BackgroundAnimation animationScreenTest;
 
     public RegisterScreen(GGame g){
 
         parent = g;
-
+        animationScreenTest = new BackgroundAnimation(parent);
         stage = new Stage();
         viewport = new StretchViewport(800,480, stage.getCamera());
 
@@ -157,6 +159,9 @@ public class RegisterScreen  implements Screen {
             }
         });
 
+        animationScreenTest.setFillParent(true);
+        animationScreenTest.setZIndex(0);
+        table.addActor(animationScreenTest);
         //add everything into table
         table.add(label).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
@@ -169,6 +174,7 @@ public class RegisterScreen  implements Screen {
         table.add(register).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(back).colspan(2);
+
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -240,6 +246,7 @@ public class RegisterScreen  implements Screen {
             try {
                 if (PlayerAccount.registerNewPlayer(loginField.getText(), encryptedPassword)) {
                     log.info("Registered successfully");
+                    GameMusic.stopAndDisposeLoginOst();
                     parent.changeScreen(parent.getCharacterSelect());
                 }
                 else {
