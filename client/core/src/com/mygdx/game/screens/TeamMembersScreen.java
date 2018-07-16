@@ -11,37 +11,35 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
-import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
-import com.mygdx.game.requests.Profile;
 
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
+
+import de.tomgrill.gdxdialogs.core.GDXDialogs;
+import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
+import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
+import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 
 public class TeamMembersScreen implements Screen {
 
     private GGame parent;
     private Stage stage;
     private Skin skin;
-
+    private Texture texture;
     private Viewport viewport;
     private Camera camera;
     private Music loginMusic;
-
+    private GDXDialogs dialogs;
 
     public TeamMembersScreen(GGame g) {
         parent = g;
-
+        dialogs = GDXDialogsSystem.install();
 //        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 
@@ -100,18 +98,14 @@ public class TeamMembersScreen implements Screen {
             TextButton profileName = new TextButton(key, skin, "square");
             TextButton points = new TextButton(teamMembers.get(key).toString(), skin, "square");
 
-            profileName.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor){
-                }
-            });
-
+            profileName.addListener(new SelectTeamMember(PlayerAccount.getProfileName(), key));
             teamMembersTable.add(profileName).fillX().expandX();
 
             //here are points of each teammate
             points.setTouchable(Touchable.disabled);
             if (PlayerAccount.isAdmin()) {
                 TextButton xButton = new TextButton("X", skin, "square");
+                xButton.addListener(new DeleteMember(PlayerAccount.getProfileName(), key));
                 teamMembersTable.add(xButton).width(Value.percentWidth(0.2f, teamMembersTable));
             }
 
@@ -150,6 +144,82 @@ public class TeamMembersScreen implements Screen {
         });
 
         Gdx.input.setInputProcessor(stage);
+    }
+
+    class SelectTeamMember extends ChangeListener{
+        String selectName;
+        String currentAccount;
+
+        public SelectTeamMember(String currentAcc, String selectName) {
+            this.currentAccount = currentAcc;
+            this.selectName = selectName;
+        }
+
+        @Override
+        public void changed(ChangeEvent changeEvent, Actor actor) {
+            getTeamMember();
+        }
+
+        private void getTeamMember(){
+            try {
+                texture = PlayerAccount.getProfileTexture(selectName);
+                PlayerAccount.selectProfile(currentAccount);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    class DeleteMember extends ChangeListener{
+        String currentPlayer;
+        String name;
+
+        public DeleteMember(String currentPlayer, String name) {
+            this.currentPlayer = currentPlayer;
+            this.name = name;
+        }
+
+        @Override
+        public void changed(ChangeEvent changeEvent, Actor actor) {
+            if(name.equals(PlayerAccount.getProfileName()))
+                denyPopUp();
+            else {
+                confirmPopUp();
+                show();
+            }
+        }
+        private void denyPopUp(){
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+            bDialog.setTitle("Denied");
+            bDialog.setMessage("Sorry, can't delete your own account here");
+            bDialog.addButton("Back");
+            bDialog.build().show();
+        }
+        private void confirmPopUp(){
+            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+            bDialog.setTitle("Confirmation");
+            bDialog.setMessage("Are you sure you want to kick " + name);
+            bDialog.setClickListener(new ButtonClickListener() {
+                @Override
+                public void click(int button) {
+                    if(button == 0){
+                        try {
+                            PlayerAccount.deleteProfile(name);
+                            PlayerAccount.selectProfile(currentPlayer);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+            bDialog.addButton("Ok");
+            bDialog.addButton("Cancel");
+
+            bDialog.build().show();
+        }
     }
 
     @Override

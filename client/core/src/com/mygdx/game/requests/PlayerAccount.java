@@ -198,6 +198,7 @@ public class PlayerAccount {
             return false;
     }
 
+
     public static boolean   deleteProfile(String name) throws IOException, JSONException {
         selectProfile(name);
         if (profile == null)
@@ -330,7 +331,6 @@ public class PlayerAccount {
         }
         return null;
     }
-
 
     public static void unequipItem(int itemId) {
         if (getItemStatus(itemId) == Item.EQUIPPED_ITEM) {

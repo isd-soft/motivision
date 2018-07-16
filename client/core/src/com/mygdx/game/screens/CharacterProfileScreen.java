@@ -223,7 +223,8 @@ public class CharacterProfileScreen implements Screen {
         itemTable.row();
         itemTable.add(settingsButton).fill().expand();
         itemTable.add(backButton).fill().expand();
-        itemTable.add(manageTeamButton).fill().expand();
+        if(PlayerAccount.isAdmin())
+            itemTable.add(manageTeamButton).fill().expand();
 
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
