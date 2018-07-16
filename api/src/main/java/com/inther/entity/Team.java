@@ -37,6 +37,16 @@ public class Team {
 
     private Integer teamLoss;
 
+    private Boolean lock;
+
+    public Boolean getLock() {
+        return lock;
+    }
+
+    public void setLock(Boolean lock) {
+        this.lock = lock;
+    }
+
     public Team() {
         teamWins = 0;
         teamLoss = 0;

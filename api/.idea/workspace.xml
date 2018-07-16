@@ -1,45 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/ApiError$ApiSubError.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/ApiError$ApiValidationError.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/ApiError.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/Application.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/EntityNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/LowerCaseClassNameResolver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/RestExceptionHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/aspect/ExceptionLoggerPointCut.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/aspect/Logging.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/controller/ActivitiesController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/controller/BattleController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/controller/CharacterController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/controller/ExitController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/controller/LoginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/controller/TeamController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/entity/Activities.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/entity/Character.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/entity/CharacterItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/entity/Items.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/entity/LastBattle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/entity/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/entity/Team.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/entity/TeamActivities.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/repo/ActivitiesRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/repo/CharacterItemRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/repo/CharacterRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/repo/ItemsRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/repo/LastBattleRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/repo/PlayerRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/repo/TeamActivitiesRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/repo/TeamRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/service/ActivitiesService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/service/CharacterService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/service/ExceptionalService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/service/ItemsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/service/PlayerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/inther/service/TeamService.class" beforeDir="false" />
-    </list>
+    <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -62,11 +24,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TeamController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TeamController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="116" column="36" lean-forward="true" selection-start-line="116" selection-start-column="36" selection-end-line="116" selection-end-column="36" />
+            <state relative-caret-position="221">
+              <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Team.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Team.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="35" column="29" lean-forward="true" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+              <folding>
+                <element signature="e#894#895#0" expanded="true" />
+                <element signature="e#921#922#0" expanded="true" />
+                <element signature="e#962#963#0" expanded="true" />
+                <element signature="e#994#995#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,7 +63,7 @@
       <file leaf-file-name="CharacterController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="3672">
               <caret line="223" column="38" selection-start-line="223" selection-start-column="30" selection-end-line="223" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -113,8 +93,8 @@
       <file leaf-file-name="ItemController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/ItemController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+            <state relative-caret-position="391">
+              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -125,8 +105,8 @@
       <file leaf-file-name="ActivitiesController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/ActivitiesController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="58" column="16" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="16" />
+            <state relative-caret-position="680">
+              <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -135,16 +115,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TeamRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/TeamRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -199,7 +170,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/ActivitiesRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/ItemsController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/Items.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/Activities.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/Character.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/TeamActivities.java" />
@@ -216,6 +186,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/ItemController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/CharacterRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java" />
       </list>
     </option>
@@ -251,6 +222,7 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -332,7 +304,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -443,6 +414,8 @@
       <workItem from="1531203412633" duration="5248000" />
       <workItem from="1531244662211" duration="704000" />
       <workItem from="1531419168075" duration="308000" />
+      <workItem from="1531732410208" duration="116000" />
+      <workItem from="1531734281845" duration="368000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Refactor&quot;">
       <created>1530734533025</created>
@@ -598,11 +571,25 @@
       <option name="project" value="LOCAL" />
       <updated>1531419489767</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Now you can run server from 1 file mvnw sh/cmd">
+      <created>1531732536389</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1531732536389</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Added lock possibility">
+      <created>1531734617741</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1531734617741</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85806000" />
+    <option name="totallyTimeSpent" value="86290000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -629,7 +616,6 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.329582" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.3267974" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="5" />
       <window_info anchor="bottom" id="Java Enterprise" order="9" sideWeight="0.4969743" weight="0.329582" />
@@ -638,7 +624,7 @@
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49283853" weight="0.39052287" />
       <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2677761" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2753404" />
       <window_info anchor="right" id="Bean Validation" order="4" />
       <window_info id="Web" order="6" side_tool="true" />
       <window_info id="Learn" order="1" />
@@ -647,6 +633,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.3267974" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24962178" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
@@ -686,7 +673,9 @@
     <MESSAGE value="Fixed Issue with lombok 1.18" />
     <MESSAGE value="TeamName bug solved" />
     <MESSAGE value="Get Team Mates Server Side (API)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Get Team Mates Server Side (API)" />
+    <MESSAGE value="Now you can run server from 1 file mvnw sh/cmd" />
+    <MESSAGE value="Added lock possibility" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added lock possibility" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -794,20 +783,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/ItemsController.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Team.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/TeamActivities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="49" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/TeamActivities.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.7.RELEASE/spring-web-5.0.7.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -926,8 +902,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/ActivitiesController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="58" column="16" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="16" />
+        <state relative-caret-position="680">
+          <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -947,8 +923,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/ItemController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+        <state relative-caret-position="391">
+          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -958,13 +934,13 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="3672">
           <caret line="223" column="38" selection-start-line="223" selection-start-column="30" selection-end-line="223" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -981,8 +957,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="116" column="36" lean-forward="true" selection-start-line="116" selection-start-column="36" selection-end-line="116" selection-end-column="36" />
+        <state relative-caret-position="221">
+          <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="35" column="29" lean-forward="true" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+          <folding>
+            <element signature="e#894#895#0" expanded="true" />
+            <element signature="e#921#922#0" expanded="true" />
+            <element signature="e#962#963#0" expanded="true" />
+            <element signature="e#994#995#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

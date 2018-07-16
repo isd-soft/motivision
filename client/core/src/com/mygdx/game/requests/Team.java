@@ -1,5 +1,8 @@
 package com.mygdx.game.requests;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.screens.DialogBox;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,7 +11,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import static com.mygdx.game.requests.Profile.PROFILE_ID;
 
 public class Team {
     public static final String  TEAM_ID    =   "teamId";
@@ -18,6 +24,7 @@ public class Team {
     public static final String  BATTLE     =   "battleFrequency";
     public static final String  WINS       =   "teamWins";
     public static final String  LOSSES     =   "teamLoss";
+    public static final String  LOCK       =   "lock";
     public static final String  CHARACTERS =   "characters";
     private Integer teamId;
     private int teamLeaderId;
@@ -26,6 +33,8 @@ public class Team {
     private int battleFrequency;
     private Integer teamWins;
     private Integer teamLoss;
+    private Boolean lock;
+
     private JSONArray teamMembersArray;
     private ArrayList<Profile> teamMembers = new ArrayList<Profile>();
     private ArrayList<Activity> teamActivities = new ArrayList<Activity>();
@@ -38,11 +47,14 @@ public class Team {
         this.battleFrequency = 0;
         this.teamWins = 0;
         this.teamLoss = 0;
+        this.lock = false;
     }
 
     private static Team getTeamFromJson(JSONObject jsonObject) throws JSONException{
         Team   team;
         String field;
+        Profile     profile;
+        JSONObject  jsonObject1;
         int    teamId;
         int    liderId;
 
@@ -68,16 +80,19 @@ public class Team {
                 team.setTeamWins(Integer.valueOf(field));
                 field = jsonObject.getString(LOSSES);
                 team.setTeamLoss(Integer.valueOf(field));
+                field = jsonObject.getString(LOCK);
+                team.setLock(Boolean.valueOf(field));
                 JSONArray arr = jsonObject.getJSONArray(CHARACTERS);
                 for(int i = 0; i < arr.length(); i++) {
-                        team.addTeamProfile(Profile.getProfile(arr.getJSONObject(i).getInt(Profile.PROFILE_ID)));
+                    jsonObject1 = arr.getJSONObject(i);
+                    profile = Profile.getProfileFromJson(jsonObject1);
+                    System.out.println("Added " + profile.getName() + " in team");
+                    team.addTeamProfile(profile);
+//                        team.addTeamProfile(Profile.getProfile(arr.getJSONObject(i).getInt(PROFILE_ID)));
                 }
                 return team;
             }catch (NumberFormatException e) {
                 setErrorMessage("Invalid number format");
-                return null;
-            } catch (IOException e) {
-                setErrorMessage("Team admin not found");
                 return null;
             }
         }
@@ -112,7 +127,7 @@ public class Team {
         }
     }
 
-    private static List<Profile> getAllCharactersFromTeamFromUrl(String url, String urlParameters, String requestMethod)
+    private static ArrayList<Profile> getAllCharactersFromTeamFromUrl(String url, String urlParameters, String requestMethod)
             throws IOException, JSONException {
         JSONObject jsonObject;
 
@@ -161,13 +176,13 @@ public class Team {
             return names;
     }
 
-    public List<Profile> getAllCharactersFromTeam(){
-        String  url;
-        List<Profile> profiles = new ArrayList<Profile>();
-        String urlParameters;
+    private ArrayList<Profile> loadAllCharactersFromTeam(){
+        String              url;
+        ArrayList<Profile>  profiles = new ArrayList<Profile>();
+        String              urlParameters;
+
         if (teamId == -1)
             return null;
-
         url = JsonHandler.domain + "/get_team_members";
         urlParameters = TEAM_ID + "=" + teamId;
         System.out.println("Start get team members from url");
@@ -178,17 +193,33 @@ public class Team {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        teamMembers = profiles;
         return profiles;
     }
 
-    public List<String> getAllCharactersFromTeamName(){
-        List<Profile> profiles = getAllCharactersFromTeam();
-        List<String> names = new ArrayList<String>();
-        for(Profile profile : profiles){
-            names.add(profile.getProfileName());
+    public LinkedHashMap<String, Integer>     getTeamMembers() {
+        LinkedHashMap<String, Integer>    membersMap;
+
+        if (teamMembers == null) {
+            loadAllCharactersFromTeam();
         }
-        return names;
+        if (teamMembers == null)
+            return null;
+        membersMap = new LinkedHashMap<String, Integer>();
+        for (Profile profile: teamMembers) {
+            membersMap.put(profile.getName(), profile.getPoints());
+        }
+        return membersMap;
     }
+
+//    public List<String> getAllCharactersFromTeamName(){
+//        List<Profile> profiles = getAllCharactersFromTeam();
+//        List<String> names = new ArrayList<String>();
+//        for(Profile profile : profiles){
+//            names.add(profile.getProfileName());
+//        }
+//        return names;
+//    }
 
     public static Team  getTeam(int teamId) throws IOException, JSONException {
         String  url;
@@ -325,8 +356,12 @@ public class Team {
         teamMembers.add(profile);
     }
 
-    public ArrayList<Profile> getTeamMembers() {
-        return teamMembers;
+//    public ArrayList<Profile> getTeamMembers() {
+//        return teamMembers;
+//    }
+
+    public Boolean getLock() {
+        return lock;
     }
 
     public JSONArray getTeamMembersArray() {
@@ -335,5 +370,50 @@ public class Team {
 
     public void setTeamMembersArray(JSONArray teamMembersArray) {
         this.teamMembersArray = teamMembersArray;
+    }
+
+    public void setLock(Boolean lock) {
+        this.lock = lock;
+    }
+
+    public static int     getTeamMemberId() {
+        return -1;
+    }
+
+
+
+    public Texture getTeamMemberTexture(String name) throws IOException, JSONException {
+        int     profileId;
+        String  urlParameters;
+        String  url;
+        Profile profile;
+
+        profileId = -1;
+        profile = null;
+        printAllMembers();
+        for (Profile member: teamMembers) {
+            if (member.getName().equals(name)) {
+                profileId = member.getId();
+                profile = member;
+                break;
+            }
+
+        }
+        if (profileId == -1) {
+            JsonHandler.errorMessage = "Character " + name + " does not exist!";
+
+            DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+            return new Texture("default.png");
+        }
+        if (profile == null)
+            return new Texture("default.png");
+        profile.updateItems();
+        return profile.getProfileTexture();
+    }
+
+    public void printAllMembers() {
+        System.out.println("Team members");
+        for (Profile profile: teamMembers)
+            System.out.println(profile.getName());
     }
 }
