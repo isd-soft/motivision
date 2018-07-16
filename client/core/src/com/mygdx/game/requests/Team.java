@@ -24,6 +24,7 @@ public class Team {
     public static final String  BATTLE     =   "battleFrequency";
     public static final String  WINS       =   "teamWins";
     public static final String  LOSSES     =   "teamLoss";
+    public static final String  LOCK       =   "lock";
     public static final String  CHARACTERS =   "characters";
     private Integer teamId;
     private int teamLeaderId;
@@ -33,6 +34,7 @@ public class Team {
     private Integer teamWins;
     private Integer teamLoss;
     private Boolean lock;
+
     private JSONArray teamMembersArray;
     private ArrayList<Profile> teamMembers = new ArrayList<Profile>();
     private ArrayList<Activity> teamActivities = new ArrayList<Activity>();
@@ -78,6 +80,8 @@ public class Team {
                 team.setTeamWins(Integer.valueOf(field));
                 field = jsonObject.getString(LOSSES);
                 team.setTeamLoss(Integer.valueOf(field));
+                field = jsonObject.getString(LOCK);
+                team.setLock(Boolean.valueOf(field));
                 JSONArray arr = jsonObject.getJSONArray(CHARACTERS);
                 for(int i = 0; i < arr.length(); i++) {
                     jsonObject1 = arr.getJSONObject(i);
@@ -356,12 +360,20 @@ public class Team {
 //        return teamMembers;
 //    }
 
+    public Boolean getLock() {
+        return lock;
+    }
+
     public JSONArray getTeamMembersArray() {
         return teamMembersArray;
     }
 
     public void setTeamMembersArray(JSONArray teamMembersArray) {
         this.teamMembersArray = teamMembersArray;
+    }
+
+    public void setLock(Boolean lock) {
+        this.lock = lock;
     }
 
     public static int     getTeamMemberId() {
