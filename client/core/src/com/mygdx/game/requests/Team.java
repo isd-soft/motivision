@@ -170,7 +170,7 @@ public class Team {
             return names;
     }
 
-    private ArrayList<Profile> loadAllCharactersFromTeam(){
+    ArrayList<Profile> loadAllCharactersFromTeam(){
         String              url;
         ArrayList<Profile>  profiles = new ArrayList<Profile>();
         String              urlParameters;
@@ -401,5 +401,17 @@ public class Team {
         System.out.println("Team members");
         for (Profile profile: teamMembers)
             System.out.println(profile.getName());
+    }
+
+    public void deleteMember(String name) throws IOException, JSONException {
+        if (teamMembers == null)
+            loadAllCharactersFromTeam();
+        for (Profile profile: teamMembers) {
+            if (profile.getName().equals(name)) {
+                profile.deleteProfile();
+                break;
+            }
+        }
+        loadAllCharactersFromTeam();
     }
 }

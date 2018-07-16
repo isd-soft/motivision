@@ -166,6 +166,7 @@ public class PlayerAccount {
             if (profile.getName().equals(name))
                 return profile;
         }
+        team = null;
         profileId = getProfileId(name);
         profile = Profile.getProfile(profileId);
         setProfile(profile);
@@ -245,6 +246,15 @@ public class PlayerAccount {
         }
         else
             return false;
+    }
+
+    public static void      deleteTeamMember(String name) throws IOException, JSONException {
+        if (team == null)
+            return;
+        team.deleteMember(name);
+        if (player != null)
+            player.updateAllCharacters();
+        team.loadAllCharactersFromTeam();
     }
 
     public static Texture   getTexture(int headType, int bodyType) {
