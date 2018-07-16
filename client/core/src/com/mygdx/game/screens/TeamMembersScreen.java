@@ -203,7 +203,7 @@ public class TeamMembersScreen implements Screen {
                 public void click(int button) {
                     if(button == 0){
                         try {
-                            PlayerAccount.deleteProfile(name);
+                            PlayerAccount.deleteTeamMember(name);
                             if (selectedName.equals(name))
                                 selectedName = null;
                             show();

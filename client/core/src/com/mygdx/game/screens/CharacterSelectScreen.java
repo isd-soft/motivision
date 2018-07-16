@@ -113,8 +113,10 @@ public class CharacterSelectScreen implements Screen {
             }
             strings = PlayerAccount.getCharactersName();
         }
-        else
+        else {
             strings.add("No Characters");
+            texture = new Texture("default.png");
+        }
 
         if (texture == null) {
             texture = new Texture("default.png");

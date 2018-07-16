@@ -91,7 +91,10 @@ public class Profile implements Comparable<Profile>{
             return null;
         try {
             characterId = jsonObject.getInt(PROFILE_ID);
-            teamId = jsonObject.getInt(TEAM_ID);
+            if (jsonObject.has(TEAM_ID))
+                teamId = jsonObject.getInt(TEAM_ID);
+            else
+                teamId = -1;
 
             if (jsonObject.has(IS_ADMIN)) {
                 field = jsonObject.getString(IS_ADMIN);
