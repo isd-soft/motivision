@@ -20,7 +20,7 @@ public class Team {
     public static final String  LOSSES     =   "teamLoss";
     public static final String  CHARACTERS =   "characters";
     private Integer teamId;
-    private Profile teamLeader;
+    private int teamLeaderId;
     private String teamName;
     private String teamLogo;
     private int battleFrequency;
@@ -30,9 +30,9 @@ public class Team {
     private ArrayList<Profile> teamMembers = new ArrayList<Profile>();
     private ArrayList<Activity> teamActivities = new ArrayList<Activity>();
 
-    private Team(Integer teamId, Profile teamLeader) {
+    private Team(Integer teamId, int teamLeaderId) {
         this.teamId = teamId;
-        this.teamLeader = teamLeader;
+        this.teamLeaderId = teamLeaderId;
         this.teamName = "";
         this.teamLogo = "";
         this.battleFrequency = 0;
@@ -54,9 +54,9 @@ public class Team {
                 teamId = Integer.parseInt(field);
                 field = jsonObject.getString(ADMIN);
                 liderId = Integer.parseInt(field);
-                Profile profile = Profile.getProfile(liderId);
+                //Profile profile = Profile.getProfile(liderId);
 
-                team = new Team(teamId, profile);
+                team = new Team(teamId, liderId);
 
                 field = jsonObject.getString(NAME);
                 team.setTeamName(field);
@@ -190,18 +190,15 @@ public class Team {
         return names;
     }
 
-    public static Team getTeam(int teamId) throws IOException, JSONException {
+    public static Team  getTeam(int teamId) throws IOException, JSONException {
         String  url;
         Team team;
         String urlParameters;
 
         if (teamId == -1)
             return null;
-
         url = JsonHandler.domain + "/get_team";
         urlParameters = TEAM_ID + "=" + teamId;
-
-        //String urlParameters = "name=Jack&occupation=programmer";
         System.out.println("Start get team from URL");
         team = getTeamFromUrl(url, urlParameters, "GET");
         //PlayerAccount.setProfile(profile);
@@ -279,8 +276,8 @@ public class Team {
         return teamId;
     }
 
-    public Profile getTeamLeader() {
-        return teamLeader;
+    public int getTeamLeaderId() {
+        return teamLeaderId;
     }
 
     public String getTeamName() {
