@@ -428,7 +428,8 @@ public class CharacterController {
             map.put("message", "item already equipped");
             return map;
         }
-        Optional<List<CharacterItem>> characterItemsEquipped = characterItemRepository.findCharacterItemsByEquipped(true);
+        Optional<List<CharacterItem>> characterItemsEquipped
+                = characterItemRepository.findCharacterItemsByCharacterIdAndEquipped(characterId, true);
         if (characterItemsEquipped.isPresent()) {
             for (CharacterItem characterItemEquip : characterItemsEquipped.get()) {
                 if (itemId < 4
@@ -451,7 +452,7 @@ public class CharacterController {
             }
         }
         characterItem.setEquipped(true);
-        log.info("Item equipped");
+        log.info("Item " + itemId + " equipped on character " + characterId);
         characterItemRepository.save(characterItem);
         map.put("status", "success");
         return map;

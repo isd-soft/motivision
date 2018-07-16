@@ -3,10 +3,8 @@ package com.inther.controller;
 import com.inther.entity.Activities;
 import com.inther.entity.Character;
 import com.inther.entity.Team;
-import com.inther.entity.TeamActivities;
 import com.inther.repo.ActivitiesRepository;
 import com.inther.repo.CharacterRepository;
-import com.inther.repo.TeamActivitiesRepository;
 import com.inther.repo.TeamRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +27,6 @@ public class ActivitiesController {
 
     @Autowired
     ActivitiesRepository activitiesRepository;
-
-    @Autowired
-    TeamActivitiesRepository teamActivitiesRepository;
 
     @Autowired
     CharacterRepository characterRepository;
@@ -59,7 +54,7 @@ public class ActivitiesController {
         log.info("Character found");
         Character character = optionalCharacter.get();
         Optional<Activities> optionalActivities =
-                activitiesRepository.findActivitiesByTeamId(character.getTeam().getId(), activityId);
+                activitiesRepository.findByTeamIdAndId(character.getTeam().getId(), activityId);
         if (!optionalActivities.isPresent()) {
             log.warn("Activity with activityId " + activityId
                     + " in Team with team id " + character.getTeam().getId() + " not found");
@@ -74,52 +69,6 @@ public class ActivitiesController {
         log.info("Points assigned to database");
         map.put("status", "success");
         map.put("points", character.getPoints());
-        return map;
-    }
-
-    /*
-     * Add activity
-     * Used to add an existing activity from the default 6
-     * @param teamId - team for activity to be added
-     * @param activityId - activity for adding
-     * @return status failed if no such team exist
-     * @return status failed if activity is not one of the default ones
-     * @return status success if the activity eas added
-     * */
-    @RequestMapping(value = "/add_activity", method = RequestMethod.POST)
-    private Map<String, Object> addActivity(@RequestParam(value = "teamId") Long teamId,
-                                            @RequestParam(value = "activityId") Long activityId) {
-        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        Optional<Team> optionalTeam = teamRepository.findById(teamId);
-        if (!optionalTeam.isPresent()) {
-            log.warn("Team with teamId " + teamId + " not found");
-            map.put("status", "failed");
-            map.put("message", "no such team with teamId exist");
-            return map;
-        }
-        log.info("Team found");
-        Optional<Activities> optionalActivities = activitiesRepository.findById(activityId);
-        if (!optionalActivities.isPresent()) {
-            log.warn("Activity with activityId" + activityId + " not found");
-            map.put("status", "failed");
-            map.put("message", "no such activity with activityId exist");
-            return map;
-        }
-        if (activityId > 6) {
-            log.warn("Activity with activityId " + activityId + " not a default one");
-            log.warn("Either add a default one or create a new one");
-            map.put("status", "failed");
-            map.put("message", "not a default activity");
-        }
-        Team team = optionalTeam.get();
-        Activities activities = optionalActivities.get();
-        log.warn("Activity found");
-        map.put("status", "success");
-        TeamActivities teamActivities = new TeamActivities();
-        teamActivities.setTeam(team);
-        teamActivities.setActivities(activities);
-        teamActivitiesRepository.save(teamActivities);
-        log.info("Added activity to the database");
         return map;
     }
 
@@ -143,7 +92,7 @@ public class ActivitiesController {
             return map;
         }
         log.info("Team found");
-        Optional<List<Activities>> optionalActivitiesList = activitiesRepository.findByTeamId(teamId);
+        Optional<List<Activities>> optionalActivitiesList = activitiesRepository.findAllByTeamId(teamId);
         if (!optionalActivitiesList.isPresent()) {
             log.info("Team doesn't have any activities");
             map.put("status", "success");
@@ -167,6 +116,7 @@ public class ActivitiesController {
         map.put("teamActivities", activitiesArrayList);
         return map;
     }
+
     @Transactional
     @RequestMapping(value = "/delete_activity", method = RequestMethod.DELETE)
     public Map<String, Object> deleteActivity(@RequestParam(value = "teamId") Long teamId,
@@ -180,25 +130,18 @@ public class ActivitiesController {
             return map;
         }
         log.info("Team found");
-        Optional<Activities> optionalActivities = activitiesRepository.findActivitiesByTeamId(teamId, activityId);
+        Optional<Activities> optionalActivities = activitiesRepository.findByTeamIdAndId(teamId, activityId);
         if (!optionalActivities.isPresent()) {
             log.warn("Team doesn't have Activity with activityId " + activityId);
             map.put("status", "failed");
             map.put("message", "this team doesn't have such activity");
             return map;
         }
-        if(activityId <= 6){
-            teamActivitiesRepository.deleteByTeamIdAndActivitiesId(teamId, activityId);
-            log.info("Default activity removed");
-            map.put("status", "success");
-            return map;
-        }else{
-            teamActivitiesRepository.deleteByTeamIdAndActivitiesId(teamId, activityId);
-            activitiesRepository.deleteById(activityId);
-            log.info("Activity deleted successfully");
-            map.put("status", "success");
-            return map;
-        }
+        log.info("Activity for deletion found");
+        activitiesRepository.delete(optionalActivities.get());
+        log.info("Activity deleted successfully");
+        map.put("status", "success");
+        return map;
     }
 
     /*
@@ -224,18 +167,23 @@ public class ActivitiesController {
         }
         log.info("Team found");
         Team team = optionalTeam.get();
-        Activities activities = new Activities();
-        activities.setName(activityName);
-        activities.setReward(activityReward);
-        log.info("Activity created");
-        activitiesRepository.save(activities);
-        TeamActivities teamActivities = new TeamActivities();
-        teamActivities.setTeam(team);
-        teamActivities.setActivities(activities);
-        teamActivitiesRepository.save(teamActivities);
-        log.info("Team Activity saved");
-        map.put("status", "success");
-        return map;
+        Optional<Activities> optionalActivities = activitiesRepository.findByNameAndTeamId(activityName, teamId);
+        if (!optionalActivities.isPresent()) {
+            log.warn("Activity name is taken");
+            map.put("status", "failed");
+            map.put("message", "Activity name is taken");
+            return map;
+        } else {
+            Activities activities = new Activities();
+            activities.setName(activityName);
+            activities.setReward(activityReward);
+            activities.setTeam(team);
+            log.info("Activity created");
+            activitiesRepository.save(activities);
+            log.info("Team Activity saved");
+            map.put("status", "success");
+            return map;
+        }
     }
 
     @RequestMapping(value = "/update_activity", method = RequestMethod.POST)
@@ -251,7 +199,7 @@ public class ActivitiesController {
             map.put("message", "no such team found");
             return map;
         }
-        Optional<Activities> optionalActivities = activitiesRepository.findActivitiesByTeamId(teamId, activityId);
+        Optional<Activities> optionalActivities = activitiesRepository.findByTeamIdAndId(teamId, activityId);
         if (!optionalActivities.isPresent()) {
             log.warn("Activity not found");
             map.put("status", "failed");
@@ -259,16 +207,10 @@ public class ActivitiesController {
             return map;
         }
         Activities activities = optionalActivities.get();
-        if (activities.getId() > 6) {
-            activities.setName(activityName);
-            activities.setReward(activityReward);
-            activitiesRepository.save(activities);
-            map.put("status", "success");
-            return map;
-        }else {
-            map.put("status", "failed");
-            map.put("message", "cannot edit default activity");
-            return map;
-        }
+        activities.setName(activityName);
+        activities.setReward(activityReward);
+        activitiesRepository.save(activities);
+        map.put("status", "success");
+        return map;
     }
 }

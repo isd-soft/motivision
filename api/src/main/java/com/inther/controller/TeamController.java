@@ -4,10 +4,8 @@ import com.inther.EntityNotFoundException;
 import com.inther.entity.Activities;
 import com.inther.entity.Character;
 import com.inther.entity.Team;
-import com.inther.entity.TeamActivities;
 import com.inther.repo.ActivitiesRepository;
 import com.inther.repo.CharacterRepository;
-import com.inther.repo.TeamActivitiesRepository;
 import com.inther.repo.TeamRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +22,6 @@ public class TeamController {
     private Logger log = Logger.getLogger(TeamController.class);
     @Autowired
     TeamRepository teamRepository;
-
-    @Autowired
-    TeamActivitiesRepository teamActivitiesRepository;
 
     @Autowired
     ActivitiesRepository activitiesRepository;
@@ -165,25 +160,6 @@ public class TeamController {
         team.setName(name);
         team.setTeamLogo(logo);
         team.setBattleFrequency(battleFrequency);
-        log.info("Team creating, setting up default activities");
-        Optional<List<Activities>> optionalActivitiesList = activitiesRepository.findAllByActivitiesID();
-        if (!optionalActivitiesList.isPresent()) {
-            log.error("Some default activity isn't present in the database");
-            map.put("status", "failed");
-            map.put("message", "activity 1-6 doesn't exist");
-            return map;
-        }
-        List<TeamActivities> teamActivitiesList = new ArrayList<>();
-        List<Activities> activitiesList = optionalActivitiesList.get();
-        Iterator<Activities> iteratorActivities = activitiesList.iterator();
-        while(iteratorActivities.hasNext()) {
-            TeamActivities teamActivities = new TeamActivities();
-            teamActivities.setTeam(team);
-            teamActivities.setActivities(iteratorActivities.next());
-            teamActivitiesList.add(teamActivities);
-        }
-        team.setTeamActivities(teamActivitiesList);
-        log.info("Default team activities adeed");
         log.info("Team creation completed");
         teamRepository.save(team);
         log.info("Team saved to the database");
@@ -210,19 +186,6 @@ public class TeamController {
             return map;
         }
         log.info("Valid teamId, Team for deletion found");
-        Optional<List<TeamActivities>> teamActivities = teamActivitiesRepository.findAllByTeamId(teamId);
-        if(teamActivities.isPresent()) {
-            log.info("Checking team activities for deletion");
-            List<TeamActivities> teamActivitiesList = teamActivities.get();
-            for (TeamActivities teamActivity : teamActivitiesList) {
-                Activities activities = teamActivity.getActivities();
-                if (activities.getId() > 6) {
-                    activitiesRepository.deleteById(activities.getId());
-                    log.info("Activity deleted");
-                }
-            }
-
-        }
         log.info("Team up for deletion");
         teamRepository.deleteById(teamId);
         log.info("Team successfully deleted");

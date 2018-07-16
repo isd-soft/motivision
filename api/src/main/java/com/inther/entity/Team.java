@@ -28,7 +28,7 @@ public class Team {
     private Character admin;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-    private List<TeamActivities> teamActivities;
+    private List<Activities> teamActivities;
 
     @OneToOne(mappedBy = "team")
     private LastBattle teamLastBattles;
@@ -86,11 +86,11 @@ public class Team {
         this.admin = admin;
     }
 
-    public List<TeamActivities> getTeamActivities() {
+    public List<Activities> getTeamActivities() {
         return teamActivities;
     }
 
-    public void setTeamActivities(List<TeamActivities> teamActivities) {
+    public void setTeamActivities(List<Activities> teamActivities) {
         this.teamActivities = teamActivities;
     }
 
