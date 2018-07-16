@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -61,6 +62,8 @@ public class AdminScreen implements Screen {
     private Label freqChoiceLabel;
     private Integer freqNumber = 0;
     private String[] freqChoices = {"Weekly", "Monthly"};
+    private CheckBox checkboxLockTeam;
+    private Boolean checkboxLockTeamBoolean = false;
 
 
     public AdminScreen(GGame g) {
@@ -94,6 +97,9 @@ public class AdminScreen implements Screen {
             e.printStackTrace();
         }
 
+        checkboxLockTeam = new CheckBox("Public", skin);
+        checkboxLockTeam.setChecked(checkboxLockTeamBoolean);
+
         textureCastle = PlayerAccount.getTeamLogo();
 
         // add the team image
@@ -105,6 +111,7 @@ public class AdminScreen implements Screen {
         TextButton settings = new TextButton("Settings", skin, "small");
 
         final Label frequencyLabel = new Label("Battle frequency", skin);
+        final Label teamLockedLabel = new Label("Allow joining in team:", skin);
         Label castleLabel = new Label("Team logo", skin);
         Label teamNameLabel;
         if(PlayerAccount.getProfileTeam() == null)
@@ -140,6 +147,21 @@ public class AdminScreen implements Screen {
         Table selectionTable = new Table();
         Table buttonTable = new Table();
         Table screen = new Table();
+
+        checkboxLockTeam.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (checkboxLockTeamBoolean == false) {
+                    checkboxLockTeam.setText("Private");
+                    checkboxLockTeamBoolean = true;
+                }
+                else {
+                    checkboxLockTeam.setText("Public");
+                    checkboxLockTeamBoolean = false;
+                }
+                //TODO: lock the team
+            }
+        });
 
         ArrayList<TextButton> activityNamesButtons = new ArrayList<TextButton>();
         ArrayList<TextButton> xButtons = new ArrayList<TextButton>();
@@ -197,6 +219,9 @@ public class AdminScreen implements Screen {
         selectionTable.add(arrowFrequencyLeft);
         selectionTable.add(freqChoiceLabel);
         selectionTable.add(arrowFrequencyRight);
+        selectionTable.row();
+        selectionTable.add(teamLockedLabel).colspan(2).fill().pad(30, 30, pad, 0);
+        selectionTable.add(checkboxLockTeam).fill().pad(30, 0, pad, 0);;
 
         if (serverActivities == null){
             activityNamesButtons.get(0).setDisabled(true);
