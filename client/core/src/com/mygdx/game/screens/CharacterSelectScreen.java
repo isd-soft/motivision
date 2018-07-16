@@ -59,7 +59,7 @@ public class CharacterSelectScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
     }
 
     @Override
@@ -76,10 +76,10 @@ public class CharacterSelectScreen implements Screen {
         Table charactersTable = new Table();
 
         // remove and add buttons
-        TextButton create = new TextButton("Create new +", skin, "square");
-        TextButton logout = new TextButton("Logout", skin, "small");
-        TextButton select = new TextButton("Select", skin, "small");
-        TextButton deletePlayer = new TextButton("Delete", skin, "small");
+        TextButton create = new TextButton("Create new +", skin, "green");
+        TextButton logout = new TextButton("Logout", skin);
+        TextButton select = new TextButton("Select", skin);
+        TextButton deletePlayer = new TextButton("Delete", skin);
         // eanble scrolling
         ScrollPane scrollPane = new ScrollPane(charactersTable);
         scrollPane.setSmoothScrolling(false);
@@ -126,7 +126,7 @@ public class CharacterSelectScreen implements Screen {
         for (int i = 0; i < strings.size(); i++) {
             characterNamesButtons.add(new TextButton(strings.get(i), skin, "square"));
 
-            xButtons.add(new TextButton("X", skin, "square"));
+            xButtons.add(new TextButton("X", skin, "red"));
 
             charactersTable.add(characterNamesButtons.get(i)).fillX().expandX();
             charactersTable.add(xButtons.get(i)).width(Value.percentWidth(0.2f, charactersTable)).fillX();
