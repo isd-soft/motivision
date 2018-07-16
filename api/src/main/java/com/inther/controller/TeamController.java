@@ -3,6 +3,7 @@ package com.inther.controller;
 import com.inther.EntityNotFoundException;
 import com.inther.entity.Activities;
 import com.inther.entity.Character;
+import com.inther.entity.Items;
 import com.inther.entity.Team;
 import com.inther.repo.ActivitiesRepository;
 import com.inther.repo.CharacterRepository;
@@ -83,7 +84,7 @@ public class TeamController {
      * Used to get a list of all team members
      * @param teamId - team to search characters in
      * @return status - failed if no such team exist
-     * @return status - success if request was successfull
+     * @return status - success if request was successful
      * @return teamMembers - null if no teamMembers
      * @return teamMembers - list of all teamMembers
      * */
@@ -115,13 +116,6 @@ public class TeamController {
             Character character = iterator.next();
             characterMap.put("characterId", String.valueOf(character.getId()));
             characterMap.put("characterName", character.getName());
-            characterMap.put("playerId", character.getPlayer().getId());
-            characterMap.put("teamId", character.getTeam().getId());
-            if (character.getTeam().getAdmin() == null) {
-                characterMap.put("isAdmin", false);
-            } else {
-                characterMap.put("isAdmin", String.valueOf(character.getTeam().getAdmin().getId().equals(character.getId())));
-            }
             characterMap.put("headType", character.getHeadType());
             characterMap.put("bodyType", character.getBodyType());
             characterMap.put("gender", character.getGender());
