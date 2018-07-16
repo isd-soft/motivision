@@ -26,6 +26,7 @@ public class Team {
     private int battleFrequency;
     private Integer teamWins;
     private Integer teamLoss;
+    private Boolean lock;
     private JSONArray teamMembersArray;
     private ArrayList<Profile> teamMembers = new ArrayList<Profile>();
     private ArrayList<Activity> teamActivities = new ArrayList<Activity>();
@@ -38,6 +39,7 @@ public class Team {
         this.battleFrequency = 0;
         this.teamWins = 0;
         this.teamLoss = 0;
+        this.lock = false;
     }
 
     private static Team getTeamFromJson(JSONObject jsonObject) throws JSONException{
