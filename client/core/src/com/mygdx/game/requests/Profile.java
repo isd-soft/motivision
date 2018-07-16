@@ -3,7 +3,6 @@ package com.mygdx.game.requests;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -91,12 +90,16 @@ public class Profile implements Comparable<Profile>{
         if (jsonObject == null)
             return null;
         try {
-            field = jsonObject.getString(PROFILE_ID);
-            characterId = Integer.parseInt(field);
-            field = jsonObject.getString(TEAM_ID);
-            teamId = Integer.parseInt(field);
-            field = jsonObject.getString(IS_ADMIN);
-            isAdmin = field.equals("true");
+            characterId = jsonObject.getInt(PROFILE_ID);
+            teamId = jsonObject.getInt(TEAM_ID);
+
+            if (jsonObject.has(IS_ADMIN)) {
+                field = jsonObject.getString(IS_ADMIN);
+                isAdmin = field.equals("true");
+            }
+            else
+                isAdmin = false;
+
             profile = new Profile(characterId, teamId, isAdmin);
 
             field = jsonObject.getString(NAME);
@@ -119,6 +122,7 @@ public class Profile implements Comparable<Profile>{
             //System.out.println("Points = " + field);
             number = jsonObject.getInt(POINTS);
             profile.setPoints(number);
+
             profile.loadItems(jsonObject);
 
             return profile;
@@ -128,13 +132,27 @@ public class Profile implements Comparable<Profile>{
         }
     }
 
-    private static Profile      getProfileFromUrl(String url, String urlParameters, String requestMethod)
+    static Profile      getProfileFromUrl(String url, String urlParameters, String requestMethod)
             throws JSONException, IOException {
         JSONObject	jsonObject;
 
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
         System.out.println(url + "?" + urlParameters);
         return getProfileFromJson(jsonObject);
+    }
+
+    public void    updateItems() throws IOException, JSONException {
+        String      urlParameters;
+        String		url;
+        JSONObject  jsonObject;
+
+        itemList = null;
+        url = JsonHandler.domain + "/get_items";
+        urlParameters = PROFILE_ID + "=" + id;
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
+        if (jsonObject == null)
+            return;
+        loadItems(jsonObject);
     }
 
     private void loadItems(JSONObject jsonObject) throws JSONException {
@@ -312,7 +330,7 @@ public class Profile implements Comparable<Profile>{
         return new Texture("result.png");
     }
 
-    private static Pixmap  addItem(Pixmap pixmap, String item, int x, int y) {
+    private static Pixmap addItemOnPixmap(Pixmap pixmap, String item, int x, int y) {
         Pixmap  itemPixmap;
 
         itemPixmap = new Pixmap(Gdx.files.internal("items/" + item + ".png"));
@@ -321,25 +339,25 @@ public class Profile implements Comparable<Profile>{
         return pixmap;
     }
 
-    private Texture mergeImgages(Map<String, String> itemImages) {
+    private Texture addItems(Map<String, String> itemImages) {
         Texture mergedImage;
         Pixmap pixmap;
 
         System.out.println("Start creating profile texture");
         pixmap = new Pixmap(Gdx.files.internal("default.png"));
-        pixmap = addItem(pixmap, itemImages.get("leggins"), 30, 353);
-        pixmap = addItem(pixmap, itemImages.get("armor"), 0, 188);
-        pixmap = addItem(pixmap, itemImages.get("sword"), 203, 165);
-        pixmap = addItem(pixmap, itemImages.get("fingers"), 219, 304);
+        pixmap = addItemOnPixmap(pixmap, itemImages.get("leggins"), 30, 353);
+        pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 0, 188);
+        pixmap = addItemOnPixmap(pixmap, itemImages.get("sword"), 203, 165);
+        pixmap = addItemOnPixmap(pixmap, itemImages.get("fingers"), 219, 304);
         if (itemImages.get("shield").equals("null") == false) {
-            pixmap = addItem(pixmap, itemImages.get("shield"), 17, 320);
+            pixmap = addItemOnPixmap(pixmap, itemImages.get("shield"), 17, 320);
         }
-        mergedImage = getTexture(pixmap, headType, bodyType);
+        mergedImage = changeFaceType(pixmap, headType, bodyType);
 //        pixmap.dispose();
         return mergedImage;
     }
 
-    public Texture getTexture() {
+    public Texture getProfileTexture() {
         Map<String, String> itemImages;
         Set<String>         itemSet;
 
@@ -366,7 +384,7 @@ public class Profile implements Comparable<Profile>{
             }
         }
         System.out.println("procesing...");
-        return mergeImgages(itemImages);
+        return addItems(itemImages);
     }
 
     public boolean      deleteProfile() throws IOException, JSONException {
@@ -464,7 +482,7 @@ public class Profile implements Comparable<Profile>{
     }
 
 
-    public static Texture getTexture(Pixmap background, int headType, int bodyType) {
+    public static Texture changeFaceType(Pixmap background, int headType, int bodyType) {
         Texture mergedImage;
         Pixmap  itemPixmap;
 
@@ -485,11 +503,11 @@ public class Profile implements Comparable<Profile>{
         return mergedImage;
     }
 
-    public static Texture getTexture(int headType, int bodyType) {
+    public static Texture changeFaceType(int headType, int bodyType) {
         Pixmap  pixmap;
 
         pixmap = new Pixmap(Gdx.files.internal("default.png"));
-        return getTexture(pixmap, headType, bodyType);
+        return changeFaceType(pixmap, headType, bodyType);
     }
 
     public boolean     buyItem(int id) throws IOException, JSONException {

@@ -36,6 +36,7 @@ public class TeamMembersScreen implements Screen {
     private Camera camera;
     private Music loginMusic;
     private GDXDialogs dialogs;
+    private String      selectedName = null;
 
     public TeamMembersScreen(GGame g) {
         parent = g;
@@ -57,9 +58,10 @@ public class TeamMembersScreen implements Screen {
         float pad = 5;
 
         // Character Sprite
-        Texture texture = null;
+        if (selectedName == null)
+            selectedName = PlayerAccount.getProfileName();
         try {
-            texture = PlayerAccount.getProfileTexture();
+            texture = PlayerAccount.getTeamMemberTexture(selectedName);
         } catch (IOException e) {
             texture = new Texture("default.png");
             e.printStackTrace();
@@ -90,6 +92,7 @@ public class TeamMembersScreen implements Screen {
 
 
         HashMap<String, Integer> teamMembers = PlayerAccount.getTeamMembersList();
+        PlayerAccount.printAllMembers();
 //
         //Collections.sort(teamMembers);
         //fill table with buttons and labels
@@ -106,7 +109,7 @@ public class TeamMembersScreen implements Screen {
             if (PlayerAccount.isAdmin()) {
 
                 TextButton xButton = new TextButton("X", skin, "square");
-                xButton.addListener(new DeleteMember(PlayerAccount.getProfileName(), key));
+                xButton.addListener(new DeleteMember(key));
                 teamMembersTable.add(xButton).width(Value.percentWidth(0.2f, teamMembersTable));
                 if (key.compareTo(PlayerAccount.getProfileName()) == 0) {
                     xButton.setDisabled(true);
@@ -152,12 +155,10 @@ public class TeamMembersScreen implements Screen {
     }
 
     class SelectTeamMember extends ChangeListener{
-        String selectName;
-        String currentAccount;
+        String name;
 
         public SelectTeamMember(String currentAcc, String selectName) {
-            this.currentAccount = currentAcc;
-            this.selectName = selectName;
+            this.name = selectName;
         }
 
         @Override
@@ -166,22 +167,14 @@ public class TeamMembersScreen implements Screen {
         }
 
         private void getTeamMember(){
-            try {
-                texture = PlayerAccount.getProfileTexture(selectName);
-                PlayerAccount.selectProfile(currentAccount);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            selectedName = name;
+            show();
         }
     }
     class DeleteMember extends ChangeListener{
-        String currentPlayer;
         String name;
 
-        public DeleteMember(String currentPlayer, String name) {
-            this.currentPlayer = currentPlayer;
+        public DeleteMember(String name) {
             this.name = name;
         }
 
@@ -211,7 +204,10 @@ public class TeamMembersScreen implements Screen {
                     if(button == 0){
                         try {
                             PlayerAccount.deleteProfile(name);
-                            PlayerAccount.selectProfile(currentPlayer);
+                            if (selectedName.equals(name))
+                                selectedName = null;
+                            show();
+                            //PlayerAccount.selectProfile(currentPlayer);
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {

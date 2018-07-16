@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.rmi.CORBA.StubDelegate;
 
@@ -23,6 +24,7 @@ public class Item {
     private int     price;
     private String  type;
     private boolean equipped;
+    private static List<Item> itemList = null;
 
     public Item(int id, int image, int price, String type, boolean equipped) {
         this.id = id;
