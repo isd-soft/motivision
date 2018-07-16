@@ -24,6 +24,7 @@ public class AnimationScreenTest extends Image {
 
 
     private TextureRegionDrawable drawable = new TextureRegionDrawable();
+    private TextureRegionDrawable drawable1 = new TextureRegionDrawable();
 
     public AnimationScreenTest(GGame g) {
         super();
@@ -73,8 +74,11 @@ public class AnimationScreenTest extends Image {
         time += delta;
         if (getAnimation() != null && getAnimation().getAnimationDuration() > 0) {
             TextureRegion frame = getAnimation().getKeyFrame(time, true);
+            TextureRegion frame1 = animation2.getKeyFrame(time, true);
             drawable.setRegion(frame);
+            drawable1.setRegion(frame1);
             setDrawable(drawable);
+            setDrawable(drawable1);
         } else {
             setDrawable(null);
         }
