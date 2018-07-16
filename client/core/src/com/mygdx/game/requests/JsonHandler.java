@@ -32,7 +32,7 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 public class JsonHandler {
 //    static final String domain = "http://207.154.207.47:8080";
 //    static final String domain = "http://192.168.1.23:8080";
-    static final String domain = "http://172.17.41.64:8080";
+    static final String domain = "http://172.17.41.110:8080";
     public static String	errorMessage = null;
 
 
@@ -174,15 +174,14 @@ public class JsonHandler {
         InputStream   inputStream;
         BufferedReader      bufferedReader;
 
-//        System.out.println();
-//        System.out.println(url + "?" + urlParameters);
-   //     jsonText = POSTMethod(url, urlParameters, isPostMethod);
-     //   System.out.println(jsonText);
         if (requestMethod.equals("POST")) {
             jsonText = POSTMethod(url, urlParameters, requestMethod);
         }
         else if (requestMethod.equals("GET")) {
-            inputStream = new URL(url + "?" + urlParameters).openStream();
+            if (url.equals(""))
+                inputStream = new URL(url).openStream();
+            else
+                inputStream = new URL(url + "?" + urlParameters).openStream();
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             jsonText = readAll(bufferedReader);
         }

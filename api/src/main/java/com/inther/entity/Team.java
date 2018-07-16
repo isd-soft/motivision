@@ -37,14 +37,14 @@ public class Team {
 
     private Integer teamLoss;
 
-    private Boolean lock;
+    private Boolean locked;
 
     public Boolean getLock() {
-        return lock;
+        return locked;
     }
 
     public void setLock(Boolean lock) {
-        this.lock = lock;
+        this.locked = lock;
     }
 
     public Team() {

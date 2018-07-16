@@ -298,7 +298,8 @@ public class PlayerAccount {
             return false;
         }
         result = profile.buyItem(id);
-        selectProfile(profile.getName());
+        profile.updateItems();
+        //selectProfile(profile.getName());
         return result;
     }
 
@@ -438,6 +439,8 @@ public class PlayerAccount {
     }
 
     public static Texture getTeamMemberTexture(String name) throws IOException, JSONException {
+        if (profile.getName().equals(name))
+            return getProfileTexture(name);
         try {
             selectProfileTeam();
         } catch (IOException e) {
