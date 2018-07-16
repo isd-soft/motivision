@@ -172,8 +172,10 @@ public void changeScreen(int screen){
 //                setScreen(teamMembersScreen);
 //			  characterSelect = new CharacterSelect(this);
 //			  setScreen(characterSelect);
-			  loginScreen = new LoginScreen(this);
-			  setScreen(loginScreen);
+//			  loginScreen = new LoginScreen(this);
+//			  setScreen(loginScreen);
+			  loadingScreen = new LoadingScreen(this);
+			  setScreen(loadingScreen);
 	}
 
           @Override
