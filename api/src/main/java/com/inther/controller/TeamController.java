@@ -57,6 +57,7 @@ public class TeamController {
         map.put("battleFrequency", team.getBattleFrequency());
         map.put("teamWins", team.getTeamWins());
         map.put("teamLoss", team.getTeamLoss());
+        map.put("lock", team.getLock());
         log.info("Team characters received");
         List<Character> characterList = characterRepository.findAllByTeamId(teamId);
         List<Map<String, Object>> result = new ArrayList<>();
