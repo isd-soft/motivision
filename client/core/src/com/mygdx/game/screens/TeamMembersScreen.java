@@ -104,9 +104,14 @@ public class TeamMembersScreen implements Screen {
             //here are points of each teammate
             points.setTouchable(Touchable.disabled);
             if (PlayerAccount.isAdmin()) {
+
                 TextButton xButton = new TextButton("X", skin, "square");
                 xButton.addListener(new DeleteMember(PlayerAccount.getProfileName(), key));
                 teamMembersTable.add(xButton).width(Value.percentWidth(0.2f, teamMembersTable));
+                if (key.compareTo(PlayerAccount.getProfileName()) == 0) {
+                    xButton.setDisabled(true);
+                    xButton.setTouchable(Touchable.disabled);
+                }
             }
 
             teamMembersTable.add(points).width(Value.percentWidth(0.2f, teamMembersTable));

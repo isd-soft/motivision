@@ -571,7 +571,7 @@ public class Profile implements Comparable<Profile>{
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
         if(jsonObject == null)
             return false;
-        this.points = jsonObject.getInt(POINTS);
+        this.points = jsonObject.getInt("points");
         return jsonObject.getString("status").equals("success");
 
     }

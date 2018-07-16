@@ -114,7 +114,7 @@ public class PlayerAccount {
         selectProfile(name);
         if (profile == null)
             return new Texture("default.png");
-        PlayerAccount.selectProfileTeam();
+        //PlayerAccount.selectProfileTeam();
         return profile.getTexture();
         //return null;
     }
@@ -131,6 +131,10 @@ public class PlayerAccount {
         if (player == null) {
             JsonHandler.errorMessage = "Player is not logged yet";
             return null;
+        }
+        if (profile != null) {
+            if (profile.getName().equals(name))
+                return profile;
         }
         profileId = getProfileId(name);
         profile = Profile.getProfile(profileId);
@@ -228,17 +232,14 @@ public class PlayerAccount {
     }
 
     public static Team      getProfileTeam(){
-        if (profile == null)
-            return null;
         try {
-            team = Team.getTeam(profile.getTeamId());
-            return team;
+            selectProfileTeam();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return team;
     }
 
     public static int getItemStatus(int id) {
@@ -288,6 +289,10 @@ public class PlayerAccount {
     public static void      selectProfileTeam() throws IOException, JSONException {
         if (profile == null)
             return;
+        if (team != null) {
+            if (team.getTeamId() == profile.getTeamId())
+                return;
+        }
         team = Team.getTeam(profile.getTeamId());
     }
 
@@ -320,16 +325,25 @@ public class PlayerAccount {
     }
 
     public static String    getProfileTeamName() {
-        if(team == null)
-            return null;
         try {
-            return Team.getTeam(profile.getTeamId()).getTeamName();
+            selectProfileTeam();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        if (team == null)
+            return null;
+        return team.getTeamName();
+//        try {
+//            return team.getTeamName();
+//            //return Team.getTeam(profile.getTeamId()).getTeamName();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
     }
 
     public static void unequipItem(int itemId) {

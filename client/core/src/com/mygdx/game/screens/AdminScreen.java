@@ -114,7 +114,7 @@ public class AdminScreen implements Screen {
         final Label teamLockedLabel = new Label("Allow joining in team:", skin);
         Label castleLabel = new Label("Team logo", skin);
         Label teamNameLabel;
-        if(PlayerAccount.getProfileTeam() == null)
+        if(PlayerAccount.getProfileTeamName() == null)
              teamNameLabel = new Label("Team Name", skin);
         else
             teamNameLabel = new Label(PlayerAccount.getProfileTeamName(), skin);

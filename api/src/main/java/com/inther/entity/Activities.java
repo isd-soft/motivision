@@ -16,8 +16,9 @@ public class Activities {
 
     private int reward;
 
-    @OneToMany(mappedBy = "activities", cascade = CascadeType.ALL)
-    private List<TeamActivities> teamActivities;
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     public Activities() {}
 
@@ -41,11 +42,11 @@ public class Activities {
         this.reward = reward;
     }
 
-    public List<TeamActivities> getTeamActivities() {
-        return teamActivities;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTeamActivities(List<TeamActivities> teamActivities) {
-        this.teamActivities = teamActivities;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

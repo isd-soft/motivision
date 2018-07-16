@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.4
--- Dumped by pg_dump version 10.4
+-- Dumped from database version 10.3
+-- Dumped by pg_dump version 10.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -14,20 +14,6 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
 
 SET default_tablespace = '';
 
@@ -40,7 +26,8 @@ SET default_with_oids = false;
 CREATE TABLE public.activities (
     id integer NOT NULL,
     name character varying(20) NOT NULL,
-    reward integer
+    reward integer,
+    team_id integer NOT NULL
 );
 
 
@@ -263,46 +250,12 @@ CREATE TABLE public.team (
     team_logo character varying(50) NOT NULL,
     battle_frequency integer NOT NULL,
     team_wins integer DEFAULT 0,
-    team_loss integer DEFAULT 0
+    team_loss integer DEFAULT 0,
+    locked boolean DEFAULT false NOT NULL
 );
 
 
 ALTER TABLE public.team OWNER TO postgres;
-
---
--- Name: team_activities; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.team_activities (
-    id integer NOT NULL,
-    activity_id integer NOT NULL,
-    team_id integer NOT NULL
-);
-
-
-ALTER TABLE public.team_activities OWNER TO postgres;
-
---
--- Name: team_activities_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.team_activities_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.team_activities_id_seq OWNER TO postgres;
-
---
--- Name: team_activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.team_activities_id_seq OWNED BY public.team_activities.id;
-
 
 --
 -- Name: team_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -376,24 +329,13 @@ ALTER TABLE ONLY public.team ALTER COLUMN id SET DEFAULT nextval('public.team_id
 
 
 --
--- Name: team_activities id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.team_activities ALTER COLUMN id SET DEFAULT nextval('public.team_activities_id_seq'::regclass);
-
-
---
 -- Data for Name: activities; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.activities (id, name, reward) FROM stdin;
-6	volleyball game	40
-5	swim 1 km	10
-1	1 push up	5
-3	1 km Run	70
-4	1 sit up	2
-2	1 pull up	8
-7	frontflip	200
+COPY public.activities (id, name, reward, team_id) FROM stdin;
+1	test	100	12
+3	supaTest	99	12
+4	thanks again and	1221	8
 \.
 
 
@@ -402,10 +344,16 @@ COPY public.activities (id, name, reward) FROM stdin;
 --
 
 COPY public."character" (id, player_id, head_type, body_type, gender, points, name, team_id) FROM stdin;
-33	29	1	1	M	0	abgar	14
-21	6	7	7	M	707	Vasea	5
-46	6	2	3	M	0	Mongolets	20
-52	22	1	1	M	0	djkfbsjfd	28
+10	22	2	3	M	17	firstt	9
+9	35	2	1	M	2518	Abgar1	8
+17	35	1	1	M	0	adcchcucu	8
+6	4	1	2	m	0	OurLad	2
+2	27	1	3	M	5	njdcfvgbhnj	2
+7	34	2	1	F	0	ebshdhd	6
+11	22	3	2	M	0	second	10
+13	22	1	2	M	0	thirdd	11
+18	35	3	3	M	124	frolloe	8
+4	32	2	1	M	549	Character	4
 \.
 
 
@@ -414,9 +362,15 @@ COPY public."character" (id, player_id, head_type, body_type, gender, points, na
 --
 
 COPY public.character_item (id, character_id, item_id, equipped) FROM stdin;
-6	21	8	t
-3	21	3	t
-4	21	4	t
+7	9	4	t
+1	4	4	f
+4	9	12	t
+3	4	2	f
+2	4	5	f
+6	9	1	t
+5	9	9	t
+9	18	1	t
+8	18	7	t
 \.
 
 
@@ -454,43 +408,22 @@ COPY public.last_battle (id, team_id, enemy_power, team_power) FROM stdin;
 
 COPY public.player (id, login, password, points) FROM stdin;
 4	ab	123	0
-5	log2	pas3	9998112
-7	alex7	123	0
-8	asdasd	dsadsa	0
-9	dndjsjsjdj	xjxjfjfj	0
-10	abgar123	123456	0
-11	122dhxxhxb	dhshzhhhzh	0
-12	123456	123456	0
-13	qqqqqq	qqqqqq	0
-14	654321	654321	0
-15	alex15	alex15	0
-16	098765	098765	0
-17	djdjdjdjd	djxjxjxj	0
-18	liviuu	liviuu	0
 19	vaseok	JYm8SJkl8FmXTN6WiWKDiA==	0
 20	987654	zLkjsnk14xwDbvBxL41Skg==	0
+6	alex	1V/HEhSFe8gsmlW5LOBqjQ==	0
 22	lliviu	mvJjCtKEJiuYKQd/ipDuiw==	0
 23	asdfgh	ZmogiXBxJ12bNP/VvYPRSQ==	0
 24	sghgxbdgbf	oHiSJ1/B383o16oTC0BviQ==	0
 25	nickname	LyCvC65jCgZ JY2o75YbDg==	0
 26	lalala	r0WFlTKXjEbNkXfmACFduQ==	0
-27	jhdjdjdjdjd	EN p/x2XGscb/TNH17aLUQ==	0
-28	qweqwe	r2lALvCNgmogicnZBF5uTQ==	0
-29	abgar1223	rEvhdgrTUaxs/exc 9szkA==	0
-30	qwerty1	xQYMg PKe0vDcWtmLz lFQ==	0
-6	alex	rynKOLSo l80sNx/oDMo/Q==	0
-31	123456yuthgf	BIrXvkH3mUq9Zm4sA/b9oA==	0
-32	fnvbvkjkbfljfdkl	1Z2HLmIYNxRsMWK9Hb9/INeM7Xfzmv4BV/jM95QXkIg=	0
-33	 bchfdgdydydy	socw60q68wxVRhEUEV tDQ==	0
-34	ifjfj   djdj     d	2ImRt 7mz5AmuijayP5bSQ==	0
-35	vjvjv9	rEvhdgrTUaxs/exc 9szkA==	0
-36	vjvjv93	g34Gw2yl4L2DwwX7e3SSOg==	0
-37	shshshsh	FebGRvu0hl3z2T3HzfGR g==	0
-38	figificjcjc	HjB y MJVqd6ULEkfUexH08qgc8IIhPzFtDVmOoTCBs=	0
-39	54e355r	FUxSIO6IYotDcRPpiueWiA==	0
-40	artiom123	I2VfCWumpp5Vb/jzXGtPsw==	0
-44	nullll	SQVTu85MRKDpsANO2QElmA==	0
-45	qwerty	xQYMg PKe0vDcWtmLz lFQ==	0
+27	qwerty123	ATD qO82ZSmjO7uttJvMhA==	0
+28	esport12	LyCvC65jCgZ JY2o75YbDg==	0
+30	qweqwe	VoFYqqWDwy1kkkxkjwFMYg==	0
+31	qwertq	JYm8SJkl8FmXTN6WiWKDiA==	0
+32	login1	1kd7qVslmOLQFSwpWuVo1g==	0
+33	12341_	rEvhdgrTUaxs/exc 9szkA==	0
+34	alloalo	rEvhdgrTUaxs/exc 9szkA==	0
+35	abgar1223	xQYMg PKe0vDcWtmLz lFQ==	0
 \.
 
 
@@ -498,58 +431,15 @@ COPY public.player (id, login, password, points) FROM stdin;
 -- Data for Name: team; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.team (id, name, lider_id, team_logo, battle_frequency, team_wins, team_loss) FROM stdin;
-5	Sexy Boys	21	No logo	7	0	0
-26	sdfsdfsdfsd	\N	teamCastle1	7	0	0
-27	sndfdfsdf	\N	teamCastle1	7	0	0
-28	sdfjkdfsjk	52	teamCastle1	7	0	0
-14	Abgar	33	default	7	0	0
-20	Mongoly	46	teamCastle1	7	0	0
-22	sdfsdfdf	\N	teamCastle1	7	0	0
-\.
-
-
---
--- Data for Name: team_activities; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.team_activities (id, activity_id, team_id) FROM stdin;
-85	6	20
-86	5	20
-87	1	20
-88	3	20
-89	4	20
-90	2	20
-97	6	22
-98	5	22
-99	1	22
-100	3	22
-101	4	22
-102	2	22
-121	6	26
-122	5	26
-123	1	26
-124	3	26
-125	4	26
-126	2	26
-127	6	27
-128	5	27
-129	1	27
-130	3	27
-49	6	14
-50	5	14
-51	1	14
-52	3	14
-53	4	14
-54	2	14
-131	4	27
-132	2	27
-133	6	28
-134	5	28
-135	1	28
-136	3	28
-137	4	28
-138	2	28
+COPY public.team (id, name, lider_id, team_logo, battle_frequency, team_wins, team_loss, locked) FROM stdin;
+4	sample	4	teamCastle3	7	0	0	f
+6	Qwerty	7	teamCastle1	7	0	0	f
+8	asdfqw	9	teamCastle1	7	0	0	f
+9	oneteam	10	teamCastle1	7	0	0	f
+10	twoteam	11	teamCastle2	7	0	0	f
+11	threeteam	13	teamCastle3	7	0	0	f
+2	qrfgth	2	teamCastle1	14	0	0	f
+12	Olvo	\N	logo	2	0	0	f
 \.
 
 
@@ -564,7 +454,7 @@ SELECT pg_catalog.setval('public.activities_id_seq', 1, false);
 -- Name: character_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.character_id_seq', 23, true);
+SELECT pg_catalog.setval('public.character_id_seq', 20, true);
 
 
 --
@@ -596,17 +486,10 @@ SELECT pg_catalog.setval('public.player_id_seq', 5, true);
 
 
 --
--- Name: team_activities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.team_activities_id_seq', 2, true);
-
-
---
 -- Name: team_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.team_id_seq', 6, true);
+SELECT pg_catalog.setval('public.team_id_seq', 4, true);
 
 
 --
@@ -666,14 +549,6 @@ ALTER TABLE ONLY public.player
 
 
 --
--- Name: team_activities team_activities_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.team_activities
-    ADD CONSTRAINT team_activities_pkey PRIMARY KEY (id);
-
-
---
 -- Name: team team_id_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -704,11 +579,19 @@ CREATE UNIQUE INDEX items_type_uindex ON public.items USING btree (type);
 
 
 --
+-- Name: activities activities___fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.activities
+    ADD CONSTRAINT activities___fk FOREIGN KEY (team_id) REFERENCES public.team(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
 -- Name: character character___fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."character"
-    ADD CONSTRAINT character___fk FOREIGN KEY (player_id) REFERENCES public.player(id) ON DELETE CASCADE;
+    ADD CONSTRAINT character___fk FOREIGN KEY (player_id) REFERENCES public.player(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -732,7 +615,7 @@ ALTER TABLE ONLY public.character_item
 --
 
 ALTER TABLE ONLY public.character_item
-    ADD CONSTRAINT character_item___fk_2 FOREIGN KEY (item_id) REFERENCES public.items(id);
+    ADD CONSTRAINT character_item___fk_2 FOREIGN KEY (item_id) REFERENCES public.items(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -749,22 +632,6 @@ ALTER TABLE ONLY public.last_battle
 
 ALTER TABLE ONLY public.team
     ADD CONSTRAINT team___fk FOREIGN KEY (lider_id) REFERENCES public."character"(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: team_activities team_activities___fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.team_activities
-    ADD CONSTRAINT team_activities___fk FOREIGN KEY (team_id) REFERENCES public.team(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: team_activities team_activities___fk_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.team_activities
-    ADD CONSTRAINT team_activities___fk_2 FOREIGN KEY (activity_id) REFERENCES public.activities(id);
 
 
 --

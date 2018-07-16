@@ -68,7 +68,7 @@ public class AnimationScreen extends Actor implements Screen {
     @Override
     public void show() {
         stage.clear();
-        stage.setDebugAll(true);
+    //    stage.setDebugAll(true);
         runTexture = new Texture(Gdx.files.internal("sprite_animation.png"));
         boomTexture = new Texture(Gdx.files.internal("boom_animation.png"));
         backgroundTexture = parent.assetsManager.aManager.get("background.png");
