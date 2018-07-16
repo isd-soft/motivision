@@ -168,7 +168,7 @@ public class ActivitiesController {
         log.info("Team found");
         Team team = optionalTeam.get();
         Optional<Activities> optionalActivities = activitiesRepository.findByNameAndTeamId(activityName, teamId);
-        if (!optionalActivities.isPresent()) {
+        if (optionalActivities.isPresent()) {
             log.warn("Activity name is taken");
             map.put("status", "failed");
             map.put("message", "Activity name is taken");
