@@ -3,14 +3,14 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	blackChanceryShadow: {
 		file: blackChanceryShadow.fnt
 	}
-	font: {
-		file: font-export.fnt
-	}
 	yuGothic: {
 		file: yuGothic.fnt
 	}
 	yuGothicGray: {
 		file: yuGothicGray.fnt
+	}
+	yuGothicRed: {
+		file: yuGothicRed.fnt
 	}
 }
 com.badlogic.gdx.graphics.Color: {
@@ -369,14 +369,14 @@ com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
 		checkboxOn: checkbox-pressed-c
 		checkboxOff: checkbox-c
 		checkboxOver: checkbox-over-c
-		font: font
+		font: yuGothic
 		fontColor: color
 	}
 	radio: {
 		checkboxOn: radio-pressed-c
 		checkboxOff: radio-c
 		checkboxOver: radio-over-c
-		font: font
+		font: yuGothic
 		fontColor: color
 	}
 }
@@ -396,13 +396,13 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 	default: {
-		font: font
+		font: yuGothic
 		up: button-c
 		down: button-pressed-over-c
 		over: button-over-c
 	}
 	toggle: {
-		font: font
+		font: yuGothic
 		up: button-c
 		down: button-pressed-c
 		over: button-over-c
@@ -415,7 +415,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 		imageOver: radio-over-c
 		imageChecked: radio-pressed-c
 		imageCheckedOver: radio-pressed-over-c
-		font: font
+		font: yuGothic
 	}
 	checkbox: {
 		imageUp: checkbox-c
@@ -423,18 +423,17 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 		imageOver: checkbox-over-c
 		imageChecked: checkbox-pressed-c
 		imageCheckedOver: checkbox-pressed-over-c
-		font: font
+		font: yuGothic
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
-		font: font
+		font: yuGothic
 		fontColor: color
 	}
-	banner: {
-		font: font
-		fontColor: color
-		background: tooltip
+	error: {
+		font: yuGothicRed
+		fontColor: medieval-red
 	}
 	fancy: {
 		font: blackChanceryShadow
@@ -447,7 +446,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: {
-		font: font
+		font: yuGothic
 		fontColorSelected: color
 		fontColorUnselected: color
 		selection: color
@@ -482,7 +481,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
 	default: {
-		font: font
+		font: yuGothic
 		fontColor: color
 		background: selectbox-c
 		scrollStyle: default
@@ -523,14 +522,14 @@ com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: {
-		font: font
+		font: yuGothic
 		fontColor: color
 		up: button-c
 		down: button-pressed-over-c
 		over: button-over-c
 	}
 	toggle: {
-		font: font
+		font: yuGothic
 		fontColor: color
 		up: button-c
 		down: button-pressed-c
@@ -539,12 +538,12 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		checkedOver: button-pressed-over-c
 	}
 	arcade: {
-		font: font
+		font: yuGothic
 		up: button-arcade-c
 		down: button-arcade-pressed-c
 	}
 	square: {
-		font: font
+		font: yuGothic
 		fontColor: color
 		up: button-c
 		down: button-pressed-over-c
@@ -553,19 +552,19 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		checkedOver: button-pressed-over-c
 	}
 	red: {
-		font: font
+		font: yuGothic
 		fontColor: color
 		up: button-red
 		down: button-pressed-c-red
 	}
 	green: {
-		font: font
+		font: yuGothic
 		fontColor: color
 		up: button-green
 		down: button-pressed-c-green
 	}
 	blue: {
-		font: font
+		font: yuGothic
 		fontColor: color
 		up: button-blue
 		down: button-pressed-c-blue
@@ -602,13 +601,17 @@ com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: {
 		background: window-c
-		titleFont: font
+		titleFont: yuGothic
 		titleFontColor: color
 	}
 	main: {
 		background: window-main-c
-		titleFont: font
+		titleFont: yuGothic
 		titleFontColor: color
+	}
+	dialog: {
+		background: window-main-c
+		titleFont: yuGothic
 	}
 }
 }

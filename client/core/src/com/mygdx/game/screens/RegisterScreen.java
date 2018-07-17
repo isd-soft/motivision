@@ -6,7 +6,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -20,7 +24,7 @@ import com.mygdx.game.requests.PlayerAccount;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterScreen  implements Screen {
+public class RegisterScreen implements Screen {
     // New version
     private final Logger log = new Logger();
     private GGame parent;
@@ -31,24 +35,26 @@ public class RegisterScreen  implements Screen {
     private Sound registerSound;
     private Sound click;
     private BackgroundAnimation animationScreenTest;
+    private Label registerLabel;
 
-    public RegisterScreen(GGame g){
+    public RegisterScreen(GGame g) {
 
         parent = g;
         click = parent.assetsManager.aManager.get("data/click.wav");
         animationScreenTest = new BackgroundAnimation(parent);
         stage = new Stage();
-        viewport = new StretchViewport(800,480, stage.getCamera());
+        viewport = new StretchViewport(800, 480, stage.getCamera());
 
         stage.setViewport(viewport);
 
 
     }
-    private void     setErrorMessage(String message) {
+
+    private void setErrorMessage(String message) {
         label.setText(message);
     }
 
-    private boolean  validateLogin(String login) {
+    private boolean validateLogin(String login) {
         Pattern pattern = Pattern.compile("[a-zA-Z0-9._-]*");
         Matcher matcher = pattern.matcher(login);
         if (login == null) {
@@ -65,7 +71,7 @@ public class RegisterScreen  implements Screen {
             log.warn("Login field must be at least 6 characters long");
             setErrorMessage("Login must contain at least 6 characters");
             return false;
-        } else if (!matcher.matches()){
+        } else if (!matcher.matches()) {
             log.warn("Login field has invalid characters");
             setErrorMessage("Login has invalid characters");
             return false;
@@ -74,7 +80,7 @@ public class RegisterScreen  implements Screen {
         return true;
     }
 
-    private boolean  validatePassword(String password) {
+    private boolean validatePassword(String password) {
         Pattern pattern = Pattern.compile("[a-zA-Z0-9._-]*");
         Matcher matcher = pattern.matcher(password);
         if (password == null) {
@@ -91,8 +97,7 @@ public class RegisterScreen  implements Screen {
             log.warn("Password field must be at least");
             setErrorMessage("Password must contain at least 6 characters");
             return false;
-        }
-        else if (!matcher.matches()) {
+        } else if (!matcher.matches()) {
             log.warn("Password field has invalid characters");
             setErrorMessage("Password has invalid characters");
             return false;
@@ -123,7 +128,6 @@ public class RegisterScreen  implements Screen {
         //registerSound.play();
 
 
-
         // Create a table that fills the screen. Everything else will go inside this table.
         Table table = new Table();
         table.setFillParent(true);
@@ -131,10 +135,11 @@ public class RegisterScreen  implements Screen {
         stage.addActor(table);
 
         //add label
-        label = new Label("Register new account", skin, "banner");
+        registerLabel = new Label("Register new account", skin, "fancy");
+        label = new Label("", skin, "error");
 
         //add text fields login/password
-        final TextField loginField = new TextField(null,skin);
+        final TextField loginField = new TextField(null, skin);
         loginField.setMessageText("Login goes here");
         final TextField passwordField = new TextField("", skin);
         passwordField.setPasswordCharacter('*');
@@ -166,6 +171,8 @@ public class RegisterScreen  implements Screen {
         animationScreenTest.setZIndex(0);
         table.addActor(animationScreenTest);
         //add everything into table
+        table.add(registerLabel).fillX();
+        table.row().pad(10, 0, 10, 0);
         table.add(label).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(loginField).fillX().uniformX();
@@ -177,6 +184,7 @@ public class RegisterScreen  implements Screen {
         table.add(register).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(back).colspan(2);
+        table.top();
 
 
         Gdx.input.setInputProcessor(stage);
@@ -193,7 +201,7 @@ public class RegisterScreen  implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width,height,true);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -218,11 +226,10 @@ public class RegisterScreen  implements Screen {
     }
 
 
-
     class RegisterListener extends ChangeListener {
-        private TextField	loginField;
-        private TextField	passwordField;
-        private TextField   retypePasswordField;
+        private TextField loginField;
+        private TextField passwordField;
+        private TextField retypePasswordField;
 
         public RegisterListener(TextField loginField, TextField passwordField, TextField retypePasswordField) {
             this.loginField = loginField;
@@ -243,7 +250,7 @@ public class RegisterScreen  implements Screen {
             else if (validateRetypePassword(retypePasswordField.getText(), passwordField.getText()) == false)
                 return;
 
-            String	encryptedPassword;
+            String encryptedPassword;
 
             encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
             //encryptedPassword = passwordField.getText();
@@ -252,8 +259,7 @@ public class RegisterScreen  implements Screen {
                     log.info("Registered successfully");
                     GameMusic.stopAndDisposeLoginOst();
                     parent.changeScreen(parent.getCharacterSelect());
-                }
-                else {
+                } else {
                     log.info("Register failed");
                     label.setText(JsonHandler.errorMessage);
                 }
