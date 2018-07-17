@@ -10,12 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -61,6 +63,10 @@ public class AdminScreen implements Screen {
     private String[] freqChoices = {"Weekly", "Monthly"};
     private CheckBox checkboxLockTeam;
     private Boolean checkboxLockTeamBoolean = false;
+
+    private Label activityLabel;
+    private Label confirmLabel;
+    private Label cancelLabel;
 
 
     public AdminScreen(GGame g) {
@@ -132,7 +138,6 @@ public class AdminScreen implements Screen {
                 freqChoiceLabel.setText(freqChoices[1]);
         } else
             freqChoiceLabel.setText("Error!");
-
 
         // add the list of already created characters
         List<Activity> serverActivities = PlayerAccount.getActivities();
@@ -368,6 +373,38 @@ public class AdminScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+
+            final TextField activityField = new TextField("", skin);
+
+            Dialog dialog = new Dialog("New Activity", skin) {
+
+                @Override
+                public void result(Object obj) {
+                    //System.out.println("result " + obj);
+
+                    if (obj == "confirm") {
+                        try {
+                            if (activityField.getText().length() < 6) {
+                                DialogBox.showInfoDialog("Error", "Activity name must be > 6 letters");
+                            } else if (!PlayerAccount.updateActivity(id, activityField.getText(), reward))
+                                DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            };
+
+            dialog.getContentTable().row();
+            dialog.text("Enter new activity name:");
+            dialog.getContentTable().add(activityField);
+            dialog.getContentTable().row();
+            dialog.button("Confirm", "confirm");
+            dialog.button("Cancel", "cancel");
+            dialog.show(stage);
+            /*
             GDXDialogs dialogs = GDXDialogsSystem.install();
 
             final GDXTextPrompt textPrompt = dialogs.newDialog(GDXTextPrompt.class);
@@ -403,6 +440,7 @@ public class AdminScreen implements Screen {
             });
 
             textPrompt.build().show();
+            */
         }
     }
 
@@ -419,6 +457,42 @@ public class AdminScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+
+            final TextField pointsField = new TextField("", skin);
+
+            Dialog dialog = new Dialog("Edit points", skin) {
+
+                @Override
+                public void result(Object obj) {
+                    //System.out.println("result " + obj);
+
+                    if (obj == "save") {
+                        try {
+                            int points = Integer.valueOf(pointsField.getText());
+                            if (points <= 0)
+                                DialogBox.showInfoDialog("Error", "Points must be > 0");
+                            if (!PlayerAccount.updateActivity(id, name, points))
+                                DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (NumberFormatException e) {
+                            DialogBox.showInfoDialog("Error", "Points cannot be string");
+                        }
+                    }
+                }
+            };
+
+            dialog.getContentTable().row();
+            dialog.text("Enter points for activity:");
+            dialog.getContentTable().add(pointsField);
+            dialog.getContentTable().row();
+            dialog.button("Save", "save");
+            dialog.button("Cancel", "cancel");
+            dialog.show(stage);
+
+            /*
             GDXDialogs dialogs = GDXDialogsSystem.install();
 
             final GDXTextPrompt textPrompt = dialogs.newDialog(GDXTextPrompt.class);
@@ -456,7 +530,7 @@ public class AdminScreen implements Screen {
                 }
             });
 
-            textPrompt.build().show();
+            textPrompt.build().show();*/
         }
     }
 
@@ -472,6 +546,36 @@ public class AdminScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+
+            final Label activityDeleteLabel = new Label("", skin, "fancy");
+
+            Dialog dialog = new Dialog("Activity Deletion", skin) {
+
+                @Override
+                public void result(Object obj) {
+                    //System.out.println("result " + obj);
+
+                    if (obj == "confirm") {
+                        try {
+                            PlayerAccount.deleteActivity(id);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            };
+
+            dialog.getContentTable().row();
+            dialog.text("Are you sure you want to delete: \"" + name + "\" ?");
+            dialog.getContentTable().add(activityDeleteLabel);
+            dialog.getContentTable().row();
+            dialog.button("Confirm", "confirm");
+            dialog.button("Cancel", "cancel");
+            dialog.show(stage);
+
+            /*
             GDXDialogs dialogs = GDXDialogsSystem.install();
 
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
@@ -498,6 +602,7 @@ public class AdminScreen implements Screen {
             bDialog.addButton("Yes");
             bDialog.addButton("No");
             bDialog.build().show();
+            */
         }
     }
 
@@ -508,6 +613,38 @@ public class AdminScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+
+            final TextField activityField = new TextField("", skin);
+
+            Dialog dialog = new Dialog("New Activity", skin) {
+
+                @Override
+                public void result(Object obj) {
+                    //System.out.println("result " + obj);
+
+                    if (obj == "confirm") {
+                        try {
+                            if (activityField.getText().length() < 7)
+                                DialogBox.showInfoDialog("Error", "Activity name must be at least 6 letters");
+                            else
+                                PlayerAccount.createActivity(activityField.getText());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            };
+
+            dialog.getContentTable().row();
+            dialog.text("Enter activity name:");
+            dialog.getContentTable().add(activityField);
+            dialog.getContentTable().row();
+            dialog.button("Confirm", "confirm");
+            dialog.button("Cancel", "cancel");
+            dialog.show(stage);
+            /*
             GDXDialogs dialogs = GDXDialogsSystem.install();
 
             final GDXTextPrompt textPrompt = dialogs.newDialog(GDXTextPrompt.class);
@@ -542,6 +679,7 @@ public class AdminScreen implements Screen {
             });
 
             textPrompt.build().show();
+            */
         }
     }
 }
