@@ -50,6 +50,8 @@ public class CharacterSelectScreen implements Screen {
 
     private Viewport viewport;
     private Camera camera;
+    private Texture background;
+    private Image bg;
     private Texture texture;
     private Boolean characterIsSelected = false;
 
@@ -57,6 +59,10 @@ public class CharacterSelectScreen implements Screen {
         parent = g;
         dialogs = GDXDialogsSystem.install();
         stage = new Stage();
+        background = parent.assetsManager.aManager.get("castlebg.jpg");
+        bg = new Image(background);
+        bg.setFillParent(true);
+        bg.setZIndex(0);
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
@@ -155,7 +161,9 @@ public class CharacterSelectScreen implements Screen {
             select.setTouchable(Touchable.disabled);
         }
 
+
         // add wrapper table
+        screenTable.addActor(bg);
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);

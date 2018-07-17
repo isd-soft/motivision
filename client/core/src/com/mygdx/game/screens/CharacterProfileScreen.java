@@ -46,6 +46,7 @@ public class CharacterProfileScreen implements Screen {
     private Texture textureImage;
     private TextureRegion textureRegion;
     private TextureRegionDrawable textureRegionDrawable;
+    private ShopAnimation shopAnimation;
 
     private GDXDialogs selectDialog;
     private GDXDialogs manageTeamDialog;
@@ -68,7 +69,7 @@ public class CharacterProfileScreen implements Screen {
         deniedSound = parent.assetsManager.aManager.get("data/denied.mp3");
         armorSound = parent.assetsManager.aManager.get("data/equipp.mp3");
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
-//        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        shopAnimation = new ShopAnimation(parent);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -232,6 +233,9 @@ public class CharacterProfileScreen implements Screen {
         if(PlayerAccount.isAdmin())
             itemTable.add(manageTeamButton).fill().expand();
 
+        shopAnimation.setFillParent(true);
+        shopAnimation.setZIndex(0);
+        screenTable.addActor(shopAnimation);
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);

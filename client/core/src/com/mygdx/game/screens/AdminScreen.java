@@ -54,6 +54,8 @@ public class AdminScreen implements Screen {
     private TextButton arrowCastleRight;
     private TextButton arrowFrequencyLeft;
     private TextButton arrowFrequencyRight;
+    private Texture background;
+    private Image bgImage;
     private Texture textureCastle;
     private Integer castleChoice = 1;
     private Label freqChoiceLabel;
@@ -65,7 +67,10 @@ public class AdminScreen implements Screen {
 
     public AdminScreen(GGame g) {
         parent = g;
-
+        background = parent.assetsManager.aManager.get("manageteam.jpg");
+        bgImage = new Image(background);
+        bgImage.setFillParent(true);
+        bgImage.setZIndex(0);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
@@ -234,6 +239,7 @@ public class AdminScreen implements Screen {
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
 
         // add wrapper table
+        screen.addActor(bgImage);
         screen.setFillParent(true);
         screen.add(selectionTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screen.add(buttonTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
