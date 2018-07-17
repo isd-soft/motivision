@@ -75,8 +75,7 @@ public class LoginScreen implements Screen{
 
 
 		//add label
-		label = new Label(null, skin);
-		label.setText("");
+		label = new Label("", skin, "error");
 		labelName = new Label(null, skin, "fancy");
 		labelName.setText("User name: ");
 		labelPassword = new Label(null, skin, "fancy");
