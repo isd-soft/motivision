@@ -170,7 +170,7 @@ public class LoginScreen implements Screen{
 		passwordField.setMessageText("Password goes here");
 
 		//Forgot password
-		forgotPassword = new TextButton("Forgot password?", skin);//, "small");
+		forgotPassword = new TextButton("Forgot password?", skin);
 		//add buttons to table
 		TextButton register = new TextButton("Register", skin);
 		TextButton submit = new TextButton("Submit", skin);
@@ -229,9 +229,8 @@ public class LoginScreen implements Screen{
 		table.addActor(animationScreenTest);
 
 		//add everything into table
-		//add everything into table
-		table.add(label).fillX().uniformX();
-		table.row().pad(5, 0, 5, 0);
+		table.add(label).fillX().uniformX().colspan(2).padTop(10);
+		table.row();//.pad(0, 0, 0, 0);
 		table.add(labelName);
 		table.add(loginField).fillX().uniformX();
 		table.row().pad(5, 0, 5, 0);
