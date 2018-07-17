@@ -6,9 +6,15 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	font: {
 		file: font-export.fnt
 	}
+	yuGothic: {
+		file: yuGothic.fnt
+	}
+	yuGothicGray: {
+		file: yuGothicGray.fnt
+	}
 }
 com.badlogic.gdx.graphics.Color: {
-	Black: {
+	black: {
 		r: 0
 		g: 0
 		b: 0
@@ -18,6 +24,12 @@ com.badlogic.gdx.graphics.Color: {
 		r: 1
 		g: 1
 		b: 1
+		a: 1
+	}
+	green: {
+		r: 0
+		g: 1
+		b: 0
 		a: 1
 	}
 	medieval-blue: {
@@ -48,6 +60,12 @@ com.badlogic.gdx.graphics.Color: {
 		r: 0.70333326
 		g: 0.70333326
 		b: 0.70333326
+		a: 1
+	}
+	yellow: {
+		r: 1
+		g: 1
+		b: 0
 		a: 1
 	}
 }
@@ -345,13 +363,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 		down: button-close-pressed-c
 		over: button-close-over-c
 	}
-	toggle2: {
-		up: button-c
-		down: button-pressed-c
-		over: button-over-c
-		checked: button-pressed-c
-		checkedOver: button-pressed-over-c
-	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
 	default: {
@@ -420,12 +431,14 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		font: font
 		fontColor: color
 	}
-	clean: {
+	banner: {
 		font: font
+		fontColor: color
+		background: tooltip
 	}
 	fancy: {
 		font: blackChanceryShadow
-		fontColor: Black
+		fontColor: black
 	}
 	fancyBlue: {
 		font: blackChanceryShadow
@@ -560,11 +573,12 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {
-		font: font
+		font: yuGothic
 		fontColor: color
 		background: textfield-c
 		cursor: cursor-c
 		selection: selection
+		messageFont: yuGothicGray
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {

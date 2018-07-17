@@ -114,7 +114,7 @@ public class RegisterScreen  implements Screen {
     @Override
     public void show() {
         stage.clear();
-        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
 
         //registerSound = Gdx.audio.newSound(Gdx.files.internal("data/BruceU.mp3"));
 
@@ -129,7 +129,7 @@ public class RegisterScreen  implements Screen {
         stage.addActor(table);
 
         //add label
-        label = new Label("Register new account", skin);
+        label = new Label("Register new account", skin, "banner");
 
         //add text fields login/password
         final TextField loginField = new TextField(null,skin);
@@ -142,11 +142,11 @@ public class RegisterScreen  implements Screen {
         final TextField retypePasswordField = new TextField("", skin);
         retypePasswordField.setPasswordCharacter('*');
         retypePasswordField.setPasswordMode(true);
-        retypePasswordField.setMessageText("Retype your password");
+        retypePasswordField.setMessageText("Retype password");
 
         //add buttons to table
         TextButton register = new TextButton("Register", skin);
-        TextButton back = new TextButton("Back", skin, "small");
+        TextButton back = new TextButton("Back", skin);
 
 
         //add listeners to buttons
