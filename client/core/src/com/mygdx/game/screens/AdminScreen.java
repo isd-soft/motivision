@@ -220,8 +220,8 @@ public class AdminScreen implements Screen {
         selectionTable.add(freqChoiceLabel);
         selectionTable.add(arrowFrequencyRight);
         selectionTable.row();
-        selectionTable.add(teamLockedLabel).colspan(2).fill().pad(30, 30, pad, 0);
-        selectionTable.add(checkboxLockTeam).fill().pad(30, 0, pad, 0);;
+        selectionTable.add(teamLockedLabel).colspan(2).fill().pad(30, 0, 0, 0);
+        selectionTable.add(checkboxLockTeam).left().pad(30, pad*2, 0, 0);;
 
         if (serverActivities == null){
             activityNamesButtons.get(0).setDisabled(true);

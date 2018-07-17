@@ -40,9 +40,10 @@ public class LoginScreen implements Screen{
 	private GDXDialogs dialogs;
 	private BackgroundAnimation animationScreenTest;
 
+	private Skin skin2;
 
 
-    public LoginScreen(GGame g){
+	public LoginScreen(GGame g){
     	parent = g;
     	dialogs = GDXDialogsSystem.install();
 		GameMusic.startLoginMusic();
@@ -58,9 +59,10 @@ public class LoginScreen implements Screen{
 
     @Override
         public void show() {
-		stage.clear();
-		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+    	stage.clear();
 
+		skin2 = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+		skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
 
 
 
@@ -74,9 +76,9 @@ public class LoginScreen implements Screen{
 		//add label
 		label = new Label(null, skin);
 		label.setText("");
-		labelName = new Label(null, skin);
+		labelName = new Label(null, skin, "fancy");
 		labelName.setText("User name: ");
-		labelPassword = new Label(null, skin);
+		labelPassword = new Label(null, skin, "fancy");
 		labelPassword.setText("Password: ");
 		//add text fields login/password
 		final TextField loginField = new TextField(null,skin);
@@ -87,7 +89,7 @@ public class LoginScreen implements Screen{
 		passwordField.setMessageText("Password goes here");
 
 		//Forgot password
-		forgotPassword = new TextButton("Forgot password?", skin, "small");
+		forgotPassword = new TextButton("Forgot password?", skin);//, "small");
 		//add buttons to table
 		TextButton register = new TextButton("Register", skin);
 		TextButton submit = new TextButton("Submit", skin);
