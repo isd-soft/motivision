@@ -28,6 +28,12 @@ public class AssetsManager {
     private final String spriteWolfAnimation = "sprite_animation_wolf.png";
     private final String spriteWalkAnimation = "sprite_walk.png";
     private final String backgroundGifAnimation = "background.png";
+
+    private final String buttonClick = "data/click.wav";
+    private final String buySound = "data/hammer.mp3";
+    private final String deniedSound = "data/denied.mp3";
+    private final String equipArmor = "data/equipp.mp3";
+
     public void loadImages() {
         aManager.load(monsterImage, Texture.class);
         aManager.load(knightImage, Texture.class);
@@ -36,5 +42,12 @@ public class AssetsManager {
         aManager.load(spriteWolfAnimation, Texture.class);
         aManager.load(spriteWalkAnimation, Texture.class);
         aManager.load(backgroundGifAnimation, Texture.class);
+    }
+
+    public void loadSounds(){
+        aManager.load(buttonClick, Sound.class);
+        aManager.load(buySound, Sound.class);
+        aManager.load(deniedSound, Sound.class);
+        aManager.load(equipArmor, Sound.class);
     }
 }

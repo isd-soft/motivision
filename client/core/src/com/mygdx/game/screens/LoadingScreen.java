@@ -37,6 +37,7 @@ public class LoadingScreen implements Screen{
 
 
 		parent.assetsManager.loadImages();
+		parent.assetsManager.loadSounds();
         parent.assetsManager.aManager.finishLoading();
     }
     
