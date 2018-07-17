@@ -43,10 +43,6 @@ public class AnimationScreen extends Actor implements Screen {
     private Texture backgroundTexture;
     private Image backgroundImage;
 
-    public AnimationScreen(){
-
-    }
-
     public AnimationScreen(GGame g) {
         parent = g;
 
@@ -123,10 +119,10 @@ public class AnimationScreen extends Actor implements Screen {
         spriteBatch.draw(backgroundTexture, 0 ,0 );
         spriteBatch.draw(currentFrame, 50, 50);
         spriteBatch.draw(runAnimation2.getKeyFrame(stateTime), currentPosition, 0, 100, 100);
-        if(runAnimation.isAnimationFinished(stateTime)){
+        //if(runAnimation.isAnimationFinished(stateTime)){
 
-            parent.changeScreen(parent.getCharacterProfile());
-        }
+          //  parent.changeScreen(parent.getCharacterProfile());
+        //}
         spriteBatch.end();
 
     }

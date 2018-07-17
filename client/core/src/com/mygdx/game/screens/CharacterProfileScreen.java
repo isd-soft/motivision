@@ -67,8 +67,7 @@ public class CharacterProfileScreen implements Screen {
         buySound = parent.assetsManager.aManager.get("data/hammer.mp3");
         deniedSound = parent.assetsManager.aManager.get("data/denied.mp3");
         armorSound = parent.assetsManager.aManager.get("data/equipp.mp3");
-        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
-//        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);

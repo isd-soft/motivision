@@ -74,10 +74,7 @@ public class LoginScreen implements Screen{
         public void show() {
     	stage.clear();
 
-		skin2 = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
 		skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-
-
 
 		// Create a table that fills the screen. Everything else will go inside this table.
 		Table table = new Table();
@@ -159,8 +156,7 @@ public class LoginScreen implements Screen{
 
 
 		//add label
-		label = new Label(null, skin);
-		label.setText("");
+		label = new Label("", skin, "error");
 		labelName = new Label(null, skin, "fancy");
 		labelName.setText("User name: ");
 		labelPassword = new Label(null, skin, "fancy");
@@ -233,19 +229,21 @@ public class LoginScreen implements Screen{
 		table.addActor(animationScreenTest);
 
 		//add everything into table
+		//add everything into table
 		table.add(label).fillX().uniformX();
 		table.row().pad(5, 0, 5, 0);
 		table.add(labelName);
-		table.add(loginField).fillX().uniformX();;
+		table.add(loginField).fillX().uniformX();
 		table.row().pad(5, 0, 5, 0);
 		table.add(labelPassword);
-		table.add(passwordField).fillX().uniformX();;
+		table.add(passwordField).fillX().uniformX();
 		table.row().pad(40, 10, 0, 10);
 		table.add(register);
 		table.add(submit);
 		table.row().pad(20, 0, 0, 0);
 		table.add(forgotPassword);
 		table.add(settings);
+		table.top();
 
         //screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
 

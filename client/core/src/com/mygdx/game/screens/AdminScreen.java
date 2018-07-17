@@ -30,8 +30,6 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
@@ -41,13 +39,12 @@ import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 import de.tomgrill.gdxdialogs.core.listener.TextPromptListener;
 
 public class AdminScreen implements Screen {
-    private static final int    YES = 0;
-    private static final int    NO = 1;
+    private static final int YES = 0;
+    private static final int NO = 1;
 
     private GGame parent;
     private Stage stage;
     private Skin skin;
-    private Skin skin2;
 
     private Viewport viewport;
     private Camera camera;
@@ -69,8 +66,7 @@ public class AdminScreen implements Screen {
     public AdminScreen(GGame g) {
         parent = g;
 
-        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-        skin2 = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -107,25 +103,25 @@ public class AdminScreen implements Screen {
 
         // remove and add buttons
         TextButton create = new TextButton("Create new +", skin, "square");
-        TextButton back = new TextButton("Back", skin, "small");
-        TextButton settings = new TextButton("Settings", skin, "small");
+        TextButton back = new TextButton("Back", skin);
+        TextButton settings = new TextButton("Settings", skin);
 
         final Label frequencyLabel = new Label("Battle frequency", skin);
         final Label teamLockedLabel = new Label("Allow joining in team:", skin);
         Label castleLabel = new Label("Team logo", skin);
         Label teamNameLabel;
-        if(PlayerAccount.getProfileTeamName() == null)
-             teamNameLabel = new Label("Team Name", skin);
+        if (PlayerAccount.getProfileTeamName() == null)
+            teamNameLabel = new Label("Team Name", skin);
         else
             teamNameLabel = new Label(PlayerAccount.getProfileTeamName(), skin);
 
         // left-right buttons
-        arrowCastleLeft = new TextButton("<", skin2);
-        arrowCastleRight = new TextButton(">", skin2);
-        arrowFrequencyLeft = new TextButton("<", skin2);
-        arrowFrequencyRight = new TextButton(">", skin2);
+        arrowCastleLeft = new TextButton("<", skin);
+        arrowCastleRight = new TextButton(">", skin);
+        arrowFrequencyLeft = new TextButton("<", skin);
+        arrowFrequencyRight = new TextButton(">", skin);
 
-        int     battleFrequency;
+        int battleFrequency;
 
         battleFrequency = PlayerAccount.getBattleFrequency();
 
@@ -134,8 +130,7 @@ public class AdminScreen implements Screen {
                 freqChoiceLabel.setText(freqChoices[0]);
             else
                 freqChoiceLabel.setText(freqChoices[1]);
-        }
-        else
+        } else
             freqChoiceLabel.setText("Error!");
 
 
@@ -154,8 +149,7 @@ public class AdminScreen implements Screen {
                 if (checkboxLockTeamBoolean == false) {
                     checkboxLockTeam.setText("Private");
                     checkboxLockTeamBoolean = true;
-                }
-                else {
+                } else {
                     checkboxLockTeam.setText("Public");
                     checkboxLockTeamBoolean = false;
                 }
@@ -172,37 +166,36 @@ public class AdminScreen implements Screen {
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.setScrollbarsOnTop(true);
 
-        if (serverActivities == null)
-        {
+        if (serverActivities == null) {
             Activity ac = new Activity(0);
             ac.setActivityName("No Activity");
             ac.setActivityReward(0);
             teamActivities.add(ac);
         } else teamActivities = serverActivities;
 
-        for (Activity activity: teamActivities) {
+        for (Activity activity : teamActivities) {
             activityNamesButtons.add(new TextButton(activity.getActivityName(), skin, "square"));
             pointsButtons.add(new TextButton(activity.getActivityReward().toString(), skin, "square"));
             xButtons.add(new TextButton("X", skin, "square"));
 
-            list.add(activityNamesButtons.get(activityNamesButtons.size()-1)).fill().expandX();
-            list.add(pointsButtons.get(pointsButtons.size()-1)).width(Value.percentWidth(0.2f, list)).fillX();
-            list.add(xButtons.get(xButtons.size()-1)).width(Value.percentWidth(0.2f, list)).fill();
+            list.add(activityNamesButtons.get(activityNamesButtons.size() - 1)).fill().expandX();
+            list.add(pointsButtons.get(pointsButtons.size() - 1)).width(Value.percentWidth(0.2f, list)).fillX();
+            list.add(xButtons.get(xButtons.size() - 1)).width(Value.percentWidth(0.2f, list)).fill();
             list.row();
 
-            activityNamesButtons.get(activityNamesButtons.size()-1)
+            activityNamesButtons.get(activityNamesButtons.size() - 1)
                     .addListener(new EditActivityName(activity.getActivityId(),
-                                                        activity.getActivityName(),
-                                                            activity.getActivityReward()));
+                            activity.getActivityName(),
+                            activity.getActivityReward()));
 
-            pointsButtons.get(pointsButtons.size()-1)
+            pointsButtons.get(pointsButtons.size() - 1)
                     .addListener(new EditActivityPoints(activity.getActivityId(),
-                                                            activity.getActivityName(),
-                                                                activity.getActivityReward()));
+                            activity.getActivityName(),
+                            activity.getActivityReward()));
 
-            xButtons.get(xButtons.size()-1)
+            xButtons.get(xButtons.size() - 1)
                     .addListener(new DeleteActivity(activity.getActivityId(),
-                                                       activity.getActivityName()));
+                            activity.getActivityName()));
         }
         list.add(create).fill().uniformY().colspan(3);
 
@@ -221,9 +214,10 @@ public class AdminScreen implements Screen {
         selectionTable.add(arrowFrequencyRight);
         selectionTable.row();
         selectionTable.add(teamLockedLabel).colspan(2).fill().pad(30, 0, 0, 0);
-        selectionTable.add(checkboxLockTeam).left().pad(30, pad*2, 0, 0);;
+        selectionTable.add(checkboxLockTeam).left().pad(30, pad * 2, 0, 0);
+        ;
 
-        if (serverActivities == null){
+        if (serverActivities == null) {
             activityNamesButtons.get(0).setDisabled(true);
             activityNamesButtons.get(0).setTouchable(Touchable.disabled);
             xButtons.get(0).setDisabled(true);
@@ -269,9 +263,9 @@ public class AdminScreen implements Screen {
         arrowFrequencyLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if(freqNumber == 1) {
+                if (freqNumber == 1) {
                     freqNumber = 0;
-                }else{
+                } else {
                     freqNumber = 1;
                 }
                 freqChoiceLabel.setText(freqChoices[freqNumber]);
@@ -283,9 +277,9 @@ public class AdminScreen implements Screen {
         arrowFrequencyRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if(freqNumber == 1) {
+                if (freqNumber == 1) {
                     freqNumber = 0;
-                }else{
+                } else {
                     freqNumber = 1;
                 }
                 freqChoiceLabel.setText(freqChoices[freqNumber]);
@@ -296,13 +290,11 @@ public class AdminScreen implements Screen {
         arrowCastleLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if(castleChoice == 1) {
+                if (castleChoice == 1) {
                     castleChoice = 3;
-                }else
-                if(castleChoice == 2){
+                } else if (castleChoice == 2) {
                     castleChoice--;
-                }else
-                if(castleChoice == 3){
+                } else if (castleChoice == 3) {
                     castleChoice--;
                 }
                 textureCastle = new Texture("teamCastle" + castleChoice + ".png");
@@ -314,13 +306,11 @@ public class AdminScreen implements Screen {
         arrowCastleRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if(castleChoice == 1){
+                if (castleChoice == 1) {
                     castleChoice++;
-                }else
-                if(castleChoice == 2){
+                } else if (castleChoice == 2) {
                     castleChoice++;
-                }else
-                if(castleChoice == 3){
+                } else if (castleChoice == 3) {
                     castleChoice = 1;
                 }
                 textureCastle = new Texture("teamCastle" + castleChoice + ".png");
@@ -393,18 +383,17 @@ public class AdminScreen implements Screen {
 
                 @Override
                 public void confirm(String text) {
-                        try {
-                            if(text.length() < 6){
-                                DialogBox.showInfoDialog("Error", "Activity name must be > 6 letters");
-                            }else
-                            if (!PlayerAccount.updateActivity(id, text, reward))
-                                DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        show();
+                    try {
+                        if (text.length() < 6) {
+                            DialogBox.showInfoDialog("Error", "Activity name must be > 6 letters");
+                        } else if (!PlayerAccount.updateActivity(id, text, reward))
+                            DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    show();
                 }
 
                 @Override
@@ -427,6 +416,7 @@ public class AdminScreen implements Screen {
             this.name = elem;
             this.reward = reward;
         }
+
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             GDXDialogs dialogs = GDXDialogsSystem.install();
@@ -446,7 +436,7 @@ public class AdminScreen implements Screen {
                 public void confirm(String text) {
                     try {
                         int points = Integer.valueOf(text);
-                        if(points <= 0)
+                        if (points <= 0)
                             DialogBox.showInfoDialog("Error", "Points must be > 0");
                         if (!PlayerAccount.updateActivity(id, name, points))
                             DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
@@ -454,7 +444,7 @@ public class AdminScreen implements Screen {
                         e.printStackTrace();
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         DialogBox.showInfoDialog("Error", "Points cannot be string");
                     }
                     show();
@@ -492,7 +482,7 @@ public class AdminScreen implements Screen {
 
                 @Override
                 public void click(int button) {
-                    if(button == 0){
+                    if (button == 0) {
                         try {
                             PlayerAccount.deleteActivity(id);
                         } catch (IOException e) {
@@ -532,7 +522,7 @@ public class AdminScreen implements Screen {
 
                 @Override
                 public void confirm(String text) {
-                    try{
+                    try {
                         if (text.length() < 7)
                             DialogBox.showInfoDialog("Error", "Activity name must be at least 6 letters");
                         else

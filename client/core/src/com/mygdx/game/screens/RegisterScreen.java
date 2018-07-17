@@ -174,15 +174,15 @@ public class RegisterScreen implements Screen {
         table.add(registerLabel).fillX();
         table.row().pad(10, 0, 10, 0);
         table.add(label).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
+        table.row().pad(0, 0, 5, 0);
         table.add(loginField).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
+        table.row().pad(5, 0, 5, 0);
         table.add(passwordField).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
+        table.row().pad(5, 0, 5, 0);
         table.add(retypePasswordField).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
+        table.row().pad(5, 0, 5, 0);
         table.add(register).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
+        table.row().pad(5, 0, 5, 0);
         table.add(back).colspan(2);
         table.top();
 
