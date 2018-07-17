@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.animation.ParallaxBackground;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.requests.Activity;
 import com.mygdx.game.requests.PlayerAccount;
@@ -105,6 +106,10 @@ public class EarnPointsScreen implements Screen {
         screenTable = new Table();
         Table buttonTable = new Table();
 
+        ParallaxBackground parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
+        parallaxBackground.setSize(800,480);
+        parallaxBackground.setSpeed(1);
+        screenTable.addActor(parallaxBackground);
         // scrollpane
         ScrollPane scrollPane = new ScrollPane(activitiesTable);
         scrollPane.setSmoothScrolling(false);
