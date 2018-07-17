@@ -289,6 +289,33 @@ public class EarnPointsScreen implements Screen {
             doActivity();
         }
         private void doActivity(){
+
+
+
+            Dialog dialog = new Dialog("", skin) {
+                public void result(Object obj) {
+                    if (obj == "yes") {
+                        try {
+                            //wolf animation goes here
+                            PlayerAccount.doActivity(id);
+                            animationScreenTest.changeAnimation(2);
+                            animationScreenTest.setCurrentPosition(300);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //EarnPointsScreen.this.show();
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.text("Are you sure you did \"" + name + "\" ?");
+            dialog.getContentTable().row();
+            dialog.button("Yes", "yes");
+            dialog.button("No", "no");
+            dialog.show(stage);
+            /*
             final GDXButtonDialog dialogsSystem = dialogs.newDialog(GDXButtonDialog.class);
 
             dialogsSystem.setTitle("Confirmation");
@@ -314,6 +341,7 @@ public class EarnPointsScreen implements Screen {
             dialogsSystem.addButton("Yes");
             dialogsSystem.addButton("No");
             dialogsSystem.build().show();
+            */
         }
     }
     @Override
