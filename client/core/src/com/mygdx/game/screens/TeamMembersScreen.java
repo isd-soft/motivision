@@ -137,7 +137,7 @@ public class TeamMembersScreen implements Screen {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
-
+                selectedName = null;
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
@@ -207,7 +207,6 @@ public class TeamMembersScreen implements Screen {
                             if (selectedName.equals(name))
                                 selectedName = null;
                             show();
-                            //PlayerAccount.selectProfile(currentPlayer);
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {
@@ -218,7 +217,6 @@ public class TeamMembersScreen implements Screen {
             });
             bDialog.addButton("Ok");
             bDialog.addButton("Cancel");
-
             bDialog.build().show();
         }
     }
@@ -227,7 +225,6 @@ public class TeamMembersScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        // tell our stage to do actions and draw itself
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
