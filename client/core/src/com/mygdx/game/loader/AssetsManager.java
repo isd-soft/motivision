@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.gameSets.GGame;
 
 
@@ -34,6 +35,18 @@ public class AssetsManager {
     private final String deniedSound = "data/denied.mp3";
     private final String equipArmor = "data/equipp.mp3";
 
+    private final String layer1 = "forest/layer1.png";
+    private final String layer2 = "forest/layer2.png";
+    private final String layer3 = "forest/layer3.png";
+    private final String layer4 = "forest/layer4.png";
+    private final String layer5 = "forest/layer5.png";
+    private final String layer6 = "forest/layer6.png";
+    private final String layer7 = "forest/layer7.png";
+    private final String layer8 = "forest/layer8.png";
+    private final String layer9 = "forest/layer9.png";
+    private final String layer10 = "forest/layer10.png";
+    private final String layer11 = "forest/layer11.png";
+
     public void loadImages() {
         aManager.load(monsterImage, Texture.class);
         aManager.load(knightImage, Texture.class);
@@ -42,6 +55,18 @@ public class AssetsManager {
         aManager.load(spriteWolfAnimation, Texture.class);
         aManager.load(spriteWalkAnimation, Texture.class);
         aManager.load(backgroundGifAnimation, Texture.class);
+
+        aManager.load(layer1, Texture.class);
+        aManager.load(layer2, Texture.class);
+        aManager.load(layer3, Texture.class);
+        aManager.load(layer4, Texture.class);
+        aManager.load(layer5, Texture.class);
+        aManager.load(layer6, Texture.class);
+        aManager.load(layer7, Texture.class);
+        aManager.load(layer8, Texture.class);
+        aManager.load(layer9, Texture.class);
+        aManager.load(layer10, Texture.class);
+        aManager.load(layer11, Texture.class);
     }
 
     public void loadSounds(){
@@ -49,5 +74,15 @@ public class AssetsManager {
         aManager.load(buySound, Sound.class);
         aManager.load(deniedSound, Sound.class);
         aManager.load(equipArmor, Sound.class);
+    }
+
+    public Array<Texture> getLayers(){
+        Array<Texture> array = new Array<Texture>();
+        for (int i = 1; i < 12; i++){
+            Texture texture = aManager.get("forest/layer"+i+".png");
+            texture.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+            array.add(texture);
+        }
+        return array;
     }
 }
