@@ -205,6 +205,7 @@ public class EarnPointsScreen implements Screen {
                             //wolf animation goes here
                             PlayerAccount.doActivity(id);
                             animationScreenTest.changeAnimation(2);
+                            animationScreenTest.setCurrentPosition(300);
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {

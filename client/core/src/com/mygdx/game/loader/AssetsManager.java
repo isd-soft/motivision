@@ -33,6 +33,16 @@ public class AssetsManager {
     private final String buySound = "data/hammer.mp3";
     private final String deniedSound = "data/denied.mp3";
     private final String equipArmor = "data/equipp.mp3";
+    private final String spriteAttackAnimation = "warrior_attack.png";
+    private final String boomAnimation = "boom_animation.png";
+
+    private final String warriorWalk = "spritesheetWarriarWalk.png";
+    private final String warriorRun = "spritesheetWarriarRun.png";
+    private final String warriorAttack = "spritesheetWarriarAttack.png";
+
+
+    private final String trollRun = "spritesheetTrollRun.png";
+    private final String trollDie = "spritesheetTrollDie.png";
 
     public void loadImages() {
         aManager.load(monsterImage, Texture.class);
@@ -49,5 +59,13 @@ public class AssetsManager {
         aManager.load(buySound, Sound.class);
         aManager.load(deniedSound, Sound.class);
         aManager.load(equipArmor, Sound.class);
+        aManager.load(spriteAttackAnimation, Texture.class);
+        aManager.load(boomAnimation, Texture.class);
+        aManager.load(warriorWalk, Texture.class);
+        aManager.load(warriorRun, Texture.class);
+        aManager.load(warriorAttack, Texture.class);
+        aManager.load(trollDie, Texture.class);
+        aManager.load(trollRun, Texture.class);
+//        aManager.load(monsterImage, Pixmap.class);
     }
 }
