@@ -65,7 +65,7 @@ public class EarnPointsScreen implements Screen {
 
         animationScreenTest = new AnimationScreenTest(parent);
 //        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
-        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
 
 
 
@@ -98,8 +98,8 @@ public class EarnPointsScreen implements Screen {
         }
         Image image = new Image(texture);
         //create buttons Settings, Back and adding them listeners
-        TextButton settingsButton = new TextButton("Settings", skin, "small");
-        TextButton backButton = new TextButton("Back", skin, "small");
+        TextButton settingsButton = new TextButton("Settings", skin);
+        TextButton backButton = new TextButton("Back", skin);
 
         // tables
         Table activitiesTable = new Table();
