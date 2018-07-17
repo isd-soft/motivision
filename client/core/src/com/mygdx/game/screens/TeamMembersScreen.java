@@ -45,8 +45,7 @@ public class TeamMembersScreen implements Screen {
 
 
         dialogs = GDXDialogsSystem.install();
-//        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
-        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+        skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
 
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
@@ -81,8 +80,8 @@ public class TeamMembersScreen implements Screen {
         teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" Wins: " + PlayerAccount.getWins() + " \t Loss: " + PlayerAccount.getLosses());
 
         // buttons
-        TextButton settingsButton = new TextButton("Settings", skin, "small");
-        TextButton backButton = new TextButton("Back", skin, "small");
+        TextButton settingsButton = new TextButton("Settings", skin);
+        TextButton backButton = new TextButton("Back", skin);
 
         // tables
         Table screenTable = new Table();
