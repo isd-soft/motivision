@@ -76,6 +76,7 @@ public class LoginScreen implements Screen{
 
 		stage.addActor(table);
 
+
 		//add label
 		label = new Label(null, skin);
 		label.setText("");
@@ -108,13 +109,31 @@ public class LoginScreen implements Screen{
 
 
 		//add listeners to buttons
+        passwordField.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                //TODO Add support for ENTER KEY
+            }
+        });
 		submit.addListener(new SubmitListener(loginField, passwordField));
 		forgotPassword.addListener(new ForgotPassword());
 		settings.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor){
 				click.play();
-				parent.changeScreen(parent.getSettings());
+                Dialog dialog = new Dialog("Settings", skin) {
+                    public void result(Object obj) {
+                        System.out.println("result "+obj);
+                    }
+                };
+                dialog.text("Are you sure you want to yada yada?");
+                dialog.button("Yes", true); //sends "true" as the result
+                dialog.button("No", false); //sends "false" as the result
+                dialog.show(stage);
+
+
+
+                //parent.changeScreen(parent.getSettings());
 			}
 		});
 
@@ -238,10 +257,13 @@ public class LoginScreen implements Screen{
 
     private void forgotPassword(){
 		click.play();
-            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
-            bDialog.setTitle("Lol");
-            bDialog.setMessage("Too bad");
-            bDialog.addButton("Go back");
-            bDialog.build().show();
+        Dialog dialog = new Dialog("", skin) {
+            public void result(Object obj) {
+                System.out.println("result "+obj);
+            }
+        };
+        dialog.text("Next time be carefull ;)");
+        dialog.button("ok", "ok"); //sends "true" as the result
+        dialog.show(stage);
     }
 }
