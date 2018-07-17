@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -28,10 +29,10 @@ import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 
 public class TeamMembersScreen implements Screen {
 
-    private GGame parent;
-    private Stage stage;
-    private Skin skin;
-    private Texture texture;
+    private GGame       parent;
+    private Stage       stage;
+    private Skin        skin;
+    private Texture     texture;
     private Viewport viewport;
     private Camera camera;
     private Music loginMusic;
@@ -40,6 +41,9 @@ public class TeamMembersScreen implements Screen {
 
     public TeamMembersScreen(GGame g) {
         parent = g;
+        Pixmap  pixmap;
+
+
         dialogs = GDXDialogsSystem.install();
 //        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
         skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));

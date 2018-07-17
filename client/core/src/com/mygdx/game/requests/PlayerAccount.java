@@ -298,7 +298,9 @@ public class PlayerAccount {
             return false;
         }
         result = profile.buyItem(id);
-        profile.updateItems();
+
+        profile = Profile.getProfile(profile.getId());
+        //profile.updateItems();
         //selectProfile(profile.getName());
         return result;
     }
