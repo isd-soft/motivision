@@ -483,6 +483,7 @@ public class AdminScreen implements Screen {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        Gdx.input.setOnscreenKeyboardVisible(false);
                         AdminScreen.this.show();
                     }
                 }
@@ -571,6 +572,7 @@ public class AdminScreen implements Screen {
                         } catch (NumberFormatException e) {
                             DialogBox.showInfoDialog("Error", "Points cannot be string");
                         }
+                        Gdx.input.setOnscreenKeyboardVisible(false);
                         AdminScreen.this.show();
                     }
                 }
@@ -727,6 +729,7 @@ public class AdminScreen implements Screen {
                             e.printStackTrace();
                         }
                     }
+                    Gdx.input.setOnscreenKeyboardVisible(false);
                     AdminScreen.this.show();
                 }
             };

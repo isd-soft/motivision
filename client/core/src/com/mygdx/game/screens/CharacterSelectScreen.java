@@ -77,6 +77,8 @@ public class CharacterSelectScreen implements Screen {
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
     }
 
+
+
     @Override
     public void show() {
         stage.clear();
@@ -89,6 +91,8 @@ public class CharacterSelectScreen implements Screen {
         Table screenTable = new Table();
         Table buttonTable = new Table();
         Table charactersTable = new Table();
+
+
 
         //settings
         //music volume

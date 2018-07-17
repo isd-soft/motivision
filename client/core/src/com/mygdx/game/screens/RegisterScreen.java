@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
@@ -167,6 +168,15 @@ public class RegisterScreen implements Screen {
             }
         });
 
+        retypePasswordField.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+                    new RegisterListener(loginField, passwordField, retypePasswordField);
+                }
+            }
+        });
+
         animationScreenTest.setFillParent(true);
         animationScreenTest.setZIndex(0);
         table.addActor(animationScreenTest);
@@ -226,6 +236,7 @@ public class RegisterScreen implements Screen {
     }
 
 
+
     class RegisterListener extends ChangeListener {
         private TextField loginField;
         private TextField passwordField;
@@ -258,6 +269,7 @@ public class RegisterScreen implements Screen {
                 if (PlayerAccount.registerNewPlayer(loginField.getText(), encryptedPassword)) {
                     log.info("Registered successfully");
                     GameMusic.stopAndDisposeLoginOst();
+                    Gdx.input.setOnscreenKeyboardVisible(false);
                     parent.changeScreen(parent.getCharacterSelect());
                 } else {
                     log.info("Register failed");

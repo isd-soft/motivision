@@ -720,8 +720,10 @@ public class CreateCharacterScreen implements Screen {
             characterParameters.put(Profile.TEAM_ID, teamId + "");
             characterParameters.put(Profile.PLAYER_ID, PlayerAccount.getPlayerId() + "");
             try {
-                if (PlayerAccount.createNewProfile(characterParameters))
+                if (PlayerAccount.createNewProfile(characterParameters)) {
                     parent.changeScreen(parent.getCharacterSelect());
+                    Gdx.input.setOnscreenKeyboardVisible(false);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
