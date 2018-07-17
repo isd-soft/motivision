@@ -1,194 +1,212 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.loader.GameMusic;
 import com.mygdx.game.logger.Logger;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
-import com.mygdx.game.gameSets.GGame;
+import com.badlogic.gdx.Input.Keys;
 
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
 import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
-import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 
-public class LoginScreen implements Screen{
+public class LoginScreen implements Screen {
     // New version
-	private Logger log = new Logger();
+    private Logger log = new Logger();
     private GGame parent;
-	private Stage stage;
-	private Skin skin;
-	private Label label;
-	private Label labelName;
-	private Label labelPassword;
+    private Stage stage;
+    private Skin skin;
+    private Label label;
+    private Label labelName;
+    private Label labelPassword;
     private TextButton forgotPassword;
-	private Viewport viewport;
-	private Camera camera;
-	private Music loginMusic;
-	private GDXDialogs dialogs;
-	private BackgroundAnimation animationScreenTest;
+    private Viewport viewport;
+    private Camera camera;
+    private Music loginMusic;
+    private GDXDialogs dialogs;
+    private BackgroundAnimation animationScreenTest;
 
-	private Sound click;
-	private Skin skin2;
+    private Sound click;
 
 
-	public LoginScreen(GGame g){
-    	parent = g;
-    	dialogs = GDXDialogsSystem.install();
-		GameMusic.startLoginMusic();
-		click = parent.assetsManager.aManager.get("data/click.wav");
-		stage = new Stage();
-		viewport = new StretchViewport(800, 480, stage.getCamera());
-		stage.setViewport(viewport);
+    public LoginScreen(GGame g) {
+        parent = g;
+        dialogs = GDXDialogsSystem.install();
+        GameMusic.startLoginMusic();
+        click = parent.assetsManager.aManager.get("data/click.wav");
+        stage = new Stage();
+        viewport = new StretchViewport(800, 480, stage.getCamera());
+        stage.setViewport(viewport);
         animationScreenTest = new BackgroundAnimation(parent);
-		// tells our asset manger that we want to load the images set in loadImages method
-		parent.assetsManager.loadImages();
+        // tells our asset manger that we want to load the images set in loadImages method
+        parent.assetsManager.loadImages();
 // tells the asset manager to load the images and wait until finished loading.
-		parent.assetsManager.aManager.finishLoading();
-        }
+        parent.assetsManager.aManager.finishLoading();
+    }
 
     @Override
-        public void show() {
-    	stage.clear();
+    public void show() {
+        stage.clear();
 
-		skin2 = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
-		skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-
+        skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
 
 
-		// Create a table that fills the screen. Everything else will go inside this table.
-		Table table = new Table();
-		table.setFillParent(true);
+        // Create a table that fills the screen. Everything else will go inside this table.
+        Table table = new Table();
+        table.setFillParent(true);
 //		table.setDebug(true);
 
-		stage.addActor(table);
+        stage.addActor(table);
 
-		//add label
-		label = new Label(null, skin);
-		label.setText("");
-		labelName = new Label(null, skin, "fancy");
-		labelName.setText("User name: ");
-		labelPassword = new Label(null, skin, "fancy");
-		labelPassword.setText("Password: ");
-		//add text fields login/password
-		final TextField loginField = new TextField(null,skin);
-		loginField.setMessageText("Login goes here");
-		final TextField passwordField = new TextField(null, skin);
-		passwordField.setPasswordCharacter('*');
-		passwordField.setPasswordMode(true);
-		passwordField.setMessageText("Password goes here");
+        //add label
+        label = new Label(null, skin, "error");
+        label.setText("");
+        labelName = new Label(null, skin, "fancy");
+        labelName.setText("User name: ");
+        labelPassword = new Label(null, skin, "fancy");
+        labelPassword.setText("Password: ");
+        //add text fields login/password
+        final TextField loginField = new TextField(null, skin);
+        loginField.setMessageText("Login goes here");
+        final TextField passwordField = new TextField(null, skin);
+        passwordField.setPasswordCharacter('*');
+        passwordField.setPasswordMode(true);
+        passwordField.setMessageText("Password goes here");
 
-		//Forgot password
-		forgotPassword = new TextButton("Forgot password?", skin);//, "small");
-		//add buttons to table
-		TextButton register = new TextButton("Register", skin);
-		TextButton submit = new TextButton("Submit", skin);
-		TextButton settings = new TextButton("Settings", skin);
+        //Forgot password
+        forgotPassword = new TextButton("Forgot password?", skin);//, "small");
+        //add buttons to table
+        TextButton register = new TextButton("Register", skin);
+        TextButton submit = new TextButton("Submit", skin);
+        TextButton settings = new TextButton("Settings", skin);
 
-		register.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor) {
-				click.play();
-				parent.changeScreen(parent.getRegister());
-			}
-		});
+        register.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                click.play();
+                parent.changeScreen(parent.getRegister());
+            }
+        });
 
 
-		//add listeners to buttons
-		submit.addListener(new SubmitListener(loginField, passwordField));
-		forgotPassword.addListener(new ForgotPassword());
-		settings.addListener(new ChangeListener() {
-			@Override
-			public void changed(ChangeEvent event, Actor actor){
-				click.play();
-				parent.changeScreen(parent.getSettings());
-			}
-		});
+        //add listeners to buttons
+        submit.addListener(new SubmitListener(loginField, passwordField));
+        forgotPassword.addListener(new ForgotPassword());
+        settings.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                click.play();
+                parent.changeScreen(parent.getSettings());
+            }
+        });
 
-		animationScreenTest.setFillParent(true);
-		animationScreenTest.setZIndex(0);
-		table.addActor(animationScreenTest);
+        animationScreenTest.setFillParent(true);
+        animationScreenTest.setZIndex(0);
+        table.addActor(animationScreenTest);
 
-		//add everything into table
-		table.add(label).fillX().uniformX();
-		table.row().pad(5, 0, 5, 0);
-		table.add(labelName);
-		table.add(loginField).fillX().uniformX();;
-		table.row().pad(5, 0, 5, 0);
-		table.add(labelPassword);
-		table.add(passwordField).fillX().uniformX();;
-		table.row().pad(40, 10, 0, 10);
-		table.add(register);
-		table.add(submit);
-		table.row().pad(20, 0, 0, 0);
-		table.add(forgotPassword);
-		table.add(settings);
+        //add everything into table
+        table.add(label).fillX().uniformX();
+        table.row().pad(5, 0, 5, 0);
+        table.add(labelName);
+        table.add(loginField).fillX().uniformX();
+        ;
+        table.row().pad(5, 0, 5, 0);
+        table.add(labelPassword);
+        table.add(passwordField).fillX().uniformX();
+        ;
+        table.row().pad(40, 10, 0, 10);
+        table.add(register);
+        table.add(submit);
+        table.row().pad(20, 0, 0, 0);
+        table.add(forgotPassword);
+        table.add(settings);
+        table.top();
 
         //screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
 
 
-
-
+//        new Dialog("Some Dialog", skin, "dialog") {
+//            protected void result (Object object) {
+//                System.out.println("Chosen: " + object);
+//            }
+//        }.text("Are you enjoying this demo?").button("Yes", true).button("No", false).key(Keys.ENTER, true)
+//                .key( Input.Keys.ESCAPE, false).show(stage);
 
         Gdx.input.setInputProcessor(stage);
-	}
+    }
 
-	@Override
-        public void render(float delta) {
-    	//camera.update();
-		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    @Override
+    public void render(float delta) {
+        //camera.update();
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		// tell our stage to do actions and draw itself
-		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-		stage.draw();
-	}
+        // tell our stage to do actions and draw itself
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.draw();
+    }
 
-	@Override
-        public void resize(int width, int height) {
+    @Override
+    public void resize(int width, int height) {
 
 
-    	stage.getViewport().update(width,height,true);
-	}
- 
-	@Override
-        public void pause() {
-	}
- 
-	@Override
-        public void resume() {
-	}
- 
-	@Override
-        public void hide() {
-	}
- 
-	@Override
-        public void dispose() {
-			stage.dispose();
-	}
+        stage.getViewport().update(width, height, true);
+    }
 
-	class SubmitListener extends ChangeListener {
-    	private TextField	loginField;
-    	private TextField	passwordField;
+    @Override
+    public void pause() {
+    }
 
-		public SubmitListener(TextField loginField, TextField passwordField) {
-			this.loginField = loginField;
-			this.passwordField = passwordField;
-		}
+    @Override
+    public void resume() {
+    }
+
+    @Override
+    public void hide() {
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
+
+    private void forgotPassword() {
+        click.play();
+        final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+        bDialog.setTitle("Lol");
+        bDialog.setMessage("Too bad");
+        bDialog.addButton("Go back");
+        bDialog.build().show();
+    }
+
+    class SubmitListener extends ChangeListener {
+        private TextField loginField;
+        private TextField passwordField;
+
+        public SubmitListener(TextField loginField, TextField passwordField) {
+            this.loginField = loginField;
+            this.passwordField = passwordField;
+        }
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -228,20 +246,11 @@ public class LoginScreen implements Screen{
         }
     }
 
-	class ForgotPassword extends ChangeListener{
+    class ForgotPassword extends ChangeListener {
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
             forgotPassword();
         }
-    }
-
-    private void forgotPassword(){
-		click.play();
-            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
-            bDialog.setTitle("Lol");
-            bDialog.setMessage("Too bad");
-            bDialog.addButton("Go back");
-            bDialog.build().show();
     }
 }

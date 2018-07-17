@@ -15,11 +15,6 @@ import com.mygdx.game.gameSets.GGame;
 
 public class SettingsScreen implements Screen{
 
-	//123456
-
-	//
-
-
     private GGame parent;
 	private Stage stage;
 	private Viewport viewport;
@@ -45,13 +40,13 @@ public class SettingsScreen implements Screen{
     @Override
 	public void show() {
 		stage.clear();
-		skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
+//		stage.setDebugAll(true);
+		skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
 
 
 		// Create a table that fills the screen. Everything else will go inside this table.
 		Table table = new Table();
 		table.setFillParent(true);
-		//table.setDebug(true);
 		stage.addActor(table);
 
 		//music volume
@@ -110,7 +105,7 @@ public class SettingsScreen implements Screen{
 		});
 
 		//making labels
-		titleLabel = new Label( "Preferences", skin, "big" );
+		titleLabel = new Label( "Preferences", skin);
 		volumeMusicLabel = new Label( "Music Volume", skin );
 		volumeSoundLabel = new Label( "Sound Volume", skin  );
 		musicOnOffLabel = new Label( "Music Effect", skin  );
@@ -146,7 +141,7 @@ public class SettingsScreen implements Screen{
 	public void render(float delta) {
 
 		// clear the screen ready for next set of images to be drawn
-		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+		Gdx.gl.glClearColor(254, 254, 254, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		// tell our stage to do actions and draw itself
