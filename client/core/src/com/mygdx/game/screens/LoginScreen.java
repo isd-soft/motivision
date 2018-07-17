@@ -44,7 +44,6 @@ public class LoginScreen implements Screen{
 	private BackgroundAnimation animationScreenTest;
 
 	//trying...
-    private Label titleLabel;
     private Label volumeMusicLabel;
     private Label volumeSoundLabel;
     private Label musicOnOffLabel;
@@ -143,7 +142,6 @@ public class LoginScreen implements Screen{
         });
 
         //making labels
-        titleLabel = new Label( "Preferences", skin);
         volumeMusicLabel = new Label( "Music Volume", skin );
         volumeSoundLabel = new Label( "Sound Volume", skin  );
         musicOnOffLabel = new Label( "Music Effect", skin  );
@@ -217,7 +215,7 @@ public class LoginScreen implements Screen{
                 dialog.getContentTable().add(soundOnOffLabel);
                 dialog.getContentTable().add(soundCheckbox);
                 dialog.getContentTable().row();
-                dialog.getContentTable().add(back).colspan(2);
+                dialog.button("back", "back");
                 dialog.show(stage);
 
                 //parent.changeScreen(parent.getSettings());
