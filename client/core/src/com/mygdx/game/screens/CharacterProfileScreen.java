@@ -3,6 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.loader.BuySound;
 import com.mygdx.game.requests.Item;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.PlayerAccount;
@@ -50,7 +52,9 @@ public class CharacterProfileScreen implements Screen {
     private GDXDialogs buyItemDialog;
 
     private Texture knightTex;
-
+    private Sound buySound;
+    private Sound deniedSound;
+    private Sound armorSound;
     private Viewport viewport;
     private Camera camera;
     private Music loginMusic;
@@ -60,7 +64,9 @@ public class CharacterProfileScreen implements Screen {
         selectDialog = GDXDialogsSystem.install();
         manageTeamDialog = GDXDialogsSystem.install();
         buyItemDialog = GDXDialogsSystem.install();
-
+        buySound = parent.assetsManager.aManager.get("data/hammer.mp3");
+        deniedSound = parent.assetsManager.aManager.get("data/denied.mp3");
+        armorSound = parent.assetsManager.aManager.get("data/equipp.mp3");
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
 //        skin = new Skin(Gdx.files.internal("skin/glassy-ui.json"));
         stage = new Stage();
@@ -333,8 +339,12 @@ public class CharacterProfileScreen implements Screen {
                 public void click(int button) {
                     if (button == YES) {
                         try {
-                            if (PlayerAccount.buyItem(itemId) == false)
+                            if (!PlayerAccount.buyItem(itemId)) {
+                                deniedSound.play();
                                 DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                            }
+                            else
+                                buySound.play();
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {
@@ -369,10 +379,13 @@ public class CharacterProfileScreen implements Screen {
             }
             else if (status == Item.EQUIPPED_ITEM) {
                 PlayerAccount.unequipItem(itemId);
+                armorSound.play();
+
             }
             else if (status == Item.UNEQUIPPED_ITEM) {
                 System.out.println("Start equipping " + itemType + "(" + itemId + ")");
                 PlayerAccount.equipItem(itemId);
+                armorSound.play();
             }
             show();
 

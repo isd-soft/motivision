@@ -29,11 +29,13 @@ public class RegisterScreen  implements Screen {
     private Label label;
     private Viewport viewport;
     private Sound registerSound;
+    private Sound click;
     private BackgroundAnimation animationScreenTest;
 
     public RegisterScreen(GGame g){
 
         parent = g;
+        click = parent.assetsManager.aManager.get("data/click.wav");
         animationScreenTest = new BackgroundAnimation(parent);
         stage = new Stage();
         viewport = new StretchViewport(800,480, stage.getCamera());
@@ -154,6 +156,7 @@ public class RegisterScreen  implements Screen {
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                click.play();
                 log.info("Back button pressed");
                 parent.changeScreen(parent.getLogin());
             }
@@ -232,6 +235,7 @@ public class RegisterScreen  implements Screen {
             //sends data into DB
             Player player;
             log.info("Register action start");
+            click.play();
             if (validateLogin(loginField.getText()) == false)
                 return;
             else if (validatePassword(passwordField.getText()) == false)

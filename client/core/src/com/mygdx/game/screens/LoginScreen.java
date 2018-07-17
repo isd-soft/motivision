@@ -3,6 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -40,6 +41,7 @@ public class LoginScreen implements Screen{
 	private GDXDialogs dialogs;
 	private BackgroundAnimation animationScreenTest;
 
+	private Sound click;
 	private Skin skin2;
 
 
@@ -47,6 +49,7 @@ public class LoginScreen implements Screen{
     	parent = g;
     	dialogs = GDXDialogsSystem.install();
 		GameMusic.startLoginMusic();
+		click = parent.assetsManager.aManager.get("data/click.wav");
 		stage = new Stage();
 		viewport = new StretchViewport(800, 480, stage.getCamera());
 		stage.setViewport(viewport);
@@ -98,6 +101,7 @@ public class LoginScreen implements Screen{
 		register.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				click.play();
 				parent.changeScreen(parent.getRegister());
 			}
 		});
@@ -109,6 +113,7 @@ public class LoginScreen implements Screen{
 		settings.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor){
+				click.play();
 				parent.changeScreen(parent.getSettings());
 			}
 		});
@@ -130,6 +135,7 @@ public class LoginScreen implements Screen{
 		table.add(submit);
 		table.row().pad(20, 0, 0, 0);
 		table.add(forgotPassword);
+		table.add(settings);
 
         //screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
 
@@ -187,6 +193,7 @@ public class LoginScreen implements Screen{
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             Player player = null;
+            click.play();
             if (loginField.getText() == "") {
                 log.warn("Login not inputted");
                 label.setText("Write the login please");
@@ -230,6 +237,7 @@ public class LoginScreen implements Screen{
     }
 
     private void forgotPassword(){
+		click.play();
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Lol");
             bDialog.setMessage("Too bad");
