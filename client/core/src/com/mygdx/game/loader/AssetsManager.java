@@ -29,6 +29,10 @@ public class AssetsManager {
     private final String spriteWolfAnimation = "sprite_animation_wolf.png";
     private final String spriteWalkAnimation = "sprite_walk.png";
     private final String backgroundGifAnimation = "background.png";
+    private final String characterSelect = "castlebg.jpg";
+    private final String characterProfile = "barracks.jpg";
+    private final String manageTeam = "manageteam.jpg";
+    private final String dwarfBackground = "dwarf.png";
 
     private final String buttonClick = "data/click.wav";
     private final String buySound = "data/hammer.mp3";
@@ -65,6 +69,10 @@ public class AssetsManager {
         aManager.load(spriteWolfAnimation, Texture.class);
         aManager.load(spriteWalkAnimation, Texture.class);
         aManager.load(backgroundGifAnimation, Texture.class);
+        aManager.load(characterSelect, Texture.class);
+        aManager.load(characterProfile, Texture.class);
+        aManager.load(manageTeam, Texture.class);
+        aManager.load(dwarfBackground, Texture.class);
 
         aManager.load(layer1, Texture.class);
         aManager.load(layer2, Texture.class);

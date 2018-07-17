@@ -34,6 +34,8 @@ public class TeamMembersScreen implements Screen {
     private Skin        skin;
     private Texture     texture;
     private Viewport viewport;
+    private Texture bgTexture;
+    private Image bgImage;
     private Camera camera;
     private Music loginMusic;
     private GDXDialogs dialogs;
@@ -46,7 +48,10 @@ public class TeamMembersScreen implements Screen {
 
         dialogs = GDXDialogsSystem.install();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-
+        bgTexture = parent.assetsManager.aManager.get("barracks.jpg");
+        bgImage = new Image(bgTexture);
+        bgImage.setFillParent(true);
+        bgImage.setZIndex(0);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -132,6 +137,7 @@ public class TeamMembersScreen implements Screen {
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);;
 
         //create table for all screen and add into it everything
+        screenTable.addActor(bgImage);
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
