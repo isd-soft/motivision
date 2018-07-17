@@ -155,6 +155,7 @@ public class TeamController {
         team.setName(name);
         team.setTeamLogo(logo);
         team.setBattleFrequency(battleFrequency);
+        team.setLock(false);
         log.info("Team creation completed");
         teamRepository.save(team);
         log.info("Team saved to the database");
