@@ -74,11 +74,11 @@ public class LoginScreen implements Screen{
 		stage.addActor(table);
 
 		//add label
-		label = new Label(null, skin, "clean");
+		label = new Label(null, skin);
 		label.setText("");
-		labelName = new Label(null, skin, "fancyBlue");
+		labelName = new Label(null, skin, "fancy");
 		labelName.setText("User name: ");
-		labelPassword = new Label(null, skin, "fancyBlue");
+		labelPassword = new Label(null, skin, "fancy");
 		labelPassword.setText("Password: ");
 		//add text fields login/password
 		final TextField loginField = new TextField(null,skin);
