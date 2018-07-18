@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class CharacterAnimation {
-    private static final int            MAX_FRAMES = 7;
-    private static final int            ANIMATION_TYPES = 1;
+    private static final int MAX_FRAMES = 7;
+    private static final int ANIMATION_TYPES = 1;
 
-    private String                      animationType;
+    private String animationType;
     //private ArrayList<TextureRegion>    animations;
     private LinkedHashMap<String, ArrayList<TextureRegion>> animations;
-    private int                         armorType;
-    private int                         headType;
-    private int                         legsType;
-    private int                         shieldType;
-    private int                         weaponType;
+    private int armorType;
+    private int headType;
+    private int legsType;
+    private int shieldType;
+    private int weaponType;
 
     public CharacterAnimation(int armorType, int headType, int legsType, int shieldType, int weaponType) {
-        ArrayList<TextureRegion>    frames;
-        TextureRegion               textureRegion;
+        ArrayList<TextureRegion> frames;
+        TextureRegion textureRegion;
 
         this.armorType = armorType;
         this.headType = headType;

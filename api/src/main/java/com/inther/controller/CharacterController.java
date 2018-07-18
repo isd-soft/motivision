@@ -7,6 +7,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 @RestController
@@ -505,8 +508,8 @@ public class CharacterController {
     @RequestMapping(value = "/delete_player", method = RequestMethod.DELETE)
     public Map<String, Object> deletePlayer(@RequestParam("playerId") Long playerId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
-        Optional<Player> optionalCharacter = playerRepository.findById(playerId);
-        if (!optionalCharacter.isPresent()) {
+        Optional<Player> optionalPlayer = playerRepository.findById(playerId);
+        if (!optionalPlayer.isPresent()) {
             log.warn("Player with playerId " + playerId + " not found");
             map.put("status", "failed");
             map.put("message", "Player not found");
@@ -516,6 +519,26 @@ public class CharacterController {
         playerRepository.deleteById(playerId);
         log.info("Player deleted");
         map.put("status", "success");
+        return map;
+    }
+    /*
+    * Request points request
+    * Used to get character points
+    * */
+    @RequestMapping(value = "/get_points", method = RequestMethod.GET)
+    public Map<String, Object> getPoints(@RequestParam(value = "characterId") Long characterId){
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+        Optional<Character> optionalCharacter = characterRepository.findById(characterId);
+        if(!optionalCharacter.isPresent()){
+            log.warn("Character with characterId " + characterId + " not found");
+            map.put("status", "failed");
+            map.put("message", "Character not found");
+            return map;
+        }
+        Character character = optionalCharacter.get();
+        log.info("Character found");
+        map.put("status", "success");
+        map.put("points", character.getPoints());
         return map;
     }
 }
