@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -346,7 +347,33 @@ public class CharacterSelectScreen implements Screen {
 
         void deletePlayer(){
             gameSounds.clickSound();
-            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+
+            Dialog dialog = new Dialog("Account deletion", skin) {
+                @Override
+                public void result(Object obj) {
+                    gameSounds.clickSound();
+                    if (obj == "confirm") {
+                        try {
+                            PlayerAccount.deletePlayer();
+                            parent.changeScreen(parent.getLogin());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //CharacterSelectScreen.this.show();
+                }
+            };
+
+            dialog.getContentTable().row();
+            dialog.text("Are you sure you want to delete your account ?");
+            dialog.getContentTable().row();
+            dialog.button("Confirm", "confirm");
+            dialog.button("Cancel", "cancel");
+            dialog.show(stage);
+
+            /*final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to delete your account ?");
             bDialog.setClickListener(new ButtonClickListener() {
@@ -368,7 +395,7 @@ public class CharacterSelectScreen implements Screen {
             });
             bDialog.addButton("Delete");
             bDialog.addButton("Cancel");
-            bDialog.build().show();
+            bDialog.build().show();*/
         }
     }
     class DeleteCharacter extends ChangeListener {
@@ -385,7 +412,34 @@ public class CharacterSelectScreen implements Screen {
 
         public void     SelectDialog() {
             gameSounds.clickSound();
-            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+
+
+            Dialog dialog = new Dialog("Admin deletion", skin) {
+                @Override
+                public void result(Object obj) {
+                    gameSounds.clickSound();
+                    if (obj == "confirm") {
+                        try {
+                            PlayerAccount.deleteProfile(name);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        texture = null;
+                    }
+                    CharacterSelectScreen.this.show();
+                }
+            };
+
+            dialog.getContentTable().row();
+            dialog.text("Character \"" + name + "\" is the team admin. \nDeleting team admin will also delete\nthe team and all characters of it's members");
+            dialog.getContentTable().row();
+            dialog.button("Confirm", "confirm");
+            dialog.button("Cancel", "cancel");
+            dialog.show(stage);
+
+            /*final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Character \"" + name + "\" is the team admin. Deleting team admin will also delete the team and all characters of it's members");
 
@@ -411,11 +465,45 @@ public class CharacterSelectScreen implements Screen {
             bDialog.addButton("Ok");
             bDialog.addButton("Cancel");
 
-            bDialog.build().show();
+            bDialog.build().show();*/
         }
 
         public void     ConfirmDialog() {
-            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+
+
+
+            Dialog dialog = new Dialog("Character deletion", skin) {
+                @Override
+                public void result(Object obj) {
+                    gameSounds.clickSound();
+                    if (obj == "yes") {
+                        if (PlayerAccount.isAdmin(name)) {
+                            SelectDialog();
+                        }
+                        else {
+                            try {
+                                PlayerAccount.deleteProfile(name);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            texture = null;
+                            CharacterSelectScreen.this.show();
+                        }
+                    }
+                }
+            };
+
+            dialog.getContentTable().row();
+            dialog.text("Are you sure you want to delete \"" + name + "\" ?");
+            dialog.getContentTable().row();
+            dialog.button("No", "no");
+            dialog.button("Yes", "yes");
+            dialog.show(stage);
+
+
+            /*final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to delete \"" + name + "\" ?");
 
@@ -446,7 +534,7 @@ public class CharacterSelectScreen implements Screen {
             bDialog.addButton("Yes");
             bDialog.addButton("No");
 
-            bDialog.build().show();
+            bDialog.build().show();*/
         }
     }
 

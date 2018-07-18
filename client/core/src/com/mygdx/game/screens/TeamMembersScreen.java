@@ -45,10 +45,7 @@ public class TeamMembersScreen implements Screen {
     private GDXDialogs dialogs;
     private String selectedName = null;
 
-    private Label volumeMusicLabel;
-    private Label volumeSoundLabel;
-    private Label musicOnOffLabel;
-    private Label soundOnOffLabel;
+    private SettingsPopup settingsPopup;
 
     public TeamMembersScreen(GGame g) {
         parent = g;
@@ -63,6 +60,8 @@ public class TeamMembersScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
+
+        settingsPopup = new SettingsPopup(g);
 
     }
 
@@ -104,67 +103,6 @@ public class TeamMembersScreen implements Screen {
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
 
-//settings
-        //music volume
-        final Slider volumeMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
-        volumeMusicSlider.setValue(parent.getPreferences().getMusicVolume());
-        volumeMusicSlider.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                parent.getPreferences().setMusicVolume(volumeMusicSlider.getValue());
-                return false;
-            }
-        });
-        //sound volume
-        final Slider volumeSoundSlider = new Slider(0f, 1f, 0.1f, false, skin);
-        volumeSoundSlider.setValue(parent.getPreferences().getSoundVolume());
-        volumeSoundSlider.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                parent.getPreferences().setSoundVolume(volumeSoundSlider.getValue());
-                return false;
-            }
-        });
-
-
-        //music
-        final CheckBox musicCheckbox = new CheckBox(null, skin);
-        musicCheckbox.setChecked(parent.getPreferences().isMusicEnabled());
-        musicCheckbox.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                boolean enabled = musicCheckbox.isChecked();
-                parent.getPreferences().setMusicEnabled(enabled);
-                return false;
-            }
-        });
-        //sound
-        final CheckBox soundCheckbox = new CheckBox(null, skin);
-        soundCheckbox.setChecked(parent.getPreferences().isSoundEnabled());
-        soundCheckbox.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                boolean enabled = soundCheckbox.isChecked();
-                parent.getPreferences().setSoundEnabled(enabled);
-                return false;
-            }
-        });
-
-        //return to main screen
-        final TextButton back = new TextButton("Back", skin);
-        back.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                gameSounds.clickSound();
-                parent.changeScreen(parent.getBackFromSettings());
-            }
-        });
-
-        //making labels
-        volumeMusicLabel = new Label("Music Volume", skin);
-        volumeSoundLabel = new Label("Sound Volume", skin);
-        musicOnOffLabel = new Label("Music Effect", skin);
-        soundOnOffLabel = new Label("Sound Effect", skin);
 
 
         HashMap<String, Integer> teamMembers = PlayerAccount.getTeamMembersList();
@@ -226,26 +164,7 @@ public class TeamMembersScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                Dialog dialog = new Dialog("Settings", skin) {
-                    public void result(Object obj) {
-                        System.out.println("result " + obj);
-                    }
-                };
-                dialog.getContentTable().row();
-                dialog.getContentTable().add(volumeMusicLabel);
-                dialog.getContentTable().add(volumeMusicSlider);
-                dialog.getContentTable().row();
-                dialog.getContentTable().add(musicOnOffLabel);
-                dialog.getContentTable().add(musicCheckbox);
-                dialog.getContentTable().row();
-                dialog.getContentTable().add(volumeSoundLabel);
-                dialog.getContentTable().add(volumeSoundSlider);
-                dialog.getContentTable().row();
-                dialog.getContentTable().add(soundOnOffLabel);
-                dialog.getContentTable().add(soundCheckbox);
-                dialog.getContentTable().row();
-                dialog.button("back", "back");
-                dialog.show(stage);
+                settingsPopup.show(stage);
 
                 // parent.setBackFromSettings(9);
                 // parent.changeScreen(parent.getSettings());
