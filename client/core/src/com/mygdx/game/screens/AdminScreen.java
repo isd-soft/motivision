@@ -4,8 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -23,6 +25,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
@@ -68,6 +72,7 @@ public class AdminScreen implements Screen {
     private String[] freqChoices = {"Weekly", "Monthly"};
     private CheckBox checkboxLockTeam;
     private Boolean checkboxLockTeamBoolean = false;
+    private Drawable transBlack;
 
     private Label activityLabel;
     private Label confirmLabel;
@@ -87,6 +92,7 @@ public class AdminScreen implements Screen {
         bgImage.setFillParent(true);
         bgImage.setZIndex(0);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
+        transBlack = new TextureRegionDrawable(new TextureRegion((Texture) parent.assetsManager.aManager.get("transpBlack50.png")));
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -123,18 +129,18 @@ public class AdminScreen implements Screen {
         Image imageCastle = new Image(textureCastle);
 
         // remove and add buttons
-        TextButton create = new TextButton("Create new +", skin, "square");
-        TextButton back = new TextButton("Back", skin);
-        TextButton settings = new TextButton("Settings", skin);
+        TextButton create = new TextButton("Create new +", skin, "green");
+        TextButton back = new TextButton("Back", skin, "blue");
+        TextButton settings = new TextButton("Settings", skin, "blue");
 
         final Label frequencyLabel = new Label("Battle frequency", skin);
         final Label teamLockedLabel = new Label("Allow joining in team:", skin);
         Label castleLabel = new Label("Team logo", skin);
-        Label teamNameLabel;
+        Label teamNameLabel = new Label("", skin, "fancyWhite");
         if (PlayerAccount.getProfileTeamName() == null)
-            teamNameLabel = new Label("Team Name", skin);
+            teamNameLabel.setText("Team Name");
         else
-            teamNameLabel = new Label(PlayerAccount.getProfileTeamName(), skin);
+            teamNameLabel.setText(PlayerAccount.getProfileTeamName());
 
         // left-right buttons
         arrowCastleLeft = new TextButton("<", skin);
@@ -249,7 +255,7 @@ public class AdminScreen implements Screen {
         for (Activity activity : teamActivities) {
             activityNamesButtons.add(new TextButton(activity.getActivityName(), skin, "square"));
             pointsButtons.add(new TextButton(activity.getActivityReward().toString(), skin, "square"));
-            xButtons.add(new TextButton("X", skin, "square"));
+            xButtons.add(new TextButton("X", skin, "red"));
 
             list.add(activityNamesButtons.get(activityNamesButtons.size() - 1)).fill().expandX();
             list.add(pointsButtons.get(pointsButtons.size() - 1)).width(Value.percentWidth(0.2f, list)).fillX();
@@ -272,6 +278,7 @@ public class AdminScreen implements Screen {
         }
         list.add(create).fill().uniformY().colspan(3);
 
+        selectionTable.setBackground(transBlack);
         selectionTable.add(teamNameLabel).colspan(4);
         selectionTable.row();
         selectionTable.add(castleLabel);
