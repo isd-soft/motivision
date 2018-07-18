@@ -165,6 +165,7 @@ public class CharacterSelectScreen implements Screen {
         TextButton logout = new TextButton("Logout", skin, "blue");
         TextButton select = new TextButton("Select", skin, "blue");
         TextButton deletePlayer = new TextButton("Delete", skin, "blue");
+        TextButton settings = new TextButton("Settings", skin, "blue");
         // eanble scrolling
         ScrollPane scrollPane = new ScrollPane(charactersTable);
         scrollPane.setSmoothScrolling(false);
@@ -227,9 +228,10 @@ public class CharacterSelectScreen implements Screen {
         // add the list and buttons table
         buttonTable.add(logout).fill().pad(0, 0, pad / 2, 0);
         buttonTable.add(deletePlayer).fill().pad(0,0,pad/2, 0);
+        buttonTable.add(settings).fill().pad(0, 0, pad / 2, 0);
         buttonTable.add(select).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();
-        buttonTable.add(scrollPane).fillX().expand().top().colspan(3).pad(pad / 2, 0, 0, 0);
+        buttonTable.add(scrollPane).fillX().expand().top().colspan(4).pad(pad / 2, 0, 0, 0);
 
         if (characterNames == null){
             characterNamesButtons.get(0).setDisabled(true);

@@ -82,6 +82,9 @@ public class CharacterProfileScreen implements Screen {
         //take number of points from DB
         //here is just random number
         int pointsNumber = PlayerAccount.getProfilePoints();
+        String teamName = PlayerAccount.getTeamName();
+        String characterName = PlayerAccount.getProfileName();
+
         if (pointsNumber == -1) {
             SelectDialog("Please First Select Character From List");
         }
@@ -241,6 +244,8 @@ public class CharacterProfileScreen implements Screen {
 
         //Create label witch represents points
         Label pointsLabel = new Label("Points: " + pointsNumber, skin);
+        Label teamLabel = new Label(" Team: " + teamName, skin);
+        Label characterLabel = new Label(" Character: " + characterName, skin);
 
         // add item list
         ArrayList<Integer> numberOfItems = new ArrayList<Integer>();
@@ -250,20 +255,19 @@ public class CharacterProfileScreen implements Screen {
             numberOfItems.add(i);
         }
 
-        /*
-        for (int i = 0; i < 10; i++) {
-                numberOfActivities.add("Activity: " + activity);
-            }
-        */
-
-
         //create and fill table with buttons and labels
         itemTable = new Table();
-        itemTable.add(earnPointsButton).fill().expand();
-        itemTable.add(teamMembersButton).fill().expand();
-        itemTable.add(lastBattleButton).fill().expand();
+        Table upButtonsTable = new Table();
+        upButtonsTable.add(earnPointsButton).fill().expandX();
+        upButtonsTable.add(teamMembersButton).fill().expandX();
+        upButtonsTable.add(lastBattleButton).fill().expandX();
+
+        itemTable.add(upButtonsTable).fill().expandX().colspan(2);
         itemTable.row();
-        itemTable.add(pointsLabel).fill().expand().padLeft(pad*2);
+        itemTable.add(characterLabel).colspan(2);
+        itemTable.row();
+        itemTable.add(pointsLabel);
+        itemTable.add(teamLabel);
         itemTable.row();
 
         for (int i = 1; i<5; i++) {
@@ -314,12 +318,16 @@ public class CharacterProfileScreen implements Screen {
         }
         //here should go if statement, if user is admin of team
         //if{ }
-        itemTable.add(imageTable).fill().expand().colspan(3);
+        itemTable.add(imageTable).fill().expand().colspan(2);
         itemTable.row();
-        itemTable.add(settingsButton).fill().expand();
-        itemTable.add(backButton).fill().expand();
+
+        Table botButtonTable = new Table();
+        botButtonTable.add(backButton).fill().expandX();
+        botButtonTable.add(settingsButton).fill().expandX();
         if(PlayerAccount.isAdmin())
-            itemTable.add(manageTeamButton).fill().expand();
+            botButtonTable.add(manageTeamButton).fill().expandX();
+
+        itemTable.add(botButtonTable).fill().expandX().colspan(2);
 
         shopAnimation.setFillParent(true);
         shopAnimation.setZIndex(0);
@@ -328,6 +336,8 @@ public class CharacterProfileScreen implements Screen {
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
         stage.addActor(screenTable);
+
+//        stage.setDebugAll(true);
 
         Gdx.input.setInputProcessor(stage);
     }
