@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
-import com.mygdx.game.loader.GameMusic;
+import com.mygdx.game.music.GameMusic;
 import com.mygdx.game.logger.Logger;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;

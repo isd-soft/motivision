@@ -13,16 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
-import com.mygdx.game.loader.BuySound;
 import com.mygdx.game.requests.Item;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.PlayerAccount;
-import com.mygdx.game.requests.Profile;
 
 import org.json.JSONException;
 

@@ -39,6 +39,8 @@ public class CreateCharacterScreen implements Screen {
     private Stage stage;
     private Viewport viewport;
     private Skin skin;
+    private Texture background;
+    private Image bgImage;
     private TextField nameText;
     private TextField teamText;
     private CheckBox checkboxTeam;
@@ -74,6 +76,10 @@ public class CreateCharacterScreen implements Screen {
     public CreateCharacterScreen(GGame g) {
         dialogs = GDXDialogsSystem.install();
         parent = g;
+        background = parent.assetsManager.aManager.get("createchar.jpg");
+        bgImage = new Image(background);
+        bgImage.setFillParent(true);
+        bgImage.setZIndex(0);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
@@ -387,6 +393,7 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.add(buttonTable).fill().expand().colspan(3);
 
         //making table for whole screen in filling it up with image and table
+        screenTable.addActor(bgImage);
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(tableActivities).fill().expand().uniform().pad(pad, pad / 2, pad, pad);

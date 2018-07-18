@@ -110,7 +110,7 @@ public class EarnPointsScreen implements Screen {
         parallaxBackground.setSize(800,480);
         parallaxBackground.setSpeed(1);
         parallaxBackground.setZIndex(0);
-        //stage.addActor(parallaxBackground);
+        stage.addActor(parallaxBackground);
         // scrollpane
         ScrollPane scrollPane = new ScrollPane(activitiesTable);
         scrollPane.setSmoothScrolling(false);

@@ -6,7 +6,6 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -15,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.loader.GameMusic;
+import com.mygdx.game.music.GameMusic;
 import com.mygdx.game.logger.Logger;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
@@ -24,8 +23,6 @@ import com.mygdx.game.gameSets.GGame;
 
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
-import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
-import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 
 public class LoginScreen implements Screen{
     // New version
@@ -345,12 +342,13 @@ public class LoginScreen implements Screen{
 
     private void forgotPassword(){
 		click.play();
-        Dialog dialog = new Dialog("", skin) {
+        Dialog dialog = new Dialog("Lmao", skin) {
             public void result(Object obj) {
                 System.out.println("result "+obj);
             }
         };
-        dialog.text("Next time be carefull ;)");
+
+        dialog.text("Sucks to be you");
         dialog.button("ok", "ok"); //sends "true" as the result
         dialog.show(stage);
     }
