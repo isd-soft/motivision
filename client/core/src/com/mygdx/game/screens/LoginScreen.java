@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -78,20 +79,21 @@ public class LoginScreen implements Screen {
         /*Settings! trying...*/
 
 
+
         //music volume
-        final Slider volumeMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
+        final Slider volumeMusicSlider = new Slider( 0f, 1f, 0.1f,false, skin );
         volumeMusicSlider.setValue(parent.getPreferences().getMusicVolume());
-        volumeMusicSlider.addListener(new EventListener() {
+        volumeMusicSlider.addListener( new EventListener() {
             @Override
             public boolean handle(Event event) {
-                parent.getPreferences().setMusicVolume(volumeMusicSlider.getValue());
+                parent.getPreferences().setMusicVolume( volumeMusicSlider.getValue() );
                 return false;
             }
         });
         //sound volume
-        final Slider volumeSoundSlider = new Slider(0f, 1f, 0.1f, false, skin);
-        volumeSoundSlider.setValue(parent.getPreferences().getSoundVolume());
-        volumeSoundSlider.addListener(new EventListener() {
+        final Slider volumeSoundSlider = new Slider( 0f, 1f, 0.1f,false, skin );
+        volumeSoundSlider.setValue( parent.getPreferences().getSoundVolume());
+        volumeSoundSlider.addListener( new EventListener() {
             @Override
             public boolean handle(Event event) {
                 parent.getPreferences().setSoundVolume(volumeSoundSlider.getValue());
@@ -100,25 +102,26 @@ public class LoginScreen implements Screen {
         });
 
 
+
         //music
         final CheckBox musicCheckbox = new CheckBox(null, skin);
-        musicCheckbox.setChecked(parent.getPreferences().isMusicEnabled());
-        musicCheckbox.addListener(new EventListener() {
+        musicCheckbox.setChecked( parent.getPreferences().isMusicEnabled() );
+        musicCheckbox.addListener( new EventListener() {
             @Override
             public boolean handle(Event event) {
                 boolean enabled = musicCheckbox.isChecked();
-                parent.getPreferences().setMusicEnabled(enabled);
+                parent.getPreferences().setMusicEnabled( enabled );
                 return false;
             }
         });
         //sound
-        final CheckBox soundCheckbox = new CheckBox(null, skin);
-        soundCheckbox.setChecked(parent.getPreferences().isSoundEnabled());
-        soundCheckbox.addListener(new EventListener() {
+        final CheckBox soundCheckbox = new CheckBox(null, skin );
+        soundCheckbox.setChecked( parent.getPreferences().isSoundEnabled() );
+        soundCheckbox.addListener( new EventListener() {
             @Override
             public boolean handle(Event event) {
                 boolean enabled = soundCheckbox.isChecked();
-                parent.getPreferences().setSoundEnabled(enabled);
+                parent.getPreferences().setSoundEnabled( enabled );
                 return false;
             }
         });
@@ -134,33 +137,37 @@ public class LoginScreen implements Screen {
         });
 
         //making labels
-        volumeMusicLabel = new Label("Music Volume", skin);
-        volumeSoundLabel = new Label("Sound Volume", skin);
-        musicOnOffLabel = new Label("Music Effect", skin);
-        soundOnOffLabel = new Label("Sound Effect", skin);
+        volumeMusicLabel = new Label( "Music Volume", skin );
+        volumeSoundLabel = new Label( "Sound Volume", skin  );
+        musicOnOffLabel = new Label( "Music Effect", skin  );
+        soundOnOffLabel = new Label( "Sound Effect", skin  );
 
         /*Settings! trying...*/
 
-        //add label
-        label = new Label("", skin, "error");
-        labelName = new Label(null, skin, "fancy");
-        labelName.setText("User name: ");
-        labelPassword = new Label(null, skin, "fancy");
-        labelPassword.setText("Password: ");
-        //add text fields login/password
-        final TextField loginField = new TextField(null, skin);
-        loginField.setMessageText("Login goes here");
-        final TextField passwordField = new TextField(null, skin);
-        passwordField.setPasswordCharacter('*');
-        passwordField.setPasswordMode(true);
-        passwordField.setMessageText("Password goes here");
 
-        //Forgot password
-        forgotPassword = new TextButton("Forgot password?", skin);
-        //add buttons to table
-        TextButton register = new TextButton("Register", skin);
-        final TextButton submit = new TextButton("Submit", skin);
-        TextButton settings = new TextButton("Settings", skin);
+
+
+
+		//add label
+		label = new Label("", skin, "error");
+		labelName = new Label(null, skin, "fancy");
+		labelName.setText("User name: ");
+		labelPassword = new Label(null, skin, "fancy");
+		labelPassword.setText("Password: ");
+		//add text fields login/password
+		final TextField loginField = new TextField(null,skin);
+		loginField.setMessageText("Login goes here");
+		final TextField passwordField = new TextField(null, skin);
+		passwordField.setPasswordCharacter('*');
+		passwordField.setPasswordMode(true);
+		passwordField.setMessageText("Password goes here");
+
+		//Forgot password
+		forgotPassword = new TextButton("Forgot password?", skin);
+		//add buttons to table
+		TextButton register = new TextButton("Register", skin);
+		final TextButton submit = new TextButton("Submit", skin);
+		TextButton settings = new TextButton("Settings", skin);
 
         register.addListener(new ChangeListener() {
             @Override
@@ -201,12 +208,12 @@ public class LoginScreen implements Screen {
                 dialog.show(stage);
 
                 //parent.changeScreen(parent.getSettings());
-            }
-        });
+			}
+		});
 
-        animationScreenTest.setFillParent(true);
-        animationScreenTest.setZIndex(0);
-        table.addActor(animationScreenTest);
+		animationScreenTest.setFillParent(true);
+		animationScreenTest.setZIndex(0);
+		table.addActor(animationScreenTest);
 
         //add everything into table
         table.add(label).fillX().uniformX().colspan(2).padTop(10);
@@ -225,51 +232,51 @@ public class LoginScreen implements Screen {
         table.top();
 
         Gdx.input.setInputProcessor(stage);
-    }
+	}
 
-    @Override
-    public void render(float delta) {
-        //camera.update();
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	@Override
+        public void render(float delta) {
+    	//camera.update();
+		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // tell our stage to do actions and draw itself
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-        stage.draw();
-    }
+		// tell our stage to do actions and draw itself
+		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+		stage.draw();
+	}
 
-    @Override
-    public void resize(int width, int height) {
+	@Override
+        public void resize(int width, int height) {
 
 
-        stage.getViewport().update(width, height, true);
-    }
+    	stage.getViewport().update(width,height,true);
+	}
+ 
+	@Override
+        public void pause() {
+	}
+ 
+	@Override
+        public void resume() {
+	}
+ 
+	@Override
+        public void hide() {
+	}
+ 
+	@Override
+        public void dispose() {
+			stage.dispose();
+	}
 
-    @Override
-    public void pause() {
-    }
+	class SubmitListener extends ChangeListener {
+    	private TextField	loginField;
+    	private TextField	passwordField;
 
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
-
-    class SubmitListener extends ChangeListener {
-        private TextField loginField;
-        private TextField passwordField;
-
-        public SubmitListener(TextField loginField, TextField passwordField) {
-            this.loginField = loginField;
-            this.passwordField = passwordField;
-        }
+		public SubmitListener(TextField loginField, TextField passwordField) {
+			this.loginField = loginField;
+			this.passwordField = passwordField;
+		}
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -307,7 +314,7 @@ public class LoginScreen implements Screen {
         }
     }
 
-    class ForgotPassword extends ChangeListener {
+	class ForgotPassword extends ChangeListener{
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -319,7 +326,7 @@ public class LoginScreen implements Screen {
         gameSounds.clickSound();
         Dialog dialog = new Dialog("Lmao", skin) {
             public void result(Object obj) {
-                System.out.println("result " + obj);
+                System.out.println("result "+obj);
             }
         };
         dialog.addListener(new ChangeListener() {

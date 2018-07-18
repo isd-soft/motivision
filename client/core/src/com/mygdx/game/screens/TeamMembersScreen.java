@@ -85,7 +85,6 @@ public class TeamMembersScreen implements Screen {
             e.printStackTrace();
         }
         Image image = new Image(texture);
-        stage.setDebugAll(true);
 
         // label
         Label teamName = new Label("", skin);
