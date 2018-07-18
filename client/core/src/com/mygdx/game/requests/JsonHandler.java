@@ -1,10 +1,5 @@
 package com.mygdx.game.requests;
 
-/*
-import com.google.gwt.thirdparty.json.JSONArray;
-import com.google.gwt.thirdparty.json.JSONException;
-import com.google.gwt.thirdparty.json.JSONObject;*/
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -30,9 +25,8 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 
 public class JsonHandler {
-    static final String domain = "http://172.17.41.64:8080";
-//    static final String domain = "http://192.168.1.23:8080";
-//    static final String domain = "http://172.17.41.110:8080";
+    static final GameProperties gameProperties = new GameProperties();
+    static final String domain = gameProperties.getDomain();
     public static String	errorMessage = null;
 
 
