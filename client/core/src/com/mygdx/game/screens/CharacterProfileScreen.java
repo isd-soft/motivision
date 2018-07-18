@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.Item;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.PlayerAccount;
@@ -52,9 +53,7 @@ public class CharacterProfileScreen implements Screen {
     private GDXDialogs buyItemDialog;
 
     private Texture knightTex;
-    private Sound buySound;
-    private Sound deniedSound;
-    private Sound armorSound;
+    private GameSounds gameSounds;
     private Viewport viewport;
     private Camera camera;
     private Music loginMusic;
@@ -69,9 +68,7 @@ public class CharacterProfileScreen implements Screen {
         selectDialog = GDXDialogsSystem.install();
         manageTeamDialog = GDXDialogsSystem.install();
         buyItemDialog = GDXDialogsSystem.install();
-        buySound = parent.assetsManager.aManager.get("data/hammer.mp3");
-        deniedSound = parent.assetsManager.aManager.get("data/denied.mp3");
-        armorSound = parent.assetsManager.aManager.get("data/equipp.mp3");
+        gameSounds = new GameSounds(g);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         shopAnimation = new ShopAnimation(parent);
         stage = new Stage();
@@ -120,6 +117,7 @@ public class CharacterProfileScreen implements Screen {
         earnPointsButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getEarnPoints());
             }
         });
@@ -127,6 +125,7 @@ public class CharacterProfileScreen implements Screen {
         teamMembersButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getTeamMembers());
             }
         });
@@ -134,7 +133,8 @@ public class CharacterProfileScreen implements Screen {
         lastBattleButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
-        //        parent.changeScreen(parent.getLastBattle());
+                gameSounds.clickSound();
+                //        parent.changeScreen(parent.getLastBattle());
             }
         });
 
@@ -400,6 +400,7 @@ public class CharacterProfileScreen implements Screen {
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
+            gameSounds.clickSound();
             if(PlayerAccount.isAdmin()){
                 parent.changeScreen(parent.getAdmin());
             }else{
@@ -410,6 +411,12 @@ public class CharacterProfileScreen implements Screen {
         private void manageRefuse(){
             final GDXButtonDialog bDialog = manageTeamDialog.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Nah bro");
+            bDialog.setClickListener(new ButtonClickListener() {
+                @Override
+                public void click(int button) {
+                    gameSounds.clickSound();
+                }
+            });
             bDialog.setMessage("You are not team admin!");
             bDialog.addButton("Back");
             bDialog.build().show();
@@ -421,6 +428,7 @@ public class CharacterProfileScreen implements Screen {
 
 
         public void     confirmDialog() {
+            gameSounds.clickSound();
             final GDXButtonDialog bDialog = buyItemDialog.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\"");
@@ -432,11 +440,11 @@ public class CharacterProfileScreen implements Screen {
                     if (button == YES) {
                         try {
                             if (!PlayerAccount.buyItem(itemId)) {
-                                deniedSound.play();
+                                gameSounds.deniedSound();
                                 DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
                             }
                             else
-                                buySound.play();
+                               gameSounds.buySound();
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {
@@ -471,16 +479,14 @@ public class CharacterProfileScreen implements Screen {
             }
             else if (status == Item.EQUIPPED_ITEM) {
                 PlayerAccount.unequipItem(itemId);
-                armorSound.play();
-
+                gameSounds.itemSound();
             }
             else if (status == Item.UNEQUIPPED_ITEM) {
                 System.out.println("Start equipping " + itemType + "(" + itemId + ")");
                 PlayerAccount.equipItem(itemId);
-                armorSound.play();
+                gameSounds.itemSound();
             }
             show();
-
         }
     }
 }

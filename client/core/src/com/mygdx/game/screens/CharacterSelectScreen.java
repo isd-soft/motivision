@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
@@ -51,7 +52,7 @@ public class CharacterSelectScreen implements Screen {
     private GGame parent;
     private Stage stage;
     private Skin skin;
-
+    private GameSounds gameSounds;
     private Viewport viewport;
     private Camera camera;
     private Texture background;
@@ -66,6 +67,7 @@ public class CharacterSelectScreen implements Screen {
 
     public CharacterSelectScreen(GGame g) {
         parent = g;
+        gameSounds = new GameSounds(g);
         dialogs = GDXDialogsSystem.install();
         stage = new Stage();
         background = parent.assetsManager.aManager.get("castlebg.jpg");
@@ -146,6 +148,7 @@ public class CharacterSelectScreen implements Screen {
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getBackFromSettings());
             }
         });
@@ -244,12 +247,12 @@ public class CharacterSelectScreen implements Screen {
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
 
         stage.addActor(screenTable);
-        stage.setDebugAll(true);
 
         // add event listeners
         logout.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 PlayerAccount.logOut();
                 parent.changeScreen(parent.getLogin());
             }
@@ -258,6 +261,7 @@ public class CharacterSelectScreen implements Screen {
         create.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getCreateCharacter()); //go to create character screen
             }
         });
@@ -265,6 +269,7 @@ public class CharacterSelectScreen implements Screen {
         select.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
@@ -312,6 +317,7 @@ public class CharacterSelectScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+            gameSounds.clickSound();
             if (texture != null)
                 texture.dispose();
             try {
@@ -337,6 +343,7 @@ public class CharacterSelectScreen implements Screen {
         }
 
         void deletePlayer(){
+            gameSounds.clickSound();
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to delete your account ?");
@@ -344,6 +351,7 @@ public class CharacterSelectScreen implements Screen {
 
                 @Override
                 public void click(int button) {
+                    gameSounds.clickSound();
                     if (button == YES) {
                         try {
                             PlayerAccount.deletePlayer();
@@ -374,6 +382,7 @@ public class CharacterSelectScreen implements Screen {
         }
 
         public void     SelectDialog() {
+            gameSounds.clickSound();
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Character \"" + name + "\" is the team admin. Deleting team admin will also delete the team and all characters of it's members");
@@ -382,6 +391,7 @@ public class CharacterSelectScreen implements Screen {
 
                 @Override
                 public void click(int button) {
+                    gameSounds.clickSound();
                     if (button == YES) {
                         try {
                             PlayerAccount.deleteProfile(name);
@@ -411,6 +421,7 @@ public class CharacterSelectScreen implements Screen {
 
                 @Override
                 public void click(int button) {
+                    gameSounds.clickSound();
                     if (button == YES) {
                         if (PlayerAccount.isAdmin(name)) {
                             SelectDialog();

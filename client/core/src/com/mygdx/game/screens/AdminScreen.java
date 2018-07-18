@@ -26,6 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.Activity;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.PlayerAccount;
@@ -52,8 +53,7 @@ public class AdminScreen implements Screen {
     private Skin skin;
 
     private Viewport viewport;
-    private Camera camera;
-    private Music loginMusic;
+    private GameSounds gameSounds;
 
     private TextButton arrowCastleLeft;
     private TextButton arrowCastleRight;
@@ -81,6 +81,7 @@ public class AdminScreen implements Screen {
 
     public AdminScreen(GGame g) {
         parent = g;
+        gameSounds = new GameSounds(g);
         background = parent.assetsManager.aManager.get("manageteam.jpg");
         bgImage = new Image(background);
         bgImage.setFillParent(true);
@@ -89,7 +90,6 @@ public class AdminScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-
 
 
         //textureCastle = new Texture("teamCastle1.png");
@@ -166,6 +166,7 @@ public class AdminScreen implements Screen {
         checkboxLockTeam.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 if (checkboxLockTeamBoolean == false) {
                     checkboxLockTeam.setText("Private");
                     checkboxLockTeamBoolean = true;
@@ -188,19 +189,19 @@ public class AdminScreen implements Screen {
 
         //settings
         //music volume
-        final Slider volumeMusicSlider = new Slider( 0f, 1f, 0.1f,false, skin );
+        final Slider volumeMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
         volumeMusicSlider.setValue(parent.getPreferences().getMusicVolume());
-        volumeMusicSlider.addListener( new EventListener() {
+        volumeMusicSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                parent.getPreferences().setMusicVolume( volumeMusicSlider.getValue() );
+                parent.getPreferences().setMusicVolume(volumeMusicSlider.getValue());
                 return false;
             }
         });
         //sound volume
-        final Slider volumeSoundSlider = new Slider( 0f, 1f, 0.1f,false, skin );
-        volumeSoundSlider.setValue( parent.getPreferences().getSoundVolume());
-        volumeSoundSlider.addListener( new EventListener() {
+        final Slider volumeSoundSlider = new Slider(0f, 1f, 0.1f, false, skin);
+        volumeSoundSlider.setValue(parent.getPreferences().getSoundVolume());
+        volumeSoundSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
                 parent.getPreferences().setSoundVolume(volumeSoundSlider.getValue());
@@ -209,35 +210,34 @@ public class AdminScreen implements Screen {
         });
 
 
-
         //music
         final CheckBox musicCheckbox = new CheckBox(null, skin);
-        musicCheckbox.setChecked( parent.getPreferences().isMusicEnabled() );
-        musicCheckbox.addListener( new EventListener() {
+        musicCheckbox.setChecked(parent.getPreferences().isMusicEnabled());
+        musicCheckbox.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
                 boolean enabled = musicCheckbox.isChecked();
-                parent.getPreferences().setMusicEnabled( enabled );
+                parent.getPreferences().setMusicEnabled(enabled);
                 return false;
             }
         });
         //sound
-        final CheckBox soundCheckbox = new CheckBox(null, skin );
-        soundCheckbox.setChecked( parent.getPreferences().isSoundEnabled() );
-        soundCheckbox.addListener( new EventListener() {
+        final CheckBox soundCheckbox = new CheckBox(null, skin);
+        soundCheckbox.setChecked(parent.getPreferences().isSoundEnabled());
+        soundCheckbox.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
                 boolean enabled = soundCheckbox.isChecked();
-                parent.getPreferences().setSoundEnabled( enabled );
+                parent.getPreferences().setSoundEnabled(enabled);
                 return false;
             }
         });
 
         //making labels
-        volumeMusicLabel = new Label( "Music Volume", skin );
-        volumeSoundLabel = new Label( "Sound Volume", skin  );
-        musicOnOffLabel = new Label( "Music Effect", skin  );
-        soundOnOffLabel = new Label( "Sound Effect", skin  );
+        volumeMusicLabel = new Label("Music Volume", skin);
+        volumeSoundLabel = new Label("Sound Volume", skin);
+        musicOnOffLabel = new Label("Music Effect", skin);
+        soundOnOffLabel = new Label("Sound Effect", skin);
 
         if (serverActivities == null) {
             Activity ac = new Activity(0);
@@ -329,7 +329,7 @@ public class AdminScreen implements Screen {
 
                 Dialog dialog = new Dialog("Settings", skin) {
                     public void result(Object obj) {
-                        System.out.println("result "+obj);
+                        System.out.println("result " + obj);
                     }
                 };
                 dialog.getContentTable().row();
@@ -463,15 +463,14 @@ public class AdminScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-
+            gameSounds.clickSound();
             final TextField activityField = new TextField("", skin);
 
             Dialog dialog = new Dialog("New Activity", skin) {
 
                 @Override
                 public void result(Object obj) {
-                    //System.out.println("result " + obj);
-
+                    gameSounds.clickSound();
                     if (obj == "confirm") {
                         try {
                             if (activityField.getText().length() < 6) {
@@ -496,43 +495,6 @@ public class AdminScreen implements Screen {
             dialog.button("Confirm", "confirm");
             dialog.button("Cancel", "cancel");
             dialog.show(stage);
-            /*
-            GDXDialogs dialogs = GDXDialogsSystem.install();
-
-            final GDXTextPrompt textPrompt = dialogs.newDialog(GDXTextPrompt.class);
-
-            textPrompt.setTitle("Edit activity name");
-            textPrompt.setMessage("Enter new activity name:");
-            textPrompt.setValue(name);
-
-            textPrompt.setCancelButtonLabel("Cancel");
-            textPrompt.setConfirmButtonLabel("Save");
-
-            textPrompt.setTextPromptListener(new TextPromptListener() {
-
-                @Override
-                public void confirm(String text) {
-                    try {
-                        if (text.length() < 6) {
-                            DialogBox.showInfoDialog("Error", "Activity name must be > 6 letters");
-                        } else if (!PlayerAccount.updateActivity(id, text, reward))
-                            DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    show();
-                }
-
-                @Override
-                public void cancel() {
-                    // handle input cancel
-                }
-            });
-
-            textPrompt.build().show();
-            */
         }
     }
 
@@ -549,15 +511,12 @@ public class AdminScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-
+            gameSounds.clickSound();
             final TextField pointsField = new TextField("", skin);
-
             Dialog dialog = new Dialog("Edit points", skin) {
-
                 @Override
                 public void result(Object obj) {
-                    //System.out.println("result " + obj);
-
+                    gameSounds.clickSound();
                     if (obj == "save") {
                         try {
                             int points = Integer.valueOf(pointsField.getText());
@@ -585,46 +544,6 @@ public class AdminScreen implements Screen {
             dialog.button("Save", "save");
             dialog.button("Cancel", "cancel");
             dialog.show(stage);
-
-            /*
-            GDXDialogs dialogs = GDXDialogsSystem.install();
-
-            final GDXTextPrompt textPrompt = dialogs.newDialog(GDXTextPrompt.class);
-
-            textPrompt.setTitle("Edit points");
-            textPrompt.setMessage("Enter points for activity:");
-            textPrompt.setValue(String.valueOf(reward));
-
-            textPrompt.setCancelButtonLabel("Cancel");
-            textPrompt.setConfirmButtonLabel("Save");
-
-            textPrompt.setTextPromptListener(new TextPromptListener() {
-
-                @Override
-                public void confirm(String text) {
-                    try {
-                        int points = Integer.valueOf(text);
-                        if (points <= 0)
-                            DialogBox.showInfoDialog("Error", "Points must be > 0");
-                        if (!PlayerAccount.updateActivity(id, name, points))
-                            DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (NumberFormatException e) {
-                        DialogBox.showInfoDialog("Error", "Points cannot be string");
-                    }
-                    show();
-                }
-
-                @Override
-                public void cancel() {
-                    // handle input cancel
-                }
-            });
-
-            textPrompt.build().show();*/
         }
     }
 
@@ -640,15 +559,12 @@ public class AdminScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-
+            gameSounds.clickSound();
             final Label activityDeleteLabel = new Label("", skin, "fancy");
-
             Dialog dialog = new Dialog("Activity Deletion", skin) {
-
                 @Override
                 public void result(Object obj) {
-                    //System.out.println("result " + obj);
-
+                    gameSounds.clickSound();
                     if (obj == "confirm") {
                         try {
                             PlayerAccount.deleteActivity(id);
@@ -669,35 +585,6 @@ public class AdminScreen implements Screen {
             dialog.button("Confirm", "confirm");
             dialog.button("Cancel", "cancel");
             dialog.show(stage);
-
-            /*
-            GDXDialogs dialogs = GDXDialogsSystem.install();
-
-            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
-            bDialog.setTitle("Confirmation");
-            bDialog.setMessage("Are you sure you want to delete \"" + name + "\" ?");
-
-            bDialog.setClickListener(new ButtonClickListener() {
-
-                @Override
-                public void click(int button) {
-                    if (button == 0) {
-                        try {
-                            PlayerAccount.deleteActivity(id);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    show();
-                }
-            });
-
-            bDialog.addButton("Yes");
-            bDialog.addButton("No");
-            bDialog.build().show();
-            */
         }
     }
 
@@ -708,15 +595,12 @@ public class AdminScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-
+            gameSounds.clickSound();
             final TextField activityField = new TextField("", skin);
-
             Dialog dialog = new Dialog("New Activity", skin) {
-
                 @Override
                 public void result(Object obj) {
-                    //System.out.println("result " + obj);
-
+                    gameSounds.clickSound();
                     if (obj == "confirm") {
                         try {
                             if (activityField.getText().length() < 7)
@@ -741,42 +625,6 @@ public class AdminScreen implements Screen {
             dialog.button("Confirm", "confirm");
             dialog.button("Cancel", "cancel");
             dialog.show(stage);
-            /*
-            GDXDialogs dialogs = GDXDialogsSystem.install();
-
-            final GDXTextPrompt textPrompt = dialogs.newDialog(GDXTextPrompt.class);
-
-            textPrompt.setTitle("New activity");
-            textPrompt.setMessage("Enter activity name:");
-
-            textPrompt.setCancelButtonLabel("Cancel");
-            textPrompt.setConfirmButtonLabel("Save");
-
-            textPrompt.setTextPromptListener(new TextPromptListener() {
-
-                @Override
-                public void confirm(String text) {
-                    try {
-                        if (text.length() < 7)
-                            DialogBox.showInfoDialog("Error", "Activity name must be at least 6 letters");
-                        else
-                            PlayerAccount.createActivity(text);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    show();
-                }
-
-                @Override
-                public void cancel() {
-                    // handle input cancel
-                }
-            });
-
-            textPrompt.build().show();
-            */
         }
     }
 }

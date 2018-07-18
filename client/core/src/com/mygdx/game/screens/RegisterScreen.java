@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.music.GameMusic;
 import com.mygdx.game.logger.Logger;
+import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
@@ -33,15 +34,14 @@ public class RegisterScreen implements Screen {
     private Skin skin;
     private Label label;
     private Viewport viewport;
-    private Sound registerSound;
-    private Sound click;
     private BackgroundAnimation animationScreenTest;
     private Label registerLabel;
+    private GameSounds gameSounds;
 
     public RegisterScreen(GGame g) {
 
         parent = g;
-        click = parent.assetsManager.aManager.get("data/click.wav");
+        gameSounds = new GameSounds(g);
         animationScreenTest = new BackgroundAnimation(parent);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
@@ -123,16 +123,8 @@ public class RegisterScreen implements Screen {
     public void show() {
         stage.clear();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-
-        //registerSound = Gdx.audio.newSound(Gdx.files.internal("data/BruceU.mp3"));
-
-        //registerSound.play();
-
-
-        // Create a table that fills the screen. Everything else will go inside this table.
         Table table = new Table();
         table.setFillParent(true);
-        //table.setDebug(true);
         stage.addActor(table);
 
         //add label
@@ -162,7 +154,7 @@ public class RegisterScreen implements Screen {
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                click.play();
+                gameSounds.clickSound();
                 log.info("Back button pressed");
                 parent.changeScreen(parent.getLogin());
             }
@@ -231,7 +223,6 @@ public class RegisterScreen implements Screen {
 
     @Override
     public void dispose() {
-        registerSound.dispose();
         stage.dispose();
     }
 
@@ -250,25 +241,21 @@ public class RegisterScreen implements Screen {
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+            gameSounds.clickSound();
             //sends data into DB
             Player player;
             log.info("Register action start");
-            click.play();
             if (validateLogin(loginField.getText()) == false)
                 return;
             else if (validatePassword(passwordField.getText()) == false)
                 return;
             else if (validateRetypePassword(retypePasswordField.getText(), passwordField.getText()) == false)
                 return;
-
             String encryptedPassword;
-
             encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
-            //encryptedPassword = passwordField.getText();
             try {
                 if (PlayerAccount.registerNewPlayer(loginField.getText(), encryptedPassword)) {
                     log.info("Registered successfully");
-                    GameMusic.stopAndDisposeLoginOst();
                     Gdx.input.setOnscreenKeyboardVisible(false);
                     parent.changeScreen(parent.getCharacterSelect());
                 } else {
@@ -286,7 +273,6 @@ public class RegisterScreen implements Screen {
             passwordField.setText("");
             retypePasswordField.setText("");
 
-            //label.setText("Registered!");
         }
     }
 }

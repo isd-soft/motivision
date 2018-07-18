@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
@@ -34,6 +35,7 @@ public class TeamMembersScreen implements Screen {
     private GGame parent;
     private Stage stage;
     private Skin skin;
+    private GameSounds gameSounds;
     private Texture texture;
     private Viewport viewport;
     private Texture bgTexture;
@@ -51,8 +53,7 @@ public class TeamMembersScreen implements Screen {
     public TeamMembersScreen(GGame g) {
         parent = g;
         Pixmap pixmap;
-
-
+        gameSounds = new GameSounds(g);
         dialogs = GDXDialogsSystem.install();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         bgTexture = parent.assetsManager.aManager.get("barracks.jpg");
@@ -69,7 +70,6 @@ public class TeamMembersScreen implements Screen {
     @Override
     public void show() {
         stage.clear();
-        stage.setDebugAll(true);
         float pad = 5;
 
         // Character Sprite
@@ -156,6 +156,7 @@ public class TeamMembersScreen implements Screen {
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getBackFromSettings());
             }
         });
@@ -215,6 +216,7 @@ public class TeamMembersScreen implements Screen {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 selectedName = null;
                 parent.changeScreen(parent.getCharacterProfile());
             }
@@ -226,7 +228,7 @@ public class TeamMembersScreen implements Screen {
 
                 Dialog dialog = new Dialog("Settings", skin) {
                     public void result(Object obj) {
-                        System.out.println("result "+obj);
+                        System.out.println("result " + obj);
                     }
                 };
                 dialog.getContentTable().row();
@@ -245,8 +247,8 @@ public class TeamMembersScreen implements Screen {
                 dialog.button("back", "back");
                 dialog.show(stage);
 
-               // parent.setBackFromSettings(9);
-               // parent.changeScreen(parent.getSettings());
+                // parent.setBackFromSettings(9);
+                // parent.changeScreen(parent.getSettings());
             }
         });
 
@@ -262,9 +264,9 @@ public class TeamMembersScreen implements Screen {
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
+            gameSounds.clickSound();
             getTeamMember();
         }
-
         private void getTeamMember() {
             selectedName = name;
             show();
@@ -280,6 +282,7 @@ public class TeamMembersScreen implements Screen {
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
+            gameSounds.clickSound();
             if (name.equals(PlayerAccount.getProfileName()))
                 denyPopUp();
             else {
@@ -292,6 +295,12 @@ public class TeamMembersScreen implements Screen {
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Denied");
             bDialog.setMessage("Sorry, can't delete your own account here");
+            bDialog.setClickListener(new ButtonClickListener() {
+                @Override
+                public void click(int button) {
+                    gameSounds.clickSound();
+                }
+            });
             bDialog.addButton("Back");
             bDialog.build().show();
         }
@@ -303,6 +312,7 @@ public class TeamMembersScreen implements Screen {
             bDialog.setClickListener(new ButtonClickListener() {
                 @Override
                 public void click(int button) {
+                    gameSounds.clickSound();
                     if (button == 0) {
                         try {
                             PlayerAccount.deleteTeamMember(name);
