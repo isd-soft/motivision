@@ -80,50 +80,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 		name: button
 		color: color
 	}
-	button-arcade-c: {
-		name: button-arcade
-		color: color
-	}
-	button-arcade-pressed-c: {
-		name: button-arcade-pressed
-		color: color
-	}
-	button-close-c: {
-		name: button-close
-		color: color
-	}
-	button-close-over-c: {
-		name: button-close-over
-		color: color
-	}
-	button-close-pressed-c: {
-		name: button-close-pressed
-		color: color
-	}
-	button-maximize-c: {
-		name: button-maximize
-		color: color
-	}
-	button-maximize-over-c: {
-		name: button-maximize-over
-		color: color
-	}
-	button-maximize-pressed-c: {
-		name: button-maximize-pressed
-		color: color
-	}
-	button-minimize-c: {
-		name: button-minimize
-		color: color
-	}
-	button-minimize-over-c: {
-		name: button-minimize-over
-		color: color
-	}
-	button-minimize-pressed-c: {
-		name: button-minimize-pressed
-		color: color
-	}
 	button-over-c: {
 		name: button-over
 		color: color
@@ -260,14 +216,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 		name: tooltip
 		color: color
 	}
-	touchpad-c: {
-		name: touchpad
-		color: color
-	}
-	touchpad-knob-c: {
-		name: touchpad-knob
-		color: color
-	}
 	tree-minus-c: {
 		name: tree-minus
 		color: color
@@ -365,21 +313,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 		over: button-over-c
 		checked: button-pressed-c
 		checkedOver: button-pressed-over-c
-	}
-	minimize: {
-		up: button-minimize-c
-		down: button-minimize-pressed-c
-		over: button-minimize-over-c
-	}
-	maximize: {
-		up: button-maximize-c
-		down: button-maximize-pressed-c
-		over: button-maximize-over-c
-	}
-	close: {
-		up: button-close-c
-		down: button-close-pressed-c
-		over: button-close-over-c
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
@@ -561,8 +494,6 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	}
 	arcade: {
 		font: yuGothic
-		up: button-arcade-c
-		down: button-arcade-pressed-c
 	}
 	square: {
 		font: yuGothic
@@ -611,8 +542,8 @@ com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle: {
 	default: {
-		background: touchpad-c
-		knob: touchpad-knob-c
+		background: button
+		knob: radio
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
