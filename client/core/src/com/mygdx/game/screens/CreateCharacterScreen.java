@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -72,6 +74,11 @@ public class CreateCharacterScreen implements Screen {
     private boolean isTeamChecked;
     private GDXDialogs dialogs;
 
+    private Label volumeMusicLabel;
+    private Label volumeSoundLabel;
+    private Label musicOnOffLabel;
+    private Label soundOnOffLabel;
+
 
     public CreateCharacterScreen(GGame g) {
         dialogs = GDXDialogsSystem.install();
@@ -117,26 +124,62 @@ public class CreateCharacterScreen implements Screen {
         Matcher matcher = pattern.matcher(characterName);
         if (characterName == null || characterName == "") {
             log.warn("Character name field is empty");
-            bDialog.setTitle("Character Name");
+
+            Dialog dialog = new Dialog("", skin) {
+                public void result(Object obj) {
+                    System.out.println("result "+obj);
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.text("Character name field is empty");
+            dialog.getContentTable().row();
+            dialog.button("back", "back");
+            dialog.show(stage);
+            /*bDialog.setTitle("Character Name");
             bDialog.setMessage("Character name field is empty");
             bDialog.addButton("Go back");
-            bDialog.build().show();
+            bDialog.build().show();*/
             return false;
         }
         else if (characterName.length() < 6) {
             log.warn("Character name field must be at least 6 characters long");
-            bDialog.setTitle("Character Name");
+
+            Dialog dialog = new Dialog("", skin) {
+                public void result(Object obj) {
+                    System.out.println("result "+obj);
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.text("Character name field must be at least 6 characters long");
+            dialog.getContentTable().row();
+            dialog.button("back", "back");
+            dialog.show(stage);
+
+            /*bDialog.setTitle("Character Name");
             bDialog.setMessage("Character name field must be at least 6 characters long");
             bDialog.addButton("Go back");
-            bDialog.build().show();
+            bDialog.build().show();*/
             return false;
         }else
         if(!matcher.matches()){
             log.warn("Character name has an illegal character");
-            bDialog.setTitle("Character Name");
+
+
+            Dialog dialog = new Dialog("", skin) {
+                public void result(Object obj) {
+                    System.out.println("result "+obj);
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.text("Character name has an illegal character");
+            dialog.getContentTable().row();
+            dialog.button("back", "back");
+            dialog.show(stage);
+
+            /*bDialog.setTitle("Character Name");
             bDialog.setMessage("Character name has an illegal character");
             bDialog.addButton("Go back");
-            bDialog.build().show();
+            bDialog.build().show();*/
             return false;
         }
         log.info("Character name validated successfully");
@@ -148,26 +191,64 @@ public class CreateCharacterScreen implements Screen {
         Matcher matcher = pattern.matcher(teamName);
         if (teamName == null || teamName == "") {
             log.warn("Team name field is empty");
+
+            Dialog dialog = new Dialog("", skin) {
+                public void result(Object obj) {
+                    System.out.println("result "+obj);
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.text("Team name field is empty");
+            dialog.getContentTable().row();
+            dialog.button("back", "back");
+            dialog.show(stage);
+
+            /*
             bDialog.setTitle("Team Name");
             bDialog.setMessage("Team name field is empty");
             bDialog.addButton("Go back");
-            bDialog.build().show();
+            bDialog.build().show();*/
             return false;
         }
         else if (teamName.length() < 6) {
             log.warn("Team name field must be at least 6 characters long");
-            bDialog.setTitle("Team Name");
+
+            Dialog dialog = new Dialog("", skin) {
+                public void result(Object obj) {
+                    System.out.println("result "+obj);
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.text("Team name field must be at least 6 characters long");
+            dialog.getContentTable().row();
+            dialog.button("back", "back");
+            dialog.show(stage);
+
+            /*bDialog.setTitle("Team Name");
             bDialog.setMessage("Team name field must be at least 6 characters long");
             bDialog.addButton("Go back");
-            bDialog.build().show();
+            bDialog.build().show();*/
             return false;
         }
         if(!matcher.matches()){
             log.warn("Team name has an illegal character");
-            bDialog.setTitle("Team Name");
+
+
+            Dialog dialog = new Dialog("", skin) {
+                public void result(Object obj) {
+                    System.out.println("result "+obj);
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.text("Team name has an illegal character");
+            dialog.getContentTable().row();
+            dialog.button("back", "back");
+            dialog.show(stage);
+
+            /*bDialog.setTitle("Team Name");
             bDialog.setMessage("Team name has an illegal character");
             bDialog.addButton("Go back");
-            bDialog.build().show();
+            bDialog.build().show();*/
             return false;
         }
         log.info("Character name validated successfully");
@@ -216,6 +297,67 @@ public class CreateCharacterScreen implements Screen {
         final Table castleTable = new Table();
         Table buttonTable = new Table();
         Table screenTable = new Table();
+
+        //music volume
+        final Slider volumeMusicSlider = new Slider( 0f, 1f, 0.1f,false, skin );
+        volumeMusicSlider.setValue(parent.getPreferences().getMusicVolume());
+        volumeMusicSlider.addListener( new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                parent.getPreferences().setMusicVolume( volumeMusicSlider.getValue() );
+                return false;
+            }
+        });
+        //sound volume
+        final Slider volumeSoundSlider = new Slider( 0f, 1f, 0.1f,false, skin );
+        volumeSoundSlider.setValue( parent.getPreferences().getSoundVolume());
+        volumeSoundSlider.addListener( new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                parent.getPreferences().setSoundVolume(volumeSoundSlider.getValue());
+                return false;
+            }
+        });
+
+
+
+        //music
+        final CheckBox musicCheckbox = new CheckBox(null, skin);
+        musicCheckbox.setChecked( parent.getPreferences().isMusicEnabled() );
+        musicCheckbox.addListener( new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                boolean enabled = musicCheckbox.isChecked();
+                parent.getPreferences().setMusicEnabled( enabled );
+                return false;
+            }
+        });
+        //sound
+        final CheckBox soundCheckbox = new CheckBox(null, skin );
+        soundCheckbox.setChecked( parent.getPreferences().isSoundEnabled() );
+        soundCheckbox.addListener( new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                boolean enabled = soundCheckbox.isChecked();
+                parent.getPreferences().setSoundEnabled( enabled );
+                return false;
+            }
+        });
+
+        //return to main screen
+        final TextButton back = new TextButton("Back", skin);
+        back.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.changeScreen(parent.getBackFromSettings());
+            }
+        });
+
+        //making labels
+        volumeMusicLabel = new Label( "Music Volume", skin );
+        volumeSoundLabel = new Label( "Sound Volume", skin  );
+        musicOnOffLabel = new Label( "Music Effect", skin  );
+        soundOnOffLabel = new Label( "Sound Effect", skin  );
 
         checkboxMale.addListener(new ChangeListener() {
             @Override
@@ -458,10 +600,23 @@ public class CreateCharacterScreen implements Screen {
             }
             if (nameExist == true) {
                 log.warn("Character name already exist!");
-                bDialog.setTitle("Character Name");
+
+                Dialog dialog = new Dialog("", skin) {
+                    public void result(Object obj) {
+                        System.out.println("result "+obj);
+                    }
+                };
+                dialog.getContentTable().row();
+                dialog.text("Character name already exist!");
+                dialog.getContentTable().row();
+                dialog.button("back", "back");
+                dialog.show(stage);
+
+
+                /*bDialog.setTitle("Character Name");
                 bDialog.setMessage("Character name already exist!");
                 bDialog.addButton("Go back");
-                bDialog.build().show();
+                bDialog.build().show();*/
                 return false;
             } else {
                 log.info("Character name does not exist, all is okay");
@@ -509,7 +664,19 @@ public class CreateCharacterScreen implements Screen {
 //                        bDialog.setMessage("Team already exists!");
 //                        bDialog.addButton("Go back");
 //                        bDialog.build().show();
-                        SelectDialog("Team already exists!");
+
+                        Dialog dialog = new Dialog("", skin) {
+                            public void result(Object obj) {
+                                System.out.println("result "+obj);
+                            }
+                        };
+                        dialog.getContentTable().row();
+                        dialog.text("Team already exists!");
+                        dialog.getContentTable().row();
+                        dialog.button("back", "back");
+                        dialog.show(stage);
+
+                        //SelectDialog("Team already exists!");
                         //teamText.setColor(Color.RED);
                         // TODO Team does not exist
                         return;
@@ -525,7 +692,19 @@ public class CreateCharacterScreen implements Screen {
                 }
                 else if (teamId == -1) {
                     log.warn("Team does not exist!");
-                    SelectDialog("Team does not exist!");
+
+                    Dialog dialog = new Dialog("", skin) {
+                        public void result(Object obj) {
+                            System.out.println("result "+obj);
+                        }
+                    };
+                    dialog.getContentTable().row();
+                    dialog.text("Team does not exist!");
+                    dialog.getContentTable().row();
+                    dialog.button("back", "back");
+                    dialog.show(stage);
+
+                    //SelectDialog("Team does not exist!");
 //                    bDialog.setTitle("Team");
 //                    bDialog.setMessage("Team does not exist!");
 //                    bDialog.addButton("Go back");
@@ -548,8 +727,10 @@ public class CreateCharacterScreen implements Screen {
             characterParameters.put(Profile.TEAM_ID, teamId + "");
             characterParameters.put(Profile.PLAYER_ID, PlayerAccount.getPlayerId() + "");
             try {
-                if (PlayerAccount.createNewProfile(characterParameters))
+                if (PlayerAccount.createNewProfile(characterParameters)) {
                     parent.changeScreen(parent.getCharacterSelect());
+                    Gdx.input.setOnscreenKeyboardVisible(false);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {

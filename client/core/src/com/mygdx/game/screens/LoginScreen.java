@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -41,7 +42,6 @@ public class LoginScreen implements Screen{
 	private BackgroundAnimation animationScreenTest;
 
 	//trying...
-    private Label titleLabel;
     private Label volumeMusicLabel;
     private Label volumeSoundLabel;
     private Label musicOnOffLabel;
@@ -140,7 +140,6 @@ public class LoginScreen implements Screen{
         });
 
         //making labels
-        titleLabel = new Label( "Preferences", skin);
         volumeMusicLabel = new Label( "Music Volume", skin );
         volumeSoundLabel = new Label( "Sound Volume", skin  );
         musicOnOffLabel = new Label( "Music Effect", skin  );
@@ -170,7 +169,7 @@ public class LoginScreen implements Screen{
 		forgotPassword = new TextButton("Forgot password?", skin);
 		//add buttons to table
 		TextButton register = new TextButton("Register", skin);
-		TextButton submit = new TextButton("Submit", skin);
+		final TextButton submit = new TextButton("Submit", skin);
 		TextButton settings = new TextButton("Settings", skin);
 
 		register.addListener(new ChangeListener() {
@@ -183,12 +182,6 @@ public class LoginScreen implements Screen{
 
 
 		//add listeners to buttons
-        passwordField.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                //TODO Add support for ENTER KEY
-            }
-        });
 		submit.addListener(new SubmitListener(loginField, passwordField));
 		forgotPassword.addListener(new ForgotPassword());
 		settings.addListener(new ChangeListener() {
@@ -214,7 +207,7 @@ public class LoginScreen implements Screen{
                 dialog.getContentTable().add(soundOnOffLabel);
                 dialog.getContentTable().add(soundCheckbox);
                 dialog.getContentTable().row();
-                dialog.getContentTable().add(back).colspan(2);
+                dialog.button("back", "back");
                 dialog.show(stage);
 
                 //parent.changeScreen(parent.getSettings());
@@ -313,6 +306,7 @@ public class LoginScreen implements Screen{
                     if (PlayerAccount.loginPlayer(loginField.getText(), encryptedPassword)) {
                         log.info("Login success");
                         GameMusic.stopAndDisposeLoginOst();
+                        Gdx.input.setOnscreenKeyboardVisible(false);
                         parent.changeScreen(parent.getCharacterSelect());
                     } else {
                         log.info("Incorrect login/password");
