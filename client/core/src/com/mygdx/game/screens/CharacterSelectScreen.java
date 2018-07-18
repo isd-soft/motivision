@@ -244,7 +244,6 @@ public class CharacterSelectScreen implements Screen {
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
 
         stage.addActor(screenTable);
-        stage.setDebugAll(true);
 
         // add event listeners
         logout.addListener(new ChangeListener() {

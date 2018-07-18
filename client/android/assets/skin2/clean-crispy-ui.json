@@ -12,6 +12,9 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	yuGothicRed: {
 		file: yuGothicRed.fnt
 	}
+	yuGothicWhite: {
+		file: yuGothicWhite.fnt
+	}
 }
 com.badlogic.gdx.graphics.Color: {
 	black: {
@@ -33,9 +36,9 @@ com.badlogic.gdx.graphics.Color: {
 		a: 1
 	}
 	medieval-blue: {
-		r: 0.2784314
-		g: 0.36078432
-		b: 0.42352942
+		r: 0.6784314
+		g: 0.84705883
+		b: 0.9019608
 		a: 1
 	}
 	medieval-green: {
@@ -334,6 +337,18 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 		name: button-pressed
 		color: medieval-blue
 	}
+	button-over-c-red: {
+		name: button-over
+		color: medieval-red
+	}
+	button-over-c-green: {
+		name: button-over
+		color: medieval-green
+	}
+	button-over-c-blue: {
+		name: button-over
+		color: medieval-blue
+	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 	default: {
@@ -428,7 +443,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: {
-		font: yuGothic
+		font: yuGothicWhite
 		fontColor: color
 	}
 	error: {
@@ -442,6 +457,10 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	fancyBlue: {
 		font: blackChanceryShadow
 		fontColor: medieval-blue
+	}
+	clean: {
+		font: yuGothic
+		fontColor: color
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
@@ -545,7 +564,7 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	square: {
 		font: yuGothic
 		fontColor: color
-		up: button-c
+		up: button
 		down: button-pressed-over-c
 		over: button-over-c
 		checked: button-pressed-c
@@ -556,18 +575,21 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		fontColor: color
 		up: button-red
 		down: button-pressed-c-red
+		over: button-over-c-red
 	}
 	green: {
 		font: yuGothic
 		fontColor: color
 		up: button-green
 		down: button-pressed-c-green
+		over: button-over-c-green
 	}
 	blue: {
 		font: yuGothic
 		fontColor: color
 		up: button-blue
 		down: button-pressed-c-blue
+		over: button-over-c-blue
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
