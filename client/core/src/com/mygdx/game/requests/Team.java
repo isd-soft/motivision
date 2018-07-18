@@ -24,7 +24,7 @@ public class Team {
     public static final String  BATTLE     =   "battleFrequency";
     public static final String  WINS       =   "teamWins";
     public static final String  LOSSES     =   "teamLoss";
-    public static final String  LOCK       =   "locked";
+    public static final String  LOCK       =   "lock";
     public static final String  CHARACTERS =   "characters";
     private Integer teamId;
     private int teamLeaderId;

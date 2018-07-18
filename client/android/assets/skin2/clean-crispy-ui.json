@@ -567,11 +567,9 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	square: {
 		font: yuGothic
 		fontColor: color
-		up: button
+		up: button-c
 		down: button-pressed-over-c
 		over: button-over-c
-		checked: button-pressed-c
-		checkedOver: button-pressed-over-c
 	}
 	red: {
 		font: yuGothic
