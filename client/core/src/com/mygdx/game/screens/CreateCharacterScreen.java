@@ -141,7 +141,7 @@ public class CreateCharacterScreen implements Screen {
             dialog.getContentTable().row();
             dialog.text("Character name field is empty");
             dialog.getContentTable().row();
-            dialog.button("back", "back");
+            dialog.button("ok", "ok");
             dialog.show(stage);
             /*bDialog.setTitle("Character Name");
             bDialog.setMessage("Character name field is empty");
@@ -159,7 +159,7 @@ public class CreateCharacterScreen implements Screen {
             dialog.getContentTable().row();
             dialog.text("Character name field must be at least 6 characters long");
             dialog.getContentTable().row();
-            dialog.button("back", "back");
+            dialog.button("ok", "ok");
             dialog.show(stage);
 
             /*bDialog.setTitle("Character Name");
@@ -179,7 +179,7 @@ public class CreateCharacterScreen implements Screen {
             dialog.getContentTable().row();
             dialog.text("Character name has an illegal character");
             dialog.getContentTable().row();
-            dialog.button("back", "back");
+            dialog.button("ok", "ok");
             dialog.show(stage);
 
             /*bDialog.setTitle("Character Name");
@@ -206,7 +206,7 @@ public class CreateCharacterScreen implements Screen {
             dialog.getContentTable().row();
             dialog.text("Team name field is empty");
             dialog.getContentTable().row();
-            dialog.button("back", "back");
+            dialog.button("ok", "ok");
             dialog.show(stage);
 
             /*
@@ -226,7 +226,7 @@ public class CreateCharacterScreen implements Screen {
             dialog.getContentTable().row();
             dialog.text("Team name field must be at least 6 characters long");
             dialog.getContentTable().row();
-            dialog.button("back", "back");
+            dialog.button("ok", "ok");
             dialog.show(stage);
 
             /*bDialog.setTitle("Team Name");
@@ -247,7 +247,7 @@ public class CreateCharacterScreen implements Screen {
             dialog.getContentTable().row();
             dialog.text("Team name has an illegal character");
             dialog.getContentTable().row();
-            dialog.button("back", "back");
+            dialog.button("ok", "ok");
             dialog.show(stage);
 
             /*bDialog.setTitle("Team Name");
@@ -617,7 +617,7 @@ public class CreateCharacterScreen implements Screen {
                 dialog.getContentTable().row();
                 dialog.text("Character name already exist!");
                 dialog.getContentTable().row();
-                dialog.button("back", "back");
+                dialog.button("ok", "ok");
                 dialog.show(stage);
                 return false;
             } else {
@@ -670,7 +670,7 @@ public class CreateCharacterScreen implements Screen {
                         dialog.getContentTable().row();
                         dialog.text("Team already exists!");
                         dialog.getContentTable().row();
-                        dialog.button("back", "back");
+                        dialog.button("ok", "ok");
                         dialog.show(stage);
 
                         //SelectDialog("Team already exists!");
@@ -703,7 +703,7 @@ public class CreateCharacterScreen implements Screen {
                             gameSounds.clickSound();
                         }
                     });
-                    dialog.button("back", "back");
+                    dialog.button("ok", "ok");
                     dialog.show(stage);
 
                     //SelectDialog("Team does not exist!");
@@ -731,7 +731,7 @@ public class CreateCharacterScreen implements Screen {
                             gameSounds.clickSound();
                         }
                     });
-                    dialog.button("back", "back");
+                    dialog.button("ok", "ok");
                     dialog.show(stage);
                 } else {
                     characterParameters.put(Profile.IS_ADMIN, "false");
