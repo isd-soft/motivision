@@ -24,7 +24,7 @@ public class Team {
     public static final String  BATTLE     =   "battleFrequency";
     public static final String  WINS       =   "teamWins";
     public static final String  LOSSES     =   "teamLoss";
-    public static final String  LOCK       =   "lock";
+    public static final String  LOCK       =   "locked";
     public static final String  CHARACTERS =   "characters";
     private Integer teamId;
     private int teamLeaderId;
@@ -241,7 +241,8 @@ public class Team {
         String		url;
         JSONObject  jsonObject;
         String		result;
-        int         teamId;
+        boolean     lock = true;
+        int         teamId = -1;
 
         url = JsonHandler.domain + "/team_exist";
         urlParameters = NAME + "=" + name;
@@ -249,17 +250,14 @@ public class Team {
         if (jsonObject == null)
             return -1;
         if (jsonObject.has(TEAM_ID))
-            return jsonObject.getInt(TEAM_ID);
-        return -1;
+            teamId = jsonObject.getInt(TEAM_ID);
+        if (jsonObject.has(LOCK))
+            lock = jsonObject.getBoolean(LOCK);
+        if (teamId != -1 && lock)
+            return -2;
+        return teamId;
     }
 
-    public static void doActivityUrl(Integer characterId, Integer activityId){
-        String      urlParameters;
-        String		url;
-        JSONObject  jsonObject;
-        String		result;
-        int         teamId;
-    }
 
     private static void	setErrorMessage(String message) {
         JsonHandler.errorMessage = message;

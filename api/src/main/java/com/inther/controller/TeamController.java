@@ -213,7 +213,7 @@ public class TeamController {
     }
 
     @RequestMapping(value = "/team_exist", method = RequestMethod.POST)
-    public Map<String, String> teamExist(@RequestParam(name = "teamName") String name) throws EntityNotFoundException {
+    public Map<String, String> teamExist(@RequestParam(name = "teamName") String name) {
         TreeMap<String, String> map = new TreeMap<>();
         Optional<Team> teamOptional = teamRepository.findByName(name);
         if (!teamOptional.isPresent()) {
@@ -226,6 +226,7 @@ public class TeamController {
         map.put("status", "success");
         Team team = teamOptional.get();
         map.put("teamId", team.getId().toString());
+        map.put("locked", team.getLock().toString());
         return map;
     }
 }

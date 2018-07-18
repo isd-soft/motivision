@@ -122,7 +122,7 @@ public class CreateCharacterScreen implements Screen {
         isTeamChecked = false;
     }
 
-    private boolean  validateCharacterName(String characterName, GDXButtonDialog bDialog) {
+    private boolean validateCharacterName(String characterName, GDXButtonDialog bDialog) {
         Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-]*");
         Matcher matcher = pattern.matcher(characterName);
         if (characterName == null || characterName == "") {
@@ -130,7 +130,7 @@ public class CreateCharacterScreen implements Screen {
 
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
-                    System.out.println("result "+obj);
+                    System.out.println("result " + obj);
                 }
             };
             dialog.getContentTable().row();
@@ -143,13 +143,12 @@ public class CreateCharacterScreen implements Screen {
             bDialog.addButton("Go back");
             bDialog.build().show();*/
             return false;
-        }
-        else if (characterName.length() < 6) {
+        } else if (characterName.length() < 6) {
             log.warn("Character name field must be at least 6 characters long");
 
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
-                    System.out.println("result "+obj);
+                    System.out.println("result " + obj);
                 }
             };
             dialog.getContentTable().row();
@@ -163,14 +162,13 @@ public class CreateCharacterScreen implements Screen {
             bDialog.addButton("Go back");
             bDialog.build().show();*/
             return false;
-        }else
-        if(!matcher.matches()){
+        } else if (!matcher.matches()) {
             log.warn("Character name has an illegal character");
 
 
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
-                    System.out.println("result "+obj);
+                    System.out.println("result " + obj);
                 }
             };
             dialog.getContentTable().row();
@@ -189,7 +187,7 @@ public class CreateCharacterScreen implements Screen {
         return true;
     }
 
-    private boolean  validateTeamName(String teamName, GDXButtonDialog bDialog) {
+    private boolean validateTeamName(String teamName, GDXButtonDialog bDialog) {
         Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_ \\-]*");
         Matcher matcher = pattern.matcher(teamName);
         if (teamName == null || teamName == "") {
@@ -197,7 +195,7 @@ public class CreateCharacterScreen implements Screen {
 
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
-                    System.out.println("result "+obj);
+                    System.out.println("result " + obj);
                 }
             };
             dialog.getContentTable().row();
@@ -212,13 +210,12 @@ public class CreateCharacterScreen implements Screen {
             bDialog.addButton("Go back");
             bDialog.build().show();*/
             return false;
-        }
-        else if (teamName.length() < 6) {
+        } else if (teamName.length() < 6) {
             log.warn("Team name field must be at least 6 characters long");
 
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
-                    System.out.println("result "+obj);
+                    System.out.println("result " + obj);
                 }
             };
             dialog.getContentTable().row();
@@ -233,13 +230,13 @@ public class CreateCharacterScreen implements Screen {
             bDialog.build().show();*/
             return false;
         }
-        if(!matcher.matches()){
+        if (!matcher.matches()) {
             log.warn("Team name has an illegal character");
 
 
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
-                    System.out.println("result "+obj);
+                    System.out.println("result " + obj);
                 }
             };
             dialog.getContentTable().row();
@@ -302,19 +299,19 @@ public class CreateCharacterScreen implements Screen {
         Table screenTable = new Table();
 
         //music volume
-        final Slider volumeMusicSlider = new Slider( 0f, 1f, 0.1f,false, skin );
+        final Slider volumeMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
         volumeMusicSlider.setValue(parent.getPreferences().getMusicVolume());
-        volumeMusicSlider.addListener( new EventListener() {
+        volumeMusicSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                parent.getPreferences().setMusicVolume( volumeMusicSlider.getValue() );
+                parent.getPreferences().setMusicVolume(volumeMusicSlider.getValue());
                 return false;
             }
         });
         //sound volume
-        final Slider volumeSoundSlider = new Slider( 0f, 1f, 0.1f,false, skin );
-        volumeSoundSlider.setValue( parent.getPreferences().getSoundVolume());
-        volumeSoundSlider.addListener( new EventListener() {
+        final Slider volumeSoundSlider = new Slider(0f, 1f, 0.1f, false, skin);
+        volumeSoundSlider.setValue(parent.getPreferences().getSoundVolume());
+        volumeSoundSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
                 parent.getPreferences().setSoundVolume(volumeSoundSlider.getValue());
@@ -323,26 +320,25 @@ public class CreateCharacterScreen implements Screen {
         });
 
 
-
         //music
         final CheckBox musicCheckbox = new CheckBox(null, skin);
-        musicCheckbox.setChecked( parent.getPreferences().isMusicEnabled() );
-        musicCheckbox.addListener( new EventListener() {
+        musicCheckbox.setChecked(parent.getPreferences().isMusicEnabled());
+        musicCheckbox.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
                 boolean enabled = musicCheckbox.isChecked();
-                parent.getPreferences().setMusicEnabled( enabled );
+                parent.getPreferences().setMusicEnabled(enabled);
                 return false;
             }
         });
         //sound
-        final CheckBox soundCheckbox = new CheckBox(null, skin );
-        soundCheckbox.setChecked( parent.getPreferences().isSoundEnabled() );
-        soundCheckbox.addListener( new EventListener() {
+        final CheckBox soundCheckbox = new CheckBox(null, skin);
+        soundCheckbox.setChecked(parent.getPreferences().isSoundEnabled());
+        soundCheckbox.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
                 boolean enabled = soundCheckbox.isChecked();
-                parent.getPreferences().setSoundEnabled( enabled );
+                parent.getPreferences().setSoundEnabled(enabled);
                 return false;
             }
         });
@@ -358,10 +354,10 @@ public class CreateCharacterScreen implements Screen {
         });
 
         //making labels
-        volumeMusicLabel = new Label( "Music Volume", skin );
-        volumeSoundLabel = new Label( "Sound Volume", skin  );
-        musicOnOffLabel = new Label( "Music Effect", skin  );
-        soundOnOffLabel = new Label( "Sound Effect", skin  );
+        volumeMusicLabel = new Label("Music Volume", skin);
+        volumeSoundLabel = new Label("Sound Volume", skin);
+        musicOnOffLabel = new Label("Music Effect", skin);
+        soundOnOffLabel = new Label("Sound Effect", skin);
 
         checkboxMale.addListener(new ChangeListener() {
             @Override
@@ -396,10 +392,9 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 gameSounds.clickSound();
-                if(headType == 1) {
+                if (headType == 1) {
                     headType = 3;
-                }else
-                if(headType == 2 || headType == 3){
+                } else if (headType == 2 || headType == 3) {
                     headType--;
                 }
                 show();
@@ -411,10 +406,9 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 gameSounds.clickSound();
-                if(headType == 3) {
+                if (headType == 3) {
                     headType = 1;
-                }else
-                if(headType == 2 || headType == 1){
+                } else if (headType == 2 || headType == 1) {
                     headType++;
                 }
                 show();
@@ -426,10 +420,9 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 gameSounds.clickSound();
-                if(bodyType == 1) {
+                if (bodyType == 1) {
                     bodyType = 3;
-                }else
-                if(bodyType == 2 || bodyType == 3){
+                } else if (bodyType == 2 || bodyType == 3) {
                     bodyType--;
                 }
                 show();
@@ -441,10 +434,9 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 gameSounds.clickSound();
-                if(bodyType == 3) {
+                if (bodyType == 3) {
                     bodyType = 1;
-                }else
-                if(bodyType == 2 || bodyType == 1){
+                } else if (bodyType == 2 || bodyType == 1) {
                     bodyType++;
                 }
                 show();
@@ -455,15 +447,13 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 gameSounds.clickSound();
-                if(castleChoice == 1) {
+                if (castleChoice == 1) {
                     castleChoice = 3;
                     textureCastle = new Texture("teamCastle3.png");
-                }else
-                if(castleChoice == 2){
+                } else if (castleChoice == 2) {
                     castleChoice--;
                     textureCastle = new Texture("teamCastle1.png");
-                }else
-                if(castleChoice == 3){
+                } else if (castleChoice == 3) {
                     castleChoice--;
                     textureCastle = new Texture("teamCastle2.png");
                 }
@@ -475,15 +465,13 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 gameSounds.clickSound();
-                if(castleChoice == 1){
+                if (castleChoice == 1) {
                     castleChoice++;
                     textureCastle = new Texture("teamCastle2.png");
-                }else
-                if(castleChoice == 2){
+                } else if (castleChoice == 2) {
                     castleChoice++;
                     textureCastle = new Texture("teamCastle3.png");
-                }else
-                if(castleChoice == 3){
+                } else if (castleChoice == 3) {
                     castleChoice = 1;
                     textureCastle = new Texture("teamCastle1.png");
                 }
@@ -527,7 +515,7 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.add(checkboxTeam)
                 .left().colspan(3).padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.row().pad(10, 0, 0, 0);
-        if(checkboxTeam.isChecked()) {
+        if (checkboxTeam.isChecked()) {
             castleTable.add(arrowCastleLeft);
             castleTable.add(imageCastle);
             castleTable.add(arrowCastleRight);
@@ -543,7 +531,7 @@ public class CreateCharacterScreen implements Screen {
                 show();
             }
         });
-        buttonTable.add(buttonBack).bottom().expand().fillX() ;
+        buttonTable.add(buttonBack).bottom().expand().fillX();
         buttonTable.add(buttonOk).bottom().expand().fillX();
 
         tableActivities.add(buttonTable).fill().expand().colspan(3);
@@ -617,7 +605,7 @@ public class CreateCharacterScreen implements Screen {
 
                 Dialog dialog = new Dialog("", skin) {
                     public void result(Object obj) {
-                        System.out.println("result "+obj);
+                        System.out.println("result " + obj);
                     }
                 };
                 dialog.getContentTable().row();
@@ -625,12 +613,6 @@ public class CreateCharacterScreen implements Screen {
                 dialog.getContentTable().row();
                 dialog.button("back", "back");
                 dialog.show(stage);
-
-
-                /*bDialog.setTitle("Character Name");
-                bDialog.setMessage("Character name already exist!");
-                bDialog.addButton("Go back");
-                bDialog.build().show();*/
                 return false;
             } else {
                 log.info("Character name does not exist, all is okay");
@@ -639,15 +621,15 @@ public class CreateCharacterScreen implements Screen {
         }
 
         @Override
-        public void changed(ChangeEvent event, Actor actor){
+        public void changed(ChangeEvent event, Actor actor) {
             gameSounds.clickSound();
-            String  gender;
-            String  profileName;
-            String  teamName;
-            int     teamId;
-            boolean                         nameExist;
-            LinkedHashMap<String, String>   teamParams;
-            LinkedHashMap<String, String>   characterParameters;
+            String gender;
+            String profileName;
+            String teamName;
+            int teamId;
+            boolean nameExist;
+            LinkedHashMap<String, String> teamParams;
+            LinkedHashMap<String, String> characterParameters;
 
             characterParameters = new LinkedHashMap<String, String>();
 
@@ -674,14 +656,9 @@ public class CreateCharacterScreen implements Screen {
                 if (checkboxTeam.isChecked()) {
                     if (teamId != -1) {
                         log.warn("Team already exists!");
-//                        bDialog.setTitle("Team");
-//                        bDialog.setMessage("Team already exists!");
-//                        bDialog.addButton("Go back");
-//                        bDialog.build().show();
-
                         Dialog dialog = new Dialog("", skin) {
                             public void result(Object obj) {
-                                System.out.println("result "+obj);
+                                System.out.println("result " + obj);
                             }
                         };
                         dialog.getContentTable().row();
@@ -703,18 +680,23 @@ public class CreateCharacterScreen implements Screen {
                     teamText.setColor(Color.WHITE);
                     System.out.println("team id = " + teamId);
                     characterParameters.put(Profile.IS_ADMIN, "true");
-                }
-                else if (teamId == -1) {
+                } else if (teamId == -1) {
                     log.warn("Team does not exist!");
 
                     Dialog dialog = new Dialog("", skin) {
                         public void result(Object obj) {
-                            System.out.println("result "+obj);
+                            System.out.println("result " + obj);
                         }
                     };
                     dialog.getContentTable().row();
                     dialog.text("Team does not exist!");
                     dialog.getContentTable().row();
+                    dialog.addListener(new ChangeListener() {
+                        @Override
+                        public void changed(ChangeEvent changeEvent, Actor actor) {
+                            gameSounds.clickSound();
+                        }
+                    });
                     dialog.button("back", "back");
                     dialog.show(stage);
 
@@ -726,6 +708,25 @@ public class CreateCharacterScreen implements Screen {
                     // TODO Team already exist
                     //teamText.setColor(Color.RED);
                     return;
+                } else if (teamId == -2) {
+                    log.warn("Team is locked!");
+
+                    Dialog dialog = new Dialog("", skin) {
+                        public void result(Object obj) {
+                            System.out.println("result " + obj);
+                        }
+                    };
+                    dialog.getContentTable().row();
+                    dialog.text("Team is locked!");
+                    dialog.getContentTable().row();
+                    dialog.addListener(new ChangeListener() {
+                        @Override
+                        public void changed(ChangeEvent changeEvent, Actor actor) {
+                            gameSounds.clickSound();
+                        }
+                    });
+                    dialog.button("back", "back");
+                    dialog.show(stage);
                 } else {
                     characterParameters.put(Profile.IS_ADMIN, "false");
                 }
@@ -752,7 +753,7 @@ public class CreateCharacterScreen implements Screen {
             }
         }
 
-        public void     SelectDialog(String message) {
+        public void SelectDialog(String message) {
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Error");
             bDialog.setMessage(message);
