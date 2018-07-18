@@ -104,8 +104,8 @@ public class EarnPointsScreen implements Screen {
         }
         Image image = new Image(texture);
         //create buttons Settings, Back and adding them listeners
-        TextButton settingsButton = new TextButton("Settings", skin);
-        TextButton backButton = new TextButton("Back", skin);
+        TextButton settingsButton = new TextButton("Settings", skin, "blue");
+        TextButton backButton = new TextButton("Back", skin, "blue");
 
         // tables
         Table activitiesTable = new Table();

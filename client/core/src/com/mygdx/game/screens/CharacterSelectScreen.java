@@ -161,9 +161,9 @@ public class CharacterSelectScreen implements Screen {
 
         // remove and add buttons
         TextButton create = new TextButton("Create new +", skin, "green");
-        TextButton logout = new TextButton("Logout", skin);
-        TextButton select = new TextButton("Select", skin);
-        TextButton deletePlayer = new TextButton("Delete", skin);
+        TextButton logout = new TextButton("Logout", skin, "blue");
+        TextButton select = new TextButton("Select", skin, "blue");
+        TextButton deletePlayer = new TextButton("Delete", skin, "blue");
         // eanble scrolling
         ScrollPane scrollPane = new ScrollPane(charactersTable);
         scrollPane.setSmoothScrolling(false);

@@ -3,6 +3,9 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	blackChanceryShadow: {
 		file: blackChanceryShadow.fnt
 	}
+	blackChanceryWhite: {
+		file: blackChanceryWhite.fnt
+	}
 	yuGothic: {
 		file: yuGothic.fnt
 	}
@@ -384,7 +387,7 @@ com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
 		checkboxOn: checkbox-pressed-c
 		checkboxOff: checkbox-c
 		checkboxOver: checkbox-over-c
-		font: yuGothic
+		font: yuGothicWhite
 		fontColor: color
 	}
 	radio: {
@@ -454,12 +457,12 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		font: blackChanceryShadow
 		fontColor: black
 	}
-	fancyBlue: {
-		font: blackChanceryShadow
-		fontColor: medieval-blue
-	}
 	clean: {
 		font: yuGothic
+		fontColor: color
+	}
+	fancyWhite: {
+		font: blackChanceryWhite
 		fontColor: color
 	}
 }
