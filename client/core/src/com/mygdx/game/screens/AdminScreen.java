@@ -274,6 +274,7 @@ public class AdminScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 //PlayerAccount.logOut();
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
