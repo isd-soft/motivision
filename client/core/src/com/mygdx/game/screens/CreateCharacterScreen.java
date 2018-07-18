@@ -5,12 +5,15 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -75,6 +78,7 @@ public class CreateCharacterScreen implements Screen {
     private TextButton buttonOk;
     private boolean isTeamChecked;
     private GDXDialogs dialogs;
+    private Drawable transBlack;
 
     private Label volumeMusicLabel;
     private Label volumeSoundLabel;
@@ -91,6 +95,7 @@ public class CreateCharacterScreen implements Screen {
         bgImage.setFillParent(true);
         bgImage.setZIndex(0);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
+        transBlack = new TextureRegionDrawable(new TextureRegion((Texture) parent.assetsManager.aManager.get("transpBlack50.png")));
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -479,6 +484,7 @@ public class CreateCharacterScreen implements Screen {
             }
         });
 
+        tableActivities.setBackground(transBlack);
         tableActivities.add(labelName).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(nameText).fillX().left().colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);

@@ -24,6 +24,7 @@ public class AssetsManager {
     private final String manageTeam = "manageteam.jpg";
     private final String dwarfBackground = "dwarf.png";
     private final String characterCreate = "createchar.jpg";
+    private final String transBlack = "transpBlack50.png";
 
     private final String buttonClick = "data/click.wav";
     private final String buySound = "data/hammer.mp3";
@@ -66,6 +67,7 @@ public class AssetsManager {
         aManager.load(manageTeam, Texture.class);
         aManager.load(dwarfBackground, Texture.class);
         aManager.load(characterCreate, Texture.class);
+        aManager.load(transBlack, Texture.class);
 
         aManager.load(spriteAttackAnimation, Texture.class);
         aManager.load(boomAnimation, Texture.class);

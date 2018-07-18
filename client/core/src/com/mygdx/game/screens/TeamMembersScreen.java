@@ -91,8 +91,8 @@ public class TeamMembersScreen implements Screen {
         teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" Wins: " + PlayerAccount.getWins() + " \t Loss: " + PlayerAccount.getLosses());
 
         // buttons
-        TextButton settingsButton = new TextButton("Settings", skin);
-        TextButton backButton = new TextButton("Back", skin);
+        TextButton settingsButton = new TextButton("Settings", skin, "blue");
+        TextButton backButton = new TextButton("Back", skin, "blue");
 
         // tables
         Table screenTable = new Table();
@@ -182,9 +182,11 @@ public class TeamMembersScreen implements Screen {
 
             //here are points of each teammate
             points.setTouchable(Touchable.disabled);
+            teamMembersTable.add(points).width(Value.percentWidth(0.2f, teamMembersTable));
+
             if (PlayerAccount.isAdmin()) {
 
-                TextButton xButton = new TextButton("X", skin, "square");
+                TextButton xButton = new TextButton("X", skin, "red");
                 xButton.addListener(new DeleteMember(key));
                 teamMembersTable.add(xButton).width(Value.percentWidth(0.2f, teamMembersTable));
                 if (key.compareTo(PlayerAccount.getProfileName()) == 0) {
@@ -193,7 +195,6 @@ public class TeamMembersScreen implements Screen {
                 }
             }
 
-            teamMembersTable.add(points).width(Value.percentWidth(0.2f, teamMembersTable));
             teamMembersTable.row();
         }
 

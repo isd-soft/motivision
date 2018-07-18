@@ -223,12 +223,12 @@ public class LoginScreen implements Screen {
         table.row().pad(5, 0, 5, 0);
         table.add(labelPassword);
         table.add(passwordField).fillX().uniformX();
-        table.row().pad(40, 10, 0, 10);
-        table.add(register);
-        table.add(submit);
+        table.row().pad(40, 0, 0, 0);
+        table.add(register).fill();
+        table.add(submit).fill();
         table.row().pad(20, 0, 0, 0);
-        table.add(forgotPassword);
-        table.add(settings);
+        table.add(forgotPassword).fill();
+        table.add(settings).fill();
         table.top();
 
         Gdx.input.setInputProcessor(stage);
@@ -251,19 +251,19 @@ public class LoginScreen implements Screen {
 
     	stage.getViewport().update(width,height,true);
 	}
- 
+
 	@Override
         public void pause() {
 	}
- 
+
 	@Override
         public void resume() {
 	}
- 
+
 	@Override
         public void hide() {
 	}
- 
+
 	@Override
         public void dispose() {
 			stage.dispose();
