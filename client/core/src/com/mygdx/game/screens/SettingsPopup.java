@@ -90,10 +90,10 @@ public class SettingsPopup {
         });
 
         //making labels
-        volumeMusicLabel = new Label( "Music Volume", skin );
-        volumeSoundLabel = new Label( "Sound Volume", skin  );
-        musicOnOffLabel = new Label( "Music Effect", skin  );
-        soundOnOffLabel = new Label( "Sound Effect", skin  );
+        volumeMusicLabel = new Label( "Music Volume", skin,  "clean");
+        volumeSoundLabel = new Label( "Sound Volume", skin,  "clean");
+        musicOnOffLabel = new Label( "Music Effect", skin,  "clean");
+        soundOnOffLabel = new Label( "Sound Effect", skin, "clean");
 
         Dialog dialog = new Dialog("Settings", skin) {
             public void result(Object obj) {
