@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.animation.ParallaxBackground;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.Activity;
 import com.mygdx.game.requests.PlayerAccount;
 
@@ -41,9 +42,7 @@ public class EarnPointsScreen implements Screen {
     private Skin skin;
 
     private Viewport viewport;
-    private Camera camera;
-    private Music loginMusic;
-
+    private GameSounds gameSounds;
     private Table screenTable;
 
 
@@ -69,7 +68,7 @@ public class EarnPointsScreen implements Screen {
     public EarnPointsScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
-
+        gameSounds = new GameSounds(g);
         animationScreenTest = new AnimationScreenTest(parent);
 //        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
@@ -117,7 +116,7 @@ public class EarnPointsScreen implements Screen {
         parallaxBackground.setSize(800,480);
         parallaxBackground.setSpeed(1);
         parallaxBackground.setZIndex(0);
-        //stage.addActor(parallaxBackground);
+        stage.addActor(parallaxBackground);
         // scrollpane
         ScrollPane scrollPane = new ScrollPane(activitiesTable);
         scrollPane.setSmoothScrolling(false);
@@ -178,6 +177,7 @@ public class EarnPointsScreen implements Screen {
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+
                 parent.changeScreen(parent.getBackFromSettings());
             }
         });
@@ -289,11 +289,10 @@ public class EarnPointsScreen implements Screen {
             doActivity();
         }
         private void doActivity(){
-
-
-
+            gameSounds.clickSound();
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
+                    gameSounds.clickSound();
                     if (obj == "yes") {
                         try {
                             //wolf animation goes here
@@ -315,33 +314,6 @@ public class EarnPointsScreen implements Screen {
             dialog.button("Yes", "yes");
             dialog.button("No", "no");
             dialog.show(stage);
-            /*
-            final GDXButtonDialog dialogsSystem = dialogs.newDialog(GDXButtonDialog.class);
-
-            dialogsSystem.setTitle("Confirmation");
-            dialogsSystem.setMessage("Are you sure you did " + name);
-            dialogsSystem.setClickListener(new ButtonClickListener() {
-                @Override
-                public void click(int button) {
-                    if(button == 0){
-                        try {
-                            //wolf animation goes here
-                            PlayerAccount.doActivity(id);
-                            animationScreenTest.changeAnimation(2);
-                            animationScreenTest.setCurrentPosition(300);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-
-            dialogsSystem.addButton("Yes");
-            dialogsSystem.addButton("No");
-            dialogsSystem.build().show();
-            */
         }
     }
     @Override

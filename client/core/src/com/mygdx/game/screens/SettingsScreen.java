@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.music.GameMusic;
 
 public class SettingsScreen implements Screen{
 
@@ -55,7 +56,6 @@ public class SettingsScreen implements Screen{
 		volumeMusicSlider.addListener( new EventListener() {
 			@Override
 			public boolean handle(Event event) {
-				parent.getPreferences().setMusicVolume( volumeMusicSlider.getValue() );
 				return false;
 			}
 		});
@@ -65,7 +65,6 @@ public class SettingsScreen implements Screen{
 		volumeSoundSlider.addListener( new EventListener() {
 			@Override
 			public boolean handle(Event event) {
-				parent.getPreferences().setSoundVolume(volumeSoundSlider.getValue());
 				return false;
 			}
 		});
@@ -79,7 +78,7 @@ public class SettingsScreen implements Screen{
 			@Override
 			public boolean handle(Event event) {
 				boolean enabled = musicCheckbox.isChecked();
-				parent.getPreferences().setMusicEnabled( enabled );
+				//parent.getPreferences().setMusicEnabled( enabled );
 				return false;
 			}
 		});

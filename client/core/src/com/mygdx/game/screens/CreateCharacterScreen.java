@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.logger.Logger;
+import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Profile;
@@ -38,9 +39,12 @@ public class CreateCharacterScreen implements Screen {
 
     private final Logger log = new Logger();
     private GGame parent;
+    private GameSounds gameSounds;
     private Stage stage;
     private Viewport viewport;
     private Skin skin;
+    private Texture background;
+    private Image bgImage;
     private TextField nameText;
     private TextField teamText;
     private CheckBox checkboxTeam;
@@ -81,6 +85,11 @@ public class CreateCharacterScreen implements Screen {
     public CreateCharacterScreen(GGame g) {
         dialogs = GDXDialogsSystem.install();
         parent = g;
+        gameSounds = new GameSounds(g);
+        background = parent.assetsManager.aManager.get("createchar.jpg");
+        bgImage = new Image(background);
+        bgImage.setFillParent(true);
+        bgImage.setZIndex(0);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
@@ -343,6 +352,7 @@ public class CreateCharacterScreen implements Screen {
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getBackFromSettings());
             }
         });
@@ -356,6 +366,7 @@ public class CreateCharacterScreen implements Screen {
         checkboxMale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 checkboxMaleBoolean = true;
                 checkboxFemaleBoolean = false;
             }
@@ -364,6 +375,7 @@ public class CreateCharacterScreen implements Screen {
         checkboxFemale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 checkboxFemaleBoolean = true;
                 checkboxMaleBoolean = false;
             }
@@ -372,6 +384,7 @@ public class CreateCharacterScreen implements Screen {
         buttonBack.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getCharacterSelect());
             }
         });
@@ -382,6 +395,7 @@ public class CreateCharacterScreen implements Screen {
         arrowHeadLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameSounds.clickSound();
                 if(headType == 1) {
                     headType = 3;
                 }else
@@ -396,6 +410,7 @@ public class CreateCharacterScreen implements Screen {
         arrowHeadRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameSounds.clickSound();
                 if(headType == 3) {
                     headType = 1;
                 }else
@@ -410,6 +425,7 @@ public class CreateCharacterScreen implements Screen {
         arrowBodyLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameSounds.clickSound();
                 if(bodyType == 1) {
                     bodyType = 3;
                 }else
@@ -424,6 +440,7 @@ public class CreateCharacterScreen implements Screen {
         arrowBodyRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameSounds.clickSound();
                 if(bodyType == 3) {
                     bodyType = 1;
                 }else
@@ -437,6 +454,7 @@ public class CreateCharacterScreen implements Screen {
         arrowCastleLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameSounds.clickSound();
                 if(castleChoice == 1) {
                     castleChoice = 3;
                     textureCastle = new Texture("teamCastle3.png");
@@ -456,6 +474,7 @@ public class CreateCharacterScreen implements Screen {
         arrowCastleRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameSounds.clickSound();
                 if(castleChoice == 1){
                     castleChoice++;
                     textureCastle = new Texture("teamCastle2.png");
@@ -519,6 +538,7 @@ public class CreateCharacterScreen implements Screen {
         checkboxTeam.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameSounds.clickSound();
                 isTeamChecked = checkboxTeam.isChecked();
                 show();
             }
@@ -529,6 +549,7 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.add(buttonTable).fill().expand().colspan(3);
 
         //making table for whole screen in filling it up with image and table
+        screenTable.addActor(bgImage);
         screenTable.setFillParent(true);
         screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(tableActivities).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
@@ -619,13 +640,13 @@ public class CreateCharacterScreen implements Screen {
 
         @Override
         public void changed(ChangeEvent event, Actor actor){
+            gameSounds.clickSound();
             String  gender;
             String  profileName;
             String  teamName;
             int     teamId;
             boolean                         nameExist;
             LinkedHashMap<String, String>   teamParams;
-            //PLACE_HOLDER for registration
             LinkedHashMap<String, String>   characterParameters;
 
             characterParameters = new LinkedHashMap<String, String>();

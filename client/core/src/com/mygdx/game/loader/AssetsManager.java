@@ -1,20 +1,10 @@
 package com.mygdx.game.loader;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.ParticleEffectLoader.ParticleEffectParameter;
-import com.badlogic.gdx.assets.loaders.SkinLoader.SkinParameter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.gameSets.GGame;
-
-
 
 public class AssetsManager {
 
@@ -33,18 +23,20 @@ public class AssetsManager {
     private final String characterProfile = "barracks.jpg";
     private final String manageTeam = "manageteam.jpg";
     private final String dwarfBackground = "dwarf.png";
+    private final String characterCreate = "createchar.jpg";
 
     private final String buttonClick = "data/click.wav";
     private final String buySound = "data/hammer.mp3";
     private final String deniedSound = "data/denied.mp3";
     private final String equipArmor = "data/equipp.mp3";
+    private final String gameOst = "data/game-ost1.mp3";
+
     private final String spriteAttackAnimation = "warrior_attack.png";
     private final String boomAnimation = "boom_animation.png";
 
     private final String warriorWalk = "spritesheetWarriarWalk.png";
     private final String warriorRun = "spritesheetWarriarRun.png";
     private final String warriorAttack = "spritesheetWarriarAttack.png";
-
 
     private final String trollRun = "spritesheetTrollRun.png";
     private final String trollDie = "spritesheetTrollDie.png";
@@ -73,6 +65,15 @@ public class AssetsManager {
         aManager.load(characterProfile, Texture.class);
         aManager.load(manageTeam, Texture.class);
         aManager.load(dwarfBackground, Texture.class);
+        aManager.load(characterCreate, Texture.class);
+
+        aManager.load(spriteAttackAnimation, Texture.class);
+        aManager.load(boomAnimation, Texture.class);
+        aManager.load(warriorWalk, Texture.class);
+        aManager.load(warriorRun, Texture.class);
+        aManager.load(warriorAttack, Texture.class);
+        aManager.load(trollDie, Texture.class);
+        aManager.load(trollRun, Texture.class);
 
         aManager.load(layer1, Texture.class);
         aManager.load(layer2, Texture.class);
@@ -88,17 +89,11 @@ public class AssetsManager {
     }
 
     public void loadSounds(){
+        aManager.load(gameOst, Music.class);
         aManager.load(buttonClick, Sound.class);
         aManager.load(buySound, Sound.class);
         aManager.load(deniedSound, Sound.class);
         aManager.load(equipArmor, Sound.class);
-        aManager.load(spriteAttackAnimation, Texture.class);
-        aManager.load(boomAnimation, Texture.class);
-        aManager.load(warriorWalk, Texture.class);
-        aManager.load(warriorRun, Texture.class);
-        aManager.load(warriorAttack, Texture.class);
-        aManager.load(trollDie, Texture.class);
-        aManager.load(trollRun, Texture.class);
 //        aManager.load(monsterImage, Pixmap.class);
     }
 
