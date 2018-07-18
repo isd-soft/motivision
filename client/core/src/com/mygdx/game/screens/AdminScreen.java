@@ -473,12 +473,12 @@ public class AdminScreen implements Screen {
             gameSounds.clickSound();
             final TextField activityField = new TextField("", skin);
 
-            Dialog dialog = new Dialog("New Activity", skin) {
+            Dialog dialog = new Dialog("Edit Activity", skin) {
 
                 @Override
                 public void result(Object obj) {
                     gameSounds.clickSound();
-                    if (obj == "confirm") {
+                    if (obj == "save") {
                         try {
                             if (activityField.getText().length() < 6) {
                                 DialogBox.showInfoDialog("Error", "Activity name must be > 6 letters");
@@ -499,7 +499,7 @@ public class AdminScreen implements Screen {
             dialog.text("Enter new activity name:");
             dialog.getContentTable().add(activityField);
             dialog.getContentTable().row();
-            dialog.button("Confirm", "confirm");
+            dialog.button("Save", "save");
             dialog.button("Cancel", "cancel");
             dialog.show(stage);
         }
@@ -608,7 +608,7 @@ public class AdminScreen implements Screen {
                 @Override
                 public void result(Object obj) {
                     gameSounds.clickSound();
-                    if (obj == "confirm") {
+                    if (obj == "save") {
                         try {
                             if (activityField.getText().length() < 7)
                                 DialogBox.showInfoDialog("Error", "Activity name must be at least 6 letters");
@@ -629,7 +629,7 @@ public class AdminScreen implements Screen {
             dialog.text("Enter activity name:");
             dialog.getContentTable().add(activityField);
             dialog.getContentTable().row();
-            dialog.button("Confirm", "confirm");
+            dialog.button("Save", "save");
             dialog.button("Cancel", "cancel");
             dialog.show(stage);
         }
