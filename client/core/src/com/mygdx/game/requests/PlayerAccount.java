@@ -81,7 +81,7 @@ public class PlayerAccount {
     }
 
     public static boolean pingHost(String host, int port) {
-        try  {
+        try {
             Socket socket = new Socket();
             socket.connect(new InetSocketAddress(host, port), 100);
             return true;
@@ -318,6 +318,12 @@ public class PlayerAccount {
         //profile.updateItems();
         //selectProfile(profile.getName());
         return result;
+    }
+
+    public static boolean updateTeam() {
+        if (profile == null)
+            return false;
+        return team.updateTeam();
     }
 
     public static boolean doActivity(int activityId) throws IOException, JSONException {
