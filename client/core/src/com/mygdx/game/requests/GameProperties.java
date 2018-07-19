@@ -3,7 +3,9 @@ package com.mygdx.game.requests;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -18,15 +20,27 @@ public class GameProperties {
     private final Pattern PORT_PATTERN = Pattern.compile(PORT_REGEX);
 
     public GameProperties() {
-        // FileHandle propertiesFileHandle = Gdx.files.internal("config.properties");
-        // try {
-        //    appProps.load(new BufferedInputStream(propertiesFileHandle.read()));
-        //} catch (IOException e) {
-        //  e.printStackTrace();
-        //}
+        File file = new File("/data/data/com.mygdx.game/files/config.properties");
+
+        if (file.exists() == false) {
+            FileHandle propertiesFileHandle = Gdx.files.internal("config.properties");
+            try {
+                appProps.load(new BufferedInputStream(propertiesFileHandle.read()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            saveDomain(appProps.getProperty("server.ip"), appProps.getProperty("server.port"));
+        }
     }
 
     public String getDomain() {
+        FileHandle propertiesFileHandle = Gdx.files.local("config.properties");
+        try {
+
+            appProps.load(new BufferedInputStream(propertiesFileHandle.read()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String domain = "http://"
                 + appProps.getProperty("server.ip")
                 + ":"
@@ -44,13 +58,12 @@ public class GameProperties {
 
     //TODO write to properties file
     public void setDomain(String ip, String port) {
-        appProps.setProperty("server.ip", ip);
-        appProps.setProperty("server.port", port);
-        FileHandle propertiesFileHandle = Gdx.files.internal("config.properties");
-        try {
-            appProps.store(new BufferedOutputStream(propertiesFileHandle.write(false)), null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if ((ipIsValid(ip) == true) && (portIsValid(port) == true))
+            saveDomain(ip, port);
+    }
+
+    public void saveDomain(String ip, String port) {
+        FileHandle file = Gdx.files.local("config.properties");
+        file.writeString("server.port=" + port + "\nserver.ip=" + ip, false);
     }
 }

@@ -138,19 +138,16 @@ public class LoginScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
+                final GameProperties gameProperties = new GameProperties();
 
                 final Label ipLabel = new Label("ip:", skin, "fancy");
-
                 final Label currentConnection = new Label ("", skin, "fancy");
-
                 final TextField ipField = new TextField("", skin);
                 final Label portLabel = new Label("port:", skin, "fancy");
                 final TextField portField = new TextField("", skin);
                 final TextButton testConnection = new TextButton("test connection", skin);
                 final Label connectionLabel = new Label("", skin);
                 final Label saveConnectionLabel = new Label(JsonHandler.getDomain(), skin);
-
-
                 final TextButton saveConnection = new TextButton("save", skin);
                 //final TextButton backConnection = new TextButton("back", skin);
 
@@ -158,7 +155,10 @@ public class LoginScreen implements Screen {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
                         if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))){
-                            connectionLabel.setText("success");
+                            if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true))
+                                connectionLabel.setText("success");
+                            else
+                                connectionLabel.setText("provide valid ip!");
                         }else {
                             connectionLabel.setText("failed to connect");
                         }
@@ -168,12 +168,16 @@ public class LoginScreen implements Screen {
                 saveConnection.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        //if(connectionLabel.getText().equals("success")){
-                            new GameProperties().saveDomain(ipField.getText(), portField.getText());
-                            saveConnectionLabel.setText("changed");
-                        //}else{
-                            //saveConnectionLabel.setText("bad server");
-                        //}
+                        if(PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))){
+                            if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true)) {
+                                gameProperties.setDomain(ipField.getText(), portField.getText());
+                                saveConnectionLabel.setText("changed");
+                            }
+                            else
+                                saveConnectionLabel.setText("provide valid ip!");
+                        }else{
+                            saveConnectionLabel.setText("bad server");
+                        }
                     }
                 });
                 Dialog dialog = new Dialog("Connection Settings", skin) {
