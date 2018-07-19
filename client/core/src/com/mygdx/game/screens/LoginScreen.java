@@ -154,13 +154,19 @@ public class LoginScreen implements Screen {
                 testConnection.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))){
-                            if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true))
-                                connectionLabel.setText("success");
-                            else
-                                connectionLabel.setText("provide valid ip!");
-                        }else {
-                            connectionLabel.setText("failed to connect");
+                        if (ipField.getText().equals(""))
+                            connectionLabel.setText("ip cannot be empty!");
+                        else if (portField.getText().equals(""))
+                            connectionLabel.setText("port cannot be empty!");
+                        else{
+                            if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
+                                if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true))
+                                    connectionLabel.setText("success");
+                                else
+                                    connectionLabel.setText("provide valid ip!");
+                            } else {
+                                connectionLabel.setText("failed to connect");
+                            }
                         }
                     }
                 });
@@ -168,15 +174,20 @@ public class LoginScreen implements Screen {
                 saveConnection.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        if(PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))){
-                            if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true)) {
-                                gameProperties.setDomain(ipField.getText(), portField.getText());
-                                saveConnectionLabel.setText("changed");
+                        if (ipField.getText().equals(""))
+                            saveConnectionLabel.setText("ip cannot be empty!");
+                        else if (portField.getText().equals(""))
+                            saveConnectionLabel.setText("port cannot be empty!");
+                        else{
+                            if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
+                                if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true)) {
+                                    gameProperties.setDomain(ipField.getText(), portField.getText());
+                                    saveConnectionLabel.setText("changed");
+                                } else
+                                    saveConnectionLabel.setText("provide valid ip!");
+                            } else {
+                                saveConnectionLabel.setText("bad server");
                             }
-                            else
-                                saveConnectionLabel.setText("provide valid ip!");
-                        }else{
-                            saveConnectionLabel.setText("bad server");
                         }
                     }
                 });
@@ -200,7 +211,7 @@ public class LoginScreen implements Screen {
                 dialog.getContentTable().row();
                 dialog.getContentTable().add(saveConnection).colspan(2);
                 dialog.getContentTable().row();
-                dialog.getContentTable().add(saveConnectionLabel).colspan(2);
+                dialog.getContentTable().add(saveConnectionLabel).colspan(2).expandX();
                 dialog.getContentTable().row();
                 //dialog.button("save", "save");
                 dialog.button("back", "back");
