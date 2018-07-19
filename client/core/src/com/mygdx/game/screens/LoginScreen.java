@@ -51,9 +51,7 @@ public class LoginScreen implements Screen {
     private GameMusic gameMusic;
     private GameSounds gameSounds;
     private SettingsPopup settingsPopup;
-    //trying...
 
-    //trying...
     private Skin skin2;
 
 
@@ -142,14 +140,19 @@ public class LoginScreen implements Screen {
                 gameSounds.clickSound();
 
                 final Label ipLabel = new Label("ip:", skin, "fancy");
+
+                final Label currentConnection = new Label ("", skin, "fancy");
+
                 final TextField ipField = new TextField("", skin);
                 final Label portLabel = new Label("port:", skin, "fancy");
                 final TextField portField = new TextField("", skin);
                 final TextButton testConnection = new TextButton("test connection", skin);
-                final Label connectionLabel = new Label("test", skin);
+                final Label connectionLabel = new Label("", skin);
+                final Label saveConnectionLabel = new Label(JsonHandler.getDomain(), skin);
+
 
                 final TextButton saveConnection = new TextButton("save", skin);
-                final TextButton backConnection = new TextButton("back", skin);
+                //final TextButton backConnection = new TextButton("back", skin);
 
                 testConnection.addListener(new ChangeListener() {
                     @Override
@@ -161,18 +164,22 @@ public class LoginScreen implements Screen {
                         }
                     }
                 });
+
+                saveConnection.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        //if(connectionLabel.getText().equals("success")){
+                            new GameProperties().saveDomain(ipField.getText(), portField.getText());
+                            saveConnectionLabel.setText("changed");
+                        //}else{
+                            //saveConnectionLabel.setText("bad server");
+                        //}
+                    }
+                });
                 Dialog dialog = new Dialog("Connection Settings", skin) {
                     @Override
                     public void result(Object obj) {
                         gameSounds.clickSound();
-                        if (obj == "save") {
-                            if(connectionLabel.getText().equals("success")){
-                                new GameProperties().setDomain(ipField.getText(), portField.getText());
-                                connectionLabel.setText("changed");
-                            }else{
-                                connectionLabel.setText("bad server");
-                            }
-                        }
                     }
                 };
 
@@ -187,8 +194,11 @@ public class LoginScreen implements Screen {
                 dialog.getContentTable().row();
                 dialog.getContentTable().add(connectionLabel).colspan(2);
                 dialog.getContentTable().row();
-                //dialog.getContentTable().add(saveConnection);
-                dialog.button("save", "save");
+                dialog.getContentTable().add(saveConnection).colspan(2);
+                dialog.getContentTable().row();
+                dialog.getContentTable().add(saveConnectionLabel).colspan(2);
+                dialog.getContentTable().row();
+                //dialog.button("save", "save");
                 dialog.button("back", "back");
                 //dialog.getContentTable().add(backConnection);
                 dialog.show(stage);
