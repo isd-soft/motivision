@@ -150,13 +150,23 @@ public class LoginScreen implements Screen {
                 final TextButton saveConnection = new TextButton("save", skin);
                 final TextButton backConnection = new TextButton("back", skin);
 
+                testConnection.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent changeEvent, Actor actor) {
+                        if (PlayerAccount.testConnection(ipField.getText(), portField.getText())){
+                            connectionLabel.setText("success");
+                        }else {
+                            connectionLabel.setText("failed to connect");
+                        }
+                    }
+                });
                 Dialog dialog = new Dialog("Connection Settings", skin) {
                     @Override
                     public void result(Object obj) {
                         gameSounds.clickSound();
                         if (obj == "save") {
                             System.out.println("Bye! You are connected?");
-                            //TODO add test connection
+                            //TODO save ip and port
                         }
                     }
                 };

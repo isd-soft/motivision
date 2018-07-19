@@ -5,16 +5,20 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 public class PlayerAccount {
-    private static Player           player = null;
-    private static Profile          profile = null;
-    private static Team             team = null;
+    private static Player player = null;
+    private static Profile profile = null;
+    private static Team team = null;
     //private static List<Profile>    teamMembers;
 
 
@@ -54,7 +58,7 @@ public class PlayerAccount {
         return team.getTeamWins();
     }
 
-    public static String getTeamName(){
+    public static String getTeamName() {
         try {
             selectProfileTeam();
         } catch (IOException e) {
@@ -62,25 +66,44 @@ public class PlayerAccount {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if(team == null)
+        if (team == null)
             return null;
         return team.getTeamName();
 
     }
-    public static List<Activity> getActivities(){
-        if(team == null)
+
+    public static List<Activity> getActivities() {
+        if (team == null)
             return null;
         return team.getTeamActivities();
     }
 
-    public static List<String> getActivitiesName(){
-        if(team == null)
+    public static boolean testConnection(String ip, String port) {
+        try {
+            String url = "http://" + ip + ":" + port + "/test";
+            System.out.println(url);
+            JSONObject jsonObject = JsonHandler.readJsonFromUrl(url, "", "GET");
+            if(jsonObject == null)
+                return false;
+            else
+                return true;
+        } catch (MalformedURLException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        } catch (JSONException e) {
+            return false;
+        }
+    }
+
+    public static List<String> getActivitiesName() {
+        if (team == null)
             return null;
         return team.getTeamActivitiesNames();
     }
 
     public static LinkedHashMap<String, Integer> getTeamMembersList() {
-        LinkedHashMap<String, Integer>  teamMembersMap;
+        LinkedHashMap<String, Integer> teamMembersMap;
 
         try {
             selectProfileTeam();
@@ -99,13 +122,13 @@ public class PlayerAccount {
         return teamMembersMap;
     }
 
-    public static List<String> getAllCharactersFromTeamName(){
-        if(team == null)
+    public static List<String> getAllCharactersFromTeamName() {
+        if (team == null)
             return null;
         return team.getTeamActivitiesNames();
     }
 
-    public static int   getProfileId(String name) {
+    public static int getProfileId(String name) {
         if (player == null) {
             JsonHandler.errorMessage = "Player is not logged yet";
             return -1;
@@ -119,7 +142,7 @@ public class PlayerAccount {
         return player.getId();
     }
 
-    public static void  printProfile() {
+    public static void printProfile() {
         if (profile != null)
             profile.printProfile();
         else
@@ -132,8 +155,8 @@ public class PlayerAccount {
         team = null;
     }
 
-    public static boolean   registerNewPlayer(String login, String encryptedPassword) throws IOException, JSONException {
-        Player  player = null;
+    public static boolean registerNewPlayer(String login, String encryptedPassword) throws IOException, JSONException {
+        Player player = null;
 
         player = Player.registerNewPlayer(login, encryptedPassword);
         PlayerAccount.player = player;
@@ -155,8 +178,8 @@ public class PlayerAccount {
         return profile.getProfileTexture();
     }
 
-    public static Profile   selectProfile(String name) throws IOException, JSONException {
-        int     profileId;
+    public static Profile selectProfile(String name) throws IOException, JSONException {
+        int profileId;
 
         if (player == null) {
             JsonHandler.errorMessage = "Player is not logged yet";
@@ -174,8 +197,8 @@ public class PlayerAccount {
     }
 
     public static boolean loginPlayer(String login, String encryptedPassword) throws IOException, JSONException {
-        Player              player = null;
-        ArrayList<String>   charactersName;
+        Player player = null;
+        ArrayList<String> charactersName;
 
         player = Player.loginPlayer(login, encryptedPassword);
         PlayerAccount.player = player;
@@ -189,7 +212,7 @@ public class PlayerAccount {
         return (player != null);
     }
 
-    public static boolean   deletePlayer() throws IOException, JSONException {
+    public static boolean deletePlayer() throws IOException, JSONException {
         boolean result;
 
         if (player == null)
@@ -199,13 +222,13 @@ public class PlayerAccount {
         return result;
     }
 
-    public static boolean   isAdmin() {
+    public static boolean isAdmin() {
         if (profile == null)
             return false;
         return isAdmin(profile.getName());
     }
 
-    public static boolean   isAdmin(String name) {
+    public static boolean isAdmin(String name) {
         try {
             selectProfile(name);
         } catch (IOException e) {
@@ -223,18 +246,17 @@ public class PlayerAccount {
         return profile.isAdmin();
     }
 
-    public static boolean   createNewProfile(LinkedHashMap<String, String> characterParameters) throws IOException, JSONException {
+    public static boolean createNewProfile(LinkedHashMap<String, String> characterParameters) throws IOException, JSONException {
         if (Profile.createNewProfile(characterParameters) != null) {
             if (player != null)
                 player.updateAllCharacters();
             return true;
-        }
-        else
+        } else
             return false;
     }
 
 
-    public static boolean   deleteProfile(String name) throws IOException, JSONException {
+    public static boolean deleteProfile(String name) throws IOException, JSONException {
         selectProfile(name);
         if (profile == null)
             return false;
@@ -243,12 +265,11 @@ public class PlayerAccount {
             if (player != null)
                 player.updateAllCharacters();
             return true;
-        }
-        else
+        } else
             return false;
     }
 
-    public static void      deleteTeamMember(String name) throws IOException, JSONException {
+    public static void deleteTeamMember(String name) throws IOException, JSONException {
         if (team == null)
             return;
         team.deleteMember(name);
@@ -257,7 +278,7 @@ public class PlayerAccount {
         team.loadAllCharactersFromTeam();
     }
 
-    public static Texture   getTexture(int headType, int bodyType) {
+    public static Texture getTexture(int headType, int bodyType) {
         if (headType <= 0 || headType > 3)
             return new Texture("default.png");
         if (bodyType <= 0 || bodyType > 3)
@@ -265,13 +286,13 @@ public class PlayerAccount {
         return Profile.changeFaceType(headType, bodyType);
     }
 
-    public static int       getProfilePoints() {
+    public static int getProfilePoints() {
         if (profile == null)
             return -1;
         return profile.getPoints();
     }
 
-    public static Team      getProfileTeam(){
+    public static Team getProfileTeam() {
         try {
             selectProfileTeam();
         } catch (IOException e) {
@@ -288,7 +309,7 @@ public class PlayerAccount {
         else return profile.getItemStatus(id);
     }
 
-    public static boolean   buyItem(int id) throws IOException, JSONException {
+    public static boolean buyItem(int id) throws IOException, JSONException {
         boolean result;
 
         if (profile == null)
@@ -305,31 +326,34 @@ public class PlayerAccount {
         return result;
     }
 
-    public static boolean   doActivity(int activityId) throws IOException, JSONException {
+    public static boolean doActivity(int activityId) throws IOException, JSONException {
         if (profile == null)
             return false;
         return profile.doActivity(activityId);
     }
 
-    public static boolean   updateActivity(int activityId, String activityName, int activityReward)
+    public static boolean updateActivity(int activityId, String activityName, int activityReward)
             throws IOException, JSONException {
         if (profile == null)
             return false;
         return profile.updateActivity(activityId, activityName, activityReward);
     }
-    public static boolean   deleteActivity(int activityId)
+
+    public static boolean deleteActivity(int activityId)
             throws IOException, JSONException {
-        if(profile == null)
+        if (profile == null)
             return false;
         return profile.deleteActivity(activityId);
     }
-    public static boolean   createActivity(String name)
+
+    public static boolean createActivity(String name)
             throws IOException, JSONException {
-        if(profile == null)
+        if (profile == null)
             return false;
         return profile.createActivity(name);
     }
-    public static void      selectProfileTeam() throws IOException, JSONException {
+
+    public static void selectProfileTeam() throws IOException, JSONException {
         if (profile == null)
             return;
         if (team != null) {
@@ -339,16 +363,16 @@ public class PlayerAccount {
         team = Team.getTeam(profile.getTeamId());
     }
 
-    public static void     printAllMembers() {
+    public static void printAllMembers() {
         if (team == null)
             System.out.println("No members found!");
         team.printAllMembers();
     }
 
     public static Pixmap addProfileStatusOnImage(Pixmap pixmap, int itemId) throws IOException, JSONException {
-        Pixmap  itemPixmap = null;
-        int     status;
-        int     price;
+        Pixmap itemPixmap = null;
+        int status;
+        int price;
 
         if (profile == null)
             return pixmap;
@@ -373,7 +397,7 @@ public class PlayerAccount {
         return pixmap;
     }
 
-    public static String    getProfileTeamName() {
+    public static String getProfileTeamName() {
         try {
             selectProfileTeam();
         } catch (IOException e) {
@@ -434,7 +458,7 @@ public class PlayerAccount {
         return new Texture(team.getTeamLogo() + ".png");
     }
 
-    public static String    getProfileName() {
+    public static String getProfileName() {
         if (profile == null)
             return "No profile";
         return profile.getName();

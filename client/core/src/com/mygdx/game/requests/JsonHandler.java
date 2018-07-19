@@ -7,12 +7,14 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.net.URLConnection;
 import java.util.List;
 
 
@@ -27,7 +29,7 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 public class JsonHandler {
     static final GameProperties gameProperties = new GameProperties();
     static final String domain = gameProperties.getDomain();
-    public static String	errorMessage = null;
+    public static String errorMessage = null;
 
 
     private static String readAll(Reader rd) throws IOException {
@@ -39,7 +41,7 @@ public class JsonHandler {
         return sb.toString();
     }
 
-    public  static HttpURLConnection getHttpConnection(String url, String type) throws IOException {
+    public static HttpURLConnection getHttpConnection(String url, String type) throws IOException {
         URL uri = new URL(url);
         HttpURLConnection httpCon = (HttpURLConnection) uri.openConnection();
         httpCon.setDoOutput(true);
@@ -47,17 +49,18 @@ public class JsonHandler {
         httpCon.connect();
         return httpCon;
     }
-    public static String    requestMethod(String url, String type){
-        HttpURLConnection   con = null;
-        String              jsonText = null;
+
+    public static String requestMethod(String url, String type) {
+        HttpURLConnection con = null;
+        String jsonText = null;
 
         try {
             con = getHttpConnection(url, type);
-           // con.connect();
+            // con.connect();
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String temp = null;
             StringBuilder sb = new StringBuilder();
-            while((temp = in.readLine()) != null){
+            while ((temp = in.readLine()) != null) {
                 sb.append(temp).append(" ");
             }
             jsonText = sb.toString();
@@ -68,14 +71,11 @@ public class JsonHandler {
             //logger.error(e.getMessage());
         }
         return jsonText;
-//result is the response you get from the remote side
+        //result is the response you get from the remote side
     }
 
 
     private static String POSTMethod(String url, String urlParameters, String requestMethod) throws IOException {
-
-       // String url = "https://httpbin.org/post";
-        //String urlParameters = "name=Jack&occupation=programmer";
         byte[] postData = urlParameters.getBytes();
 
         HttpURLConnection con = null;
@@ -85,11 +85,7 @@ public class JsonHandler {
             con = (HttpURLConnection) myurl.openConnection();
 
             con.setDoOutput(true);
-                con.setRequestMethod(requestMethod);
-            //System.out.println(urlParameters);
-           // con.setRequestProperty("User-Agent", "Java client");
-           // con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
+            con.setRequestMethod(requestMethod);
             DataOutputStream wr;
             try {
                 wr = new DataOutputStream(con.getOutputStream());
@@ -163,23 +159,21 @@ public class JsonHandler {
         }
     }
 
-    public static JSONObject    readJsonFromUrl(String url, String urlParameters, String requestMethod) throws IOException, JSONException {
-        String              jsonText;
-        InputStream   inputStream;
-        BufferedReader      bufferedReader;
+    public static JSONObject readJsonFromUrl(String url, String urlParameters, String requestMethod) throws IOException, JSONException {
+        String jsonText;
+        InputStream inputStream;
+        BufferedReader bufferedReader;
 
         if (requestMethod.equals("POST")) {
             jsonText = POSTMethod(url, urlParameters, requestMethod);
-        }
-        else if (requestMethod.equals("GET")) {
+        } else if (requestMethod.equals("GET")) {
             if (url.equals(""))
                 inputStream = new URL(url).openStream();
             else
                 inputStream = new URL(url + "?" + urlParameters).openStream();
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             jsonText = readAll(bufferedReader);
-        }
-        else {
+        } else {
             jsonText = requestMethod(url + "?" + urlParameters, requestMethod);
         }
         return readJsonFromUrl(jsonText);
@@ -201,22 +195,21 @@ public class JsonHandler {
             e.printStackTrace();
             return null;
         } finally {
-           // is.close();
+            // is.close();
         }
     }
 
-    public static void      parseJson(JSONObject obj) throws JSONException {
+    public static void parseJson(JSONObject obj) throws JSONException {
         String pageName = obj.getJSONObject("pageInfo").getString("pageName");
 
         JSONArray arr = obj.getJSONArray("posts");
-        for (int i = 0; i < arr.length(); i++)
-        {
+        for (int i = 0; i < arr.length(); i++) {
             String post_id = arr.getJSONObject(i).getString("post_id");
         }
     }
 
-    public static void	readErrorMessage(JSONObject jsonObject) {
-        String	status;
+    public static void readErrorMessage(JSONObject jsonObject) {
+        String status;
 
         errorMessage = null;
         try {
@@ -224,17 +217,14 @@ public class JsonHandler {
             if (status.equals("success")) {
                 errorMessage = null;
                 //System.out.println(errorMessage);
-            }
-            else if (status.equals("failed")){
+            } else if (status.equals("failed")) {
                 errorMessage = jsonObject.getString("message");
                 System.out.println(errorMessage);
-            }
-            else if (jsonObject.has("error")) {
+            } else if (jsonObject.has("error")) {
                 errorMessage = jsonObject.getString("error");
                 System.out.println(errorMessage);
                 System.out.println(jsonObject.getString("message"));
-            }
-            else {
+            } else {
                 errorMessage = "No valid information from server received";
                 System.out.println(errorMessage);
             }
@@ -242,7 +232,8 @@ public class JsonHandler {
             // TODO Auto-generated catch block
             e.printStackTrace();
             errorMessage = "A json exception occured";
-        };
+        }
+        ;
 
     }
 }
