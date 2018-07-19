@@ -125,7 +125,6 @@ public class JsonHandler {
 
 
     public static BufferedReader getRequestResult(String url, List<BasicNameValuePair> urlParameters) {
-        //String url = "https://selfsolve.apple.com/wcResults.do";
 
         CloseableHttpClient client = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost(url);

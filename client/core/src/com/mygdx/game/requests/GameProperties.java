@@ -4,10 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Properties;
@@ -46,9 +49,11 @@ public class GameProperties {
     public void setDomain(String ip, String port) {
         appProps.setProperty("server.ip", ip);
         appProps.setProperty("server.port", port);
-        FileOutputStream output = null;
+        BufferedOutputStream output = null;
+
         try {
-            //output = new FileOutputStream();
+            //output = new BufferedWriter(new FileWriter("properties_1/" + part.name + ".txt", true));
+            output = new BufferedOutputStream(new FileOutputStream("config.properties"));
             appProps.store(output, "This description goes to the header of a file");
 
         } catch (FileNotFoundException e) {

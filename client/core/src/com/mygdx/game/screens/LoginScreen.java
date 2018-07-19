@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.music.GameMusic;
 import com.mygdx.game.logger.Logger;
 import com.mygdx.game.music.GameSounds;
+import com.mygdx.game.requests.GameProperties;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
@@ -153,7 +154,7 @@ public class LoginScreen implements Screen {
                 testConnection.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        if (PlayerAccount.testConnection(ipField.getText(), portField.getText())){
+                        if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))){
                             connectionLabel.setText("success");
                         }else {
                             connectionLabel.setText("failed to connect");
@@ -165,8 +166,12 @@ public class LoginScreen implements Screen {
                     public void result(Object obj) {
                         gameSounds.clickSound();
                         if (obj == "save") {
-                            System.out.println("Bye! You are connected?");
-                            //TODO save ip and port
+                            if(connectionLabel.getText().equals("success")){
+                                new GameProperties().setDomain(ipField.getText(), portField.getText());
+                                connectionLabel.setText("changed");
+                            }else{
+                                connectionLabel.setText("bad server");
+                            }
                         }
                     }
                 };
