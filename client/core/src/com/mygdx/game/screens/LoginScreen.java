@@ -24,6 +24,12 @@ import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.gameSets.GGame;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
+import javax.xml.soap.Text;
+
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
 
@@ -37,6 +43,7 @@ public class LoginScreen implements Screen {
     private Label labelName;
     private Label labelPassword;
     private TextButton forgotPassword;
+    private TextButton connection;
     private Viewport viewport;
     private GDXDialogs dialogs;
     private BackgroundAnimation animationScreenTest;
@@ -104,6 +111,7 @@ public class LoginScreen implements Screen {
 		TextButton register = new TextButton("Register", skin);
 		final TextButton submit = new TextButton("Submit", skin);
 		final TextButton settings = new TextButton("Settings", skin);
+		TextButton connection = new TextButton("Connection", skin);
 
         register.addListener(new ChangeListener() {
             @Override
@@ -127,6 +135,60 @@ public class LoginScreen implements Screen {
 			}
 		});
 
+        connection.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
+
+                final Label ipLabel = new Label("ip:", skin, "fancy");
+                final TextField ipField = new TextField("", skin);
+                final Label portLabel = new Label("port:", skin, "fancy");
+                final TextField portField = new TextField("", skin);
+                final TextButton testConnection = new TextButton("test connection", skin);
+                final Label connectionLabel = new Label("test", skin);
+
+                final TextButton saveConnection = new TextButton("save", skin);
+                final TextButton backConnection = new TextButton("back", skin);
+
+                testConnection.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent changeEvent, Actor actor) {
+                        if (PlayerAccount.testConnection(ipField.getText(), portField.getText())){
+                            connectionLabel.setText("success");
+                        }else {
+                            connectionLabel.setText("failed to connect");
+                        }
+                    }
+                });
+                Dialog dialog = new Dialog("Connection Settings", skin) {
+                    @Override
+                    public void result(Object obj) {
+                        gameSounds.clickSound();
+                        if (obj == "save") {
+                            System.out.println("Bye! You are connected?");
+                            //TODO save ip and port
+                        }
+                    }
+                };
+
+                dialog.getContentTable().row();
+                dialog.getContentTable().add(ipLabel);
+                dialog.getContentTable().add(ipField);
+                dialog.getContentTable().row();
+                dialog.getContentTable().add(portLabel);
+                dialog.getContentTable().add(portField);
+                dialog.getContentTable().row();
+                dialog.getContentTable().add(testConnection).colspan(2);
+                dialog.getContentTable().row();
+                dialog.getContentTable().add(connectionLabel).colspan(2);
+                dialog.getContentTable().row();
+                //dialog.getContentTable().add(saveConnection);
+                dialog.button("save", "save");
+                dialog.button("back", "back");
+                //dialog.getContentTable().add(backConnection);
+                dialog.show(stage);
+            }
+        });
 		animationScreenTest.setFillParent(true);
 		animationScreenTest.setZIndex(0);
 		table.addActor(animationScreenTest);
@@ -145,6 +207,8 @@ public class LoginScreen implements Screen {
         table.row().pad(20, 0, 0, 0);
         table.add(forgotPassword).fill();
         table.add(settings).fill();
+        table.row().pad(20, 0, 0, 0);
+        table.add(connection).fill().colspan(2);
         table.top();
 
         Gdx.input.setInputProcessor(stage);

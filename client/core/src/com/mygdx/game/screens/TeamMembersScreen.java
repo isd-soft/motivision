@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.PlayerAccount;
+import com.mygdx.game.requests.Team;
 
 import org.json.JSONException;
 
@@ -125,7 +126,37 @@ public class TeamMembersScreen implements Screen {
             if (PlayerAccount.isAdmin()) {
 
                 TextButton xButton = new TextButton("X", skin, "red");
-                xButton.addListener(new DeleteMember(key));
+
+                xButton.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        Dialog dialog = new Dialog("Confirmation", skin) {
+                            @Override
+                            public void result(Object obj) {
+                                gameSounds.clickSound();
+                                if (obj == "yes") {
+                                    try {
+                                        PlayerAccount.deleteTeamMember(key);
+                                        if (selectedName.equals(key))
+                                            selectedName = null;
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    TeamMembersScreen.this.show();
+                                }
+                            }
+                        };
+
+                        dialog.getContentTable().row();
+                        dialog.text("Are you sure you want to kick \"" + key + "\" ?");
+                        dialog.button("Yes", "yes");
+                        dialog.button("No", "no");
+                        dialog.show(stage);
+                    }
+                });
+
                 teamMembersTable.add(xButton).width(Value.percentWidth(0.2f, teamMembersTable));
                 if (key.compareTo(PlayerAccount.getProfileName()) == 0) {
                     xButton.setDisabled(true);
@@ -225,6 +256,34 @@ public class TeamMembersScreen implements Screen {
         }
 
         private void confirmPopUp() {
+
+
+            Dialog dialog = new Dialog("Confirmation", skin) {
+                @Override
+                public void result(Object obj) {
+                    gameSounds.clickSound();
+                    if (obj == "yes") {
+                        try {
+                            PlayerAccount.deleteTeamMember(name);
+                            if (selectedName.equals(name))
+                                selectedName = null;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        TeamMembersScreen.this.show();
+                    }
+                }
+            };
+
+            dialog.getContentTable().row();
+            dialog.text("Are you sure you want to kick \"" + name + "\" ?");
+            dialog.button("Yes", "yes");
+            dialog.button("Yes", "no");
+            dialog.show(stage);
+
+            /*
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to kick " + name);
@@ -248,7 +307,7 @@ public class TeamMembersScreen implements Screen {
             });
             bDialog.addButton("Ok");
             bDialog.addButton("Cancel");
-            bDialog.build().show();
+            bDialog.build().show();*/
         }
     }
 

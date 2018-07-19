@@ -10,6 +10,7 @@ public class GameSounds {
     private static Sound deniedSound;
     private static Sound buySound;
     private static float VOLUME = 1.0f;
+    private static float volumeStash = 1.0f;
 
     public GameSounds(GGame parent) {
         this.parent = parent;
@@ -19,24 +20,39 @@ public class GameSounds {
         buySound = parent.assetsManager.aManager.get("data/hammer.mp3");
     }
 
-    public void setSoundVolume(float volume){
+    public boolean isEnabled(){
+        return !(VOLUME == 0);
+    }
+    public void setSoundVolume(float volume) {
+        volumeStash = VOLUME;
         VOLUME = volume;
     }
-    public void disableSound(){
+
+    public void disableSound() {
+        volumeStash = VOLUME;
         VOLUME = 0;
     }
-    public void buySound(){
+
+    public  void enableSound(){
+        VOLUME = volumeStash;
+    }
+
+    public void buySound() {
         buySound.play(VOLUME);
     }
 
-    public void clickSound(){
+    public void clickSound() {
         clickSound.play(VOLUME);
     }
-    public void itemSound(){
+
+    public void itemSound() {
         itemSound.play(VOLUME);
     }
 
-    public void deniedSound(){
+    public void deniedSound() {
         deniedSound.play(VOLUME);
+    }
+    public float getVolumeStash(){
+        return volumeStash;
     }
 }
