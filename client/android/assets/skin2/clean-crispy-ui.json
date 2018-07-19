@@ -12,6 +12,9 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	yuGothicGray: {
 		file: yuGothicGray.fnt
 	}
+	yuGothicGreen: {
+		file: yuGothicGreen.fnt
+	}
 	yuGothicRed: {
 		file: yuGothicRed.fnt
 	}
@@ -317,9 +320,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 }
 com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
 	default: {
-		checkboxOn: checkbox-pressed-c
-		checkboxOff: checkbox-c
-		checkboxOver: checkbox-over-c
+		checkboxOn: big-check-
+		checkboxOff: big-uncheck
 		font: yuGothicWhite
 		fontColor: color
 	}
@@ -327,6 +329,12 @@ com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
 		checkboxOn: radio-pressed-c
 		checkboxOff: radio-c
 		checkboxOver: radio-over-c
+		font: yuGothic
+		fontColor: color
+	}
+	clean: {
+		checkboxOn: big-check-
+		checkboxOff: big-uncheck
 		font: yuGothic
 		fontColor: color
 	}
@@ -397,6 +405,10 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	fancyWhite: {
 		font: blackChanceryWhite
 		fontColor: color
+	}
+	success: {
+		font: yuGothicGreen
+		fontColor: medieval-green
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
@@ -555,11 +567,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 	default: {
 		background: window-c
-		titleFont: yuGothic
-		titleFontColor: color
-	}
-	main: {
-		background: window-main-c
 		titleFont: yuGothic
 		titleFontColor: color
 	}
