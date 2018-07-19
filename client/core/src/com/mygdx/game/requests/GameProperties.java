@@ -3,29 +3,27 @@ package com.mygdx.game.requests;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 public class GameProperties {
     private final Properties appProps = new Properties();
-    //private final String regex = "(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
+    private final String IP4V_REGEX
+            = "(([0-1]?[0-9]{1,2}\\.)|(2[0-4][0-9]\\.)|(25[0-5]\\.)){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))";
+    private final Pattern IP_PATTERN = Pattern.compile(IP4V_REGEX);
+    private final String PORT_REGEX =
+            "([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])";
+    private final Pattern PORT_PATTERN = Pattern.compile(PORT_REGEX);
 
     public GameProperties() {
-        FileHandle propertiesFileHandle = Gdx.files.internal("config.properties");
-        try {
-            appProps.load(new BufferedInputStream(propertiesFileHandle.read()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // FileHandle propertiesFileHandle = Gdx.files.internal("config.properties");
+        // try {
+        //    appProps.load(new BufferedInputStream(propertiesFileHandle.read()));
+        //} catch (IOException e) {
+        //  e.printStackTrace();
+        //}
     }
 
     public String getDomain() {
@@ -36,38 +34,23 @@ public class GameProperties {
         return domain;
     }
 
-    //TODO validate both IP4V and IP6V
     public boolean ipIsValid(String ip) {
-        return false;
+        return IP_PATTERN.matcher(ip).matches();
     }
 
-    //TODO validate port
     public boolean portIsValid(String port) {
-        return false;
+        return PORT_PATTERN.matcher(port).matches();
     }
 
+    //TODO write to properties file
     public void setDomain(String ip, String port) {
         appProps.setProperty("server.ip", ip);
         appProps.setProperty("server.port", port);
-        BufferedOutputStream output = null;
-
+        FileHandle propertiesFileHandle = Gdx.files.internal("config.properties");
         try {
-            //output = new BufferedWriter(new FileWriter("properties_1/" + part.name + ".txt", true));
-            output = new BufferedOutputStream(new FileOutputStream("config.properties"));
-            appProps.store(output, "This description goes to the header of a file");
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            appProps.store(new BufferedOutputStream(propertiesFileHandle.write(false)), null);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (output != null) {
-                try {
-                    output.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }
