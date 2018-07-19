@@ -28,7 +28,7 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 public class JsonHandler {
     static final GameProperties gameProperties = new GameProperties();
-    static final String domain = gameProperties.getDomain();
+    static final String domain = "http://172.17.41.64:8080"; //gameProperties.getDomain();
     public static String errorMessage = null;
 
 
@@ -163,6 +163,7 @@ public class JsonHandler {
         InputStream inputStream;
         BufferedReader bufferedReader;
 
+        System.out.println(url + "?" + urlParameters);
         if (requestMethod.equals("POST")) {
             jsonText = POSTMethod(url, urlParameters, requestMethod);
         } else if (requestMethod.equals("GET")) {

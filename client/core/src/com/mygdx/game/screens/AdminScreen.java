@@ -131,7 +131,7 @@ public class AdminScreen implements Screen {
         TextButton create = new TextButton("Create new +", skin, "green");
         TextButton back = new TextButton("Back", skin, "blue");
         TextButton settings = new TextButton("Settings", skin, "blue");
-
+        TextButton save = new TextButton("Save", skin, "green");
         final Label frequencyLabel = new Label("Battle frequency", skin);
         final Label teamLockedLabel = new Label("Allow joining in team:", skin);
         Label castleLabel = new Label("Team logo", skin);
@@ -243,7 +243,9 @@ public class AdminScreen implements Screen {
         selectionTable.row();
         selectionTable.add(teamLockedLabel).colspan(2).fill().pad(30, 0, 0, 0);
         selectionTable.add(checkboxLockTeam).left().pad(30, pad * 2, 0, 0);
-        ;
+        selectionTable.row();
+        selectionTable.add(save).colspan(4).fill();
+
 
         if (serverActivities == null) {
             activityNamesButtons.get(0).setDisabled(true);
@@ -348,6 +350,13 @@ public class AdminScreen implements Screen {
                 textureCastle = new Texture("teamCastle" + castleChoice + ".png");
                 PlayerAccount.setTeamLogo("teamCastle" + castleChoice);
                 show();
+            }
+        });
+
+        save.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                PlayerAccount.updateTeam();
             }
         });
         Gdx.input.setInputProcessor(stage);
