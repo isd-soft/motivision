@@ -18,6 +18,15 @@ public class GameModel {
         createFloor();
         createObject();
         createMovingObject();
+
+        BodyFactory bodyFactory = BodyFactory.getInstance(world);
+
+        bodyFactory.makeSquareBody(1,3,2,  BodyFactory.HUMAN, BodyDef.BodyType.DynamicBody, false);
+        bodyFactory.makeSquareBody(-10,3,2,  BodyFactory.SKELETON, BodyDef.BodyType.DynamicBody, false);
+        bodyFactory.makeSquareBody(10,4,2,  BodyFactory.WOLF, BodyDef.BodyType.DynamicBody, false);
+        bodyFactory.makeSquareBody(3,2,2,  BodyFactory.TROLL, BodyDef.BodyType.DynamicBody, false);
+
+
     }
 
 

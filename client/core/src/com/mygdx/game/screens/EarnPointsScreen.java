@@ -55,7 +55,7 @@ public class EarnPointsScreen implements Screen {
     private static final int FRAME_COLS = 6, FRAME_ROWS = 5;
 
     private GDXDialogs dialogs;
-    public AnimationScreenTest animationScreenTest;
+    private AnimationScreenTest animationScreenTest;
 
     private SettingsPopup settingsPopup;
 
@@ -70,6 +70,8 @@ public class EarnPointsScreen implements Screen {
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
         settingsPopup = new SettingsPopup();
+
+        animationScreenTest.setScreenAnimation(2, "ATTACK");
     }
 
 
@@ -77,7 +79,6 @@ public class EarnPointsScreen implements Screen {
     public void show() {
         stage.clear();
 //        stage.setDebugAll(true);
-        animationScreenTest.changeAnimation(1);
         float pad = 5;
 
         backgroundTexture = parent.assetsManager.aManager.get("background.png");
@@ -107,7 +108,7 @@ public class EarnPointsScreen implements Screen {
         parallaxBackground.setSize(800, 480);
         parallaxBackground.setSpeed(1);
         parallaxBackground.setZIndex(0);
-        stage.addActor(parallaxBackground);
+        //stage.addActor(parallaxBackground);
         // scrollpane
         ScrollPane scrollPane = new ScrollPane(activitiesTable);
         scrollPane.setSmoothScrolling(false);

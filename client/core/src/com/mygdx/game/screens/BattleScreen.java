@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.animation.CharacterAnimation;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.gameSets.GameModel;
 
@@ -29,6 +31,8 @@ public class BattleScreen implements Screen {
 
     private Texture knightTex;
 
+    public AnimationScreenTest animationScreenTest;
+
     public BattleScreen(GGame g) {
         parent = g;
         model = new GameModel();
@@ -42,6 +46,10 @@ public class BattleScreen implements Screen {
         stage.setViewport(viewport);
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
 */
+        animationScreenTest = new AnimationScreenTest(parent);
+
+
+
 
         sb = new SpriteBatch();
         sb.setProjectionMatrix(cam.combined);
@@ -77,15 +85,23 @@ public class BattleScreen implements Screen {
     public void show() {
         stage.clear();
 
+        animationScreenTest.changeAnimation(1);
 
 
-
-
+        stage.addActor(animationScreenTest);
         Gdx.input.setInputProcessor(stage);
     }
 
+    long    myTime = 0;
+    int     alpha = 20;
+
     @Override
     public void render(float delta) {
+
+        myTime++;
+        if (myTime >= 7 * alpha)
+            myTime = 0;
+
 
         model.logicStep(delta);
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
