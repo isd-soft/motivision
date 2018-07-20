@@ -32,11 +32,13 @@ public class JsonHandler {
     public static String errorMessage = null;
 
     public static String getDomain() {
-        return domain;
+        GameProperties gameP = new GameProperties();
+        return gameP.getDomain();
     }
 
     public static void setDomain(String domain) {
-        JsonHandler.domain = gameProperties.getDomain();
+        GameProperties gameP = new GameProperties();
+        JsonHandler.domain = gameP.getDomain();
     }
 
     private static String readAll(Reader rd) throws IOException {
