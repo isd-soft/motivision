@@ -28,11 +28,15 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 public class JsonHandler {
     static final GameProperties gameProperties = new GameProperties();
-    static final String domain = gameProperties.getDomain();
+    static String domain = gameProperties.getDomain();
     public static String errorMessage = null;
 
     public static String getDomain() {
         return domain;
+    }
+
+    public static void setDomain(String domain) {
+        JsonHandler.domain = domain;
     }
 
     private static String readAll(Reader rd) throws IOException {

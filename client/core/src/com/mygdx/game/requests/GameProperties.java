@@ -65,5 +65,6 @@ public class GameProperties {
     public void saveDomain(String ip, String port) {
         FileHandle file = Gdx.files.local("config.properties");
         file.writeString("server.port=" + port + "\nserver.ip=" + ip, false);
+        JsonHandler.setDomain(getDomain());
     }
 }

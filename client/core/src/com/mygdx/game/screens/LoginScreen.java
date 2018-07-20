@@ -53,6 +53,8 @@ public class LoginScreen implements Screen {
     private GameMusic gameMusic = GameMusic.getInstance();
     private GameSounds gameSounds = GameSounds.getInstance();
     private SettingsPopup settingsPopup;
+    private Boolean checkBoxRememberMeBoolean = false;
+    private Boolean doEncrypt = true;
     //trying...
 
     //trying...
@@ -94,11 +96,38 @@ public class LoginScreen implements Screen {
 		labelPassword.setAlignment(Align.center);
 		//add text fields login/password
 		final TextField loginField = new TextField(null,skin);
-		loginField.setMessageText("Login goes here");
-		final TextField passwordField = new TextField(null, skin);
-		passwordField.setPasswordCharacter('*');
-		passwordField.setPasswordMode(true);
-		passwordField.setMessageText("Password goes here");
+        final TextField passwordField = new TextField(null, skin);
+        passwordField.setPasswordCharacter('*');
+        passwordField.setPasswordMode(true);
+
+		if (RememberMe.rememberMeFileExists() == true && RememberMe.wasCheckBoxChecked() == true) {
+            loginField.setText(RememberMe.getLogin());
+            passwordField.setText(RememberMe.getPassword());
+            doEncrypt = false;
+            checkBoxRememberMeBoolean = true;
+        }
+        else {
+            loginField.setMessageText("Login goes here");
+            passwordField.setMessageText("Password goes here");
+		}
+
+		passwordField.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                doEncrypt = true;
+            }
+        });
+
+		loginField.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                doEncrypt = true;
+            }
+        });
+        //remember me section
+        final Label rememberMeLabel = new Label("Remember me: ", skin, "big");
+        final CheckBox checkBoxRememberMe = new CheckBox(null, skin, "clean");
+        checkBoxRememberMe.setChecked(checkBoxRememberMeBoolean);
 
         //Forgot password
         forgotPassword = new TextButton("Forgot password?", skin);
@@ -107,6 +136,19 @@ public class LoginScreen implements Screen {
         final TextButton submit = new TextButton("Submit", skin);
         final TextButton settings = new TextButton("Settings", skin);
         TextButton connection = new TextButton("Connection", skin);
+
+        checkBoxRememberMe.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
+                if (checkBoxRememberMeBoolean == false)
+                    checkBoxRememberMeBoolean = true;
+                else
+                    checkBoxRememberMeBoolean = false;
+
+                checkBoxRememberMe.setChecked(checkBoxRememberMeBoolean);
+            }
+        });
 
         register.addListener(new ChangeListener() {
             @Override
@@ -145,6 +187,9 @@ public class LoginScreen implements Screen {
                 final Label connectionLabel = new Label("", skin, "big");
                 final Label saveConnectionLabel = new Label(JsonHandler.getDomain().replace("http://", ""), skin, "big");
                 final TextButton saveConnection = new TextButton("save", skin, "big");
+
+
+
                 //final TextButton backConnection = new TextButton("back", skin);
 
                 testConnection.addListener(new ChangeListener() {
@@ -227,13 +272,16 @@ public class LoginScreen implements Screen {
         table.row().pad(5, 0, 5, 0);
         table.add(labelPassword);
         table.add(passwordField).fillX();
-        table.row().pad(20, 0, 0, 0);
+        table.row().pad(0, 0, 0, 0);
+        table.add(rememberMeLabel);
+        table.add(checkBoxRememberMe);
+        table.row().pad(10, 0, 0, 0);
         table.add(register).fill();
         table.add(submit).fill();
-        table.row().pad(20, 0, 0, 0);
+        table.row().pad(10, 0, 0, 0);
         table.add(forgotPassword).fill();
         table.add(settings).fill();
-        table.row().pad(20, 0, 0, 0);
+        table.row().pad(10, 0, 0, 0);
         table.add(connection).fill().colspan(2);
         table.top();
 
@@ -297,15 +345,20 @@ public class LoginScreen implements Screen {
             } else {
                 log.info("Login and Password inputted");
                 String encryptedPassword;
-                encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+                if (doEncrypt == true)
+                    encryptedPassword = EncryptPassword.encrypt(passwordField.getText());
+                else
+                    encryptedPassword = passwordField.getText();
                 try {
                     if (PlayerAccount.loginPlayer(loginField.getText(), encryptedPassword)) {
                         log.info("Login success");
                         Gdx.input.setOnscreenKeyboardVisible(false);
+                        RememberMe.savePlayer(loginField.getText(), encryptedPassword, String.valueOf(checkBoxRememberMeBoolean));
                         parent.changeScreen(parent.getCharacterSelect());
                     } else {
                         log.info("Incorrect login/password");
                         label.setText(JsonHandler.errorMessage);
+                        passwordField.setText("");
                     }
                 } catch (Exception e) {
                     log.error("Something went wrong occurred");
