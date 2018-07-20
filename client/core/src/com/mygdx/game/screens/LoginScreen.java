@@ -135,24 +135,56 @@ public class LoginScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
+                final GameProperties gameProperties = new GameProperties();
 
                 final Label ipLabel = new Label("ip:", skin, "fancy");
+                final Label currentConnection = new Label ("", skin, "fancy");
                 final TextField ipField = new TextField("", skin);
                 final Label portLabel = new Label("port:", skin, "fancy");
                 final TextField portField = new TextField("", skin);
                 final TextButton testConnection = new TextButton("test connection", skin);
-                final Label connectionLabel = new Label("test", skin);
-
+                final Label connectionLabel = new Label("", skin);
+                final Label saveConnectionLabel = new Label(JsonHandler.getDomain(), skin);
                 final TextButton saveConnection = new TextButton("save", skin);
-                final TextButton backConnection = new TextButton("back", skin);
+                //final TextButton backConnection = new TextButton("back", skin);
 
                 testConnection.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
-                            connectionLabel.setText("success");
-                        } else {
-                            connectionLabel.setText("failed to connect");
+                        if (ipField.getText().equals(""))
+                            connectionLabel.setText("ip cannot be empty!");
+                        else if (portField.getText().equals(""))
+                            connectionLabel.setText("port cannot be empty!");
+                        else{
+                            if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
+                                if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true))
+                                    connectionLabel.setText("success");
+                                else
+                                    connectionLabel.setText("provide valid ip!");
+                            } else {
+                                connectionLabel.setText("failed to connect");
+                            }
+                        }
+                    }
+                });
+
+                saveConnection.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        if (ipField.getText().equals(""))
+                            saveConnectionLabel.setText("ip cannot be empty!");
+                        else if (portField.getText().equals(""))
+                            saveConnectionLabel.setText("port cannot be empty!");
+                        else{
+                            if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
+                                if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true)) {
+                                    gameProperties.setDomain(ipField.getText(), portField.getText());
+                                    saveConnectionLabel.setText("changed");
+                                } else
+                                    saveConnectionLabel.setText("provide valid ip!");
+                            } else {
+                                saveConnectionLabel.setText("bad server");
+                            }
                         }
                     }
                 });
@@ -160,14 +192,6 @@ public class LoginScreen implements Screen {
                     @Override
                     public void result(Object obj) {
                         gameSounds.clickSound();
-                        if (obj == "save") {
-                            if (connectionLabel.getText().equals("success")) {
-                                new GameProperties().setDomain(ipField.getText(), portField.getText());
-                                connectionLabel.setText("changed");
-                            } else {
-                                connectionLabel.setText("bad server");
-                            }
-                        }
                     }
                 };
 
@@ -182,8 +206,11 @@ public class LoginScreen implements Screen {
                 dialog.getContentTable().row();
                 dialog.getContentTable().add(connectionLabel).colspan(2);
                 dialog.getContentTable().row();
-                //dialog.getContentTable().add(saveConnection);
-                dialog.button("save", "save");
+                dialog.getContentTable().add(saveConnection).colspan(2);
+                dialog.getContentTable().row();
+                dialog.getContentTable().add(saveConnectionLabel).colspan(2).expandX();
+                dialog.getContentTable().row();
+                //dialog.button("save", "save");
                 dialog.button("back", "back");
                 //dialog.getContentTable().add(backConnection);
                 dialog.show(stage);
@@ -294,7 +321,7 @@ public class LoginScreen implements Screen {
         }
     }
 
-    class ForgotPassword extends ChangeListener {
+	class ForgotPassword extends ChangeListener{
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
