@@ -155,7 +155,7 @@ public class AdminScreen implements Screen {
                     checkboxLockTeam.setText("Public");
                     checkboxLockTeamBoolean = false;
                 }
-                //TODO: lock the team
+                PlayerAccount.updateTeam();
             }
         });
 
@@ -219,7 +219,6 @@ public class AdminScreen implements Screen {
         selectionTable.add(teamLockedLabel).colspan(2).fill().pad(30, 0, 0, 0);
         selectionTable.add(checkboxLockTeam).left().pad(30, pad * 2, 0, 0);
         selectionTable.row();
-        selectionTable.add(save).colspan(4).fill();
 
 
         if (serverActivities == null) {
@@ -275,6 +274,7 @@ public class AdminScreen implements Screen {
                 }
                 freqChoiceLabel.setText(freqChoices[freqNumber]);
                 PlayerAccount.setBattleFrequency(freqNumber);
+                PlayerAccount.updateTeam();
             }
         });
 
@@ -289,6 +289,7 @@ public class AdminScreen implements Screen {
                 }
                 freqChoiceLabel.setText(freqChoices[freqNumber]);
                 PlayerAccount.setBattleFrequency(freqNumber);
+                PlayerAccount.updateTeam();
             }
         });
 
@@ -304,6 +305,7 @@ public class AdminScreen implements Screen {
                 }
                 textureCastle = new Texture("teamCastle" + castleChoice + ".png");
                 PlayerAccount.setTeamLogo("teamCastle" + castleChoice);
+                PlayerAccount.updateTeam();
                 show();
             }
         });
@@ -320,16 +322,11 @@ public class AdminScreen implements Screen {
                 }
                 textureCastle = new Texture("teamCastle" + castleChoice + ".png");
                 PlayerAccount.setTeamLogo("teamCastle" + castleChoice);
+                PlayerAccount.updateTeam();
                 show();
             }
         });
 
-        save.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                PlayerAccount.updateTeam();
-            }
-        });
         Gdx.input.setInputProcessor(stage);
     }
 
