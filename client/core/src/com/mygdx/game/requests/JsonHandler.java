@@ -37,8 +37,7 @@ public class JsonHandler {
     }
 
     public static void setDomain(String domain) {
-        GameProperties gameP = new GameProperties();
-        JsonHandler.domain = gameP.getDomain();
+        JsonHandler.domain = domain;
     }
 
     private static String readAll(Reader rd) throws IOException {
