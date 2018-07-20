@@ -29,12 +29,6 @@ public class SettingsPopup {
     private boolean sound = true;
     private Dialog dialog;
 
-    public SettingsPopup(GGame g) {
-        parent = g;
-        gameMusic = new GameMusic(g);
-        gameSounds = new GameSounds(g);
-    }
-
     public void show(Stage stage) {
 
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));

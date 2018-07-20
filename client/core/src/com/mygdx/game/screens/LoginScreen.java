@@ -143,7 +143,7 @@ public class LoginScreen implements Screen {
                 final TextField portField = new TextField("", skin);
                 final TextButton testConnection = new TextButton("test connection", skin, "big");
                 final Label connectionLabel = new Label("", skin, "big");
-                final Label saveConnectionLabel = new Label(JsonHandler.getDomain(), skin, "big");
+                final Label saveConnectionLabel = new Label(JsonHandler.getDomain().replace("http://", ""), skin, "big");
                 final TextButton saveConnection = new TextButton("save", skin, "big");
                 //final TextButton backConnection = new TextButton("back", skin);
 
