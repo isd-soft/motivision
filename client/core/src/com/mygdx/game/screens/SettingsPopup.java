@@ -22,17 +22,9 @@ public class SettingsPopup {
     private Label musicOnOffLabel;
     private Label soundOnOffLabel;
     private GGame parent;
-    private GameMusic gameMusic;
-    private GameSounds gameSounds;
+    private GameMusic gameMusic = GameMusic.getInstance();
+    private GameSounds gameSounds = GameSounds.getInstance();
     private Skin skin;
-    private boolean music = true;
-    private boolean sound = true;
-
-    public SettingsPopup(GGame g) {
-        parent = g;
-        gameMusic = new GameMusic(g);
-        gameSounds = new GameSounds(g);
-    }
 
     public void show(Stage stage) {
 
@@ -40,11 +32,11 @@ public class SettingsPopup {
         gameSounds.clickSound();
         //music volume
         final Slider volumeMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
-        volumeMusicSlider.setValue(gameMusic.getVolumeStash());
+        volumeMusicSlider.setValue(gameMusic.getVolume());
         volumeMusicSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                gameMusic.setMusicSound(volumeMusicSlider.getValue());
+                gameMusic.setVolume(volumeMusicSlider.getValue());
                 return false;
             }
         });
@@ -54,7 +46,7 @@ public class SettingsPopup {
         volumeSoundSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
-                gameSounds.setSoundVolume(volumeSoundSlider.getValue());
+                gameSounds.setVolume(volumeSoundSlider.getValue());
                 return false;
             }
         });
@@ -62,17 +54,16 @@ public class SettingsPopup {
 
         //music
         final CheckBox musicCheckbox = new CheckBox(null, skin);
-        musicCheckbox.setChecked(gameMusic.isEnabled());
+        musicCheckbox.setChecked(gameMusic.isPlaying());
         musicCheckbox.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 gameSounds.clickSound();
-                if (music) {
-                    music = false;
-                    gameMusic.stopMusic();
-                } else if (!music) {
-                    music = true;
+                if (!gameMusic.isPlaying()) {
                     gameMusic.startMusic();
+                } else {
+                    gameMusic.stopMusic();
+
                 }
             }
         });
@@ -82,11 +73,9 @@ public class SettingsPopup {
         soundCheckbox.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                if (sound) {
-                    sound = false;
-                    gameSounds.setSoundVolume(0);
+                if (gameSounds.isEnabled()) {
+                    gameSounds.disableSound();
                 } else {
-                    sound = true;
                     gameSounds.enableSound();
                 }
             }

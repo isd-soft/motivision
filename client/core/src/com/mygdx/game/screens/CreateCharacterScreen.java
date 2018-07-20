@@ -42,7 +42,7 @@ public class CreateCharacterScreen implements Screen {
 
     private final Logger log = new Logger();
     private GGame parent;
-    private GameSounds gameSounds;
+    private GameSounds gameSounds = GameSounds.getInstance();
     private Stage stage;
     private Viewport viewport;
     private Skin skin;
@@ -89,7 +89,6 @@ public class CreateCharacterScreen implements Screen {
     public CreateCharacterScreen(GGame g) {
         dialogs = GDXDialogsSystem.install();
         parent = g;
-        gameSounds = new GameSounds(g);
         background = parent.assetsManager.aManager.get("createchar.jpg");
         bgImage = new Image(background);
         bgImage.setFillParent(true);
@@ -208,12 +207,6 @@ public class CreateCharacterScreen implements Screen {
             dialog.getContentTable().row();
             dialog.button("ok", "ok");
             dialog.show(stage);
-
-            /*
-            bDialog.setTitle("Team Name");
-            bDialog.setMessage("Team name field is empty");
-            bDialog.addButton("Go back");
-            bDialog.build().show();*/
             return false;
         } else if (teamName.length() < 6) {
             log.warn("Team name field must be at least 6 characters long");
@@ -228,11 +221,6 @@ public class CreateCharacterScreen implements Screen {
             dialog.getContentTable().row();
             dialog.button("ok", "ok");
             dialog.show(stage);
-
-            /*bDialog.setTitle("Team Name");
-            bDialog.setMessage("Team name field must be at least 6 characters long");
-            bDialog.addButton("Go back");
-            bDialog.build().show();*/
             return false;
         }
         if (!matcher.matches()) {
@@ -249,11 +237,6 @@ public class CreateCharacterScreen implements Screen {
             dialog.getContentTable().row();
             dialog.button("ok", "ok");
             dialog.show(stage);
-
-            /*bDialog.setTitle("Team Name");
-            bDialog.setMessage("Team name has an illegal character");
-            bDialog.addButton("Go back");
-            bDialog.build().show();*/
             return false;
         }
         log.info("Character name validated successfully");
@@ -491,9 +474,7 @@ public class CreateCharacterScreen implements Screen {
 
         tableActivities.add(labelGender).left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(checkboxMale);
-        //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.add(checkboxFemale);
-        //.getActor().getCells().get(0).size(Value.percentHeight(1.0f, checkboxMale));
         tableActivities.row().pad(10, 0, 0, 0);
 
         headTable.add(arrowHeadLeft);
@@ -705,14 +686,7 @@ public class CreateCharacterScreen implements Screen {
                     });
                     dialog.button("ok", "ok");
                     dialog.show(stage);
-
-                    //SelectDialog("Team does not exist!");
-//                    bDialog.setTitle("Team");
-//                    bDialog.setMessage("Team does not exist!");
-//                    bDialog.addButton("Go back");
-//                    bDialog.build().show();
                     // TODO Team already exist
-                    //teamText.setColor(Color.RED);
                     return;
                 } else if (teamId == -2) {
                     log.warn("Team is locked!");

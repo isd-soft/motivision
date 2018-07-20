@@ -28,47 +28,30 @@ public class AnimationScreen extends Actor implements Screen {
     private Animation<TextureRegion> runAnimation;
     private Animation<TextureRegion> runAnimation2;
     private Texture runTexture;
-    private Texture runTexture2;
     private Texture boomTexture;
     private float stateTime;
-
     private float currentPosition = 100;
-
     private SpriteBatch spriteBatch;
-
     private Viewport viewport;
-    private Camera camera;
-    private Music loginMusic;
-
     private Texture backgroundTexture;
-    private Image backgroundImage;
 
     public AnimationScreen(GGame g) {
         parent = g;
-
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
-
         stage = new Stage();
         spriteBatch = new SpriteBatch();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-
-        //удалить
-
         parent.assetsManager.loadImages();
         parent.assetsManager.aManager.finishLoading();
-        //удалить
     }
-
 
     @Override
     public void show() {
         stage.clear();
-    //    stage.setDebugAll(true);
         runTexture = new Texture(Gdx.files.internal("sprite_animation.png"));
         boomTexture = new Texture(Gdx.files.internal("boom_animation.png"));
         backgroundTexture = parent.assetsManager.aManager.get("background.png");
-
         runAnimation = makeFrames(runTexture);
         runAnimation2 = makeFrames(runTexture);
         currentPosition = 100;
@@ -80,8 +63,7 @@ public class AnimationScreen extends Actor implements Screen {
     }
 
 
-
-    public Animation makeFrames(Texture textureT){
+    public Animation makeFrames(Texture textureT) {
         TextureRegion[][] trm = TextureRegion.split(textureT, textureT.getWidth() / FRAME_COLS, textureT.getHeight() / FRAME_ROWS);
 
         //
@@ -99,37 +81,27 @@ public class AnimationScreen extends Actor implements Screen {
     }
 
 
-
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stateTime += Gdx.graphics.getDeltaTime();
-
         currentPosition += 5;
-        //
-        TextureRegion currentFrame = runAnimation.getKeyFrame(stateTime,false);
-        TextureRegion currentFrame2 = runAnimation2.getKeyFrame(stateTime,false);
-
-
+        TextureRegion currentFrame = runAnimation.getKeyFrame(stateTime, false);
+        TextureRegion currentFrame2 = runAnimation2.getKeyFrame(stateTime, false);
         spriteBatch.begin();
         // tell our stage to do actions and draw itself
         stage.act(Gdx.graphics.getDeltaTime());
-        spriteBatch.draw(backgroundTexture, 0 ,0 );
+        spriteBatch.draw(backgroundTexture, 0, 0);
         spriteBatch.draw(currentFrame, 50, 50);
         spriteBatch.draw(runAnimation2.getKeyFrame(stateTime), currentPosition, 0, 100, 100);
-        //if(runAnimation.isAnimationFinished(stateTime)){
-
-          //  parent.changeScreen(parent.getCharacterProfile());
-        //}
         spriteBatch.end();
 
     }
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width,height,true);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override

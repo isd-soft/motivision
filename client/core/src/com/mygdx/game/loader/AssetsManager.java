@@ -10,7 +10,7 @@ public class AssetsManager {
 
 
     public final AssetManager aManager = new AssetManager();
-
+    private static AssetsManager singleton = new AssetsManager();
     //Textures
     private final String monsterImage = "monster.png";
     private final String knightImage = "knight.png";
@@ -54,6 +54,13 @@ public class AssetsManager {
     private final String layer10 = "forest/layer10.png";
     private final String layer11 = "forest/layer11.png";
 
+    private AssetsManager(){
+    }
+
+    public static AssetsManager getInstance(){
+        return singleton;
+    }
+
     public void loadImages() {
         aManager.load(monsterImage, Texture.class);
         aManager.load(knightImage, Texture.class);
@@ -90,13 +97,15 @@ public class AssetsManager {
         aManager.load(layer11, Texture.class);
     }
 
-    public void loadSounds(){
-        aManager.load(gameOst, Music.class);
+    public void loadSounds() {
         aManager.load(buttonClick, Sound.class);
         aManager.load(buySound, Sound.class);
         aManager.load(deniedSound, Sound.class);
         aManager.load(equipArmor, Sound.class);
-//        aManager.load(monsterImage, Pixmap.class);
+    }
+
+    public void loadMusic(){
+        aManager.load(gameOst, Music.class);
     }
 
     public Array<Texture> getLayers(){

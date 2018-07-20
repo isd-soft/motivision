@@ -53,7 +53,7 @@ public class CharacterProfileScreen implements Screen {
     private GDXDialogs buyItemDialog;
 
     private Texture knightTex;
-    private GameSounds gameSounds;
+    private GameSounds gameSounds = GameSounds.getInstance();
     private Viewport viewport;
     private Camera camera;
     private Music loginMusic;
@@ -65,13 +65,12 @@ public class CharacterProfileScreen implements Screen {
         selectDialog = GDXDialogsSystem.install();
         manageTeamDialog = GDXDialogsSystem.install();
         buyItemDialog = GDXDialogsSystem.install();
-        gameSounds = new GameSounds(g);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         shopAnimation = new ShopAnimation(parent);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-        settingsPopup = new SettingsPopup(g);
+        settingsPopup = new SettingsPopup();
 
     }
 
@@ -146,10 +145,7 @@ public class CharacterProfileScreen implements Screen {
         settingsButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
-                //parent.setBackFromSettings(6);
-
                 settingsPopup.show(stage);
-                //parent.changeScreen(parent.getSettings());
             }
         });
 
@@ -158,6 +154,7 @@ public class CharacterProfileScreen implements Screen {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor){
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getCharacterSelect());
             }
         });

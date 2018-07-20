@@ -42,7 +42,7 @@ public class EarnPointsScreen implements Screen {
     private Skin skin;
 
     private Viewport viewport;
-    private GameSounds gameSounds;
+    private GameSounds gameSounds = GameSounds.getInstance();
     private Table screenTable;
 
 
@@ -50,7 +50,6 @@ public class EarnPointsScreen implements Screen {
 
     private AnimationScreen animationScreen;
     private SpriteBatch batch;
-
 
 
     private static final int FRAME_COLS = 6, FRAME_ROWS = 5;
@@ -61,23 +60,16 @@ public class EarnPointsScreen implements Screen {
     private SettingsPopup settingsPopup;
 
 
-
     public EarnPointsScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
-        gameSounds = new GameSounds(g);
         animationScreenTest = new AnimationScreenTest(parent);
-//        skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-
-
-
         batch = new SpriteBatch();
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-
-        settingsPopup = new SettingsPopup(g);
+        settingsPopup = new SettingsPopup();
     }
 
 
@@ -112,7 +104,7 @@ public class EarnPointsScreen implements Screen {
         Table buttonTable = new Table();
 
         ParallaxBackground parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
-        parallaxBackground.setSize(800,480);
+        parallaxBackground.setSize(800, 480);
         parallaxBackground.setSpeed(1);
         parallaxBackground.setZIndex(0);
         stage.addActor(parallaxBackground);
@@ -125,8 +117,7 @@ public class EarnPointsScreen implements Screen {
         List<Activity> teamActivities = new ArrayList<Activity>();
 
 
-        if (serverActivities == null)
-        {
+        if (serverActivities == null) {
             Activity ac = new Activity(0);
             ac.setActivityName("No Activity");
             ac.setActivityReward(0);
@@ -134,10 +125,10 @@ public class EarnPointsScreen implements Screen {
         } else teamActivities = serverActivities;
 
         //fill table with buttons and labels
-        for (final Activity activity: teamActivities){
+        for (final Activity activity : teamActivities) {
             //instead of PLACE_HOLDER there should be name of activity
             TextButton activityName = new TextButton(activity.getActivityName(), skin, "square");
-            if (serverActivities == null){
+            if (serverActivities == null) {
                 activityName.setDisabled(true);
                 activityName.setTouchable(Touchable.disabled);
             }
@@ -157,33 +148,22 @@ public class EarnPointsScreen implements Screen {
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
 
-        //create table for all screen and add into it everything
         screenTable.setFillParent(true);
-
-        //lidl strategy
-
-        //
-        //lidlActor.setPosition(0,0);
-
-
         screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         stage.addActor(screenTable);
 
         settingsButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
-
+            public void changed(ChangeEvent event, Actor actor) {
                 settingsPopup.show(stage);
-
-                //parent.setBackFromSettings(7);
-                //parent.changeScreen(parent.getSettings());
             }
         });
 
         backButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
+                gameSounds.clickSound();
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
@@ -192,7 +172,7 @@ public class EarnPointsScreen implements Screen {
     }
 
 
-    class DoActivity extends ChangeListener{
+    class DoActivity extends ChangeListener {
 
         private int id;
         private String name;
@@ -206,7 +186,8 @@ public class EarnPointsScreen implements Screen {
         public void changed(ChangeEvent changeEvent, Actor actor) {
             doActivity();
         }
-        private void doActivity(){
+
+        private void doActivity() {
             gameSounds.clickSound();
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
@@ -223,7 +204,6 @@ public class EarnPointsScreen implements Screen {
                             e.printStackTrace();
                         }
                     }
-                    //EarnPointsScreen.this.show();
                 }
             };
             dialog.getContentTable().row();
@@ -234,6 +214,7 @@ public class EarnPointsScreen implements Screen {
             dialog.show(stage);
         }
     }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
@@ -245,7 +226,7 @@ public class EarnPointsScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width,height,true);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override

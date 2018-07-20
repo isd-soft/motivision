@@ -48,8 +48,8 @@ public class LoginScreen implements Screen {
     private Viewport viewport;
     private GDXDialogs dialogs;
     private BackgroundAnimation animationScreenTest;
-    private GameMusic gameMusic;
-    private GameSounds gameSounds;
+    private GameMusic gameMusic = GameMusic.getInstance();
+    private GameSounds gameSounds = GameSounds.getInstance();
     private SettingsPopup settingsPopup;
     //trying...
 
@@ -60,9 +60,7 @@ public class LoginScreen implements Screen {
     public LoginScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
-        gameMusic = new GameMusic(g);
         gameMusic.startMusic();
-        gameSounds = new GameSounds(g);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -71,7 +69,7 @@ public class LoginScreen implements Screen {
         parent.assetsManager.loadImages();
         // tells the asset manager to load the images and wait until finished loading.
         parent.assetsManager.aManager.finishLoading();
-        settingsPopup = new SettingsPopup(g);
+        settingsPopup = new SettingsPopup();
     }
 
     @Override
@@ -89,30 +87,27 @@ public class LoginScreen implements Screen {
         /*Settings! trying...*/
 
 
+        //add label
+        label = new Label("", skin, "error");
+        labelName = new Label(null, skin, "fancy");
+        labelName.setText("User name: ");
+        labelPassword = new Label(null, skin, "fancy");
+        labelPassword.setText("Password: ");
+        //add text fields login/password
+        final TextField loginField = new TextField(null, skin);
+        loginField.setMessageText("Login goes here");
+        final TextField passwordField = new TextField(null, skin);
+        passwordField.setPasswordCharacter('*');
+        passwordField.setPasswordMode(true);
+        passwordField.setMessageText("Password goes here");
 
-
-
-		//add label
-		label = new Label("", skin, "error");
-		labelName = new Label(null, skin, "fancy");
-		labelName.setText("User name: ");
-		labelPassword = new Label(null, skin, "fancy");
-		labelPassword.setText("Password: ");
-		//add text fields login/password
-		final TextField loginField = new TextField(null,skin);
-		loginField.setMessageText("Login goes here");
-		final TextField passwordField = new TextField(null, skin);
-		passwordField.setPasswordCharacter('*');
-		passwordField.setPasswordMode(true);
-		passwordField.setMessageText("Password goes here");
-
-		//Forgot password
-		forgotPassword = new TextButton("Forgot password?", skin);
-		//add buttons to table
-		TextButton register = new TextButton("Register", skin);
-		final TextButton submit = new TextButton("Submit", skin);
-		final TextButton settings = new TextButton("Settings", skin);
-		TextButton connection = new TextButton("Connection", skin);
+        //Forgot password
+        forgotPassword = new TextButton("Forgot password?", skin);
+        //add buttons to table
+        TextButton register = new TextButton("Register", skin);
+        final TextButton submit = new TextButton("Submit", skin);
+        final TextButton settings = new TextButton("Settings", skin);
+        TextButton connection = new TextButton("Connection", skin);
 
         register.addListener(new ChangeListener() {
             @Override
@@ -133,8 +128,8 @@ public class LoginScreen implements Screen {
                 settingsPopup.show(stage);
 
                 //parent.changeScreen(parent.getSettings());
-			}
-		});
+            }
+        });
 
         connection.addListener(new ChangeListener() {
             @Override
@@ -154,9 +149,9 @@ public class LoginScreen implements Screen {
                 testConnection.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))){
+                        if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
                             connectionLabel.setText("success");
-                        }else {
+                        } else {
                             connectionLabel.setText("failed to connect");
                         }
                     }
@@ -166,10 +161,10 @@ public class LoginScreen implements Screen {
                     public void result(Object obj) {
                         gameSounds.clickSound();
                         if (obj == "save") {
-                            if(connectionLabel.getText().equals("success")){
+                            if (connectionLabel.getText().equals("success")) {
                                 new GameProperties().setDomain(ipField.getText(), portField.getText());
                                 connectionLabel.setText("changed");
-                            }else{
+                            } else {
                                 connectionLabel.setText("bad server");
                             }
                         }
@@ -194,9 +189,9 @@ public class LoginScreen implements Screen {
                 dialog.show(stage);
             }
         });
-		animationScreenTest.setFillParent(true);
-		animationScreenTest.setZIndex(0);
-		table.addActor(animationScreenTest);
+        animationScreenTest.setFillParent(true);
+        animationScreenTest.setZIndex(0);
+        table.addActor(animationScreenTest);
 
         //add everything into table
         table.add(label).fillX().uniformX().colspan(2).padTop(10);
@@ -217,51 +212,51 @@ public class LoginScreen implements Screen {
         table.top();
 
         Gdx.input.setInputProcessor(stage);
-	}
+    }
 
-	@Override
-        public void render(float delta) {
-    	//camera.update();
-		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    @Override
+    public void render(float delta) {
+        //camera.update();
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		// tell our stage to do actions and draw itself
-		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-		stage.draw();
-	}
+        // tell our stage to do actions and draw itself
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.draw();
+    }
 
-	@Override
-        public void resize(int width, int height) {
+    @Override
+    public void resize(int width, int height) {
 
 
-    	stage.getViewport().update(width,height,true);
-	}
+        stage.getViewport().update(width, height, true);
+    }
 
-	@Override
-        public void pause() {
-	}
+    @Override
+    public void pause() {
+    }
 
-	@Override
-        public void resume() {
-	}
+    @Override
+    public void resume() {
+    }
 
-	@Override
-        public void hide() {
-	}
+    @Override
+    public void hide() {
+    }
 
-	@Override
-        public void dispose() {
-			stage.dispose();
-	}
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
 
-	class SubmitListener extends ChangeListener {
-    	private TextField	loginField;
-    	private TextField	passwordField;
+    class SubmitListener extends ChangeListener {
+        private TextField loginField;
+        private TextField passwordField;
 
-		public SubmitListener(TextField loginField, TextField passwordField) {
-			this.loginField = loginField;
-			this.passwordField = passwordField;
-		}
+        public SubmitListener(TextField loginField, TextField passwordField) {
+            this.loginField = loginField;
+            this.passwordField = passwordField;
+        }
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -299,7 +294,7 @@ public class LoginScreen implements Screen {
         }
     }
 
-	class ForgotPassword extends ChangeListener{
+    class ForgotPassword extends ChangeListener {
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -311,7 +306,7 @@ public class LoginScreen implements Screen {
         gameSounds.clickSound();
         Dialog dialog = new Dialog("Lmao", skin) {
             public void result(Object obj) {
-                System.out.println("result "+obj);
+                System.out.println("result " + obj);
             }
         };
         dialog.addListener(new ChangeListener() {
