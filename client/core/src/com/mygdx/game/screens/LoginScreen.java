@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.music.GameMusic;
 import com.mygdx.game.logger.Logger;
 import com.mygdx.game.music.GameSounds;
+import com.mygdx.game.requests.GameProperties;
 import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
@@ -49,8 +50,8 @@ public class LoginScreen implements Screen {
     private Viewport viewport;
     private GDXDialogs dialogs;
     private BackgroundAnimation animationScreenTest;
-    private GameMusic gameMusic;
-    private GameSounds gameSounds;
+    private GameMusic gameMusic = GameMusic.getInstance();
+    private GameSounds gameSounds = GameSounds.getInstance();
     private SettingsPopup settingsPopup;
     //trying...
 
@@ -61,9 +62,7 @@ public class LoginScreen implements Screen {
     public LoginScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
-        gameMusic = new GameMusic(g);
         gameMusic.startMusic();
-        gameSounds = new GameSounds(g);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -72,7 +71,7 @@ public class LoginScreen implements Screen {
         parent.assetsManager.loadImages();
         // tells the asset manager to load the images and wait until finished loading.
         parent.assetsManager.aManager.finishLoading();
-        settingsPopup = new SettingsPopup(g);
+        settingsPopup = new SettingsPopup();
     }
 
     @Override
@@ -101,13 +100,13 @@ public class LoginScreen implements Screen {
 		passwordField.setPasswordMode(true);
 		passwordField.setMessageText("Password goes here");
 
-		//Forgot password
-		forgotPassword = new TextButton("Forgot password?", skin);
-		//add buttons to table
-		TextButton register = new TextButton("Register", skin);
-		final TextButton submit = new TextButton("Submit", skin);
-		final TextButton settings = new TextButton("Settings", skin);
-		TextButton connection = new TextButton("Connection", skin);
+        //Forgot password
+        forgotPassword = new TextButton("Forgot password?", skin);
+        //add buttons to table
+        TextButton register = new TextButton("Register", skin);
+        final TextButton submit = new TextButton("Submit", skin);
+        final TextButton settings = new TextButton("Settings", skin);
+        TextButton connection = new TextButton("Connection", skin);
 
         register.addListener(new ChangeListener() {
             @Override
@@ -128,33 +127,63 @@ public class LoginScreen implements Screen {
                 settingsPopup.show(stage);
 
                 //parent.changeScreen(parent.getSettings());
-			}
-		});
+            }
+        });
 
         connection.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
+                final GameProperties gameProperties = new GameProperties();
 
                 final Label ipLabel = new Label("ip:", skin, "big");
+                final Label currentConnection = new Label ("", skin, "big");
                 final TextField ipField = new TextField("", skin);
                 final Label portLabel = new Label("port:", skin, "big");
                 final TextField portField = new TextField("", skin);
                 final TextButton testConnection = new TextButton("test connection", skin, "big");
-                final Label connectionLabel = new Label("test", skin, "big");
-
+                final Label connectionLabel = new Label("", skin, "big");
+                final Label saveConnectionLabel = new Label(JsonHandler.getDomain(), skin, "big");
                 final TextButton saveConnection = new TextButton("save", skin, "big");
-                final TextButton backConnection = new TextButton("back", skin, "big");
+                //final TextButton backConnection = new TextButton("back", skin);
 
                 testConnection.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
-                        if (PlayerAccount.testConnection(ipField.getText(), portField.getText())){
-                            connectionLabel.setText("success");
-                            connectionLabel.setColor(Color.GREEN);
-                        }else {
-                            connectionLabel.setText("failed to connect");
-                            connectionLabel.setColor(Color.RED);
+                        if (ipField.getText().equals(""))
+                            connectionLabel.setText("ip cannot be empty!");
+                        else if (portField.getText().equals(""))
+                            connectionLabel.setText("port cannot be empty!");
+                        else{
+                            if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
+                                if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true))
+                                    connectionLabel.setText("success");
+                                else
+                                    connectionLabel.setText("provide valid ip!");
+                            } else {
+                                connectionLabel.setText("failed to connect");
+                            }
+                        }
+                    }
+                });
+
+                saveConnection.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        if (ipField.getText().equals(""))
+                            saveConnectionLabel.setText("ip cannot be empty!");
+                        else if (portField.getText().equals(""))
+                            saveConnectionLabel.setText("port cannot be empty!");
+                        else{
+                            if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
+                                if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true)) {
+                                    gameProperties.setDomain(ipField.getText(), portField.getText());
+                                    saveConnectionLabel.setText("changed");
+                                } else
+                                    saveConnectionLabel.setText("provide valid ip!");
+                            } else {
+                                saveConnectionLabel.setText("bad server");
+                            }
                         }
                     }
                 });
@@ -162,10 +191,6 @@ public class LoginScreen implements Screen {
                     @Override
                     public void result(Object obj) {
                         gameSounds.clickSound();
-                        if (obj == "save") {
-                            System.out.println("Bye! You are connected?");
-                            //TODO save ip and port
-                        }
                     }
                 };
 
@@ -180,16 +205,19 @@ public class LoginScreen implements Screen {
                 dialog.getContentTable().row();
                 dialog.getContentTable().add(connectionLabel).colspan(2);
                 dialog.getContentTable().row();
-                //dialog.getContentTable().add(saveConnection);
-                dialog.button("save", "save");
+                dialog.getContentTable().add(saveConnection).colspan(2);
+                dialog.getContentTable().row();
+                dialog.getContentTable().add(saveConnectionLabel).colspan(2).expandX();
+                dialog.getContentTable().row();
+                //dialog.button("save", "save");
                 dialog.button("back", "back");
                 //dialog.getContentTable().add(backConnection);
                 dialog.show(stage);
             }
         });
-		animationScreenTest.setFillParent(true);
-		animationScreenTest.setZIndex(0);
-		table.addActor(animationScreenTest);
+        animationScreenTest.setFillParent(true);
+        animationScreenTest.setZIndex(0);
+        table.addActor(animationScreenTest);
 
         //add everything into table
         table.add(label).fillX().colspan(2).padTop(10);
@@ -210,51 +238,51 @@ public class LoginScreen implements Screen {
         table.top();
 
         Gdx.input.setInputProcessor(stage);
-	}
+    }
 
-	@Override
-        public void render(float delta) {
-    	//camera.update();
-		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    @Override
+    public void render(float delta) {
+        //camera.update();
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		// tell our stage to do actions and draw itself
-		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-		stage.draw();
-	}
+        // tell our stage to do actions and draw itself
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.draw();
+    }
 
-	@Override
-        public void resize(int width, int height) {
+    @Override
+    public void resize(int width, int height) {
 
 
-    	stage.getViewport().update(width,height,true);
-	}
+        stage.getViewport().update(width, height, true);
+    }
 
-	@Override
-        public void pause() {
-	}
+    @Override
+    public void pause() {
+    }
 
-	@Override
-        public void resume() {
-	}
+    @Override
+    public void resume() {
+    }
 
-	@Override
-        public void hide() {
-	}
+    @Override
+    public void hide() {
+    }
 
-	@Override
-        public void dispose() {
-			stage.dispose();
-	}
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
 
-	class SubmitListener extends ChangeListener {
-    	private TextField	loginField;
-    	private TextField	passwordField;
+    class SubmitListener extends ChangeListener {
+        private TextField loginField;
+        private TextField passwordField;
 
-		public SubmitListener(TextField loginField, TextField passwordField) {
-			this.loginField = loginField;
-			this.passwordField = passwordField;
-		}
+        public SubmitListener(TextField loginField, TextField passwordField) {
+            this.loginField = loginField;
+            this.passwordField = passwordField;
+        }
 
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
@@ -304,7 +332,7 @@ public class LoginScreen implements Screen {
         gameSounds.clickSound();
         Dialog dialog = new Dialog("Lmao", skin) {
             public void result(Object obj) {
-                System.out.println("result "+obj);
+                System.out.println("result " + obj);
             }
         };
         dialog.addListener(new ChangeListener() {

@@ -2,30 +2,28 @@ package com.mygdx.game.music;
 
 import com.badlogic.gdx.audio.Sound;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.loader.AssetsManager;
 
 public class GameSounds {
-    private GGame parent;
-    private static Sound clickSound;
-    private static Sound itemSound;
-    private static Sound deniedSound;
-    private static Sound buySound;
-    private static float VOLUME = 1.0f;
-    private static float volumeStash = 1.0f;
+    private static GameSounds gameSounds = new GameSounds();
+    private final AssetsManager assetsManager = AssetsManager.getInstance();
+    private Sound clickSound = assetsManager.aManager.get("data/click.wav");
+    private Sound itemSound = assetsManager.aManager.get("data/equipp.mp3");
+    private Sound deniedSound = assetsManager.aManager.get("data/denied.mp3");
+    private Sound buySound = assetsManager.aManager.get("data/hammer.mp3");
+    private float VOLUME = 1.0f;
+    private float volumeStash = 1.0f;
 
-    public GameSounds(GGame parent) {
-        this.parent = parent;
-        clickSound = parent.assetsManager.aManager.get("data/click.wav");
-        itemSound = parent.assetsManager.aManager.get("data/equipp.mp3");
-        deniedSound = parent.assetsManager.aManager.get("data/denied.mp3");
-        buySound = parent.assetsManager.aManager.get("data/hammer.mp3");
+
+    private GameSounds() {
     }
 
-    public boolean isEnabled(){
-        return !(VOLUME == 0);
+    public static GameSounds getInstance() {
+        return gameSounds;
     }
-    public void setSoundVolume(float volume) {
-        volumeStash = VOLUME;
-        VOLUME = volume;
+
+    public void enableSound() {
+        VOLUME = volumeStash;
     }
 
     public void disableSound() {
@@ -33,8 +31,21 @@ public class GameSounds {
         VOLUME = 0;
     }
 
-    public  void enableSound(){
-        VOLUME = volumeStash;
+    public boolean isEnabled() {
+        return !(VOLUME == 0);
+    }
+
+    public float getVolume() {
+        return VOLUME;
+    }
+
+    public void setVolume(float volume) {
+        volumeStash = VOLUME;
+        VOLUME = volume;
+    }
+
+    public float getVolumeStash(){
+        return volumeStash;
     }
 
     public void buySound() {
@@ -52,7 +63,5 @@ public class GameSounds {
     public void deniedSound() {
         deniedSound.play(VOLUME);
     }
-    public float getVolumeStash(){
-        return volumeStash;
-    }
+
 }

@@ -36,7 +36,7 @@ public class TeamMembersScreen implements Screen {
     private GGame parent;
     private Stage stage;
     private Skin skin;
-    private GameSounds gameSounds;
+    private GameSounds gameSounds = GameSounds.getInstance();
     private Texture texture;
     private Viewport viewport;
     private Texture bgTexture;
@@ -51,7 +51,7 @@ public class TeamMembersScreen implements Screen {
     public TeamMembersScreen(GGame g) {
         parent = g;
         Pixmap pixmap;
-        gameSounds = new GameSounds(g);
+
         dialogs = GDXDialogsSystem.install();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         bgTexture = parent.assetsManager.aManager.get("barracks.jpg");
@@ -62,7 +62,7 @@ public class TeamMembersScreen implements Screen {
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
 
-        settingsPopup = new SettingsPopup(g);
+        settingsPopup = new SettingsPopup();
 
     }
 
@@ -103,12 +103,8 @@ public class TeamMembersScreen implements Screen {
         ScrollPane scrollPane = new ScrollPane(teamMembersTable);
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
-
-
-
         HashMap<String, Integer> teamMembers = PlayerAccount.getTeamMembersList();
         PlayerAccount.printAllMembers();
-//
         //Collections.sort(teamMembers);
         //fill table with buttons and labels
         for (final String key : teamMembers.keySet()) {
@@ -130,6 +126,7 @@ public class TeamMembersScreen implements Screen {
                 xButton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
+                        gameSounds.clickSound();
                         Dialog dialog = new Dialog("Confirmation", skin) {
                             @Override
                             public void result(Object obj) {
@@ -194,11 +191,7 @@ public class TeamMembersScreen implements Screen {
         settingsButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
                 settingsPopup.show(stage);
-
-                // parent.setBackFromSettings(9);
-                // parent.changeScreen(parent.getSettings());
             }
         });
 
@@ -282,32 +275,6 @@ public class TeamMembersScreen implements Screen {
             dialog.button("Yes", "yes");
             dialog.button("Yes", "no");
             dialog.show(stage);
-
-            /*
-            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
-            bDialog.setTitle("Confirmation");
-            bDialog.setMessage("Are you sure you want to kick " + name);
-            bDialog.setClickListener(new ButtonClickListener() {
-                @Override
-                public void click(int button) {
-                    gameSounds.clickSound();
-                    if (button == 0) {
-                        try {
-                            PlayerAccount.deleteTeamMember(name);
-                            if (selectedName.equals(name))
-                                selectedName = null;
-                            show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-            bDialog.addButton("Ok");
-            bDialog.addButton("Cancel");
-            bDialog.build().show();*/
         }
     }
 

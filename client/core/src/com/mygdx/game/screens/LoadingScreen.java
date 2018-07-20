@@ -35,10 +35,11 @@ public class LoadingScreen implements Screen{
     public LoadingScreen(GGame game){
         parent = game;
 
-
 		parent.assetsManager.loadImages();
 		parent.assetsManager.loadSounds();
-        parent.assetsManager.aManager.finishLoading();
+		parent.assetsManager.loadMusic();
+
+		parent.assetsManager.aManager.finishLoading();
     }
     
     

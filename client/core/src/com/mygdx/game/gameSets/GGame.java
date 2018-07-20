@@ -16,9 +16,7 @@ import com.mygdx.game.screens.EarnPointsScreen;
 import com.mygdx.game.screens.LastBattleScreen;
 import com.mygdx.game.screens.LoadingScreen;
 import com.mygdx.game.screens.LoginScreen;
-import com.mygdx.game.screens.MenuScreen;
 import com.mygdx.game.screens.RegisterScreen;
-import com.mygdx.game.screens.SettingsScreen;
 import com.mygdx.game.screens.TeamMembersScreen;
 
 public class GGame extends Game {
@@ -36,13 +34,11 @@ public class GGame extends Game {
     private final static int ANIMATION = 10;
     private final static int BATTLE = 11;
     private final static int LASTBATTLE = 12;
-    public SettingsScreen settingsScreen;
-    public AssetsManager assetsManager = new AssetsManager();
+    public AssetsManager assetsManager = AssetsManager.getInstance();
     private SpriteBatch batch;
     private BitmapFont font;
     private LoadingScreen loadingScreen;
     private AppPreferences preferences;
-    private MenuScreen menuScreen;
     private BattleScreen battleScreen;
     private LoginScreen loginScreen;
     private RegisterScreen registerScreen;
@@ -108,11 +104,6 @@ public class GGame extends Game {
         return LASTBATTLE;
     }
 
-
-//PREFERENCES - preferencessScreen - settingScreen
-//APPLICATION - mainScreen - gameScreen
-//MENU - menuScreen - menuScreen
-
     public void changeScreen(int screen) {
         switch (screen) {
             case LOGIN:
@@ -122,17 +113,6 @@ public class GGame extends Game {
             case REGISTER:
                 if (registerScreen == null) registerScreen = new RegisterScreen(this);
                 this.setScreen(registerScreen);
-                break;
-            case MENU:
-                if (menuScreen == null)
-                    menuScreen = new MenuScreen(this);
-                this.setScreen(menuScreen);
-                break;
-            //тут измененно
-            case SETTINGS:
-                if (settingsScreen == null)
-                    settingsScreen = new SettingsScreen(this);
-                this.setScreen(settingsScreen);
                 break;
             case CHARACTERSELECT:
                 if (characterSelectScreen == null)

@@ -31,6 +31,9 @@ public class JsonHandler {
     static final String domain = gameProperties.getDomain();
     public static String errorMessage = null;
 
+    public static String getDomain() {
+        return domain;
+    }
 
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
@@ -125,7 +128,6 @@ public class JsonHandler {
 
 
     public static BufferedReader getRequestResult(String url, List<BasicNameValuePair> urlParameters) {
-        //String url = "https://selfsolve.apple.com/wcResults.do";
 
         CloseableHttpClient client = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost(url);

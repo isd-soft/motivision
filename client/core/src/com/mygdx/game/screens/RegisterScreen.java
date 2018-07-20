@@ -36,12 +36,11 @@ public class RegisterScreen implements Screen {
     private Viewport viewport;
     private BackgroundAnimation animationScreenTest;
     private Label registerLabel;
-    private GameSounds gameSounds;
+    private GameSounds gameSounds = GameSounds.getInstance();
 
     public RegisterScreen(GGame g) {
 
         parent = g;
-        gameSounds = new GameSounds(g);
         animationScreenTest = new BackgroundAnimation(parent);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
@@ -163,7 +162,7 @@ public class RegisterScreen implements Screen {
         retypePasswordField.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+                if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
                     new RegisterListener(loginField, passwordField, retypePasswordField);
                 }
             }
@@ -225,7 +224,6 @@ public class RegisterScreen implements Screen {
     public void dispose() {
         stage.dispose();
     }
-
 
 
     class RegisterListener extends ChangeListener {

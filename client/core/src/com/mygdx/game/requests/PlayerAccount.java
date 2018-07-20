@@ -8,7 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -78,21 +80,13 @@ public class PlayerAccount {
         return team.getTeamActivities();
     }
 
-    public static boolean testConnection(String ip, String port) {
+    public static boolean pingHost(String host, int port) {
         try {
-            String url = "http://" + ip + ":" + port + "/test";
-            System.out.println(url);
-            JSONObject jsonObject = JsonHandler.readJsonFromUrl(url, "", "GET");
-            if(jsonObject == null)
-                return false;
-            else
-                return true;
-        } catch (MalformedURLException e) {
-            return false;
+            Socket socket = new Socket();
+            socket.connect(new InetSocketAddress(host, port), 100);
+            return true;
         } catch (IOException e) {
-            return false;
-        } catch (JSONException e) {
-            return false;
+            return false; // Either timeout or unreachable or failed DNS lookup.
         }
     }
 
@@ -319,11 +313,14 @@ public class PlayerAccount {
             return false;
         }
         result = profile.buyItem(id);
-
         profile = Profile.getProfile(profile.getId());
-        //profile.updateItems();
-        //selectProfile(profile.getName());
         return result;
+    }
+
+    public static boolean updateTeam() {
+        if (profile == null)
+            return false;
+        return team.updateTeam();
     }
 
     public static boolean doActivity(int activityId) throws IOException, JSONException {

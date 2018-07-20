@@ -57,7 +57,7 @@ public class AdminScreen implements Screen {
     private Skin skin;
 
     private Viewport viewport;
-    private GameSounds gameSounds;
+    private GameSounds gameSounds = GameSounds.getInstance();
 
     private TextButton arrowCastleLeft;
     private TextButton arrowCastleRight;
@@ -74,16 +74,12 @@ public class AdminScreen implements Screen {
     private Boolean checkboxLockTeamBoolean = false;
     private Drawable transBlack;
 
-    private Label activityLabel;
-    private Label confirmLabel;
-    private Label cancelLabel;
 
     private SettingsPopup settingsPopup;
 
 
     public AdminScreen(GGame g) {
         parent = g;
-        gameSounds = new GameSounds(g);
         background = parent.assetsManager.aManager.get("manageteam.jpg");
         bgImage = new Image(background);
         bgImage.setFillParent(true);
@@ -93,35 +89,18 @@ public class AdminScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-
-
         //textureCastle = new Texture("teamCastle1.png");
         freqChoiceLabel = new Label("freq", skin);
-
-        settingsPopup = new SettingsPopup(g);
+        settingsPopup = new SettingsPopup();
     }
 
     @Override
     public void show() {
         stage.clear();
-//        stage.setDebugAll(true);
+        //  stage.setDebugAll(true);
         float pad = 5;
-
-        // Character Sprite
-        Texture texture = null;
-        try {
-            texture = PlayerAccount.getProfileTexture();
-        } catch (IOException e) {
-            texture = new Texture("default.png");
-            e.printStackTrace();
-        } catch (JSONException e) {
-            texture = new Texture("default.png");
-            e.printStackTrace();
-        }
-
         checkboxLockTeam = new CheckBox("Public", skin);
         checkboxLockTeam.setChecked(checkboxLockTeamBoolean);
-
         textureCastle = PlayerAccount.getTeamLogo();
 
         // add the team image
@@ -131,7 +110,7 @@ public class AdminScreen implements Screen {
         TextButton create = new TextButton("Create new +", skin, "green");
         TextButton back = new TextButton("Back", skin, "blue");
         TextButton settings = new TextButton("Settings", skin, "blue");
-
+        TextButton save = new TextButton("Save", skin, "green");
         final Label frequencyLabel = new Label("Battle frequency", skin);
         final Label teamLockedLabel = new Label("Allow joining in team:", skin);
         Label castleLabel = new Label("Team logo", skin);
@@ -140,7 +119,6 @@ public class AdminScreen implements Screen {
             teamNameLabel.setText("Team Name");
         else
             teamNameLabel.setText(PlayerAccount.getProfileTeamName());
-
         // left-right buttons
         arrowCastleLeft = new TextButton("<", skin);
         arrowCastleRight = new TextButton(">", skin);
@@ -148,9 +126,7 @@ public class AdminScreen implements Screen {
         arrowFrequencyRight = new TextButton(">", skin);
 
         int battleFrequency;
-
         battleFrequency = PlayerAccount.getBattleFrequency();
-
         if (battleFrequency != -1) {
             if (battleFrequency == 7)
                 freqChoiceLabel.setText(freqChoices[0]);
@@ -191,7 +167,6 @@ public class AdminScreen implements Screen {
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
         scrollPane.setScrollbarsOnTop(true);
-
 
         if (serverActivities == null) {
             Activity ac = new Activity(0);
@@ -243,7 +218,9 @@ public class AdminScreen implements Screen {
         selectionTable.row();
         selectionTable.add(teamLockedLabel).colspan(2).fill().pad(30, 0, 0, 0);
         selectionTable.add(checkboxLockTeam).left().pad(30, pad * 2, 0, 0);
-        ;
+        selectionTable.row();
+        selectionTable.add(save).colspan(4).fill();
+
 
         if (serverActivities == null) {
             activityNamesButtons.get(0).setDisabled(true);
@@ -282,11 +259,7 @@ public class AdminScreen implements Screen {
         settings.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
                 settingsPopup.show(stage);
-
-                //parent.setBackFromSettings(8);
-                //parent.changeScreen(parent.getSettings());
             }
         });
 
@@ -348,6 +321,13 @@ public class AdminScreen implements Screen {
                 textureCastle = new Texture("teamCastle" + castleChoice + ".png");
                 PlayerAccount.setTeamLogo("teamCastle" + castleChoice);
                 show();
+            }
+        });
+
+        save.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                PlayerAccount.updateTeam();
             }
         });
         Gdx.input.setInputProcessor(stage);

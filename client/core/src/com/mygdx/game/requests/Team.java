@@ -17,15 +17,15 @@ import java.util.Set;
 import static com.mygdx.game.requests.Profile.PROFILE_ID;
 
 public class Team {
-    public static final String  TEAM_ID    =   "teamId";
-    public static final String  NAME       =   "teamName";
-    public static final String  ADMIN      =   "liderId";
-    public static final String  LOGO       =   "teamLogo";
-    public static final String  BATTLE     =   "battleFrequency";
-    public static final String  WINS       =   "teamWins";
-    public static final String  LOSSES     =   "teamLoss";
-    public static final String  LOCK       =   "lock";
-    public static final String  CHARACTERS =   "characters";
+    public static final String TEAM_ID = "teamId";
+    public static final String NAME = "teamName";
+    public static final String ADMIN = "liderId";
+    public static final String LOGO = "teamLogo";
+    public static final String BATTLE = "battleFrequency";
+    public static final String WINS = "teamWins";
+    public static final String LOSSES = "teamLoss";
+    public static final String LOCK = "lock";
+    public static final String CHARACTERS = "characters";
     private Integer teamId;
     private int teamLeaderId;
     private String teamName;
@@ -50,17 +50,17 @@ public class Team {
         this.lock = false;
     }
 
-    private static Team getTeamFromJson(JSONObject jsonObject) throws JSONException{
-        Team   team;
+    private static Team getTeamFromJson(JSONObject jsonObject) throws JSONException {
+        Team team;
         String field;
-        Profile     profile;
-        JSONObject  jsonObject1;
-        int    teamId;
-        int    liderId;
+        Profile profile;
+        JSONObject jsonObject1;
+        int teamId;
+        int liderId;
 
-        if(jsonObject == null){
+        if (jsonObject == null) {
             return null;
-        }else {
+        } else {
             try {
                 field = jsonObject.getString(TEAM_ID);
                 teamId = Integer.parseInt(field);
@@ -83,7 +83,7 @@ public class Team {
                 field = jsonObject.getString(LOCK);
                 team.setLock(Boolean.valueOf(field));
                 JSONArray arr = jsonObject.getJSONArray(CHARACTERS);
-                for(int i = 0; i < arr.length(); i++) {
+                for (int i = 0; i < arr.length(); i++) {
                     jsonObject1 = arr.getJSONObject(i);
                     profile = Profile.getProfileFromJson(jsonObject1);
                     System.out.println("Added " + profile.getName() + " in team");
@@ -91,7 +91,7 @@ public class Team {
 //                        team.addTeamProfile(Profile.getProfile(arr.getJSONObject(i).getInt(PROFILE_ID)));
                 }
                 return team;
-            }catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 setErrorMessage("Invalid number format");
                 return null;
             }
@@ -100,7 +100,7 @@ public class Team {
 
     private static Team getTeamFromUrl(String url, String urlParameters, String requestMethod)
             throws IOException, JSONException {
-        JSONObject	jsonObject;
+        JSONObject jsonObject;
 
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
         System.out.println(url + "?" + urlParameters);
@@ -108,7 +108,7 @@ public class Team {
     }
 
     private static List<Activity> getTeamActivitiesFromUrl(String url, String urlParameters, String requestMethod)
-        throws IOException, JSONException {
+            throws IOException, JSONException {
         JSONObject jsonObject;
 
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
@@ -120,12 +120,13 @@ public class Team {
         } else {
             JSONArray arr = jsonObject.getJSONArray("teamActivities");
             ArrayList<Activity> activities = new ArrayList<Activity>();
-            for (int i = 0; i<arr.length(); i++){
+            for (int i = 0; i < arr.length(); i++) {
                 activities.add(Activity.getActivityFromJson(arr.getJSONObject(i)));
             }
             return activities;
         }
     }
+
 
     private static ArrayList<Profile> getAllCharactersFromTeamFromUrl(String url, String urlParameters, String requestMethod)
             throws IOException, JSONException {
@@ -140,22 +141,48 @@ public class Team {
         } else {
             JSONArray arr = jsonObject.getJSONArray("teamMembers");
             ArrayList<Profile> profiles = new ArrayList<Profile>();
-            for (int i = 0; i<arr.length(); i++){
+            for (int i = 0; i < arr.length(); i++) {
                 profiles.add(Profile.getProfileFromJson(arr.getJSONObject(i)));
             }
             return profiles;
         }
     }
 
-    public List<Activity> getTeamActivities(){
-        String  url;
+    public boolean updateTeam(){
+        String url = JsonHandler.domain + "/update_team";
+        String urlParameters =
+                TEAM_ID + "=" + teamId
+                        + "&" + LOGO + "=" + teamLogo
+                        + "&" + BATTLE + "=" + battleFrequency
+                        + "&" + LOCK + "=" + lock;
+        JSONObject jsonObject;
+        try {
+            jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
+            if (jsonObject == null){
+                System.out.println("jsonObject is null");
+                return false;
+            }
+            if(jsonObject.getString("status").equals("success"))
+                return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
+    public List<Activity> getTeamActivities() {
+        String url;
         List<Activity> activities = new ArrayList<Activity>();
         String urlParameters;
         if (teamId == -1)
             return null;
 
         url = JsonHandler.domain + "/get_activities";
-        urlParameters = TEAM_ID +"=" + teamId;
+        urlParameters = TEAM_ID + "=" + teamId;
         System.out.println("Start get activities from url");
         try {
             activities = getTeamActivitiesFromUrl(url, urlParameters, "GET");
@@ -167,19 +194,19 @@ public class Team {
         return activities;
     }
 
-    public List<String> getTeamActivitiesNames(){
-            List<Activity> activities = getTeamActivities();
-            List<String> names = new ArrayList<String>();
-            for(Activity activity : activities){
-                names.add(activity.getActivityName());
-            }
-            return names;
+    public List<String> getTeamActivitiesNames() {
+        List<Activity> activities = getTeamActivities();
+        List<String> names = new ArrayList<String>();
+        for (Activity activity : activities) {
+            names.add(activity.getActivityName());
+        }
+        return names;
     }
 
-    ArrayList<Profile> loadAllCharactersFromTeam(){
-        String              url;
-        ArrayList<Profile>  profiles = new ArrayList<Profile>();
-        String              urlParameters;
+    ArrayList<Profile> loadAllCharactersFromTeam() {
+        String url;
+        ArrayList<Profile> profiles = new ArrayList<Profile>();
+        String urlParameters;
 
         if (teamId == -1)
             return null;
@@ -197,8 +224,8 @@ public class Team {
         return profiles;
     }
 
-    public LinkedHashMap<String, Integer>     getTeamMembers() {
-        LinkedHashMap<String, Integer>    membersMap;
+    public LinkedHashMap<String, Integer> getTeamMembers() {
+        LinkedHashMap<String, Integer> membersMap;
 
         if (teamMembers == null) {
             loadAllCharactersFromTeam();
@@ -206,7 +233,7 @@ public class Team {
         if (teamMembers == null)
             return null;
         membersMap = new LinkedHashMap<String, Integer>();
-        for (Profile profile: teamMembers) {
+        for (Profile profile : teamMembers) {
             membersMap.put(profile.getName(), profile.getPoints());
         }
         return membersMap;
@@ -221,8 +248,8 @@ public class Team {
 //        return names;
 //    }
 
-    public static Team  getTeam(int teamId) throws IOException, JSONException {
-        String  url;
+    public static Team getTeam(int teamId) throws IOException, JSONException {
+        String url;
         Team team;
         String urlParameters;
 
@@ -236,13 +263,13 @@ public class Team {
         return team;
     }
 
-    public static int	getTeamId(String name) throws IOException, JSONException {
-        String      urlParameters;
-        String		url;
-        JSONObject  jsonObject;
-        String		result;
-        boolean     lock = true;
-        int         teamId = -1;
+    public static int getTeamId(String name) throws IOException, JSONException {
+        String urlParameters;
+        String url;
+        JSONObject jsonObject;
+        String result;
+        boolean lock = true;
+        int teamId = -1;
 
         url = JsonHandler.domain + "/team_exist";
         urlParameters = NAME + "=" + name;
@@ -259,21 +286,21 @@ public class Team {
     }
 
 
-    private static void	setErrorMessage(String message) {
+    private static void setErrorMessage(String message) {
         JsonHandler.errorMessage = message;
     }
 
 
     public static int createNewTeam(LinkedHashMap<String, String> teamParams) throws IOException, JSONException {
-        Profile         profile;
-        String          url;
-        String          urlParameters = null;
-        String          name;
+        Profile profile;
+        String url;
+        String urlParameters = null;
+        String name;
         Set<String> keySet;
         JSONObject jsonObject;
-        int             characterId;
+        int characterId;
 
-        int     teamId;
+        int teamId;
 
         name = teamParams.get(NAME);
         teamId = getTeamId(name);
@@ -283,7 +310,7 @@ public class Team {
         }
         url = JsonHandler.domain + "/create_team";
         keySet = teamParams.keySet();
-        for (String key: keySet) {
+        for (String key : keySet) {
             if (urlParameters == null)
                 urlParameters = "";
             else
@@ -350,13 +377,11 @@ public class Team {
     public void setTeamLoss(Integer teamLoss) {
         this.teamLoss = teamLoss;
     }
-    public void addTeamProfile(Profile profile){
+
+    public void addTeamProfile(Profile profile) {
         teamMembers.add(profile);
     }
 
-//    public ArrayList<Profile> getTeamMembers() {
-//        return teamMembers;
-//    }
 
     public Boolean getLock() {
         return lock;
@@ -374,22 +399,20 @@ public class Team {
         this.lock = lock;
     }
 
-    public static int     getTeamMemberId() {
+    public static int getTeamMemberId() {
         return -1;
     }
 
-
-
     public Texture getTeamMemberTexture(String name) throws IOException, JSONException {
-        int     profileId;
-        String  urlParameters;
-        String  url;
+        int profileId;
+        String urlParameters;
+        String url;
         Profile profile;
 
         profileId = -1;
         profile = null;
         printAllMembers();
-        for (Profile member: teamMembers) {
+        for (Profile member : teamMembers) {
             if (member.getName().equals(name)) {
                 profileId = member.getId();
                 profile = member;
@@ -411,14 +434,14 @@ public class Team {
 
     public void printAllMembers() {
         System.out.println("Team members");
-        for (Profile profile: teamMembers)
+        for (Profile profile : teamMembers)
             System.out.println(profile.getName());
     }
 
     public void deleteMember(String name) throws IOException, JSONException {
         if (teamMembers == null)
             loadAllCharactersFromTeam();
-        for (Profile profile: teamMembers) {
+        for (Profile profile : teamMembers) {
             if (profile.getName().equals(name)) {
                 profile.deleteProfile();
                 break;
