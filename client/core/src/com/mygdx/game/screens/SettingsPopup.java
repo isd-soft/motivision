@@ -72,6 +72,7 @@ public class SettingsPopup {
         });
         //sound
         final CheckBox soundCheckbox = new CheckBox(null, skin, "clean");
+
         soundCheckbox.setChecked(gameSounds.isEnabled());
         soundCheckbox.addListener(new ChangeListener() {
             @Override
@@ -83,6 +84,8 @@ public class SettingsPopup {
                 }
             }
         });
+
+
 
         //return to main screen
         final TextButton back = new TextButton("Back", skin, "big");

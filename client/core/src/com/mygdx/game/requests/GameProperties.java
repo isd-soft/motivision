@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 public class GameProperties {
     private final Properties appProps = new Properties();
+    private static Properties staticAppProps = new Properties();
     private final String IP4V_REGEX
             = "(([0-1]?[0-9]{1,2}\\.)|(2[0-4][0-9]\\.)|(25[0-5]\\.)){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))";
     private final Pattern IP_PATTERN = Pattern.compile(IP4V_REGEX);
@@ -65,5 +66,21 @@ public class GameProperties {
     public void saveDomain(String ip, String port) {
         FileHandle file = Gdx.files.local("config.properties");
         file.writeString("server.port=" + port + "\nserver.ip=" + ip, false);
+        JsonHandler.setDomain(getDomain());
+    }
+
+    public static String staticGetDomain() {
+        FileHandle propertiesFileHandle = Gdx.files.local("config.properties");
+        try {
+
+            staticAppProps.load(new BufferedInputStream(propertiesFileHandle.read()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String domain = "http://"
+                + staticAppProps.getProperty("server.ip")
+                + ":"
+                + staticAppProps.getProperty("server.port");
+        return domain;
     }
 }

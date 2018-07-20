@@ -356,7 +356,26 @@ public class CharacterProfileScreen implements Screen {
 
         public void     confirmDialog() {
             gameSounds.clickSound();
-            final GDXButtonDialog bDialog = buyItemDialog.newDialog(GDXButtonDialog.class);
+
+
+            Dialog dialog = new Dialog("Confirmation", skin) {
+                @Override
+                public void result(Object obj) {
+                    gameSounds.clickSound();
+                    if (obj == "yes") {
+
+                        CharacterProfileScreen.this.show();
+                    }
+                }
+            };
+
+            dialog.getContentTable().row();
+            dialog.text("random");
+            dialog.button("Yes", "yes");
+            dialog.button("No", "no");
+            dialog.show(stage);
+
+            /*final GDXButtonDialog bDialog = buyItemDialog.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\"");
 
@@ -385,7 +404,7 @@ public class CharacterProfileScreen implements Screen {
             bDialog.addButton("Ok");
             bDialog.addButton("Cancel");
 
-            bDialog.build().show();
+            bDialog.build().show();*/
         }
 
         public ClickButton(String name, int id) {
