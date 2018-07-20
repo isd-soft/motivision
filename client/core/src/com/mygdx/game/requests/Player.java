@@ -163,7 +163,8 @@ public class Player {
             return null;
         }
 
-        url = JsonHandler.domain + "/login";
+        GameProperties gameProperties = new GameProperties();
+        url = gameProperties.getDomain() + "/login";
         String urlParameters = "login=" + login + "&password=" + password;
         player = getPlayerFromUrl(url, urlParameters, "POST");
         log.info("Player found");
