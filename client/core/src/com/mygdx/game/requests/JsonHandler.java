@@ -28,7 +28,7 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 public class JsonHandler {
     static final GameProperties gameProperties = new GameProperties();
-    static String domain = gameProperties.getDomain();
+    static String domain = "http://172.17.41.110:8080";
     public static String errorMessage = null;
 
     public static String getDomain() {
@@ -36,7 +36,7 @@ public class JsonHandler {
     }
 
     public static void setDomain(String domain) {
-        JsonHandler.domain = gameProperties.getDomain();
+        JsonHandler.domain = "http://172.17.41.110:8080";
     }
 
     private static String readAll(Reader rd) throws IOException {
