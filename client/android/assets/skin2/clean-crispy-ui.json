@@ -9,6 +9,9 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	yuGothic: {
 		file: yuGothic.fnt
 	}
+	yuGothicBig: {
+		file: yuGothicBig.fnt
+	}
 	yuGothicGray: {
 		file: yuGothicGray.fnt
 	}
@@ -410,6 +413,10 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		font: yuGothicGreen
 		fontColor: medieval-green
 	}
+	big: {
+		font: yuGothicBig
+		fontColor: color
+	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: {
@@ -534,6 +541,13 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		up: button-blue
 		down: button-pressed-c-blue
 		over: button-over-c-blue
+	}
+	big: {
+		font: yuGothicBig
+		fontColor: color
+		up: button-c
+		down: button-pressed-over-c
+		over: button-over-c
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {

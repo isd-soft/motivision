@@ -27,6 +27,7 @@ public class SettingsPopup {
     private Skin skin;
     private boolean music = true;
     private boolean sound = true;
+    private Dialog dialog;
 
     public SettingsPopup(GGame g) {
         parent = g;
@@ -61,7 +62,7 @@ public class SettingsPopup {
 
 
         //music
-        final CheckBox musicCheckbox = new CheckBox(null, skin);
+        final CheckBox musicCheckbox = new CheckBox(null, skin, "clean");
         musicCheckbox.setChecked(gameMusic.isEnabled());
         musicCheckbox.addListener(new ChangeListener() {
             @Override
@@ -77,7 +78,7 @@ public class SettingsPopup {
             }
         });
         //sound
-        final CheckBox soundCheckbox = new CheckBox(null, skin);
+        final CheckBox soundCheckbox = new CheckBox(null, skin, "clean");
         soundCheckbox.setChecked(gameSounds.isEnabled());
         soundCheckbox.addListener(new ChangeListener() {
             @Override
@@ -93,26 +94,34 @@ public class SettingsPopup {
         });
 
         //return to main screen
-        final TextButton back = new TextButton("Back", skin);
+        final TextButton back = new TextButton("Back", skin, "big");
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
+                dialog.hide();
             }
         });
 
         //making labels
-        volumeMusicLabel = new Label("Music Volume", skin);
-        volumeSoundLabel = new Label("Sound Volume", skin);
-        musicOnOffLabel = new Label("Music Effect", skin);
-        soundOnOffLabel = new Label("Sound Effect", skin);
+        volumeMusicLabel = new Label("Music Volume", skin, "big");
+        volumeSoundLabel = new Label("Sound Volume", skin, "big");
+        musicOnOffLabel = new Label("Music Effect", skin, "big");
+        soundOnOffLabel = new Label("Sound Effect", skin, "big");
 
-        Dialog dialog = new Dialog("Settings", skin) {
+        dialog = new Dialog("Settings", skin) {
             public void result(Object obj) {
                 System.out.println("result " + obj);
             }
         };
-        dialog.getContentTable().row();
+
+//        dialog.getTitleTable().getCells().get(0).padBottom(100);
+
+//        dialog.setDebug(true, true);
+//        dialog.setFillParent(true);
+
+
+
         dialog.getContentTable().add(volumeMusicLabel);
         dialog.getContentTable().add(volumeMusicSlider);
         dialog.getContentTable().row();
@@ -125,7 +134,8 @@ public class SettingsPopup {
         dialog.getContentTable().add(soundOnOffLabel);
         dialog.getContentTable().add(soundCheckbox);
         dialog.getContentTable().row();
-        dialog.button("back", back);
+        dialog.getButtonTable().add(back);
         dialog.show(stage);
+//        stage.addActor(dialog);
     }
 }

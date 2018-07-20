@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.music.GameMusic;
@@ -82,21 +84,15 @@ public class LoginScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-        /*Settings! trying...*/
-
-
-        /*Settings! trying...*/
-
-
-
-
 
 		//add label
 		label = new Label("", skin, "error");
 		labelName = new Label(null, skin, "fancy");
 		labelName.setText("User name: ");
+		labelName.setAlignment(Align.center);
 		labelPassword = new Label(null, skin, "fancy");
 		labelPassword.setText("Password: ");
+		labelPassword.setAlignment(Align.center);
 		//add text fields login/password
 		final TextField loginField = new TextField(null,skin);
 		loginField.setMessageText("Login goes here");
@@ -140,23 +136,25 @@ public class LoginScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
 
-                final Label ipLabel = new Label("ip:", skin, "fancy");
+                final Label ipLabel = new Label("ip:", skin, "big");
                 final TextField ipField = new TextField("", skin);
-                final Label portLabel = new Label("port:", skin, "fancy");
+                final Label portLabel = new Label("port:", skin, "big");
                 final TextField portField = new TextField("", skin);
-                final TextButton testConnection = new TextButton("test connection", skin);
-                final Label connectionLabel = new Label("test", skin);
+                final TextButton testConnection = new TextButton("test connection", skin, "big");
+                final Label connectionLabel = new Label("test", skin, "big");
 
-                final TextButton saveConnection = new TextButton("save", skin);
-                final TextButton backConnection = new TextButton("back", skin);
+                final TextButton saveConnection = new TextButton("save", skin, "big");
+                final TextButton backConnection = new TextButton("back", skin, "big");
 
                 testConnection.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
                         if (PlayerAccount.testConnection(ipField.getText(), portField.getText())){
                             connectionLabel.setText("success");
+                            connectionLabel.setColor(Color.GREEN);
                         }else {
                             connectionLabel.setText("failed to connect");
+                            connectionLabel.setColor(Color.RED);
                         }
                     }
                 });
@@ -194,14 +192,14 @@ public class LoginScreen implements Screen {
 		table.addActor(animationScreenTest);
 
         //add everything into table
-        table.add(label).fillX().uniformX().colspan(2).padTop(10);
+        table.add(label).fillX().colspan(2).padTop(10);
         table.row();//.pad(0, 0, 0, 0);
-        table.add(labelName);
-        table.add(loginField).fillX().uniformX();
+        table.add(labelName).width(Value.percentWidth(0.25f, table));;
+        table.add(loginField).fillX().width(Value.percentWidth(0.25f, table));
         table.row().pad(5, 0, 5, 0);
         table.add(labelPassword);
-        table.add(passwordField).fillX().uniformX();
-        table.row().pad(40, 0, 0, 0);
+        table.add(passwordField).fillX();
+        table.row().pad(20, 0, 0, 0);
         table.add(register).fill();
         table.add(submit).fill();
         table.row().pad(20, 0, 0, 0);
@@ -315,7 +313,8 @@ public class LoginScreen implements Screen {
                 gameSounds.clickSound();
             }
         });
-        dialog.text("Sucks to be you");
+        Label fail = new Label("Sucks to be you",skin,  "big");
+        dialog.getContentTable().add(fail);
         dialog.button("ok", "ok"); //sends "true" as the result
         dialog.show(stage);
     }

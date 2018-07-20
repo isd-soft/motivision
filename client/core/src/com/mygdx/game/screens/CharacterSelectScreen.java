@@ -310,8 +310,9 @@ public class CharacterSelectScreen implements Screen {
                 }
             };
 
-            dialog.getContentTable().row();
-            dialog.text("Are you sure you want to delete your account ?");
+            Label confirm = new Label("Are you sure you want to delete your account ?", skin, "big");
+
+            dialog.getContentTable().add(confirm);
             dialog.getContentTable().row();
             dialog.button("Confirm", "confirm");
             dialog.button("Cancel", "cancel");
@@ -376,8 +377,9 @@ public class CharacterSelectScreen implements Screen {
                 }
             };
 
+            Label confirmAdmin = new Label("Character \"" + name + "\" is the team admin. \nDeleting team admin will also delete\nthe team and all characters of it's members", skin, "big");
             dialog.getContentTable().row();
-            dialog.text("Character \"" + name + "\" is the team admin. \nDeleting team admin will also delete\nthe team and all characters of it's members");
+            dialog.getContentTable().add(confirmAdmin);
             dialog.getContentTable().row();
             dialog.button("Confirm", "confirm");
             dialog.button("Cancel", "cancel");
@@ -439,8 +441,9 @@ public class CharacterSelectScreen implements Screen {
                 }
             };
 
+            Label confirmRemove = new Label("Are you sure you want to delete \"" + name + "\" ?", skin, "big");
             dialog.getContentTable().row();
-            dialog.text("Are you sure you want to delete \"" + name + "\" ?");
+            dialog.getContentTable().add(confirmRemove);
             dialog.getContentTable().row();
             dialog.button("No", "no");
             dialog.button("Yes", "yes");
