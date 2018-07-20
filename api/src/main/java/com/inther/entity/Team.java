@@ -10,9 +10,9 @@ import java.util.List;
 public class Team {
 
     @Id
-    @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(generator = "kaugen")
     private Long id;
+    @GenericGenerator(name = "kaugen", strategy = "increment")
 
     private String name;
 
