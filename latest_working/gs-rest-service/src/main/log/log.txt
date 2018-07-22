@@ -1,0 +1,1931 @@
+0 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request playerExist
+1 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+1 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+125 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Player found
+125 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request playerExist
+125 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 127 ms
+262 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+267 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request login
+267 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+267 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+267 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+270 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+364 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Fetching player characters
+364 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Characters received
+364 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request login
+364 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 102 ms
+400 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+401 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+401 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+401 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+435 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found, processing data
+475 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@77c151f9
+475 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@29b0de4b
+475 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@706e1cd6
+476 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+476 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+476 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 76 ms
+2524 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+2525 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getTeam
+2525 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+2526 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+2536 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team with teamId found
+2536 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team characters received
+2543 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Parsing team characters
+2543 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team data successfully returned
+2543 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getTeam
+2543 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 19 ms
+3011 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+3011 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+3011 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+3022 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+3022 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 11 ms
+12912 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+12912 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getActivities
+12912 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+12912 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+12921 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team found
+12938 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+12938 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+12938 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getActivities
+12938 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 26 ms
+169456 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+169456 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request playerExist
+169456 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+169456 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+169459 [http-nio-8080-exec-8] INFO  com.inther.controller.LoginController  - Player found
+169459 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request playerExist
+169459 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+169535 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+169535 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request login
+169535 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+169536 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+169536 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+169538 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+169542 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Fetching player characters
+169543 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Characters received
+169543 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request login
+169543 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+169646 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+169646 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+169646 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+169646 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+169650 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character found, processing data
+169654 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@46efbc3d
+169654 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@55dd961e
+169654 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@da23420
+169654 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+169654 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+169654 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+175170 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+175170 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+175170 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+175170 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 18
+175174 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character found, processing data
+175176 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+175176 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+177948 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+177948 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request getTeam
+177948 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+177948 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+177952 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team with teamId found
+177952 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team characters received
+177955 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Parsing team characters
+177955 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team data successfully returned
+177955 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request getTeam
+177955 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+178114 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+178114 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+178114 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+178118 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+178119 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+267637 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+267637 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request playerExist
+267637 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+267637 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+267639 [http-nio-8080-exec-5] INFO  com.inther.controller.LoginController  - Player found
+267639 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request playerExist
+267639 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+267905 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+267905 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request login
+267905 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+267905 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+267905 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+267907 [http-nio-8080-exec-6] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+267911 [http-nio-8080-exec-6] INFO  com.inther.controller.LoginController  - Fetching player characters
+267911 [http-nio-8080-exec-6] INFO  com.inther.controller.LoginController  - Characters received
+267911 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request login
+267911 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+267930 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+267930 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+267930 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+267930 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+267935 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Character found, processing data
+267939 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@729bb561
+267939 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@56fa4d6b
+267939 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@626e6130
+267939 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+267939 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+267939 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 9 ms
+272827 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+272827 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getTeam
+272827 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+272827 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+272830 [http-nio-8080-exec-8] INFO  com.inther.controller.TeamController  - Team with teamId found
+272830 [http-nio-8080-exec-8] INFO  com.inther.controller.TeamController  - Team characters received
+272832 [http-nio-8080-exec-8] INFO  com.inther.controller.TeamController  - Parsing team characters
+272832 [http-nio-8080-exec-8] INFO  com.inther.controller.TeamController  - Team data successfully returned
+272832 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getTeam
+272832 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+305674 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+305674 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request getActivities
+305674 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+305674 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+305679 [http-nio-8080-exec-9] INFO  com.inther.controller.ActivitiesController  - Team found
+305681 [http-nio-8080-exec-9] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+305681 [http-nio-8080-exec-9] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+305681 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request getActivities
+305681 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+352188 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+352189 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request buyItem
+352189 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+352189 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+352189 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 10
+352192 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character found
+352195 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Item found
+352195 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character has enough points
+352195 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Item bought
+352256 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Item saved in Character inventory
+352256 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request buyItem
+352256 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 68 ms
+352309 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+352309 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+352309 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+352309 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+352312 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character found, processing data
+352316 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@279e72ed
+352316 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@26e0134
+352316 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7bad29d3
+352316 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@8337578
+352316 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+352316 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+352316 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+354420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+354420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request equipItem
+354420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+354420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+354420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 10
+354424 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character found
+354425 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Item found
+354437 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Item 10 equipped on character 9
+354439 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request equipItem
+354440 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 20 ms
+383281 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+383281 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request equipItem
+383281 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+383282 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+383282 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 9
+383284 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found
+383285 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item found
+383291 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item 9 equipped on character 9
+383293 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request equipItem
+383293 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 12 ms
+396547 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+396547 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getItems
+396547 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+396547 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 18
+396550 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character found
+396557 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character has no items
+396557 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getItems
+396557 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 10 ms
+955053 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+955053 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request playerExist
+955053 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+955053 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+955055 [http-nio-8080-exec-6] INFO  com.inther.controller.LoginController  - Player found
+955055 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request playerExist
+955055 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+955071 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+955071 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request login
+955071 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+955071 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+955071 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+955072 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+955076 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Fetching player characters
+955076 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Characters received
+955076 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request login
+955076 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+955114 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+955114 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+955115 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+955115 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+955117 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character found, processing data
+955120 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7a7b137b
+955120 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@4905b9a9
+955120 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5db734b
+955120 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@6b719eac
+955120 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+955120 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+955120 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+959720 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+959720 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request getTeam
+959720 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+959720 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+959723 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team with teamId found
+959723 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team characters received
+959724 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Parsing team characters
+959724 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team data successfully returned
+959724 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request getTeam
+959724 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+959855 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+959855 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+959855 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+959857 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+959857 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+964372 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+964372 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request getActivities
+964372 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+964372 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+964376 [http-nio-8080-exec-1] INFO  com.inther.controller.ActivitiesController  - Team found
+964377 [http-nio-8080-exec-1] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+964377 [http-nio-8080-exec-1] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+964377 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request getActivities
+964377 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+1057091 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1057091 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getItems
+1057091 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+1057091 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 18
+1057094 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found
+1057095 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character has no items
+1057095 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getItems
+1057095 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+1058404 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1058404 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getItems
+1058404 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+1058404 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 18
+1058406 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character found
+1058407 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character has no items
+1058407 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getItems
+1058407 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+1059296 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1059296 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request getItems
+1059296 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+1059296 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 18
+1059299 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Character found
+1059300 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Character has no items
+1059300 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request getItems
+1059300 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+1061547 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1061547 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getActivities
+1061547 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+1061547 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+1061551 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team found
+1061552 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+1061552 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+1061552 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getActivities
+1061552 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+1063886 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1063886 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request doActivity
+1063886 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+1063886 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1063886 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: activityId = 4
+1063888 [http-nio-8080-exec-7] INFO  com.inther.controller.ActivitiesController  - Character found
+1063892 [http-nio-8080-exec-7] INFO  com.inther.controller.ActivitiesController  - Activity found
+1063896 [http-nio-8080-exec-7] INFO  com.inther.controller.ActivitiesController  - Points assigned to database
+1063896 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request doActivity
+1063896 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 10 ms
+1066800 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1066800 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getActivities
+1066800 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+1066800 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+1066803 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team found
+1066806 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+1066806 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+1066806 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getActivities
+1066806 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+1068469 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1068469 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request doActivity
+1068469 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+1068469 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1068469 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 2: activityId = 4
+1068471 [http-nio-8080-exec-9] INFO  com.inther.controller.ActivitiesController  - Character found
+1068473 [http-nio-8080-exec-9] INFO  com.inther.controller.ActivitiesController  - Activity found
+1068476 [http-nio-8080-exec-9] INFO  com.inther.controller.ActivitiesController  - Points assigned to database
+1068476 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request doActivity
+1068476 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+1069893 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1069893 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request doActivity
+1069893 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+1069893 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1069893 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 2: activityId = 4
+1069895 [http-nio-8080-exec-10] INFO  com.inther.controller.ActivitiesController  - Character found
+1069897 [http-nio-8080-exec-10] INFO  com.inther.controller.ActivitiesController  - Activity found
+1069899 [http-nio-8080-exec-10] INFO  com.inther.controller.ActivitiesController  - Points assigned to database
+1069899 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request doActivity
+1069899 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+1073526 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1073526 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request buyItem
+1073526 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+1073526 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1073526 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 1
+1073528 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character found
+1073530 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item found
+1073530 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character has enough points
+1073530 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item bought
+1073534 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item saved in Character inventory
+1073534 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request buyItem
+1073534 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+1073544 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1073544 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+1073544 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+1073544 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1073546 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character found, processing data
+1073549 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7f7e774
+1073549 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@12a13ba4
+1073549 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@4308abba
+1073549 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3afd54ce
+1073549 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@289c8a2
+1073549 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+1073549 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+1073549 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+1074841 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1074841 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request buyItem
+1074841 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+1074841 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1074841 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 5
+1074843 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found
+1074844 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item found
+1074844 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character has enough points
+1074844 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item bought
+1074848 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item saved in Character inventory
+1074848 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request buyItem
+1074848 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+1074972 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1074972 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+1074972 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+1074972 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1074974 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character found, processing data
+1074977 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2f2f41e3
+1074977 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@40d02797
+1074977 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@761e1b4b
+1074977 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@42e640ec
+1074977 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1713210a
+1074978 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@56be50e0
+1074978 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+1074978 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+1074978 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+1076668 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1076668 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request buyItem
+1076668 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+1076668 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1076668 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 12
+1076670 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Character found
+1076672 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item found
+1076672 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Character has enough points
+1076672 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item bought
+1076676 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item saved in Character inventory
+1076676 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request buyItem
+1076676 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+1076688 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1076688 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+1076688 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+1076688 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1076690 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character found, processing data
+1076695 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@42e9d3bd
+1076695 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@108aae83
+1076695 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5e4725e0
+1076695 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@108a69ca
+1076695 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1cf2245d
+1076695 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@59496ff6
+1076695 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3e46291a
+1076695 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+1076695 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+1076695 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+1078023 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1078023 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request buyItem
+1078023 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+1078023 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1078023 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 3
+1078025 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Character found
+1078026 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item found
+1078027 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Character has enough points
+1078027 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item bought
+1078031 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item saved in Character inventory
+1078031 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request buyItem
+1078031 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+1078045 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1078045 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+1078045 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+1078045 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1078047 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character found, processing data
+1078051 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@440782ea
+1078051 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2138f596
+1078051 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@49c6791b
+1078051 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@61af813c
+1078051 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@19474f31
+1078051 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7fb58dca
+1078051 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5c13d86
+1078051 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@187aea63
+1078051 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+1078051 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+1078051 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+1080370 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1080370 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request buyItem
+1080370 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+1080370 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1080370 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 8
+1080372 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Character found
+1080374 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Item found
+1080374 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Character has enough points
+1080374 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Item bought
+1080378 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Item saved in Character inventory
+1080378 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request buyItem
+1080378 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+1080418 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1080419 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+1080419 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+1080419 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1080421 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character found, processing data
+1080425 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@47e7cea5
+1080425 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@34cc9831
+1080425 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7bdc2684
+1080425 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@34578eeb
+1080425 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@4d3cec22
+1080425 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1d61f8a4
+1080425 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@713158a
+1080425 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@f3bf355
+1080425 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@25cc436c
+1080425 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+1080425 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+1080425 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+1081696 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1081696 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request buyItem
+1081696 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+1081696 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1081696 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 11
+1081698 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character found
+1081699 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item found
+1081699 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character has enough points
+1081699 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item bought
+1081702 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item saved in Character inventory
+1081702 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request buyItem
+1081702 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+1081713 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1081713 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+1081713 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+1081714 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1081715 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character found, processing data
+1081719 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@39882f67
+1081720 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@641fdd30
+1081720 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@26e7dc19
+1081720 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7117ef7f
+1081720 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@91c152d
+1081720 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1370bf63
+1081720 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@befbe00
+1081720 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@45cdc415
+1081720 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2c9104fc
+1081720 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3a0c3daa
+1081720 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+1081720 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+1081720 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+1083229 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1083229 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request buyItem
+1083229 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+1083229 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1083229 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 7
+1083232 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found
+1083233 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item found
+1083233 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character has enough points
+1083233 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item bought
+1083237 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item saved in Character inventory
+1083237 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request buyItem
+1083237 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+1083259 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+1083259 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+1083259 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+1083259 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+1083261 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character found, processing data
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3885b43b
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2bab52f
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1b844b78
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@32e82b92
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@27597598
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@709daf91
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@497be571
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3a3cf377
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5625b41d
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@4bd9686f
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5d9f4c08
+1083266 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+1083266 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+1083266 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4103900 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4103900 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request playerExist
+4103900 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+4103900 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+4103921 [http-nio-8080-exec-6] INFO  com.inther.controller.LoginController  - Player found
+4103921 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request playerExist
+4103921 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 22 ms
+4103985 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4103985 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request login
+4103985 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+4103985 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+4103985 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+4103987 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+4103996 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Fetching player characters
+4103996 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Characters received
+4103996 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request login
+4103996 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 11 ms
+4104295 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4104295 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+4104295 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+4104295 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4104301 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character found, processing data
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5a605cd9
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@534e4b76
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7e356da6
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@6559c9d5
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3d87c733
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1c333e0e
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@49be3873
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@628257f0
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@61bfaacc
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@64f92bbb
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5cbceaf7
+4104312 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+4104312 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+4104312 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 17 ms
+4107457 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4107457 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request getTeam
+4107457 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+4107458 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+4107462 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team with teamId found
+4107462 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team characters received
+4107463 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Parsing team characters
+4107463 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team data successfully returned
+4107463 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request getTeam
+4107464 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4107618 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4107618 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+4107618 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+4107621 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+4107621 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+4110017 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4110018 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+4110018 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+4110018 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 18
+4110021 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character found, processing data
+4110022 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+4110022 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+4110703 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4110704 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request getTeam
+4110704 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+4110704 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+4110707 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team with teamId found
+4110707 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team characters received
+4110708 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Parsing team characters
+4110708 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team data successfully returned
+4110709 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request getTeam
+4110709 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+4132029 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4132029 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getActivities
+4132029 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+4132029 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+4132032 [http-nio-8080-exec-3] INFO  com.inther.controller.ActivitiesController  - Team found
+4132037 [http-nio-8080-exec-3] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+4132037 [http-nio-8080-exec-3] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+4132037 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getActivities
+4132037 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+4133962 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4133962 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request doActivity
+4133962 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+4133962 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 18
+4133962 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 2: activityId = 4
+4133965 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Character found
+4133967 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Activity found
+4133974 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Points assigned to database
+4133974 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request doActivity
+4133974 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 12 ms
+4365793 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4365793 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request playerExist
+4365793 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+4365793 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+4365795 [http-nio-8080-exec-6] INFO  com.inther.controller.LoginController  - Player found
+4365795 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request playerExist
+4365795 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+4365811 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4365811 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request login
+4365811 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+4365811 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+4365811 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+4365813 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+4365816 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Fetching player characters
+4365816 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Characters received
+4365816 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request login
+4365816 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+4365847 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4365847 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+4365847 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+4365847 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4365850 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character found, processing data
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@46e0e679
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@23510cb5
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@17aa3d37
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1d75e9ae
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5c671757
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@77f89cca
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@317d5487
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3f7e39f
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@67ce9119
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@54635fe6
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@fe1e081
+4365856 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+4365856 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+4365856 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 9 ms
+4367708 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4367708 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request getTeam
+4367708 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+4367708 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+4367711 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team with teamId found
+4367711 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team characters received
+4367712 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Parsing team characters
+4367712 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team data successfully returned
+4367713 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request getTeam
+4367713 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+4367901 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4367902 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+4367902 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+4367904 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+4367904 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+4377705 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4377706 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4377706 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+4377706 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4377706 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 5
+4377709 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character found
+4377710 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item found
+4377718 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item 5 equipped on character 9
+4377721 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4377721 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 16 ms
+4378792 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4378792 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4378792 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+4378792 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4378792 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 5
+4378795 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character found
+4378796 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Item found
+4378798 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Item unequipped
+4378799 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4378799 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4409619 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4409619 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4409619 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+4409619 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4409619 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 2
+4409622 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found
+4409623 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item found
+4409625 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item unequipped
+4409627 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4409627 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+4411773 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4411773 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4411773 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+4411773 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4411773 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 2
+4411775 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character found
+4411777 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Item found
+4411781 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Item 2 equipped on character 9
+4411783 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4411783 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 10 ms
+4414629 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4414629 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4414629 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+4414629 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4414629 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 2
+4414632 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Character found
+4414634 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item found
+4414636 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item unequipped
+4414638 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4414638 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 9 ms
+4417080 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4417080 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4417080 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+4417080 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4417080 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 2
+4417082 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character found
+4417084 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Item found
+4417088 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Item 2 equipped on character 9
+4417090 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4417090 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 10 ms
+4418660 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4418661 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4418661 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+4418661 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4418661 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 3
+4418662 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Character found
+4418664 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item found
+4418669 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item 3 equipped on character 9
+4418671 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4418671 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 11 ms
+4419160 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4419160 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4419160 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+4419160 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4419160 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 3
+4419162 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character found
+4419163 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Item found
+4419164 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Item unequipped
+4419166 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4419167 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4419584 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4419584 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4419584 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+4419584 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4419584 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 3
+4419586 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Character found
+4419587 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Item found
+4419590 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Item 3 equipped on character 9
+4419592 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4419592 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+4419853 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4419853 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4419853 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+4419854 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4419854 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 3
+4419855 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character found
+4419856 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Item found
+4419858 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Item unequipped
+4419860 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4419860 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4420114 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4420114 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4420114 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+4420114 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4420114 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 3
+4420115 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character found
+4420116 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item found
+4420119 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item 3 equipped on character 9
+4420121 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4420121 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4421200 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4421200 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4421200 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+4421200 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4421200 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 2
+4421202 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character found
+4421203 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Item found
+4421207 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Item 2 equipped on character 9
+4421209 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4421209 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 9 ms
+4421467 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4421467 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4421467 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+4421467 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4421467 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 2
+4421469 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found
+4421470 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item found
+4421471 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item unequipped
+4421473 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4421473 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+4421710 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4421710 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4421710 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+4421710 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4421710 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 2
+4421711 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character found
+4421712 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Item found
+4421715 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Item 2 equipped on character 9
+4421717 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4421717 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4422403 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4422403 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4422403 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+4422403 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4422403 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 2
+4422405 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Character found
+4422407 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item found
+4422408 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item unequipped
+4422410 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4422410 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4422660 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4422660 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4422660 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+4422660 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4422660 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 2
+4422662 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character found
+4422663 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Item found
+4422666 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Item 2 equipped on character 9
+4422668 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4422668 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+4423818 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4423818 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4423818 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+4423818 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4423818 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 9
+4423820 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Character found
+4423822 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item found
+4423823 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item unequipped
+4423825 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4423825 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4424299 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4424299 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4424299 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+4424299 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4424299 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 11
+4424300 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character found
+4424301 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Item found
+4424306 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Item 11 equipped on character 9
+4424308 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4424308 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 9 ms
+4424477 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4424477 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4424477 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+4424477 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4424477 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 6
+4424479 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Character found
+4424481 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Item found
+4424483 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Item 6 equipped on character 9
+4424485 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4424485 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+4424696 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4424696 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4424696 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+4424696 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4424696 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 8
+4424698 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character found
+4424699 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Item found
+4424707 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Item 8 equipped on character 9
+4424709 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4424709 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 13 ms
+4424955 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4424955 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4424955 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+4424955 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4424955 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 5
+4424957 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character found
+4424958 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item found
+4424963 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item 5 equipped on character 9
+4424965 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4424965 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 10 ms
+4425341 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4425341 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4425341 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+4425341 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4425341 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 5
+4425343 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character found
+4425344 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Item found
+4425344 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Item unequipped
+4425346 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4425346 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+4425617 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4425617 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4425617 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+4425617 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4425617 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 6
+4425619 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found
+4425620 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item found
+4425623 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Item 6 equipped on character 9
+4425625 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4425625 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+4425863 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4425863 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4425863 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+4425863 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4425863 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 6
+4425865 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character found
+4425867 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Item found
+4425868 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Item unequipped
+4425871 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4425871 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+4426113 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4426113 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4426113 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+4426113 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4426113 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 8
+4426114 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Character found
+4426116 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item found
+4426117 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item unequipped
+4426118 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4426118 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+4426330 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4426330 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4426330 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+4426330 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4426330 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 3
+4426331 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character found
+4426333 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Item found
+4426337 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Item 3 equipped on character 9
+4426339 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4426339 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 9 ms
+4427569 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4427569 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4427569 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+4427569 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4427569 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 2
+4427571 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Character found
+4427572 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item found
+4427577 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item 2 equipped on character 9
+4427578 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4427579 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 10 ms
+4428238 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4428238 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4428238 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+4428238 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4428238 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 5
+4428240 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Character found
+4428241 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Item found
+4428243 [http-nio-8080-exec-8] INFO  com.inther.controller.CharacterController  - Item 5 equipped on character 9
+4428244 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4428244 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+4428908 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4428909 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4428909 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+4428909 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4428909 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 6
+4428910 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Character found
+4428911 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Item found
+4428916 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Item 6 equipped on character 9
+4428917 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4428917 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 9 ms
+4429559 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4429559 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4429559 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+4429559 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4429559 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 9
+4429560 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character found
+4429561 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Item found
+4429564 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Item 9 equipped on character 9
+4429565 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4429565 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+4430322 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4430323 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4430323 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+4430323 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4430323 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 12
+4430324 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character found
+4430325 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item found
+4430330 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Item 12 equipped on character 9
+4430331 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4430331 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 9 ms
+4431112 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4431112 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request equipItem
+4431112 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+4431112 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4431112 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 3
+4431114 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character found
+4431115 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Item found
+4431120 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Item 3 equipped on character 9
+4431122 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request equipItem
+4431122 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 10 ms
+4694552 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4694553 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request playerExist
+4694553 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+4694553 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+4694555 [http-nio-8080-exec-4] INFO  com.inther.controller.LoginController  - Player found
+4694555 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request playerExist
+4694555 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+4694578 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4694578 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request login
+4694578 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+4694578 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+4694578 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+4694580 [http-nio-8080-exec-5] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+4694586 [http-nio-8080-exec-5] INFO  com.inther.controller.LoginController  - Fetching player characters
+4694586 [http-nio-8080-exec-5] INFO  com.inther.controller.LoginController  - Characters received
+4694586 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request login
+4694586 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+4694617 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4694617 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+4694617 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+4694617 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4694619 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character found, processing data
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@4ef46f9c
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@10c9eb71
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2ad7db0d
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@477b37d6
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2a1e282a
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@75d3dc7b
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@61c86e7f
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7f132017
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@249708a7
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@4f4c284a
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@6dd50c4a
+4694631 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+4694631 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+4694631 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 14 ms
+4700263 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4700263 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request getTeam
+4700263 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+4700263 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+4700265 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Team with teamId found
+4700265 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Team characters received
+4700267 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Parsing team characters
+4700267 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Team data successfully returned
+4700267 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request getTeam
+4700267 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+4700578 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4700578 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+4700578 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+4700581 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+4700581 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+4840724 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4840724 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request playerExist
+4840724 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+4840724 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+4840725 [http-nio-8080-exec-10] INFO  com.inther.controller.LoginController  - Player found
+4840725 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request playerExist
+4840726 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+4840845 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4840845 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request login
+4840845 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+4840845 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+4840845 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+4840847 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+4840850 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Fetching player characters
+4840850 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Characters received
+4840850 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request login
+4840850 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+4840891 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4840891 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+4840891 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+4840892 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4840893 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character found, processing data
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7811b153
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3b0f0e87
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@69e0fab3
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@ce77b2b
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7909d8cd
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3ab18a5d
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@546adada
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@63e3dd5f
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@549bae5e
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@62ce35f2
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@60f08f7b
+4840898 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+4840898 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+4840898 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4843005 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4843006 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+4843006 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+4843006 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 18
+4843007 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found, processing data
+4843009 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+4843009 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+4844655 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4844655 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+4844655 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+4844655 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4844657 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character found, processing data
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7f89b57c
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5df34afb
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@48bc7f40
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2675d3fe
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@14e5b019
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@530684ec
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@786bb7b3
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@70897163
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@49d56213
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2e93ae21
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@b60526f
+4844661 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+4844661 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+4844661 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+4845387 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4845387 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request getTeam
+4845387 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+4845387 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+4845389 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team with teamId found
+4845389 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team characters received
+4845390 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Parsing team characters
+4845390 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team data successfully returned
+4845390 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request getTeam
+4845390 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+4845542 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4845542 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+4845542 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+4845544 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+4845544 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+4869928 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4869928 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+4869928 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+4869928 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+4869928 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 12
+4869930 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Character found
+4869931 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item found
+4869933 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Item unequipped
+4869935 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+4869935 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+4871725 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+4871725 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getActivities
+4871725 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+4871725 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+4871728 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team found
+4871729 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+4871729 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+4871729 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getActivities
+4871729 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+5091865 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5091865 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request playerExist
+5091865 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+5091865 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+5091866 [http-nio-8080-exec-10] INFO  com.inther.controller.LoginController  - Player found
+5091866 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request playerExist
+5091866 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 1 ms
+5091900 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5091900 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request login
+5091900 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+5091900 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+5091900 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+5091902 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+5091905 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Fetching player characters
+5091905 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Characters received
+5091905 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request login
+5091905 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+5091940 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5091940 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+5091940 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+5091940 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+5091941 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character found, processing data
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2b6b3814
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1d70e320
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2421a143
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@49db8524
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3b82bf93
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@21712220
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@873b4f4
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1d14e27b
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@33c4a86d
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1b0cec17
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@e4d3f96
+5091945 [http-nio-8080-exec-2] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+5091946 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+5091946 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+5094224 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5094224 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getTeam
+5094224 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+5094224 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5094226 [http-nio-8080-exec-3] INFO  com.inther.controller.TeamController  - Team with teamId found
+5094226 [http-nio-8080-exec-3] INFO  com.inther.controller.TeamController  - Team characters received
+5094227 [http-nio-8080-exec-3] INFO  com.inther.controller.TeamController  - Parsing team characters
+5094227 [http-nio-8080-exec-3] INFO  com.inther.controller.TeamController  - Team data successfully returned
+5094227 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getTeam
+5094227 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5094368 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5094368 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+5094368 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+5094370 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+5094370 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+5100484 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5100484 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request unEquipItem
+5100484 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+5100484 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+5100484 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 3
+5100486 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Character found
+5100487 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item found
+5100488 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Item unequipped
+5100489 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request unEquipItem
+5100489 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+5101127 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5101127 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request equipItem
+5101127 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+5101127 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+5101127 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 2: itemId = 3
+5101129 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character found
+5101130 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Item found
+5101132 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Item 3 equipped on character 9
+5101134 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request equipItem
+5101134 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+5104566 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5104566 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5104566 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+5104566 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5104569 [http-nio-8080-exec-7] INFO  com.inther.controller.ActivitiesController  - Team found
+5104570 [http-nio-8080-exec-7] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5104570 [http-nio-8080-exec-7] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5104570 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5104570 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+5339334 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5339334 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request playerExist
+5339334 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+5339335 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+5339339 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Player found
+5339339 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request playerExist
+5339339 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+5339354 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5339354 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request login
+5339354 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+5339354 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+5339354 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+5339355 [http-nio-8080-exec-10] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+5339360 [http-nio-8080-exec-10] INFO  com.inther.controller.LoginController  - Fetching player characters
+5339360 [http-nio-8080-exec-10] INFO  com.inther.controller.LoginController  - Characters received
+5339360 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request login
+5339360 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+5339389 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5339389 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+5339389 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+5339389 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+5339392 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character found, processing data
+5339398 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@45a257dd
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@529abe7f
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1d9c062
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@546d3906
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@32680e9
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@4c8bfb4
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@4b5db59f
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@764510fb
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@41d3e712
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@a7c583
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@26f07945
+5339399 [http-nio-8080-exec-1] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+5339399 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+5339399 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 10 ms
+5347433 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5347433 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request getTeam
+5347433 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+5347433 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5347440 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team with teamId found
+5347440 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team characters received
+5347441 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Parsing team characters
+5347441 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team data successfully returned
+5347441 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request getTeam
+5347441 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+5347601 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5347601 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+5347601 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+5347604 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+5347604 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5350196 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5350196 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5350196 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+5350196 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5350200 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Team found
+5350201 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5350201 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5350201 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5350201 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+5351849 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5351849 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5351849 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+5351849 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5351849 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle2
+5351849 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5351854 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team found
+5351868 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team updated successfully
+5351869 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5351869 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 20 ms
+5351978 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5351978 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5351978 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+5351978 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5351982 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team found
+5351984 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5351984 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5351984 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5351984 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+5352869 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5352869 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5352869 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+5352869 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5352869 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle3
+5352869 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5352873 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Team found
+5352885 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Team updated successfully
+5352885 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5352885 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 16 ms
+5352968 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5352968 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5352968 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+5352969 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5352972 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team found
+5352973 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5352973 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5352973 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5352973 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+5355479 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5355479 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5355479 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+5355479 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5355479 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle3
+5355479 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5355488 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team found
+5355489 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team updated successfully
+5355489 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5355489 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 10 ms
+5364102 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5364102 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5364102 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+5364102 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5364102 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle3
+5364102 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 0
+5364105 [http-nio-8080-exec-10] INFO  com.inther.controller.TeamController  - Team found
+5364116 [http-nio-8080-exec-10] INFO  com.inther.controller.TeamController  - Team updated successfully
+5364116 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5364116 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 14 ms
+5365477 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5365477 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5365477 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+5365477 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5365477 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle3
+5365477 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5365480 [http-nio-8080-exec-1] INFO  com.inther.controller.TeamController  - Team found
+5365482 [http-nio-8080-exec-1] INFO  com.inther.controller.TeamController  - Team updated successfully
+5365482 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5365482 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+5366942 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5366942 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5366942 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+5366942 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5366942 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle1
+5366942 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5366945 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team found
+5366947 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team updated successfully
+5366947 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5366947 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+5366980 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5366981 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5366981 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+5366981 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5366983 [http-nio-8080-exec-3] INFO  com.inther.controller.ActivitiesController  - Team found
+5366985 [http-nio-8080-exec-3] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5366985 [http-nio-8080-exec-3] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5366985 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5366985 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+5379477 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5379477 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5379477 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+5379477 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5379477 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle1
+5379477 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5379480 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team found
+5379481 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team updated successfully
+5379481 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5379481 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+5380846 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5380846 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5380846 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+5380846 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5380846 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle1
+5380846 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5380849 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team found
+5380850 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team updated successfully
+5380850 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5380850 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+5399079 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5399079 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5399079 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+5399079 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5399082 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team found
+5399083 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5399083 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5399083 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5399083 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+5400363 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5400363 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5400363 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+5400363 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5400363 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle2
+5400363 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5400366 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Team found
+5400368 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Team updated successfully
+5400368 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5400368 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+5400479 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5400479 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5400479 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+5400479 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5400481 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team found
+5400482 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5400482 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5400482 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5400482 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5401853 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5401853 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5401853 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+5401853 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5401855 [http-nio-8080-exec-9] INFO  com.inther.controller.ActivitiesController  - Team found
+5401856 [http-nio-8080-exec-9] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5401856 [http-nio-8080-exec-9] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5401856 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5401856 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5403362 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5403362 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5403362 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+5403362 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5403362 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle3
+5403362 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5403364 [http-nio-8080-exec-10] INFO  com.inther.controller.TeamController  - Team found
+5403365 [http-nio-8080-exec-10] INFO  com.inther.controller.TeamController  - Team updated successfully
+5403365 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5403365 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5403448 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5403448 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5403448 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+5403448 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5403449 [http-nio-8080-exec-1] INFO  com.inther.controller.ActivitiesController  - Team found
+5403451 [http-nio-8080-exec-1] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5403451 [http-nio-8080-exec-1] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5403451 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5403451 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5416597 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5416597 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request playerExist
+5416597 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+5416597 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+5416600 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Player found
+5416600 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request playerExist
+5416600 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5416670 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5416670 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request login
+5416670 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+5416670 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+5416670 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+5416672 [http-nio-8080-exec-3] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+5416673 [http-nio-8080-exec-3] INFO  com.inther.controller.LoginController  - Fetching player characters
+5416673 [http-nio-8080-exec-3] INFO  com.inther.controller.LoginController  - Characters received
+5416673 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request login
+5416673 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5416695 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5416695 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+5416695 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+5416695 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+5416698 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character found, processing data
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@59cfa9aa
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5f6cff9b
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@493df35d
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7a2032d3
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@5e0646c4
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@66aeeab8
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@40af4a2b
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3b625e47
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@57be0f89
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@46d4c4ec
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7c10200f
+5416707 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+5416707 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+5416707 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 12 ms
+5417905 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5417905 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request getTeam
+5417905 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+5417905 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5417909 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team with teamId found
+5417909 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team characters received
+5417911 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Parsing team characters
+5417911 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team data successfully returned
+5417911 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request getTeam
+5417911 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+5418809 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5418809 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5418809 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+5418809 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5418810 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team found
+5418812 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5418812 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5418812 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5418812 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5421490 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5421490 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5421490 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+5421490 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5421490 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle1
+5421490 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5421492 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Team found
+5421494 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Team updated successfully
+5421494 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5421495 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+5421528 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5421528 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5421528 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+5421528 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5421530 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team found
+5421531 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5421532 [http-nio-8080-exec-8] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5421532 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5421532 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+5422200 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5422200 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5422200 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+5422200 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5422200 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle2
+5422200 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 1
+5422202 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team found
+5422204 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team updated successfully
+5422204 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5422204 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+5422255 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5422255 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5422255 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+5422255 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5422257 [http-nio-8080-exec-10] INFO  com.inther.controller.ActivitiesController  - Team found
+5422258 [http-nio-8080-exec-10] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5422258 [http-nio-8080-exec-10] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5422258 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5422258 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5423448 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5423448 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5423448 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+5423448 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5423448 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle2
+5423448 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 0
+5423450 [http-nio-8080-exec-1] INFO  com.inther.controller.TeamController  - Team found
+5423452 [http-nio-8080-exec-1] INFO  com.inther.controller.TeamController  - Team updated successfully
+5423452 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5423452 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+5424420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5424420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+5424420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+5424420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5424420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle2
+5424420 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 0
+5424422 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team found
+5424423 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team updated successfully
+5424423 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+5424423 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5436337 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5436337 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request playerExist
+5436337 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+5436337 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+5436338 [http-nio-8080-exec-3] INFO  com.inther.controller.LoginController  - Player found
+5436339 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request playerExist
+5436339 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+5436358 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5436358 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request login
+5436358 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+5436358 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+5436358 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+5436359 [http-nio-8080-exec-4] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+5436361 [http-nio-8080-exec-4] INFO  com.inther.controller.LoginController  - Fetching player characters
+5436361 [http-nio-8080-exec-4] INFO  com.inther.controller.LoginController  - Characters received
+5436361 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request login
+5436361 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5436395 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5436395 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+5436395 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+5436395 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+5436398 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Character found, processing data
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@613dc90d
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@4798935b
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@a3cee3a
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7a0c51a3
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@75f69a4e
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@76f7dde0
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@1b57a03a
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@34e7bba
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@42abb577
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@a7b681f
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2c0b4f1a
+5436402 [http-nio-8080-exec-5] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+5436402 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+5436402 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+5437385 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5437385 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getTeam
+5437385 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+5437385 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5437388 [http-nio-8080-exec-6] INFO  com.inther.controller.TeamController  - Team with teamId found
+5437388 [http-nio-8080-exec-6] INFO  com.inther.controller.TeamController  - Team characters received
+5437389 [http-nio-8080-exec-6] INFO  com.inther.controller.TeamController  - Parsing team characters
+5437389 [http-nio-8080-exec-6] INFO  com.inther.controller.TeamController  - Team data successfully returned
+5437389 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getTeam
+5437389 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+5439732 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5439732 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request getActivities
+5439732 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+5439732 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+5439734 [http-nio-8080-exec-7] INFO  com.inther.controller.ActivitiesController  - Team found
+5439735 [http-nio-8080-exec-7] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+5439735 [http-nio-8080-exec-7] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+5439735 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request getActivities
+5439735 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+5942320 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+5942320 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request playerExist
+5942320 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+5942320 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: login = //
+5942323 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Player not found
+5942323 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request playerExist
+5942323 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+15440679 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+15440679 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request playerExist
+15440679 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+15440680 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+15440778 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Player found
+15440778 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request playerExist
+15440779 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 100 ms
+15440806 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+15440806 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request login
+15440806 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+15440806 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: login = abgar1223
+15440806 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+15440808 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+15440892 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Fetching player characters
+15440893 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Characters received
+15440893 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request login
+15440893 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 87 ms
+15440932 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+15440932 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+15440932 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+15440932 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 9
+15440941 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found, processing data
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@589abf85
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@65cdc61a
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@3ccd86d6
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7a6f73e7
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@77049db8
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7c726854
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2cd9aa3a
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@2da8140d
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7e92b55d
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@114d4213
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@7024a27a
+15440988 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+15440988 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+15440988 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 56 ms
+15442944 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+15442944 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getTeam
+15442944 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+15442945 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 8
+15442950 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team with teamId found
+15442950 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team characters received
+15442952 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Parsing team characters
+15442952 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team data successfully returned
+15442952 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getTeam
+15442952 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+15443352 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+15443352 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+15443352 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+15443355 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+15443355 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+17013141 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17013141 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request playerExist
+17013141 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+17013141 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: login = qwerty
+17013147 [http-nio-8080-exec-7] INFO  com.inther.controller.LoginController  - Player found
+17013147 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request playerExist
+17013147 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+17013165 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17013165 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request login
+17013165 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+17013165 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: login = qwerty
+17013165 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+17013167 [http-nio-8080-exec-8] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+17013173 [http-nio-8080-exec-8] INFO  com.inther.controller.LoginController  - Fetching player characters
+17013173 [http-nio-8080-exec-8] INFO  com.inther.controller.LoginController  - Characters received
+17013173 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request login
+17013173 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+17013192 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17013192 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+17013192 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+17013192 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 19
+17013196 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Character found, processing data
+17013199 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@dc52965
+17013199 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@56bcab9a
+17013199 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+17013199 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+17013199 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 7 ms
+17199161 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17199161 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request playerExist
+17199161 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+17199161 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: login = qwerty
+17199163 [http-nio-8080-exec-1] INFO  com.inther.controller.LoginController  - Player found
+17199163 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request playerExist
+17199163 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+17199181 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17199181 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request login
+17199181 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+17199181 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: login = qwerty
+17199181 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+17199182 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+17199184 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Fetching player characters
+17199184 [http-nio-8080-exec-2] INFO  com.inther.controller.LoginController  - Characters received
+17199184 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request login
+17199184 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+17199204 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17199204 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+17199204 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+17199204 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 19
+17199207 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character found, processing data
+17199209 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@4f536b41
+17199209 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@33840410
+17199209 [http-nio-8080-exec-3] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+17199209 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+17199209 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+17200771 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17200771 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getTeam
+17200771 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+17200771 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+17200774 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team with teamId found
+17200774 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team characters received
+17200775 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Parsing team characters
+17200776 [http-nio-8080-exec-4] INFO  com.inther.controller.TeamController  - Team data successfully returned
+17200776 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getTeam
+17200776 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+17202174 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17202174 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request getActivities
+17202174 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+17202174 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+17202178 [http-nio-8080-exec-5] INFO  com.inther.controller.ActivitiesController  - Team found
+17202190 [http-nio-8080-exec-5] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+17202191 [http-nio-8080-exec-5] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+17202191 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request getActivities
+17202191 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 17 ms
+17207764 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17207764 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getActivities
+17207764 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+17207764 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+17207768 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team found
+17207769 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+17207769 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+17207769 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getActivities
+17207769 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+17331542 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17331543 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request playerExist
+17331543 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+17331543 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: login = qwerty
+17331547 [http-nio-8080-exec-8] INFO  com.inther.controller.LoginController  - Player found
+17331547 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request playerExist
+17331547 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+17331564 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17331564 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request login
+17331564 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+17331564 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: login = qwerty
+17331564 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 2: password = xQYMg PKe0vDcWtmLz lFQ==
+17331565 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Login is successfull, processing data
+17331568 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Fetching player characters
+17331568 [http-nio-8080-exec-9] INFO  com.inther.controller.LoginController  - Characters received
+17331568 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request login
+17331568 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+17331597 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17331597 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request getCharacter
+17331597 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+17331597 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: characterId = 19
+17331600 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character found, processing data
+17331602 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@40d50d9b
+17331602 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - com.inther.entity.CharacterItem@51144622
+17331602 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character data process done successfully
+17331602 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request getCharacter
+17331602 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+17333707 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17333707 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request getTeam
+17333707 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+17333707 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+17333710 [http-nio-8080-exec-1] INFO  com.inther.controller.TeamController  - Team with teamId found
+17333710 [http-nio-8080-exec-1] INFO  com.inther.controller.TeamController  - Team characters received
+17333711 [http-nio-8080-exec-1] INFO  com.inther.controller.TeamController  - Parsing team characters
+17333712 [http-nio-8080-exec-1] INFO  com.inther.controller.TeamController  - Team data successfully returned
+17333712 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request getTeam
+17333712 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 5 ms
+17334006 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17334006 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request getItemPrice
+17334006 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+17334008 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request getItemPrice
+17334008 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+17928241 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17928241 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getActivities
+17928241 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+17928241 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+17928247 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Team found
+17928249 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+17928249 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+17928249 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getActivities
+17928249 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+17929136 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17929136 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+17929137 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+17929137 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+17929137 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle1
+17929137 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 7
+17929141 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team found
+17929144 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team updated successfully
+17929144 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+17929144 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 8 ms
+17931466 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17931466 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request getActivities
+17931466 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+17931466 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+17931469 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team found
+17931470 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+17931470 [http-nio-8080-exec-6] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+17931470 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request getActivities
+17931470 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+17949947 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17949947 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request teamExist
+17949947 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+17949947 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: name = ajsjsj
+17949957 [http-nio-8080-exec-7] INFO  com.inther.controller.TeamController  - Team not found
+17949957 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request teamExist
+17949957 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 10 ms
+17967642 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17967642 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Starting request teamExist
+17967642 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Arguments passed 
+17967642 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Argument 1: name = ajsjsjs
+17967645 [http-nio-8080-exec-8] INFO  com.inther.controller.TeamController  - Team found
+17967646 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Ending request teamExist
+17967646 [http-nio-8080-exec-8] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+17967751 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17967751 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request characterExist
+17967751 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+17967751 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: characterName = gyhvyvg
+17967757 [http-nio-8080-exec-9] INFO  com.inther.controller.CharacterController  - Character not found
+17967757 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request characterExist
+17967757 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 6 ms
+17994328 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17994328 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Starting request getActivities
+17994328 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Arguments passed 
+17994328 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+17994330 [http-nio-8080-exec-1] INFO  com.inther.controller.ActivitiesController  - Team found
+17994331 [http-nio-8080-exec-1] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+17994331 [http-nio-8080-exec-1] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+17994331 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Ending request getActivities
+17994331 [http-nio-8080-exec-1] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+17995155 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+17995155 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request updateTeam
+17995155 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+17995155 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+17995155 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 2: teamLogo = teamCastle1
+17995155 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 3: frequency = 7
+17995158 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team found
+17995159 [http-nio-8080-exec-2] INFO  com.inther.controller.TeamController  - Team updated successfully
+17995159 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request updateTeam
+17995159 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+18008702 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18008702 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request teamExist
+18008702 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+18008702 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: name = ajsjsjs
+18008705 [http-nio-8080-exec-3] INFO  com.inther.controller.TeamController  - Team found
+18008705 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request teamExist
+18008705 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+18008823 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18008823 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request characterExist
+18008823 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+18008823 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: characterName = kvvivj
+18008824 [http-nio-8080-exec-4] INFO  com.inther.controller.CharacterController  - Character not found
+18008825 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request characterExist
+18008825 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
+18019938 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18019938 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request teamExist
+18019938 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+18019938 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: name = ajsjsjs
+18019941 [http-nio-8080-exec-6] INFO  com.inther.controller.TeamController  - Team found
+18019941 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request teamExist
+18019941 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+18020036 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18020036 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Starting request characterExist
+18020036 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Arguments passed 
+18020036 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Argument 1: characterName = kvvivj
+18020037 [http-nio-8080-exec-7] INFO  com.inther.controller.CharacterController  - Character not found
+18020037 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Ending request characterExist
+18020037 [http-nio-8080-exec-7] INFO  com.inther.aspect.Logging  - Request handled in 1 ms
+18021725 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18021725 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Starting request teamExist
+18021725 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Arguments passed 
+18021725 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Argument 1: name = ajsjsjs
+18021728 [http-nio-8080-exec-9] INFO  com.inther.controller.TeamController  - Team found
+18021728 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Ending request teamExist
+18021728 [http-nio-8080-exec-9] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+18021753 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18021753 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Starting request characterExist
+18021753 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Arguments passed 
+18021753 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Argument 1: characterName = kvvivj
+18021754 [http-nio-8080-exec-10] INFO  com.inther.controller.CharacterController  - Character not found
+18021754 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Ending request characterExist
+18021754 [http-nio-8080-exec-10] INFO  com.inther.aspect.Logging  - Request handled in 1 ms
+18042450 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18042451 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Starting request getActivities
+18042451 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Arguments passed 
+18042451 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+18042453 [http-nio-8080-exec-2] INFO  com.inther.controller.ActivitiesController  - Team found
+18042454 [http-nio-8080-exec-2] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+18042454 [http-nio-8080-exec-2] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+18042454 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Ending request getActivities
+18042454 [http-nio-8080-exec-2] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+18066800 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18066800 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Starting request getActivities
+18066800 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Arguments passed 
+18066801 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+18066803 [http-nio-8080-exec-3] INFO  com.inther.controller.ActivitiesController  - Team found
+18066804 [http-nio-8080-exec-3] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+18066804 [http-nio-8080-exec-3] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+18066804 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Ending request getActivities
+18066804 [http-nio-8080-exec-3] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+18069152 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18069152 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Starting request getActivities
+18069152 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Arguments passed 
+18069152 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Argument 1: teamId = 12
+18069155 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Team found
+18069156 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Team has some activities
+18069156 [http-nio-8080-exec-4] INFO  com.inther.controller.ActivitiesController  - Team activities returned successfully
+18069156 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Ending request getActivities
+18069156 [http-nio-8080-exec-4] INFO  com.inther.aspect.Logging  - Request handled in 4 ms
+18096727 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18096727 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Starting request teamExist
+18096727 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Arguments passed 
+18096727 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Argument 1: name = ajsjsjs
+18096730 [http-nio-8080-exec-5] INFO  com.inther.controller.TeamController  - Team found
+18096730 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Ending request teamExist
+18096730 [http-nio-8080-exec-5] INFO  com.inther.aspect.Logging  - Request handled in 3 ms
+18096819 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - ---------------------------------------------------
+18096819 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Starting request characterExist
+18096819 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Arguments passed 
+18096819 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Argument 1: characterName = bjbjgughv
+18096820 [http-nio-8080-exec-6] INFO  com.inther.controller.CharacterController  - Character not found
+18096821 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Ending request characterExist
+18096821 [http-nio-8080-exec-6] INFO  com.inther.aspect.Logging  - Request handled in 2 ms
