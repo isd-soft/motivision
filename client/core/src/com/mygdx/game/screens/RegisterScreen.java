@@ -151,6 +151,7 @@ public class RegisterScreen implements Screen {
         });
         //add label
         registerLabel = new Label("Register new account", skin, "fancy");
+        registerLabel.setAlignment(Align.center);
         label = new Label("", skin, "error");
         label.setAlignment(Align.center);
 
