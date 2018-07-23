@@ -32,12 +32,11 @@ public class AnimationScreenTest extends Image {
     private Texture trollDieTexture;
 
 
-
     private float currentPosition;
 
     private GGame parent;
     private SpriteBatch batch;
-    CharacterAnimation  characterAnimation;
+    CharacterAnimation characterAnimation;
     private int screenAnimation;
     //you can combine spritesheets on the go ingame.
     // draw the parts you want into a framebuffer, grab a pixmap and draw that pixmap on a texture
@@ -63,12 +62,12 @@ public class AnimationScreenTest extends Image {
         trollDieTexture = parent.assetsManager.aManager.get("spritesheetTrollDie.png");
 
         //making animation
-        animationWarriarWalk = makeFrames(warriarWalkTexture, 0.099f,2, 4);
-        animationWarriarRun = makeFrames(warriarRunTexture, 0.033f,2, 4);
-        animationWarriarAttack = makeFrames(warriarAttackTexture, 0.099f, 2,4);
+        animationWarriarWalk = makeFrames(warriarWalkTexture, 0.099f, 2, 4);
+        animationWarriarRun = makeFrames(warriarRunTexture, 0.033f, 2, 4);
+        animationWarriarAttack = makeFrames(warriarAttackTexture, 0.099f, 2, 4);
 
 
-        animationTrollRun = makeFrames(trollRunTexture, 0.066f, 2,4 );
+        animationTrollRun = makeFrames(trollRunTexture, 0.066f, 2, 4);
         animationTrollDie = makeFrames(trollDieTexture, 0.099f, 2, 4);
     }
 
@@ -77,39 +76,40 @@ public class AnimationScreenTest extends Image {
         this.animation = animation;
     }
 
-    public Animation<TextureRegion> getAnimation(){
-            return animation;
+    public Animation<TextureRegion> getAnimation() {
+        return animation;
     }
 
     public void changeAnimation(int i) {
-        if(i == 1 ){
+        if (i == 1) {
             //this.animation = animation1;
             setAnimation(animationWarriarWalk);
         }
-        if(i == 2){
+        if (i == 2) {
             //this.animation = animation2;
             setAnimation(animationWarriarRun);
         }
     }
 
-    public void setScreenAnimation(int i, String animationType){
+    public void setScreenAnimation(int i, String animationType) {
         characterAnimation.setAnimationType(animationType);
         this.screenAnimation = i;
     }
 
-    private int getScreenAnimation(){
+    private int getScreenAnimation() {
         return screenAnimation;
     }
 
 
-    public void setCurrentPosition(int i){
+    public void setCurrentPosition(int i) {
         this.currentPosition = i;
     }
 
 
-    long    myTime = 0;
-    int     alpha = 20;
+    long myTime = 0;
+    int alpha = 20;
     int curr = 500;
+
     @Override
     public void act(float delta) {
         myTime++;
@@ -127,23 +127,36 @@ public class AnimationScreenTest extends Image {
         myTime++;
         if (myTime >= 7 * alpha)
             myTime = 0;
-        if(getScreenAnimation() == 1) {
-            characterAnimation.draw(batch, characterAnimation.getAnimationType(), (int) (myTime / alpha % 7), 300, 300, 1.5f);
-        } else{
-            characterAnimation.draw(batch, /*CharacterAnimation.ANIMATION*/ characterAnimation.getAnimationType(), (int) (myTime / alpha % 7), 300, 200, 0.5f);
+        if (getScreenAnimation() == 1) {
+            characterAnimation.draw(batch,
+                    characterAnimation.getAnimationType(),
+                    (int) (myTime / alpha % 7),
+                    300,
+                    300,
+                    1.5f);
+        } else {
+            characterAnimation.draw(batch,
+                    characterAnimation.getAnimationType(),
+                    (int) (myTime / alpha % 7),
+                    300,
+                    200,
+                    0.5f);
         }
         batch.end();
         super.act(delta);
     }
 
 
-    public Animation makeFrames(Texture textureT,float timePerFrame , final int FRAME_COLS, final int FRAME_ROWS) {
-        TextureRegion[][] trm = TextureRegion.split(textureT, textureT.getWidth() / FRAME_COLS, textureT.getHeight() / FRAME_ROWS);
-        TextureRegion[] textureFrames = new TextureRegion[(FRAME_ROWS * FRAME_COLS)-1];
+    public Animation makeFrames(Texture textureT, float timePerFrame, final int FRAME_COLS, final int FRAME_ROWS) {
+        TextureRegion[][] trm =
+                TextureRegion.split(textureT,
+                        textureT.getWidth() / FRAME_COLS,
+                        textureT.getHeight() / FRAME_ROWS);
+        TextureRegion[] textureFrames = new TextureRegion[(FRAME_ROWS * FRAME_COLS) - 1];
         int index = 0;
         for (int i = 0; i < FRAME_ROWS; i++) {
             for (int j = 0; j < FRAME_COLS; j++) {
-                if((FRAME_ROWS * FRAME_COLS -1) == index)
+                if ((FRAME_ROWS * FRAME_COLS - 1) == index)
                     break;
                 textureFrames[index++] = trm[i][j];
             }
