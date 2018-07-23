@@ -395,7 +395,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	}
 	error: {
 		font: yuGothicRed
-		fontColor: medieval-red
 	}
 	fancy: {
 		font: blackChanceryShadow

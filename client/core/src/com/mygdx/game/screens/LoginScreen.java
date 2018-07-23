@@ -42,11 +42,6 @@ public class LoginScreen implements Screen {
     private SettingsPopup settingsPopup;
     private Boolean checkBoxRememberMeBoolean = false;
     private Boolean doEncrypt = true;
-    //trying...
-
-    //trying...
-    private Skin skin2;
-
 
     public LoginScreen(GGame g) {
         parent = g;
@@ -74,7 +69,8 @@ public class LoginScreen implements Screen {
         stage.addActor(table);
 
         //add label
-        label = new Label("", skin, "error");
+        label = new Label(null, skin, "error");
+        label.setAlignment(Align.center);
         labelName = new Label(null, skin, "fancy");
         labelName.setText("User name: ");
         labelName.setAlignment(Align.center);
@@ -82,7 +78,7 @@ public class LoginScreen implements Screen {
         labelPassword.setText("Password: ");
         labelPassword.setAlignment(Align.center);
         //add text fields login/password
-        final TextField loginField = new TextField(null,skin);
+        final TextField loginField = new TextField(null, skin);
         final TextField passwordField = new TextField(null, skin);
         passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
@@ -92,8 +88,7 @@ public class LoginScreen implements Screen {
             passwordField.setText(RememberMe.getPassword());
             doEncrypt = false;
             checkBoxRememberMeBoolean = true;
-        }
-        else {
+        } else {
             loginField.setMessageText("Login goes here");
             passwordField.setMessageText("Password goes here");
         }
@@ -122,7 +117,7 @@ public class LoginScreen implements Screen {
         TextButton register = new TextButton("Register", skin);
         final TextButton submit = new TextButton("Submit", skin);
         final TextButton settings = new TextButton("Settings", skin);
-        TextButton connection = new TextButton("Connection", skin);
+        connection = new TextButton("Connection", skin);
 
         checkBoxRememberMe.addListener(new ChangeListener() {
             @Override
@@ -166,7 +161,7 @@ public class LoginScreen implements Screen {
                 final GameProperties gameProperties = new GameProperties();
 
                 final Label ipLabel = new Label("ip:", skin, "big");
-                final Label currentConnection = new Label ("", skin, "big");
+                final Label currentConnection = new Label("", skin, "big");
                 final TextField ipField = new TextField("", skin);
                 final Label portLabel = new Label("port:", skin, "big");
                 final TextField portField = new TextField("", skin);
@@ -174,7 +169,6 @@ public class LoginScreen implements Screen {
                 final Label connectionLabel = new Label("", skin, "big");
                 final Label saveConnectionLabel = new Label(JsonHandler.getDomain().replace("http://", ""), skin, "big");
                 final TextButton saveConnection = new TextButton("save", skin, "big");
-
 
 
                 //final TextButton backConnection = new TextButton("back", skin);
@@ -186,7 +180,7 @@ public class LoginScreen implements Screen {
                             connectionLabel.setText("ip cannot be empty!");
                         else if (portField.getText().equals(""))
                             connectionLabel.setText("port cannot be empty!");
-                        else{
+                        else {
                             if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
                                 if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true))
                                     connectionLabel.setText("success");
@@ -206,7 +200,7 @@ public class LoginScreen implements Screen {
                             saveConnectionLabel.setText("ip cannot be empty!");
                         else if (portField.getText().equals(""))
                             saveConnectionLabel.setText("port cannot be empty!");
-                        else{
+                        else {
                             if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
                                 if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true)) {
                                     gameProperties.setDomain(ipField.getText(), portField.getText());
@@ -254,7 +248,7 @@ public class LoginScreen implements Screen {
         //add everything into table
         table.add(label).fillX().colspan(2).padTop(10);
         table.row();//.pad(0, 0, 0, 0);
-        table.add(labelName).width(Value.percentWidth(0.25f, table));;
+        table.add(labelName).width(Value.percentWidth(0.25f, table));
         table.add(loginField).fillX().width(Value.percentWidth(0.25f, table));
         table.row().pad(5, 0, 5, 0);
         table.add(labelPassword);
@@ -350,10 +344,11 @@ public class LoginScreen implements Screen {
                 } catch (Exception e) {
                     log.error("Something went wrong occurred");
                     e.printStackTrace();
-                    if (JsonHandler.errorMessage != null)
+                    if (JsonHandler.errorMessage != null) {
                         label.setText(JsonHandler.errorMessage);
-                    else
+                    } else {
                         label.setText("Something went wrong");
+                    }
                 }
                 passwordField.setText("");
             }
@@ -381,7 +376,7 @@ public class LoginScreen implements Screen {
                 gameSounds.clickSound();
             }
         });
-        Label fail = new Label("Sucks to be you",skin,  "big");
+        Label fail = new Label("Sucks to be you", skin, "big");
         dialog.getContentTable().add(fail);
         dialog.button("ok", "ok"); //sends "true" as the result
         dialog.show(stage);

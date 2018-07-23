@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
@@ -129,6 +130,7 @@ public class RegisterScreen implements Screen {
         //add label
         registerLabel = new Label("Register new account", skin, "fancy");
         label = new Label("", skin, "error");
+        label.setAlignment(Align.center);
 
         //add text fields login/password
         final TextField loginField = new TextField(null, skin);
