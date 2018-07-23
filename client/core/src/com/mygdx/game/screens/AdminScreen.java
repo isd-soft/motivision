@@ -71,7 +71,7 @@ public class AdminScreen implements Screen {
     private Integer freqNumber = 0;
     private String[] freqChoices = {"Weekly", "Monthly"};
     private CheckBox checkboxLockTeam;
-    private Boolean checkboxLockTeamBoolean = false;
+    private Boolean checkboxLockTeamBoolean = PlayerAccount.getProfileTeam().getLock();
     private Drawable transBlack;
 
 
@@ -99,7 +99,10 @@ public class AdminScreen implements Screen {
         stage.clear();
         //  stage.setDebugAll(true);
         float pad = 5;
-        checkboxLockTeam = new CheckBox("Public", skin);
+        if(checkboxLockTeamBoolean)
+            checkboxLockTeam = new CheckBox("Private", skin);
+        else
+            checkboxLockTeam = new CheckBox("Public", skin);
         checkboxLockTeam.setChecked(checkboxLockTeamBoolean);
         textureCastle = PlayerAccount.getTeamLogo();
 
@@ -155,6 +158,7 @@ public class AdminScreen implements Screen {
                     checkboxLockTeam.setText("Public");
                     checkboxLockTeamBoolean = false;
                 }
+                PlayerAccount.setTeamLocked(checkboxLockTeamBoolean);
                 PlayerAccount.updateTeam();
             }
         });
@@ -475,7 +479,7 @@ public class AdminScreen implements Screen {
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             gameSounds.clickSound();
-            final Label activityDeleteLabel = new Label("Are you sure you want to delete: \\\"\" + name + \"\\\" ?", skin, "big");
+            final Label activityDeleteLabel = new Label("Are you sure you want to delete: \"\" + name + \"\" ?", skin, "big");
             Dialog dialog = new Dialog("Activity Deletion", skin) {
                 @Override
                 public void result(Object obj) {
