@@ -127,6 +127,7 @@ public class TeamMembersScreen implements Screen {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
                         gameSounds.clickSound();
+                        final Label kickLabel = new Label("Are you sure you want to kick \"" + key + "\" ?", skin, "big");
                         Dialog dialog = new Dialog("Confirmation", skin) {
                             @Override
                             public void result(Object obj) {
@@ -147,7 +148,7 @@ public class TeamMembersScreen implements Screen {
                         };
 
                         dialog.getContentTable().row();
-                        dialog.text("Are you sure you want to kick \"" + key + "\" ?");
+                        dialog.getContentTable().add(kickLabel);
                         dialog.button("Yes", "yes");
                         dialog.button("No", "no");
                         dialog.show(stage);
@@ -250,7 +251,7 @@ public class TeamMembersScreen implements Screen {
 
         private void confirmPopUp() {
 
-
+            final Label kickCharacterLabel = new Label("Are you sure you want to kick \"" + name + "\" ?", skin, "big");
             Dialog dialog = new Dialog("Confirmation", skin) {
                 @Override
                 public void result(Object obj) {
@@ -271,7 +272,7 @@ public class TeamMembersScreen implements Screen {
             };
 
             dialog.getContentTable().row();
-            dialog.text("Are you sure you want to kick \"" + name + "\" ?");
+            dialog.getContentTable().add(kickCharacterLabel);
             dialog.button("Yes", "yes");
             dialog.button("Yes", "no");
             dialog.show(stage);

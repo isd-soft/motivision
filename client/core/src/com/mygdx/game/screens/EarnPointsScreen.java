@@ -190,6 +190,8 @@ public class EarnPointsScreen implements Screen {
 
         private void doActivity() {
             gameSounds.clickSound();
+
+            final Label activityDoneLabel = new Label("Are you sure you did \"" + name + "\" ?", skin, "big");
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
                     gameSounds.clickSound();
@@ -208,7 +210,7 @@ public class EarnPointsScreen implements Screen {
                 }
             };
             dialog.getContentTable().row();
-            dialog.text("Are you sure you did \"" + name + "\" ?");
+            dialog.getContentTable().add(activityDoneLabel);
             dialog.getContentTable().row();
             dialog.button("Yes", "yes");
             dialog.button("No", "no");
