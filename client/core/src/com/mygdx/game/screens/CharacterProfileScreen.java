@@ -53,6 +53,8 @@ public class CharacterProfileScreen implements Screen {
     private GDXDialogs buyItemDialog;
 
     private Texture knightTex;
+    private Texture background;
+    private Image bg;
     private GameSounds gameSounds = GameSounds.getInstance();
     private Viewport viewport;
     private Camera camera;
@@ -70,7 +72,10 @@ public class CharacterProfileScreen implements Screen {
         manageTeamDialog = GDXDialogsSystem.install();
         buyItemDialog = GDXDialogsSystem.install();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-        shopAnimation = new ShopAnimation(parent);
+        background = parent.assetsManager.aManager.get("universalbg.png");
+        bg = new Image(background);
+        bg.setFillParent(true);
+        bg.setZIndex(0);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -78,6 +83,7 @@ public class CharacterProfileScreen implements Screen {
 
 
         animationScreenTest.setScreenAnimation(1, "ATTACK");
+        animationScreenTest.setZIndex(1);
     }
 
     @Override
@@ -252,9 +258,7 @@ public class CharacterProfileScreen implements Screen {
 
         itemTable.add(botButtonTable).fill().expandX().colspan(2);
 
-        shopAnimation.setFillParent(true);
-        shopAnimation.setZIndex(0);
-        //screenTable.addActor(shopAnimation);
+        screenTable.add(bg).fill().expand();
         screenTable.setFillParent(true);
         screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);

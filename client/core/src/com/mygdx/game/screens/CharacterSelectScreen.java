@@ -63,7 +63,7 @@ public class CharacterSelectScreen implements Screen {
     public CharacterSelectScreen(GGame g) {
         parent = g;
         stage = new Stage();
-        background = parent.assetsManager.aManager.get("castlebg.jpg");
+        background = parent.assetsManager.aManager.get("universalbg.png");
         bg = new Image(background);
         bg.setFillParent(true);
         bg.setZIndex(0);

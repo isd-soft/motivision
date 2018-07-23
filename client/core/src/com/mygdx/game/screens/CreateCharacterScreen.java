@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -20,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.logger.Logger;
 import com.mygdx.game.music.GameSounds;
-import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Profile;
 import com.mygdx.game.requests.Team;
@@ -35,8 +32,6 @@ import java.util.regex.Pattern;
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
 import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
-
-import static javax.security.auth.callback.ConfirmationCallback.YES;
 
 public class CreateCharacterScreen implements Screen {
 
@@ -86,7 +81,7 @@ public class CreateCharacterScreen implements Screen {
     public CreateCharacterScreen(GGame g) {
         dialogs = GDXDialogsSystem.install();
         parent = g;
-        background = parent.assetsManager.aManager.get("createchar.jpg");
+        background = parent.assetsManager.aManager.get("universalbg.png");
         bgImage = new Image(background);
         bgImage.setFillParent(true);
         bgImage.setZIndex(0);
@@ -124,8 +119,9 @@ public class CreateCharacterScreen implements Screen {
         isTeamChecked = false;
     }
 
-    private boolean validateCharacterName(String characterName, GDXButtonDialog bDialog) {
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-]*");
+    private boolean validateCharacterName(String name) {
+        String characterName = name.trim();
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-\\s]*");
         Matcher matcher = pattern.matcher(characterName);
         if (characterName == null || characterName == "") {
             log.warn("Character name field is empty");
@@ -189,8 +185,9 @@ public class CreateCharacterScreen implements Screen {
         return true;
     }
 
-    private boolean validateTeamName(String teamName, GDXButtonDialog bDialog) {
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_ \\-]*");
+    private boolean validateTeamName(String name, GDXButtonDialog bDialog) {
+        String teamName = name.trim();
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_ \\-\\s]*");
         Matcher matcher = pattern.matcher(teamName);
         if (teamName == null || teamName == "") {
             log.warn("Team name field is empty");
@@ -560,7 +557,7 @@ public class CreateCharacterScreen implements Screen {
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             profileName = nameText.getText();
             System.out.println("Name = [" + profileName + "]");
-            if (validateCharacterName(profileName, bDialog) == false)
+            if (validateCharacterName(profileName) == false)
                 return;
             characterParameters.put(Profile.NAME, nameText.getText());
 

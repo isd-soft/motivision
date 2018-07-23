@@ -54,7 +54,7 @@ public class TeamMembersScreen implements Screen {
 
         dialogs = GDXDialogsSystem.install();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-        bgTexture = parent.assetsManager.aManager.get("barracks.jpg");
+        bgTexture = parent.assetsManager.aManager.get("universalbg.png");
         bgImage = new Image(bgTexture);
         bgImage.setFillParent(true);
         bgImage.setZIndex(0);
