@@ -61,7 +61,7 @@ public class Profile implements Comparable<Profile>{
 
         url = JsonHandler.domain + "/character_exist";
         urlParameters = NAME + "=" + name;
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
+        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
         if (jsonObject == null)
             return true;
         result = jsonObject.getString("message");

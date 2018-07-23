@@ -54,14 +54,6 @@ public class AssetsManager {
     private final String layer10 = "forest/layer10.png";
     private final String layer11 = "forest/layer11.png";
 
-    private AssetsManager(){
-    }
-
-    public static AssetsManager getInstance(){
-        return singleton;
-    }
-
-
     private final String knightIronHead = "Body_Parts/1_KNIGHT/1_head_.png";
     private final String knightIronBody = "Body_Parts/1_KNIGHT/1_body_.png";
     private final String knightIronLeftArm = "Body_Parts/1_KNIGHT/1_left_arm_.png";
@@ -89,7 +81,14 @@ public class AssetsManager {
     private final String knightGoldenShield = "Body_Parts/3_KNIGHT/3_shield_.png";
     private final String knightGoldenWeapon = "Body_Parts/3_KNIGHT/3_weapon_.png";
 
+    private final String universal = "universalbg.png";
 
+    private AssetsManager() {
+    }
+
+    public static AssetsManager getInstance() {
+        return singleton;
+    }
 
 
     public void loadImages() {
@@ -131,7 +130,7 @@ public class AssetsManager {
         aManager.load(knightIronBody, Texture.class);
         aManager.load(knightIronLeftArm, Texture.class);
         aManager.load(knightIronRightArm, Texture.class);
-        aManager.load(knightIronLeftLeg , Texture.class);
+        aManager.load(knightIronLeftLeg, Texture.class);
         aManager.load(knightIronRightLeg, Texture.class);
         aManager.load(knightIronShield, Texture.class);
         aManager.load(knightIronWeapon, Texture.class);
@@ -140,7 +139,7 @@ public class AssetsManager {
         aManager.load(knightBronzeBody, Texture.class);
         aManager.load(knightBronzeLeftArm, Texture.class);
         aManager.load(knightBronzeRightArm, Texture.class);
-        aManager.load(knightBronzeLeftLeg , Texture.class);
+        aManager.load(knightBronzeLeftLeg, Texture.class);
         aManager.load(knightBronzeRightLeg, Texture.class);
         aManager.load(knightBronzeShield, Texture.class);
         aManager.load(knightBronzeWeapon, Texture.class);
@@ -162,24 +161,24 @@ public class AssetsManager {
         aManager.load(trollDie, Texture.class);
         aManager.load(trollRun, Texture.class);
 
-
+        aManager.load(universal, Texture.class);
     }
 
-    public void loadSounds(){
+    public void loadSounds() {
         aManager.load(buttonClick, Sound.class);
         aManager.load(buySound, Sound.class);
         aManager.load(deniedSound, Sound.class);
         aManager.load(equipArmor, Sound.class);
     }
 
-    public void loadMusic(){
+    public void loadMusic() {
         aManager.load(gameOst, Music.class);
     }
 
-    public Array<Texture> getLayers(){
+    public Array<Texture> getLayers() {
         Array<Texture> array = new Array<Texture>();
-        for (int i = 1; i < 12; i++){
-            Texture texture = aManager.get("forest/layer"+i+".png");
+        for (int i = 1; i < 12; i++) {
+            Texture texture = aManager.get("forest/layer" + i + ".png");
             texture.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
             array.add(texture);
         }

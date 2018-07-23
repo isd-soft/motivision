@@ -53,6 +53,8 @@ public class CharacterProfileScreen implements Screen {
     private GDXDialogs buyItemDialog;
 
     private Texture knightTex;
+    private Texture background;
+    private Image bg;
     private GameSounds gameSounds = GameSounds.getInstance();
     private Viewport viewport;
     private Camera camera;
@@ -70,7 +72,10 @@ public class CharacterProfileScreen implements Screen {
         manageTeamDialog = GDXDialogsSystem.install();
         buyItemDialog = GDXDialogsSystem.install();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-        shopAnimation = new ShopAnimation(parent);
+        background = parent.assetsManager.aManager.get("universalbg.png");
+        bg = new Image(background);
+        bg.setFillParent(true);
+        bg.setZIndex(0);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -78,6 +83,7 @@ public class CharacterProfileScreen implements Screen {
 
 
         animationScreenTest.setScreenAnimation(1, "ATTACK");
+        animationScreenTest.setZIndex(1);
     }
 
     @Override
@@ -252,9 +258,7 @@ public class CharacterProfileScreen implements Screen {
 
         itemTable.add(botButtonTable).fill().expandX().colspan(2);
 
-        shopAnimation.setFillParent(true);
-        shopAnimation.setZIndex(0);
-        //screenTable.addActor(shopAnimation);
+        screenTable.add(bg).fill().expand();
         screenTable.setFillParent(true);
         screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
@@ -294,41 +298,6 @@ public class CharacterProfileScreen implements Screen {
         return textureRegionDrawable;
     }
 
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        // tell our stage to do actions and draw itself
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-        stage.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        stage.getViewport().update(width,height,true);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
-
     class ManageTeamButton extends ChangeListener{
 
         @Override
@@ -361,6 +330,40 @@ public class CharacterProfileScreen implements Screen {
 
 
         public void     confirmDialog() {
+
+            //
+            //
+            // This code should be here but it's not working...
+            //
+            //
+
+            /*Label buyLabel = new Label("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\" ?", skin, "big");
+            Dialog dialog = new Dialog("Confirmation", skin) {
+                public void result(Object obj) {
+                    if (obj == "yes") {
+                        try {
+                            if (!PlayerAccount.buyItem(itemId)) {
+                                gameSounds.deniedSound();
+                                DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                            }
+                            else
+                                gameSounds.itemSound();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        CharacterProfileScreen.this.show();
+                    }
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.getContentTable().add(buyLabel);
+            dialog.getContentTable().row();
+            dialog.button("Yes", "yes");
+            dialog.button("No", "no");
+            dialog.show(stage);*/
+
             final GDXButtonDialog bDialog = buyItemDialog.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\"");
@@ -420,6 +423,40 @@ public class CharacterProfileScreen implements Screen {
             }
             show();
         }
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        // tell our stage to do actions and draw itself
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        stage.draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        stage.getViewport().update(width,height,true);
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
     }
 }
 

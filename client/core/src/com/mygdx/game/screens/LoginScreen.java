@@ -28,12 +28,7 @@ import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.gameSets.GGame;
-
-import org.json.JSONException;
-
-import java.io.IOException;
-
-import javax.xml.soap.Text;
+import com.mygdx.game.requests.RememberMe;
 
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
@@ -52,6 +47,7 @@ public class LoginScreen implements Screen {
     private Viewport viewport;
     private GDXDialogs dialogs;
     private BackgroundAnimation animationScreenTest;
+    private GameMusic gameMusic = GameMusic.getInstance();
     private GameSounds gameSounds = GameSounds.getInstance();
     private SettingsPopup settingsPopup;
     private Boolean checkBoxRememberMeBoolean = false;
@@ -68,6 +64,7 @@ public class LoginScreen implements Screen {
     public LoginScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
+        gameMusic.startMusic();
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);

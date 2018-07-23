@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -20,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.logger.Logger;
 import com.mygdx.game.music.GameSounds;
-import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Profile;
 import com.mygdx.game.requests.Team;
@@ -35,8 +32,6 @@ import java.util.regex.Pattern;
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
 import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
-
-import static javax.security.auth.callback.ConfirmationCallback.YES;
 
 public class CreateCharacterScreen implements Screen {
 
@@ -86,7 +81,7 @@ public class CreateCharacterScreen implements Screen {
     public CreateCharacterScreen(GGame g) {
         dialogs = GDXDialogsSystem.install();
         parent = g;
-        background = parent.assetsManager.aManager.get("createchar.jpg");
+        background = parent.assetsManager.aManager.get("universalbg.png");
         bgImage = new Image(background);
         bgImage.setFillParent(true);
         bgImage.setZIndex(0);
@@ -124,19 +119,21 @@ public class CreateCharacterScreen implements Screen {
         isTeamChecked = false;
     }
 
-    private boolean validateCharacterName(String characterName, GDXButtonDialog bDialog) {
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-]*");
+    private boolean validateCharacterName(String name) {
+        String characterName = name.trim();
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-\\s]*");
         Matcher matcher = pattern.matcher(characterName);
         if (characterName == null || characterName == "") {
             log.warn("Character name field is empty");
 
+            final Label characterNameEmptyLabel = new Label("Character name field is empty", skin, "big");
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
                     System.out.println("result " + obj);
                 }
             };
             dialog.getContentTable().row();
-            dialog.text("Character name field is empty");
+            dialog.getContentTable().add(characterNameEmptyLabel);
             dialog.getContentTable().row();
             dialog.button("ok", "ok");
             dialog.show(stage);
@@ -147,6 +144,7 @@ public class CreateCharacterScreen implements Screen {
             return false;
         } else if (characterName.length() < 6) {
             log.warn("Character name field must be at least 6 characters long");
+            final Label characterNameLabel = new Label("Character name field must be at least 6 characters long", skin, "big");
 
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
@@ -154,7 +152,7 @@ public class CreateCharacterScreen implements Screen {
                 }
             };
             dialog.getContentTable().row();
-            dialog.text("Character name field must be at least 6 characters long");
+            dialog.getContentTable().add(characterNameLabel);
             dialog.getContentTable().row();
             dialog.button("ok", "ok");
             dialog.show(stage);
@@ -166,7 +164,7 @@ public class CreateCharacterScreen implements Screen {
             return false;
         } else if (!matcher.matches()) {
             log.warn("Character name has an illegal character");
-
+            final Label characterNameLabel2 = new Label("Character name has an illegal character", skin, "big");
 
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
@@ -174,7 +172,7 @@ public class CreateCharacterScreen implements Screen {
                 }
             };
             dialog.getContentTable().row();
-            dialog.text("Character name has an illegal character");
+            dialog.getContentTable().add(characterNameLabel2);
             dialog.getContentTable().row();
             dialog.button("ok", "ok");
             dialog.show(stage);
@@ -189,19 +187,21 @@ public class CreateCharacterScreen implements Screen {
         return true;
     }
 
-    private boolean validateTeamName(String teamName, GDXButtonDialog bDialog) {
-        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_ \\-]*");
+    private boolean validateTeamName(String name, GDXButtonDialog bDialog) {
+        String teamName = name.trim();
+        Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_ \\-\\s]*");
         Matcher matcher = pattern.matcher(teamName);
         if (teamName == null || teamName == "") {
             log.warn("Team name field is empty");
 
+            final Label teamNameLabel = new Label("Team name field is empty", skin, "big");
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
                     System.out.println("result " + obj);
                 }
             };
             dialog.getContentTable().row();
-            dialog.text("Team name field is empty");
+            dialog.getContentTable().add(teamNameLabel);
             dialog.getContentTable().row();
             dialog.button("ok", "ok");
             dialog.show(stage);
@@ -209,13 +209,14 @@ public class CreateCharacterScreen implements Screen {
         } else if (teamName.length() < 6) {
             log.warn("Team name field must be at least 6 characters long");
 
+            final Label teamNameLabel2 = new Label("Team name field must be at least 6 characters long", skin, "big");
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
                     System.out.println("result " + obj);
                 }
             };
             dialog.getContentTable().row();
-            dialog.text("Team name field must be at least 6 characters long");
+            dialog.getContentTable().add(teamNameLabel2);
             dialog.getContentTable().row();
             dialog.button("ok", "ok");
             dialog.show(stage);
@@ -224,14 +225,14 @@ public class CreateCharacterScreen implements Screen {
         if (!matcher.matches()) {
             log.warn("Team name has an illegal character");
 
-
+            final Label teamNameLabel3 = new Label("Team name has an illegal character", skin, "big");
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
                     System.out.println("result " + obj);
                 }
             };
             dialog.getContentTable().row();
-            dialog.text("Team name has an illegal character");
+            dialog.getContentTable().add(teamNameLabel3);
             dialog.getContentTable().row();
             dialog.button("ok", "ok");
             dialog.show(stage);
@@ -527,13 +528,14 @@ public class CreateCharacterScreen implements Screen {
             if (nameExist == true) {
                 log.warn("Character name already exist!");
 
+                final Label characterNameAlreadyExistLabel = new Label("Character name already exist!", skin, "big");
                 Dialog dialog = new Dialog("", skin) {
                     public void result(Object obj) {
                         System.out.println("result " + obj);
                     }
                 };
                 dialog.getContentTable().row();
-                dialog.text("Character name already exist!");
+                dialog.getContentTable().add(characterNameAlreadyExistLabel);
                 dialog.getContentTable().row();
                 dialog.button("ok", "ok");
                 dialog.show(stage);
@@ -560,7 +562,7 @@ public class CreateCharacterScreen implements Screen {
             final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
             profileName = nameText.getText();
             System.out.println("Name = [" + profileName + "]");
-            if (validateCharacterName(profileName, bDialog) == false)
+            if (validateCharacterName(profileName) == false)
                 return;
             characterParameters.put(Profile.NAME, nameText.getText());
 
@@ -580,13 +582,15 @@ public class CreateCharacterScreen implements Screen {
                 if (checkboxTeam.isChecked()) {
                     if (teamId != -1) {
                         log.warn("Team already exists!");
+
+                        final Label teamAlreadyExistsLabel = new Label("Team already exists!", skin, "big");
                         Dialog dialog = new Dialog("", skin) {
                             public void result(Object obj) {
                                 System.out.println("result " + obj);
                             }
                         };
                         dialog.getContentTable().row();
-                        dialog.text("Team already exists!");
+                        dialog.getContentTable().add(teamAlreadyExistsLabel);
                         dialog.getContentTable().row();
                         dialog.button("ok", "ok");
                         dialog.show(stage);
@@ -607,13 +611,14 @@ public class CreateCharacterScreen implements Screen {
                 } else if (teamId == -1) {
                     log.warn("Team does not exist!");
 
+                    final Label teamDoesNotExistLabel = new Label("Team does not exist!", skin, "big");
                     Dialog dialog = new Dialog("", skin) {
                         public void result(Object obj) {
                             System.out.println("result " + obj);
                         }
                     };
                     dialog.getContentTable().row();
-                    dialog.text("Team does not exist!");
+                    dialog.getContentTable().add(teamDoesNotExistLabel);
                     dialog.getContentTable().row();
                     dialog.addListener(new ChangeListener() {
                         @Override
@@ -628,13 +633,14 @@ public class CreateCharacterScreen implements Screen {
                 } else if (teamId == -2) {
                     log.warn("Team is locked!");
 
+                    final Label teamIsLockedLabel = new Label("Team is locked!", skin, "big");
                     Dialog dialog = new Dialog("", skin) {
                         public void result(Object obj) {
                             System.out.println("result " + obj);
                         }
                     };
                     dialog.getContentTable().row();
-                    dialog.text("Team is locked!");
+                    dialog.getContentTable().add(teamIsLockedLabel);
                     dialog.getContentTable().row();
                     dialog.addListener(new ChangeListener() {
                         @Override

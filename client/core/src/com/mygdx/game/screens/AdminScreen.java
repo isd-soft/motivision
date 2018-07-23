@@ -379,7 +379,7 @@ public class AdminScreen implements Screen {
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             gameSounds.clickSound();
             final TextField activityField = new TextField("", skin);
-
+            final Label newActivityLabel = new Label("Enter new activity name:", skin, "big");
             Dialog dialog = new Dialog("Edit Activity", skin) {
 
                 @Override
@@ -403,7 +403,7 @@ public class AdminScreen implements Screen {
             };
 
             dialog.getContentTable().row();
-            dialog.text("Enter new activity name:");
+            dialog.getContentTable().add(newActivityLabel);
             dialog.getContentTable().add(activityField);
             dialog.getContentTable().row();
             dialog.button("Save", "save");
@@ -427,6 +427,7 @@ public class AdminScreen implements Screen {
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             gameSounds.clickSound();
             final TextField pointsField = new TextField("", skin);
+            final Label newPointsLabel = new Label("Enter points for activity:", skin, "big");
             Dialog dialog = new Dialog("Edit points", skin) {
                 @Override
                 public void result(Object obj) {
@@ -452,7 +453,7 @@ public class AdminScreen implements Screen {
             };
 
             dialog.getContentTable().row();
-            dialog.text("Enter points for activity:");
+            dialog.getContentTable().add(newPointsLabel);
             dialog.getContentTable().add(pointsField);
             dialog.getContentTable().row();
             dialog.button("Save", "save");
@@ -474,7 +475,7 @@ public class AdminScreen implements Screen {
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             gameSounds.clickSound();
-            final Label activityDeleteLabel = new Label("", skin, "fancy");
+            final Label activityDeleteLabel = new Label("Are you sure you want to delete: \\\"\" + name + \"\\\" ?", skin, "big");
             Dialog dialog = new Dialog("Activity Deletion", skin) {
                 @Override
                 public void result(Object obj) {
@@ -493,7 +494,6 @@ public class AdminScreen implements Screen {
             };
 
             dialog.getContentTable().row();
-            dialog.text("Are you sure you want to delete: \"" + name + "\" ?");
             dialog.getContentTable().add(activityDeleteLabel);
             dialog.getContentTable().row();
             dialog.button("Confirm", "confirm");
@@ -511,6 +511,7 @@ public class AdminScreen implements Screen {
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             gameSounds.clickSound();
             final TextField activityField = new TextField("", skin);
+            final Label createActivityLabel = new Label("Enter activity name:", skin, "big");
             Dialog dialog = new Dialog("New Activity", skin) {
                 @Override
                 public void result(Object obj) {
@@ -533,7 +534,7 @@ public class AdminScreen implements Screen {
             };
 
             dialog.getContentTable().row();
-            dialog.text("Enter activity name:");
+            dialog.getContentTable().add(createActivityLabel);
             dialog.getContentTable().add(activityField);
             dialog.getContentTable().row();
             dialog.button("Save", "save");
