@@ -11,6 +11,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.loader.AssetsManager;
+import com.mygdx.game.music.GameMusic;
+import com.mygdx.game.music.GameSounds;
 
 
 public class LoadingScreen implements Screen{
@@ -30,16 +32,18 @@ public class LoadingScreen implements Screen{
 	private OrthographicCamera camera = null;
 	private ExtendViewport viewport;
 	private Texture texture = null;
-    private Music loadingMusic;
+	private GameMusic gameMusic;
 
-    public LoadingScreen(GGame game){
+
+	public LoadingScreen(GGame game){
         parent = game;
 
 		parent.assetsManager.loadImages();
 		parent.assetsManager.loadSounds();
 		parent.assetsManager.loadMusic();
-
 		parent.assetsManager.aManager.finishLoading();
+		gameMusic = GameMusic.getInstance();
+		gameMusic.startMusic();
     }
     
     

@@ -77,7 +77,7 @@ public class CharacterProfileScreen implements Screen {
         settingsPopup = new SettingsPopup();
 
 
-        animationScreenTest.setScreenAnimation(1, "IDLE");
+        animationScreenTest.setScreenAnimation(1, "ATTACK");
     }
 
     @Override

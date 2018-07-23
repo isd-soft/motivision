@@ -50,7 +50,6 @@ public class LoginScreen implements Screen {
     private Viewport viewport;
     private GDXDialogs dialogs;
     private BackgroundAnimation animationScreenTest;
-    private GameMusic gameMusic = GameMusic.getInstance();
     private GameSounds gameSounds = GameSounds.getInstance();
     private SettingsPopup settingsPopup;
     private Boolean checkBoxRememberMeBoolean = false;
@@ -64,7 +63,6 @@ public class LoginScreen implements Screen {
     public LoginScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
-        gameMusic.startMusic();
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -277,12 +275,12 @@ public class LoginScreen implements Screen {
         table.add(checkBoxRememberMe);
         table.row().pad(10, 0, 0, 0);
         table.add(register).fill();
-        table.add(submit).fill();
-        table.row().pad(10, 0, 0, 0);
         table.add(forgotPassword).fill();
+        table.row().pad(10, 0, 0, 0);
+        table.add(connection).fill();
         table.add(settings).fill();
         table.row().pad(10, 0, 0, 0);
-        table.add(connection).fill().colspan(2);
+        table.add(submit).fill().colspan(2);
         table.top();
 
         Gdx.input.setInputProcessor(stage);
