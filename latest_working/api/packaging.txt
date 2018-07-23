@@ -1,7 +1,0 @@
-Linux run from terminal: sh mvnw
-Windows run from cmd: mvnw.cmd
-
-1)maven clean install
-2)
-3)To build mvnw/mvnw.cmd:
-mvn -N io.takari:maven:wrapper
