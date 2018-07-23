@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">LidlGame</string>
-    <string name="domain">"http://172.17.41.110:8080"</string>
+    <string name="app_name">MotiVision</string>
+    <string name="domain">"http://207.154.207.47:8080"</string>
 
     <!--
     Ввод логина и пароля + кнопка Войти + снизу регистрация
