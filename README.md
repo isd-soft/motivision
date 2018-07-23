@@ -3,11 +3,6 @@
 This project is made to encourage practicing sports such as volleyball, swimming, push ups, pull ups and so on.
 Here you will find an implementation of Restful API App (Server) & libGdx Android (Client)
 
-## Built With
-
-* [Maven](https://maven.apache.org/) - Dependency Management (Server)
-* [Gradle](https://gradle.org/) - Build tool (Client)
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment notes from below on how to deploy the project on a live system.
@@ -16,11 +11,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 Deployment can be done on Windows/Linux/Mac OS with these components installed:
 
-```
-JDK 8 and above
-Maven
-PostgreSQL
-```
+* [JDK 8 and above](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Maven](https://maven.apache.org/)
+* [PostgreSQL 10](https://www.postgresql.org/download/)
 
 To run the Server just write in cmd/terminal:
 
