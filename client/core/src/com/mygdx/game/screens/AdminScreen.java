@@ -522,7 +522,7 @@ public class AdminScreen implements Screen {
                     gameSounds.clickSound();
                     if (obj == "save") {
                         try {
-                            if (activityField.getText().length() < 7)
+                            if (activityField.getText().length() < 6)
                                 DialogBox.showInfoDialog("Error", "Activity name must be at least 6 letters");
                             else
                                 PlayerAccount.createActivity(activityField.getText());

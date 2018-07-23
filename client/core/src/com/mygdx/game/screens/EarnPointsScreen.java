@@ -18,8 +18,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.brashmonkey.spriter.Data;
+import com.brashmonkey.spriter.Loader;
+import com.brashmonkey.spriter.Player;
+import com.brashmonkey.spriter.SCMLReader;
 import com.mygdx.game.animation.ParallaxBackground;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.loader.AssetsManager;
 import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.Activity;
 import com.mygdx.game.requests.PlayerAccount;
@@ -64,7 +69,7 @@ public class EarnPointsScreen implements Screen {
         parent = g;
         dialogs = GDXDialogsSystem.install();
         parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
-        parallaxBackground.setZIndex(3);
+        parallaxBackground.setZIndex(0);
         animationScreenTest = new AnimationScreenTest(parent);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         batch = new SpriteBatch();
@@ -73,9 +78,19 @@ public class EarnPointsScreen implements Screen {
         stage.setViewport(viewport);
         settingsPopup = new SettingsPopup();
         animationScreenTest.setScreenAnimation(2, "ATTACK");
-        animationScreenTest.setZIndex(0);
+        animationScreenTest.setZIndex(7);
     }
 
+
+    public void animation() {
+//        SCMLReader reader = new SCMLReader(Gdx.files.internal("BodyParts/Project.scml").path());
+//        Data data = reader.getData();
+//        Player yourPlayer = new Player(data.getEntity("IDLE"));
+//        Loader loader = new com.mygdx.game.screens.L;
+//
+//        loader.load("Path to the root folder of your SCML file");
+//
+    }
 
     @Override
     public void show() {
@@ -108,6 +123,8 @@ public class EarnPointsScreen implements Screen {
 
         parallaxBackground.setSize(800, 480);
         parallaxBackground.setSpeed(1);
+        parallaxBackground.setZIndex(0);
+        stage.addActor(parallaxBackground);
         // scrollpane
         ScrollPane scrollPane = new ScrollPane(activitiesTable);
         scrollPane.setSmoothScrolling(false);
@@ -147,9 +164,11 @@ public class EarnPointsScreen implements Screen {
         buttonTable.add(backButton).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
-        screenTable.add(parallaxBackground);
+        // stage.addActor(parallaxBackground);
         screenTable.setFillParent(true);
-        screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(animationScreenTest);
+        screenTable.add(parallaxBackground);
+        //screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         stage.addActor(screenTable);
 

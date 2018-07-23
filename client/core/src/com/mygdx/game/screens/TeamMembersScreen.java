@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -14,6 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
@@ -45,6 +49,8 @@ public class TeamMembersScreen implements Screen {
     private Music loginMusic;
     private GDXDialogs dialogs;
     private String selectedName = null;
+    private Drawable profileImage;
+
 
     private SettingsPopup settingsPopup;
 
@@ -84,11 +90,16 @@ public class TeamMembersScreen implements Screen {
             texture = new Texture("default.png");
             e.printStackTrace();
         }
-        Image image = new Image(texture);
+
+        profileImage = new TextureRegionDrawable(new TextureRegion(texture));
 
         // label
-        Label teamName = new Label("", skin);
-        teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" Wins: " + PlayerAccount.getWins() + " Loss: " + PlayerAccount.getLosses());
+        Label teamStats = new Label("", skin);
+        teamStats.setText("Victories: " + PlayerAccount.getWins() + " Defeats: " + PlayerAccount.getLosses());
+        teamStats.setAlignment(Align.center);
+
+        String teamName = PlayerAccount.getTeamName();
+        Label teamLabel = new Label(" Team: " + teamName, skin, "big");
 
         // buttons
         TextButton settingsButton = new TextButton("Settings", skin);
@@ -168,15 +179,19 @@ public class TeamMembersScreen implements Screen {
         buttonTable.add(settingsButton).fill().pad(0, 0, pad, 0);
         buttonTable.add(backButton).fill().pad(0, 0, pad, 0);
         buttonTable.row();
-        buttonTable.add(teamName).fill().colspan(2).padBottom(pad);
+        buttonTable.add(teamStats).fill().colspan(2).padBottom(pad);
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
-        ;
+
+        Table leftTable = new Table();
+        leftTable.setBackground(profileImage);
+        leftTable.add(teamLabel);
+        leftTable.top();
 
         //create table for all screen and add into it everything
         screenTable.addActor(bgImage);
         screenTable.setFillParent(true);
-        screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         stage.addActor(screenTable);
 

@@ -289,7 +289,7 @@ public class LoginScreen implements Screen {
         table.addActor(animationScreenTest);
 
         //add everything into table
-        table.add(label).fillX().colspan(2).padTop(10);
+        table.add(label).colspan(2).padTop(10);
         table.row();//.pad(0, 0, 0, 0);
         table.add(labelName).width(Value.percentWidth(0.25f, table));
         table.add(loginField).fillX().width(Value.percentWidth(0.25f, table));
