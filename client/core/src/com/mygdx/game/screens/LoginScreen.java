@@ -59,6 +59,7 @@ public class LoginScreen implements Screen {
     private TextField passwordField;
     private TextField loginField;
     private TextButton submit;
+    private TextField ipField;
 
 
     public LoginScreen(GGame g) {
@@ -199,7 +200,7 @@ public class LoginScreen implements Screen {
 
                 final Label ipLabel = new Label("ip:", skin, "big");
                 final Label currentConnection = new Label ("", skin, "big");
-                final TextField ipField = new TextField("", skin);
+                ipField = new TextField("", skin);
                 final Label portLabel = new Label("port:", skin, "big");
                 final TextField portField = new TextField("", skin);
                 final TextButton testConnection = new TextButton("test connection", skin, "big");
@@ -277,7 +278,7 @@ public class LoginScreen implements Screen {
                 //dialog.button("save", "save");
                 dialog.button("back", "back");
 
-                ipField.setFocusTraversal(false);
+//                ipField.setFocusTraversal(false);
                 stage.setKeyboardFocus(ipField);
                 //dialog.getContentTable().add(backConnection);
                 dialog.show(stage);
