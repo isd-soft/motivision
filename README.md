@@ -30,7 +30,7 @@ mvnw.cmd
 ## Steps to Setup the Client
 
 ```
-Install the app from Play Store
+Install the app from Apk file
 Or
 Build it with Android Studio from the "client" folder
 ```
