@@ -449,6 +449,11 @@ public class PlayerAccount {
         team.setTeamLogo(teamLogo);
     }
 
+    public static void setTeamLocked(boolean locked){
+        if(team == null)
+            return;
+        team.setLock(locked);
+    }
     public static Texture getTeamLogo() {
         if (team == null)
             return new Texture("teamCastle1.png");

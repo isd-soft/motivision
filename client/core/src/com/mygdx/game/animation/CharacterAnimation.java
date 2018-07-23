@@ -1,5 +1,7 @@
 package com.mygdx.game.animation;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,6 +11,7 @@ import com.mygdx.game.gameSets.GGame;
 import com.sun.imageio.spi.FileImageInputStreamSpi;
 
 import javax.imageio.stream.FileImageInputStream;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -57,30 +60,30 @@ public class CharacterAnimation {
     private Texture ironShield;
     private Texture ironWeapon;
     Texture[] bodyPartsTextures;
-    int     centerImageX;
-    int     centerImageY;
+    int centerImageX;
+    int centerImageY;
 
 
     private GGame parent;
 
 
-    public void setAnimationType(String animationType){
+    public void setAnimationType(String animationType) {
         this.animationType = animationType;
     }
 
-    public String getAnimationType(){
+    public String getAnimationType() {
         return animationType;
     }
 
-    public void     centerImage() {
-        int     minX = 100000;
-        int     minY = 100000;
-        int     maxX = 100000;
-        int     maxY = 100000;
+    public void centerImage() {
+        int minX = 100000;
+        int minY = 100000;
+        int maxX = 100000;
+        int maxY = 100000;
 
         Set<String> keySet = animations.keySet();
-        Animation   animation;
-        for (String key: keySet) {
+        Animation animation;
+        for (String key : keySet) {
             animation = animations.get(key);
             animation.centerImage();
         }
@@ -125,35 +128,23 @@ public class CharacterAnimation {
         this.shieldType = shieldType;
         this.weaponType = weaponType;
         String[] bodyPartsName = {"left_lag_", "right_arm_", "weapon_", "body_",
-                "right_lag_","left_arm_", "shield_",
+                "right_lag_", "left_arm_", "shield_",
                 "head_"};
-        int[]   bodyType = {legsType, armorType, weaponType, armorType, legsType, shieldType, armorType, headType};
+        int[] bodyType = {legsType, armorType, weaponType, armorType, legsType, shieldType, armorType, headType};
         BufferedReader[] bodyPartsPropertiesFile = null;
 
-        try {
-            bodyPartsPropertiesFile = new BufferedReader[bodyPartsName.length];
-            bodyPartsTextures = new Texture[bodyPartsName.length];
-            for (int i = 0; i < bodyPartsName.length; i++) {
-                bodyPartsPropertiesFile[i] = new BufferedReader((new FileReader("properties/" + bodyPartsName[i] + "3.txt")));
-                bodyPartsTextures[i] = parent.assetsManager.aManager.get("Body_Parts/" + bodyType[i] + "_KNIGHT/" + bodyType[i] + "_" + bodyPartsName[i] + ".png");
-            }
-//            BufferedReader fileHead = new BufferedReader ((new FileReader("properties/head_" +armorType+".txt")));
-//            BufferedReader fileBody = new BufferedReader ((new InputStreamReader(new FileInputStream("properties/body_" +armorType+".txt"))));
-//            BufferedReader fileLeftArm = new BufferedReader ((new InputStreamReader(new FileInputStream("properties/left_arm_" +armorType+".txt"))));
-//            BufferedReader fileRightArm = new BufferedReader ((new InputStreamReader(new FileInputStream("properties/right_arm_" +armorType+".txt"))));
-//            BufferedReader fileLeftLeg = new BufferedReader ((new InputStreamReader(new FileInputStream("properties/left_lag_" +armorType+".txt"))));
-//            BufferedReader fileRightLeg = new BufferedReader ((new InputStreamReader(new FileInputStream("properties/right_lag_" +armorType+".txt"))));
-//            BufferedReader fileShield = new BufferedReader ((new InputStreamReader(new FileInputStream("properties/shield_" +armorType+".txt"))));
-//            BufferedReader fileWeapon = new BufferedReader ((new InputStreamReader(new FileInputStream("properties/weapon_" +armorType+".txt"))));
+        bodyPartsPropertiesFile = new BufferedReader[bodyPartsName.length];
+        bodyPartsTextures = new Texture[bodyPartsName.length];
+        for (int i = 0; i < bodyPartsName.length; i++) {
 
-        } catch (IOException e) {
-
+            bodyPartsPropertiesFile[i] = new BufferedReader(new InputStreamReader(Gdx.files.internal("properties/" + bodyPartsName[i] + "3.txt").read()));
+            //bodyPartsPropertiesFile[i] = new BufferedReader((new FileReader("properties/" + bodyPartsName[i] + "3.txt")));
+            bodyPartsTextures[i] = parent.assetsManager.aManager.get("Body_Parts/" + bodyType[i] + "_KNIGHT/" + bodyType[i] + "_" + bodyPartsName[i] + ".png");
         }
         animations = new LinkedHashMap<String, Animation>();
-
         BodyPart bodyPart;
-        String  line = "";
-        Frame   frame;
+        String line = "";
+        Frame frame;
         Animation animation;
 
         for (int animationType = 0; animationType < ANIMATION_TYPES; animationType++) {
@@ -173,14 +164,14 @@ public class CharacterAnimation {
     }
 
     public void draw(SpriteBatch batch, String animationType, int frameNumber, int pivotX, int pivotY, float scale) {
-        Animation   animation;
+        Animation animation;
 
         animation = animations.get(animationType);
         animation.draw(batch, frameNumber, pivotX, pivotY, scale);
     }
 
     class Frame {
-        ArrayList<BodyPart>     frame;
+        ArrayList<BodyPart> frame;
 
         public void addBodyPart(BodyPart bodyPart) {
             if (frame == null)
@@ -200,7 +191,7 @@ public class CharacterAnimation {
 
 
     class Animation {
-        ArrayList<Frame>     animation;
+        ArrayList<Frame> animation;
 
         public void addFrame(Frame frame) {
             if (animation == null)
@@ -209,14 +200,14 @@ public class CharacterAnimation {
         }
 
         public void draw(SpriteBatch batch, int frameNumber, int pivotX, int pivotY, float scale) {
-            Frame   frame;
+            Frame frame;
 
             frame = animation.get(frameNumber);
             frame.draw(batch, pivotX, pivotY, scale);
         }
 
         public void centerImage() {
-            for (Frame frame: animation) {
+            for (Frame frame : animation) {
                 frame.centerImage();
             }
         }

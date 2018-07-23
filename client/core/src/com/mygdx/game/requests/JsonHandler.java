@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,15 +29,16 @@ import static org.apache.http.HttpHeaders.USER_AGENT;
 
 public class JsonHandler {
     static final GameProperties gameProperties = new GameProperties();
-    static String domain = "http://172.17.41.110:8080";
+    static String domain = gameProperties.getDomain();
     public static String errorMessage = null;
 
     public static String getDomain() {
-        return domain;
+        GameProperties gameP = new GameProperties();
+        return gameP.getDomain();
     }
 
     public static void setDomain(String domain) {
-        JsonHandler.domain = "http://172.17.41.110:8080";
+        JsonHandler.domain = domain;
     }
 
     private static String readAll(Reader rd) throws IOException {

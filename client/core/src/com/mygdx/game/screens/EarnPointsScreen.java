@@ -96,8 +96,8 @@ public class EarnPointsScreen implements Screen {
         }
         Image image = new Image(texture);
         //create buttons Settings, Back and adding them listeners
-        TextButton settingsButton = new TextButton("Settings", skin, "blue");
-        TextButton backButton = new TextButton("Back", skin, "blue");
+        TextButton settingsButton = new TextButton("Settings", skin);
+        TextButton backButton = new TextButton("Back", skin);
 
         // tables
         Table activitiesTable = new Table();
@@ -108,7 +108,7 @@ public class EarnPointsScreen implements Screen {
         parallaxBackground.setSize(800, 480);
         parallaxBackground.setSpeed(1);
         parallaxBackground.setZIndex(0);
-        //stage.addActor(parallaxBackground);
+        stage.addActor(parallaxBackground);
         // scrollpane
         ScrollPane scrollPane = new ScrollPane(activitiesTable);
         scrollPane.setSmoothScrolling(false);
@@ -190,6 +190,8 @@ public class EarnPointsScreen implements Screen {
 
         private void doActivity() {
             gameSounds.clickSound();
+
+            final Label activityDoneLabel = new Label("Are you sure you did \"" + name + "\" ?", skin, "big");
             Dialog dialog = new Dialog("", skin) {
                 public void result(Object obj) {
                     gameSounds.clickSound();
@@ -208,7 +210,7 @@ public class EarnPointsScreen implements Screen {
                 }
             };
             dialog.getContentTable().row();
-            dialog.text("Are you sure you did \"" + name + "\" ?");
+            dialog.getContentTable().add(activityDoneLabel);
             dialog.getContentTable().row();
             dialog.button("Yes", "yes");
             dialog.button("No", "no");

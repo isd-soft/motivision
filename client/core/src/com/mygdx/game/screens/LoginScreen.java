@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -26,12 +28,7 @@ import com.mygdx.game.requests.JsonHandler;
 import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.gameSets.GGame;
-
-import org.json.JSONException;
-
-import java.io.IOException;
-
-import javax.xml.soap.Text;
+import com.mygdx.game.requests.RememberMe;
 
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
@@ -59,6 +56,10 @@ public class LoginScreen implements Screen {
 
     //trying...
     private Skin skin2;
+    private TextField passwordField;
+    private TextField loginField;
+    private TextButton submit;
+    private TextField ipField;
 
 
     public LoginScreen(GGame g) {
@@ -68,6 +69,8 @@ public class LoginScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
+        Gdx.input.setInputProcessor(stage);
+
         animationScreenTest = new BackgroundAnimation(parent);
         // tells our asset manger that we want to load the images set in loadImages method
         parent.assetsManager.loadImages();
@@ -81,13 +84,27 @@ public class LoginScreen implements Screen {
         stage.clear();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
 
+        stage.addListener(new InputListener() {
+            @Override
+            public boolean keyUp(InputEvent event, int keycode) {
+                System.out.println("new keycode = " + keycode);
+                if (keycode == Input.Keys.ENTER) {
+                    if (stage.getKeyboardFocus() == loginField)
+                        stage.setKeyboardFocus(passwordField);
+                    else if (stage.getKeyboardFocus() == passwordField && keycode == Input.Keys.ENTER)
+                        submit.fire(new ChangeListener.ChangeEvent());
+                }
+                return false;
+            }
+        });
         // Create a table that fills the screen. Everything else will go inside this table.
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
 
 		//add label
-		label = new Label("", skin, "error");
+		label = new Label(null, skin, "error");
+        label.setAlignment(Align.center);
 		labelName = new Label(null, skin, "fancy");
 		labelName.setText("User name: ");
 		labelName.setAlignment(Align.center);
@@ -95,18 +112,21 @@ public class LoginScreen implements Screen {
 		labelPassword.setText("Password: ");
 		labelPassword.setAlignment(Align.center);
 		//add text fields login/password
-		final TextField loginField = new TextField(null,skin);
-        final TextField passwordField = new TextField(null, skin);
+		loginField = new TextField(null, skin);
+        passwordField = new TextField(null, skin);
         passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
+        loginField.setFocusTraversal(false);
+        passwordField.setFocusTraversal(false);
+
+
 
 		if (RememberMe.rememberMeFileExists() == true && RememberMe.wasCheckBoxChecked() == true) {
             loginField.setText(RememberMe.getLogin());
             passwordField.setText(RememberMe.getPassword());
             doEncrypt = false;
             checkBoxRememberMeBoolean = true;
-        }
-        else {
+        } else {
             loginField.setMessageText("Login goes here");
             passwordField.setMessageText("Password goes here");
 		}
@@ -133,9 +153,9 @@ public class LoginScreen implements Screen {
         forgotPassword = new TextButton("Forgot password?", skin);
         //add buttons to table
         TextButton register = new TextButton("Register", skin);
-        final TextButton submit = new TextButton("Submit", skin);
+        submit = new TextButton("Submit", skin);
         final TextButton settings = new TextButton("Settings", skin);
-        TextButton connection = new TextButton("Connection", skin);
+        connection = new TextButton("Connection", skin);
 
         checkBoxRememberMe.addListener(new ChangeListener() {
             @Override
@@ -180,7 +200,7 @@ public class LoginScreen implements Screen {
 
                 final Label ipLabel = new Label("ip:", skin, "big");
                 final Label currentConnection = new Label ("", skin, "big");
-                final TextField ipField = new TextField("", skin);
+                ipField = new TextField("", skin);
                 final Label portLabel = new Label("port:", skin, "big");
                 final TextField portField = new TextField("", skin);
                 final TextButton testConnection = new TextButton("test connection", skin, "big");
@@ -192,6 +212,7 @@ public class LoginScreen implements Screen {
 
                 //final TextButton backConnection = new TextButton("back", skin);
 
+
                 testConnection.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -199,7 +220,7 @@ public class LoginScreen implements Screen {
                             connectionLabel.setText("ip cannot be empty!");
                         else if (portField.getText().equals(""))
                             connectionLabel.setText("port cannot be empty!");
-                        else{
+                        else {
                             if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
                                 if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true))
                                     connectionLabel.setText("success");
@@ -219,7 +240,7 @@ public class LoginScreen implements Screen {
                             saveConnectionLabel.setText("ip cannot be empty!");
                         else if (portField.getText().equals(""))
                             saveConnectionLabel.setText("port cannot be empty!");
-                        else{
+                        else {
                             if (PlayerAccount.pingHost(ipField.getText(), Integer.valueOf(portField.getText()))) {
                                 if ((gameProperties.ipIsValid(ipField.getText()) == true) && (gameProperties.portIsValid(portField.getText()) == true)) {
                                     gameProperties.setDomain(ipField.getText(), portField.getText());
@@ -256,6 +277,9 @@ public class LoginScreen implements Screen {
                 dialog.getContentTable().row();
                 //dialog.button("save", "save");
                 dialog.button("back", "back");
+
+//                ipField.setFocusTraversal(false);
+                stage.setKeyboardFocus(ipField);
                 //dialog.getContentTable().add(backConnection);
                 dialog.show(stage);
             }
@@ -267,7 +291,7 @@ public class LoginScreen implements Screen {
         //add everything into table
         table.add(label).fillX().colspan(2).padTop(10);
         table.row();//.pad(0, 0, 0, 0);
-        table.add(labelName).width(Value.percentWidth(0.25f, table));;
+        table.add(labelName).width(Value.percentWidth(0.25f, table));
         table.add(loginField).fillX().width(Value.percentWidth(0.25f, table));
         table.row().pad(5, 0, 5, 0);
         table.add(labelPassword);
@@ -277,12 +301,12 @@ public class LoginScreen implements Screen {
         table.add(checkBoxRememberMe);
         table.row().pad(10, 0, 0, 0);
         table.add(register).fill();
-        table.add(submit).fill();
-        table.row().pad(10, 0, 0, 0);
         table.add(forgotPassword).fill();
+        table.row().pad(10, 0, 0, 0);
+        table.add(connection).fill();
         table.add(settings).fill();
         table.row().pad(10, 0, 0, 0);
-        table.add(connection).fill().colspan(2);
+        table.add(submit).fill().colspan(2);
         table.top();
 
         Gdx.input.setInputProcessor(stage);
@@ -363,10 +387,11 @@ public class LoginScreen implements Screen {
                 } catch (Exception e) {
                     log.error("Something went wrong occurred");
                     e.printStackTrace();
-                    if (JsonHandler.errorMessage != null)
+                    if (JsonHandler.errorMessage != null) {
                         label.setText(JsonHandler.errorMessage);
-                    else
+                    } else {
                         label.setText("Something went wrong");
+                    }
                 }
                 passwordField.setText("");
             }
@@ -394,7 +419,7 @@ public class LoginScreen implements Screen {
                 gameSounds.clickSound();
             }
         });
-        Label fail = new Label("Sucks to be you",skin,  "big");
+        Label fail = new Label("Sucks to be you", skin, "big");
         dialog.getContentTable().add(fail);
         dialog.button("ok", "ok"); //sends "true" as the result
         dialog.show(stage);

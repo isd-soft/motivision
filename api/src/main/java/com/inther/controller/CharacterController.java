@@ -200,7 +200,7 @@ public class CharacterController {
      * @return status - success, message - true if character exists
      * @return status - success, message - false if character doesn't exists
      * */
-    @RequestMapping(value = "/character_exist", method = RequestMethod.GET)
+    @RequestMapping(value = "/character_exist", method = RequestMethod.POST)
     public Map<String, Object> characterExist(@RequestParam(value = "characterName") String characterName) {
         Optional<Character> optionalCharacter = characterRepository.findByName(characterName);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();

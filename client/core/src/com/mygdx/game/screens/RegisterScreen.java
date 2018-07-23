@@ -6,6 +6,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -13,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
@@ -37,6 +40,10 @@ public class RegisterScreen implements Screen {
     private BackgroundAnimation animationScreenTest;
     private Label registerLabel;
     private GameSounds gameSounds = GameSounds.getInstance();
+    private TextField retypePasswordField;
+    private TextField loginField;
+    private TextField passwordField;
+    private TextButton register;
 
     public RegisterScreen(GGame g) {
 
@@ -126,25 +133,46 @@ public class RegisterScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
+        // Handling Enter key evenn
+        stage.addListener(new InputListener() {
+            @Override
+            public boolean keyUp(InputEvent event, int keycode) {
+                System.out.println("new keycode = " + keycode);
+                if (keycode == Input.Keys.ENTER || keycode == Input.Keys.TAB) {
+                    if (stage.getKeyboardFocus() == loginField)
+                        stage.setKeyboardFocus(passwordField);
+                    else if (stage.getKeyboardFocus() == passwordField)
+                        stage.setKeyboardFocus(retypePasswordField);
+                    else if (stage.getKeyboardFocus() == retypePasswordField && keycode == Input.Keys.ENTER)
+                        register.fire(new ChangeListener.ChangeEvent());
+                }
+                return false;
+            }
+        });
         //add label
         registerLabel = new Label("Register new account", skin, "fancy");
+        registerLabel.setAlignment(Align.center);
         label = new Label("", skin, "error");
+        label.setAlignment(Align.center);
 
         //add text fields login/password
-        final TextField loginField = new TextField(null, skin);
+        loginField = new TextField(null, skin);
         loginField.setMessageText("Login goes here");
-        final TextField passwordField = new TextField("", skin);
+        passwordField = new TextField("", skin);
         passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
         passwordField.setMessageText("Password goes here");
 
-        final TextField retypePasswordField = new TextField("", skin);
+        retypePasswordField = new TextField("", skin);
         retypePasswordField.setPasswordCharacter('*');
         retypePasswordField.setPasswordMode(true);
         retypePasswordField.setMessageText("Retype password");
 
+        loginField.setFocusTraversal(false);
+        passwordField.setFocusTraversal(false);
+        retypePasswordField.setFocusTraversal(false);
         //add buttons to table
-        TextButton register = new TextButton("Register", skin);
+        register = new TextButton("Register", skin);
         TextButton back = new TextButton("Back", skin);
 
 

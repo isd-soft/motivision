@@ -31,19 +31,19 @@ public class TeamController {
     CharacterRepository characterRepository;
 
     /*
-    * Get team info request
-    * Used to get team info by teamId
-    * @param teamId - id of the team to get data
-    * @return if such team exist return Json info about the team
-    * @return if no such team exist return Json fail message
-    * */
+     * Get team info request
+     * Used to get team info by teamId
+     * @param teamId - id of the team to get data
+     * @return if such team exist return Json info about the team
+     * @return if no such team exist return Json fail message
+     * */
     @RequestMapping(value = "/get_team", method = RequestMethod.GET)
-    public Map<String, Object> getTeam(@RequestParam(value = "teamId") Long teamId){
+    public Map<String, Object> getTeam(@RequestParam(value = "teamId") Long teamId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Team> optionalTeam = teamRepository.findTeamById(teamId);
-        if(!optionalTeam.isPresent()){
+        if (!optionalTeam.isPresent()) {
             log.warn("Invalid teamId, Team not found");
-            map.put("status","failed");
+            map.put("status", "failed");
             map.put("message", "team not found");
             return map;
         }
@@ -62,7 +62,7 @@ public class TeamController {
         List<Character> characterList = characterRepository.findAllByTeamId(teamId);
         List<Map<String, Object>> result = new ArrayList<>();
         log.info("Parsing team characters");
-        for(Character character : characterList){
+        for (Character character : characterList) {
             Map<String, Object> characterMap = new LinkedHashMap<>();
             characterMap.put("characterId", character.getId());
             characterMap.put("characterName", character.getName());
@@ -129,19 +129,19 @@ public class TeamController {
     }
 
     /*
-    *  Create team request
-    *  Used to create new team and add default 6 activities to it
-    *  @param name - team name
-    *  @param logo - team logo
-    *  @param battleFrequency - team battleFrequency
-    *  @return status failed if team name already exists
-    *  @return status failed if somehow default activities are not present
-    *  @return status success if team was successfully created
-    * */
+     *  Create team request
+     *  Used to create new team and add default 6 activities to it
+     *  @param name - team name
+     *  @param logo - team logo
+     *  @param battleFrequency - team battleFrequency
+     *  @return status failed if team name already exists
+     *  @return status failed if somehow default activities are not present
+     *  @return status success if team was successfully created
+     * */
     @RequestMapping(value = "/create_team", method = RequestMethod.POST)
     public Map<String, Object> createTeam(@RequestParam(value = "teamName") String name,
-                                           @RequestParam(value = "teamLogo") String logo,
-                                           @RequestParam(value = "battleFrequency") Integer battleFrequency) {
+                                          @RequestParam(value = "teamLogo") String logo,
+                                          @RequestParam(value = "battleFrequency") Integer battleFrequency) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Team> optionalTeam = teamRepository.findByName(name);
         if (optionalTeam.isPresent()) {
@@ -165,17 +165,17 @@ public class TeamController {
     }
 
     /*
-    * Delete team request
-    * Used to delete a team by teamId
-    * @param teamId - team for deletion
-    * @return status failed if no such team exists
-    * @return status success if team was deleted successfully
-    * */
+     * Delete team request
+     * Used to delete a team by teamId
+     * @param teamId - team for deletion
+     * @return status failed if no such team exists
+     * @return status success if team was deleted successfully
+     * */
     @RequestMapping(value = "/delete_team", method = RequestMethod.DELETE)
-    public Map<String, Object> deleteTeam(@RequestParam(value = "teamId") Long teamId){
+    public Map<String, Object> deleteTeam(@RequestParam(value = "teamId") Long teamId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Team> optionalTeam = teamRepository.findById(teamId);
-        if (!optionalTeam.isPresent()){
+        if (!optionalTeam.isPresent()) {
             log.warn("Ivalid teamId, no such Team found in database");
             map.put("status", "failed");
             map.put("message", "no such team exist");
@@ -193,10 +193,11 @@ public class TeamController {
     @RequestMapping(value = "/update_team", method = RequestMethod.POST)
     public Map<String, Object> updateTeam(@RequestParam(value = "teamId") Long teamId,
                                           @RequestParam(value = "teamLogo") String teamLogo,
-                                          @RequestParam(value = "battleFrequency") Integer frequency){
+                                          @RequestParam(value = "battleFrequency") Integer frequency,
+                                          @RequestParam(value = "lock") boolean lock) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Team> optionalTeam = teamRepository.findById(teamId);
-        if (!optionalTeam.isPresent()){
+        if (!optionalTeam.isPresent()) {
             log.warn("Ivalid teamId, no such Team found in database");
             map.put("status", "failed");
             map.put("message", "no such team exist");
@@ -206,6 +207,7 @@ public class TeamController {
         Team team = optionalTeam.get();
         team.setTeamLogo(teamLogo);
         team.setBattleFrequency(frequency);
+        team.setLock(lock);
         teamRepository.save(team);
         log.info("Team updated successfully");
         map.put("status", "success");
@@ -226,7 +228,7 @@ public class TeamController {
         map.put("status", "success");
         Team team = teamOptional.get();
         map.put("teamId", team.getId().toString());
-        map.put("locked", team.getLock().toString());
+        map.put("lock", team.getLock().toString());
         return map;
     }
 }

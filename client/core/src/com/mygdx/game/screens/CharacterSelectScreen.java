@@ -56,14 +56,13 @@ public class CharacterSelectScreen implements Screen {
     private Texture background;
     private Image bg;
     private Texture texture;
-    private Boolean characterIsSelected = false;
 
     private SettingsPopup settingsPopup;
 
     public CharacterSelectScreen(GGame g) {
         parent = g;
         stage = new Stage();
-        background = parent.assetsManager.aManager.get("castlebg.jpg");
+        background = parent.assetsManager.aManager.get("universalbg.png");
         bg = new Image(background);
         bg.setFillParent(true);
         bg.setZIndex(0);
@@ -90,10 +89,10 @@ public class CharacterSelectScreen implements Screen {
 
         // remove and add buttons
         TextButton create = new TextButton("Create new +", skin, "green");
-        TextButton logout = new TextButton("Logout", skin, "blue");
-        TextButton select = new TextButton("Select", skin, "blue");
-        TextButton deletePlayer = new TextButton("Delete", skin, "blue");
-        TextButton settings = new TextButton("Settings", skin, "blue");
+        TextButton logout = new TextButton("Logout", skin);
+        TextButton select = new TextButton("Select", skin);
+        TextButton deletePlayer = new TextButton("Delete", skin);
+        TextButton settings = new TextButton("Settings", skin);
 
         // enable scrolling
         ScrollPane scrollPane = new ScrollPane(charactersTable);

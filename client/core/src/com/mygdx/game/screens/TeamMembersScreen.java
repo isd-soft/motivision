@@ -54,7 +54,7 @@ public class TeamMembersScreen implements Screen {
 
         dialogs = GDXDialogsSystem.install();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-        bgTexture = parent.assetsManager.aManager.get("barracks.jpg");
+        bgTexture = parent.assetsManager.aManager.get("universalbg.png");
         bgImage = new Image(bgTexture);
         bgImage.setFillParent(true);
         bgImage.setZIndex(0);
@@ -88,11 +88,11 @@ public class TeamMembersScreen implements Screen {
 
         // label
         Label teamName = new Label("", skin);
-        teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" Wins: " + PlayerAccount.getWins() + " \t Loss: " + PlayerAccount.getLosses());
+        teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" Wins: " + PlayerAccount.getWins() + " Loss: " + PlayerAccount.getLosses());
 
         // buttons
-        TextButton settingsButton = new TextButton("Settings", skin, "blue");
-        TextButton backButton = new TextButton("Back", skin, "blue");
+        TextButton settingsButton = new TextButton("Settings", skin);
+        TextButton backButton = new TextButton("Back", skin);
 
         // tables
         Table screenTable = new Table();
@@ -127,6 +127,7 @@ public class TeamMembersScreen implements Screen {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
                         gameSounds.clickSound();
+                        final Label kickLabel = new Label("Are you sure you want to kick \"" + key + "\" ?", skin, "big");
                         Dialog dialog = new Dialog("Confirmation", skin) {
                             @Override
                             public void result(Object obj) {
@@ -147,7 +148,7 @@ public class TeamMembersScreen implements Screen {
                         };
 
                         dialog.getContentTable().row();
-                        dialog.text("Are you sure you want to kick \"" + key + "\" ?");
+                        dialog.getContentTable().add(kickLabel);
                         dialog.button("Yes", "yes");
                         dialog.button("No", "no");
                         dialog.show(stage);
@@ -170,7 +171,6 @@ public class TeamMembersScreen implements Screen {
         buttonTable.add(teamName).fill().colspan(2).padBottom(pad);
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
-        ;
 
         //create table for all screen and add into it everything
         screenTable.addActor(bgImage);
@@ -250,7 +250,7 @@ public class TeamMembersScreen implements Screen {
 
         private void confirmPopUp() {
 
-
+            final Label kickCharacterLabel = new Label("Are you sure you want to kick \"" + name + "\" ?", skin, "big");
             Dialog dialog = new Dialog("Confirmation", skin) {
                 @Override
                 public void result(Object obj) {
@@ -271,7 +271,7 @@ public class TeamMembersScreen implements Screen {
             };
 
             dialog.getContentTable().row();
-            dialog.text("Are you sure you want to kick \"" + name + "\" ?");
+            dialog.getContentTable().add(kickCharacterLabel);
             dialog.button("Yes", "yes");
             dialog.button("Yes", "no");
             dialog.show(stage);

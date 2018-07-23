@@ -60,12 +60,8 @@ public class CharacterProfileScreen implements Screen {
 
     private SettingsPopup settingsPopup;
 
-
-    private AnimationScreenTest animationScreenTest;
-
     public CharacterProfileScreen(GGame g) {
         parent = g;
-        animationScreenTest = new AnimationScreenTest(parent);
         selectDialog = GDXDialogsSystem.install();
         manageTeamDialog = GDXDialogsSystem.install();
         buyItemDialog = GDXDialogsSystem.install();
@@ -76,8 +72,6 @@ public class CharacterProfileScreen implements Screen {
         stage.setViewport(viewport);
         settingsPopup = new SettingsPopup();
 
-
-        animationScreenTest.setScreenAnimation(1, "IDLE");
     }
 
     @Override
@@ -254,9 +248,9 @@ public class CharacterProfileScreen implements Screen {
 
         shopAnimation.setFillParent(true);
         shopAnimation.setZIndex(0);
-        //screenTable.addActor(shopAnimation);
+        screenTable.addActor(shopAnimation);
         screenTable.setFillParent(true);
-        screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
         stage.addActor(screenTable);
 
@@ -361,7 +355,36 @@ public class CharacterProfileScreen implements Screen {
 
 
         public void     confirmDialog() {
-            final GDXButtonDialog bDialog = buyItemDialog.newDialog(GDXButtonDialog.class);
+            gameSounds.clickSound();
+
+            final Label buyLabel = new Label("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\" ?", skin, "big");
+            Dialog dialog = new Dialog("Confirmation", skin) {
+                public void result(Object obj) {
+                    gameSounds.clickSound();
+                    if (obj == "yes") {
+                        try {
+                            if (!PlayerAccount.buyItem(itemId)) {
+                                gameSounds.deniedSound();
+                                DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                            }
+                            else
+                                gameSounds.buySound();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    CharacterProfileScreen.this.show();
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.getContentTable().add(buyLabel);
+            dialog.getContentTable().row();
+            dialog.button("Yes", "yes");
+            dialog.button("No", "no");
+            dialog.show(stage);
+            /*final GDXButtonDialog bDialog = buyItemDialog.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\"");
 
@@ -376,7 +399,7 @@ public class CharacterProfileScreen implements Screen {
                                 DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
                             }
                             else
-                                gameSounds.itemSound();
+                                gameSounds.buySound();
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {
@@ -390,7 +413,7 @@ public class CharacterProfileScreen implements Screen {
             bDialog.addButton("Ok");
             bDialog.addButton("Cancel");
 
-            bDialog.build().show();
+            bDialog.build().show();*/
         }
 
         public ClickButton(String name, int id) {
@@ -412,13 +435,14 @@ public class CharacterProfileScreen implements Screen {
             else if (status == Item.EQUIPPED_ITEM) {
                 PlayerAccount.unequipItem(itemId);
                 gameSounds.itemSound();
+                CharacterProfileScreen.this.show();
             }
             else if (status == Item.UNEQUIPPED_ITEM) {
                 System.out.println("Start equipping " + itemType + "(" + itemId + ")");
                 PlayerAccount.equipItem(itemId);
                 gameSounds.itemSound();
+                CharacterProfileScreen.this.show();
             }
-            show();
         }
     }
 }

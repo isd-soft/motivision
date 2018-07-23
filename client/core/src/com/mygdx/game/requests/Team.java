@@ -148,7 +148,7 @@ public class Team {
         }
     }
 
-    public boolean updateTeam(){
+    public boolean updateTeam() {
         String url = JsonHandler.domain + "/update_team";
         String urlParameters =
                 TEAM_ID + "=" + teamId
@@ -158,11 +158,11 @@ public class Team {
         JSONObject jsonObject;
         try {
             jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
-            if (jsonObject == null){
+            if (jsonObject == null) {
                 System.out.println("jsonObject is null");
                 return false;
             }
-            if(jsonObject.getString("status").equals("success"))
+            if (jsonObject.getString("status").equals("success"))
                 return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -270,18 +270,17 @@ public class Team {
         String result;
         boolean lock = true;
         int teamId = -1;
-
         url = JsonHandler.domain + "/team_exist";
         urlParameters = NAME + "=" + name;
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
         if (jsonObject == null)
             return -1;
-        if (jsonObject.has(TEAM_ID))
+        if (jsonObject.has(TEAM_ID)){
             teamId = jsonObject.getInt(TEAM_ID);
-        if (jsonObject.has(LOCK))
             lock = jsonObject.getBoolean(LOCK);
-        if (teamId != -1 && lock)
-            return -2;
+            if (lock)
+                return -2;
+        }
         return teamId;
     }
 
