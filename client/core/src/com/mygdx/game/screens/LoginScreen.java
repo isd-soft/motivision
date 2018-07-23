@@ -59,6 +59,7 @@ public class LoginScreen implements Screen {
     private TextField passwordField;
     private TextField loginField;
     private TextButton submit;
+    private TextField ipField;
 
 
     public LoginScreen(GGame g) {
@@ -198,14 +199,15 @@ public class LoginScreen implements Screen {
                 final GameProperties gameProperties = new GameProperties();
 
                 final Label ipLabel = new Label("ip:", skin, "big");
-                final Label currentConnection = new Label("", skin, "big");
-                final TextField ipField = new TextField("", skin);
+                final Label currentConnection = new Label ("", skin, "big");
+                ipField = new TextField("", skin);
                 final Label portLabel = new Label("port:", skin, "big");
                 final TextField portField = new TextField("", skin);
                 final TextButton testConnection = new TextButton("test connection", skin, "big");
                 final Label connectionLabel = new Label("", skin, "big");
                 final Label saveConnectionLabel = new Label(JsonHandler.getDomain().replace("http://", ""), skin, "big");
                 final TextButton saveConnection = new TextButton("save", skin, "big");
+
 
 
                 //final TextButton backConnection = new TextButton("back", skin);
@@ -276,7 +278,7 @@ public class LoginScreen implements Screen {
                 //dialog.button("save", "save");
                 dialog.button("back", "back");
 
-                ipField.setFocusTraversal(false);
+//                ipField.setFocusTraversal(false);
                 stage.setKeyboardFocus(ipField);
                 //dialog.getContentTable().add(backConnection);
                 dialog.show(stage);
