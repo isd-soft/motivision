@@ -58,11 +58,13 @@ public class EarnPointsScreen implements Screen {
     private AnimationScreenTest animationScreenTest;
 
     private SettingsPopup settingsPopup;
-
+    private ParallaxBackground parallaxBackground;
 
     public EarnPointsScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
+        parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
+        parallaxBackground.setZIndex(0);
         animationScreenTest = new AnimationScreenTest(parent);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         batch = new SpriteBatch();
@@ -70,8 +72,8 @@ public class EarnPointsScreen implements Screen {
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
         settingsPopup = new SettingsPopup();
-
         animationScreenTest.setScreenAnimation(2, "ATTACK");
+        animationScreenTest.setZIndex(7);
     }
 
 
@@ -104,11 +106,8 @@ public class EarnPointsScreen implements Screen {
         screenTable = new Table();
         Table buttonTable = new Table();
 
-        ParallaxBackground parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
         parallaxBackground.setSize(800, 480);
         parallaxBackground.setSpeed(1);
-        parallaxBackground.setZIndex(0);
-        stage.addActor(parallaxBackground);
         // scrollpane
         ScrollPane scrollPane = new ScrollPane(activitiesTable);
         scrollPane.setSmoothScrolling(false);
@@ -148,9 +147,11 @@ public class EarnPointsScreen implements Screen {
         buttonTable.add(backButton).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
-
+        // stage.addActor(parallaxBackground);
         screenTable.setFillParent(true);
-        screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(animationScreenTest);
+        screenTable.add(parallaxBackground);
+        //screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         stage.addActor(screenTable);
 
