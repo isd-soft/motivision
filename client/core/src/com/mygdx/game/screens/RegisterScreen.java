@@ -202,7 +202,7 @@ public class RegisterScreen implements Screen {
         //add everything into table
         table.add(registerLabel).fillX();
         table.row().pad(10, 0, 10, 0);
-        table.add(label).fillX().uniformX();
+        table.add(label).uniformX();
         table.row().pad(0, 0, 5, 0);
         table.add(loginField).fillX().uniformX();
         table.row().pad(5, 0, 5, 0);
