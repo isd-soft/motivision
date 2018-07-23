@@ -374,7 +374,20 @@ public class CharacterProfileScreen implements Screen {
                         try {
                             if (!PlayerAccount.buyItem(itemId)) {
                                 gameSounds.deniedSound();
-                                DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                                final Label buyLabelError = new Label("Not enough points!", skin, "error");
+                                Dialog dialogError = new Dialog("", skin) {
+                                    public void result(Object obj) {
+                                        gameSounds.clickSound();
+                                        if (obj == "ok")
+                                            CharacterProfileScreen.this.show();
+                                    }
+                                };
+                                dialogError.getContentTable().row();
+                                dialogError.getContentTable().add(buyLabelError);
+                                dialogError.getContentTable().row();
+                                dialogError.button("Ok", "ok");
+                                dialogError.show(stage);
+                                //DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
                             }
                             else
                                 gameSounds.buySound();
@@ -384,7 +397,7 @@ public class CharacterProfileScreen implements Screen {
                             e.printStackTrace();
                         }
                     }
-                    CharacterProfileScreen.this.show();
+                    //CharacterProfileScreen.this.show();
                 }
             };
             dialog.getContentTable().row();
