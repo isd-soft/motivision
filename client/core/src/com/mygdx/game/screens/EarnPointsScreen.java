@@ -18,8 +18,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.brashmonkey.spriter.Data;
+import com.brashmonkey.spriter.Loader;
+import com.brashmonkey.spriter.Player;
+import com.brashmonkey.spriter.SCMLReader;
 import com.mygdx.game.animation.ParallaxBackground;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.loader.AssetsManager;
 import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.Activity;
 import com.mygdx.game.requests.PlayerAccount;
@@ -76,6 +81,16 @@ public class EarnPointsScreen implements Screen {
         animationScreenTest.setZIndex(7);
     }
 
+
+    public void animation() {
+//        SCMLReader reader = new SCMLReader(Gdx.files.internal("BodyParts/Project.scml").path());
+//        Data data = reader.getData();
+//        Player yourPlayer = new Player(data.getEntity("IDLE"));
+//        Loader loader = new com.mygdx.game.screens.L;
+//
+//        loader.load("Path to the root folder of your SCML file");
+//
+    }
 
     @Override
     public void show() {
