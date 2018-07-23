@@ -16,11 +16,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 Deployment can be done on Windows/Linux/Mac OS with these components installed:
 
-```
-JDK 8 and above
-Maven
-PostgreSQL
-```
+* [JDK 8 and above](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Maven](https://maven.apache.org/)
+* [PostgreSQL 10](https://www.postgresql.org/download/)
 
 To run the Server just write in cmd/terminal:
 
