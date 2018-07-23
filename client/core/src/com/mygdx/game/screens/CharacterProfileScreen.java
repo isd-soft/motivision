@@ -258,7 +258,8 @@ public class CharacterProfileScreen implements Screen {
 
         itemTable.add(botButtonTable).fill().expandX().colspan(2);
 
-        screenTable.add(bg).fill().expand();
+        //screenTable.add(bg).fill().expand();
+        screenTable.addActor(bg);
         screenTable.setFillParent(true);
         screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);

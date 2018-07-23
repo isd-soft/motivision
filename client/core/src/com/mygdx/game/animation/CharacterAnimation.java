@@ -87,21 +87,6 @@ public class CharacterAnimation {
             animation = animations.get(key);
             animation.centerImage();
         }
-//        for (Animation animati1on: animations) {
-//            int x;
-//            int y;
-//            int width;
-//            int height;
-
-//            x = part.x;
-//            y = part.y;
-//            width = x + part.width;
-//            height = y + part.height;
-//            minX = Math.min(minX, x);
-//            minY = Math.min(minY, y);
-//            maxX = Math.min(maxX, width);
-//            maxY = Math.min(maxY, height);
-//        }
         centerImageX = (maxX - minX) / 2;
         centerImageY = (maxY - minY) / 2;
     }
@@ -111,16 +96,6 @@ public class CharacterAnimation {
         ArrayList<TextureRegion> frames;
         TextureRegion textureRegion;
         Texture texture1;
-
-//
-//        ironHead = parent.assetsManager.aManager.get("Body_Parts/1_KNIGHT/1_body_.png");
-//        ironBody = parent.assetsManager.aManager.get(" ");
-//        ironLeftArm = parent.assetsManager.aManager.get(" ");
-//        ironRightArm = parent.assetsManager.aManager.get(" ");
-//        ironLeftLeg = parent.assetsManager.aManager.get(" ");
-//        ironRightLeg = parent.assetsManager.aManager.get(" ");
-//        ironShield = parent.assetsManager.aManager.get(" ");
-//        ironWeapon = parent.assetsManager.aManager.get(" ");
 
         this.armorType = armorType;
         this.headType = headType;
