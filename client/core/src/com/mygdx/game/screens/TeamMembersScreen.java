@@ -171,7 +171,6 @@ public class TeamMembersScreen implements Screen {
         buttonTable.add(teamName).fill().colspan(2).padBottom(pad);
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
-        ;
 
         //create table for all screen and add into it everything
         screenTable.addActor(bgImage);
