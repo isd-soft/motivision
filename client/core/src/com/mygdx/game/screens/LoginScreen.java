@@ -1,9 +1,19 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -42,6 +52,14 @@ public class LoginScreen implements Screen {
     private SettingsPopup settingsPopup;
     private Boolean checkBoxRememberMeBoolean = false;
     private Boolean doEncrypt = true;
+    //trying...
+
+    //trying...
+    private Skin skin2;
+    private TextField passwordField;
+    private TextField loginField;
+    private TextButton submit;
+
 
     public LoginScreen(GGame g) {
         parent = g;
@@ -50,6 +68,8 @@ public class LoginScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
+        Gdx.input.setInputProcessor(stage);
+
         animationScreenTest = new BackgroundAnimation(parent);
         // tells our asset manger that we want to load the images set in loadImages method
         parent.assetsManager.loadImages();
@@ -63,27 +83,44 @@ public class LoginScreen implements Screen {
         stage.clear();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
 
+        stage.addListener(new InputListener() {
+            @Override
+            public boolean keyUp(InputEvent event, int keycode) {
+                System.out.println("new keycode = " + keycode);
+                if (keycode == Input.Keys.ENTER) {
+                    if (stage.getKeyboardFocus() == loginField)
+                        stage.setKeyboardFocus(passwordField);
+                    else if (stage.getKeyboardFocus() == passwordField && keycode == Input.Keys.ENTER)
+                        submit.fire(new ChangeListener.ChangeEvent());
+                }
+                return false;
+            }
+        });
         // Create a table that fills the screen. Everything else will go inside this table.
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
 
-        //add label
-        label = new Label(null, skin, "error");
+		//add label
+		label = new Label(null, skin, "error");
         label.setAlignment(Align.center);
-        labelName = new Label(null, skin, "fancy");
-        labelName.setText("User name: ");
-        labelName.setAlignment(Align.center);
-        labelPassword = new Label(null, skin, "fancy");
-        labelPassword.setText("Password: ");
-        labelPassword.setAlignment(Align.center);
-        //add text fields login/password
-        final TextField loginField = new TextField(null, skin);
-        final TextField passwordField = new TextField(null, skin);
+		labelName = new Label(null, skin, "fancy");
+		labelName.setText("User name: ");
+		labelName.setAlignment(Align.center);
+		labelPassword = new Label(null, skin, "fancy");
+		labelPassword.setText("Password: ");
+		labelPassword.setAlignment(Align.center);
+		//add text fields login/password
+		loginField = new TextField(null, skin);
+        passwordField = new TextField(null, skin);
         passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
+        loginField.setFocusTraversal(false);
+        passwordField.setFocusTraversal(false);
 
-        if (RememberMe.rememberMeFileExists() == true && RememberMe.wasCheckBoxChecked() == true) {
+
+
+		if (RememberMe.rememberMeFileExists() == true && RememberMe.wasCheckBoxChecked() == true) {
             loginField.setText(RememberMe.getLogin());
             passwordField.setText(RememberMe.getPassword());
             doEncrypt = false;
@@ -91,16 +128,16 @@ public class LoginScreen implements Screen {
         } else {
             loginField.setMessageText("Login goes here");
             passwordField.setMessageText("Password goes here");
-        }
+		}
 
-        passwordField.addListener(new ChangeListener() {
+		passwordField.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 doEncrypt = true;
             }
         });
 
-        loginField.addListener(new ChangeListener() {
+		loginField.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 doEncrypt = true;
@@ -115,7 +152,7 @@ public class LoginScreen implements Screen {
         forgotPassword = new TextButton("Forgot password?", skin);
         //add buttons to table
         TextButton register = new TextButton("Register", skin);
-        final TextButton submit = new TextButton("Submit", skin);
+        submit = new TextButton("Submit", skin);
         final TextButton settings = new TextButton("Settings", skin);
         connection = new TextButton("Connection", skin);
 
@@ -172,6 +209,7 @@ public class LoginScreen implements Screen {
 
 
                 //final TextButton backConnection = new TextButton("back", skin);
+
 
                 testConnection.addListener(new ChangeListener() {
                     @Override
@@ -237,6 +275,9 @@ public class LoginScreen implements Screen {
                 dialog.getContentTable().row();
                 //dialog.button("save", "save");
                 dialog.button("back", "back");
+
+                ipField.setFocusTraversal(false);
+                stage.setKeyboardFocus(ipField);
                 //dialog.getContentTable().add(backConnection);
                 dialog.show(stage);
             }
@@ -257,13 +298,13 @@ public class LoginScreen implements Screen {
         table.add(rememberMeLabel);
         table.add(checkBoxRememberMe);
         table.row().pad(10, 0, 0, 0);
-        table.add(submit).fill().colspan(2);
-        table.row().pad(10, 0, 0, 0);
         table.add(register).fill();
+        table.add(forgotPassword).fill();
+        table.row().pad(10, 0, 0, 0);
+        table.add(connection).fill();
         table.add(settings).fill();
         table.row().pad(10, 0, 0, 0);
-        table.add(forgotPassword).fill();
-        table.add(connection).fill();
+        table.add(submit).fill().colspan(2);
         table.top();
 
         Gdx.input.setInputProcessor(stage);
@@ -355,7 +396,7 @@ public class LoginScreen implements Screen {
         }
     }
 
-    class ForgotPassword extends ChangeListener{
+	class ForgotPassword extends ChangeListener{
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {

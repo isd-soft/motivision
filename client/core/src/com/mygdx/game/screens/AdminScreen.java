@@ -108,8 +108,8 @@ public class AdminScreen implements Screen {
 
         // remove and add buttons
         TextButton create = new TextButton("Create new +", skin, "green");
-        TextButton back = new TextButton("Back", skin, "blue");
-        TextButton settings = new TextButton("Settings", skin, "blue");
+        TextButton back = new TextButton("Back", skin);
+        TextButton settings = new TextButton("Settings", skin);
         TextButton save = new TextButton("Save", skin, "green");
         final Label frequencyLabel = new Label("Battle frequency", skin);
         final Label teamLockedLabel = new Label("Allow joining in team:", skin);

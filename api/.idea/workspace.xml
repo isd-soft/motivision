@@ -1,7 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="" />
+    <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/log/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/log/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/3_KNIGHT/3_head_.png" beforeDir="false" afterPath="$PROJECT_DIR$/../client/android/assets/Body_Parts/3_KNIGHT/3_head_.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_Woman warrior.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_body.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_head.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_left arm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_left_lag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_right_arm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_right_leg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/hend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/shield.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/sword.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_Woman warrior.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_body.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_head.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_left_arm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_left_leg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_right_arm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_right_leg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/3_shield_.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/dagger.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/hend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_body.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_head.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_left_arm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_left_lag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_right arm_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_right leg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_right_arm_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/Asset 148.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/aкrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/bow_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/bow_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/hend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/quiver.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../client/android/assets/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/JsonHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/JsonHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/LoginScreen.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -12,50 +53,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/LoginController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2193">
-              <caret line="141" column="42" selection-start-line="141" selection-start-column="42" selection-end-line="141" selection-end-column="42" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TeamController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="2346">
+              <caret line="153" column="25" selection-start-line="153" selection-start-column="25" selection-end-line="153" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Team.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Team.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Team.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="35" column="29" lean-forward="true" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
-              <folding>
-                <element signature="e#894#895#0" expanded="true" />
-                <element signature="e#921#922#0" expanded="true" />
-                <element signature="e#962#963#0" expanded="true" />
-                <element signature="e#994#995#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CharacterRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/CharacterRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="30" column="73" selection-start-line="30" selection-start-column="73" selection-end-line="30" selection-end-column="73" />
+            <state relative-caret-position="187">
+              <caret line="14" selection-start-line="14" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -63,11 +74,20 @@
       <file leaf-file-name="CharacterController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3672">
-              <caret line="223" column="38" selection-start-line="223" selection-start-column="30" selection-end-line="223" selection-end-column="38" />
+            <state relative-caret-position="8976">
+              <caret line="538" column="33" selection-start-line="538" selection-start-column="33" selection-end-line="538" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CharacterItemRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/CharacterItemRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="17" column="76" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -84,8 +104,17 @@
       <file leaf-file-name="Items.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Items.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+            <state relative-caret-position="187">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Character.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="935">
+              <caret line="80" selection-start-line="80" selection-end-line="80" />
             </state>
           </provider>
         </entry>
@@ -93,29 +122,17 @@
       <file leaf-file-name="ItemController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/ItemController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="646">
+              <caret line="46" column="44" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActivitiesController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/ActivitiesController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+            <state relative-caret-position="17">
+              <caret line="1" column="27" lean-forward="true" selection-start-line="1" selection-start-column="27" selection-end-line="3" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -207,7 +224,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="255" />
     <option name="y" value="-20" />
     <option name="width" value="655" />
@@ -221,8 +238,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -297,13 +314,20 @@
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="log" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -320,7 +344,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
+    <property name="settings.editor.selected.configurable" value="debugger.hotswap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -416,6 +440,7 @@
       <workItem from="1531419168075" duration="308000" />
       <workItem from="1531732410208" duration="116000" />
       <workItem from="1531734281845" duration="368000" />
+      <workItem from="1532331173492" duration="1967000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Refactor&quot;">
       <created>1530734533025</created>
@@ -589,7 +614,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86290000" />
+    <option name="totallyTimeSpent" value="88258000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -601,7 +626,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
@@ -616,25 +641,25 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.329582" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.3267974" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="5" />
       <window_info anchor="bottom" id="Java Enterprise" order="9" sideWeight="0.4969743" weight="0.329582" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4969743" weight="0.32843137" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49283853" weight="0.39052287" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.38987687" />
       <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2753404" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2747396" />
       <window_info anchor="right" id="Bean Validation" order="4" />
       <window_info id="Web" order="6" side_tool="true" />
-      <window_info id="Learn" order="1" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.3267974" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Learn" order="1" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24962178" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
     </layout>
@@ -800,8 +825,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Character.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="80" column="31" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
+        <state relative-caret-position="935">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
         </state>
       </provider>
     </entry>
@@ -894,9 +919,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2193">
           <caret line="141" column="42" selection-start-line="141" selection-start-column="42" selection-end-line="141" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -916,32 +938,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Items.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+        <state relative-caret-position="187">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/ItemController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="646">
+          <caret line="46" column="44" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        <state relative-caret-position="17">
+          <caret line="1" column="27" lean-forward="true" selection-start-line="1" selection-start-column="27" selection-end-line="3" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3672">
-          <caret line="223" column="38" selection-start-line="223" selection-start-column="30" selection-end-line="223" selection-end-column="38" />
+        <state relative-caret-position="8976">
+          <caret line="538" column="33" selection-start-line="538" selection-start-column="33" selection-end-line="538" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -957,24 +976,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="2346">
+          <caret line="153" column="25" selection-start-line="153" selection-start-column="25" selection-end-line="153" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Team.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="35" column="29" lean-forward="true" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
-          <folding>
-            <element signature="e#894#895#0" expanded="true" />
-            <element signature="e#921#922#0" expanded="true" />
-            <element signature="e#962#963#0" expanded="true" />
-            <element signature="e#994#995#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="187">
+          <caret line="14" selection-start-line="14" selection-end-line="15" />
         </state>
       </provider>
     </entry>

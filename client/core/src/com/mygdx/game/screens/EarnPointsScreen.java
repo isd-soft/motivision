@@ -96,8 +96,8 @@ public class EarnPointsScreen implements Screen {
         }
         Image image = new Image(texture);
         //create buttons Settings, Back and adding them listeners
-        TextButton settingsButton = new TextButton("Settings", skin, "blue");
-        TextButton backButton = new TextButton("Back", skin, "blue");
+        TextButton settingsButton = new TextButton("Settings", skin);
+        TextButton backButton = new TextButton("Back", skin);
 
         // tables
         Table activitiesTable = new Table();
@@ -108,7 +108,7 @@ public class EarnPointsScreen implements Screen {
         parallaxBackground.setSize(800, 480);
         parallaxBackground.setSpeed(1);
         parallaxBackground.setZIndex(0);
-        //stage.addActor(parallaxBackground);
+        stage.addActor(parallaxBackground);
         // scrollpane
         ScrollPane scrollPane = new ScrollPane(activitiesTable);
         scrollPane.setSmoothScrolling(false);

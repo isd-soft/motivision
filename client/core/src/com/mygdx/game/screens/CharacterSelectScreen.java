@@ -56,7 +56,6 @@ public class CharacterSelectScreen implements Screen {
     private Texture background;
     private Image bg;
     private Texture texture;
-    private Boolean characterIsSelected = false;
 
     private SettingsPopup settingsPopup;
 
@@ -90,10 +89,10 @@ public class CharacterSelectScreen implements Screen {
 
         // remove and add buttons
         TextButton create = new TextButton("Create new +", skin, "green");
-        TextButton logout = new TextButton("Logout", skin, "blue");
-        TextButton select = new TextButton("Select", skin, "blue");
-        TextButton deletePlayer = new TextButton("Delete", skin, "blue");
-        TextButton settings = new TextButton("Settings", skin, "blue");
+        TextButton logout = new TextButton("Logout", skin);
+        TextButton select = new TextButton("Select", skin);
+        TextButton deletePlayer = new TextButton("Delete", skin);
+        TextButton settings = new TextButton("Settings", skin);
 
         // enable scrolling
         ScrollPane scrollPane = new ScrollPane(charactersTable);
