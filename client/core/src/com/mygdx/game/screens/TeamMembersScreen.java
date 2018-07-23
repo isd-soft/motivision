@@ -88,11 +88,11 @@ public class TeamMembersScreen implements Screen {
 
         // label
         Label teamName = new Label("", skin);
-        teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" Wins: " + PlayerAccount.getWins() + " \t Loss: " + PlayerAccount.getLosses());
+        teamName.setText("Team: \"" + PlayerAccount.getTeamName() + "\" Wins: " + PlayerAccount.getWins() + " Loss: " + PlayerAccount.getLosses());
 
         // buttons
-        TextButton settingsButton = new TextButton("Settings", skin, "blue");
-        TextButton backButton = new TextButton("Back", skin, "blue");
+        TextButton settingsButton = new TextButton("Settings", skin);
+        TextButton backButton = new TextButton("Back", skin);
 
         // tables
         Table screenTable = new Table();
