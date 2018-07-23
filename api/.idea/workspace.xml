@@ -2,46 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/LoaderImplementation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/libs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Animation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Box.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/CCDResolver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Calculator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Curve.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Data.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Dimension.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Drawer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Entity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/File.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/FileReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Folder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/IKObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/IKResolver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Interpolator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/LibGdx/LibGdxAtlasLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/LibGdx/LibGdxDrawer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/LibGdx/LibGdxLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Loader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Mainline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Meta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/PlayerTweener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Point.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Rectangle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/SCMLReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Spriter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/SpriterException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Timeline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/TweenedAnimation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/XmlReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/log/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/log/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/3_KNIGHT/3_head_.png" beforeDir="false" afterPath="$PROJECT_DIR$/../client/android/assets/Body_Parts/3_KNIGHT/3_head_.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_Woman warrior.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_body.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_head.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_left arm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_left_lag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_right_arm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/1_right_leg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/hend.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/shield.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/4_KNIGHT/sword.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_Woman warrior.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_body.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_head.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_left_arm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_left_leg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_right_arm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/2_right_leg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/3_shield_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/dagger.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/5_KNIGHT/hend.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_body.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_head.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_left_arm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_left_lag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_right arm_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_right leg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/3_right_arm_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/Asset 148.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/aкrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/bow_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/bow_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/hend.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/Body_Parts/6_KNIGHT/quiver.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/android/assets/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../client/android/assets/app.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/android/assets/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../client/android/assets/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/JsonHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/JsonHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/LoginScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../client/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/EarnPointsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/EarnPointsScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../client/settings.gradle" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -132,7 +132,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="1" column="27" lean-forward="true" selection-start-line="1" selection-start-column="27" selection-end-line="3" selection-end-column="57" />
+              <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="3" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -626,7 +626,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
@@ -655,13 +655,39 @@
       <window_info id="Web" order="6" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Learn" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50716144" side_tool="true" weight="0.39215687" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2747396" />
+      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Java Enterprise" order="9" sideWeight="0.4969743" weight="0.329582" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.38987687" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
+      <window_info id="Structure" order="8" side_tool="true" weight="0.24962178" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info id="Web" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24962178" />
+      <window_info id="Image Layers" order="5" />
+      <window_info anchor="right" id="Bean Validation" order="4" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4969743" weight="0.32843137" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.329582" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.3267974" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info id="Designer" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -953,7 +979,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1" column="27" lean-forward="true" selection-start-line="1" selection-start-column="27" selection-end-line="3" selection-end-column="57" />
+          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="3" selection-end-column="57" />
         </state>
       </provider>
     </entry>
