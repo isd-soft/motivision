@@ -11,11 +11,14 @@ public class CharacterWalkAnimation extends Image {
     SpriteBatch batch;
     ShapeRenderer renderer;
     Player player;
+    Player enemy;
+
     Loader loader;
     Drawer drawer;
     Data data;
     PlayerTweener tweener;
-    private int alo;
+    private int alo = 0;
+    private int currentPosition;
 
     public CharacterWalkAnimation() {
         renderer = new ShapeRenderer();
@@ -33,7 +36,12 @@ public class CharacterWalkAnimation extends Image {
 //        //CharacterMap map = player.getEntity().getCharacterMap("CharacterMapTest");
 //        CharacterMap map  = charMaps[0];
 //        //Entity human
-//        player = new Player(humanEntity);
+        player = new Player(humanEntity);
+        enemy = new Player(humanEntity);
+
+        player.setTime(50);
+
+
 //        player.characterMaps = new CharacterMap[1];
 //
 //        player.characterMaps[0] = charMaps[0];
@@ -50,7 +58,7 @@ public class CharacterWalkAnimation extends Image {
 
     public void init(String animation) {
         player.setAnimation(animation);
-
+        enemy.setAnimation(animation);
         loader = new LoaderImplementation(data);
         loader.load(Gdx.files.internal("").path());
         drawer = new DrawerImplementation(loader, batch, renderer);
@@ -70,16 +78,38 @@ public class CharacterWalkAnimation extends Image {
 
     }
 
-
+    public void storeInts(){
+        ++alo;
+    }
+    public void setPosition(){
+        currentPosition = 800;
+    }
 
     @Override
     public void act(float delta) {
         player.update();
+        enemy.update();
+        currentPosition += -1;
         //first is y second is x
         player.setPosition(200, 50);
-
+        enemy.setPosition(currentPosition, 50);
 
         batch.begin();
+        if(alo >0){
+            drawer.draw(enemy);
+            if(currentPosition <450){
+                player.setAnimation("ATTACK");
+                enemy.setAnimation("DIE");
+                drawer.draw(player);
+                drawer.draw(enemy);
+                if(player.getTime() == 50){
+                    --alo;
+                    player.setAnimation("WALK");
+                    enemy.setAnimation("WALK");
+                    drawer.draw(player);
+                }
+            }
+        }
         drawer.draw(player);
         batch.end();
     }

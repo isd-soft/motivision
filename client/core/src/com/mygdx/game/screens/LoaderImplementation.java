@@ -71,12 +71,15 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
         //iron armor, steel armor, diamond armor
         //iron leggings, steel leggings, diamond leggings
 
-        for(int i = 0; i < 9; i++){
+        for(int i = 0; i < 8; i++){
             FileReference fileReference = new FileReference(0, i);
             this.resources.put(fileReference, this.loadResource(fileReference));
         }
+        if(list == null){
+            return;
+        }
         for(String itemName: list){
-            int folderId = -1;
+            int folderId = 0;
             int fileId;
             //get folder id
             if(itemName.contains("steel")){
@@ -98,19 +101,21 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
                 this.resources.put(arm2, this.loadResource(arm2));
 
             }
+
             if(itemName.contains("sword")){
                 FileReference ref = new FileReference(folderId, 4);
                 this.resources.put(ref, this.loadResource(ref));
             }
-            if(itemName.contains("shield")){
-                FileReference ref = new FileReference(folderId, 5);
-                this.resources.put(ref, this.loadResource(ref));
-            }
+
             if(itemName.contains("leggins")) {
                 FileReference ref = new FileReference(folderId, 6);
                 this.resources.put(ref, this.loadResource(ref));
                 FileReference ref2 = new FileReference(folderId, 7);
                 this.resources.put(ref2, this.loadResource(ref2));
+            }
+            if(itemName.contains("shield")){
+                FileReference ref = new FileReference(folderId, 5);
+                this.resources.put(ref, this.loadResource(ref));
             }
 
         }
