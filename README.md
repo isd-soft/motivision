@@ -31,10 +31,12 @@ mvnw.cmd
 
 ## Android
 
-Install the app from Apk file
-Or
-Build your own apk
+Install the apk or build your own apk
 
 ![Build your own apk](readme/build_apk.png?raw=true "Don't click me")
+
+## Desktop
+
+Run .jar file or build your own jar
 
 # Done!
