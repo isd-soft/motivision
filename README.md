@@ -36,21 +36,22 @@ Deployment can be done on Windows/Linux/Mac OS with these components installed:
 
 ## Android
 
-You can build apk in Android Studio
+You can build apk in Android Studio following instruction:
 
 ![Build your own apk](readme/build_apk.png?raw=true "Don't click me")
 
 ```
-It will be saved in following directory:
+Apk will be saved in following directory:
 /motivision/client/android/build/outputs/apk/[your_apk]
 ```
 ## Desktop
 
-To build jar in Android press on Gradle menu from the right corner and double click on "dist" task
+To build jar in Android Studio just press on Gradle menu from the right corner and then double click on "dist" gradle task:
 
 ![Build you own jar](readme/build_jar1.png?raw=true "Don't click me")
+
 ```
-It will be saved in following directory:
+Executable jar will be saved in following directory:
 /motivision/client/core/build/libs
 ```
 
