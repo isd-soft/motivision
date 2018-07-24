@@ -87,7 +87,7 @@ public class LoginScreen implements Screen {
         stage.addListener(new InputListener() {
             @Override
             public boolean keyUp(InputEvent event, int keycode) {
-                System.out.println("new keycode = " + keycode);
+//                System.out.println("new keycode = " + keycode);
                 if (keycode == Input.Keys.ENTER) {
                     if (stage.getKeyboardFocus() == loginField)
                         stage.setKeyboardFocus(passwordField);

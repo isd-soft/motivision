@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -57,6 +58,8 @@ public class CharacterProfileScreen implements Screen {
     private Viewport viewport;
     private Camera camera;
     private Music loginMusic;
+    private Drawable profileImage;
+
 
     private SettingsPopup settingsPopup;
 
@@ -100,7 +103,7 @@ public class CharacterProfileScreen implements Screen {
             texture = new Texture("default.png");
             e.printStackTrace();
         }
-        Image image = new Image(texture);
+        profileImage = new TextureRegionDrawable(new TextureRegion(texture));
         //create text buttons and give them listeners
         TextButton earnPointsButton = new TextButton("Earn Points", skin);
         TextButton teamMembersButton = new TextButton("Team Members", skin);
@@ -162,8 +165,8 @@ public class CharacterProfileScreen implements Screen {
 
         //Create label witch represents points
         Label pointsLabel = new Label("Points: " + pointsNumber, skin);
-        Label teamLabel = new Label(" Team: " + teamName, skin);
-        Label characterLabel = new Label(" Character: " + characterName, skin);
+        Label teamLabel = new Label(" Team: " + teamName, skin, "big");
+        Label characterLabel = new Label(" Character: " + characterName, skin, "big");
 
         // add item list
         ArrayList<Integer> numberOfItems = new ArrayList<Integer>();
@@ -174,19 +177,6 @@ public class CharacterProfileScreen implements Screen {
         }
 
         //create and fill table with buttons and labels
-        itemTable = new Table();
-        Table upButtonsTable = new Table();
-        upButtonsTable.add(earnPointsButton).fill().expandX();
-        upButtonsTable.add(teamMembersButton).fill().expandX();
-        upButtonsTable.add(lastBattleButton).fill().expandX();
-
-        itemTable.add(upButtonsTable).fill().expandX().colspan(2);
-        itemTable.row();
-        itemTable.add(characterLabel).colspan(2);
-        itemTable.row();
-        itemTable.add(pointsLabel);
-        itemTable.add(teamLabel);
-        itemTable.row();
 
         for (int i = 1; i<5; i++) {
             int x = 0;
@@ -234,9 +224,21 @@ public class CharacterProfileScreen implements Screen {
 
 
         }
-        //here should go if statement, if user is admin of team
-        //if{ }
-        itemTable.add(imageTable).fill().expand().colspan(2);
+
+        itemTable = new Table();
+        Table upButtonsTable = new Table();
+        upButtonsTable.add(earnPointsButton).fill().expandX();
+        upButtonsTable.add(teamMembersButton).fill().expandX();
+        upButtonsTable.add(lastBattleButton).fill().expandX();
+
+        itemTable.add(upButtonsTable).fill().expandX();
+        itemTable.row();
+//        itemTable.add(characterLabel);
+//        itemTable.row();
+        itemTable.add(pointsLabel);
+//        itemTable.add(teamLabel);
+        itemTable.row();
+        itemTable.add(imageTable).fill().expand();
         itemTable.row();
 
         Table botButtonTable = new Table();
@@ -245,13 +247,20 @@ public class CharacterProfileScreen implements Screen {
         if(PlayerAccount.isAdmin())
             botButtonTable.add(manageTeamButton).fill().expandX();
 
-        itemTable.add(botButtonTable).fill().expandX().colspan(2);
+        itemTable.add(botButtonTable).fill().expandX();
+
+        Table leftTable = new Table();
+        leftTable.setBackground(profileImage);
+        leftTable.add(teamLabel);
+        leftTable.row();
+        leftTable.add(characterLabel);
+        leftTable.top();
 
         shopAnimation.setFillParent(true);
         shopAnimation.setZIndex(0);
         screenTable.addActor(shopAnimation);
         screenTable.setFillParent(true);
-        screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
         stage.addActor(screenTable);
 
@@ -366,7 +375,20 @@ public class CharacterProfileScreen implements Screen {
                         try {
                             if (!PlayerAccount.buyItem(itemId)) {
                                 gameSounds.deniedSound();
-                                DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+                                final Label buyLabelError = new Label("Not enough points!", skin, "error");
+                                Dialog dialogError = new Dialog("", skin) {
+                                    public void result(Object obj) {
+                                        gameSounds.clickSound();
+                                        if (obj == "ok")
+                                            CharacterProfileScreen.this.show();
+                                    }
+                                };
+                                dialogError.getContentTable().row();
+                                dialogError.getContentTable().add(buyLabelError);
+                                dialogError.getContentTable().row();
+                                dialogError.button("Ok", "ok");
+                                dialogError.show(stage);
+                                //DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
                             }
                             else
                                 gameSounds.buySound();
