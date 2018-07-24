@@ -165,7 +165,7 @@ public class EarnPointsScreen implements Screen {
         // stage.addActor(parallaxBackground);
         screenTable.setFillParent(true);
         screenTable.add(animationScreenTest);
-        screenTable.add(parallaxBackground);
+        screenTable.addActor(parallaxBackground);
         //screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         stage.addActor(screenTable);

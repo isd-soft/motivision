@@ -397,7 +397,7 @@ public class CharacterProfileScreen implements Screen {
                             e.printStackTrace();
                         }
                     }
-                    //CharacterProfileScreen.this.show();
+                    CharacterProfileScreen.this.show();
                 }
             };
             dialog.getContentTable().row();
