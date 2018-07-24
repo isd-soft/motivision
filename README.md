@@ -32,6 +32,6 @@ mvnw.cmd
 ###Android
 Install the app from Apk file
 Or
-![Build your own apk](motivision/readme/build_apk.png?raw=true "Title")
+![Build your own apk](readme/build_apk.png?raw=true "Title")
 
 ## Done!
