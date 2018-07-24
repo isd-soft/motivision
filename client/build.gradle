@@ -9,6 +9,8 @@ buildscript {
         google()
     }
     dependencies {
+	
+        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
         classpath 'com.android.tools.build:gradle:2.3.0'
         
 
@@ -82,10 +84,20 @@ project(":core") {
 
 
     dependencies {
+		compile project(":spriter")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         
+    }
+}
+
+project(":spriter") {
+    apply plugin: "java"
+
+
+    dependencies {
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
     }
 }
 

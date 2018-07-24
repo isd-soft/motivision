@@ -1,5 +1,5 @@
-package com.mygdx.game.animation;
-
+//package com.mygdx.game.animation;
+/*
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -93,3 +93,4 @@ public class BodyPart {
     }
 }
 
+*/

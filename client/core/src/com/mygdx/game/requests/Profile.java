@@ -1,4 +1,4 @@
-package com.mygdx.game.requests;
+package com.mygdx.game.requests;;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -51,6 +51,19 @@ public class Profile implements Comparable<Profile>{
         this.teamId = teamId;
         this.isAdmin = isAdmin;
         this.itemList = null;
+    }
+
+    public ArrayList<String>    getEquippedItems() {
+        ArrayList<String>   equippedItems = null;
+
+        for (Item item: itemList) {
+            if (item.isEquipped()) {
+                if (equippedItems == null)
+                    equippedItems = new ArrayList<String>();
+                equippedItems.add(item.getName());
+            }
+        }
+        return equippedItems;
     }
 
     public static boolean	nameExist(String name) throws IOException, JSONException {
