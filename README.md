@@ -1,7 +1,7 @@
 # MotiVision
 
 This project is made to encourage practicing sports such as volleyball, swimming, push ups, pull ups and so on.
-Here you will find an implementation of Restful API App (Server) & libGdx Android (Client)
+Here you will find an implementation of Restful API (Server) & libGdx Android (Client) App
 
 ## Getting Started
 
@@ -29,14 +29,29 @@ mvnw.cmd
 
 # Steps to Setup the Client
 
+Deployment can be done on Windows/Linux/Mac OS with these components installed:
+
+* [JDK 8 and above](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Android Studio with SDK](https://developer.android.com/studio/)
+
 ## Android
 
-Install the apk or build your own apk
+You can build apk in Android Studio
 
 ![Build your own apk](readme/build_apk.png?raw=true "Don't click me")
 
+```
+It will be saved in following directory:
+/motivision/client/android/build/outputs/apk/[your_apk]
+```
 ## Desktop
 
-Run .jar file or build your own jar
+To build jar in Android press on Gradle menu from the right corner and double click on "dist" task
+
+![Build you own jar](readme/build_jar1.png?raw=true "Don't click me")
+```
+It will be saved in following directory:
+/motivision/client/core/build/libs
+```
 
 # Done!
