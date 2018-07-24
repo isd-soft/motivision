@@ -400,7 +400,7 @@ public class Profile implements Comparable<Profile>{
         }
         //System.out.println("procesing...");
 //        return new Texture("default.png");
-          return addItems(itemImages);
+        return addItems(itemImages);
     }
 
     public boolean      deleteProfile() throws IOException, JSONException {
@@ -627,7 +627,20 @@ public class Profile implements Comparable<Profile>{
             return false;
         return jsonObject.getString("status").equals("success");
     }
+    public ArrayList<String>    getEquippedItems() {
+        ArrayList<String>   equippedItems = null;
+        if(itemList == null)
+            return null;
+        for (Item item: itemList) {
+            if (item.isEquipped()) {
+                if (equippedItems == null)
+                    equippedItems = new ArrayList<String>();
+                equippedItems.add(item.getName());
+            }
+        }
 
+        return equippedItems;
+    }
     public boolean deleteActivity( int activityId)
             throws IOException, JSONException {
         String      urlParameters;
@@ -665,3 +678,18 @@ public class Profile implements Comparable<Profile>{
         return name.compareTo(profile.getName());
     }
 }
+
+
+/*public ArrayList<String>    getEquippedItems() {
+        ArrayList<String>   equippedItems = null;
+
+        for (Item item: itemList) {
+            if (item.isEquipped()) {
+                if (equippedItems == null)
+                    equippedItems = new ArrayList<String>();
+                equippedItems.add(item.getName());
+            }
+        }
+        return equippedItems;
+    }
+    */

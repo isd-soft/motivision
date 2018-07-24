@@ -28,6 +28,12 @@ public class PlayerAccount {
         PlayerAccount.profile = profile;
     }
 
+    public static ArrayList<String> getEquippedItems() {
+        if (profile == null)
+            return null;
+        return profile.getEquippedItems();
+    }
+
     public static ArrayList<String> getCharactersName() {
         if (player == null)
             return null;
