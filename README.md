@@ -1,7 +1,7 @@
 # MotiVision
 
 This project is made to encourage practicing sports such as volleyball, swimming, push ups, pull ups and so on.
-Here you will find an implementation of Restful API (Server) & libGdx Android (Client) App
+Here you will find an implementation of Restful API (Server) & libGdx Android (Client) App.
 
 ## Getting Started
 
@@ -52,7 +52,7 @@ To build jar in Android Studio just press on Gradle menu from the right corner a
 
 ```
 Executable jar will be saved in following directory:
-/motivision/client/core/build/libs
+/motivision/client/desktop/build/libs
 ```
 
 # Done!
