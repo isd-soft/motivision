@@ -7,7 +7,7 @@ Here you will find an implementation of Restful API App (Server) & libGdx Androi
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment notes from below on how to deploy the project on a live system.
 
-### Steps to Setup the Server
+## Steps to Setup the Server
 
 Deployment can be done on Windows/Linux/Mac OS with these components installed:
 
@@ -29,10 +29,9 @@ mvnw.cmd
 
 ## Steps to Setup the Client
 
-```
+###Android
 Install the app from Apk file
 Or
-Build it with Android Studio from the "client" folder
-```
+![Build your own apk](motivision/readme/build_apk.png?raw=true "Title")
 
 ## Done!
