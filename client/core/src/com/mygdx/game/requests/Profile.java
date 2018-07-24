@@ -337,7 +337,7 @@ public class Profile implements Comparable<Profile>{
         Pixmap  itemPixmap;
 
         itemPixmap = new Pixmap(Gdx.files.internal("items/" + item + ".png"));
-        pixmap.drawPixmap(itemPixmap, x, y);
+        pixmap.drawPixmap(itemPixmap, x - itemPixmap.getWidth() / 2, y - itemPixmap.getHeight() / 2);
         itemPixmap.dispose();
         return pixmap;
     }
@@ -345,17 +345,28 @@ public class Profile implements Comparable<Profile>{
     private Texture addItems(Map<String, String> itemImages) {
         Texture mergedImage;
         Pixmap pixmap;
+        String legginsType;
+        String armorType;
 
         System.out.println("Start creating profile texture");
         pixmap = new Pixmap(Gdx.files.internal("default.png"));
-        pixmap = addItemOnPixmap(pixmap, itemImages.get("leggins"), 30, 353);
-        pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 0, 188);
-        pixmap = addItemOnPixmap(pixmap, itemImages.get("sword"), 203, 165);
-        pixmap = addItemOnPixmap(pixmap, itemImages.get("fingers"), 219, 304);
+        legginsType = itemImages.get("leggins");
+        legginsType = legginsType.split("_")[0];
+        armorType = itemImages.get("armor");
+        armorType = legginsType.split("_")[0];
+        pixmap = addItemOnPixmap(pixmap, legginsType + "_left_leg", 227, 435);
+        pixmap = addItemOnPixmap(pixmap, legginsType + "_right_leg", 163, 436);
+        pixmap = addItemOnPixmap(pixmap, armorType + "_left_arm", 286, 304);
+        pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
+        pixmap = addItemOnPixmap(pixmap, armorType + "_right_arm", 91, 320);
+        pixmap = addItemOnPixmap(pixmap, itemImages.get("sword"), 411, 280);
+//        pixmap = addItemOnPixmap(pixmap, itemImages.get("fingers"), 219, 304);
         if (itemImages.get("shield").equals("null") == false) {
-            pixmap = addItemOnPixmap(pixmap, itemImages.get("shield"), 17, 320);
+            pixmap = addItemOnPixmap(pixmap, itemImages.get("shield"), 137, 373);
         }
-        mergedImage = changeFaceType(pixmap, headType, bodyType);
+        pixmap = addItemOnPixmap(pixmap, "steel_helmet", 184, 139);
+        mergedImage = new Texture(pixmap);
+//        mergedImage = changeFaceType(pixmap, headType, bodyType);
 //        pixmap.dispose();
         return mergedImage;
     }
@@ -368,7 +379,7 @@ public class Profile implements Comparable<Profile>{
         itemImages = new LinkedHashMap<String, String>();
         itemImages.put("sword", "default_sword");
         itemImages.put("armor", "default_armor");
-        itemImages.put("fingers", "default_fingers");
+//        itemImages.put("fingers", "default_fingers");
         itemImages.put("leggins", "default_leggins");
         itemImages.put("shield", "null");
         itemSet = itemImages.keySet();
@@ -377,17 +388,19 @@ public class Profile implements Comparable<Profile>{
                 if (item.isEquipped() == false)
                     continue;
                 for (String itemType : itemSet) {
+                    System.out.println(item.getType());
                     if (item.getType().contains(itemType)) {
                         itemImages.put(itemType, item.getType());
-                        if (itemType.equals("armor")) {
-                            itemImages.put("fingers", item.getType().replaceAll("armor", "fingers"));
-                        }
+//                        if (itemType.equals("armor")) {
+//                            itemImages.put("fingers", item.getType().replaceAll("armor", "fingers"));
+//                        }
                     }
                 }
             }
         }
-        System.out.println("procesing...");
-        return addItems(itemImages);
+        //System.out.println("procesing...");
+//        return new Texture("default.png");
+          return addItems(itemImages);
     }
 
     public boolean      deleteProfile() throws IOException, JSONException {
