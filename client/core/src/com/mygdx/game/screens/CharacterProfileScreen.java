@@ -367,6 +367,7 @@ public class CharacterProfileScreen implements Screen {
 
             final Label buyLabel = new Label("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\" ?", skin, "big");
             Dialog dialog = new Dialog("Confirmation", skin) {
+                int flag = 1;
                 public void result(Object obj) {
                     gameSounds.clickSound();
                     if (obj == "yes") {
@@ -377,8 +378,10 @@ public class CharacterProfileScreen implements Screen {
                                 Dialog dialogError = new Dialog("", skin) {
                                     public void result(Object obj) {
                                         gameSounds.clickSound();
-                                        if (obj == "ok")
+                                        if (obj == "ok") {
                                             CharacterProfileScreen.this.show();
+                                            flag = 0;
+                                        }
                                     }
                                 };
                                 dialogError.getContentTable().row();
@@ -395,8 +398,10 @@ public class CharacterProfileScreen implements Screen {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        if (flag == 0)
+                            CharacterProfileScreen.this.show();
                     }
-                    CharacterProfileScreen.this.show();
+
                 }
             };
             dialog.getContentTable().row();
