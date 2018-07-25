@@ -372,7 +372,7 @@ public class Profile implements Comparable<Profile>{
         return pixmap;
     }
 
-    private Texture addItems(Map<String, String> itemImages) {
+    private static Texture addItems(Map<String, String> itemImages, int headType, int bodyType) {
         Texture mergedImage;
         Pixmap pixmap;
         String legginsType;
@@ -386,10 +386,10 @@ public class Profile implements Comparable<Profile>{
         armorType = armorType.split("_")[0];
         pixmap = addItemOnPixmap(pixmap, legginsType + "_left_leg", 227, 435);
         pixmap = addItemOnPixmap(pixmap, armorType + "_left_arm", 286, 304);
-        if (armorType.equals("iron"))
-            pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
+//        if (armorType.equals("iron"))
+//            pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
         pixmap = addItemOnPixmap(pixmap, legginsType + "_right_leg", 163, 436);
-        if (armorType.equals("iron") == false)
+//        if (armorType.equals("iron") == false)
             pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
         pixmap = addItemOnPixmap(pixmap, armorType + "_right_arm", 91, 320);
         pixmap = addItemOnPixmap(pixmap, itemImages.get("sword"), 411, 280);
@@ -400,7 +400,7 @@ public class Profile implements Comparable<Profile>{
         pixmap = addItemOnPixmap(pixmap, "steel_helmet", 184, 139);
         mergedImage = new Texture(pixmap);
 //        mergedImage = changeFaceType(pixmap, headType, bodyType);
-//        pixmap.dispose();
+        pixmap.dispose();
         return mergedImage;
     }
 
@@ -437,7 +437,7 @@ public class Profile implements Comparable<Profile>{
         }
         //System.out.println("procesing...");
 //        return new Texture("default.png");
-        return addItems(itemImages);
+        return addItems(itemImages, headType, bodyType);
     }
 
     public boolean      deleteProfile() throws IOException, JSONException {
@@ -539,7 +539,7 @@ public class Profile implements Comparable<Profile>{
         Texture mergedImage;
         Pixmap  itemPixmap;
 
-        if (headType <= 0 || headType > 3)
+        if (headType <= 0 || headType > 2)
             headType = 1;
         if (bodyType <= 0 || bodyType > 3)
             bodyType = 1;
@@ -603,6 +603,7 @@ public class Profile implements Comparable<Profile>{
         urlParameters += "&" + Item.ITEM_ID + "=" + itemId;
         JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
     }
+
     public void equipItem(int itemId) throws IOException, JSONException {
         String      url;
         String      urlParameters;
@@ -704,6 +705,16 @@ public class Profile implements Comparable<Profile>{
     @Override
     public int compareTo(Profile profile) {
         return name.compareTo(profile.getName());
+    }
+
+    public int getHeadNumber() {
+        int headNumber;
+
+        headNumber = 0;
+        if (gender == 'M')
+            headNumber += 6;
+        headNumber += bodyType * headType;
+        return headNumber;
     }
 }
 

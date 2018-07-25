@@ -275,6 +275,12 @@ public class PlayerAccount {
         team.loadAllCharactersFromTeam();
     }
 
+    public static int       getHeadNumber() {
+        if (profile == null)
+            return 0;
+        return profile.getHeadNumber();
+    }
+
     public static Texture getTexture(int headType, int bodyType) {
         if (headType <= 0 || headType > 3)
             return new Texture("default.png");
