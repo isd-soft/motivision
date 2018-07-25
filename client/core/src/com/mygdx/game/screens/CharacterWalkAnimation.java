@@ -112,7 +112,7 @@ public class CharacterWalkAnimation extends Image {
         currentPosition += -3;
         //first is y second is x
 
-        player.setPosition(200, 50);
+        player.setPosition(200, 150);
         enemy.setPosition(currentPosition, 50);
         batch.begin();
         batch.draw(texture, 0, 0, 1300, 800);

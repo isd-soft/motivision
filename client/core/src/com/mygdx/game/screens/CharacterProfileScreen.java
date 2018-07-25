@@ -259,15 +259,16 @@ public class CharacterProfileScreen implements Screen {
         leftTable.row();
         leftTable.add(characterLabel).expandX();
         leftTable.row();
+        leftTable.add(animation).expand();
         //leftTable.add(walkAnimation).expand();
 
-        shopAnimation.setFillParent(true);
-        shopAnimation.setZIndex(0);
+//        shopAnimation.setFillParent(true);
+  //      shopAnimation.setZIndex(0);
         //screenTable.addActor(shopAnimation);
         screenTable.setFillParent(true);
         screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         //screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
-        screenTable.add(animation).fill().expand().uniform().pad(pad, pad, pad, pad/2);
+        //screenTable.add(animation).fill().expand().uniform().pad(pad, pad, pad, pad/2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
         stage.addActor(screenTable);
 
@@ -471,6 +472,7 @@ public class CharacterProfileScreen implements Screen {
                 System.out.println("Start equipping " + itemType + "(" + itemId + ")");
                 PlayerAccount.equipItem(itemId);
                 gameSounds.itemSound();
+                CharacterProfileScreen.this.show();
             }
         }
     }
