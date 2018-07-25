@@ -353,11 +353,14 @@ public class Profile implements Comparable<Profile>{
         legginsType = itemImages.get("leggins");
         legginsType = legginsType.split("_")[0];
         armorType = itemImages.get("armor");
-        armorType = legginsType.split("_")[0];
+        armorType = armorType.split("_")[0];
         pixmap = addItemOnPixmap(pixmap, legginsType + "_left_leg", 227, 435);
-        pixmap = addItemOnPixmap(pixmap, legginsType + "_right_leg", 163, 436);
         pixmap = addItemOnPixmap(pixmap, armorType + "_left_arm", 286, 304);
-        pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
+        if (armorType.equals("iron"))
+            pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
+        pixmap = addItemOnPixmap(pixmap, legginsType + "_right_leg", 163, 436);
+        if (armorType.equals("iron") == false)
+            pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
         pixmap = addItemOnPixmap(pixmap, armorType + "_right_arm", 91, 320);
         pixmap = addItemOnPixmap(pixmap, itemImages.get("sword"), 411, 280);
 //        pixmap = addItemOnPixmap(pixmap, itemImages.get("fingers"), 219, 304);
@@ -389,6 +392,10 @@ public class Profile implements Comparable<Profile>{
                     continue;
                 for (String itemType : itemSet) {
                     System.out.println(item.getType());
+                    if (item.getType().equals("steel_axe")) {
+                        System.out.println("Axe added!");
+                        itemImages.put("sword", "steel_sword");
+                    }
                     if (item.getType().contains(itemType)) {
                         itemImages.put(itemType, item.getType());
 //                        if (itemType.equals("armor")) {
@@ -585,8 +592,11 @@ public class Profile implements Comparable<Profile>{
         urlParameters += "&" + Item.ITEM_ID + "=" + itemId;
         JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
         for (Item item: itemList) {
-            if (item.getId() != itemId && item.getType().contains(type)) {
-                item.unequip();
+            if (item.getId() != itemId) {
+                if (item.getType().contains(type))
+                    item.unequip();
+                if (item.getType().equals("steel_axe") && type.equals("sword"))
+                    item.unequip();
             }
         }
     }
