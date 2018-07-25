@@ -85,14 +85,14 @@ public class Profile implements Comparable<Profile>{
         return equippedItems;
     }*/
     public ArrayList<String>    getEquippedItems() {
-        ArrayList<String>   equippedItems = null;
+        ArrayList<String>   equippedItems;
+
+        equippedItems = new ArrayList<String>();
         if(itemList == null){
-            return null;
+            return equippedItems;
         }
         for (Item item: itemList) {
             if (item.isEquipped()) {
-                if (equippedItems == null)
-                    equippedItems = new ArrayList<String>();
                 equippedItems.add(item.getName());
             }
         }
@@ -711,7 +711,7 @@ public class Profile implements Comparable<Profile>{
         int headNumber;
 
         headNumber = 0;
-        if (gender == 'M')
+        if (gender == 'F')
             headNumber += 6;
         headNumber += bodyType * headType;
         return headNumber;

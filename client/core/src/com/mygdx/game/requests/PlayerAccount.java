@@ -14,6 +14,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class PlayerAccount {
     private static Team team = null;
     //private static List<Profile>    teamMembers;
 
+
+    private static int headType = 1;
+    private static int raceType = 1;
 
     public static void setProfile(Profile profile) {
         PlayerAccount.profile = profile;
@@ -168,6 +172,8 @@ public class PlayerAccount {
         return profile.getProfileTexture();
         //return null;
     }
+
+
 
     public static Texture getProfileTexture() throws IOException, JSONException {
         if (profile == null)
