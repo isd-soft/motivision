@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Array;
 public class ParallaxBackground extends Actor {
 
@@ -14,22 +15,28 @@ public class ParallaxBackground extends Actor {
     float x,y,width,heigth,scaleX,scaleY;
     int originX, originY,rotation,srcX,srcY;
     boolean flipX,flipY;
+    Group group;
 
     private int speed;
 
     public ParallaxBackground(Array<Texture> textures){
         layers = textures;
+        group = new Group();
         for(int i = 0; i <textures.size;i++){
             layers.get(i).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
         }
         scroll = 0;
         speed = 0;
-
         x = y = originX = originY = rotation = srcY = 0;
         width =  Gdx.graphics.getWidth();
         heigth = Gdx.graphics.getHeight();
         scaleX = scaleY = 1;
         flipX = flipY = false;
+
+    }
+
+    public Array<Texture> getLayers() {
+        return layers;
     }
 
     public void setSpeed(int newSpeed){

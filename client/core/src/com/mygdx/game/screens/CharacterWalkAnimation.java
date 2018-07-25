@@ -1,11 +1,15 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Array;
 import com.brashmonkey.spriter.*;
-import com.brashmonkey.spriter.Entity.CharacterMap;
+import com.mygdx.game.animation.ParallaxBackground;
+import com.mygdx.game.loader.AssetsManager;
+
 
 public class CharacterWalkAnimation extends Image {
     SpriteBatch batch;
@@ -16,13 +20,25 @@ public class CharacterWalkAnimation extends Image {
     Loader loader;
     Drawer drawer;
     Data data;
-    PlayerTweener tweener;
+
     private int alo = 0;
     private int currentPosition;
+    AssetsManager assetsManager = AssetsManager.getInstance();
+    Texture texture;
+    Image image;
+    ParallaxBackground parallaxBackground;
 
     public CharacterWalkAnimation() {
+        this.setZIndex(5);
+        parallaxBackground = new ParallaxBackground(assetsManager.getLayers());
+
+        texture = assetsManager.aManager.get("universalbg.png");
+        image = new Image(texture);
+        image.setBounds(0, 0, 800, 480);
         renderer = new ShapeRenderer();
         batch = new SpriteBatch();
+//        System.out.println(Gdx.files.internal("animation.scml"));
+//        SCMLReader reader = new SCMLReader(Gdx.files.internal("animation.scml").read());
         System.out.println(Gdx.files.internal("CharacterAnimations.scml"));
         SCMLReader reader = new SCMLReader(Gdx.files.internal("CharacterAnimations.scml").read());
         data = reader.getData();
@@ -50,10 +66,6 @@ public class CharacterWalkAnimation extends Image {
        // player.setAnimation();
 
         //Animation for human entity
-//        tweener = new PlayerTweener(data.getEntity(0));
-//        tweener.getSecondPlayer().setAnimation("WALK");
-//        tweener.getFirstPlayer().setAnimation("ATTACK");
-//        tweener.setWeight(0);
     }
 
     public void init(String animation) {
@@ -61,6 +73,11 @@ public class CharacterWalkAnimation extends Image {
         enemy.setAnimation(animation);
         loader = new LoaderImplementation(data);
         loader.load(Gdx.files.internal("").path());
+        drawer = new DrawerImplementation((LoaderImplementation) loader, batch, renderer);
+//        if (animation == "ATTACK") {
+//            yourPlayer.setTime(600);
+//            yourPlayer.setAnimation("IDLE");
+//        }
         drawer = new DrawerImplementation((LoaderImplementation) loader, batch, renderer);
 //        if (animation == "ATTACK") {
 //            player.setTime(100);
@@ -94,11 +111,11 @@ public class CharacterWalkAnimation extends Image {
         enemy.update();
         currentPosition += -3;
         //first is y second is x
+
         player.setPosition(200, 50);
         enemy.setPosition(currentPosition, 50);
-
         batch.begin();
-
+        batch.draw(texture, 0, 0, 1300, 800);
         if(alo >0){
             drawer.draw(enemy);
             if(currentPosition <450){

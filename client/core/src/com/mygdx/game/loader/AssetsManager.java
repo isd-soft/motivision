@@ -6,6 +6,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 
+import javax.xml.soap.Text;
+
 public class AssetsManager {
 
 
@@ -242,9 +244,14 @@ public class AssetsManager {
         aManager.load(equipArmor, Sound.class);
     }
 
+    public void loadItems(){
+
+    }
+
     public void loadMusic() {
         aManager.load(gameOst, Music.class);
     }
+
 
     public Array<Texture> getLayers() {
         Array<Texture> array = new Array<Texture>();

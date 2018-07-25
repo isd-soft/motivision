@@ -52,9 +52,6 @@ public class LoadingScreen implements Screen{
 	public void show() {
 		int w;
 		int h;
-		//loadingMusic = Gdx.audio.newMusic(Gdx.files.internal("Gwe.mp3"));
-		//loadingMusic.setLooping(true);
-		//loadingMusic.play();
 
 		batch = new SpriteBatch();
 		texture = new Texture(Gdx.files.internal("isd_logo-500x500.png"));

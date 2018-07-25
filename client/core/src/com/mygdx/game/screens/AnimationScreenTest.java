@@ -1,5 +1,5 @@
-//package com.mygdx.game.screens;
-/*
+/*package com.mygdx.game.screens;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -36,7 +36,6 @@ public class AnimationScreenTest extends Image {
 
     private GGame parent;
     private SpriteBatch batch;
-    CharacterAnimation characterAnimation;
     private int screenAnimation;
     //you can combine spritesheets on the go ingame.
     // draw the parts you want into a framebuffer, grab a pixmap and draw that pixmap on a texture
@@ -47,11 +46,6 @@ public class AnimationScreenTest extends Image {
         batch = new SpriteBatch();
 
 
-        try {
-            characterAnimation = new CharacterAnimation(g, 3, 3, 2, 2, 3);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         //getting textures
         warriarWalkTexture = parent.assetsManager.aManager.get("spritesheetWarriarWalk.png");
@@ -92,7 +86,6 @@ public class AnimationScreenTest extends Image {
     }
 
     public void setScreenAnimation(int i, String animationType) {
-        characterAnimation.setAnimationType(animationType);
         this.screenAnimation = i;
     }
 

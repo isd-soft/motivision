@@ -47,12 +47,13 @@ public class CharacterProfileScreen implements Screen {
     private Texture textureImage;
     private TextureRegion textureRegion;
     private TextureRegionDrawable textureRegionDrawable;
-    private ShopAnimation shopAnimation;
+   // private ShopAnimation shopAnimation;
 
     private GDXDialogs selectDialog;
     private GDXDialogs manageTeamDialog;
     private GDXDialogs buyItemDialog;
 
+    private CharacterWalkAnimation walkAnimation;
     private Texture knightTex;
     private GameSounds gameSounds = GameSounds.getInstance();
     private Viewport viewport;
@@ -68,8 +69,12 @@ public class CharacterProfileScreen implements Screen {
         selectDialog = GDXDialogsSystem.install();
         manageTeamDialog = GDXDialogsSystem.install();
         buyItemDialog = GDXDialogsSystem.install();
+        walkAnimation =  new CharacterWalkAnimation();
+        walkAnimation = new CharacterWalkAnimation();
+        walkAnimation.init("IDLE");
+        walkAnimation.setZIndex(10);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-        shopAnimation = new ShopAnimation(parent);
+        //shopAnimation = new ShopAnimation(parent);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -256,11 +261,12 @@ public class CharacterProfileScreen implements Screen {
         leftTable.add(characterLabel);
         leftTable.top();
 
-        shopAnimation.setFillParent(true);
-        shopAnimation.setZIndex(0);
-        screenTable.addActor(shopAnimation);
+       // shopAnimation.setFillParent(true);
+       // shopAnimation.setZIndex(0);
+       // screenTable.addActor(shopAnimation);
         screenTable.setFillParent(true);
-        screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+       // screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(walkAnimation).fill().expand().uniform().pad(pad, pad, pad, pad/2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
         stage.addActor(screenTable);
 
@@ -464,7 +470,6 @@ public class CharacterProfileScreen implements Screen {
                 System.out.println("Start equipping " + itemType + "(" + itemId + ")");
                 PlayerAccount.equipItem(itemId);
                 gameSounds.itemSound();
-                CharacterProfileScreen.this.show();
             }
         }
     }

@@ -78,11 +78,8 @@ public class EarnPointsScreen implements Screen {
         stage.setViewport(viewport);
         settingsPopup = new SettingsPopup();
         //animationScreenTest.setScreenAnimation(2, "ATTACK");
-        //animationScreenTest.setZIndex(0);
-        //animationScreenTest.setScreenAnimation(2, "ATTACK");
-        //animationScreenTest.setZIndex(7);
+       // animationScreenTest.setZIndex(7);
     }
-
 
 
     public void animation() {
@@ -124,8 +121,6 @@ public class EarnPointsScreen implements Screen {
         screenTable = new Table();
         Table buttonTable = new Table();
 
-        parallaxBackground.setSize(800, 480);
-        parallaxBackground.setSpeed(1);
         // scrollpane
         ScrollPane scrollPane = new ScrollPane(activitiesTable);
         scrollPane.setSmoothScrolling(false);
@@ -165,13 +160,20 @@ public class EarnPointsScreen implements Screen {
         buttonTable.add(backButton).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
-        // stage.addActor(parallaxBackground);
+        //bgImage.setZIndex(0);
+        //bgImage.setFillParent(true);
+        animationTest.toFront();
+        //stage.addActor(bgImage);
+        //stage.addActor(group);
+        //screenTable.add(parallaxBackground);
+        //screenTable.add(animationTest).fill().expand().uniform().pad(pad, pad/2, pad, pad);
+        //screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.setFillParent(true);
         //screenTable.add(parallaxBackground);
         screenTable.add(animationTest).fill().expand().uniform().pad(pad, pad/2, pad, pad);
-        //screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         stage.addActor(screenTable);
+        //stage.addActor(animationTest);
 
         settingsButton.addListener(new ChangeListener() {
             @Override
