@@ -1,5 +1,5 @@
-package com.mygdx.game.screens;
-
+//package com.mygdx.game.screens;
+/*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -165,3 +165,4 @@ public class AnimationScreenTest extends Image {
         return textureAnimation;
     }
 }
+*/

@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.loader.AssetsManager;
 import com.mygdx.game.screens.AdminScreen;
 import com.mygdx.game.screens.AnimationScreen;
-import com.mygdx.game.screens.BattleScreen;
+//import com.mygdx.game.screens.BattleScreen;
 import com.mygdx.game.screens.CharacterProfileScreen;
 import com.mygdx.game.screens.CharacterSelectScreen;
 import com.mygdx.game.screens.CreateCharacterScreen;
@@ -39,7 +39,7 @@ public class GGame extends Game {
     private BitmapFont font;
     private LoadingScreen loadingScreen;
     private AppPreferences preferences;
-    private BattleScreen battleScreen;
+    //private BattleScreen battleScreen;
     private LoginScreen loginScreen;
     private RegisterScreen registerScreen;
     private CharacterSelectScreen characterSelectScreen;
@@ -146,10 +146,11 @@ public class GGame extends Game {
                 this.setScreen(animationScreen);
                 break;
 
-            case BATTLE:
+            /*case BATTLE:
                 if (battleScreen == null) battleScreen = new BattleScreen(this);
                 this.setScreen(battleScreen);
                 break;
+*/
             case LASTBATTLE:
                 if (lastBattleScreen == null) lastBattleScreen = new LastBattleScreen(this);
                 this.setScreen(lastBattleScreen);

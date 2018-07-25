@@ -1,6 +1,6 @@
-package com.mygdx.game.screens;
+//package com.mygdx.game.screens;
 
-
+/*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -46,6 +46,7 @@ public class BattleScreen implements Screen {
         stage.setViewport(viewport);
         skin = new Skin(Gdx.files.internal("skin1/neon-ui.json"));
 */
+/*
         animationScreenTest = new AnimationScreenTest(parent);
 
 
@@ -129,6 +130,7 @@ public class BattleScreen implements Screen {
 
         debugRenderer.render(model.world, cam.combined);
 */
+/*
     }
 
     @Override

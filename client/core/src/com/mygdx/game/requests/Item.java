@@ -87,4 +87,8 @@ public class Item {
     public void unequip() {
         this.equipped = false;
     }
+
+    public String getName() {
+        return type;
+    }
 }
