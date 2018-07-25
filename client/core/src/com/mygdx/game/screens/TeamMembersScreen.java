@@ -74,11 +74,13 @@ public class TeamMembersScreen implements Screen {
     @Override
     public void show() {
         stage.clear();
-        DrawerImplementation.characterName = selectedName;
         float pad = 5;
 
         // Character Sprite
         // label
+        if (selectedName == null)
+            selectedName = PlayerAccount.getProfileName();
+        DrawerImplementation.characterName = selectedName;
         Label teamStats = new Label("", skin);
         teamStats.setText("Victories: " + PlayerAccount.getWins() + " Defeats: " + PlayerAccount.getLosses());
         teamStats.setAlignment(Align.center);
