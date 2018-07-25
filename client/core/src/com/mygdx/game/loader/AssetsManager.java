@@ -88,6 +88,11 @@ public class AssetsManager {
     private final String humanHeadFemale2 = "HeadTypes/head_11.png";
     private final String humanHeadFemale3 = "HeadTypes/head_12.png";
 
+    private final String ogreHead1 = "HeadTypes/head_13.png";
+    private final String ogreHead2 = "HeadTypes/head_14.png";
+    private final String ogreHead3 = "HeadTypes/head_15.png";
+
+
 
     private final String emptySprite = "default.png";
 
@@ -246,6 +251,11 @@ public class AssetsManager {
         aManager.load(humanHeadFemale1, Texture.class);
         aManager.load(humanHeadFemale2, Texture.class);
         aManager.load(humanHeadFemale3, Texture.class);
+
+        aManager.load(ogreHead1, Texture.class);
+        aManager.load(ogreHead2, Texture.class);
+        aManager.load(ogreHead3, Texture.class);
+
     }
 
 

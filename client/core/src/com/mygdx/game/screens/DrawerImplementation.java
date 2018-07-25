@@ -21,7 +21,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
     ShapeRenderer renderer;
     ArrayList<String> items = PlayerAccount.getEquippedItems();
     LoaderImplementation loaderImplementation;
-    public static boolean   CHARACTER_CREATION = false;
+    public static boolean CHARACTER_CREATION = false;
 
     public DrawerImplementation(LoaderImplementation loader, SpriteBatch batch, ShapeRenderer renderer) {
         super(loader);
@@ -92,7 +92,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                     break;
                 case HEAD:
                     int headNumber = PlayerAccount.getHeadNumber();
-                    if(headNumber != 0)
+                    if (headNumber != 0)
                         sprite = loaderImplementation.getHead(headNumber);
                     else
                         sprite = loaderImplementation.getHead(4);
@@ -240,6 +240,8 @@ public class DrawerImplementation extends Drawer<Sprite> {
         return sprite;
     }
 
+
+
     private Sprite loadDefault(Timeline.Key.Object object) {
         Sprite sprite;
         // default
@@ -277,8 +279,10 @@ public class DrawerImplementation extends Drawer<Sprite> {
 
     @Override
     public void draw(Timeline.Key.Object object) {
-
         Sprite sprite = null;
+
+
+        // if it's a monster
         if (GGame.SCREEN_NUMBER != 4) {
             ArrayList<String> itemsName = PlayerAccount.getEquippedItems();
             if (itemsName != null) {
@@ -289,7 +293,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
             //Create character screen
             if (itemsName == null)
                 sprite = getEmptySprite();
-        }else {
+        } else {
             sprite = loadDefault(object);
         }
 
