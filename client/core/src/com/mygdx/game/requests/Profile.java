@@ -713,7 +713,14 @@ public class Profile implements Comparable<Profile>{
         headNumber = 0;
         if (gender == 'F')
             headNumber += 6;
-        headNumber += bodyType * headType;
+        if (headType < 1 || headType > 2)
+            headType = 1;
+        if (bodyType < 1 || bodyType > 3)
+            bodyType = 1;
+        if (headType == 2)
+            headNumber += 3;
+        headNumber += bodyType;
+        //System.out.println("Head number = " + headNumber);
         return headNumber;
     }
 }

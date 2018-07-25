@@ -41,8 +41,6 @@ public class CreateCharacterScreen implements Screen {
     private Stage stage;
     private Viewport viewport;
     private Skin skin;
-    private Texture background;
-    private Image bgImage;
     private TextField nameText;
     private TextField teamText;
     private CheckBox checkboxTeam;
@@ -76,15 +74,18 @@ public class CreateCharacterScreen implements Screen {
     private Drawable transBlack;
     private CharacterWalkAnimation animation;
     private SettingsPopup settingsPopup;
+    public static int   selectedRaceType = 1;
+    public static int   selectedHeadType = 1;
+    public static char  selectedGender = 'M';
 
 
     public CreateCharacterScreen(GGame g) {
         dialogs = GDXDialogsSystem.install();
         parent = g;
-        background = parent.assetsManager.aManager.get("universalbg.png");
-        bgImage = new Image(background);
-        bgImage.setFillParent(true);
-        bgImage.setZIndex(0);
+//        background = parent.assetsManager.aManager.get("universalbg.png");
+//        bgImage = new Image(background);
+//        bgImage.setFillParent(true);
+//        bgImage.setZIndex(0);
         animation = new CharacterWalkAnimation();
         animation.init("IDLE");
         animation.setZIndex(10);
@@ -318,6 +319,7 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
+                selectedGender = 'M';
                 checkboxMaleBoolean = true;
                 checkboxFemaleBoolean = false;
             }
@@ -327,6 +329,7 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
+                selectedGender = 'F';
                 checkboxFemaleBoolean = true;
                 checkboxMaleBoolean = false;
             }
@@ -352,6 +355,7 @@ public class CreateCharacterScreen implements Screen {
                 } else if (raceType == 2) {
                     raceType--;
                 }
+                selectedRaceType = raceType;
                 show();
             }
         });
@@ -366,6 +370,7 @@ public class CreateCharacterScreen implements Screen {
                 } else if ( raceType == 1) {
                     raceType++;
                 }
+                selectedRaceType = raceType;
                 show();
             }
         });
@@ -380,6 +385,7 @@ public class CreateCharacterScreen implements Screen {
                 } else if (headType == 2 || headType == 3) {
                     headType--;
                 }
+                selectedHeadType = headType;
                 show();
             }
         });
@@ -394,6 +400,7 @@ public class CreateCharacterScreen implements Screen {
                 } else if (headType == 2 || headType == 1) {
                     headType++;
                 }
+                selectedHeadType = headType;
                 show();
             }
         });
@@ -491,7 +498,7 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.add(buttonTable).fill().expand().colspan(3);
 
         //making table for whole screen in filling it up with image and table
-        screenTable.addActor(bgImage);
+//        screenTable.addActor(bgImage);
         screenTable.setFillParent(true);
         screenTable.add(animation).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(tableActivities).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
@@ -679,5 +686,25 @@ public class CreateCharacterScreen implements Screen {
 
             bDialog.build().show();
         }
+    }
+
+    public static int   getHeadNumber() {
+        int headNumber;
+
+        headNumber = 0;
+        if (selectedGender == 'F')
+            headNumber += 6;
+        if (selectedRaceType < 1 || selectedRaceType > 2)
+            selectedRaceType = 1;
+        if (selectedHeadType < 1 || selectedHeadType > 3)
+            selectedHeadType = 1;
+        System.out.println("Race = " + selectedRaceType);
+        System.out.println("Head = " + selectedHeadType);
+        System.out.println("Gender = " + selectedGender);
+        if (selectedRaceType == 2)
+            headNumber += 3;
+        headNumber += selectedHeadType;
+        //System.out.println("Head number = " + headNumber);
+        return headNumber;
     }
 }

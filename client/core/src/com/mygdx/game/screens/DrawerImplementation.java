@@ -21,6 +21,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
     ShapeRenderer renderer;
     ArrayList<String> items = PlayerAccount.getEquippedItems();
     LoaderImplementation loaderImplementation;
+    public static boolean   CHARACTER_CREATION = false;
 
     public DrawerImplementation(LoaderImplementation loader, SpriteBatch batch, ShapeRenderer renderer) {
         super(loader);
@@ -247,7 +248,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                 sprite = loaderImplementation.get("body_default");
                 return sprite;
             case HEAD:
-                sprite = loaderImplementation.get("head_gold");
+                sprite = loaderImplementation.getHead(CreateCharacterScreen.getHeadNumber());
                 return sprite;
             case LEFT_ARM:
                 sprite = loaderImplementation.get("left_arm_default");
