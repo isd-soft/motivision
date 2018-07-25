@@ -116,10 +116,6 @@ public class PlayerAccount {
         if (team == null)
             return null;
         teamMembersMap = team.getTeamMembers();
-//        teamMembersMap = new LinkedHashMap<String, Integer>();
-//        for (Profile member: teamMembers) {
-//            teamMembersMap.put(member.getName(), member.getPoints());
-//        }
         return teamMembersMap;
     }
 
