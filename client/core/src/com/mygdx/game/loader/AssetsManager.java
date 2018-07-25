@@ -76,8 +76,8 @@ public class AssetsManager {
 //    private final String warriorRun = "spritesheetWarriarRun.png";
 //    private final String warriorAttack = "spritesheetWarriarAttack.png";
 //
-//    private final String trollRun = "spritesheetTrollRun.png";
-//    private final String trollDie = "spritesheetTrollDie.png";
+    //private final String trollRun = "TrollRun.png";
+    //private final String trollDie = "TrollDie.png";
 
     private final String layer1 = "forest/layer1.png";
     private final String layer2 = "forest/layer2.png";
@@ -133,8 +133,8 @@ public class AssetsManager {
 //        aManager.load(knightImage, Texture.class);
 //        aManager.load(cloudImage, Texture.class);
 //        aManager.load(spriteAnimation, Texture.class);
-//        aManager.load(spriteWolfAnimation, Texture.class);
-//        aManager.load(spriteWalkAnimation, Texture.class);
+       // aManager.load(trollRun, Texture.class);
+        //aManager.load(trollRun, Texture.class);
         aManager.load(backgroundGifAnimation, Texture.class);
         aManager.load(characterSelect, Texture.class);
         aManager.load(characterProfile, Texture.class);
