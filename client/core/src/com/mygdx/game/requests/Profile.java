@@ -711,7 +711,7 @@ public class Profile implements Comparable<Profile>{
         int headNumber;
 
         headNumber = 0;
-        if (gender == 'M')
+        if (gender == 'F')
             headNumber += 6;
         headNumber += bodyType * headType;
         return headNumber;

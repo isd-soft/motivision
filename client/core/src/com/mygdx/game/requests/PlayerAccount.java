@@ -25,6 +25,9 @@ public class PlayerAccount {
     //private static List<Profile>    teamMembers;
 
 
+    private static int headType = 1;
+    private static int raceType = 1;
+
     public static void setProfile(Profile profile) {
         PlayerAccount.profile = profile;
     }

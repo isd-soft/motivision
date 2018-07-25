@@ -48,12 +48,12 @@ public class CreateCharacterScreen implements Screen {
     private CheckBox checkboxTeam;
     private CheckBox checkboxMale;
     private CheckBox checkboxFemale;
+    private Label labelRaceNumber;
     private Label labelHeadNumber;
-    private Label labelBodyNumber;
     private Texture textureCastle;
     private Integer castleChoice = 1;
-    private Integer bodyType = 1;
     private Integer headType = 1;
+    private Integer raceType = 1;
     private Boolean checkboxMaleBoolean = true;
     private Boolean checkboxFemaleBoolean = false;
     private Boolean checkBoxTeamBoolean = false;
@@ -61,12 +61,12 @@ public class CreateCharacterScreen implements Screen {
     private String defaultTeamText;
     private Label labelName;
     private Label labelGender;
-    private Label labelBody;
     private Label labelHead;
+    private Label labelRace;
+    private TextButton arrowRaceLeft;
+    private TextButton arrowRaceRight;
     private TextButton arrowHeadLeft;
     private TextButton arrowHeadRight;
-    private TextButton arrowBodyLeft;
-    private TextButton arrowBodyRight;
     private TextButton arrowCastleLeft;
     private TextButton arrowCastleRight;
     private TextButton buttonBack;
@@ -74,7 +74,7 @@ public class CreateCharacterScreen implements Screen {
     private boolean isTeamChecked;
     private GDXDialogs dialogs;
     private Drawable transBlack;
-
+    private CharacterWalkAnimation animation;
     private SettingsPopup settingsPopup;
 
 
@@ -85,6 +85,10 @@ public class CreateCharacterScreen implements Screen {
         bgImage = new Image(background);
         bgImage.setFillParent(true);
         bgImage.setZIndex(0);
+        animation = new CharacterWalkAnimation();
+        animation.init("IDLE");
+        animation.setZIndex(10);
+
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         transBlack = new TextureRegionDrawable(new TextureRegion((Texture) parent.assetsManager.aManager.get("transpBlack50.png")));
         stage = new Stage();
@@ -102,12 +106,12 @@ public class CreateCharacterScreen implements Screen {
         teamText = new TextField(null, skin);
         teamText.setMessageText(defaultTeamText);
         textureCastle = new Texture("teamCastle1.png");
-        labelHeadNumber = new Label("1", skin);
+        labelRaceNumber = new Label("1", skin);
         labelName = new Label("Name", skin);
         labelGender = new Label("Gender", skin);
-        labelBody = new Label("Body", skin);
-        labelBodyNumber = new Label("1", skin);
-        labelHead = new Label("Head", skin);
+        labelHead = new Label("Body", skin);
+        labelHeadNumber = new Label("1", skin);
+        labelRace = new Label("Head", skin);
         checkboxMale = new CheckBox("Male", skin);
         checkboxFemale = new CheckBox("Female", skin);
         ButtonGroup genderCheckBoxGroup = new ButtonGroup(checkboxFemale, checkboxMale);
@@ -274,7 +278,6 @@ public class CreateCharacterScreen implements Screen {
 
     @Override
     public void show() {
-        Texture texture;
         Image image;
 
         stage.clear();
@@ -283,16 +286,12 @@ public class CreateCharacterScreen implements Screen {
         checkboxTeam.setChecked(isTeamChecked);
 
         // Character Sprite
-        System.out.println("show");
-        texture = PlayerAccount.getTexture(headType, bodyType);
-        image = new Image(texture);
-
         final Image imageCastle = new Image(textureCastle);
 
         buttonOk = new TextButton("Ok", skin);
         //making labels
+        labelRaceNumber.setText(String.valueOf(raceType));
         labelHeadNumber.setText(String.valueOf(headType));
-        labelBodyNumber.setText(String.valueOf(bodyType));
 
         final Label labelTeam = new Label("Team", skin);
 
@@ -300,10 +299,10 @@ public class CreateCharacterScreen implements Screen {
         checkboxMale.setChecked(checkboxMaleBoolean);
         checkboxFemale.setChecked(checkboxFemaleBoolean);
 
+        arrowRaceLeft = new TextButton("<", skin);
+        arrowRaceRight = new TextButton(">", skin);
         arrowHeadLeft = new TextButton("<", skin);
         arrowHeadRight = new TextButton(">", skin);
-        arrowBodyLeft = new TextButton("<", skin);
-        arrowBodyRight = new TextButton(">", skin);
         arrowCastleLeft = new TextButton("<", skin);
         arrowCastleRight = new TextButton(">", skin);
 
@@ -344,6 +343,34 @@ public class CreateCharacterScreen implements Screen {
         buttonOk.addListener(new CreateCharacter());
 
         // Previous head type
+        arrowRaceLeft.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameSounds.clickSound();
+                if (raceType == 1) {
+                    raceType = 2;
+                } else if (raceType == 2) {
+                    raceType--;
+                }
+                show();
+            }
+        });
+
+        // Next head type
+        arrowRaceRight.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                gameSounds.clickSound();
+                if (raceType == 2) {
+                    raceType = 1;
+                } else if ( raceType == 1) {
+                    raceType++;
+                }
+                show();
+            }
+        });
+
+        // Previous body type
         arrowHeadLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -357,7 +384,7 @@ public class CreateCharacterScreen implements Screen {
             }
         });
 
-        // Next head type
+        // Next body type
         arrowHeadRight.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -366,34 +393,6 @@ public class CreateCharacterScreen implements Screen {
                     headType = 1;
                 } else if (headType == 2 || headType == 1) {
                     headType++;
-                }
-                show();
-            }
-        });
-
-        // Previous body type
-        arrowBodyLeft.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                gameSounds.clickSound();
-                if (bodyType == 1) {
-                    bodyType = 3;
-                } else if (bodyType == 2 || bodyType == 3) {
-                    bodyType--;
-                }
-                show();
-            }
-        });
-
-        // Next body type
-        arrowBodyRight.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                gameSounds.clickSound();
-                if (bodyType == 3) {
-                    bodyType = 1;
-                } else if (bodyType == 2 || bodyType == 1) {
-                    bodyType++;
                 }
                 show();
             }
@@ -445,21 +444,21 @@ public class CreateCharacterScreen implements Screen {
         tableActivities.add(checkboxFemale);
         tableActivities.row().pad(10, 0, 0, 0);
 
-        headTable.add(arrowHeadLeft);
+        headTable.add(arrowRaceLeft);
+        labelRaceNumber.setAlignment(Align.center);
+        headTable.add(labelRaceNumber).width(Value.percentWidth(0.3f, tableActivities));
+        headTable.add(arrowRaceRight);
+
+        bodyTable.add(arrowHeadLeft);
         labelHeadNumber.setAlignment(Align.center);
-        headTable.add(labelHeadNumber).width(Value.percentWidth(0.3f, tableActivities));
-        headTable.add(arrowHeadRight);
+        bodyTable.add(labelHeadNumber).width(Value.percentWidth(0.3f, tableActivities));
+        bodyTable.add(arrowHeadRight);
 
-        bodyTable.add(arrowBodyLeft);
-        labelBodyNumber.setAlignment(Align.center);
-        bodyTable.add(labelBodyNumber).width(Value.percentWidth(0.3f, tableActivities));
-        bodyTable.add(arrowBodyRight);
-
-        tableActivities.add(labelHead)
+        tableActivities.add(labelRace)
                 .left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(headTable).colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
-        tableActivities.add(labelBody)
+        tableActivities.add(labelHead)
                 .left().padLeft(Value.percentWidth(0.1f, tableActivities));
         tableActivities.add(bodyTable).colspan(2);
         tableActivities.row().pad(10, 0, 0, 0);
@@ -494,7 +493,7 @@ public class CreateCharacterScreen implements Screen {
         //making table for whole screen in filling it up with image and table
         screenTable.addActor(bgImage);
         screenTable.setFillParent(true);
-        screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(animation).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(tableActivities).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
         stage.addActor(screenTable);
 
@@ -567,8 +566,8 @@ public class CreateCharacterScreen implements Screen {
             else
                 gender = "F";
             characterParameters.put(Profile.GENDER, gender);
-            characterParameters.put(Profile.HEAD_TYPE, labelHeadNumber.getText() + "");
-            characterParameters.put(Profile.BODY_TYPE, labelBodyNumber.getText() + "");
+            characterParameters.put(Profile.HEAD_TYPE, labelRaceNumber.getText() + "");
+            characterParameters.put(Profile.BODY_TYPE, labelHeadNumber.getText() + "");
 
             teamName = teamText.getText();
             if (validateTeamName(teamName, bDialog) == false)

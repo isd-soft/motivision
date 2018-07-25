@@ -21,6 +21,7 @@ import com.mygdx.game.screens.TeamMembersScreen;
 
 public class GGame extends Game {
 
+    public static int SCREEN_NUMBER = 0;
     private final static int LOGIN = 0;
     private final static int REGISTER = 1;
     private final static int MENU = 2;
@@ -109,51 +110,55 @@ public class GGame extends Game {
             case LOGIN:
                 if (loginScreen == null) loginScreen = new LoginScreen(this);
                 this.setScreen(loginScreen);
+                SCREEN_NUMBER = 1;
                 break;
             case REGISTER:
                 if (registerScreen == null) registerScreen = new RegisterScreen(this);
                 this.setScreen(registerScreen);
+                SCREEN_NUMBER = 2;
                 break;
             case CHARACTERSELECT:
                 if (characterSelectScreen == null)
                     characterSelectScreen = new CharacterSelectScreen(this);
                 this.setScreen(characterSelectScreen);
+                SCREEN_NUMBER = 3;
                 break;
             case CREATECHARACTER:
-                /*if(createCharacterScreen == null)*/
                 createCharacterScreen = new CreateCharacterScreen(this);
                 this.setScreen(createCharacterScreen);
+                SCREEN_NUMBER = 4;
                 break;
             case CHARACTERPROFILE:
                 if (characterProfileScreen == null)
                     characterProfileScreen = new CharacterProfileScreen(this);
                 this.setScreen(characterProfileScreen);
+                SCREEN_NUMBER = 5;
                 break;
             case EARNPOINTS:
                 if (earnPointsScreen == null) earnPointsScreen = new EarnPointsScreen(this);
                 this.setScreen(earnPointsScreen);
+                SCREEN_NUMBER = 6;
                 break;
             case ADMIN:
                 if (adminScreen == null) adminScreen = new AdminScreen(this);
                 this.setScreen(adminScreen);
+                SCREEN_NUMBER = 7;
                 break;
             case TEAMMEMBER:
                 if (teamMembersScreen == null) teamMembersScreen = new TeamMembersScreen(this);
                 this.setScreen(teamMembersScreen);
+                SCREEN_NUMBER = 8;
                 break;
             case ANIMATION:
                 if (animationScreen == null) animationScreen = new AnimationScreen(this);
                 this.setScreen(animationScreen);
+                SCREEN_NUMBER = 9;
                 break;
 
-            /*case BATTLE:
-                if (battleScreen == null) battleScreen = new BattleScreen(this);
-                this.setScreen(battleScreen);
-                break;
-*/
             case LASTBATTLE:
                 if (lastBattleScreen == null) lastBattleScreen = new LastBattleScreen(this);
                 this.setScreen(lastBattleScreen);
+                SCREEN_NUMBER = 10;
                 break;
 
         }

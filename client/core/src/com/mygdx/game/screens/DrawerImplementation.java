@@ -8,6 +8,7 @@ import com.brashmonkey.spriter.FileReference;
 import com.brashmonkey.spriter.Loader;
 import com.brashmonkey.spriter.Player;
 import com.brashmonkey.spriter.Timeline;
+import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.requests.PlayerAccount;
 
 import java.lang.reflect.Array;
@@ -89,27 +90,11 @@ public class DrawerImplementation extends Drawer<Sprite> {
                     }
                     break;
                 case HEAD:
-                    for (String item : itemsList) {
-                        if (item.contains("armor")) {
-                            String spritePath;
-                            String[] word = item.split("_");
-                            if (word[0].equals("iron")) {
-                                spritePath = "head_iron";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("steel")) {
-                                spritePath = "head_steel";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("gold")) {
-                                spritePath = "head_gold";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                        }
-                    }
+                    int headNumber = PlayerAccount.getHeadNumber();
+                    if(headNumber != 0)
+                        sprite = loaderImplementation.getHead(headNumber);
+                    else
+                        sprite = loaderImplementation.getHead(4);
                     break;
                 case LEFT_ARM:
                     for (String item : itemsList) {
@@ -259,28 +244,28 @@ public class DrawerImplementation extends Drawer<Sprite> {
         // default
         switch (BodyParts.getById(object.ref.file)) {
             case BODY:
-                sprite = loaderImplementation.get("body_gold");
+                sprite = loaderImplementation.get("body_default");
                 return sprite;
             case HEAD:
                 sprite = loaderImplementation.get("head_gold");
                 return sprite;
             case LEFT_ARM:
-                sprite = loaderImplementation.get("left_arm_gold");
+                sprite = loaderImplementation.get("left_arm_default");
                 return sprite;
             case RIGHT_ARM:
-                sprite = loaderImplementation.get("right_arm_gold");
+                sprite = loaderImplementation.get("right_arm_default");
                 return sprite;
             case WEAPON:
-                sprite = loaderImplementation.get("weapon_gold");
+                sprite = loaderImplementation.get("weapon_default");
                 return sprite;
             case SHIELD:
-                sprite = loaderImplementation.get("shield_gold");
+                sprite = loaderImplementation.get("shield_default");
                 return sprite;
             case RIGHT_LEG:
-                sprite = loaderImplementation.get("right_leg_gold");
+                sprite = loaderImplementation.get("right_leg_default");
                 return sprite;
             case LEFT_LEG:
-                sprite = loaderImplementation.get("left_leg_gold");
+                sprite = loaderImplementation.get("left_leg_default");
                 return sprite;
             default:
                 sprite = loader.get(object.ref);
@@ -288,18 +273,24 @@ public class DrawerImplementation extends Drawer<Sprite> {
         }
     }
 
+
     @Override
     public void draw(Timeline.Key.Object object) {
 
-        ArrayList<String> itemsName = PlayerAccount.getEquippedItems();
         Sprite sprite = null;
-        if (itemsName != null) {
-            sprite = getSprite(itemsName, object);
-            if(sprite == null)
-                sprite = loadDefault(object);
+        if (GGame.SCREEN_NUMBER != 4) {
+            ArrayList<String> itemsName = PlayerAccount.getEquippedItems();
+            if (itemsName != null) {
+                sprite = getSprite(itemsName, object);
+                if (sprite == null)
+                    sprite = loadDefault(object);
+            }
+            //Create character screen
+            if (itemsName == null)
+                sprite = getEmptySprite();
+        }else {
+            sprite = loadDefault(object);
         }
-        if (itemsName == null)
-            sprite = getEmptySprite();
 
 
         float newPivotX = (sprite.getWidth() * object.pivot.x);
