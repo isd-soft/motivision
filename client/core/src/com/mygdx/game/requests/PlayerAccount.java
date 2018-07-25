@@ -47,6 +47,12 @@ public class PlayerAccount {
         return team.getTeamLoss();
     }
 
+    public static ArrayList<String> getEquippedItems() {
+        if (profile == null)
+            return null;
+        return profile.getEquippedItems();
+    }
+
     public static Integer getWins() {
         try {
             selectProfileTeam();
@@ -449,11 +455,12 @@ public class PlayerAccount {
         team.setTeamLogo(teamLogo);
     }
 
-    public static void setTeamLocked(boolean locked){
-        if(team == null)
+    public static void setTeamLocked(boolean locked) {
+        if (team == null)
             return;
         team.setLock(locked);
     }
+
     public static Texture getTeamLogo() {
         if (team == null)
             return new Texture("teamCastle1.png");

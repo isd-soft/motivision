@@ -70,6 +70,21 @@ public class Profile implements Comparable<Profile>{
         return true;
     }
 
+    public ArrayList<String>    getEquippedItems() {
+        ArrayList<String>   equippedItems = null;
+        if(itemList == null){
+            return null;
+        }
+        for (Item item: itemList) {
+            if (item.isEquipped()) {
+                if (equippedItems == null)
+                    equippedItems = new ArrayList<String>();
+                equippedItems.add(item.getName());
+            }
+        }
+        return equippedItems;
+    }
+
     private static void	setErrorMessage(String message) {
         JsonHandler.errorMessage = message;
     }
