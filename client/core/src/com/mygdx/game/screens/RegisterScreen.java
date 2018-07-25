@@ -1,5 +1,6 @@
 package com.mygdx.game.screens;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -135,6 +136,7 @@ public class RegisterScreen implements Screen {
 
         // Handling Enter key evenn
         stage.addListener(new InputListener() {
+
             @Override
             public boolean keyUp(InputEvent event, int keycode) {
                 System.out.println("new keycode = " + keycode);
@@ -145,6 +147,9 @@ public class RegisterScreen implements Screen {
                         stage.setKeyboardFocus(retypePasswordField);
                     else if (stage.getKeyboardFocus() == retypePasswordField && keycode == Input.Keys.ENTER)
                         register.fire(new ChangeListener.ChangeEvent());
+                    else if (stage.getKeyboardFocus() == retypePasswordField) {
+                        stage.setKeyboardFocus(loginField);
+                    }
                 }
                 return false;
             }
@@ -168,9 +173,11 @@ public class RegisterScreen implements Screen {
         retypePasswordField.setPasswordMode(true);
         retypePasswordField.setMessageText("Retype password");
 
-        loginField.setFocusTraversal(false);
-        passwordField.setFocusTraversal(false);
-        retypePasswordField.setFocusTraversal(false);
+        if (Gdx.app.getType() == Application.ApplicationType.Android) {
+            loginField.setFocusTraversal(false);
+            passwordField.setFocusTraversal(false);
+            retypePasswordField.setFocusTraversal(false);
+        }
         //add buttons to table
         register = new TextButton("Register", skin);
         TextButton back = new TextButton("Back", skin);

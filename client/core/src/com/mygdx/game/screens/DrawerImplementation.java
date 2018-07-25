@@ -290,6 +290,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
 
         if (GGame.SCREEN_NUMBER != GGame.CREATECHARACTER - 1 && GGame.SCREEN_NUMBER != GGame.TEAMMEMBER - 1) {
             ArrayList<String> itemsName = PlayerAccount.getEquippedItems();
+
             if (itemsName != null) {
                 headNumber = PlayerAccount.getHeadNumber();
                 sprite = getSprite(itemsName, headNumber, object);

@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.music.GameSounds;
+import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
@@ -57,6 +58,7 @@ public class CharacterSelectScreen implements Screen {
     private Image bg;
     private Texture texture;
     private CharacterWalkAnimation animation;
+    private String  selectedName;
 
     private SettingsPopup settingsPopup;
 
@@ -112,12 +114,26 @@ public class CharacterSelectScreen implements Screen {
         ArrayList<String> strings = new ArrayList<String>();
         ArrayList<String> characterNames = PlayerAccount.getCharactersName();
         if (characterNames != null) {
+            if (characterNames.size() >= 1) {
+                if (selectedName == null)
+                    selectedName = characterNames.get(0);
+                try {
+                    PlayerAccount.selectProfile(selectedName);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+                selectedName = null;
             strings = PlayerAccount.getCharactersName();
         } else {
+            selectedName = null;
             strings.add("No Characters");
         //    texture = new Texture("default.png");
         }
-
+        System.out.println(selectedName);
 //        image = new Image(texture);
 
         for (int i = 0; i < strings.size(); i++) {
@@ -236,12 +252,14 @@ public class CharacterSelectScreen implements Screen {
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             gameSounds.clickSound();
             try {
+                selectedName = name;
                 PlayerAccount.selectProfile(name);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            show();
             /*if (texture != null)
                 texture.dispose();
             try {
@@ -283,6 +301,7 @@ public class CharacterSelectScreen implements Screen {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        selectedName = null;
                     }
                 }
             };
@@ -327,6 +346,7 @@ public class CharacterSelectScreen implements Screen {
                             e.printStackTrace();
                         }
                     }
+                    selectedName = null;
                     CharacterSelectScreen.this.show();
                 }
             };
@@ -358,6 +378,7 @@ public class CharacterSelectScreen implements Screen {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                            selectedName = null;
                             CharacterSelectScreen.this.show();
                         }
                     }

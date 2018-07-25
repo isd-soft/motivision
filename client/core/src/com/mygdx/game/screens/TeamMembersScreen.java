@@ -102,7 +102,7 @@ public class TeamMembersScreen implements Screen {
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
         HashMap<String, Integer> teamMembers = PlayerAccount.getTeamMembersList();
-        PlayerAccount.printAllMembers();
+        //PlayerAccount.printAllMembers();
         //Collections.sort(teamMembers);
         //fill table with buttons and labels
         for (final String key : teamMembers.keySet()) {
