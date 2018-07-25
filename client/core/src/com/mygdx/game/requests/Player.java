@@ -4,6 +4,8 @@ import com.mygdx.game.logger.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -29,6 +31,7 @@ public class Player {
             return null;
         charName = new ArrayList<String>();
         charName.addAll(characterList.values());
+        Collections.sort(charName);
         return charName;
     }
 
