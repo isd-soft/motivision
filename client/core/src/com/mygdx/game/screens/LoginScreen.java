@@ -419,7 +419,7 @@ public class LoginScreen implements Screen {
                 gameSounds.clickSound();
             }
         });
-        Label fail = new Label("Sucks to be you", skin, "big");
+        Label fail = new Label("Too bad", skin, "big");
         dialog.getContentTable().add(fail);
         dialog.button("ok", "ok"); //sends "true" as the result
         dialog.show(stage);

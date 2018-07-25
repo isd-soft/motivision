@@ -397,7 +397,7 @@ public class CharacterProfileScreen implements Screen {
                                 buyLabel.setText("Not enough points");
                             } else {
                                 gameSounds.buySound();
-                                buyLabel.setText("Nice!");
+                                buyLabel.setText("Nice, go back");
                             }
                         }
                         else {
