@@ -439,9 +439,9 @@ public class AdminScreen implements Screen {
                     if (obj == "save") {
                         try {
                             int points = Integer.valueOf(pointsField.getText());
-                            if (points <= 0)
-                                DialogBox.showInfoDialog("Error", "Points must be > 0");
-                            if (!PlayerAccount.updateActivity(id, name, points))
+                            if (points < 0)
+                                DialogBox.showInfoDialog("Error", "Points must be >= 0");
+                            else if (!PlayerAccount.updateActivity(id, name, points))
                                 DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
                         } catch (IOException e) {
                             e.printStackTrace();

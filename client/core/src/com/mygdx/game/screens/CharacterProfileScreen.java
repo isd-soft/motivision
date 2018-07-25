@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
@@ -47,13 +48,14 @@ public class CharacterProfileScreen implements Screen {
     private Texture textureImage;
     private TextureRegion textureRegion;
     private TextureRegionDrawable textureRegionDrawable;
-   // private ShopAnimation shopAnimation;
+    private ShopAnimation shopAnimation;
 
     private GDXDialogs selectDialog;
     private GDXDialogs manageTeamDialog;
     private GDXDialogs buyItemDialog;
 
-    private CharacterWalkAnimation walkAnimation;
+    private CharacterWalkAnimation animation;
+
     private Texture knightTex;
     private GameSounds gameSounds = GameSounds.getInstance();
     private Viewport viewport;
@@ -67,12 +69,11 @@ public class CharacterProfileScreen implements Screen {
     public CharacterProfileScreen(GGame g) {
         parent = g;
         selectDialog = GDXDialogsSystem.install();
+        animation = new CharacterWalkAnimation();
+        animation.init("IDLE");
+        animation.setZIndex(10);
         manageTeamDialog = GDXDialogsSystem.install();
         buyItemDialog = GDXDialogsSystem.install();
-        walkAnimation =  new CharacterWalkAnimation();
-        walkAnimation = new CharacterWalkAnimation();
-        walkAnimation.init("IDLE");
-        walkAnimation.setZIndex(10);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         //shopAnimation = new ShopAnimation(parent);
         stage = new Stage();
@@ -81,7 +82,6 @@ public class CharacterProfileScreen implements Screen {
         settingsPopup = new SettingsPopup();
 
     }
-
     @Override
     public void show() {
         //take number of points from DB
@@ -98,7 +98,7 @@ public class CharacterProfileScreen implements Screen {
         float pad = 5;
 
         // Character Sprite
-        Texture texture = null;
+        /*Texture texture = null;
         try {
             texture = PlayerAccount.getProfileTexture();
         } catch (IOException e) {
@@ -107,8 +107,8 @@ public class CharacterProfileScreen implements Screen {
         } catch (JSONException e) {
             texture = new Texture("default.png");
             e.printStackTrace();
-        }
-        profileImage = new TextureRegionDrawable(new TextureRegion(texture));
+        }*/
+        //profileImage = new TextureRegionDrawable(new TextureRegion(texture));
         //create text buttons and give them listeners
         TextButton earnPointsButton = new TextButton("Earn Points", skin);
         TextButton teamMembersButton = new TextButton("Team Members", skin);
@@ -170,8 +170,11 @@ public class CharacterProfileScreen implements Screen {
 
         //Create label witch represents points
         Label pointsLabel = new Label("Points: " + pointsNumber, skin);
-        Label teamLabel = new Label(" Team: " + teamName, skin, "big");
-        Label characterLabel = new Label(" Character: " + characterName, skin, "big");
+        pointsLabel.setAlignment(Align.center);
+        Label teamLabel = new Label(" Team: " + teamName, skin);
+        teamLabel.setAlignment(Align.center);
+        Label characterLabel = new Label(" Character: " + characterName, skin);
+        characterLabel.setAlignment(Align.center);
 
         // add item list
         ArrayList<Integer> numberOfItems = new ArrayList<Integer>();
@@ -238,10 +241,7 @@ public class CharacterProfileScreen implements Screen {
 
         itemTable.add(upButtonsTable).fill().expandX();
         itemTable.row();
-//        itemTable.add(characterLabel);
-//        itemTable.row();
         itemTable.add(pointsLabel);
-//        itemTable.add(teamLabel);
         itemTable.row();
         itemTable.add(imageTable).fill().expand();
         itemTable.row();
@@ -255,18 +255,20 @@ public class CharacterProfileScreen implements Screen {
         itemTable.add(botButtonTable).fill().expandX();
 
         Table leftTable = new Table();
-        leftTable.setBackground(profileImage);
-        leftTable.add(teamLabel);
+        leftTable.add(teamLabel).expandX();
         leftTable.row();
-        leftTable.add(characterLabel);
-        leftTable.top();
+        leftTable.add(characterLabel).expandX();
+        leftTable.row();
+        leftTable.add(animation).expand();
+        //leftTable.add(walkAnimation).expand();
 
-       // shopAnimation.setFillParent(true);
-       // shopAnimation.setZIndex(0);
-       // screenTable.addActor(shopAnimation);
+//        shopAnimation.setFillParent(true);
+  //      shopAnimation.setZIndex(0);
+        //screenTable.addActor(shopAnimation);
         screenTable.setFillParent(true);
-       // screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
-        screenTable.add(walkAnimation).fill().expand().uniform().pad(pad, pad, pad, pad/2);
+        screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        //screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        //screenTable.add(animation).fill().expand().uniform().pad(pad, pad, pad, pad/2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
         stage.addActor(screenTable);
 
@@ -470,6 +472,7 @@ public class CharacterProfileScreen implements Screen {
                 System.out.println("Start equipping " + itemType + "(" + itemId + ")");
                 PlayerAccount.equipItem(itemId);
                 gameSounds.itemSound();
+                CharacterProfileScreen.this.show();
             }
         }
     }

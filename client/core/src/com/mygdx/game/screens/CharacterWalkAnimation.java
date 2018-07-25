@@ -30,13 +30,6 @@ public class CharacterWalkAnimation extends Image {
     Image image;
     ParallaxBackground parallaxBackground;
 
-//troll
-//    private Animation<TextureRegion> animationTrollRun;
-//    private Animation<TextureRegion> animationTrollDie;
-//    private Texture trollRunTexture;
-//    private Texture trollDieTexture;
-//    private float time;
-
     public CharacterWalkAnimation() {
         this.setZIndex(5);
         parallaxBackground = new ParallaxBackground(assetsManager.getLayers());
@@ -67,10 +60,6 @@ public class CharacterWalkAnimation extends Image {
         setPosition();
         player.setTime(700);
 
-//        trollRunTexture = assetsManager.aManager.get("TrollRun.png");
-//        trollDieTexture = assetsManager.aManager.get("TrollDie.png");
-//        animationTrollRun = makeFrames(trollRunTexture, 0.066f, 2, 4);
-//        animationTrollDie = makeFrames(trollDieTexture, 0.099f, 2, 4);
 
 //        player.characterMaps = new CharacterMap[1];
 //
@@ -120,31 +109,12 @@ public class CharacterWalkAnimation extends Image {
         currentPosition = 1400;
     }
 
-    public Animation makeFrames(Texture textureT, float timePerFrame, final int FRAME_COLS, final int FRAME_ROWS) {
-        TextureRegion[][] trm = TextureRegion.split(textureT, textureT.getWidth() / FRAME_COLS,textureT.getHeight() / FRAME_ROWS);
-        TextureRegion[] textureFrames = new TextureRegion[(FRAME_ROWS * FRAME_COLS) - 1];
-        int index = 0;
-        for (int i = 0; i < FRAME_ROWS; i++) {
-            for (int j = 0; j < FRAME_COLS; j++) {
-                if ((FRAME_ROWS * FRAME_COLS - 1) == index)
-                    break;
-                textureFrames[index++] = trm[i][j];
-            }
-        }
-        Animation textureAnimation = new Animation<TextureRegion>(timePerFrame, textureFrames);
-        return textureAnimation;
-    }
-
-
     @Override
     public void act(float delta) {
         player.update();
         enemy.update();
         if(alo > 0)
        currentPosition += -3;
-//        TextureRegion trollRun = animationTrollRun.getKeyFrame(time, true);
-//        TextureRegion trollDie = animationTrollDie.getKeyFrame(time, true);
-
         //first is y second is x
 
         player.setPosition(200, 150);
