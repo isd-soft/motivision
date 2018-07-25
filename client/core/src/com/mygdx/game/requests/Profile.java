@@ -365,6 +365,7 @@ public class Profile implements Comparable<Profile>{
     private static Pixmap addItemOnPixmap(Pixmap pixmap, String item, int x, int y) {
         Pixmap  itemPixmap;
 
+        x += 40;
         itemPixmap = new Pixmap(Gdx.files.internal("items/" + item + ".png"));
         pixmap.drawPixmap(itemPixmap, x - itemPixmap.getWidth() / 2, y - itemPixmap.getHeight() / 2);
         itemPixmap.dispose();
@@ -620,6 +621,8 @@ public class Profile implements Comparable<Profile>{
         urlParameters = PROFILE_ID + "=" + this.id;
         urlParameters += "&" + Item.ITEM_ID + "=" + itemId;
         JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
+        if (type.equals("axe"))
+            type = "sword";
         for (Item item: itemList) {
             if (item.getId() != itemId) {
                 if (item.getType().contains(type))
