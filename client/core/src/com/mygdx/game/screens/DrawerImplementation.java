@@ -82,6 +82,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                             }
                         }
                     }
+                    break;
                 case HEAD:
                     for (String item : itemsList) {
                         if (item.contains("armor")) {
@@ -104,6 +105,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                             }
                         }
                     }
+                    break;
                 case LEFT_ARM:
                     for (String item : itemsList) {
                         if (item.contains("armor")) {
@@ -126,6 +128,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                             }
                         }
                     }
+                    break;
                 case RIGHT_ARM:
                     for (String item : itemsList) {
                         if (item.contains("armor")) {
@@ -148,6 +151,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                             }
                         }
                     }
+                    break;
                 case WEAPON:
                     for (String item : itemsList) {
                         if (item.contains("sword") || item.contains("axe")) {
@@ -170,6 +174,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                             }
                         }
                     }
+                    break;
                 case SHIELD:
                     for (String item : itemsList) {
                         if (item.contains("shield")) {
@@ -192,9 +197,10 @@ public class DrawerImplementation extends Drawer<Sprite> {
                             }
                         }
                     }
+                    break;
                 case RIGHT_LEG:
                     for (String item : itemsList) {
-                        if (item.contains("leggings")) {
+                        if (item.contains("leggins")) {
                             String spritePath;
                             String[] word = item.split("_");
                             if (word[0].equals("iron")) {
@@ -214,9 +220,10 @@ public class DrawerImplementation extends Drawer<Sprite> {
                             }
                         }
                     }
+                    break;
                 case LEFT_LEG:
                     for (String item : itemsList) {
-                        if (item.contains("leggings")) {
+                        if (item.contains("leggins")) {
                             String spritePath;
                             String[] word = item.split("_");
                             if (word[0].equals("iron")) {
@@ -236,7 +243,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                             }
                         }
                     }
-
+                    break;
             }
         }
         return sprite;
@@ -244,6 +251,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
 
     private Sprite loadDefault(Timeline.Key.Object object) {
         Sprite sprite;
+        // default
         switch (BodyParts.getById(object.ref.file)) {
             case BODY:
                 sprite = loaderImplementation.get("body_gold");
