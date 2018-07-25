@@ -27,6 +27,7 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
 
     public AssetsManager assetsManager = AssetsManager.getInstance();
     public HashMap<String, Sprite> ourResources = new HashMap<String, Sprite>();
+    private ArrayList<Sprite> heads = new ArrayList<Sprite>(12);
     public static int standardAtlasWidth = 2048, standardAtlasHeight = 2048;
 
     private PixmapPacker packer;
@@ -89,44 +90,71 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
     }
 
 
-    public Sprite get(String spriteName){
+    public Sprite get(String spriteName) {
         return ourResources.get(spriteName);
     }
 
+    public Sprite getHead(int i){
+        return heads.get(i-1);
+    }
 
 
-    protected void loadRecourse(){
-        ourResources.put("body_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/body_.png")));
-        ourResources.put("body_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/body_.png")));
-        ourResources.put("body_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/body_.png")));
+    protected void loadRecourse() {
+        ourResources.put("body_default", new Sprite((Texture) assetsManager.aManager.get("DefaultKnight/body_.png")));
+        ourResources.put("body_iron", new Sprite((Texture) assetsManager.aManager.get("IronKnight/body_.png")));
+        ourResources.put("body_steel", new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/body_.png")));
+        ourResources.put("body_gold", new Sprite((Texture) assetsManager.aManager.get("GoldKnight/body_.png")));
 
-        ourResources.put("head_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/head_.png")));
-        ourResources.put("head_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/head_.png")));
-        ourResources.put("head_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/head_.png")));
+        ourResources.put("head_iron", new Sprite((Texture) assetsManager.aManager.get("IronKnight/head_.png")));
+        ourResources.put("head_steel", new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/head_.png")));
+        ourResources.put("head_gold", new Sprite((Texture) assetsManager.aManager.get("GoldKnight/head_.png")));
 
-        ourResources.put("left_arm_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/left_arm_.png")));
-        ourResources.put("left_arm_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/left_arm_.png")));
-        ourResources.put("left_arm_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/left_arm_.png")));
+        ourResources.put("left_arm_default", new Sprite((Texture) assetsManager.aManager.get("DefaultKnight/left_arm_.png")));
+        ourResources.put("left_arm_iron", new Sprite((Texture) assetsManager.aManager.get("IronKnight/left_arm_.png")));
+        ourResources.put("left_arm_steel", new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/left_arm_.png")));
+        ourResources.put("left_arm_gold", new Sprite((Texture) assetsManager.aManager.get("GoldKnight/left_arm_.png")));
 
-        ourResources.put("right_arm_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/right_arm_.png")));
-        ourResources.put("right_arm_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/right_arm_.png")));
-        ourResources.put("right_arm_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/right_arm_.png")));
+        ourResources.put("right_arm_default", new Sprite((Texture) assetsManager.aManager.get("DefaultKnight/right_arm_.png")));
+        ourResources.put("right_arm_iron", new Sprite((Texture) assetsManager.aManager.get("IronKnight/right_arm_.png")));
+        ourResources.put("right_arm_steel", new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/right_arm_.png")));
+        ourResources.put("right_arm_gold", new Sprite((Texture) assetsManager.aManager.get("GoldKnight/right_arm_.png")));
 
-        ourResources.put("left_leg_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/left_leg_.png")));
-        ourResources.put("left_leg_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/left_leg_.png")));
-        ourResources.put("left_leg_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/left_leg_.png")));
+        ourResources.put("left_leg_default", new Sprite((Texture) assetsManager.aManager.get("DefaultKnight/left_leg_.png")));
+        ourResources.put("left_leg_iron", new Sprite((Texture) assetsManager.aManager.get("IronKnight/left_leg_.png")));
+        ourResources.put("left_leg_steel", new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/left_leg_.png")));
+        ourResources.put("left_leg_gold", new Sprite((Texture) assetsManager.aManager.get("GoldKnight/left_leg_.png")));
 
-        ourResources.put("right_leg_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/right_leg_.png")));
-        ourResources.put("right_leg_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/right_leg_.png")));
-        ourResources.put("right_leg_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/right_leg_.png")));
+        ourResources.put("right_leg_default", new Sprite((Texture) assetsManager.aManager.get("DefaultKnight/right_leg_.png")));
+        ourResources.put("right_leg_iron", new Sprite((Texture) assetsManager.aManager.get("IronKnight/right_leg_.png")));
+        ourResources.put("right_leg_steel", new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/right_leg_.png")));
+        ourResources.put("right_leg_gold", new Sprite((Texture) assetsManager.aManager.get("GoldKnight/right_leg_.png")));
 
-        ourResources.put("shield_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/shield_.png")));
-        ourResources.put("shield_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/shield_.png")));
-        ourResources.put("shield_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/shield_.png")));
+        ourResources.put("shield_default", new Sprite((Texture) assetsManager.aManager.get("DefaultKnight/shield_.png")));
+        ourResources.put("shield_iron", new Sprite((Texture) assetsManager.aManager.get("IronKnight/shield_.png")));
+        ourResources.put("shield_steel", new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/shield_.png")));
+        ourResources.put("shield_gold", new Sprite((Texture) assetsManager.aManager.get("GoldKnight/shield_.png")));
 
-        ourResources.put("weapon_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/weapon_.png")));
-        ourResources.put("weapon_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/weapon_.png")));
-        ourResources.put("weapon_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/weapon_.png")));
+        ourResources.put("weapon_default", new Sprite((Texture) assetsManager.aManager.get("DefaultKnight/weapon_.png")));
+        ourResources.put("weapon_iron", new Sprite((Texture) assetsManager.aManager.get("IronKnight/weapon_.png")));
+        ourResources.put("weapon_steel", new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/weapon_.png")));
+        ourResources.put("weapon_gold", new Sprite((Texture) assetsManager.aManager.get("GoldKnight/weapon_.png")));
+
+
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_1.png")));
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_2.png")));
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_3.png")));
+
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_4.png")));
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_5.png")));
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_6.png")));
+
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_7.png")));
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_8.png")));
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_9.png")));
+
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_10.png")));
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_11.png")));
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_12.png")));
 
         ourResources.put("empty", new Sprite((Texture) assetsManager.aManager.get("default.png")));
 
