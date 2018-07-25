@@ -223,7 +223,7 @@ public class EarnPointsScreen implements Screen {
                             //wolf animation goes here
                             PlayerAccount.doActivity(id);
 
-                            animationTest.setPosition();
+                            //animationTest.setPosition();
                             animationTest.storeInts();
 
                             /*

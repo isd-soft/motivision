@@ -58,6 +58,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
 
         //  has items
         if (itemsList != null) {
+            //String key = BodyParts.getById(object.ref.file).name().toLowerCase()+"_"+
             switch (BodyParts.getById(object.ref.file)) {
                 case BODY:
                     // default sprite init here

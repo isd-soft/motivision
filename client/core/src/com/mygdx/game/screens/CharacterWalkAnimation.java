@@ -3,10 +3,12 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.brashmonkey.spriter.*;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.mygdx.game.animation.ParallaxBackground;
 import com.mygdx.game.loader.AssetsManager;
 
@@ -27,6 +29,13 @@ public class CharacterWalkAnimation extends Image {
     Texture texture;
     Image image;
     ParallaxBackground parallaxBackground;
+
+//troll
+//    private Animation<TextureRegion> animationTrollRun;
+//    private Animation<TextureRegion> animationTrollDie;
+//    private Texture trollRunTexture;
+//    private Texture trollDieTexture;
+//    private float time;
 
     public CharacterWalkAnimation() {
         this.setZIndex(5);
@@ -54,9 +63,14 @@ public class CharacterWalkAnimation extends Image {
 //        //Entity human
         player = new Player(humanEntity);
         enemy = new Player(humanEntity);
+        enemy.flip(true, false);
+        setPosition();
+        player.setTime(700);
 
-        player.setTime(100);
-
+//        trollRunTexture = assetsManager.aManager.get("TrollRun.png");
+//        trollDieTexture = assetsManager.aManager.get("TrollDie.png");
+//        animationTrollRun = makeFrames(trollRunTexture, 0.066f, 2, 4);
+//        animationTrollDie = makeFrames(trollDieTexture, 0.099f, 2, 4);
 
 //        player.characterMaps = new CharacterMap[1];
 //
@@ -65,7 +79,8 @@ public class CharacterWalkAnimation extends Image {
         //player.
        // player.setAnimation();
 
-        //Animation for human entity
+        //Animation troll
+
     }
 
     public void init(String animation) {
@@ -102,28 +117,49 @@ public class CharacterWalkAnimation extends Image {
         alo=0;
     }
     public void setPosition(){
-        currentPosition = 1300;
+        currentPosition = 1400;
     }
+
+    public Animation makeFrames(Texture textureT, float timePerFrame, final int FRAME_COLS, final int FRAME_ROWS) {
+        TextureRegion[][] trm = TextureRegion.split(textureT, textureT.getWidth() / FRAME_COLS,textureT.getHeight() / FRAME_ROWS);
+        TextureRegion[] textureFrames = new TextureRegion[(FRAME_ROWS * FRAME_COLS) - 1];
+        int index = 0;
+        for (int i = 0; i < FRAME_ROWS; i++) {
+            for (int j = 0; j < FRAME_COLS; j++) {
+                if ((FRAME_ROWS * FRAME_COLS - 1) == index)
+                    break;
+                textureFrames[index++] = trm[i][j];
+            }
+        }
+        Animation textureAnimation = new Animation<TextureRegion>(timePerFrame, textureFrames);
+        return textureAnimation;
+    }
+
 
     @Override
     public void act(float delta) {
         player.update();
         enemy.update();
-        currentPosition += -3;
+        if(alo > 0)
+       currentPosition += -3;
+//        TextureRegion trollRun = animationTrollRun.getKeyFrame(time, true);
+//        TextureRegion trollDie = animationTrollDie.getKeyFrame(time, true);
+
         //first is y second is x
 
-        player.setPosition(200, 50);
-        enemy.setPosition(currentPosition, 50);
+        player.setPosition(200, 150);
+        enemy.setPosition(currentPosition, 150);
         batch.begin();
         batch.draw(texture, 0, 0, 1300, 800);
         if(alo >0){
             drawer.draw(enemy);
-            if(currentPosition <450){
+            if(currentPosition <500){
                 player.setAnimation("ATTACK");
                 enemy.setAnimation("DIE");
+                currentPosition = 500;
                 drawer.draw(player);
                 drawer.draw(enemy);
-                if(player.getTime() == 100){
+                if(player.getTime() == 600){
                     --alo;
                     player.setAnimation("WALK");
                     enemy.setAnimation("WALK");
