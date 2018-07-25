@@ -123,6 +123,20 @@ public class CreateCharacterScreen implements Screen {
         String characterName = name.trim();
         Pattern pattern = Pattern.compile("[a-zA-Z0-9\\.\\_\\-\\s]*");
         Matcher matcher = pattern.matcher(characterName);
+
+        boolean nameExist;
+        final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
+
+        try {
+            nameExist = Profile.nameExist(name);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+
         if (characterName == null || characterName == "") {
             log.warn("Character name field is empty");
 
@@ -182,7 +196,23 @@ public class CreateCharacterScreen implements Screen {
             bDialog.addButton("Go back");
             bDialog.build().show();*/
             return false;
+        } else if (nameExist == true) {
+            log.warn("Character name already exist!");
+
+            final Label characterNameAlreadyExistLabel = new Label("Character name already exist!", skin, "big");
+            Dialog dialog = new Dialog("", skin) {
+                public void result(Object obj) {
+                    System.out.println("result " + obj);
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.getContentTable().add(characterNameAlreadyExistLabel);
+            dialog.getContentTable().row();
+            dialog.button("ok", "ok");
+            dialog.show(stage);
+            return false;
         }
+
         log.info("Character name validated successfully");
         return true;
     }
@@ -511,40 +541,6 @@ public class CreateCharacterScreen implements Screen {
     }
 
     class CreateCharacter extends ChangeListener {
-        public boolean validateName(String profileName) {
-            boolean nameExist;
-            final GDXButtonDialog bDialog = dialogs.newDialog(GDXButtonDialog.class);
-
-            try {
-                nameExist = Profile.nameExist(profileName);
-                // TODO
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return false;
-            }
-            if (nameExist == true) {
-                log.warn("Character name already exist!");
-
-                final Label characterNameAlreadyExistLabel = new Label("Character name already exist!", skin, "big");
-                Dialog dialog = new Dialog("", skin) {
-                    public void result(Object obj) {
-                        System.out.println("result " + obj);
-                    }
-                };
-                dialog.getContentTable().row();
-                dialog.getContentTable().add(characterNameAlreadyExistLabel);
-                dialog.getContentTable().row();
-                dialog.button("ok", "ok");
-                dialog.show(stage);
-                return false;
-            } else {
-                log.info("Character name does not exist, all is okay");
-                return true;
-            }
-        }
 
         @Override
         public void changed(ChangeEvent event, Actor actor) {

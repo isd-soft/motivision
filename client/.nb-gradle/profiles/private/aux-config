@@ -8,7 +8,12 @@
     </open-files>
     <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-      <group/>
+      <group>
+        <file>file:/C:/Users/Ambalabada/Desktop/motivision-ALLO/motivision/client/core/src/com/mygdx/game/gameSets/GGame.java</file>
+        <file>file:/C:/Users/Ambalabada/Desktop/motivision-ALLO/motivision/client/core/src/com/mygdx/game/screens/EarnPointsScreen.java</file>
+        <file>file:/C:/Users/Ambalabada/Desktop/motivision-ALLO/motivision/client/core/src/com/mygdx/game/screens/DrawerImplementation.java</file>
+        <file>file:/C:/Users/Ambalabada/Desktop/motivision-ALLO/motivision/client/core/src/com/mygdx/game/screens/CharacterWalkAnimation.java</file>
+      </group>
     </open-files>
   </auxiliary>
 </gradle-project-properties>

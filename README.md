@@ -1,13 +1,13 @@
 # MotiVision
 
 This project is made to encourage practicing sports such as volleyball, swimming, push ups, pull ups and so on.
-Here you will find an implementation of Restful API App (Server) & libGdx Android (Client)
+Here you will find an implementation of Restful API (Server) & libGdx Android (Client) App.
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment notes from below on how to deploy the project on a live system.
 
-### Steps to Setup the Server
+# Steps to Setup the Server
 
 Deployment can be done on Windows/Linux/Mac OS with these components installed:
 
@@ -27,12 +27,32 @@ cd motivision/api
 mvnw.cmd
 ```
 
-## Steps to Setup the Client
+# Steps to Setup the Client
+
+Deployment can be done on Windows/Linux/Mac OS with these components installed:
+
+* [JDK 8 and above](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Android Studio with SDK](https://developer.android.com/studio/)
+
+## Android
+
+You can build apk in Android Studio following instruction:
+
+![Build your own apk](readme/build_apk.png?raw=true "Don't click me")
 
 ```
-Install the app from Apk file
-Or
-Build it with Android Studio from the "client" folder
+Apk will be saved in following directory:
+/motivision/client/android/build/outputs/apk/[your_apk]
+```
+## Desktop
+
+To build jar in Android Studio just press on Gradle menu from the right corner and then double click on "dist" gradle task:
+
+![Build you own jar](readme/build_jar1.png?raw=true "Don't click me")
+
+```
+Executable jar will be saved in following directory:
+/motivision/client/desktop/build/libs
 ```
 
-## Done!
+# Done!

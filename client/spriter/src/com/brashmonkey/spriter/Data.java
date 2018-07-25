@@ -11,7 +11,7 @@ package com.brashmonkey.spriter;
 public class Data {
 
 	public final Folder[] folders;
-    final Entity[] entities;
+    public final Entity[] entities;
     private int folderPointer = 0, entityPointer = 0;
     public final String scmlVersion, generator, generatorVersion;
     

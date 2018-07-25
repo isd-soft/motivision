@@ -413,10 +413,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 		font: yuGothicBig
 		fontColor: color
 	}
-	success: {
-		font: yuGothicGreen
-		fontColor: medieval-green
-	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
 	default: {
@@ -510,9 +506,6 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 		over: button-over-c
 		checked: button-pressed-c
 		checkedOver: button-pressed-over-c
-	}
-	arcade: {
-		font: yuGothic
 	}
 	square: {
 		font: yuGothic

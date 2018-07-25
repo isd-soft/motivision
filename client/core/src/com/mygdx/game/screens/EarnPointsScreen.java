@@ -2,19 +2,29 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.brashmonkey.spriter.Data;
+import com.brashmonkey.spriter.Loader;
+import com.brashmonkey.spriter.Player;
+import com.brashmonkey.spriter.SCMLReader;
 import com.mygdx.game.animation.ParallaxBackground;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.loader.AssetsManager;
 import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.Activity;
 import com.mygdx.game.requests.PlayerAccount;
@@ -27,7 +37,8 @@ import java.util.List;
 
 import de.tomgrill.gdxdialogs.core.GDXDialogs;
 import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
-
+import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
+import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 
 public class EarnPointsScreen implements Screen {
 
@@ -54,12 +65,14 @@ public class EarnPointsScreen implements Screen {
 
     private SettingsPopup settingsPopup;
     private ParallaxBackground parallaxBackground;
-    private Group group = new Group();
     private Texture texture;
     private Image bgImage;
     public EarnPointsScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
+        animationTest = new CharacterWalkAnimation();
+        animationTest.init("WALK");
+        animationTest.setZIndex(10);
         texture = parent.assetsManager.aManager.get("universalbg.png");
         bgImage = new Image(texture);
         bgImage.setZIndex(0);
@@ -69,8 +82,6 @@ public class EarnPointsScreen implements Screen {
         parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
         parallaxBackground.setSize(800, 480);
         parallaxBackground.setSpeed(1);
-        group.addActor(parallaxBackground);
-        group.setZIndex(0);
         animationScreenTest = new AnimationScreenTest(parent);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         batch = new SpriteBatch();
@@ -79,10 +90,19 @@ public class EarnPointsScreen implements Screen {
         stage.setViewport(viewport);
         settingsPopup = new SettingsPopup();
         animationScreenTest.setScreenAnimation(2, "ATTACK");
-        animationScreenTest.setZIndex(0);
+        animationScreenTest.setZIndex(7);
     }
 
 
+    public void animation() {
+//        SCMLReader reader = new SCMLReader(Gdx.files.internal("BodyParts/Project.scml").path());
+//        Data data = reader.getData();
+//        Player yourPlayer = new Player(data.getEntity("IDLE"));
+//        Loader loader = new com.mygdx.game.screens.L;
+//
+//        loader.load("Path to the root folder of your SCML file");
+//
+    }
 
     @Override
     public void show() {
@@ -215,9 +235,9 @@ public class EarnPointsScreen implements Screen {
                             animationTest.init("IDLE");
 
 
-                            /*
+
                             animationScreenTest.changeAnimation(2);
-                            animationScreenTest.setCurrentPosition(300);*/
+                            animationScreenTest.setCurrentPosition(300);
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {

@@ -44,17 +44,17 @@ public class AssetsManager {
     private final String trollRun = "spritesheetTrollRun.png";
     private final String trollDie = "spritesheetTrollDie.png";
 
-    private final String layer1 = "forest/layer1.1.png";
-    private final String layer2 = "forest/layer2.1.png";
-    private final String layer3 = "forest/layer3.1.png";
-    private final String layer4 = "forest/layer4.1.png";
-    private final String layer5 = "forest/layer5.1.png";
-    private final String layer6 = "forest/layer6.1.png";
-    private final String layer7 = "forest/layer7.1.png";
-    private final String layer8 = "forest/layer8.1.png";
-    private final String layer9 = "forest/layer9.1.png";
-    private final String layer10 = "forest/layer10.1.png";
-    private final String layer11 = "forest/layer11.1.png";
+    private final String layer1 = "forest/layer1.png";
+    private final String layer2 = "forest/layer2.png";
+    private final String layer3 = "forest/layer3.png";
+    private final String layer4 = "forest/layer4.png";
+    private final String layer5 = "forest/layer5.png";
+    private final String layer6 = "forest/layer6.png";
+    private final String layer7 = "forest/layer7.png";
+    private final String layer8 = "forest/layer8.png";
+    private final String layer9 = "forest/layer9.png";
+    private final String layer10 = "forest/layer10.png";
+    private final String layer11 = "forest/layer11.png";
 
     private final String knightIronHead = "Body_Parts/1_KNIGHT/1_head_.png";
     private final String knightIronBody = "Body_Parts/1_KNIGHT/1_body_.png";
@@ -126,12 +126,12 @@ public class AssetsManager {
 
 
     public void loadImages() {
-        aManager.load(monsterImage, Texture.class);
-        aManager.load(knightImage, Texture.class);
-        aManager.load(cloudImage, Texture.class);
-        aManager.load(spriteAnimation, Texture.class);
-        aManager.load(spriteWolfAnimation, Texture.class);
-        aManager.load(spriteWalkAnimation, Texture.class);
+//        aManager.load(monsterImage, Texture.class);
+//        aManager.load(knightImage, Texture.class);
+//        aManager.load(cloudImage, Texture.class);
+//        aManager.load(spriteAnimation, Texture.class);
+//        aManager.load(spriteWolfAnimation, Texture.class);
+//        aManager.load(spriteWalkAnimation, Texture.class);
         aManager.load(backgroundGifAnimation, Texture.class);
         aManager.load(characterSelect, Texture.class);
         aManager.load(characterProfile, Texture.class);
@@ -140,13 +140,13 @@ public class AssetsManager {
         aManager.load(characterCreate, Texture.class);
         aManager.load(transBlack, Texture.class);
 
-        aManager.load(spriteAttackAnimation, Texture.class);
-        aManager.load(boomAnimation, Texture.class);
-        aManager.load(warriorWalk, Texture.class);
-        aManager.load(warriorRun, Texture.class);
-        aManager.load(warriorAttack, Texture.class);
-        aManager.load(trollDie, Texture.class);
-        aManager.load(trollRun, Texture.class);
+//        aManager.load(spriteAttackAnimation, Texture.class);
+//        aManager.load(boomAnimation, Texture.class);
+//        aManager.load(warriorWalk, Texture.class);
+//        aManager.load(warriorRun, Texture.class);
+//        aManager.load(warriorAttack, Texture.class);
+//        aManager.load(trollDie, Texture.class);
+//        aManager.load(trollRun, Texture.class);
 
         aManager.load(layer1, Texture.class);
         aManager.load(layer2, Texture.class);
@@ -177,6 +177,14 @@ public class AssetsManager {
         aManager.load(knightBronzeRightLeg, Texture.class);
         aManager.load(knightBronzeShield, Texture.class);
         aManager.load(knightBronzeWeapon, Texture.class);
+
+//        aManager.load(spriteAttackAnimation, Texture.class);
+//        aManager.load(boomAnimation, Texture.class);
+//        aManager.load(warriorWalk, Texture.class);
+//        aManager.load(warriorRun, Texture.class);
+//        aManager.load(warriorAttack, Texture.class);
+//        aManager.load(trollDie, Texture.class);
+//        aManager.load(trollRun, Texture.class);
 
         aManager.load(knightGoldenHead, Texture.class);
         aManager.load(knightGoldenBody, Texture.class);

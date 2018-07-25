@@ -1,5 +1,5 @@
-package com.mygdx.game.animation;
-
+//package com.mygdx.game.animation;
+/*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -32,33 +32,33 @@ public class CharacterAnimation {
     private int weaponType;
 
     //private String ANIMATION;
-
-    private final String knightIronBody = "Body_Parts/1_KNIGHT/1_body_.png";
-    private final String knightIronLeftArm = "Body_Parts/1_KNIGHT/1_left_arm_.png";
-    private final String knightIronRightArm = "Body_Parts/1_KNIGHT/1_right_arm_.png";
-    private final String knightIronLeftLeg = "Body_Parts/1_KNIGHT/1_left_lag_.png";
-    private final String knightIronRightLeg = "Body_Parts/1_KNIGHT/1_right_lag_.png";
-    private final String knightIronShield = "Body_Parts/1_KNIGHT/1_shield_.png";
-    private final String knightIronWeapon = "Body_Parts/1_KNIGHT/1_weapon_.png";
-
-
-    private final String knightGoldenHead = "Body_Parts/3_KNIGHT/3_head_.png";
-    private final String knightGoldenBody = "Body_Parts/3_KNIGHT/3_body_.png";
-    private final String knightGoldenLeftArm = "Body_Parts/3_KNIGHT/3_left_arm_.png";
-    private final String knightGoldenRightArm = "Body_Parts/3_KNIGHT/3_right_arm_.png";
-    private final String knightGoldenLeftLeg = "Body_Parts/3_KNIGHT/3_left_lag_.png";
-    private final String knightGoldenRightLeg = "Body_Parts/3_KNIGHT/3_right_lag_.png";
-    private final String knightGoldenShield = "Body_Parts/3_KNIGHT/3_shield_.png";
-    private final String knightGoldenWeapon = "Body_Parts/3_KNIGHT/3_weapon_.png";
-
-    private Texture ironHead;
-    private Texture ironBody;
-    private Texture ironLeftArm;
-    private Texture ironRightArm;
-    private Texture ironLeftLeg;
-    private Texture ironRightLeg;
-    private Texture ironShield;
-    private Texture ironWeapon;
+//
+//    private final String knightIronBody = "Body_Parts/1_KNIGHT/1_body_.png";
+//    private final String knightIronLeftArm = "Body_Parts/1_KNIGHT/1_left_arm_.png";
+//    private final String knightIronRightArm = "Body_Parts/1_KNIGHT/1_right_arm_.png";
+//    private final String knightIronLeftLeg = "Body_Parts/1_KNIGHT/1_left_lag_.png";
+//    private final String knightIronRightLeg = "Body_Parts/1_KNIGHT/1_right_lag_.png";
+//    private final String knightIronShield = "Body_Parts/1_KNIGHT/1_shield_.png";
+//    private final String knightIronWeapon = "Body_Parts/1_KNIGHT/1_weapon_.png";
+//
+//
+//    private final String knightGoldenHead = "Body_Parts/3_KNIGHT/3_head_.png";
+//    private final String knightGoldenBody = "Body_Parts/3_KNIGHT/3_body_.png";
+//    private final String knightGoldenLeftArm = "Body_Parts/3_KNIGHT/3_left_arm_.png";
+//    private final String knightGoldenRightArm = "Body_Parts/3_KNIGHT/3_right_arm_.png";
+//    private final String knightGoldenLeftLeg = "Body_Parts/3_KNIGHT/3_left_lag_.png";
+//    private final String knightGoldenRightLeg = "Body_Parts/3_KNIGHT/3_right_lag_.png";
+//    private final String knightGoldenShield = "Body_Parts/3_KNIGHT/3_shield_.png";
+//    private final String knightGoldenWeapon = "Body_Parts/3_KNIGHT/3_weapon_.png";
+//
+//    private Texture ironHead;
+//    private Texture ironBody;
+//    private Texture ironLeftArm;
+//    private Texture ironRightArm;
+//    private Texture ironLeftLeg;
+//    private Texture ironRightLeg;
+//    private Texture ironShield;
+//    private Texture ironWeapon;
     Texture[] bodyPartsTextures;
     int centerImageX;
     int centerImageY;
@@ -188,3 +188,4 @@ public class CharacterAnimation {
         }
     }
 }
+*/

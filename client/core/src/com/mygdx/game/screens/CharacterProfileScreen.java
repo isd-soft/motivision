@@ -121,6 +121,7 @@ public class CharacterProfileScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 gameSounds.clickSound();
+
                 parent.changeScreen(parent.getEarnPoints());
             }
         });
@@ -397,7 +398,7 @@ public class CharacterProfileScreen implements Screen {
                             e.printStackTrace();
                         }
                     }
-                    //CharacterProfileScreen.this.show();
+                    CharacterProfileScreen.this.show();
                 }
             };
             dialog.getContentTable().row();
