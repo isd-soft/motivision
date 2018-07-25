@@ -497,4 +497,22 @@ public class PlayerAccount {
         //printAllMembers();
         return team.getTeamMemberTexture(name);
     }
+
+    public static ArrayList<String> getTeamMemberEquippedItems(String name) throws IOException, JSONException {
+        if (profile == null)
+            return null;
+        if (profile.getName().equals(name))
+            return profile.getEquippedItems();
+        try {
+            selectProfileTeam();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (team == null)
+            return null;
+        //printAllMembers();
+        return team.getTeamMemberEquippedItems(name);
+    }
 }
