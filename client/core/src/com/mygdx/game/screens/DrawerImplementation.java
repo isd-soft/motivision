@@ -61,7 +61,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
         return loaderImplementation.get("empty");
     }
 
-    private Sprite getSprite(ArrayList<String> itemsList, Timeline.Key.Object object) {
+    private Sprite getSprite(ArrayList<String> itemsList, int headNumber, Timeline.Key.Object object) {
         Sprite sprite = null;
         // make a map
 
@@ -94,7 +94,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                     }
                     break;
                 case HEAD:
-                    int headNumber = PlayerAccount.getHeadNumber();
+//                    int headNumber = PlayerAccount.getHeadNumber();
                     if (headNumber != 0)
                         sprite = loaderImplementation.getHead(headNumber);
                     else
@@ -243,7 +243,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
         return sprite;
     }
 
-    private Sprite loadDefault(Timeline.Key.Object object) {
+    private Sprite loadDefault(Timeline.Key.Object object, int headNumber) {
         Sprite sprite;
         // default
         switch (BodyParts.getById(object.ref.file)) {
@@ -251,7 +251,10 @@ public class DrawerImplementation extends Drawer<Sprite> {
                 sprite = loaderImplementation.get("body_default");
                 return sprite;
             case HEAD:
-                sprite = loaderImplementation.getHead(CreateCharacterScreen.getHeadNumber());
+                if (GGame.SCREEN_NUMBER == 4) {
+                    headNumber = CreateCharacterScreen.getHeadNumber();
+                }
+                sprite = loaderImplementation.getHead(headNumber);
                 return sprite;
             case LEFT_ARM:
                 sprite = loaderImplementation.get("left_arm_default");
@@ -282,36 +285,41 @@ public class DrawerImplementation extends Drawer<Sprite> {
     public void draw(Timeline.Key.Object object) {
 
         Sprite sprite = null;
+        int    headNumber;
 
 
-        if (GGame.SCREEN_NUMBER != 4 && GGame.SCREEN_NUMBER != 8) {
+        if (GGame.SCREEN_NUMBER != GGame.CREATECHARACTER - 1 && GGame.SCREEN_NUMBER != GGame.TEAMMEMBER - 1) {
             ArrayList<String> itemsName = PlayerAccount.getEquippedItems();
             if (itemsName != null) {
-                sprite = getSprite(itemsName, object);
+                headNumber = PlayerAccount.getHeadNumber();
+                sprite = getSprite(itemsName, headNumber, object);
                 if (sprite == null)
-                    sprite = loadDefault(object);
+                    sprite = loadDefault(object, 1);
             }
             //Create character screen
             if (itemsName == null)
                 sprite = getEmptySprite();
-        } else if (GGame.SCREEN_NUMBER == 8) {
+        } else if (GGame.SCREEN_NUMBER == GGame.TEAMMEMBER - 1) {
             try {
                 ArrayList<String> itemsName = PlayerAccount.getTeamMemberEquippedItems(characterName);
                 if (itemsName != null) {
-                    sprite = getSprite(itemsName, object);
+                    headNumber = PlayerAccount.getTeamMemberHeadNumber(characterName);
+                    sprite = getSprite(itemsName, headNumber, object);
                     if (sprite == null)
-                        sprite = loadDefault(object);
+                        sprite = loadDefault(object, 1);
                 }
                 //Create character screen
                 if (itemsName == null)
                     sprite = getEmptySprite();
             } catch (IOException e) {
-                sprite = loadDefault(object);
+                sprite = loadDefault(object, 1);
             } catch (JSONException e) {
-                sprite = loadDefault(object);
+                sprite = loadDefault(object, 1);
             }
+        } else if (GGame.SCREEN_NUMBER == GGame.CREATECHARACTER - 1) {
+                sprite = loadDefault(object, CreateCharacterScreen.getHeadNumber());
         } else {
-            sprite = loadDefault(object);
+            sprite = loadDefault(object, 1);
         }
 
 

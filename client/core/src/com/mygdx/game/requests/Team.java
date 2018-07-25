@@ -86,7 +86,7 @@ public class Team {
                 for (int i = 0; i < arr.length(); i++) {
                     jsonObject1 = arr.getJSONObject(i);
                     profile = Profile.getProfileFromJson(jsonObject1);
-                    System.out.println("Added " + profile.getName() + " in team");
+                    //System.out.println("Added " + profile.getName() + " in team");
                     team.addTeamProfile(profile);
 //                        team.addTeamProfile(Profile.getProfile(arr.getJSONObject(i).getInt(PROFILE_ID)));
                 }
@@ -410,7 +410,7 @@ public class Team {
 
         profileId = -1;
         profile = null;
-        printAllMembers();
+       // printAllMembers();
         for (Profile member : teamMembers) {
             if (member.getName().equals(name)) {
                 profileId = member.getId();
@@ -427,7 +427,7 @@ public class Team {
         }
         if (profile == null)
             return new Texture("default.png");
-        profile.updateItems();
+        profile.loadItems();
         return profile.getProfileTexture();
     }
 
@@ -437,7 +437,7 @@ public class Team {
 
         profileId = -1;
         profile = null;
-        printAllMembers();
+     //   printAllMembers();
         for (Profile member : teamMembers) {
             if (member.getName().equals(name)) {
                 profileId = member.getId();
@@ -453,7 +453,7 @@ public class Team {
         }
         if (profile == null)
             return null;
-        profile.updateItems();
+        profile.loadItems();
         return profile.getEquippedItems();
     }
 
@@ -473,5 +473,30 @@ public class Team {
             }
         }
         loadAllCharactersFromTeam();
+    }
+
+    public int getTeamMemberHeadNumber(String name) {
+        int profileId;
+        Profile profile;
+
+        profileId = -1;
+        profile = null;
+        //printAllMembers();
+        for (Profile member : teamMembers) {
+            if (member.getName().equals(name)) {
+                profileId = member.getId();
+                profile = member;
+                break;
+            }
+
+        }
+        if (profileId == -1) {
+            JsonHandler.errorMessage = "Character " + name + " does not exist!";
+            DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+            return 0;
+        }
+        if (profile == null)
+            return 0;
+        return profile.getHeadNumber();
     }
 }

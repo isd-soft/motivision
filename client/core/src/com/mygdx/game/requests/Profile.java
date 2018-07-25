@@ -155,7 +155,7 @@ public class Profile implements Comparable<Profile>{
             number = jsonObject.getInt(POINTS);
             profile.setPoints(number);
 
-            profile.loadItems(jsonObject);
+            profile.loadItemsFromServer(jsonObject);
 
             return profile;
         } catch (NumberFormatException e) {
@@ -173,6 +173,19 @@ public class Profile implements Comparable<Profile>{
         return getProfileFromJson(jsonObject);
     }
 
+    // Load items from server if they aren't loaded already
+    public void loadItems() {
+        if (itemList == null) {
+            try {
+                updateItems();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void    updateItems() throws IOException, JSONException {
         String      urlParameters;
         String		url;
@@ -184,10 +197,10 @@ public class Profile implements Comparable<Profile>{
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
         if (jsonObject == null)
             return;
-        loadItems(jsonObject);
+        loadItemsFromServer(jsonObject);
     }
 
-    private void loadItems(JSONObject jsonObject) throws JSONException {
+    private void loadItemsFromServer(JSONObject jsonObject) throws JSONException {
         Item    item;
         String  field;
         String  itemType;
@@ -196,6 +209,7 @@ public class Profile implements Comparable<Profile>{
         int     itemPrice;
         boolean equipped;
 
+        itemList = new ArrayList<Item>();
         if (jsonObject.has("items") == false)
             return;
         if (jsonObject.isNull("items"))
@@ -211,7 +225,6 @@ public class Profile implements Comparable<Profile>{
         }
         if (arr == null)
             return;
-        itemList = new ArrayList<Item>();
 
         for (int i = 0; i < arr.length(); i++)
         {

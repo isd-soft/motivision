@@ -698,9 +698,6 @@ public class CreateCharacterScreen implements Screen {
             selectedRaceType = 1;
         if (selectedHeadType < 1 || selectedHeadType > 3)
             selectedHeadType = 1;
-        System.out.println("Race = " + selectedRaceType);
-        System.out.println("Head = " + selectedHeadType);
-        System.out.println("Gender = " + selectedGender);
         if (selectedRaceType == 2)
             headNumber += 3;
         headNumber += selectedHeadType;

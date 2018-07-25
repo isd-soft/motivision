@@ -515,4 +515,10 @@ public class PlayerAccount {
         //printAllMembers();
         return team.getTeamMemberEquippedItems(name);
     }
+
+    public static int       getTeamMemberHeadNumber(String name) {
+        if (team == null)
+            return 0;
+        return team.getTeamMemberHeadNumber(name);
+    }
 }
