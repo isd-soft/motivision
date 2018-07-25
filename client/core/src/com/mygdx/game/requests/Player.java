@@ -32,7 +32,7 @@ public class Player {
         return charName;
     }
 
-    public int                  getProfileId(String name) {
+    public int getProfileId(String name) {
         Set<Integer>    keySet;
         String          profileName;
 

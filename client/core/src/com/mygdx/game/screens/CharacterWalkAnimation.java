@@ -38,14 +38,28 @@ public class CharacterWalkAnimation extends Image {
         image.setBounds(0, 0, 800, 480);
         renderer = new ShapeRenderer();
         batch = new SpriteBatch();
-        SCMLReader reader = new SCMLReader(Gdx.files.internal("CharacterAnimations.scml").read());
+
+        SCMLReader reader = new SCMLReader(Gdx.files.internal("KekNew.scml").read());
         data = reader.getData();
         Entity humanEntity = data.getEntity(0);
         player = new Player(humanEntity);
         enemy = new Player(humanEntity);
         enemy.flip(true, false);
+
         setPosition();
         player.setTime(700);
+
+        enemy.setTime(700);
+
+
+//        player.characterMaps = new CharacterMap[1];
+//
+//        player.characterMaps[0] = charMaps[0];
+
+        //player.
+       // player.setAnimation();
+
+        //Animation troll
 
     }
 
@@ -60,6 +74,7 @@ public class CharacterWalkAnimation extends Image {
 
     public void changeAnimation(String animation) {
         player.setAnimation(animation);
+        enemy.setAnimation(animation);
 
     }
 
@@ -86,26 +101,33 @@ public class CharacterWalkAnimation extends Image {
         player.setPosition(200, 150);
         enemy.setPosition(currentPosition, 150);
         batch.begin();
+
         batch.draw(texture, 0, 0, 1300, 800);
+
+        drawer.draw(player);
         if (alo > 0) {
             drawer.draw(enemy);
-            if (currentPosition < 500) {
-                player.setAnimation("ATTACK");
-                enemy.setAnimation("DIE");
-                currentPosition = 500;
-                drawer.draw(player);
-                drawer.draw(enemy);
-                if (player.getTime() == 600) {
-                    --alo;
-                    player.setAnimation("WALK");
-                    enemy.setAnimation("WALK");
-                    setPosition();
+//            if (currentPosition < 520) {
+//                player.setAnimation("ATTACK");
+                //drawer.draw(player);
 
-                    drawer.draw(player);
+                if (currentPosition < 450) {
+                    currentPosition = 450;
+                    player.setAnimation("ATTACK");
+                    enemy.setAnimation("DIE");
+
+                    //drawer.draw(enemy);
+                    if (enemy.getTime() == 600) {
+                        --alo;
+                        player.setAnimation("WALK");
+                        enemy.setAnimation("WALK");
+                        setPosition();
+
+                        //drawer.draw(player);
+                    }
                 }
-            }
+        //    }
         }
-        drawer.draw(player);
         batch.end();
     }
 }

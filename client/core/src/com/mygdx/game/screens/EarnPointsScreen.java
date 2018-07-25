@@ -188,6 +188,7 @@ public class EarnPointsScreen implements Screen {
                 gameSounds.clickSound();
                 animationTest.changeAnimation("WALK");
                 animationTest.zeroInts();
+                animationTest.setPosition();
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
