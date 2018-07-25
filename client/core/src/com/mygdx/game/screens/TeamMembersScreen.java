@@ -48,7 +48,7 @@ public class TeamMembersScreen implements Screen {
     private Camera camera;
     private Music loginMusic;
     private GDXDialogs dialogs;
-    private String selectedName = null;
+    private static String selectedName = null;
     private Drawable profileImage;
 
 
@@ -325,5 +325,9 @@ public class TeamMembersScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    public static String getSelectedName() {
+        return selectedName;
     }
 }
