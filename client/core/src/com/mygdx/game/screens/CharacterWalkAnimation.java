@@ -6,11 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
-import com.brashmonkey.spriter.Data;
-import com.brashmonkey.spriter.Drawer;
-import com.brashmonkey.spriter.Loader;
-import com.brashmonkey.spriter.Player;
-import com.brashmonkey.spriter.SCMLReader;
+import com.brashmonkey.spriter.*;
 import com.mygdx.game.animation.ParallaxBackground;
 import com.mygdx.game.loader.AssetsManager;
 
@@ -18,10 +14,15 @@ import com.mygdx.game.loader.AssetsManager;
 public class CharacterWalkAnimation extends Image {
     SpriteBatch batch;
     ShapeRenderer renderer;
-    Player yourPlayer;
+    Player player;
+    Player enemy;
+
     Loader loader;
     Drawer drawer;
     Data data;
+
+    private int alo = 0;
+    private int currentPosition;
     AssetsManager assetsManager = AssetsManager.getInstance();
     Texture texture;
     Image image;
@@ -36,36 +37,103 @@ public class CharacterWalkAnimation extends Image {
         image.setBounds(0, 0, 800, 480);
         renderer = new ShapeRenderer();
         batch = new SpriteBatch();
-        System.out.println(Gdx.files.internal("animation.scml"));
-        SCMLReader reader = new SCMLReader(Gdx.files.internal("animation.scml").read());
+//        System.out.println(Gdx.files.internal("animation.scml"));
+//        SCMLReader reader = new SCMLReader(Gdx.files.internal("animation.scml").read());
+        System.out.println(Gdx.files.internal("CharacterAnimations.scml"));
+        SCMLReader reader = new SCMLReader(Gdx.files.internal("CharacterAnimations.scml").read());
         data = reader.getData();
-        //Entity human
-        yourPlayer = new Player(data.getEntity(0));
+        Entity humanEntity = data.getEntity(0);
+//        //CharacterMap
+//        CharacterMap[] charMaps = {
+//                humanEntity.getCharacterMap("CharacterMapTest.scml"),
+//                //humanEntity.getCharacterMap("CharacterBronze")
+//                                        };
+//
+//        //CharacterMap map = player.getEntity().getCharacterMap("CharacterMapTest");
+//        CharacterMap map  = charMaps[0];
+//        //Entity human
+        player = new Player(humanEntity);
+        enemy = new Player(humanEntity);
+
+        player.setTime(100);
+
+
+//        player.characterMaps = new CharacterMap[1];
+//
+//        player.characterMaps[0] = charMaps[0];
+
+        //player.
+       // player.setAnimation();
+
         //Animation for human entity
-        yourPlayer.setAnimation("IDLE");
     }
 
     public void init(String animation) {
-        yourPlayer.setAnimation(animation);
+        player.setAnimation(animation);
+        enemy.setAnimation(animation);
         loader = new LoaderImplementation(data);
         loader.load(Gdx.files.internal("").path());
         drawer = new DrawerImplementation((LoaderImplementation) loader, batch, renderer);
-        if (animation == "ATTACK") {
-            yourPlayer.setTime(600);
-            yourPlayer.setAnimation("IDLE");
-        }
+//        if (animation == "ATTACK") {
+//            yourPlayer.setTime(600);
+//            yourPlayer.setAnimation("IDLE");
+//        }
+        drawer = new DrawerImplementation((LoaderImplementation) loader, batch, renderer);
+//        if (animation == "ATTACK") {
+//            player.setTime(100);
+//            player.setAnimation("WALK");
+//        }
     }
 
 
+    public void changeCharacterMap(){
+        //player.characterMaps[1] = charMaps[1];
+    }
+
+    public void changeAnimation(String animation) {
+        player.setAnimation(animation);
+
+    }
+
+    public void storeInts(){
+        ++alo;
+    }
+    public void zeroInts(){
+        alo=0;
+    }
+    public void setPosition(){
+        currentPosition = 1300;
+    }
+
     @Override
     public void act(float delta) {
-        yourPlayer.update();
+        player.update();
+        enemy.update();
+        currentPosition += -3;
         //first is y second is x
-        yourPlayer.setPosition(200, 150);
+
+        player.setPosition(200, 50);
+        enemy.setPosition(currentPosition, 50);
         batch.begin();
         batch.draw(texture, 0, 0, 1300, 800);
-        drawer.draw(yourPlayer);
+        if(alo >0){
+            drawer.draw(enemy);
+            if(currentPosition <450){
+                player.setAnimation("ATTACK");
+                enemy.setAnimation("DIE");
+                drawer.draw(player);
+                drawer.draw(enemy);
+                if(player.getTime() == 100){
+                    --alo;
+                    player.setAnimation("WALK");
+                    enemy.setAnimation("WALK");
+                    setPosition();
+
+                    drawer.draw(player);
+                }
+            }
+        }
+        drawer.draw(player);
         batch.end();
-        //super.act(delta);
     }
 }

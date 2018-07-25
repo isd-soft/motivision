@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
@@ -74,7 +75,7 @@ public class CharacterProfileScreen implements Screen {
         manageTeamDialog = GDXDialogsSystem.install();
         buyItemDialog = GDXDialogsSystem.install();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-        shopAnimation = new ShopAnimation(parent);
+        //shopAnimation = new ShopAnimation(parent);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -169,8 +170,11 @@ public class CharacterProfileScreen implements Screen {
 
         //Create label witch represents points
         Label pointsLabel = new Label("Points: " + pointsNumber, skin);
-        Label teamLabel = new Label(" Team: " + teamName, skin, "big");
-        Label characterLabel = new Label(" Character: " + characterName, skin, "big");
+        pointsLabel.setAlignment(Align.center);
+        Label teamLabel = new Label(" Team: " + teamName, skin);
+        teamLabel.setAlignment(Align.center);
+        Label characterLabel = new Label(" Character: " + characterName, skin);
+        characterLabel.setAlignment(Align.center);
 
         // add item list
         ArrayList<Integer> numberOfItems = new ArrayList<Integer>();
@@ -237,10 +241,7 @@ public class CharacterProfileScreen implements Screen {
 
         itemTable.add(upButtonsTable).fill().expandX();
         itemTable.row();
-//        itemTable.add(characterLabel);
-//        itemTable.row();
         itemTable.add(pointsLabel);
-//        itemTable.add(teamLabel);
         itemTable.row();
         itemTable.add(imageTable).fill().expand();
         itemTable.row();
@@ -254,16 +255,17 @@ public class CharacterProfileScreen implements Screen {
         itemTable.add(botButtonTable).fill().expandX();
 
         Table leftTable = new Table();
-        leftTable.setBackground(profileImage);
-        leftTable.add(teamLabel);
+        leftTable.add(teamLabel).expandX();
         leftTable.row();
-        leftTable.add(characterLabel);
-        leftTable.top();
+        leftTable.add(characterLabel).expandX();
+        leftTable.row();
+        //leftTable.add(walkAnimation).expand();
 
         shopAnimation.setFillParent(true);
         shopAnimation.setZIndex(0);
         //screenTable.addActor(shopAnimation);
         screenTable.setFillParent(true);
+        screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         //screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(animation).fill().expand().uniform().pad(pad, pad, pad, pad/2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
@@ -469,7 +471,6 @@ public class CharacterProfileScreen implements Screen {
                 System.out.println("Start equipping " + itemType + "(" + itemId + ")");
                 PlayerAccount.equipItem(itemId);
                 gameSounds.itemSound();
-                CharacterProfileScreen.this.show();
             }
         }
     }
