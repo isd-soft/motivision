@@ -431,6 +431,32 @@ public class Team {
         return profile.getProfileTexture();
     }
 
+    public ArrayList<String> getTeamMemberEquippedItems(String name) throws IOException, JSONException {
+        int profileId;
+        Profile profile;
+
+        profileId = -1;
+        profile = null;
+        printAllMembers();
+        for (Profile member : teamMembers) {
+            if (member.getName().equals(name)) {
+                profileId = member.getId();
+                profile = member;
+                break;
+            }
+
+        }
+        if (profileId == -1) {
+            JsonHandler.errorMessage = "Character " + name + " does not exist!";
+            DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+            return null;
+        }
+        if (profile == null)
+            return null;
+        profile.updateItems();
+        return profile.getEquippedItems();
+    }
+
     public void printAllMembers() {
         System.out.println("Team members");
         for (Profile profile : teamMembers)

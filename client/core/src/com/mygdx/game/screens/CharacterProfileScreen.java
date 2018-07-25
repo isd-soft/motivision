@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -260,20 +261,10 @@ public class CharacterProfileScreen implements Screen {
         leftTable.add(characterLabel).expandX();
         leftTable.row();
         leftTable.add(animation).expand();
-        //leftTable.add(walkAnimation).expand();
-
-//        shopAnimation.setFillParent(true);
-  //      shopAnimation.setZIndex(0);
-        //screenTable.addActor(shopAnimation);
         screenTable.setFillParent(true);
         screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
-        //screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
-        //screenTable.add(animation).fill().expand().uniform().pad(pad, pad, pad, pad/2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
         stage.addActor(screenTable);
-
-//        stage.setDebugAll(true);
-
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -375,46 +366,49 @@ public class CharacterProfileScreen implements Screen {
         public void     confirmDialog() {
             gameSounds.clickSound();
 
-            final Label buyLabel = new Label("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\" ?", skin, "big");
+            final TextButton buyButton = new TextButton("buy", skin);
+            final Label buyLabel = new Label("Buy \"" + itemType.replace('_', ' ') + "\" ?", skin, "big");
             Dialog dialog = new Dialog("Confirmation", skin) {
                 public void result(Object obj) {
                     gameSounds.clickSound();
-                    if (obj == "yes") {
-                        try {
-                            if (!PlayerAccount.buyItem(itemId)) {
-                                gameSounds.deniedSound();
-                                final Label buyLabelError = new Label("Not enough points!", skin, "error");
-                                Dialog dialogError = new Dialog("", skin) {
-                                    public void result(Object obj) {
-                                        gameSounds.clickSound();
-                                        if (obj == "ok")
-                                            CharacterProfileScreen.this.show();
-                                    }
-                                };
-                                dialogError.getContentTable().row();
-                                dialogError.getContentTable().add(buyLabelError);
-                                dialogError.getContentTable().row();
-                                dialogError.button("Ok", "ok");
-                                dialogError.show(stage);
-                                //DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
-                            }
-                            else
-                                gameSounds.buySound();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    if (obj == "back") {
+                        CharacterProfileScreen.this.show();
                     }
-                    CharacterProfileScreen.this.show();
+
                 }
             };
             dialog.getContentTable().row();
             dialog.getContentTable().add(buyLabel);
             dialog.getContentTable().row();
-            dialog.button("Yes", "yes");
-            dialog.button("No", "no");
+            dialog.getContentTable().add(buyButton);
+            dialog.button("back", "back");
             dialog.show(stage);
+
+            buyButton.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    try {
+                        int status;
+                        status = PlayerAccount.getItemStatus(itemId);
+                        if (status == Item.STORE_ITEM) {
+                            if (!PlayerAccount.buyItem(itemId)) {
+                                gameSounds.deniedSound();
+                                buyLabel.setText("Not enough points");
+                            } else {
+                                gameSounds.buySound();
+                                buyLabel.setText("Nice!");
+                            }
+                        }
+                        else {
+                            buyLabel.setText("Already bought!");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
             /*final GDXButtonDialog bDialog = buyItemDialog.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Confirmation");
             bDialog.setMessage("Are you sure you want to buy \"" + itemType.replace('_', ' ') + "\"");

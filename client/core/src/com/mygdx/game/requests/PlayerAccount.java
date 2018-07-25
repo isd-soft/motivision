@@ -14,6 +14,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class PlayerAccount {
     private static Team team = null;
     //private static List<Profile>    teamMembers;
 
+
+    private static int headType = 1;
+    private static int raceType = 1;
 
     public static void setProfile(Profile profile) {
         PlayerAccount.profile = profile;
@@ -169,6 +173,8 @@ public class PlayerAccount {
         //return null;
     }
 
+
+
     public static Texture getProfileTexture() throws IOException, JSONException {
         if (profile == null)
             return new Texture("default.png");
@@ -273,6 +279,12 @@ public class PlayerAccount {
         if (player != null)
             player.updateAllCharacters();
         team.loadAllCharactersFromTeam();
+    }
+
+    public static int       getHeadNumber() {
+        if (profile == null)
+            return 0;
+        return profile.getHeadNumber();
     }
 
     public static Texture getTexture(int headType, int bodyType) {
@@ -484,5 +496,23 @@ public class PlayerAccount {
             return new Texture("default.png");
         //printAllMembers();
         return team.getTeamMemberTexture(name);
+    }
+
+    public static ArrayList<String> getTeamMemberEquippedItems(String name) throws IOException, JSONException {
+        if (profile == null)
+            return null;
+        if (profile.getName().equals(name))
+            return profile.getEquippedItems();
+        try {
+            selectProfileTeam();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (team == null)
+            return null;
+        //printAllMembers();
+        return team.getTeamMemberEquippedItems(name);
     }
 }

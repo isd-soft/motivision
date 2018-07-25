@@ -38,7 +38,6 @@ ALTER TABLE public.activities OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.activities_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -78,7 +77,7 @@ ALTER TABLE public."character" OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.character_id_seq
-    AS integer
+    
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -114,7 +113,7 @@ ALTER TABLE public.character_item OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.character_item_id_seq
-    AS integer
+    
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -150,7 +149,7 @@ ALTER TABLE public.items OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.items_id_seq
-    AS integer
+    
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -186,7 +185,7 @@ ALTER TABLE public.last_battle OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.last_battle_id_seq
-    AS integer
+    
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -222,7 +221,7 @@ ALTER TABLE public.player OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.player_id_seq
-    AS integer
+    
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -262,7 +261,7 @@ ALTER TABLE public.team OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.team_id_seq
-    AS integer
+    
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
