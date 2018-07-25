@@ -52,15 +52,6 @@ public class CharacterWalkAnimation extends Image {
         enemy.setTime(700);
 
 
-//        player.characterMaps = new CharacterMap[1];
-//
-//        player.characterMaps[0] = charMaps[0];
-
-        //player.
-       // player.setAnimation();
-
-        //Animation troll
-
     }
 
     public void init(String animation) {

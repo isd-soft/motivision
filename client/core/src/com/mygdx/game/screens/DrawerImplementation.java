@@ -11,6 +11,9 @@ import com.brashmonkey.spriter.Timeline;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.requests.PlayerAccount;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +24,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
     ShapeRenderer renderer;
     ArrayList<String> items = PlayerAccount.getEquippedItems();
     LoaderImplementation loaderImplementation;
-    public static boolean   CHARACTER_CREATION = false;
+    public static String characterName;
 
     public DrawerImplementation(LoaderImplementation loader, SpriteBatch batch, ShapeRenderer renderer) {
         super(loader);
@@ -92,7 +95,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                     break;
                 case HEAD:
                     int headNumber = PlayerAccount.getHeadNumber();
-                    if(headNumber != 0)
+                    if (headNumber != 0)
                         sprite = loaderImplementation.getHead(headNumber);
                     else
                         sprite = loaderImplementation.getHead(4);
@@ -279,7 +282,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
     public void draw(Timeline.Key.Object object) {
 
         Sprite sprite = null;
-        if (GGame.SCREEN_NUMBER != 4) {
+        if (GGame.SCREEN_NUMBER != 4 && GGame.SCREEN_NUMBER != 8) {
             ArrayList<String> itemsName = PlayerAccount.getEquippedItems();
             if (itemsName != null) {
                 sprite = getSprite(itemsName, object);
@@ -289,7 +292,23 @@ public class DrawerImplementation extends Drawer<Sprite> {
             //Create character screen
             if (itemsName == null)
                 sprite = getEmptySprite();
-        }else {
+        } else if (GGame.SCREEN_NUMBER == 8) {
+            try {
+                ArrayList<String> itemsName = PlayerAccount.getTeamMemberEquippedItems(characterName);
+                if (itemsName != null) {
+                    sprite = getSprite(itemsName, object);
+                    if (sprite == null)
+                        sprite = loadDefault(object);
+                }
+                //Create character screen
+                if (itemsName == null)
+                    sprite = getEmptySprite();
+            } catch (IOException e) {
+                sprite = loadDefault(object);
+            } catch (JSONException e) {
+                sprite = loadDefault(object);
+            }
+        } else {
             sprite = loadDefault(object);
         }
 
