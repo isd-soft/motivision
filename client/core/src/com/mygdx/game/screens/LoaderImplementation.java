@@ -127,6 +127,9 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
         ourResources.put("weapon_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/weapon_.png")));
         ourResources.put("weapon_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/weapon_.png")));
         ourResources.put("weapon_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/weapon_.png")));
+
+        ourResources.put("empty", new Sprite((Texture) assetsManager.aManager.get("default.png")));
+
     }
 
 

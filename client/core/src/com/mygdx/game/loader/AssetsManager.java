@@ -66,18 +66,7 @@ public class AssetsManager {
     private final String steelWeapon = "BronzeKnight/weapon_.png";
     private final String goldWeapon = "GoldKnight/weapon_.png";
 
-
-
-
-//    private final String spriteAttackAnimation = "warrior_attack.png";
-//    private final String boomAnimation = "boom_animation.png";
-//
-//    private final String warriorWalk = "spritesheetWarriarWalk.png";
-//    private final String warriorRun = "spritesheetWarriarRun.png";
-//    private final String warriorAttack = "spritesheetWarriarAttack.png";
-//
-    //private final String trollRun = "TrollRun.png";
-    //private final String trollDie = "TrollDie.png";
+    private final String emptySprite = "default.png";
 
     private final String layer1 = "forest/layer1.png";
     private final String layer2 = "forest/layer2.png";
@@ -233,6 +222,8 @@ public class AssetsManager {
         aManager.load(ironWeapon, Texture.class);
         aManager.load(steelWeapon, Texture.class);
         aManager.load(goldWeapon, Texture.class);
+
+        aManager.load(emptySprite, Texture.class);
     }
 
 

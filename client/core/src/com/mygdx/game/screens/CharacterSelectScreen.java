@@ -56,6 +56,7 @@ public class CharacterSelectScreen implements Screen {
     private Texture background;
     private Image bg;
     private Texture texture;
+    private CharacterWalkAnimation animation;
 
     private SettingsPopup settingsPopup;
 
@@ -63,9 +64,13 @@ public class CharacterSelectScreen implements Screen {
         parent = g;
         stage = new Stage();
         background = parent.assetsManager.aManager.get("universalbg.png");
-        bg = new Image(background);
-        bg.setFillParent(true);
-        bg.setZIndex(0);
+        animation = new CharacterWalkAnimation();
+        animation.init("IDLE");
+        animation.setZIndex(10);
+
+        //bg = new Image(background);
+        //bg.setFillParent(true);
+        //bg.setZIndex(0);
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
@@ -107,33 +112,13 @@ public class CharacterSelectScreen implements Screen {
         ArrayList<String> strings = new ArrayList<String>();
         ArrayList<String> characterNames = PlayerAccount.getCharactersName();
         if (characterNames != null) {
-            if (texture == null) {
-                try {
-                    texture = PlayerAccount.getProfileTexture(characterNames.get(0));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                try {
-                    texture = PlayerAccount.getProfileTexture();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
             strings = PlayerAccount.getCharactersName();
         } else {
             strings.add("No Characters");
-            texture = new Texture("default.png");
+        //    texture = new Texture("default.png");
         }
 
-        if (texture == null) {
-            texture = new Texture("default.png");
-        }
-        image = new Image(texture);
+//        image = new Image(texture);
 
         for (int i = 0; i < strings.size(); i++) {
             characterNamesButtons.add(new TextButton(strings.get(i), skin, "square"));
@@ -143,9 +128,7 @@ public class CharacterSelectScreen implements Screen {
             charactersTable.add(characterNamesButtons.get(i)).fillX().expandX();
             charactersTable.add(xButtons.get(i)).width(Value.percentWidth(0.2f, charactersTable)).fillX();
             charactersTable.row();
-
             characterNamesButtons.get(i).addListener(new SelectCharacter(strings.get(i)));
-
             xButtons.get(i).addListener(new DeleteCharacter(strings.get(i)));
         }
         charactersTable.add(create).fill().uniformY().colspan(2);
@@ -174,11 +157,10 @@ public class CharacterSelectScreen implements Screen {
             select.setTouchable(Touchable.disabled);
         }
 
-
         // add wrapper table
-        screenTable.addActor(bg);
+
         screenTable.setFillParent(true);
-        screenTable.add(image).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
+        screenTable.add(animation).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
 
         stage.addActor(screenTable);
@@ -253,7 +235,14 @@ public class CharacterSelectScreen implements Screen {
         @Override
         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             gameSounds.clickSound();
-            if (texture != null)
+            try {
+                PlayerAccount.selectProfile(name);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            /*if (texture != null)
                 texture.dispose();
             try {
                 System.out.println("Start getting profile texture");
@@ -265,7 +254,8 @@ public class CharacterSelectScreen implements Screen {
             }
             if (texture == null)
                 texture = new Texture("default.png");
-            show();
+                */
+            //show();
         }
     }
 
@@ -336,7 +326,6 @@ public class CharacterSelectScreen implements Screen {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        texture = null;
                     }
                     CharacterSelectScreen.this.show();
                 }
@@ -369,7 +358,6 @@ public class CharacterSelectScreen implements Screen {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            texture = null;
                             CharacterSelectScreen.this.show();
                         }
                     }

@@ -52,6 +52,10 @@ public class DrawerImplementation extends Drawer<Sprite> {
         items = PlayerAccount.getEquippedItems();
     }
 
+    private Sprite getEmptySprite() {
+        return loaderImplementation.get("empty");
+    }
+
     private Sprite getSprite(ArrayList<String> itemsList, Timeline.Key.Object object) {
         Sprite sprite = null;
         // make a map
@@ -289,10 +293,14 @@ public class DrawerImplementation extends Drawer<Sprite> {
 
         ArrayList<String> itemsName = PlayerAccount.getEquippedItems();
         Sprite sprite = null;
-        if(itemsName != null)
+        if (itemsName != null) {
             sprite = getSprite(itemsName, object);
-        if(sprite == null)
-            sprite = loadDefault(object);
+            if(sprite == null)
+                sprite = loadDefault(object);
+        }
+        if (itemsName == null)
+            sprite = getEmptySprite();
+
 
         float newPivotX = (sprite.getWidth() * object.pivot.x);
         float newX = object.position.x - newPivotX;
