@@ -13,20 +13,20 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.brashmonkey.spriter.Data;
 import com.brashmonkey.spriter.FileReference;
-import com.brashmonkey.spriter.Folder;
 import com.brashmonkey.spriter.Loader;
+import com.mygdx.game.loader.AssetsManager;
 import com.mygdx.game.requests.PlayerAccount;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
 public class LoaderImplementation extends Loader<Sprite> implements Disposable {
 
-
-    public HashMap<String, Sprite> imageMap = new HashMap<String, Sprite>(8);
+    public AssetsManager assetsManager = AssetsManager.getInstance();
+    public HashMap<String, Sprite> ourResources = new HashMap<String, Sprite>();
     public static int standardAtlasWidth = 2048, standardAtlasHeight = 2048;
 
     private PixmapPacker packer;
@@ -60,80 +60,8 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
     }
 
     @Override
-    public void load(String root) {
-        this.root = root;
-        this.beginLoading();
-        //get folder id and item id by character item
-        List<String> list = PlayerAccount.getEquippedItems();
-
-        //iron sword, steel sword, diamond sword
-        //iron shield, steel shield, diamond shield
-        //iron armor, steel armor, diamond armor
-        //iron leggings, steel leggings, diamond leggings
-
-        for(int i = 0; i < 8; i++){
-            FileReference fileReference = new FileReference(0, i);
-            this.resources.put(fileReference, this.loadResource(fileReference));
-        }
-        if(list == null){
-            return;
-        }
-        for(String itemName: list){
-            int folderId = 0;
-            int fileId;
-            //get folder id
-            if(itemName.contains("steel")){
-                folderId = 2;
-            }
-            if(itemName.contains("gold")){
-                folderId = 0;
-            }
-            if(itemName.contains("iron")){
-                folderId = 1;
-            }
-
-            if(itemName.contains("armor")){
-                FileReference ref =  new FileReference(folderId, 0);
-                this.resources.put(ref, this.loadResource(ref));
-                FileReference arm1 = new FileReference(folderId, 2);
-                FileReference arm2 = new FileReference(folderId, 3);
-                this.resources.put(arm1, this.loadResource(arm1));
-                this.resources.put(arm2, this.loadResource(arm2));
-
-            }
-
-            if(itemName.contains("sword")){
-                FileReference ref = new FileReference(folderId, 4);
-                this.resources.put(ref, this.loadResource(ref));
-            }
-
-            if(itemName.contains("leggins")) {
-                FileReference ref = new FileReference(folderId, 6);
-                this.resources.put(ref, this.loadResource(ref));
-                FileReference ref2 = new FileReference(folderId, 7);
-                this.resources.put(ref2, this.loadResource(ref2));
-            }
-            if(itemName.contains("shield")){
-                FileReference ref = new FileReference(folderId, 5);
-                this.resources.put(ref, this.loadResource(ref));
-            }
-
-        }
-
-        /*for (Folder folder : data.folders) {
-            for (com.brashmonkey.spriter.File file : folder.files) {
-                //if(new java.io.File(root+"/"+file.name).exists()){
-                FileReference ref = new FileReference(folder.id, file.id);
-                this.resources.put(ref, this.loadResource(ref));
-                //}
-            }
-        }
-        */
-        this.finishLoading();
-    }
-
-    @Override
     protected Sprite loadResource(FileReference ref) {
+
         FileHandle f;
         String pathPrefix;
         if (super.root == null || super.root.equals("")) {
@@ -159,6 +87,48 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
         this.pixmaps.put(ref, pix);
         return null;
     }
+
+
+    public Sprite get(String spriteName){
+        return ourResources.get(spriteName);
+    }
+
+
+
+    protected void loadRecourse(){
+        ourResources.put("body_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/body_.png")));
+        ourResources.put("body_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/body_.png")));
+        ourResources.put("body_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/body_.png")));
+
+        ourResources.put("head_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/head_.png")));
+        ourResources.put("head_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/head_.png")));
+        ourResources.put("head_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/head_.png")));
+
+        ourResources.put("left_arm_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/left_arm_.png")));
+        ourResources.put("left_arm_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/left_arm_.png")));
+        ourResources.put("left_arm_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/left_arm_.png")));
+
+        ourResources.put("right_arm_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/right_arm_.png")));
+        ourResources.put("right_arm_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/right_arm_.png")));
+        ourResources.put("right_arm_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/right_arm_.png")));
+
+        ourResources.put("left_leg_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/left_leg_.png")));
+        ourResources.put("left_leg_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/left_leg_.png")));
+        ourResources.put("left_leg_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/left_leg_.png")));
+
+        ourResources.put("right_leg_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/right_leg_.png")));
+        ourResources.put("right_leg_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/right_leg_.png")));
+        ourResources.put("right_leg_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/right_leg_.png")));
+
+        ourResources.put("shield_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/shield_.png")));
+        ourResources.put("shield_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/shield_.png")));
+        ourResources.put("shield_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/shield_.png")));
+
+        ourResources.put("weapon_iron",new Sprite((Texture) assetsManager.aManager.get("IronKnight/weapon_.png")));
+        ourResources.put("weapon_steel",new Sprite((Texture) assetsManager.aManager.get("BronzeKnight/weapon_.png")));
+        ourResources.put("weapon_gold",new Sprite((Texture) assetsManager.aManager.get("GoldKnight/weapon_.png")));
+    }
+
 
     /**
      * Packs all loaded sprites into an atlas. Has to called after loading all sprites.
@@ -207,8 +177,15 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
         int width = (int) data.getFile(ref.folder, ref.file).size.width;
         int height = (int) data.getFile(ref.folder, ref.file).size.height;
         TextureRegion texRegion = new TextureRegion(tex, width, height);
-        resources.put(ref, new Sprite(texRegion));
+        super.resources.put(ref, new Sprite(texRegion));
         pixmapsToDispose.put(image, true);
+    }
+
+    @Override
+    public void load(String root) {
+        assetsManager.loadItemsSprite();
+        loadRecourse();
+        super.load(root);
     }
 
     protected void disposePixmaps() {

@@ -70,6 +70,20 @@ public class Profile implements Comparable<Profile>{
         return true;
     }
 
+    /*public ArrayList<String>    getEquippedItems() {
+        ArrayList<String>   equippedItems = null;
+        if(itemList == null)
+            return null;
+        for (Item item: itemList) {
+            if (item.isEquipped()) {
+                if (equippedItems == null)
+                    equippedItems = new ArrayList<String>();
+                equippedItems.add(item.getName());
+            }
+        }
+
+        return equippedItems;
+    }*/
     public ArrayList<String>    getEquippedItems() {
         ArrayList<String>   equippedItems = null;
         if(itemList == null){
@@ -641,20 +655,6 @@ public class Profile implements Comparable<Profile>{
         if(jsonObject == null)
             return false;
         return jsonObject.getString("status").equals("success");
-    }
-    public ArrayList<String>    getEquippedItems() {
-        ArrayList<String>   equippedItems = null;
-        if(itemList == null)
-            return null;
-        for (Item item: itemList) {
-            if (item.isEquipped()) {
-                if (equippedItems == null)
-                    equippedItems = new ArrayList<String>();
-                equippedItems.add(item.getName());
-            }
-        }
-
-        return equippedItems;
     }
     public boolean deleteActivity( int activityId)
             throws IOException, JSONException {

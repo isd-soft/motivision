@@ -261,7 +261,7 @@ public class AssetsManager {
     public Array<Texture> getLayers() {
         Array<Texture> array = new Array<Texture>();
         for (int i = 1; i < 12; i++) {
-            Texture texture = aManager.get("forest/layer" + i + ".1.png");
+            Texture texture = aManager.get("forest/layer" + i + ".png");
             texture.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
             array.add(texture);
         }

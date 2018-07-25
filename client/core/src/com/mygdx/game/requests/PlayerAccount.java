@@ -53,11 +53,6 @@ public class PlayerAccount {
         return team.getTeamLoss();
     }
 
-    public static ArrayList<String> getEquippedItems() {
-        if (profile == null)
-            return null;
-        return profile.getEquippedItems();
-    }
 
     public static Integer getWins() {
         try {

@@ -61,7 +61,7 @@ public class EarnPointsScreen implements Screen {
     private static final int FRAME_COLS = 6, FRAME_ROWS = 5;
 
     private GDXDialogs dialogs;
-    private AnimationScreenTest animationScreenTest;
+//    private AnimationScreenTest animationScreenTest;
 
     private SettingsPopup settingsPopup;
     private ParallaxBackground parallaxBackground;
@@ -69,10 +69,6 @@ public class EarnPointsScreen implements Screen {
     private Image bgImage;
     public EarnPointsScreen(GGame g) {
         parent = g;
-        dialogs = GDXDialogsSystem.install();
-        animationTest = new CharacterWalkAnimation();
-        animationTest.init("WALK");
-        animationTest.setZIndex(10);
         texture = parent.assetsManager.aManager.get("universalbg.png");
         bgImage = new Image(texture);
         bgImage.setZIndex(0);
@@ -82,15 +78,15 @@ public class EarnPointsScreen implements Screen {
         parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
         parallaxBackground.setSize(800, 480);
         parallaxBackground.setSpeed(1);
-        animationScreenTest = new AnimationScreenTest(parent);
+       // animationScreenTest = new AnimationScreenTest(parent);
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         batch = new SpriteBatch();
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
         settingsPopup = new SettingsPopup();
-        animationScreenTest.setScreenAnimation(2, "ATTACK");
-        animationScreenTest.setZIndex(7);
+        //animationScreenTest.setScreenAnimation(2, "ATTACK");
+       // animationScreenTest.setZIndex(7);
     }
 
 
@@ -233,11 +229,8 @@ public class EarnPointsScreen implements Screen {
                             //wolf animation goes here
                             PlayerAccount.doActivity(id);
                             animationTest.init("IDLE");
-
-
-
-                            animationScreenTest.changeAnimation(2);
-                            animationScreenTest.setCurrentPosition(300);
+                            //animationScreenTest.changeAnimation(2);
+                           // animationScreenTest.setCurrentPosition(300);
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (JSONException e) {
