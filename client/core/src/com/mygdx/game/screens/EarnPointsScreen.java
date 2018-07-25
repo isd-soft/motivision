@@ -185,6 +185,7 @@ public class EarnPointsScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
                 animationTest.changeAnimation("WALK");
+                animationTest.zeroInts();
                 parent.changeScreen(parent.getCharacterProfile());
             }
         });
@@ -219,9 +220,9 @@ public class EarnPointsScreen implements Screen {
                         try {
                             //wolf animation goes here
                             PlayerAccount.doActivity(id);
+
                             animationTest.setPosition();
                             animationTest.storeInts();
-                            animationTest.setPosition();
 
                             /*
                             animationScreenTest.changeAnimation(2);

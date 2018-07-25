@@ -30,9 +30,6 @@
         <file id="6" name="BronzeKnight/shield_.png" width="90" height="114" pivot_x="0.5" pivot_y="0.5"/>
         <file id="7" name="BronzeKnight/weapon_.png" width="138" height="267" pivot_x="0.5" pivot_y="0.5"/>
     </folder>
-    <folder id="3">
-        <file id="0" name="spritesheetTrollDie.png" width="2203" height="2367" pivot_x="0" pivot_y="1"/>
-    </folder>
     <entity id="0" name="Human">
         <obj_info name="bone_003" type="bone" w="25.4777" h="10"/>
         <obj_info name="bone_004" type="bone" w="24.5223" h="10"/>

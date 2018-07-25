@@ -23,8 +23,8 @@ public class CharacterWalkAnimation extends Image {
     public CharacterWalkAnimation() {
         renderer = new ShapeRenderer();
         batch = new SpriteBatch();
-        System.out.println(Gdx.files.internal("KekNew.scml"));
-        SCMLReader reader = new SCMLReader(Gdx.files.internal("KekNew.scml").read());
+        System.out.println(Gdx.files.internal("CharacterAnimations.scml"));
+        SCMLReader reader = new SCMLReader(Gdx.files.internal("CharacterAnimations.scml").read());
         data = reader.getData();
         Entity humanEntity = data.getEntity(0);
 //        //CharacterMap
@@ -39,7 +39,7 @@ public class CharacterWalkAnimation extends Image {
         player = new Player(humanEntity);
         enemy = new Player(humanEntity);
 
-        player.setTime(50);
+        player.setTime(100);
 
 
 //        player.characterMaps = new CharacterMap[1];
@@ -61,7 +61,7 @@ public class CharacterWalkAnimation extends Image {
         enemy.setAnimation(animation);
         loader = new LoaderImplementation(data);
         loader.load(Gdx.files.internal("").path());
-        drawer = new DrawerImplementation(loader, batch, renderer);
+        drawer = new DrawerImplementation((LoaderImplementation) loader, batch, renderer);
 //        if (animation == "ATTACK") {
 //            player.setTime(100);
 //            player.setAnimation("WALK");
@@ -81,20 +81,24 @@ public class CharacterWalkAnimation extends Image {
     public void storeInts(){
         ++alo;
     }
+    public void zeroInts(){
+        alo=0;
+    }
     public void setPosition(){
-        currentPosition = 800;
+        currentPosition = 1300;
     }
 
     @Override
     public void act(float delta) {
         player.update();
         enemy.update();
-        currentPosition += -1;
+        currentPosition += -3;
         //first is y second is x
         player.setPosition(200, 50);
         enemy.setPosition(currentPosition, 50);
 
         batch.begin();
+
         if(alo >0){
             drawer.draw(enemy);
             if(currentPosition <450){
@@ -102,10 +106,12 @@ public class CharacterWalkAnimation extends Image {
                 enemy.setAnimation("DIE");
                 drawer.draw(player);
                 drawer.draw(enemy);
-                if(player.getTime() == 50){
+                if(player.getTime() == 100){
                     --alo;
                     player.setAnimation("WALK");
                     enemy.setAnimation("WALK");
+                    setPosition();
+
                     drawer.draw(player);
                 }
             }
