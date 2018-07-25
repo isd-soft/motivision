@@ -41,6 +41,7 @@ public class LoadingScreen implements Screen{
 		parent.assetsManager.loadImages();
 		parent.assetsManager.loadSounds();
 		parent.assetsManager.loadMusic();
+		parent.assetsManager.loadItemsSprite();
 		parent.assetsManager.aManager.finishLoading();
 		gameMusic = GameMusic.getInstance();
 		gameMusic.startMusic();

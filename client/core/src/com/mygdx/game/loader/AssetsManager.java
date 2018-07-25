@@ -14,12 +14,12 @@ public class AssetsManager {
     public final AssetManager aManager = new AssetManager();
     private static AssetsManager singleton = new AssetsManager();
     //Textures
-    private final String monsterImage = "monster.png";
-    private final String knightImage = "knight.png";
-    private final String cloudImage = "background.png";
-    private final String spriteAnimation = "sprite_animation.png";
-    private final String spriteWolfAnimation = "sprite_animation_wolf.png";
-    private final String spriteWalkAnimation = "sprite_walk.png";
+//    private final String monsterImage = "monster.png";
+//    private final String knightImage = "knight.png";
+//    private final String cloudImage = "background.png";
+//    private final String spriteAnimation = "sprite_animation.png";
+//    private final String spriteWolfAnimation = "sprite_animation_wolf.png";
+//    private final String spriteWalkAnimation = "sprite_walk.png";
     private final String backgroundGifAnimation = "background.png";
     private final String characterSelect = "castlebg.jpg";
     private final String characterProfile = "barracks.jpg";
@@ -33,55 +33,6 @@ public class AssetsManager {
     private final String deniedSound = "data/denied.mp3";
     private final String equipArmor = "data/equipp.mp3";
     private final String gameOst = "data/game-ost1.mp3";
-
-    private final String spriteAttackAnimation = "warrior_attack.png";
-    private final String boomAnimation = "boom_animation.png";
-
-    private final String warriorWalk = "spritesheetWarriarWalk.png";
-    private final String warriorRun = "spritesheetWarriarRun.png";
-    private final String warriorAttack = "spritesheetWarriarAttack.png";
-
-    private final String trollRun = "spritesheetTrollRun.png";
-    private final String trollDie = "spritesheetTrollDie.png";
-
-    private final String layer1 = "forest/layer1.png";
-    private final String layer2 = "forest/layer2.png";
-    private final String layer3 = "forest/layer3.png";
-    private final String layer4 = "forest/layer4.png";
-    private final String layer5 = "forest/layer5.png";
-    private final String layer6 = "forest/layer6.png";
-    private final String layer7 = "forest/layer7.png";
-    private final String layer8 = "forest/layer8.png";
-    private final String layer9 = "forest/layer9.png";
-    private final String layer10 = "forest/layer10.png";
-    private final String layer11 = "forest/layer11.png";
-
-    private final String knightIronHead = "Body_Parts/1_KNIGHT/1_head_.png";
-    private final String knightIronBody = "Body_Parts/1_KNIGHT/1_body_.png";
-    private final String knightIronLeftArm = "Body_Parts/1_KNIGHT/1_left_arm_.png";
-    private final String knightIronRightArm = "Body_Parts/1_KNIGHT/1_right_arm_.png";
-    private final String knightIronLeftLeg = "Body_Parts/1_KNIGHT/1_left_lag_.png";
-    private final String knightIronRightLeg = "Body_Parts/1_KNIGHT/1_right_lag_.png";
-    private final String knightIronShield = "Body_Parts/1_KNIGHT/1_shield_.png";
-    private final String knightIronWeapon = "Body_Parts/1_KNIGHT/1_weapon_.png";
-
-    private final String knightBronzeHead = "Body_Parts/2_KNIGHT/2_head_.png";
-    private final String knightBronzeBody = "Body_Parts/2_KNIGHT/2_body_.png";
-    private final String knightBronzeLeftArm = "Body_Parts/2_KNIGHT/2_left_arm_.png";
-    private final String knightBronzeRightArm = "Body_Parts/2_KNIGHT/2_right_arm_.png";
-    private final String knightBronzeLeftLeg = "Body_Parts/2_KNIGHT/2_left_lag_.png";
-    private final String knightBronzeRightLeg = "Body_Parts/2_KNIGHT/2_right_lag_.png";
-    private final String knightBronzeShield = "Body_Parts/2_KNIGHT/2_shield_.png";
-    private final String knightBronzeWeapon = "Body_Parts/2_KNIGHT/2_weapon_.png";
-
-    private final String knightGoldenHead = "Body_Parts/3_KNIGHT/3_head_.png";
-    private final String knightGoldenBody = "Body_Parts/3_KNIGHT/3_body_.png";
-    private final String knightGoldenLeftArm = "Body_Parts/3_KNIGHT/3_left_arm_.png";
-    private final String knightGoldenRightArm = "Body_Parts/3_KNIGHT/3_right_arm_.png";
-    private final String knightGoldenLeftLeg = "Body_Parts/3_KNIGHT/3_left_lag_.png";
-    private final String knightGoldenRightLeg = "Body_Parts/3_KNIGHT/3_right_lag_.png";
-    private final String knightGoldenShield = "Body_Parts/3_KNIGHT/3_shield_.png";
-    private final String knightGoldenWeapon = "Body_Parts/3_KNIGHT/3_weapon_.png";
 
     private final String ironBody = "IronKnight/body_.png";
     private final String goldBody = "GoldKnight/body_.png";
@@ -114,6 +65,58 @@ public class AssetsManager {
     private final String ironWeapon = "IronKnight/weapon_.png";
     private final String steelWeapon = "BronzeKnight/weapon_.png";
     private final String goldWeapon = "GoldKnight/weapon_.png";
+
+
+
+
+//    private final String spriteAttackAnimation = "warrior_attack.png";
+//    private final String boomAnimation = "boom_animation.png";
+//
+//    private final String warriorWalk = "spritesheetWarriarWalk.png";
+//    private final String warriorRun = "spritesheetWarriarRun.png";
+//    private final String warriorAttack = "spritesheetWarriarAttack.png";
+//
+//    private final String trollRun = "spritesheetTrollRun.png";
+//    private final String trollDie = "spritesheetTrollDie.png";
+
+    private final String layer1 = "forest/layer1.png";
+    private final String layer2 = "forest/layer2.png";
+    private final String layer3 = "forest/layer3.png";
+    private final String layer4 = "forest/layer4.png";
+    private final String layer5 = "forest/layer5.png";
+    private final String layer6 = "forest/layer6.png";
+    private final String layer7 = "forest/layer7.png";
+    private final String layer8 = "forest/layer8.png";
+    private final String layer9 = "forest/layer9.png";
+    private final String layer10 = "forest/layer10.png";
+    private final String layer11 = "forest/layer11.png";
+//
+//    private final String knightIronHead = "Body_Parts/1_KNIGHT/1_head_.png";
+//    private final String knightIronBody = "Body_Parts/1_KNIGHT/1_body_.png";
+//    private final String knightIronLeftArm = "Body_Parts/1_KNIGHT/1_left_arm_.png";
+//    private final String knightIronRightArm = "Body_Parts/1_KNIGHT/1_right_arm_.png";
+//    private final String knightIronLeftLeg = "Body_Parts/1_KNIGHT/1_left_lag_.png";
+//    private final String knightIronRightLeg = "Body_Parts/1_KNIGHT/1_right_lag_.png";
+//    private final String knightIronShield = "Body_Parts/1_KNIGHT/1_shield_.png";
+//    private final String knightIronWeapon = "Body_Parts/1_KNIGHT/1_weapon_.png";
+//
+//    private final String knightBronzeHead = "Body_Parts/2_KNIGHT/2_head_.png";
+//    private final String knightBronzeBody = "Body_Parts/2_KNIGHT/2_body_.png";
+//    private final String knightBronzeLeftArm = "Body_Parts/2_KNIGHT/2_left_arm_.png";
+//    private final String knightBronzeRightArm = "Body_Parts/2_KNIGHT/2_right_arm_.png";
+//    private final String knightBronzeLeftLeg = "Body_Parts/2_KNIGHT/2_left_lag_.png";
+//    private final String knightBronzeRightLeg = "Body_Parts/2_KNIGHT/2_right_lag_.png";
+//    private final String knightBronzeShield = "Body_Parts/2_KNIGHT/2_shield_.png";
+//    private final String knightBronzeWeapon = "Body_Parts/2_KNIGHT/2_weapon_.png";
+//
+//    private final String knightGoldenHead = "Body_Parts/3_KNIGHT/3_head_.png";
+//    private final String knightGoldenBody = "Body_Parts/3_KNIGHT/3_body_.png";
+//    private final String knightGoldenLeftArm = "Body_Parts/3_KNIGHT/3_left_arm_.png";
+//    private final String knightGoldenRightArm = "Body_Parts/3_KNIGHT/3_right_arm_.png";
+//    private final String knightGoldenLeftLeg = "Body_Parts/3_KNIGHT/3_left_lag_.png";
+//    private final String knightGoldenRightLeg = "Body_Parts/3_KNIGHT/3_right_lag_.png";
+//    private final String knightGoldenShield = "Body_Parts/3_KNIGHT/3_shield_.png";
+//    private final String knightGoldenWeapon = "Body_Parts/3_KNIGHT/3_weapon_.png";
 
     private final String universal = "universalbg.png";
 
@@ -160,23 +163,32 @@ public class AssetsManager {
         aManager.load(layer10, Texture.class);
         aManager.load(layer11, Texture.class);
 
-        aManager.load(knightIronHead, Texture.class);
-        aManager.load(knightIronBody, Texture.class);
-        aManager.load(knightIronLeftArm, Texture.class);
-        aManager.load(knightIronRightArm, Texture.class);
-        aManager.load(knightIronLeftLeg, Texture.class);
-        aManager.load(knightIronRightLeg, Texture.class);
-        aManager.load(knightIronShield, Texture.class);
-        aManager.load(knightIronWeapon, Texture.class);
-
-        aManager.load(knightBronzeHead, Texture.class);
-        aManager.load(knightBronzeBody, Texture.class);
-        aManager.load(knightBronzeLeftArm, Texture.class);
-        aManager.load(knightBronzeRightArm, Texture.class);
-        aManager.load(knightBronzeLeftLeg, Texture.class);
-        aManager.load(knightBronzeRightLeg, Texture.class);
-        aManager.load(knightBronzeShield, Texture.class);
-        aManager.load(knightBronzeWeapon, Texture.class);
+//        aManager.load(knightIronHead, Texture.class);
+//        aManager.load(knightIronBody, Texture.class);
+//        aManager.load(knightIronLeftArm, Texture.class);
+//        aManager.load(knightIronRightArm, Texture.class);
+//        aManager.load(knightIronLeftLeg, Texture.class);
+//        aManager.load(knightIronRightLeg, Texture.class);
+//        aManager.load(knightIronShield, Texture.class);
+//        aManager.load(knightIronWeapon, Texture.class);
+//
+//        aManager.load(knightBronzeHead, Texture.class);
+//        aManager.load(knightBronzeBody, Texture.class);
+//        aManager.load(knightBronzeLeftArm, Texture.class);
+//        aManager.load(knightBronzeRightArm, Texture.class);
+//        aManager.load(knightBronzeLeftLeg, Texture.class);
+//        aManager.load(knightBronzeRightLeg, Texture.class);
+//        aManager.load(knightBronzeShield, Texture.class);
+//        aManager.load(knightBronzeWeapon, Texture.class);
+//
+//        aManager.load(knightGoldenHead, Texture.class);
+//        aManager.load(knightGoldenBody, Texture.class);
+//        aManager.load(knightGoldenLeftArm, Texture.class);
+//        aManager.load(knightGoldenRightArm, Texture.class);
+//        aManager.load(knightGoldenLeftLeg, Texture.class);
+//        aManager.load(knightGoldenRightLeg, Texture.class);
+//        aManager.load(knightGoldenShield, Texture.class);
+//        aManager.load(knightGoldenWeapon, Texture.class);
 
 //        aManager.load(spriteAttackAnimation, Texture.class);
 //        aManager.load(boomAnimation, Texture.class);
@@ -186,25 +198,7 @@ public class AssetsManager {
 //        aManager.load(trollDie, Texture.class);
 //        aManager.load(trollRun, Texture.class);
 
-        aManager.load(knightGoldenHead, Texture.class);
-        aManager.load(knightGoldenBody, Texture.class);
-        aManager.load(knightGoldenLeftArm, Texture.class);
-        aManager.load(knightGoldenRightArm, Texture.class);
-        aManager.load(knightGoldenLeftLeg, Texture.class);
-        aManager.load(knightGoldenRightLeg, Texture.class);
-        aManager.load(knightGoldenShield, Texture.class);
-        aManager.load(knightGoldenWeapon, Texture.class);
-
-        aManager.load(spriteAttackAnimation, Texture.class);
-        aManager.load(boomAnimation, Texture.class);
-        aManager.load(warriorWalk, Texture.class);
-        aManager.load(warriorRun, Texture.class);
-        aManager.load(warriorAttack, Texture.class);
-        aManager.load(trollDie, Texture.class);
-        aManager.load(trollRun, Texture.class);
         aManager.load(universal, Texture.class);
-
-        loadItemsSprite();
     }
 
     public void loadItemsSprite(){
@@ -240,6 +234,7 @@ public class AssetsManager {
         aManager.load(steelWeapon, Texture.class);
         aManager.load(goldWeapon, Texture.class);
     }
+
 
 
     public void loadSounds() {
