@@ -261,6 +261,7 @@ public class CharacterProfileScreen implements Screen {
         leftTable.add(characterLabel).expandX();
         leftTable.row();
         leftTable.add(animation).expand();
+
         screenTable.setFillParent(true);
         screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
