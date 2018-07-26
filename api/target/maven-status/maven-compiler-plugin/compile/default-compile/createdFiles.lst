@@ -33,4 +33,5 @@ com\inther\repo\CharacterRepository.class
 com\inther\controller\ExitController.class
 com\inther\service\CharacterService.class
 com\inther\service\PlayerService.class
+com\inther\controller\TestController.class
 com\inther\service\ItemsService.class
