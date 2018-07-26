@@ -263,6 +263,7 @@ public class CharacterProfileScreen implements Screen {
         leftTable.add(characterLabel).expandX();
         leftTable.row();
         leftTable.add(animation).expand();
+
         screenTable.setFillParent(true);
         screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(itemTable).fill().expand().uniform().pad(pad, pad / 2, pad, pad);
@@ -398,7 +399,7 @@ public class CharacterProfileScreen implements Screen {
                                 buyLabel.setText("Not enough points");
                             } else {
                                 gameSounds.buySound();
-                                buyLabel.setText("Nice!");
+                                buyLabel.setText("Nice, go back");
                             }
                         }
                         else {

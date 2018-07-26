@@ -20,7 +20,8 @@ public class CharacterWalkAnimation extends Image {
     Player enemy;
 
     Loader loader;
-    Drawer drawer;
+    DrawerImplementation drawer;
+    OgreDrawerImplementation monsterDrawer;
     Data data;
 
     private int alo = 0;
@@ -47,20 +48,12 @@ public class CharacterWalkAnimation extends Image {
         enemy = new Player(humanEntity);
         enemy.flip(true, false);
 
+
         setPosition();
         player.setTime(700);
 
         enemy.setTime(700);
 
-
-//        player.characterMaps = new CharacterMap[1];
-//
-//        player.characterMaps[0] = charMaps[0];
-
-        //player.
-       // player.setAnimation();
-
-        //Animation troll
 
     }
 
@@ -70,6 +63,7 @@ public class CharacterWalkAnimation extends Image {
         loader = new LoaderImplementation(data);
         loader.load(Gdx.files.internal("").path());
         drawer = new DrawerImplementation((LoaderImplementation) loader, batch, renderer);
+        monsterDrawer = new OgreDrawerImplementation((LoaderImplementation) loader, batch, renderer);
     }
 
 
@@ -108,11 +102,7 @@ public class CharacterWalkAnimation extends Image {
 
         drawer.draw(player);
         if (alo > 0) {
-            drawer.draw(enemy);
-//            if (currentPosition < 520) {
-//                player.setAnimation("ATTACK");
-                //drawer.draw(player);
-
+            monsterDrawer.draw(enemy);
                 if (currentPosition < 450) {
                     currentPosition = 450;
                     player.setAnimation("ATTACK");
@@ -126,6 +116,8 @@ public class CharacterWalkAnimation extends Image {
                         --alo;
                         player.setAnimation("WALK");
                         enemy.setAnimation("WALK");
+                        setPosition();
+                        MonsterGenerator.randomize();
 
                         //drawer.draw(player);
                     }

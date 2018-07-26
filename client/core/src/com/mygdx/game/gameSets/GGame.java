@@ -26,12 +26,12 @@ public class GGame extends Game {
     private final static int REGISTER = 1;
     private final static int MENU = 2;
     private final static int SETTINGS = 3;
-    private final static int CHARACTERSELECT = 4;
-    private final static int CREATECHARACTER = 5;
+    public final static int CHARACTERSELECT = 4;
+    public final static int CREATECHARACTER = 5;
     private final static int CHARACTERPROFILE = 6;
     private final static int EARNPOINTS = 7;
-    private final static int ADMIN = 8;
-    private final static int TEAMMEMBER = 9;
+    public final static int ADMIN = 8;
+    public final static int TEAMMEMBER = 9;
     private final static int ANIMATION = 10;
     private final static int BATTLE = 11;
     private final static int LASTBATTLE = 12;

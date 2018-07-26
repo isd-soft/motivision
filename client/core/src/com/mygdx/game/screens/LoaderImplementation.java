@@ -27,7 +27,7 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
 
     public AssetsManager assetsManager = AssetsManager.getInstance();
     public HashMap<String, Sprite> ourResources = new HashMap<String, Sprite>();
-    private ArrayList<Sprite> heads = new ArrayList<Sprite>(12);
+    private ArrayList<Sprite> heads = new ArrayList<Sprite>(15);
     public static int standardAtlasWidth = 2048, standardAtlasHeight = 2048;
 
     private PixmapPacker packer;
@@ -155,6 +155,11 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
         heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_10.png")));
         heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_11.png")));
         heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_12.png")));
+
+
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_13.png")));
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_14.png")));
+        heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_15.png")));
 
         ourResources.put("empty", new Sprite((Texture) assetsManager.aManager.get("default.png")));
 

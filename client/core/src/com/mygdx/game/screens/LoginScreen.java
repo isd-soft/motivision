@@ -1,5 +1,6 @@
 package com.mygdx.game.screens;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -85,11 +86,14 @@ public class LoginScreen implements Screen {
             @Override
             public boolean keyUp(InputEvent event, int keycode) {
 //                System.out.println("new keycode = " + keycode);
-                if (keycode == Input.Keys.ENTER) {
+                if (keycode == Input.Keys.ENTER || keycode == Input.Keys.TAB) {
                     if (stage.getKeyboardFocus() == loginField)
                         stage.setKeyboardFocus(passwordField);
                     else if (stage.getKeyboardFocus() == passwordField && keycode == Input.Keys.ENTER)
                         submit.fire(new ChangeListener.ChangeEvent());
+                    else if (stage.getKeyboardFocus() == passwordField)
+                        stage.setKeyboardFocus(loginField);
+
                 }
                 return false;
             }
@@ -113,8 +117,12 @@ public class LoginScreen implements Screen {
         passwordField = new TextField(null, skin);
         passwordField.setPasswordCharacter('*');
         passwordField.setPasswordMode(true);
-        loginField.setFocusTraversal(false);
-        passwordField.setFocusTraversal(false);
+        if (Gdx.app.getType() == Application.ApplicationType.Android) {
+            loginField.setFocusTraversal(false);
+            passwordField.setFocusTraversal(false);
+        }
+//        loginField.setFocusTraversal(true);
+//        passwordField.setFocusTraversal(true);
 
 
 
@@ -416,7 +424,7 @@ public class LoginScreen implements Screen {
                 gameSounds.clickSound();
             }
         });
-        Label fail = new Label("Sucks to be you", skin, "big");
+        Label fail = new Label("Too bad", skin, "big");
         dialog.getContentTable().add(fail);
         dialog.button("ok", "ok"); //sends "true" as the result
         dialog.show(stage);

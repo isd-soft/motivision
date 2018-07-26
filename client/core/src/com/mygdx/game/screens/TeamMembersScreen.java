@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.brashmonkey.spriter.Drawer;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.PlayerAccount;
@@ -41,29 +42,26 @@ public class TeamMembersScreen implements Screen {
     private Stage stage;
     private Skin skin;
     private GameSounds gameSounds = GameSounds.getInstance();
-    private Texture texture;
     private Viewport viewport;
-    private Texture bgTexture;
-    private Image bgImage;
     private Camera camera;
     private Music loginMusic;
     private GDXDialogs dialogs;
-    private String selectedName = null;
-    private Drawable profileImage;
-
-
+    private static String selectedName = null;
+    private CharacterWalkAnimation animation;
     private SettingsPopup settingsPopup;
 
     public TeamMembersScreen(GGame g) {
-        parent = g;
+        if (selectedName == null) {
+            selectedName = PlayerAccount.getProfileName();
+        }
+            parent = g;
         Pixmap pixmap;
+        animation = new CharacterWalkAnimation();
+        animation.init("IDLE");
+        animation.setZIndex(10);
 
         dialogs = GDXDialogsSystem.install();
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
-        bgTexture = parent.assetsManager.aManager.get("universalbg.png");
-        bgImage = new Image(bgTexture);
-        bgImage.setFillParent(true);
-        bgImage.setZIndex(0);
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
@@ -79,21 +77,10 @@ public class TeamMembersScreen implements Screen {
         float pad = 5;
 
         // Character Sprite
+        // label
         if (selectedName == null)
             selectedName = PlayerAccount.getProfileName();
-        try {
-            texture = PlayerAccount.getTeamMemberTexture(selectedName);
-        } catch (IOException e) {
-            texture = new Texture("default.png");
-            e.printStackTrace();
-        } catch (JSONException e) {
-            texture = new Texture("default.png");
-            e.printStackTrace();
-        }
-
-        profileImage = new TextureRegionDrawable(new TextureRegion(texture));
-
-        // label
+        DrawerImplementation.characterName = selectedName;
         Label teamStats = new Label("", skin);
         teamStats.setText("Victories: " + PlayerAccount.getWins() + " Defeats: " + PlayerAccount.getLosses());
         teamStats.setAlignment(Align.center);
@@ -115,7 +102,7 @@ public class TeamMembersScreen implements Screen {
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
         HashMap<String, Integer> teamMembers = PlayerAccount.getTeamMembersList();
-        PlayerAccount.printAllMembers();
+        //PlayerAccount.printAllMembers();
         //Collections.sort(teamMembers);
         //fill table with buttons and labels
         for (final String key : teamMembers.keySet()) {
@@ -184,12 +171,12 @@ public class TeamMembersScreen implements Screen {
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
 
         Table leftTable = new Table();
-        leftTable.setBackground(profileImage);
         leftTable.add(teamLabel);
         leftTable.top();
+        leftTable.row();
+        leftTable.add(animation).expand();
 
-        //create table for all screen and add into it everything
-        screenTable.addActor(bgImage);
+
         screenTable.setFillParent(true);
         screenTable.add(leftTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
@@ -223,12 +210,14 @@ public class TeamMembersScreen implements Screen {
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
+            System.out.println(GGame.SCREEN_NUMBER);
             gameSounds.clickSound();
-            getTeamMember();
+            DrawerImplementation.characterName = getTeamMember();
         }
-        private void getTeamMember() {
+        private String getTeamMember() {
             selectedName = name;
             show();
+            return selectedName;
         }
     }
 
@@ -325,5 +314,9 @@ public class TeamMembersScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    public static String getSelectedName() {
+        return selectedName;
     }
 }

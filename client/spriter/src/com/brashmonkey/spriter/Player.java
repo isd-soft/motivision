@@ -25,7 +25,7 @@ import com.brashmonkey.spriter.Timeline.Key.Object;
  * @author Trixt0r
  *
  */
-public class Player {
+public class Player{
 	
 	protected Entity entity;
 	Animation animation;

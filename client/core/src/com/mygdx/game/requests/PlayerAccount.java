@@ -28,7 +28,7 @@ public class PlayerAccount {
     private static int headType = 1;
     private static int raceType = 1;
 
-    public static void setProfile(Profile profile) {
+    private static void setProfile(Profile profile) {
         PlayerAccount.profile = profile;
     }
 
@@ -514,5 +514,11 @@ public class PlayerAccount {
             return null;
         //printAllMembers();
         return team.getTeamMemberEquippedItems(name);
+    }
+
+    public static int       getTeamMemberHeadNumber(String name) {
+        if (team == null)
+            return 0;
+        return team.getTeamMemberHeadNumber(name);
     }
 }

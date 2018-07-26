@@ -3,12 +3,15 @@ package com.mygdx.game.requests;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.screens.DialogBox;
 
+import org.apache.commons.codec.StringEncoderComparator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,7 +89,7 @@ public class Team {
                 for (int i = 0; i < arr.length(); i++) {
                     jsonObject1 = arr.getJSONObject(i);
                     profile = Profile.getProfileFromJson(jsonObject1);
-                    System.out.println("Added " + profile.getName() + " in team");
+                    //System.out.println("Added " + profile.getName() + " in team");
                     team.addTeamProfile(profile);
 //                        team.addTeamProfile(Profile.getProfile(arr.getJSONObject(i).getInt(PROFILE_ID)));
                 }
@@ -220,6 +223,14 @@ public class Team {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        if (profiles != null)
+            Collections.sort(profiles, new Comparator<Profile>() {
+                @Override
+                public int compare(Profile profile, Profile t1) {
+                    return profile.getName().compareTo(t1.getName());
+                }
+            });
+
         teamMembers = profiles;
         return profiles;
     }
@@ -232,6 +243,7 @@ public class Team {
         }
         if (teamMembers == null)
             return null;
+
         membersMap = new LinkedHashMap<String, Integer>();
         for (Profile profile : teamMembers) {
             membersMap.put(profile.getName(), profile.getPoints());
@@ -275,7 +287,7 @@ public class Team {
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
         if (jsonObject == null)
             return -1;
-        if (jsonObject.has(TEAM_ID)){
+        if (jsonObject.has(TEAM_ID)) {
             teamId = jsonObject.getInt(TEAM_ID);
             lock = jsonObject.getBoolean(LOCK);
             if (lock)
@@ -378,6 +390,21 @@ public class Team {
     }
 
     public void addTeamProfile(Profile profile) {
+        if (teamMembers == null)
+            teamMembers = new ArrayList<Profile>();
+        Collections.sort(teamMembers, new Comparator<Profile>() {
+            @Override
+            public int compare(Profile profile, Profile t1) {
+                return profile.getName().compareTo(t1.getName());
+            }
+        });
+        try {
+            profile.updateItems();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         teamMembers.add(profile);
     }
 
@@ -410,7 +437,7 @@ public class Team {
 
         profileId = -1;
         profile = null;
-        printAllMembers();
+        // printAllMembers();
         for (Profile member : teamMembers) {
             if (member.getName().equals(name)) {
                 profileId = member.getId();
@@ -427,7 +454,7 @@ public class Team {
         }
         if (profile == null)
             return new Texture("default.png");
-        profile.updateItems();
+        profile.loadItems();
         return profile.getProfileTexture();
     }
 
@@ -437,7 +464,7 @@ public class Team {
 
         profileId = -1;
         profile = null;
-        printAllMembers();
+        //   printAllMembers();
         for (Profile member : teamMembers) {
             if (member.getName().equals(name)) {
                 profileId = member.getId();
@@ -453,7 +480,7 @@ public class Team {
         }
         if (profile == null)
             return null;
-        profile.updateItems();
+        profile.loadItems();
         return profile.getEquippedItems();
     }
 
@@ -473,5 +500,30 @@ public class Team {
             }
         }
         loadAllCharactersFromTeam();
+    }
+
+    public int getTeamMemberHeadNumber(String name) {
+        int profileId;
+        Profile profile;
+
+        profileId = -1;
+        profile = null;
+        //printAllMembers();
+        for (Profile member : teamMembers) {
+            if (member.getName().equals(name)) {
+                profileId = member.getId();
+                profile = member;
+                break;
+            }
+
+        }
+        if (profileId == -1) {
+            JsonHandler.errorMessage = "Character " + name + " does not exist!";
+            DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+            return 0;
+        }
+        if (profile == null)
+            return 0;
+        return profile.getHeadNumber();
     }
 }
