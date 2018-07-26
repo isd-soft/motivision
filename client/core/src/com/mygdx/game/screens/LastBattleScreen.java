@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -32,23 +33,23 @@ public class LastBattleScreen implements Screen {
     private Skin skin;
 
     private Viewport viewport;
-    private GameSounds gameSounds = GameSounds.getInstance();
-    private Table screenTable;
 
 
     private Texture backgroundTexture;
 
-    private AnimationScreen animationScreen;
     private CharacterFightAnimation animationTest;
     private SpriteBatch batch;
 
+    //Health should be points, which are taken from DB
+    private int monsterHealth = 200;
+    private int playerHealth = 250;
+    //attack should be some math stuff dunno
+    private int playerAttack;
+    private int monsterAttack;
+    //label for HP
+    private Label playerHP;
+    private Label monsterHP;
 
-    private static final int FRAME_COLS = 6, FRAME_ROWS = 5;
-
-    private GDXDialogs dialogs;
-    //private AnimationScreenTest animationScreenTest;
-
-    private SettingsPopup settingsPopup;
     private ParallaxBackground parallaxBackground;
 
     public LastBattleScreen (GGame g) {
@@ -70,6 +71,10 @@ public class LastBattleScreen implements Screen {
         stage.setViewport(viewport);
         //animationScreenTest.setScreenAnimation(2, "ATTACK");
         // animationScreenTest.setZIndex(7);
+//        playerHP = new Label("Players' HP " + playerHealth, skin);
+//        monsterHP = new Label("Monsters' HP " + monsterHealth, skin);
+//        playerHP.setPosition(100, 300);
+//        monsterHP.setPosition(800, 300);
     }
 
 
@@ -82,6 +87,12 @@ public class LastBattleScreen implements Screen {
 //        loader.load("Path to the root folder of your SCML file");
 //
     }
+
+    public void makeRandomAttack(){
+        playerAttack = (int) (Math.random() * 50);
+        monsterAttack = (int) (Math.random() * 50);
+    }
+
 
     @Override
     public void show() {

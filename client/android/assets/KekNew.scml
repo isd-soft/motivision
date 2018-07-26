@@ -43,14 +43,20 @@
         <file id="9" name="HeadTypes/head_10.png" width="183" height="142" pivot_x="0.5" pivot_y="0.5"/>
         <file id="10" name="HeadTypes/head_11.png" width="183" height="142" pivot_x="0.5" pivot_y="0.5"/>
         <file id="11" name="HeadTypes/head_12.png" width="183" height="142" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="12" name="HeadTypes/head_13.png" width="183" height="142" pivot_x="0" pivot_y="1"/>
     </folder>
     <folder id="4" name="TrollHead">
-        <file id="0" name="TrollHead/troll_1.png" width="183" height="142" pivot_x="0.5" pivot_y="0.5"/>
-        <file id="1" name="TrollHead/troll_2.png" width="183" height="142" pivot_x="0.5" pivot_y="0.5"/>
-        <file id="2" name="TrollHead/troll_3.png" width="183" height="142" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="0" name="TrollHead/troll_3.png" width="183" height="142" pivot_x="0.5" pivot_y="0.5"/>
     </folder>
     <folder id="5">
         <file id="0" name="head.png" width="512" height="512" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <folder id="6" name="Weapon">
+        <file id="0" name="Weapon/2_ORK_sword.png" width="177" height="132" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="Weapon/3_ORK_Labrys.png" width="183" height="127" pivot_x="0" pivot_y="1"/>
+        <file id="2" name="Weapon/stick.png" width="62" height="128" pivot_x="0" pivot_y="1"/>
+        <file id="3" name="Weapon/weapon_2.png" width="138" height="267" pivot_x="0" pivot_y="1"/>
+        <file id="4" name="Weapon/sword.png" width="81" height="144" pivot_x="0" pivot_y="1"/>
     </folder>
     <entity id="0" name="Human">
         <obj_info name="bone_003" type="bone" w="25.4777" h="10"/>
@@ -97,7 +103,7 @@
             <map folder="0" file="1" target_folder="3" target_file="5"/>
         </character_map>
         <character_map id="5" name="TROLL">
-            <map folder="0" file="1" target_folder="4" target_file="2"/>
+            <map folder="0" file="1" target_folder="4" target_file="0"/>
         </character_map>
         <animation id="0" name="ATTACK" length="700" interval="100">
             <mainline>
