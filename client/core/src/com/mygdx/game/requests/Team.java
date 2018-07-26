@@ -151,7 +151,7 @@ public class Team {
         }
     }
 
-    public boolean updateTeam() {
+    public boolean changeTeamParameters() {
         String url = JsonHandler.domain + "/update_team";
         String urlParameters =
                 TEAM_ID + "=" + teamId

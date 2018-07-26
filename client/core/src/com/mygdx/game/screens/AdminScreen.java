@@ -2,15 +2,10 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -19,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -40,13 +34,6 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import de.tomgrill.gdxdialogs.core.GDXDialogs;
-import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
-import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
-import de.tomgrill.gdxdialogs.core.dialogs.GDXTextPrompt;
-import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
-import de.tomgrill.gdxdialogs.core.listener.TextPromptListener;
 
 public class AdminScreen implements Screen {
     private static final int YES = 0;
@@ -159,7 +146,7 @@ public class AdminScreen implements Screen {
                     checkboxLockTeamBoolean = false;
                 }
                 PlayerAccount.setTeamLocked(checkboxLockTeamBoolean);
-                PlayerAccount.updateTeam();
+                PlayerAccount.changeTeamParameters();
             }
         });
 
@@ -278,7 +265,7 @@ public class AdminScreen implements Screen {
                 }
                 freqChoiceLabel.setText(freqChoices[freqNumber]);
                 PlayerAccount.setBattleFrequency(freqNumber);
-                PlayerAccount.updateTeam();
+                PlayerAccount.changeTeamParameters();
             }
         });
 
@@ -293,7 +280,7 @@ public class AdminScreen implements Screen {
                 }
                 freqChoiceLabel.setText(freqChoices[freqNumber]);
                 PlayerAccount.setBattleFrequency(freqNumber);
-                PlayerAccount.updateTeam();
+                PlayerAccount.changeTeamParameters();
             }
         });
 
@@ -309,7 +296,7 @@ public class AdminScreen implements Screen {
                 }
                 textureCastle = new Texture("teamCastle" + castleChoice + ".png");
                 PlayerAccount.setTeamLogo("teamCastle" + castleChoice);
-                PlayerAccount.updateTeam();
+                PlayerAccount.changeTeamParameters();
                 show();
             }
         });
@@ -326,7 +313,7 @@ public class AdminScreen implements Screen {
                 }
                 textureCastle = new Texture("teamCastle" + castleChoice + ".png");
                 PlayerAccount.setTeamLogo("teamCastle" + castleChoice);
-                PlayerAccount.updateTeam();
+                PlayerAccount.changeTeamParameters();
                 show();
             }
         });
