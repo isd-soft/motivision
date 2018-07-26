@@ -14,32 +14,33 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-public class Profile implements Comparable<Profile>{
-    public static final String  PROFILE_ID = "characterId";
-    public static final String  TEAM_ID = "teamId";
-    public static final String  IS_ADMIN = "isAdmin";
-    public static final String  NAME = "characterName";
-    public static final String  HEAD_TYPE = "headType";
-    public static final String  BODY_TYPE = "bodyType";
-    public static final String  GENDER = "gender";
-    public static final String  POINTS = "points";
-    public static final String  PLAYER_ID = "playerId";
+public class Profile implements Comparable<Profile> {
+    public static final String PROFILE_ID = "characterId";
+    public static final String TEAM_ID = "teamId";
+    public static final String IS_ADMIN = "isAdmin";
+    public static final String NAME = "characterName";
+    public static final String HEAD_TYPE = "headType";
+    public static final String BODY_TYPE = "bodyType";
+    public static final String GENDER = "gender";
+    public static final String POINTS = "points";
+    public static final String PLAYER_ID = "playerId";
 
-    private String  name;
-    private int     id;
-    private int     headType;
-    private int     bodyType;
-    private char    gender;
-    private int     points;
-    private int     teamId;
-    private int     power;
+    private String name;
+    private int id;
+    private int headType;
+    private int bodyType;
+    private char gender;
+    private int points;
+    private int teamId;
+    private int power;
     private boolean isAdmin;
-    private ArrayList<Item>     itemList;
+    private ArrayList<Item> itemList;
 
 
     private Profile(int id, int teamId, boolean isAdmin) {
@@ -55,11 +56,11 @@ public class Profile implements Comparable<Profile>{
         this.itemList = null;
     }
 
-    public static boolean	nameExist(String name) throws IOException, JSONException {
-        String      urlParameters;
-        String		url;
-        JSONObject  jsonObject;
-        String		result;
+    public static boolean nameExist(String name) throws IOException, JSONException {
+        String urlParameters;
+        String url;
+        JSONObject jsonObject;
+        String result;
 
         url = JsonHandler.domain + "/character_exist";
         urlParameters = NAME + "=" + name;
@@ -86,45 +87,39 @@ public class Profile implements Comparable<Profile>{
 
         return equippedItems;
     }*/
-    public ArrayList<String>    getEquippedItems() {
-        ArrayList<String>   equippedItems;
+    public ArrayList<String> getEquippedItems() {
+        ArrayList<String> equippedItems;
 
         equippedItems = new ArrayList<String>();
-        if(itemList == null){
+        if (itemList == null) {
             return equippedItems;
         }
         power = 0;
-        for (Item item: itemList) {
+        for (Item item : itemList) {
             if (item.isEquipped()) {
-                try {
-                    power += Item.getItemPrice(item.getId());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                power += Item.getItemPrice(item.getId());
                 equippedItems.add(item.getName());
             }
         }
         return equippedItems;
     }
 
-    private static void	setErrorMessage(String message) {
+    private static void setErrorMessage(String message) {
         JsonHandler.errorMessage = message;
     }
 
-    public boolean  isAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
     }
 
-    public static Profile      getProfileFromJson(JSONObject jsonObject) throws JSONException {
-        Profile     profile;
-        String		field;
-        int         characterId;
-        int         teamId;
-        boolean     isAdmin;
-        int         number;
-        char        gender = 'N';
+    public static Profile getProfileFromJson(JSONObject jsonObject) throws JSONException {
+        Profile profile;
+        String field;
+        int characterId;
+        int teamId;
+        boolean isAdmin;
+        int number;
+        char gender = 'N';
 
         if (jsonObject == null)
             return null;
@@ -138,8 +133,7 @@ public class Profile implements Comparable<Profile>{
             if (jsonObject.has(IS_ADMIN)) {
                 field = jsonObject.getString(IS_ADMIN);
                 isAdmin = field.equals("true");
-            }
-            else
+            } else
                 isAdmin = false;
 
             profile = new Profile(characterId, teamId, isAdmin);
@@ -174,9 +168,9 @@ public class Profile implements Comparable<Profile>{
         }
     }
 
-    static Profile      getProfileFromUrl(String url, String urlParameters, String requestMethod)
+    static Profile getProfileFromUrl(String url, String urlParameters, String requestMethod)
             throws JSONException, IOException {
-        JSONObject	jsonObject;
+        JSONObject jsonObject;
 
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, requestMethod);
         System.out.println(url + "?" + urlParameters);
@@ -196,10 +190,10 @@ public class Profile implements Comparable<Profile>{
         }
     }
 
-    public void    updateItems() throws IOException, JSONException {
-        String      urlParameters;
-        String		url;
-        JSONObject  jsonObject;
+    public void updateItems() throws IOException, JSONException {
+        String urlParameters;
+        String url;
+        JSONObject jsonObject;
 
         itemList = null;
         url = JsonHandler.domain + "/get_items";
@@ -207,58 +201,61 @@ public class Profile implements Comparable<Profile>{
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
         if (jsonObject == null)
             return;
-        loadItemsFromServer(jsonObject);
+        itemList = loadItemsFromServer(jsonObject);
     }
 
-    private void loadItemsFromServer(JSONObject jsonObject) throws JSONException {
-        Item    item;
-        String  field;
-        String  itemType;
-        int     itemId;
-        int     itemImage;
-        int     itemPrice;
+    private ArrayList<Item> loadItemsFromServer(JSONObject jsonObject) throws JSONException {
+        Item item;
+        String field;
+        String itemName;
+        String itemType;
+        String itemImage;
+        int itemId;
+        int itemPrice;
         boolean equipped;
+        ArrayList<Item>  itemsList;
 
-        itemList = new ArrayList<Item>();
+        itemsList = new ArrayList<Item>();
         if (jsonObject.has("items") == false)
-            return;
+            return itemsList;
         if (jsonObject.isNull("items"))
-            return;
+            return itemsList;
 
         if (jsonObject.get("items") == null)
-            return;
+            return itemsList;
         JSONArray arr;
         try {
             arr = jsonObject.getJSONArray("items");
         } catch (JSONException e) {
-            return;
+            return itemsList;
         }
         if (arr == null)
-            return;
+            return itemsList;
 
-        for (int i = 0; i < arr.length(); i++)
-        {
+        for (int i = 0; i < arr.length(); i++) {
             itemId = arr.getJSONObject(i).getInt(Item.ITEM_ID);
-            itemImage = arr.getJSONObject(i).getInt(Item.ITEM_IMAGE);
+            itemName = arr.getJSONObject(i).getString(Item.ITEM_NAME);
+            itemImage = arr.getJSONObject(i).getString(Item.ITEM_IMAGE);
             itemPrice = arr.getJSONObject(i).getInt(Item.ITEM_PRICE);
             itemType = arr.getJSONObject(i).getString(Item.ITEM_TYPE);
             if (arr.getJSONObject(i).has(Item.ITEM_EQUIPPED))
                 equipped = arr.getJSONObject(i).getBoolean(Item.ITEM_EQUIPPED);
             else
                 equipped = true;
-            item = new Item(itemId, itemImage, itemPrice, itemType, equipped);
-            itemList.add(item);
+            item = new Item(itemId, itemName, itemImage, itemPrice, itemType, equipped);
+            itemsList.add(item);
         }
+        return itemsList;
     }
 
-    private static Profile  createProfileWithId(int characterId, LinkedHashMap<String, String> profileParams) {
+    private static Profile createProfileWithId(int characterId, LinkedHashMap<String, String> profileParams) {
         try {
-            Profile         profile;
-            String          field;
-            int             teamId;
-            int             number;
-            boolean         isAdmin;
-            char            gender = 'N';
+            Profile profile;
+            String field;
+            int teamId;
+            int number;
+            boolean isAdmin;
+            char gender = 'N';
 
             field = profileParams.get(TEAM_ID);
             teamId = Integer.parseInt(field);
@@ -290,15 +287,15 @@ public class Profile implements Comparable<Profile>{
         }
     }
 
-    public static Profile	createNewProfile(LinkedHashMap<String, String> profileParams) throws IOException, JSONException {
+    public static Profile createNewProfile(LinkedHashMap<String, String> profileParams) throws IOException, JSONException {
         // List<BasicNameValuePair>    urlParameters;
-        Profile         profile;
-        String          url;
-        String          urlParameters = null;
-        String          name;
-        Set<String>     keySet;
-        JSONObject      jsonObject;
-        int             characterId;
+        Profile profile;
+        String url;
+        String urlParameters = null;
+        String name;
+        Set<String> keySet;
+        JSONObject jsonObject;
+        int characterId;
 
         name = profileParams.get(NAME);
         if (nameExist(name)) {
@@ -307,7 +304,7 @@ public class Profile implements Comparable<Profile>{
         }
         url = JsonHandler.domain + "/create_character";
         keySet = profileParams.keySet();
-        for (String key: keySet) {
+        for (String key : keySet) {
             if (urlParameters == null)
                 urlParameters = "";
             else
@@ -336,8 +333,8 @@ public class Profile implements Comparable<Profile>{
         //return getProfileFromUrl(url, urlParameters, true);
     }
 
-    public static Profile	getProfile(int profileId) throws IOException, JSONException {
-        String  url;
+    public static Profile getProfile(int profileId) throws IOException, JSONException {
+        String url;
         Profile profile;
         String urlParameters;
 
@@ -354,7 +351,7 @@ public class Profile implements Comparable<Profile>{
         return profile;
     }
 
-    private Texture     splitImages(Map<String, String> itemImages) throws IOException {
+    private Texture splitImages(Map<String, String> itemImages) throws IOException {
         BufferedImage result = new BufferedImage(466, 510, BufferedImage.TYPE_INT_RGB);
         Graphics g = result.getGraphics();
         BufferedImage bi;
@@ -380,13 +377,13 @@ public class Profile implements Comparable<Profile>{
             g.drawImage(bi, 17, 320, null);
         }
 
-        ImageIO.write(result,"png",new File("result.png"));
+        ImageIO.write(result, "png", new File("result.png"));
 
         return new Texture("result.png");
     }
 
     private static Pixmap addItemOnPixmap(Pixmap pixmap, String item, int x, int y) {
-        Pixmap  itemPixmap;
+        Pixmap itemPixmap;
 
         x += 40;
         itemPixmap = new Pixmap(Gdx.files.internal("items/" + item + ".png"));
@@ -413,7 +410,7 @@ public class Profile implements Comparable<Profile>{
 //            pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
         pixmap = addItemOnPixmap(pixmap, legginsType + "_right_leg", 163, 436);
 //        if (armorType.equals("iron") == false)
-            pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
+        pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
         pixmap = addItemOnPixmap(pixmap, armorType + "_right_arm", 91, 320);
         pixmap = addItemOnPixmap(pixmap, itemImages.get("sword"), 411, 280);
 //        pixmap = addItemOnPixmap(pixmap, itemImages.get("fingers"), 219, 304);
@@ -429,7 +426,7 @@ public class Profile implements Comparable<Profile>{
 
     public Texture getProfileTexture() {
         Map<String, String> itemImages;
-        Set<String>         itemSet;
+        Set<String> itemSet;
 
         //System.out.println("procesing...");
         itemImages = new LinkedHashMap<String, String>();
@@ -463,9 +460,9 @@ public class Profile implements Comparable<Profile>{
         return addItems(itemImages, headType, bodyType);
     }
 
-    public boolean      deleteProfile() throws IOException, JSONException {
-        String  url;
-        String  status;
+    public boolean deleteProfile() throws IOException, JSONException {
+        String url;
+        String status;
         String urlParameters;
         JSONObject jsonObject;
 
@@ -483,7 +480,7 @@ public class Profile implements Comparable<Profile>{
         return false;
     }
 
-    public void     printProfile() {
+    public void printProfile() {
         System.out.println("Id: " + this.id);
         System.out.println("Name: " + this.name);
         System.out.println("headType: " + this.headType);
@@ -492,15 +489,15 @@ public class Profile implements Comparable<Profile>{
         System.out.println("points: " + this.points);
         System.out.println("teamId: " + this.teamId);
         System.out.println("isAdmin: " + this.isAdmin);
-        if (itemList != null) {
-            for (Item item: itemList) {
-                item.print();
-            }
-        }
+//        if (itemList != null) {
+//            for (Item item : itemList) {
+//                item.print();
+//            }
+//        }
     }
 
-    public void     buyItem(String itemType) {
-        int     itemId;
+    public void buyItem(String itemType) {
+        int itemId;
 
         //itemId = Item.getId(itemType);
     }
@@ -560,7 +557,7 @@ public class Profile implements Comparable<Profile>{
 
     public static Texture changeFaceType(Pixmap background, int headType, int bodyType) {
         Texture mergedImage;
-        Pixmap  itemPixmap;
+        Pixmap itemPixmap;
 
         if (headType <= 0 || headType > 2)
             headType = 1;
@@ -580,17 +577,17 @@ public class Profile implements Comparable<Profile>{
     }
 
     public static Texture changeFaceType(int headType, int bodyType) {
-        Pixmap  pixmap;
+        Pixmap pixmap;
 
         pixmap = new Pixmap(Gdx.files.internal("default.png"));
         return changeFaceType(pixmap, headType, bodyType);
     }
 
-    public boolean     buyItem(int id) throws IOException, JSONException {
-        String      urlParameters;
-        String		url;
-        JSONObject  jsonObject;
-        String		result;
+    public boolean buyItem(int id) throws IOException, JSONException {
+        String urlParameters;
+        String url;
+        JSONObject jsonObject;
+        String result;
 
         url = JsonHandler.domain + "/buy_item";
         urlParameters = PROFILE_ID + "=" + this.id;
@@ -605,7 +602,7 @@ public class Profile implements Comparable<Profile>{
     public int getItemStatus(int id) {
         if (itemList == null)
             return Item.STORE_ITEM;
-        for (Item item: itemList) {
+        for (Item item : itemList) {
             if (item.getId() == id)
                 return item.isEquipped() ? Item.EQUIPPED_ITEM : Item.UNEQUIPPED_ITEM;
         }
@@ -613,10 +610,10 @@ public class Profile implements Comparable<Profile>{
     }
 
     public void unequipItem(int itemId) throws IOException, JSONException {
-        String      url;
-        String      urlParameters;
+        String url;
+        String urlParameters;
 
-        for (Item item: itemList) {
+        for (Item item : itemList) {
             if (item.getId() == itemId) {
                 item.unequip();
             }
@@ -628,11 +625,11 @@ public class Profile implements Comparable<Profile>{
     }
 
     public void equipItem(int itemId) throws IOException, JSONException {
-        String      url;
-        String      urlParameters;
-        String      type = null;
+        String url;
+        String urlParameters;
+        String type = null;
 
-        for (Item item: itemList) {
+        for (Item item : itemList) {
             if (item.getId() == itemId) {
                 type = item.getType().split("_")[1];
                 item.equip();
@@ -647,7 +644,7 @@ public class Profile implements Comparable<Profile>{
         JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
         if (type.equals("axe"))
             type = "sword";
-        for (Item item: itemList) {
+        for (Item item : itemList) {
             if (item.getId() != itemId) {
                 if (item.getType().contains(type))
                     item.unequip();
@@ -658,18 +655,17 @@ public class Profile implements Comparable<Profile>{
     }
 
 
-
-    public boolean      doActivity(int activityId) throws IOException, JSONException {
-        String      urlParameters;
-        String		url;
-        JSONObject  jsonObject;
-        String		result;
+    public boolean doActivity(int activityId) throws IOException, JSONException {
+        String urlParameters;
+        String url;
+        JSONObject jsonObject;
+        String result;
 
         url = JsonHandler.domain + "/do_activity";
         urlParameters = Profile.PROFILE_ID + "=" + id;
         urlParameters += "&" + Activity.ACTIVITY_ID + "=" + activityId;
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
-        if(jsonObject == null)
+        if (jsonObject == null)
             return false;
         this.points = jsonObject.getInt("points");
         return jsonObject.getString("status").equals("success");
@@ -678,10 +674,10 @@ public class Profile implements Comparable<Profile>{
 
     public boolean updateActivity(int activityId, String activityName, int activityReward)
             throws IOException, JSONException {
-        String      urlParameters;
-        String		url;
-        JSONObject  jsonObject;
-        String		result;
+        String urlParameters;
+        String url;
+        JSONObject jsonObject;
+        String result;
 
         url = JsonHandler.domain + "/update_activity";
         urlParameters = Team.TEAM_ID + "=" + teamId;
@@ -689,38 +685,39 @@ public class Profile implements Comparable<Profile>{
         urlParameters += "&" + Activity.ACTIVITY_NAME + "=" + activityName;
         urlParameters += "&" + Activity.ACTIVITY_REWARD + "=" + activityReward;
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
-        if(jsonObject == null)
+        if (jsonObject == null)
             return false;
         return jsonObject.getString("status").equals("success");
     }
-    public boolean deleteActivity( int activityId)
+
+    public boolean deleteActivity(int activityId)
             throws IOException, JSONException {
-        String      urlParameters;
-        String		url;
-        JSONObject  jsonObject;
-        String		result;
+        String urlParameters;
+        String url;
+        JSONObject jsonObject;
+        String result;
 
         url = JsonHandler.domain + "/delete_activity";
         urlParameters = Team.TEAM_ID + "=" + teamId;
         urlParameters += "&" + Activity.ACTIVITY_ID + "=" + activityId;
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "DELETE");
-        if(jsonObject == null)
+        if (jsonObject == null)
             return false;
         return jsonObject.getString("status").equals("success");
     }
 
     public boolean createActivity(String name) throws IOException, JSONException {
-        String      urlParameters;
-        String		url;
-        JSONObject  jsonObject;
-        String		result;
+        String urlParameters;
+        String url;
+        JSONObject jsonObject;
+        String result;
 
         url = JsonHandler.domain + "/create_activity";
         urlParameters = Team.TEAM_ID + "=" + teamId;
         urlParameters += "&" + Activity.ACTIVITY_NAME + "=" + name;
         urlParameters += "&" + Activity.ACTIVITY_REWARD + "=" + 0;
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
-        if(jsonObject == null)
+        if (jsonObject == null)
             return false;
         return jsonObject.getString("status").equals("success");
     }
