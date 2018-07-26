@@ -59,6 +59,9 @@ public class EarnPointsScreen implements Screen {
     private SettingsPopup settingsPopup;
     private ParallaxBackground parallaxBackground;
 
+
+
+
     public EarnPointsScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
