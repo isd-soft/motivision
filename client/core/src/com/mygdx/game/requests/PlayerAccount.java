@@ -5,16 +5,11 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
 import java.net.Socket;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -239,13 +234,9 @@ public class PlayerAccount {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println("profile " + ((profile == null) ? "= null" : "!= null"));
+//        System.out.println("profile " + ((profile == null) ? "= null" : "!= null"));
         if (profile == null)
             return false;
-        if (profile.isAdmin())
-            System.out.println("Profile is admin");
-        else
-            System.out.println("Profile is not an admin");
         return profile.isAdmin();
     }
 
@@ -332,10 +323,10 @@ public class PlayerAccount {
         return result;
     }
 
-    public static boolean updateTeam() {
+    public static boolean changeTeamParameters() {
         if (profile == null)
             return false;
-        return team.updateTeam();
+        return team.changeTeamParameters();
     }
 
     public static boolean doActivity(int activityId) throws IOException, JSONException {
@@ -373,6 +364,10 @@ public class PlayerAccount {
                 return;
         }
         team = Team.getTeam(profile.getTeamId());
+    }
+
+    public static void updateTeam() {
+        team.loadAllCharactersFromTeam();
     }
 
     public static void printAllMembers() {
