@@ -88,11 +88,13 @@ public class JsonHandler {
         byte[] postData = urlParameters.getBytes();
 
         HttpURLConnection con = null;
+//        System.out.println("Connection Timeout: " + con.getConnectTimeout());
         try {
 
             URL myurl = new URL(url);
             con = (HttpURLConnection) myurl.openConnection();
 
+            con.setConnectTimeout(3000);
             con.setDoOutput(true);
             con.setRequestMethod(requestMethod);
             DataOutputStream wr;
@@ -167,22 +169,33 @@ public class JsonHandler {
         }
     }
 
-    public static JSONObject readJsonFromUrl(String url, String urlParameters, String requestMethod) throws IOException, JSONException {
+    public static JSONObject readJsonFromUrl(String urlString, String urlParameters, String requestMethod) throws IOException, JSONException {
         String jsonText;
         InputStream inputStream;
         BufferedReader bufferedReader;
+        URL url;
 
         if (requestMethod.equals("POST")) {
-            jsonText = POSTMethod(url, urlParameters, requestMethod);
+            jsonText = POSTMethod(urlString, urlParameters, requestMethod);
         } else if (requestMethod.equals("GET")) {
-            if (url.equals(""))
-                inputStream = new URL(url).openStream();
-            else
-                inputStream = new URL(url + "?" + urlParameters).openStream();
-            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            if (urlString.equals("")) {
+                url = new URL(urlString);
+                URLConnection connection = url.openConnection();
+                // set the connection timeout to 5 seconds
+                connection.setConnectTimeout(3000);
+                bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            }
+            else {
+                url = new URL(urlString + "?" + urlParameters);
+                URLConnection connection = url.openConnection();
+                // set the connection timeout to 5 seconds
+                connection.setConnectTimeout(3000);
+                bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            }
+//            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             jsonText = readAll(bufferedReader);
         } else {
-            jsonText = requestMethod(url + "?" + urlParameters, requestMethod);
+            jsonText = requestMethod(urlString + "?" + urlParameters, requestMethod);
         }
         return readJsonFromUrl(jsonText);
     }

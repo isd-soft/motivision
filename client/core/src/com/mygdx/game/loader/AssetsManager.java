@@ -108,6 +108,19 @@ public class AssetsManager {
     private final String layer10 = "forest/layer10.png";
     private final String layer11 = "forest/layer11.png";
 
+
+    private final String player1 = "forest/layer1.1.png";
+    private final String player2 = "forest/layer2.1.png";
+    private final String player3 = "forest/layer3.1.png";
+    private final String player4 = "forest/layer4.1.png";
+    private final String player5 = "forest/layer5.1.png";
+    private final String player6 = "forest/layer6.1.png";
+    private final String player7 = "forest/layer7.1.png";
+    private final String player8 = "forest/layer8.1.png";
+    private final String player9 = "forest/layer9.1.png";
+    private final String player10 = "forest/layer10.1.png";
+    private final String player11 = "forest/layer11.1.png";
+
     private final String universal = "universalbg.png";
 
     private AssetsManager() {
@@ -153,6 +166,17 @@ public class AssetsManager {
         aManager.load(layer10, Texture.class);
         aManager.load(layer11, Texture.class);
 
+        aManager.load(player1, Texture.class);
+        aManager.load(player2, Texture.class);
+        aManager.load(player3, Texture.class);
+        aManager.load(player4, Texture.class);
+        aManager.load(player5, Texture.class);
+        aManager.load(player6, Texture.class);
+        aManager.load(player7, Texture.class);
+        aManager.load(player8, Texture.class);
+        aManager.load(player9, Texture.class);
+        aManager.load(player10, Texture.class);
+        aManager.load(player11, Texture.class);
 //        aManager.load(knightIronHead, Texture.class);
 //        aManager.load(knightIronBody, Texture.class);
 //        aManager.load(knightIronLeftArm, Texture.class);
@@ -278,7 +302,7 @@ public class AssetsManager {
     public Array<Texture> getLayers() {
         Array<Texture> array = new Array<Texture>();
         for (int i = 1; i < 12; i++) {
-            Texture texture = aManager.get("forest/layer" + i + ".png");
+            Texture texture = aManager.get("forest/layer" + i + ".1.png");
             texture.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
             array.add(texture);
         }

@@ -39,8 +39,8 @@ import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
 import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 
 public class CharacterProfileScreen implements Screen {
-    private static final int    YES = 0;
-    private static final int    CANCEL = 1;
+    private static final int YES = 0;
+    private static final int CANCEL = 1;
     private GGame parent;
     private Stage stage;
     private Skin skin;
@@ -84,6 +84,7 @@ public class CharacterProfileScreen implements Screen {
         settingsPopup = new SettingsPopup();
 
     }
+
     @Override
     public void show() {
         //take number of points from DB
@@ -115,7 +116,7 @@ public class CharacterProfileScreen implements Screen {
         TextButton earnPointsButton = new TextButton("Earn Points", skin);
         TextButton teamMembersButton = new TextButton("Team Members", skin);
         final TextButton lastBattleButton = new TextButton("Last battle", skin);
-        TextButton manageTeamButton = new  TextButton("Manage Team", skin);
+        TextButton manageTeamButton = new TextButton("Manage Team", skin);
         TextButton settingsButton = new TextButton("Settings", skin);
         TextButton backButton = new TextButton("Back", skin);
 
@@ -126,7 +127,7 @@ public class CharacterProfileScreen implements Screen {
 
         earnPointsButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
 
                 parent.changeScreen(parent.getEarnPoints());
@@ -135,7 +136,7 @@ public class CharacterProfileScreen implements Screen {
 
         teamMembersButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
                 parent.changeScreen(parent.getTeamMembers());
             }
@@ -143,9 +144,9 @@ public class CharacterProfileScreen implements Screen {
 
         lastBattleButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
-                     parent.changeScreen(parent.getLastBattle());
+                //parent.changeScreen(parent.getLastBattle());
 
             }
         });
@@ -153,19 +154,17 @@ public class CharacterProfileScreen implements Screen {
         manageTeamButton.addListener(new ManageTeamButton());
 
 
-
         settingsButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
                 settingsPopup.show(stage);
             }
         });
 
 
-
         backButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor){
+            public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
                 parent.changeScreen(parent.getCharacterSelect());
             }
@@ -183,45 +182,45 @@ public class CharacterProfileScreen implements Screen {
         ArrayList<Integer> numberOfItems = new ArrayList<Integer>();
 
         //here should go i< activities and activities should be taken from Data Base
-        for (int i = 1; i <13; i++) {
+        for (int i = 1; i < 13; i++) {
             numberOfItems.add(i);
         }
 
         //create and fill table with buttons and labels
 
-        for (int i = 1; i<5; i++) {
+        for (int i = 1; i < 5; i++) {
             int x = 0;
-            if(i == 1){
-                for(int e = 0; e < 3; e++){
-                    imageButton =  new ImageButton((addImage("store_items/sword_" + (i+e) + ".png", 1 + e)));
-                    imageButton.addListener(new ClickButton((i+e) + "_sword", 1 + e));
+            if (i == 1) {
+                for (int e = 0; e < 3; e++) {
+                    imageButton = new ImageButton((addImage("store_items/sword_" + (i + e) + ".png", 1 + e)));
+                    imageButton.addListener(new ClickButton((i + e) + "_sword", 1 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
-            }else if(i == 2) {
-                for(int e = 0; e < 3; e++){
-                    imageButton =  new ImageButton((addImage("store_items/shield_" + ((i-1)+e) + ".png", 4 + e)));
-                    imageButton.addListener(new ClickButton(((i-1)+e) + "_shield", 4 + e));
+            } else if (i == 2) {
+                for (int e = 0; e < 3; e++) {
+                    imageButton = new ImageButton((addImage("store_items/shield_" + ((i - 1) + e) + ".png", 4 + e)));
+                    imageButton.addListener(new ClickButton(((i - 1) + e) + "_shield", 4 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
-            }else if(i == 3){
-                for(int e = 0; e < 3; e++) {
-                    imageButton = new ImageButton((addImage("store_items/armor_" + ((i-2)+e) + ".png", 7 + e)));
-                    imageButton.addListener(new ClickButton((i-2)+e + "_armor", 7 + e));
+            } else if (i == 3) {
+                for (int e = 0; e < 3; e++) {
+                    imageButton = new ImageButton((addImage("store_items/armor_" + ((i - 2) + e) + ".png", 7 + e)));
+                    imageButton.addListener(new ClickButton((i - 2) + e + "_armor", 7 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                 }
                 imageTable.row();
-            }else{
-                for(int e = 0; e < 3; e++){
-                    imageButton =  new ImageButton((addImage("store_items/leggins_" + ((i-3)+e) + ".png", 10 + e)));
-                    imageButton.addListener(new ClickButton( (i-3)+e + "_leggins", 10 + e));
+            } else {
+                for (int e = 0; e < 3; e++) {
+                    imageButton = new ImageButton((addImage("store_items/leggins_" + ((i - 3) + e) + ".png", 10 + e)));
+                    imageButton.addListener(new ClickButton((i - 3) + e + "_leggins", 10 + e));
                     imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
                     x = e;
                 }
                 imageTable.row();
             }
-            if(imageButton == null){
+            if (imageButton == null) {
                 imageButton = new ImageButton((addImage("store_items/sword_default.png", -1)));
             }
             //Set the button up
@@ -252,7 +251,7 @@ public class CharacterProfileScreen implements Screen {
         Table botButtonTable = new Table();
         botButtonTable.add(backButton).fill().expandX();
         botButtonTable.add(settingsButton).fill().expandX();
-        if(PlayerAccount.isAdmin())
+        if (PlayerAccount.isAdmin())
             botButtonTable.add(manageTeamButton).fill().expandX();
 
         itemTable.add(botButtonTable).fill().expandX();
@@ -271,7 +270,7 @@ public class CharacterProfileScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
-    public void     SelectDialog(String message) {
+    public void SelectDialog(String message) {
         final GDXButtonDialog bDialog = selectDialog.newDialog(GDXButtonDialog.class);
         bDialog.setTitle("Error");
         bDialog.setMessage(message);
@@ -281,7 +280,7 @@ public class CharacterProfileScreen implements Screen {
     }
 
     public TextureRegionDrawable addImage(String imagePath, int itemId) {
-        Pixmap  pixmap;
+        Pixmap pixmap;
 
         pixmap = new Pixmap(Gdx.files.internal(imagePath));
         if (itemId != -1) {
@@ -312,7 +311,7 @@ public class CharacterProfileScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width,height,true);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -335,19 +334,19 @@ public class CharacterProfileScreen implements Screen {
         stage.dispose();
     }
 
-    class ManageTeamButton extends ChangeListener{
+    class ManageTeamButton extends ChangeListener {
 
         @Override
         public void changed(ChangeEvent changeEvent, Actor actor) {
             gameSounds.clickSound();
-            if(PlayerAccount.isAdmin()){
+            if (PlayerAccount.isAdmin()) {
                 parent.changeScreen(parent.getAdmin());
-            }else{
+            } else {
                 manageRefuse();
             }
         }
 
-        private void manageRefuse(){
+        private void manageRefuse() {
             final GDXButtonDialog bDialog = manageTeamDialog.newDialog(GDXButtonDialog.class);
             bDialog.setTitle("Nah bro");
             bDialog.setClickListener(new ButtonClickListener() {
@@ -361,12 +360,13 @@ public class CharacterProfileScreen implements Screen {
             bDialog.build().show();
         }
     }
-    class ClickButton extends ChangeListener{
-        String  itemType;
-        int     itemId;
+
+    class ClickButton extends ChangeListener {
+        String itemType;
+        int itemId;
 
 
-        public void     confirmDialog() {
+        public void confirmDialog() {
             gameSounds.clickSound();
 
             final TextButton buyButton = new TextButton("buy", skin);
@@ -401,8 +401,7 @@ public class CharacterProfileScreen implements Screen {
                                 gameSounds.buySound();
                                 buyLabel.setText("Nice, go back");
                             }
-                        }
-                        else {
+                        } else {
                             buyLabel.setText("Already bought!");
                         }
                     } catch (IOException e) {
@@ -459,13 +458,11 @@ public class CharacterProfileScreen implements Screen {
             status = PlayerAccount.getItemStatus(itemId);
             if (status == Item.STORE_ITEM) {
                 confirmDialog();
-            }
-            else if (status == Item.EQUIPPED_ITEM) {
+            } else if (status == Item.EQUIPPED_ITEM) {
                 PlayerAccount.unequipItem(itemId);
                 gameSounds.itemSound();
                 CharacterProfileScreen.this.show();
-            }
-            else if (status == Item.UNEQUIPPED_ITEM) {
+            } else if (status == Item.UNEQUIPPED_ITEM) {
                 System.out.println("Start equipping " + itemType + "(" + itemId + ")");
                 PlayerAccount.equipItem(itemId);
                 gameSounds.itemSound();

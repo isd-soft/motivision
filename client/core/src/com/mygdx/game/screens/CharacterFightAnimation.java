@@ -29,12 +29,16 @@ public class CharacterFightAnimation extends Image{
     private int alo = 0;
     private int currentPosition = 1400;
 
-    private int monsterPosition = 800;
-    private int playerPosition = 200;
+    private int monsterPosition;
+    private int playerPosition;
 
+    //Health should be points, which are taken from DB
     private int monsterHealth = 200;
     private int playerHealth = 250;
-
+    //attack should be some math stuff dunno
+    private int playerAttack;
+    private int monsterAttack;
+    //
 
     AssetsManager assetsManager = AssetsManager.getInstance();
     Texture texture;
@@ -59,9 +63,7 @@ public class CharacterFightAnimation extends Image{
         enemy.flip(true, false);
 
         setPosition();
-        enemy.setAnimation("ATTACK");
         player.setTime(700);
-
         enemy.setTime(700);
 
 
@@ -76,9 +78,16 @@ public class CharacterFightAnimation extends Image{
 
     }
 
+    public void makeRandomAttack(){
+        playerAttack = (int) (Math.random() * 50);
+        monsterAttack = (int) (Math.random() * 50);
+    }
+
+
     public void init(String animation) {
         player.setAnimation(animation);
-        //enemy.setAnimation(animation);
+        enemy.setAnimation(animation);
+
         loader = new LoaderImplementation(data);
         loader.load(Gdx.files.internal("").path());
         drawer = new DrawerImplementation((LoaderImplementation) loader, batch, renderer);
@@ -100,8 +109,8 @@ public class CharacterFightAnimation extends Image{
     }
 
     public void setPosition() {
-        playerPosition = 200;
-        monsterPosition = 800;
+        playerPosition = -300;
+        monsterPosition = 1500;
     }
 
     @Override
@@ -109,13 +118,12 @@ public class CharacterFightAnimation extends Image{
 
         player.setPosition(playerPosition, 150);
         enemy.setPosition(monsterPosition, 150);
+
+
+
         player.update();
         enemy.update();
-
-
         //first is y second is x
-
-
 
         playerPosition += +2;
         monsterPosition += -2;
@@ -125,36 +133,60 @@ public class CharacterFightAnimation extends Image{
 
         drawer.draw(player);
         drawer.draw(enemy);
-        if (playerPosition > 450) {
-            monsterPosition = 550;
-            playerPosition = 450;
-            if (monsterHealth > 0) {
-                ;
-                player.getAnimation();
-                enemy.getAnimation();
+        if (playerPosition > 470 && monsterPosition < 730) {
+            monsterPosition = 730;
+            playerPosition = 470;
+
+            if (monsterHealth > 0 || playerHealth >0) {
+                mortalKombat();
+            }else{
+                setPosition();
             }
+
         }
 //            if (currentPosition < 520) {
 //                player.setAnimation("ATTACK");
             //drawer.draw(player);
 
-            if (currentPosition < 450) {
-                currentPosition = 450;
-                player.setAnimation("ATTACK");
-                enemy.setAnimation("DIE");
-
-                //drawer.draw(enemy);
-                if (enemy.getTime() == 600) {
-                    --alo;
-                    player.setAnimation("WALK");
-                    enemy.setAnimation("WALK");
-                    setPosition();
-
-                    //drawer.draw(player);
-                }
-            }
+//            if (currentPosition < 450) {
+//                currentPosition = 450;
+//                player.setAnimation("ATTACK");
+//                enemy.setAnimation("DIE");
+//
+//                //drawer.draw(enemy);
+//                if (enemy.getTime() == 600) {
+//                    --alo;
+//                    player.setAnimation("WALK");
+//                    enemy.setAnimation("WALK");
+//                    setPosition();
+//
+//                    //drawer.draw(player);
+//                }
+//            }
             //    }
 
         batch.end();
+    }
+
+    public void mortalKombat(){
+        player.setAnimation("ATTACK");
+        makeRandomAttack();
+        monsterHealth -= playerAttack;
+        if(player.getTime() >= 600){
+            enemy.setAnimation("DIE");
+            player.setAnimation("STAY");
+            if(enemy.getTime() >= 600){
+                enemy.setAnimation("ATTACK");
+                playerHealth -= monsterAttack;
+                if(enemy.getTime() >= 600) {
+                    player.setAnimation("DIE");
+                    enemy.setAnimation("STAY");
+                    if(player.getTime() >= 600){
+                        player.setAnimation("STAY");
+                    }
+                }
+            }
+        }
+
     }
 }
