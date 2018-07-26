@@ -63,7 +63,7 @@ public class EarnPointsScreen implements Screen {
         parent = g;
         dialogs = GDXDialogsSystem.install();
         animationTest = new CharacterWalkAnimation();
-        animationTest.init("WALK");
+        animationTest.init("IDLE");
         animationTest.setZIndex(10);
         parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
         parallaxBackground.setZIndex(0);
@@ -118,7 +118,7 @@ public class EarnPointsScreen implements Screen {
         TextButton backButton = new TextButton("Back", skin);
 
         // tables
-        Table activitiesTable = new Table();
+        final Table activitiesTable = new Table();
         screenTable = new Table();
         Table buttonTable = new Table();
 
@@ -187,7 +187,8 @@ public class EarnPointsScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
-                animationTest.changeAnimation("WALK");
+                animationTest.changeAnimation();
+
                 animationTest.zeroInts();
                 animationTest.setPosition();
                 parent.changeScreen(parent.getCharacterProfile());

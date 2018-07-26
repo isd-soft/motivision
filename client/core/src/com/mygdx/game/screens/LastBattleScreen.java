@@ -70,7 +70,6 @@ public class LastBattleScreen implements Screen {
         stage.setViewport(viewport);
         //animationScreenTest.setScreenAnimation(2, "ATTACK");
         // animationScreenTest.setZIndex(7);
-
     }
 
 
@@ -107,6 +106,7 @@ public class LastBattleScreen implements Screen {
         //create buttons Settings, Back and adding them listeners
 
         animationTest.toFront();
+        animationTest.init("WALK");
         stage.addActor(animationTest);
         //stage.addActor(animationTest);
         Gdx.input.setInputProcessor(stage);
