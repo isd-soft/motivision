@@ -44,24 +44,28 @@ public class GameSounds {
         VOLUME = volume;
     }
 
-    public float getVolumeStash(){
+    public float getVolumeStash() {
         return volumeStash;
     }
 
     public void buySound() {
-        buySound.play(VOLUME);
+        if (isEnabled())
+            buySound.play(VOLUME);
     }
 
     public void clickSound() {
-        clickSound.play(VOLUME);
+        if (isEnabled())
+            clickSound.play(VOLUME);
     }
 
     public void itemSound() {
-        itemSound.play(VOLUME);
+        if (isEnabled())
+            itemSound.play(VOLUME);
     }
 
     public void deniedSound() {
-        deniedSound.play(VOLUME);
+        if (isEnabled())
+            deniedSound.play(VOLUME);
     }
 
 }

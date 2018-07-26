@@ -374,8 +374,29 @@ public class CharacterProfileScreen implements Screen {
             Dialog dialog = new Dialog("Confirmation", skin) {
                 public void result(Object obj) {
                     gameSounds.clickSound();
-                    if (obj == "back") {
-                        CharacterProfileScreen.this.show();
+                    if (obj == "yes") {
+                        try {
+                            int status;
+                            status = PlayerAccount.getItemStatus(itemId);
+                            if (status == Item.STORE_ITEM) {
+                                if (!PlayerAccount.buyItem(itemId)) {
+                                    gameSounds.deniedSound();
+                                    denyDialog();
+                                    //buyLabel.setText("Not enough points");
+                                } else {
+                                    gameSounds.buySound();
+                                    CharacterProfileScreen.this.show();
+                                    //buyLabel.setText("Nice, go back");
+                                }
+                            }
+                            else {
+                                //buyLabel.setText("Already bought!");
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                 }
@@ -383,8 +404,9 @@ public class CharacterProfileScreen implements Screen {
             dialog.getContentTable().row();
             dialog.getContentTable().add(buyLabel);
             dialog.getContentTable().row();
-            dialog.getContentTable().add(buyButton);
-            dialog.button("back", "back");
+            //dialog.getContentTable().add(buyButton);
+            dialog.button("Yes", "yes");
+            dialog.button("No", "no");
             dialog.show(stage);
 
             buyButton.addListener(new ChangeListener() {
@@ -396,7 +418,8 @@ public class CharacterProfileScreen implements Screen {
                         if (status == Item.STORE_ITEM) {
                             if (!PlayerAccount.buyItem(itemId)) {
                                 gameSounds.deniedSound();
-                                buyLabel.setText("Not enough points");
+                                denyDialog();
+                                //buyLabel.setText("Not enough points");
                             } else {
                                 gameSounds.buySound();
                                 buyLabel.setText("Nice, go back");
@@ -441,6 +464,24 @@ public class CharacterProfileScreen implements Screen {
             bDialog.addButton("Cancel");
 
             bDialog.build().show();*/
+        }
+
+        public void     denyDialog() {
+            gameSounds.clickSound();
+
+            final TextButton okButton = new TextButton("Ok", skin);
+            final Label buyLabel = new Label("Not enough points!", skin, "big");
+            Dialog dialog = new Dialog("Deny", skin) {
+                public void result(Object obj) {
+                    gameSounds.clickSound();
+                }
+            };
+            dialog.getContentTable().row();
+            dialog.getContentTable().add(buyLabel);
+            dialog.getContentTable().row();
+            //dialog.getContentTable().add(okButton);
+            dialog.button("Ok", "yes");
+            dialog.show(stage);
         }
 
         public ClickButton(String name, int id) {
