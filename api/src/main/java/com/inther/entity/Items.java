@@ -15,7 +15,9 @@ public class Items {
 
     private String type;
 
-    private String imageUrl;
+    private String name;
+
+    private String imagePath;
 
     private int price;
 
@@ -32,8 +34,12 @@ public class Items {
         return type;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getName() {
+        return name;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 
     public int getPrice() {

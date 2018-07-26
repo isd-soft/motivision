@@ -44,7 +44,7 @@ public class ItemController {
     * @return status - success and items array
     * @return itemId and itemPrice
     * */
-    @RequestMapping(value = "/get_item_price")
+    @RequestMapping(value = "/get_store_items")
     public Map<String, Object> getItemPrice(){
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         List<Items> itemsList = itemsRepository.findAll();
@@ -54,6 +54,9 @@ public class ItemController {
             LinkedHashMap<String, Object> itemMap = new LinkedHashMap<>();
             itemMap.put("itemId", items.getId());
             itemMap.put("itemPrice", items.getPrice());
+            itemMap.put("itemName", items.getName());
+            itemMap.put("itemImagePath", items.getImagePath());
+            itemMap.put("itemType", items.getType());
             result.add(itemMap);
         }
         map.put("items", result);

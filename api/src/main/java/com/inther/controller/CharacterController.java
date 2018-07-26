@@ -7,9 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.*;
 
 @RestController
@@ -148,7 +145,8 @@ public class CharacterController {
             Map<String, Object> itemsMap = new TreeMap<>();
             itemsMap.put("itemId", items.getId());
             itemsMap.put("itemType", items.getType());
-            itemsMap.put("itemImageUrl", items.getImageUrl());
+            itemsMap.put("itemName", items.getName());
+            itemsMap.put("itemImagePath", items.getImagePath());
             itemsMap.put("itemPrice", items.getPrice());
             log.info(characterItem);
             itemsMap.put("equipped", characterItem.getEquipped());
@@ -252,7 +250,8 @@ public class CharacterController {
             Items items = iterator.next();
             itemsMap.put("itemId", items.getId());
             itemsMap.put("itemType", items.getType());
-            itemsMap.put("itemImageUrl", items.getImageUrl());
+            itemsMap.put("itemName", items.getName());
+            itemsMap.put("itemImagePath", items.getImagePath());
             itemsMap.put("itemPrice", items.getPrice());
             itemsMap.put("equipped", characterItemRepository.findCharacterItemByItemsIdAndCharacterId(items.getId(), characterId).get().getEquipped());
             result.add(itemsMap);
