@@ -39,7 +39,7 @@ public class CharacterWalkAnimation extends Image {
         texture = assetsManager.aManager.get("universalbg.png");
         image = new Image(texture);
 
-        image.setBounds(0, 0, 800, 480);
+        image.setBounds(0, 0, getWidth(), getHeight());
         renderer = new ShapeRenderer();
         batch = new SpriteBatch();
 
@@ -105,24 +105,27 @@ public class CharacterWalkAnimation extends Image {
         drawer.draw(player);
         if (alo > 0) {
             monsterDrawer.draw(enemy);
-            if (currentPosition < 450) {
-                currentPosition = 450;
-                player.setAnimation("ATTACK");
-                enemy.setAnimation("DIE");
+            if(currentPosition < 520) {
+                    player.setAnimation("ATTACK");
+                if (currentPosition < 450) {
+                    currentPosition = 450;
+                    enemy.setAnimation("DIE");
+//                    if (player.getTime()>=600) {
+//                        player.setAnimation("IDLE");
+                        System.out.println(player.getTime());
+                        if (player.getTime() >= 600) {
 
-                //drawer.draw(enemy);
-                System.out.println(player.getTime());
-                if (player.getTime() >= 600) {
+                            setPosition();
+                            --alo;
+                            player.setAnimation("IDLE");
+                            enemy.setAnimation("WALK");
+                            MonsterGenerator.randomize();
 
-                    setPosition();
-                    --alo;
-                    player.setAnimation("IDLE");
-                    enemy.setAnimation("WALK");
-                    MonsterGenerator.randomize();
-
-                    //drawer.draw(player);
+                            //drawer.draw(player);
+                        }
+                    }
                 }
-            }
+            //}
             //    }
         }
         batch.end();

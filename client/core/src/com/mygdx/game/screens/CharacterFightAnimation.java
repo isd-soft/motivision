@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.brashmonkey.spriter.Data;
 import com.brashmonkey.spriter.Drawer;
 import com.brashmonkey.spriter.Entity;
@@ -17,16 +19,16 @@ import com.mygdx.game.loader.AssetsManager;
 
 public class CharacterFightAnimation extends Image{
 
-    SpriteBatch batch;
-    ShapeRenderer renderer;
-    Player player;
-    Player enemy;
+    private SpriteBatch batch;
+    private ShapeRenderer renderer;
+    private Player player;
+    private Player enemy;
 
-    Loader loader;
-    Drawer drawer;
-    Data data;
+    private Loader loader;
+    private Drawer drawer;
+    private Data data;
 
-    private int alo = 0;
+
     private int currentPosition = 1400;
 
     private int monsterPosition;
@@ -38,7 +40,14 @@ public class CharacterFightAnimation extends Image{
     //attack should be some math stuff dunno
     private int playerAttack;
     private int monsterAttack;
+    //label for HP
+    Label playerHP;
+    Label monsterHP;
+
+    Skin skin;
     //
+
+    OgreDrawerImplementation monsterDrawer;
 
     AssetsManager assetsManager = AssetsManager.getInstance();
     Texture texture;
@@ -49,12 +58,19 @@ public class CharacterFightAnimation extends Image{
         this.setZIndex(5);
         parallaxBackground = new ParallaxBackground(assetsManager.getLayers());
         texture = assetsManager.aManager.get("universalbg.png");
+
         image = new Image(texture);
 
-        image.setBounds(0, 0, 800, 480);
+        image.setBounds(0, 0, getWidth(), getHeight());
         renderer = new ShapeRenderer();
         batch = new SpriteBatch();
 
+
+        //labels
+
+        skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
+//        playerHP = new Label("Players' HP " + playerHealth, skin);
+//        monsterHP = new Label("Monsters' HP " + monsterHealth, skin);
         SCMLReader reader = new SCMLReader(Gdx.files.internal("KekNew.scml").read());
         data = reader.getData();
         Entity humanEntity = data.getEntity(0);
@@ -91,6 +107,8 @@ public class CharacterFightAnimation extends Image{
         loader = new LoaderImplementation(data);
         loader.load(Gdx.files.internal("").path());
         drawer = new DrawerImplementation((LoaderImplementation) loader, batch, renderer);
+
+        monsterDrawer = new OgreDrawerImplementation((LoaderImplementation) loader, batch, renderer);
     }
 
 
@@ -100,13 +118,6 @@ public class CharacterFightAnimation extends Image{
 
     }
 
-    public void storeInts() {
-        ++alo;
-    }
-
-    public void zeroInts() {
-        alo = 0;
-    }
 
     public void setPosition() {
         playerPosition = -300;
@@ -116,6 +127,8 @@ public class CharacterFightAnimation extends Image{
     @Override
     public void act(float delta) {
 
+
+        makeRandomAttack();
         player.setPosition(playerPosition, 150);
         enemy.setPosition(monsterPosition, 150);
 
@@ -132,10 +145,10 @@ public class CharacterFightAnimation extends Image{
         batch.draw(texture, 0, 0, 1300, 800);
 
         drawer.draw(player);
-        drawer.draw(enemy);
-        if (playerPosition > 470 && monsterPosition < 730) {
-            monsterPosition = 730;
-            playerPosition = 470;
+        monsterDrawer.draw(enemy);
+        if (playerPosition > 485 && monsterPosition < 715) {
+            monsterPosition = 715;
+            playerPosition = 485;
 
             if (monsterHealth > 0 || playerHealth >0) {
                 mortalKombat();
@@ -168,25 +181,50 @@ public class CharacterFightAnimation extends Image{
         batch.end();
     }
 
-    public void mortalKombat(){
+    public void playerMove(){
         player.setAnimation("ATTACK");
-        makeRandomAttack();
         monsterHealth -= playerAttack;
         if(player.getTime() >= 600){
             enemy.setAnimation("DIE");
-            player.setAnimation("STAY");
-            if(enemy.getTime() >= 600){
-                enemy.setAnimation("ATTACK");
-                playerHealth -= monsterAttack;
-                if(enemy.getTime() >= 600) {
-                    player.setAnimation("DIE");
-                    enemy.setAnimation("STAY");
-                    if(player.getTime() >= 600){
-                        player.setAnimation("STAY");
-                    }
-                }
-            }
         }
+    }
+
+    public void ogreMove(){
+        enemy.setAnimation("ATTACK");
+    }
+
+    public void mortalKombat(){
+        player.setAnimation("ATTACK");
+        //makeRandomAttack();
+        monsterHealth -= playerAttack;
+        //monsterHP.setText("Monster HP:" + monsterHealth);
+        if(player.getTime() >= 600){
+            player.setAnimation("IDLE");
+            enemy.setAnimation("DIE");
+//            if(enemy.getTime() >= 600){
+//                enemy.setAnimation("ATTACK");
+//                playerHealth -= monsterAttack;
+//
+//                player.setAnimation("DIE");
+//                //playerHP.setText("Player HP:" + playerHealth);
+//                if(enemy.getTime() >= 600) {
+//                    player.setAnimation("DIE");
+//                    enemy.setAnimation("DIE");
+//                    if(player.getTime() >= 600){
+//                        player.setAnimation("DIE");
+//                    }
+//                }
+//            }
+        }
+
+        if(enemy.getTime() == 600){
+            enemy.setAnimation("ATTACK");
+            playerHealth -= monsterAttack;
+        }if(enemy.getTime() == 600){
+            enemy.setAnimation("IDLE");
+            player.setAnimation("DIE");
+        }
+
 
     }
 }
