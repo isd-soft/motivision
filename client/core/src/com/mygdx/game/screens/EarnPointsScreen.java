@@ -74,7 +74,8 @@ public class EarnPointsScreen implements Screen {
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         batch = new SpriteBatch();
         stage = new Stage();
-        viewport = new StretchViewport(800, 480, stage.getCamera());
+        viewport = new StretchViewport(800, 420 , stage.getCamera());
+
         stage.setViewport(viewport);
         settingsPopup = new SettingsPopup();
         //animationScreenTest.setScreenAnimation(2, "ATTACK");

@@ -85,7 +85,7 @@ public class TeamMembersScreen implements Screen {
         teamStats.setAlignment(Align.center);
 
         String teamName = PlayerAccount.getTeamName();
-        Label teamLabel = new Label(" Team: " + teamName, skin, "big");
+        Label teamLabel = new Label(" Team: " + teamName, skin);
 
         // buttons
         TextButton settingsButton = new TextButton("Settings", skin);

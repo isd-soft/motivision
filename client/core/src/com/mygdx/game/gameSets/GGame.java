@@ -53,6 +53,8 @@ public class GGame extends Game {
     private AnimationScreen animationScreen;
     private int i;
 
+
+
     public int getLogin() {
         return LOGIN;
     }
@@ -104,6 +106,7 @@ public class GGame extends Game {
     public int getLastBattle() {
         return LASTBATTLE;
     }
+
 
     public void changeScreen(int screen) {
         switch (screen) {
