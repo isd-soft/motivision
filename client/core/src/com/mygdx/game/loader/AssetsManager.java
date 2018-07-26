@@ -60,7 +60,7 @@ public class AssetsManager {
     private final String defaultWeapon = "Weapon/weapon_1.png";
     private final String ironWeapon = "Weapon/weapon_2.png";
     private final String steelWeapon = "Weapon/weapon_3.png";
-    private final String goldWeapon = "Weapon/weapon_4.pngg";
+    private final String goldWeapon = "Weapon/weapon_4.png";
 
     private final String elfHeadMale1 = "HeadTypes/head_1.png";
     private final String elfHeadMale2 = "HeadTypes/head_2.png";

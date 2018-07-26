@@ -73,32 +73,19 @@ public class Profile implements Comparable<Profile> {
         return true;
     }
 
-    /*public ArrayList<String>    getEquippedItems() {
-        ArrayList<String>   equippedItems = null;
-        if(itemList == null)
-            return null;
-        for (Item item: itemList) {
-            if (item.isEquipped()) {
-                if (equippedItems == null)
-                    equippedItems = new ArrayList<String>();
-                equippedItems.add(item.getName());
-            }
-        }
+    public ArrayList<Item> getEquippedItems() {
+        ArrayList<Item> equippedItems;
 
-        return equippedItems;
-    }*/
-    public ArrayList<String> getEquippedItems() {
-        ArrayList<String> equippedItems;
-
-        equippedItems = new ArrayList<String>();
+        equippedItems = new ArrayList<Item>();
         if (itemList == null) {
             return equippedItems;
         }
         power = 0;
         for (Item item : itemList) {
             if (item.isEquipped()) {
-                power += Item.getItemPrice(item.getId());
-                equippedItems.add(item.getName());
+                power += item.getPrice();
+                //power += Item.getItemPrice(item.getId());
+                equippedItems.add(item);
             }
         }
         return equippedItems;
@@ -154,8 +141,6 @@ public class Profile implements Comparable<Profile> {
                 gender = field.toCharArray()[0];
             profile.setGender(gender);
 
-            //field = jsonObject.getString(POINTS);
-            //System.out.println("Points = " + field);
             number = jsonObject.getInt(POINTS);
             profile.setPoints(number);
 
@@ -201,10 +186,10 @@ public class Profile implements Comparable<Profile> {
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
         if (jsonObject == null)
             return;
-        itemList = loadItemsFromServer(jsonObject);
+        loadItemsFromServer(jsonObject);
     }
 
-    private ArrayList<Item> loadItemsFromServer(JSONObject jsonObject) throws JSONException {
+    private void loadItemsFromServer(JSONObject jsonObject) throws JSONException {
         Item item;
         String field;
         String itemName;
@@ -213,24 +198,24 @@ public class Profile implements Comparable<Profile> {
         int itemId;
         int itemPrice;
         boolean equipped;
-        ArrayList<Item>  itemsList;
+        ArrayList<Item>  items;
 
-        itemsList = new ArrayList<Item>();
+        items = new ArrayList<Item>();
         if (jsonObject.has("items") == false)
-            return itemsList;
+            return;
         if (jsonObject.isNull("items"))
-            return itemsList;
+            return;
 
         if (jsonObject.get("items") == null)
-            return itemsList;
+            return;
         JSONArray arr;
         try {
             arr = jsonObject.getJSONArray("items");
         } catch (JSONException e) {
-            return itemsList;
+            return;
         }
         if (arr == null)
-            return itemsList;
+            return;
 
         for (int i = 0; i < arr.length(); i++) {
             itemId = arr.getJSONObject(i).getInt(Item.ITEM_ID);
@@ -243,9 +228,9 @@ public class Profile implements Comparable<Profile> {
             else
                 equipped = true;
             item = new Item(itemId, itemName, itemImage, itemPrice, itemType, equipped);
-            itemsList.add(item);
+            items.add(item);
         }
-        return itemsList;
+        itemList = items;
     }
 
     private static Profile createProfileWithId(int characterId, LinkedHashMap<String, String> profileParams) {
@@ -288,7 +273,6 @@ public class Profile implements Comparable<Profile> {
     }
 
     public static Profile createNewProfile(LinkedHashMap<String, String> profileParams) throws IOException, JSONException {
-        // List<BasicNameValuePair>    urlParameters;
         Profile profile;
         String url;
         String urlParameters = null;
@@ -311,26 +295,17 @@ public class Profile implements Comparable<Profile> {
                 urlParameters += "&";
             urlParameters += key + "=" + profileParams.get(key);
         }
-//        urlParameters = new ArrayList<BasicNameValuePair>();
-//        urlParameters.add(new BasicNameValuePair("login", login + ""));
-//        urlParameters.add(new BasicNameValuePair("password", password + ""));
-
-        //String urlParameters = "login=" + login + "&password=" + password;
         System.out.println(url + "?" + urlParameters);
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "POST");
         if (jsonObject == null)
             return null;
-        System.out.println(jsonObject);
-
         characterId = jsonObject.getInt(PROFILE_ID);
         profile = createProfileWithId(characterId, profileParams);
         if (profile == null)
             System.out.println("Profile is null");
         else
             System.out.println("Profile is not null");
-        //PlayerAccount.setProfile(profile);
         return profile;
-        //return getProfileFromUrl(url, urlParameters, true);
     }
 
     public static Profile getProfile(int profileId) throws IOException, JSONException {
@@ -340,125 +315,85 @@ public class Profile implements Comparable<Profile> {
 
         if (profileId == -1)
             return null;
-
         url = JsonHandler.domain + "/get_character";
         urlParameters = PROFILE_ID + "=" + profileId;
-
-        //String urlParameters = "name=Jack&occupation=programmer";
         System.out.println("Start get profile from URL");
         profile = getProfileFromUrl(url, urlParameters, "GET");
-        //PlayerAccount.setProfile(profile);
         return profile;
     }
 
-    private Texture splitImages(Map<String, String> itemImages) throws IOException {
-        BufferedImage result = new BufferedImage(466, 510, BufferedImage.TYPE_INT_RGB);
-        Graphics g = result.getGraphics();
-        BufferedImage bi;
+//    private static Pixmap addItemOnPixmap(Pixmap pixmap, String item, int x, int y) {
+//        Pixmap itemPixmap;
+//
+//        x += 40;
+//        itemPixmap = new Pixmap(Gdx.files.internal("items/" + item + ".png"));
+//        pixmap.drawPixmap(itemPixmap, x - itemPixmap.getWidth() / 2, y - itemPixmap.getHeight() / 2);
+//        itemPixmap.dispose();
+//        return pixmap;
+//    }
 
-        bi = ImageIO.read(new File("knight_3.png"));
-        g.drawImage(bi, 0, 0, null);
+//    private static Texture addItems(Map<String, String> itemImages, int headType, int bodyType) {
+//        Texture mergedImage;
+//        Pixmap pixmap;
+//        String legginsType;
+//        String armorType;
+//
+//        System.out.println("Start creating profile texture");
+//        pixmap = new Pixmap(Gdx.files.internal("default.png"));
+//        legginsType = itemImages.get("leggins");
+//        legginsType = legginsType.split("_")[0];
+//        armorType = itemImages.get("armor");
+//        armorType = armorType.split("_")[0];
+//        pixmap = addItemOnPixmap(pixmap, legginsType + "_left_leg", 227, 435);
+//        pixmap = addItemOnPixmap(pixmap, armorType + "_left_arm", 286, 304);
+////        if (armorType.equals("iron"))
+////            pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
+//        pixmap = addItemOnPixmap(pixmap, legginsType + "_right_leg", 163, 436);
+////        if (armorType.equals("iron") == false)
+//        pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
+//        pixmap = addItemOnPixmap(pixmap, armorType + "_right_arm", 91, 320);
+//        pixmap = addItemOnPixmap(pixmap, itemImages.get("sword"), 411, 280);
+////        pixmap = addItemOnPixmap(pixmap, itemImages.get("fingers"), 219, 304);
+//        if (itemImages.get("shield").equals("null") == false) {
+//            pixmap = addItemOnPixmap(pixmap, itemImages.get("shield"), 137, 373);
+//        }
+//        pixmap = addItemOnPixmap(pixmap, "steel_helmet", 184, 139);
+//        mergedImage = new Texture(pixmap);
+////        mergedImage = changeFaceType(pixmap, headType, bodyType);
+//        pixmap.dispose();
+//        return mergedImage;
+//    }
 
-        bi = ImageIO.read(new File("items/" + itemImages.get("leggins") + ".png"));
-        g.drawImage(bi, 30, 353, null);
-
-        bi = ImageIO.read(new File("items/" + itemImages.get("armor") + ".png"));
-        g.drawImage(bi, 0, 188, null);
-
-        bi = ImageIO.read(new File("items/" + itemImages.get("sword") + ".png"));
-        g.drawImage(bi, 203, 165, null);
-
-
-        bi = ImageIO.read(new File("items/" + itemImages.get("fingers") + ".png"));
-        g.drawImage(bi, 219, 304, null);
-
-        if (itemImages.get("shield").equals(null) == false) {
-            bi = ImageIO.read(new File("items/" + itemImages.get("shield") + ".png"));
-            g.drawImage(bi, 17, 320, null);
-        }
-
-        ImageIO.write(result, "png", new File("result.png"));
-
-        return new Texture("result.png");
-    }
-
-    private static Pixmap addItemOnPixmap(Pixmap pixmap, String item, int x, int y) {
-        Pixmap itemPixmap;
-
-        x += 40;
-        itemPixmap = new Pixmap(Gdx.files.internal("items/" + item + ".png"));
-        pixmap.drawPixmap(itemPixmap, x - itemPixmap.getWidth() / 2, y - itemPixmap.getHeight() / 2);
-        itemPixmap.dispose();
-        return pixmap;
-    }
-
-    private static Texture addItems(Map<String, String> itemImages, int headType, int bodyType) {
-        Texture mergedImage;
-        Pixmap pixmap;
-        String legginsType;
-        String armorType;
-
-        System.out.println("Start creating profile texture");
-        pixmap = new Pixmap(Gdx.files.internal("default.png"));
-        legginsType = itemImages.get("leggins");
-        legginsType = legginsType.split("_")[0];
-        armorType = itemImages.get("armor");
-        armorType = armorType.split("_")[0];
-        pixmap = addItemOnPixmap(pixmap, legginsType + "_left_leg", 227, 435);
-        pixmap = addItemOnPixmap(pixmap, armorType + "_left_arm", 286, 304);
-//        if (armorType.equals("iron"))
-//            pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
-        pixmap = addItemOnPixmap(pixmap, legginsType + "_right_leg", 163, 436);
-//        if (armorType.equals("iron") == false)
-        pixmap = addItemOnPixmap(pixmap, itemImages.get("armor"), 174, 308);
-        pixmap = addItemOnPixmap(pixmap, armorType + "_right_arm", 91, 320);
-        pixmap = addItemOnPixmap(pixmap, itemImages.get("sword"), 411, 280);
-//        pixmap = addItemOnPixmap(pixmap, itemImages.get("fingers"), 219, 304);
-        if (itemImages.get("shield").equals("null") == false) {
-            pixmap = addItemOnPixmap(pixmap, itemImages.get("shield"), 137, 373);
-        }
-        pixmap = addItemOnPixmap(pixmap, "steel_helmet", 184, 139);
-        mergedImage = new Texture(pixmap);
-//        mergedImage = changeFaceType(pixmap, headType, bodyType);
-        pixmap.dispose();
-        return mergedImage;
-    }
-
-    public Texture getProfileTexture() {
-        Map<String, String> itemImages;
-        Set<String> itemSet;
-
-        //System.out.println("procesing...");
-        itemImages = new LinkedHashMap<String, String>();
-        itemImages.put("sword", "default_sword");
-        itemImages.put("armor", "default_armor");
-//        itemImages.put("fingers", "default_fingers");
-        itemImages.put("leggins", "default_leggins");
-        itemImages.put("shield", "null");
-        itemSet = itemImages.keySet();
-        if (itemList != null) {
-            for (Item item : itemList) {
-                if (item.isEquipped() == false)
-                    continue;
-                for (String itemType : itemSet) {
-                    System.out.println(item.getType());
-                    if (item.getType().equals("steel_axe")) {
-                        System.out.println("Axe added!");
-                        itemImages.put("sword", "steel_sword");
-                    }
-                    if (item.getType().contains(itemType)) {
-                        itemImages.put(itemType, item.getType());
-//                        if (itemType.equals("armor")) {
-//                            itemImages.put("fingers", item.getType().replaceAll("armor", "fingers"));
-//                        }
-                    }
-                }
-            }
-        }
-        //System.out.println("procesing...");
-//        return new Texture("default.png");
-        return addItems(itemImages, headType, bodyType);
-    }
+//    public Texture getProfileTexture() {
+//        Map<String, String> itemImages;
+//        Set<String> itemSet;
+//
+//        //System.out.println("procesing...");
+//        itemImages = new LinkedHashMap<String, String>();
+//        itemImages.put("sword", "default_sword");
+//        itemImages.put("armor", "default_armor");
+////        itemImages.put("fingers", "default_fingers");
+//        itemImages.put("leggins", "default_leggins");
+//        itemImages.put("shield", "null");
+//        itemSet = itemImages.keySet();
+//        if (itemList != null) {
+//            for (Item item : itemList) {
+//                if (item.isEquipped() == false)
+//                    continue;
+//                for (String itemType : itemSet) {
+//                    System.out.println(item.getType());
+//                    if (item.getType().equals("steel_axe")) {
+//                        System.out.println("Axe added!");
+//                        itemImages.put("sword", "steel_sword");
+//                    }
+//                    if (item.getType().contains(itemType)) {
+//                        itemImages.put(itemType, item.getType());
+//                    }
+//                }
+//            }
+//        }
+//        return addItems(itemImages, headType, bodyType);
+//    }
 
     public boolean deleteProfile() throws IOException, JSONException {
         String url;
@@ -471,35 +406,12 @@ public class Profile implements Comparable<Profile> {
         url = JsonHandler.domain + "/delete_character";
         urlParameters = PROFILE_ID + "=" + id;
         jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "DELETE");
-        //System.out.println(url + "?" + urlParameters);
         if (jsonObject == null)
             return false;
         status = jsonObject.getString("status");
         if (status.equals("success"))
             return true;
         return false;
-    }
-
-    public void printProfile() {
-        System.out.println("Id: " + this.id);
-        System.out.println("Name: " + this.name);
-        System.out.println("headType: " + this.headType);
-        System.out.println("bodyType: " + this.bodyType);
-        System.out.println("gender: " + this.gender);
-        System.out.println("points: " + this.points);
-        System.out.println("teamId: " + this.teamId);
-        System.out.println("isAdmin: " + this.isAdmin);
-//        if (itemList != null) {
-//            for (Item item : itemList) {
-//                item.print();
-//            }
-//        }
-    }
-
-    public void buyItem(String itemType) {
-        int itemId;
-
-        //itemId = Item.getId(itemType);
     }
 
     public int getId() {
@@ -522,20 +434,8 @@ public class Profile implements Comparable<Profile> {
         this.bodyType = bodyType;
     }
 
-    public char getGender() {
-        return gender;
-    }
-
     public void setGender(char gender) {
         this.gender = gender;
-    }
-
-    public int getBodyType() {
-        return bodyType;
-    }
-
-    public int getHeadType() {
-        return headType;
     }
 
     public String getName() {
@@ -555,33 +455,32 @@ public class Profile implements Comparable<Profile> {
     }
 
 
-    public static Texture changeFaceType(Pixmap background, int headType, int bodyType) {
-        Texture mergedImage;
-        Pixmap itemPixmap;
+//    public static Texture changeFaceType(Pixmap background, int headType, int bodyType) {
+//        Texture mergedImage;
+//        Pixmap itemPixmap;
+//
+//        if (headType <= 0 || headType > 2)
+//            headType = 1;
+//        if (bodyType <= 0 || bodyType > 3)
+//            bodyType = 1;
+//
+//        itemPixmap = new Pixmap(Gdx.files.internal("head/body" + bodyType + ".png"));
+//        background.drawPixmap(itemPixmap, 0, 0);
+//        itemPixmap.dispose();
+//        itemPixmap = new Pixmap(Gdx.files.internal("head/head" + headType + ".png"));
+//        background.drawPixmap(itemPixmap, 0, 0);
+//        itemPixmap.dispose();
+//        mergedImage = new Texture(background);
+//        System.out.println("Texture created");
+//        return mergedImage;
+//    }
 
-        if (headType <= 0 || headType > 2)
-            headType = 1;
-        if (bodyType <= 0 || bodyType > 3)
-            bodyType = 1;
-
-        itemPixmap = new Pixmap(Gdx.files.internal("head/body" + bodyType + ".png"));
-        background.drawPixmap(itemPixmap, 0, 0);
-        itemPixmap.dispose();
-        itemPixmap = new Pixmap(Gdx.files.internal("head/head" + headType + ".png"));
-        background.drawPixmap(itemPixmap, 0, 0);
-        itemPixmap.dispose();
-        mergedImage = new Texture(background);
-        System.out.println("Texture created");
-        // background.dispose();
-        return mergedImage;
-    }
-
-    public static Texture changeFaceType(int headType, int bodyType) {
-        Pixmap pixmap;
-
-        pixmap = new Pixmap(Gdx.files.internal("default.png"));
-        return changeFaceType(pixmap, headType, bodyType);
-    }
+//    public static Texture changeFaceType(int headType, int bodyType) {
+//        Pixmap pixmap;
+//
+//        pixmap = new Pixmap(Gdx.files.internal("default.png"));
+//        return changeFaceType(pixmap, headType, bodyType);
+//    }
 
     public boolean buyItem(int id) throws IOException, JSONException {
         String urlParameters;
@@ -631,7 +530,7 @@ public class Profile implements Comparable<Profile> {
 
         for (Item item : itemList) {
             if (item.getId() == itemId) {
-                type = item.getType().split("_")[1];
+                type = item.getType();
                 item.equip();
                 System.out.println("Item found!");
                 break;
@@ -642,14 +541,9 @@ public class Profile implements Comparable<Profile> {
         urlParameters = PROFILE_ID + "=" + this.id;
         urlParameters += "&" + Item.ITEM_ID + "=" + itemId;
         JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
-        if (type.equals("axe"))
-            type = "sword";
         for (Item item : itemList) {
-            if (item.getId() != itemId) {
-                if (item.getType().contains(type))
-                    item.unequip();
-                if (item.getType().equals("steel_axe") && type.equals("sword"))
-                    item.unequip();
+            if (item.getId() != itemId && item.getType().equals(type)) {
+                item.unequip();
             }
         }
     }
@@ -740,7 +634,6 @@ public class Profile implements Comparable<Profile> {
         if (headType == 2)
             headNumber += 3;
         headNumber += bodyType;
-        //System.out.println("Head number = " + headNumber);
         return headNumber;
     }
 
@@ -748,18 +641,3 @@ public class Profile implements Comparable<Profile> {
         return power;
     }
 }
-
-
-/*public ArrayList<String>    getEquippedItems() {
-        ArrayList<String>   equippedItems = null;
-
-        for (Item item: itemList) {
-            if (item.isEquipped()) {
-                if (equippedItems == null)
-                    equippedItems = new ArrayList<String>();
-                equippedItems.add(item.getName());
-            }
-        }
-        return equippedItems;
-    }
-    */

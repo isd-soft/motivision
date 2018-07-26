@@ -92,17 +92,17 @@ public class LastBattleScreen implements Screen {
         backgroundTexture = parent.assetsManager.aManager.get("background.png");
 
         // Character Sprite
-        Texture texture = null;
-        try {
-            texture = PlayerAccount.getProfileTexture();
-        } catch (IOException e) {
-            texture = new Texture("default.png");
-            e.printStackTrace();
-        } catch (JSONException e) {
-            texture = new Texture("default.png");
-            e.printStackTrace();
-        }
-        Image image = new Image(texture);
+//        Texture texture = null;
+//        try {
+//            texture = PlayerAccount.getProfileTexture();
+//        } catch (IOException e) {
+//            texture = new Texture("default.png");
+//            e.printStackTrace();
+//        } catch (JSONException e) {
+//            texture = new Texture("default.png");
+//            e.printStackTrace();
+//        }
+//        Image image = new Image(texture);
         //create buttons Settings, Back and adding them listeners
 
         animationTest.toFront();

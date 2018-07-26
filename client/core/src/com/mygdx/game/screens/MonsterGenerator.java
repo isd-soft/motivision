@@ -5,7 +5,7 @@ import com.mygdx.game.requests.PlayerAccount;
 import java.util.Random;
 
 public class MonsterGenerator {
-    public static final String[] types = {"default", "iron", "steel", "gold"};
+    public static final String[] types = {"1", "2", "3", "4"};
     public static final int[] POWERS = {0, 333, 555, 777};
     private static final float MIN_SCALE = 0.5f;
     private static final float MAX_SCALE = 2f;
@@ -82,11 +82,13 @@ public class MonsterGenerator {
     }
 
     public static void randomize() {
-        monster = new MonsterGenerator();
+        monster = null;
     }
 
     public static MonsterGenerator getInstance() {
         if (monster == null)
+            monster = new MonsterGenerator();
+        else if (monster.power > PlayerAccount.getProfilePower())
             monster = new MonsterGenerator();
         return monster;
     }

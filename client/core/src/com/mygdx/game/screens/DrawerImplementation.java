@@ -9,6 +9,7 @@ import com.brashmonkey.spriter.Loader;
 import com.brashmonkey.spriter.Player;
 import com.brashmonkey.spriter.Timeline;
 import com.mygdx.game.gameSets.GGame;
+import com.mygdx.game.requests.Item;
 import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
@@ -22,7 +23,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
 
     SpriteBatch batch;
     ShapeRenderer renderer;
-    ArrayList<String> items = PlayerAccount.getEquippedItems();
+    ArrayList<Item> items = PlayerAccount.getEquippedItems();
     LoaderImplementation loaderImplementation;
     public static String characterName;
 
@@ -61,7 +62,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
         return loaderImplementation.get("empty");
     }
 
-    private Sprite getSprite(ArrayList<String> itemsList, int headNumber, Timeline.Key.Object object) {
+    private Sprite getSprite(ArrayList<Item> itemsList, int headNumber, Timeline.Key.Object object) {
         Sprite sprite = null;
         // make a map
 
@@ -71,25 +72,9 @@ public class DrawerImplementation extends Drawer<Sprite> {
             switch (BodyParts.getById(object.ref.file)) {
                 case BODY:
                     // default sprite init here
-                    for (String item : itemsList) {
-                        if (item.contains("armor")) {
-                            String spritePath;
-                            String[] word = item.split("_");
-                            if (word[0].equals("iron")) {
-                                spritePath = "body_iron";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("steel")) {
-                                spritePath = "body_steel";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("gold")) {
-                                spritePath = "body_gold";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
+                    for (Item item : itemsList) {
+                        if(item.getType().equals("armor")){
+                            sprite = loaderImplementation.get(item.getImagePath());
                         }
                     }
                     break;
@@ -101,140 +86,44 @@ public class DrawerImplementation extends Drawer<Sprite> {
                         sprite = loaderImplementation.getHead(4);
                     break;
                 case LEFT_ARM:
-                    for (String item : itemsList) {
-                        if (item.contains("armor")) {
-                            String spritePath;
-                            String[] word = item.split("_");
-                            if (word[0].equals("iron")) {
-                                spritePath = "left_arm_iron";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("steel")) {
-                                spritePath = "left_arm_steel";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("gold")) {
-                                spritePath = "left_arm_gold";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
+                    for (Item item : itemsList) {
+                        if(item.getType().equals("armor")){
+                            sprite = loaderImplementation.get("left_arm_" + item.getImagePath().replaceAll("armor_", ""));
                         }
                     }
                     break;
                 case RIGHT_ARM:
-                    for (String item : itemsList) {
-                        if (item.contains("armor")) {
-                            String spritePath;
-                            String[] word = item.split("_");
-                            if (word[0].equals("iron")) {
-                                spritePath = "right_arm_iron";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("steel")) {
-                                spritePath = "right_arm_steel";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("gold")) {
-                                spritePath = "right_arm_gold";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
+                    for (Item item : itemsList) {
+                        if(item.getType().equals("armor")){
+                            sprite = loaderImplementation.get("right_arm_" + item.getImagePath().replaceAll("armor_", ""));
                         }
                     }
                     break;
                 case WEAPON:
-                    for (String item : itemsList) {
-                        if (item.contains("sword") || item.contains("axe")) {
-                            String spritePath;
-                            String[] word = item.split("_");
-                            if (word[0].equals("iron")) {
-                                spritePath = "weapon_iron";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("steel")) {
-                                spritePath = "weapon_steel";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("gold")) {
-                                spritePath = "weapon_gold";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
+                    for (Item item : itemsList) {
+                        if(item.getType().equals("weapon")){
+                            sprite = loaderImplementation.get(item.getImagePath());
                         }
                     }
                     break;
                 case SHIELD:
-                    for (String item : itemsList) {
-                        if (item.contains("shield")) {
-                            String spritePath;
-                            String[] word = item.split("_");
-                            if (word[0].equals("iron")) {
-                                spritePath = "shield_iron";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("steel")) {
-                                spritePath = "shield_steel";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("gold")) {
-                                spritePath = "shield_gold";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
+                    for (Item item : itemsList) {
+                        if(item.getType().equals("shield")){
+                            sprite = loaderImplementation.get(item.getImagePath());
                         }
                     }
                     break;
                 case RIGHT_LEG:
-                    for (String item : itemsList) {
-                        if (item.contains("leggins")) {
-                            String spritePath;
-                            String[] word = item.split("_");
-                            if (word[0].equals("iron")) {
-                                spritePath = "right_leg_iron";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("steel")) {
-                                spritePath = "right_leg_steel";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("gold")) {
-                                spritePath = "right_leg_gold";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
+                    for (Item item : itemsList) {
+                        if(item.getType().equals("leggins")){
+                            sprite = loaderImplementation.get("right_leg_" + item.getImagePath().replaceAll("leggins_", ""));
                         }
                     }
                     break;
                 case LEFT_LEG:
-                    for (String item : itemsList) {
-                        if (item.contains("leggins")) {
-                            String spritePath;
-                            String[] word = item.split("_");
-                            if (word[0].equals("iron")) {
-                                spritePath = "left_leg_iron";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("steel")) {
-                                spritePath = "left_leg_steel";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
-                            if (word[0].equals("gold")) {
-                                spritePath = "left_leg_gold";
-                                sprite = loaderImplementation.get(spritePath);
-                                return sprite;
-                            }
+                    for (Item item : itemsList) {
+                        if(item.getType().equals("leggins")){
+                            sprite = loaderImplementation.get("left_leg_" + item.getImagePath().replaceAll("leggins_", ""));
                         }
                     }
                     break;
@@ -248,7 +137,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
         // default
         switch (BodyParts.getById(object.ref.file)) {
             case BODY:
-                sprite = loaderImplementation.get("body_default");
+                sprite = loaderImplementation.get("armor_1");
                 return sprite;
             case HEAD:
                 if (GGame.SCREEN_NUMBER == 4) {
@@ -257,22 +146,22 @@ public class DrawerImplementation extends Drawer<Sprite> {
                 sprite = loaderImplementation.getHead(headNumber);
                 return sprite;
             case LEFT_ARM:
-                sprite = loaderImplementation.get("left_arm_default");
+                sprite = loaderImplementation.get("left_arm_1");
                 return sprite;
             case RIGHT_ARM:
-                sprite = loaderImplementation.get("right_arm_default");
+                sprite = loaderImplementation.get("right_arm_1");
                 return sprite;
             case WEAPON:
-                sprite = loaderImplementation.get("weapon_default");
+                sprite = loaderImplementation.get("weapon_1");
                 return sprite;
             case SHIELD:
-                sprite = loaderImplementation.get("shield_default");
+                sprite = loaderImplementation.get("shield_1");
                 return sprite;
             case RIGHT_LEG:
-                sprite = loaderImplementation.get("right_leg_default");
+                sprite = loaderImplementation.get("right_leg_1");
                 return sprite;
             case LEFT_LEG:
-                sprite = loaderImplementation.get("left_leg_default");
+                sprite = loaderImplementation.get("left_leg_1");
                 return sprite;
             default:
                 sprite = loader.get(object.ref);
@@ -289,7 +178,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
 
 
         if (GGame.SCREEN_NUMBER != GGame.CREATECHARACTER - 1 && GGame.SCREEN_NUMBER != GGame.TEAMMEMBER - 1) {
-            ArrayList<String> itemsName = PlayerAccount.getEquippedItems();
+            ArrayList<Item> itemsName = PlayerAccount.getEquippedItems();
 
             if (itemsName != null) {
                 headNumber = PlayerAccount.getHeadNumber();
@@ -302,7 +191,7 @@ public class DrawerImplementation extends Drawer<Sprite> {
                 sprite = getEmptySprite();
         } else if (GGame.SCREEN_NUMBER == GGame.TEAMMEMBER - 1) {
             try {
-                ArrayList<String> itemsName = PlayerAccount.getTeamMemberEquippedItems(characterName);
+                ArrayList<Item> itemsName = PlayerAccount.getTeamMemberEquippedItems(characterName);
                 if (itemsName != null) {
                     headNumber = PlayerAccount.getTeamMemberHeadNumber(characterName);
                     sprite = getSprite(itemsName, headNumber, object);
