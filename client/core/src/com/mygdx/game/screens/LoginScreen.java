@@ -302,8 +302,8 @@ public class LoginScreen implements Screen {
         table.add(labelPassword);
         table.add(passwordField).fillX();
         table.row().pad(0, 0, 0, 0);
-        table.add(rememberMeLabel);
-        table.add(checkBoxRememberMe);
+        //table.add(rememberMeLabel);
+        //table.add(checkBoxRememberMe);
         table.row().pad(10, 0, 0, 0);
         table.add(register).fill();
         table.add(forgotPassword).fill();
