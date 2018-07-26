@@ -2,46 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/LoaderImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/libs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Animation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Box.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/CCDResolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Calculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Curve.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Data.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Dimension.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Drawer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Entity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/File.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/FileReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Folder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/IKObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/IKResolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Interpolator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/LibGdx/LibGdxAtlasLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/LibGdx/LibGdxDrawer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/LibGdx/LibGdxLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Loader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Mainline.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Meta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/PlayerTweener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Point.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Rectangle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/SCMLReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Spriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/SpriterException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Timeline.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/TweenedAnimation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/XmlReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/log/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/log/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/android/assets/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../client/android/assets/app.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/android/assets/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../client/android/assets/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../client/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/EarnPointsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/EarnPointsScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../client/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/GameProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/GameProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/JsonHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/requests/JsonHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/CharacterWalkAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/CharacterWalkAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/MonsterGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/MonsterGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/spriter/build/libs/spriter-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../client/spriter/build/libs/spriter-1.0.jar" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,11 +21,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TeamController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TeamController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2346">
-              <caret line="153" column="25" selection-start-line="153" selection-start-column="25" selection-end-line="153" selection-end-column="25" />
+            <state relative-caret-position="238">
+              <caret line="109" column="31" selection-start-line="109" selection-start-column="27" selection-end-line="109" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -124,15 +101,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="646">
               <caret line="46" column="44" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="3" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -224,7 +192,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="255" />
     <option name="y" value="-20" />
     <option name="width" value="655" />
@@ -238,8 +206,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -327,7 +293,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -641,13 +609,13 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.329582" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.3267974" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.3255814" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="5" />
       <window_info anchor="bottom" id="Java Enterprise" order="9" sideWeight="0.4969743" weight="0.329582" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4969743" weight="0.32843137" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.38987687" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.5239398" />
       <window_info anchor="bottom" id="Spring" order="9" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2747396" />
@@ -978,8 +946,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="3" selection-end-column="57" />
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
@@ -1002,8 +970,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2346">
-          <caret line="153" column="25" selection-start-line="153" selection-start-column="25" selection-end-line="153" selection-end-column="25" />
+        <state relative-caret-position="238">
+          <caret line="109" column="31" selection-start-line="109" selection-start-column="27" selection-end-line="109" selection-end-column="31" />
         </state>
       </provider>
     </entry>
