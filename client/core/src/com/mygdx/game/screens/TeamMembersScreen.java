@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.brashmonkey.spriter.Drawer;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.music.GameSounds;
+import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 import com.mygdx.game.requests.Team;
 
@@ -54,7 +55,7 @@ public class TeamMembersScreen implements Screen {
         if (selectedName == null) {
             selectedName = PlayerAccount.getProfileName();
         }
-            parent = g;
+        parent = g;
         Pixmap pixmap;
         animation = new CharacterWalkAnimation();
         animation.init("IDLE");
@@ -65,11 +66,8 @@ public class TeamMembersScreen implements Screen {
         stage = new Stage();
         viewport = new StretchViewport(800, 480, stage.getCamera());
         stage.setViewport(viewport);
-
         settingsPopup = new SettingsPopup();
-
     }
-
 
     @Override
     public void show() {
@@ -81,12 +79,13 @@ public class TeamMembersScreen implements Screen {
         if (selectedName == null)
             selectedName = PlayerAccount.getProfileName();
         DrawerImplementation.characterName = selectedName;
+        PlayerAccount.updateTeam();
         Label teamStats = new Label("", skin);
         teamStats.setText("Victories: " + PlayerAccount.getWins() + " Defeats: " + PlayerAccount.getLosses());
         teamStats.setAlignment(Align.center);
 
         String teamName = PlayerAccount.getTeamName();
-        Label teamLabel = new Label(" Team: " + teamName, skin, "big");
+        Label teamLabel = new Label(" Team: " + teamName, skin);
 
         // buttons
         TextButton settingsButton = new TextButton("Settings", skin);
