@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="gs-rest-service:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="motivision-1.war">
+      <element id="artifact" artifact-name="gs-rest-service:war exploded" />
+    </root>
+  </artifact>
+</component>

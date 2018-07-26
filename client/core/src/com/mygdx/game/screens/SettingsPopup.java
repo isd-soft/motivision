@@ -92,6 +92,7 @@ public class SettingsPopup {
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+
                 gameSounds.clickSound();
                 dialog.hide();
             }
