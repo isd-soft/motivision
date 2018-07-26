@@ -26,18 +26,19 @@ public class MonsterGenerator {
         Random rand;
 
         rand = new Random();
-        profilePower = (int) (PlayerAccount.getProfilePower() * 1.2f);
+        profilePower = (int) (PlayerAccount.getProfilePower() * 1.4f);
         if (power <= profilePower) {
             return;
         }
+        System.out.println("Normalize: " + profilePower + " vs " + power);
         if (bodyType > 0)
-            bodyType -= rand.nextInt(1);
+            bodyType -= rand.nextInt(2);
         if (legsType > 0)
-            legsType -= rand.nextInt(1);
+            legsType -= rand.nextInt(2);
         if (weaponType > 0)
-            weaponType -= rand.nextInt(1);
+            weaponType -= rand.nextInt(2);
         if (shieldType > 0)
-            shieldType -= rand.nextInt(1);
+            shieldType -= rand.nextInt(2);
         power = POWERS[bodyType] + POWERS[legsType];
         power += POWERS[weaponType] + POWERS[shieldType];
         normalizeMonsterPower();
@@ -46,23 +47,31 @@ public class MonsterGenerator {
     private MonsterGenerator() {
         Random rand;
         int index;
+        int profilePower = 0;
+        int minLevel = 0;
 
         rand = new Random();
         power = 0;
-
-        index = (int) rand.nextInt(4);
+        profilePower = PlayerAccount.getProfilePower();
+        if (profilePower >= 333 * 3)
+            minLevel++;
+        if (profilePower >= 555 * 3)
+            minLevel++;
+        if (profilePower >= 777 * 3)
+            minLevel++;
+        index = (int) rand.nextInt(4 - minLevel) + minLevel;
         bodyType = index;
         power += POWERS[index];
 
-        index = (int) rand.nextInt(4);
+        index = (int) rand.nextInt(4 - minLevel) + minLevel;
         legsType = index;
         power += POWERS[index];
 
-        index = (int) rand.nextInt(4);
+        index = (int) rand.nextInt(4 - minLevel) + minLevel;
         weaponType = index;
         power += POWERS[index];
 
-        index = (int) rand.nextInt(4);
+        index = (int) rand.nextInt(4 - minLevel) + minLevel;
         shieldType = index;
         power += POWERS[index];
         normalizeMonsterPower();

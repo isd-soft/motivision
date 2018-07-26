@@ -21,6 +21,10 @@ public class Item {
     public static final int EQUIPPED_ITEM = 1;
     public static final int UNEQUIPPED_ITEM = 2;
 
+    private static int  powerLevel1;
+    private static int  powerLevel2;
+    private static int  powerLevel3;
+
     private int id;
     private int image;
     private int price;
@@ -58,6 +62,8 @@ public class Item {
         String urlParameters;
         JSONObject jsonObject;
         JSONArray jsonArray;
+        int     maxPower;
+        int     price;
 
         url = JsonHandler.domain + "/get_item_price";
         urlParameters = "";
@@ -90,5 +96,17 @@ public class Item {
 
     public String getName() {
         return type;
+    }
+
+    public static int getPowerLevel1() {
+        return powerLevel1;
+    }
+
+    public static int getPowerLevel2() {
+        return powerLevel2;
+    }
+
+    public static int getPowerLevel3() {
+        return powerLevel3;
     }
 }
