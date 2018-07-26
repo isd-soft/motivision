@@ -448,7 +448,24 @@ public class AdminScreen implements Screen {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (NumberFormatException e) {
-                            DialogBox.showInfoDialog("Error", "Points cannot be string");
+                            //DialogBox.showInfoDialog("Error", "Points cannot be string or null");
+                            final Label modifyActivityErrorLabel = new Label("Points cannot be string or null", skin, "error");
+                            Dialog dialog = new Dialog("Error", skin) {
+                                @Override
+                                public void result(Object obj) {
+                                    gameSounds.clickSound();
+                                    if (obj == "ok") {
+                                        AdminScreen.this.show();
+                                    }
+                                    Gdx.input.setOnscreenKeyboardVisible(false);
+                                }
+                            };
+
+                            dialog.getContentTable().row();
+                            dialog.getContentTable().add(modifyActivityErrorLabel);
+                            dialog.getContentTable().row();
+                            dialog.button("ok", "ok");
+                            dialog.show(stage);
                         }
                         Gdx.input.setOnscreenKeyboardVisible(false);
                         AdminScreen.this.show();
@@ -522,10 +539,30 @@ public class AdminScreen implements Screen {
                     gameSounds.clickSound();
                     if (obj == "save") {
                         try {
-                            if (activityField.getText().length() < 6)
-                                DialogBox.showInfoDialog("Error", "Activity name must be at least 6 letters");
-                            else
+                            if (activityField.getText().length() < 6) {
+                                //DialogBox.showInfoDialog("Error", "Activity name must be at least 6 letters");
+                                final Label createActivityErrorLabel = new Label("Activity name must be at least 6 letters", skin, "error");
+                                Dialog dialog = new Dialog("Error", skin) {
+                                    @Override
+                                    public void result(Object obj) {
+                                        gameSounds.clickSound();
+                                        if (obj == "ok") {
+                                            AdminScreen.this.show();
+                                        }
+                                        Gdx.input.setOnscreenKeyboardVisible(false);
+                                    }
+                                };
+
+                                dialog.getContentTable().row();
+                                dialog.getContentTable().add(createActivityErrorLabel);
+                                dialog.getContentTable().row();
+                                dialog.button("ok", "ok");
+                                dialog.show(stage);
+                            }
+                            else {
                                 PlayerAccount.createActivity(activityField.getText());
+                                AdminScreen.this.show();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
@@ -533,7 +570,6 @@ public class AdminScreen implements Screen {
                         }
                     }
                     Gdx.input.setOnscreenKeyboardVisible(false);
-                    AdminScreen.this.show();
                 }
             };
 
