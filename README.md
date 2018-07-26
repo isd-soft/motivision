@@ -69,7 +69,7 @@ Test
 Item
 ```
 
-### Team
+### Team has following requests:
 
 /get_team?teamId=X
 ```
@@ -83,45 +83,85 @@ Item
  
  Example of output data:
  
- If team is not found you will see this:
+  If team is not found you will see this:
+   {"status":"failed","message":"team not found"}
  
- {"status":"failed","message":"team not found"}
+  If team is found it returns following JSON data:
+  {
+     "status": "success",
+     "teamId": 1,
+     "teamName": "Team",
+     "liderId": 24,
+     "teamLogo": "noLogo",
+     "battleFrequency": 7,
+     "teamWins": 172,
+     "teamLoss": 30,
+     "lock": false,
+     "characters": [
+         {
+             "characterId": 25,
+             "characterName": "Admin",
+             "playerId": 38,
+             "teamId": 17,
+             "isAdmin": "true",
+             "headType": 1,
+             "bodyType": 1,
+             "gender": "M",
+             "points": 2343
+         },
+         {
+             "characterId": 29,
+             "characterName": "User",
+             "playerId": 38,
+             "teamId": 17,
+             "isAdmin": "false",
+             "headType": 1,
+             "bodyType": 1,
+             "gender": "F",
+             "points": 300
+         }
+     ]
+ }
  
- If team is found it returns following JSON data:
- {
-    "status": "success",
-    "teamId": 1,
-    "teamName": "Team",
-    "liderId": 24,
-    "teamLogo": "noLogo",
-    "battleFrequency": 7,
-    "teamWins": 172,
-    "teamLoss": 30,
-    "lock": false,
-    "characters": [
-        {
-            "characterId": 25,
-            "characterName": "jijiji",
-            "playerId": 38,
-            "teamId": 17,
-            "isAdmin": "false",
-            "headType": 1,
-            "bodyType": 1,
-            "gender": "M",
-            "points": 0
-        },
-        {
-            "characterId": 29,
-            "characterName": "atdasd",
-            "playerId": 38,
-            "teamId": 17,
-            "isAdmin": "false",
-            "headType": 1,
-            "bodyType": 1,
-            "gender": "M",
-            "points": 0
-        }
+```
+
+/get_team_members?teamId=X
+```
+/*
+* Get team members request
+* Used to get a list of all team members
+* @param teamId - team to search characters in
+* @return status - failed if no such team exist
+* @return status - success if request was successful
+* @return teamMembers - null if no teamMembers
+* @return teamMembers - list of all teamMembers
+* */
+
+ Example of output data:
+ 
+  If team is not found you will see this:
+   {"status":"failed","message":"team not found"}
+ 
+  If team is found it returns following JSON data:
+  {
+      "status": "success",
+      "teamMembers": [
+          {
+              "characterId": "25",
+              "characterName": "jijiji",
+              "headType": 1,
+              "bodyType": 1,
+              "gender": "M",
+              "points": 0
+          },
+          {
+              "characterId": "29",
+              "characterName": "atdasd",
+              "headType": 1,
+              "bodyType": 1,
+              "gender": "M",
+              "points": 0
+          }
     ]
 }
- 
 ```
