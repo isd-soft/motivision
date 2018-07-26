@@ -12,13 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.brashmonkey.spriter.Data;
-import com.brashmonkey.spriter.Loader;
-import com.brashmonkey.spriter.Player;
-import com.brashmonkey.spriter.SCMLReader;
 import com.mygdx.game.animation.ParallaxBackground;
 import com.mygdx.game.gameSets.GGame;
-import com.mygdx.game.loader.AssetsManager;
 import com.mygdx.game.music.GameSounds;
 import com.mygdx.game.requests.Activity;
 import com.mygdx.game.requests.PlayerAccount;
@@ -47,7 +42,7 @@ public class EarnPointsScreen implements Screen {
     private Texture backgroundTexture;
 
     private AnimationScreen animationScreen;
-    private CharacterWalkAnimation animationTest;
+    private CharacterAnimation animationTest;
     private SpriteBatch batch;
 
 
@@ -62,7 +57,7 @@ public class EarnPointsScreen implements Screen {
     public EarnPointsScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
-        animationTest = new CharacterWalkAnimation();
+        animationTest = new CharacterAnimation();
         animationTest.init("IDLE");
         animationTest.setZIndex(10);
         parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
@@ -84,13 +79,7 @@ public class EarnPointsScreen implements Screen {
 
 
     public void animation() {
-//        SCMLReader reader = new SCMLReader(Gdx.files.internal("BodyParts/Project.scml").path());
-//        Data data = reader.getData();
-//        Player yourPlayer = new Player(data.getEntity("IDLE"));
-//        Loader loader = new com.mygdx.game.screens.L;
-//
-//        loader.load("Path to the root folder of your SCML file");
-//
+
     }
 
     @Override
@@ -161,20 +150,11 @@ public class EarnPointsScreen implements Screen {
         buttonTable.add(backButton).fill().pad(0, 0, pad / 2, 0);
         buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
-        //bgImage.setZIndex(0);
-        //bgImage.setFillParent(true);
         animationTest.toFront();
-        //stage.addActor(bgImage);
-        //stage.addActor(group);
-        //screenTable.add(parallaxBackground);
-        //screenTable.add(animationTest).fill().expand().uniform().pad(pad, pad/2, pad, pad);
-        //screenTable.add(animationScreenTest).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         screenTable.setFillParent(true);
-        //screenTable.add(parallaxBackground);
         screenTable.add(animationTest).fill().expand().uniform().pad(pad, pad/2, pad, pad);
         screenTable.add(buttonTable).fill().expand().uniform().pad(pad, pad, pad, pad / 2);
         stage.addActor(screenTable);
-        //stage.addActor(animationTest);
 
         settingsButton.addListener(new ChangeListener() {
             @Override
@@ -188,6 +168,7 @@ public class EarnPointsScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 gameSounds.clickSound();
                 animationTest.changeAnimation();
+
 
                 animationTest.zeroInts();
                 animationTest.setPosition();

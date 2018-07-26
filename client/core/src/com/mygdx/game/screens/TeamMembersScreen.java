@@ -6,26 +6,17 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.brashmonkey.spriter.Drawer;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.music.GameSounds;
-import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
-import com.mygdx.game.requests.Team;
 
 import org.json.JSONException;
 
@@ -48,7 +39,7 @@ public class TeamMembersScreen implements Screen {
     private Music loginMusic;
     private GDXDialogs dialogs;
     private static String selectedName = null;
-    private CharacterWalkAnimation animation;
+    private CharacterAnimation animation;
     private SettingsPopup settingsPopup;
 
     public TeamMembersScreen(GGame g) {
@@ -57,7 +48,7 @@ public class TeamMembersScreen implements Screen {
         }
         parent = g;
         Pixmap pixmap;
-        animation = new CharacterWalkAnimation();
+        animation = new CharacterAnimation();
         animation.init("IDLE");
         animation.setZIndex(10);
 
@@ -101,9 +92,6 @@ public class TeamMembersScreen implements Screen {
         scrollPane.setSmoothScrolling(false);
         scrollPane.setScrollingDisabled(true, false);
         HashMap<String, Integer> teamMembers = PlayerAccount.getTeamMembersList();
-        //PlayerAccount.printAllMembers();
-        //Collections.sort(teamMembers);
-        //fill table with buttons and labels
         for (final String key : teamMembers.keySet()) {
             //instead of PLACE_HOLDER there should be name of character
             TextButton profileName = new TextButton(key, skin, "square");

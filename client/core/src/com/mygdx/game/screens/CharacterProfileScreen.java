@@ -55,7 +55,7 @@ public class CharacterProfileScreen implements Screen {
     private GDXDialogs manageTeamDialog;
     private GDXDialogs buyItemDialog;
 
-    private CharacterWalkAnimation animation;
+    private CharacterAnimation animation;
 
     private Texture knightTex;
     private GameSounds gameSounds = GameSounds.getInstance();
@@ -71,7 +71,7 @@ public class CharacterProfileScreen implements Screen {
     public CharacterProfileScreen(GGame g) {
         parent = g;
         selectDialog = GDXDialogsSystem.install();
-        animation = new CharacterWalkAnimation();
+        animation = new CharacterAnimation();
         animation.init("IDLE");
         animation.setZIndex(10);
         manageTeamDialog = GDXDialogsSystem.install();

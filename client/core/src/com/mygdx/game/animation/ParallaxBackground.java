@@ -52,7 +52,7 @@ public class ParallaxBackground extends Actor {
             // background speed adjusting here
             srcX = scroll + (i*this.LAYER_SPEED_DIFFERENCE *scroll)/3;
             batch.draw(layers.get(i), x, y, originX, originY, width, heigth,
-                    scaleX,scaleY, rotation, srcX,srcY, layers.get(i).getWidth(),layers.get(i).getHeight(), flipX,flipY);
+                    scaleX,scaleY, rotation, srcX,srcY, 800,layers.get(i).getHeight(), flipX,flipY);
         }
     }
 }

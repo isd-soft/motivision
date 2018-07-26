@@ -2,48 +2,30 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.music.GameSounds;
-import com.mygdx.game.requests.Player;
 import com.mygdx.game.requests.PlayerAccount;
 
 import org.json.JSONException;
 
-import java.awt.Event;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
-import de.tomgrill.gdxdialogs.core.GDXDialogs;
-import de.tomgrill.gdxdialogs.core.GDXDialogsSystem;
-import de.tomgrill.gdxdialogs.core.dialogs.GDXButtonDialog;
-import de.tomgrill.gdxdialogs.core.listener.ButtonClickListener;
 
 public class CharacterSelectScreen implements Screen {
     private static final int YES = 0;
@@ -57,7 +39,7 @@ public class CharacterSelectScreen implements Screen {
     private Texture background;
     private Image bg;
     private Texture texture;
-    private CharacterWalkAnimation animation;
+    private CharacterAnimation animation;
     private String  selectedName;
 
     private SettingsPopup settingsPopup;
@@ -66,7 +48,7 @@ public class CharacterSelectScreen implements Screen {
         parent = g;
         stage = new Stage();
         background = parent.assetsManager.aManager.get("universalbg.png");
-        animation = new CharacterWalkAnimation();
+        animation = new CharacterAnimation();
         animation.init("IDLE");
         animation.setZIndex(10);
 

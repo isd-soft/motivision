@@ -72,7 +72,7 @@ public class CreateCharacterScreen implements Screen {
     private boolean isTeamChecked;
     private GDXDialogs dialogs;
     private Drawable transBlack;
-    private CharacterWalkAnimation animation;
+    private CharacterAnimation animation;
     private SettingsPopup settingsPopup;
     public static int   selectedRaceType = 1;
     public static int   selectedHeadType = 1;
@@ -86,7 +86,7 @@ public class CreateCharacterScreen implements Screen {
 //        bgImage = new Image(background);
 //        bgImage.setFillParent(true);
 //        bgImage.setZIndex(0);
-        animation = new CharacterWalkAnimation();
+        animation = new CharacterAnimation();
         animation.init("IDLE");
         animation.setZIndex(10);
 
