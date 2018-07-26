@@ -175,6 +175,7 @@ public class JsonHandler {
         BufferedReader bufferedReader;
         URL url;
 
+        System.out.println(urlString + "?" + urlParameters);
         if (requestMethod.equals("POST")) {
             jsonText = POSTMethod(urlString, urlParameters, requestMethod);
         } else if (requestMethod.equals("GET")) {

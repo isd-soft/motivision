@@ -37,6 +37,7 @@ public class Profile implements Comparable<Profile>{
     private char    gender;
     private int     points;
     private int     teamId;
+    private int     power;
     private boolean isAdmin;
     private ArrayList<Item>     itemList;
 
@@ -48,6 +49,7 @@ public class Profile implements Comparable<Profile>{
         this.bodyType = 0;
         this.gender = 'N';
         this.points = 0;
+        this.power = 0;
         this.teamId = teamId;
         this.isAdmin = isAdmin;
         this.itemList = null;
@@ -91,8 +93,16 @@ public class Profile implements Comparable<Profile>{
         if(itemList == null){
             return equippedItems;
         }
+        power = 0;
         for (Item item: itemList) {
             if (item.isEquipped()) {
+                try {
+                    power += Item.getItemPrice(item.getId());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 equippedItems.add(item.getName());
             }
         }
@@ -735,6 +745,10 @@ public class Profile implements Comparable<Profile>{
         headNumber += bodyType;
         //System.out.println("Head number = " + headNumber);
         return headNumber;
+    }
+
+    public int getPower() {
+        return power;
     }
 }
 
