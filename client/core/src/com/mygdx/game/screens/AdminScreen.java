@@ -202,8 +202,8 @@ public class AdminScreen implements Screen {
                 .fill();
         selectionTable.add(arrowCastleRight);
         selectionTable.row();
-        selectionTable.add(frequencyLabel);
-        selectionTable.add(arrowFrequencyLeft);
+        //selectionTable.add(frequencyLabel);
+        //selectionTable.add(arrowFrequencyLeft);
         selectionTable.add(freqChoiceLabel);
         selectionTable.add(arrowFrequencyRight);
         selectionTable.row();

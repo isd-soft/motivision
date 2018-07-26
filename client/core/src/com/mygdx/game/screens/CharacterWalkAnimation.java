@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.mygdx.game.animation.ParallaxBackground;
 import com.mygdx.game.gameSets.GGame;
 import com.mygdx.game.loader.AssetsManager;
+import com.mygdx.game.music.GameSounds;
 
 
 public class CharacterWalkAnimation extends Image {
@@ -23,6 +24,8 @@ public class CharacterWalkAnimation extends Image {
     Loader loader;
     DrawerImplementation drawer;
     OgreDrawerImplementation monsterDrawer;
+
+    private GameSounds gameSounds = GameSounds.getInstance();
     Data data;
 
     private int alo = 0;
@@ -39,7 +42,7 @@ public class CharacterWalkAnimation extends Image {
         texture = assetsManager.aManager.get("universalbg.png");
         image = new Image(texture);
 
-        image.setBounds(0, 0, 800, 480);
+        image.setBounds(0, 0, getWidth(), getHeight());
         renderer = new ShapeRenderer();
         batch = new SpriteBatch();
 
@@ -106,24 +109,29 @@ public class CharacterWalkAnimation extends Image {
         drawer.draw(player);
         if (alo > 0) {
             monsterDrawer.draw(enemy);
-            if (currentPosition < 450) {
-                currentPosition = 450;
-                player.setAnimation("ATTACK");
-                enemy.setAnimation("DIE");
+            if(currentPosition < 520) {
+                    player.setAnimation("ATTACK");
+                    gameSounds.hitSound();
+                if (currentPosition < 450) {
+                    currentPosition = 450;
+                    gameSounds.deathSound();
+                    enemy.setAnimation("DIE");
+//                    if (player.getTime()>=600) {
+//                        player.setAnimation("IDLE");
+                        System.out.println(player.getTime());
+                        if (player.getTime() >= 600) {
 
-                //drawer.draw(enemy);
-                System.out.println(player.getTime());
-                if (player.getTime() >= 600) {
+                            setPosition();
+                            --alo;
+                            player.setAnimation("IDLE");
+                            enemy.setAnimation("WALK");
+                            MonsterGenerator.randomize();
 
-                    setPosition();
-                    --alo;
-                    player.setAnimation("IDLE");
-                    enemy.setAnimation("WALK");
-                    MonsterGenerator.randomize();
-
-                    //drawer.draw(player);
+                            //drawer.draw(player);
+                        }
+                    }
                 }
-            }
+            //}
             //    }
         }
         batch.end();

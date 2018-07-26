@@ -80,8 +80,7 @@ public class GameProperties {
         String domain = "http://"
                 + staticAppProps.getProperty("server.ip")
                 + ":"
-                + staticAppProps.getProperty("server.port")
-                + "/motivision-1/";
+                + staticAppProps.getProperty("server.port");
         return domain;
     }
 }

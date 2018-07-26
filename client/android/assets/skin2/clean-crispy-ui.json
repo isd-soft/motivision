@@ -15,14 +15,11 @@ com.badlogic.gdx.graphics.g2d.BitmapFont: {
 	yuGothicGray: {
 		file: yuGothicGray.fnt
 	}
-	yuGothicGreen: {
-		file: yuGothicGreen.fnt
-	}
-	yuGothicRed: {
-		file: yuGothicRed.fnt
-	}
 	yuGothicWhite: {
 		file: yuGothicWhite.fnt
+	}
+	yuGothicYellow: {
+		file: yuGothicYellow.fnt
 	}
 }
 com.badlogic.gdx.graphics.Color: {
@@ -412,6 +409,11 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	big: {
 		font: yuGothicBig
 		fontColor: color
+	}
+	price: {
+		font: yuGothicYellow
+		fontColor: color
+		background: dotBlack
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {

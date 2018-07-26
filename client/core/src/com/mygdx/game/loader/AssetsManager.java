@@ -25,6 +25,8 @@ public class AssetsManager {
     private final String buySound = "data/hammer.mp3";
     private final String deniedSound = "data/denied.mp3";
     private final String equipArmor = "data/equipp.mp3";
+    private final String monsterDeathSound = "data/monsterDeath.mp3";
+    private final String playerHitSound = "data/weaponBlow.mp3";
     private final String gameOst = "data/game-ost1.mp3";
 
     private final String defaultBody = "Body/body_1.png";
@@ -224,6 +226,8 @@ public class AssetsManager {
         aManager.load(buySound, Sound.class);
         aManager.load(deniedSound, Sound.class);
         aManager.load(equipArmor, Sound.class);
+        aManager.load(monsterDeathSound, Sound.class);
+        aManager.load(playerHitSound, Sound.class);
     }
 
     public void loadItems(){
