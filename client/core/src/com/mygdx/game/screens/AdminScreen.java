@@ -441,6 +441,9 @@ public class AdminScreen implements Screen {
                             int points = Integer.valueOf(pointsField.getText());
                             if (points < 0)
                                 DialogBox.showInfoDialog("Error", "Points must be >= 0");
+                            else if(points > 10000){
+                                DialogBox.showInfoDialog("Error", "That's cheating!");
+                            }
                             else if (!PlayerAccount.updateActivity(id, name, points))
                                 DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
                         } catch (IOException e) {
@@ -522,8 +525,10 @@ public class AdminScreen implements Screen {
                     gameSounds.clickSound();
                     if (obj == "save") {
                         try {
-                            if (activityField.getText().length() < 6)
-                                DialogBox.showInfoDialog("Error", "Activity name must be at least 6 letters");
+                            if (activityField.getText().length() > 20)
+                                DialogBox.showInfoDialog("Error", "Name too big");
+                            else if ( activityField.getText().trim().length()  < 3)
+                                DialogBox.showInfoDialog("Error", "Name too short");
                             else
                                 PlayerAccount.createActivity(activityField.getText());
                         } catch (JSONException e) {

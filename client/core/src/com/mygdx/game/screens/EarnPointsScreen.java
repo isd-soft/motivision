@@ -63,7 +63,7 @@ public class EarnPointsScreen implements Screen {
         parent = g;
         dialogs = GDXDialogsSystem.install();
         animationTest = new CharacterWalkAnimation();
-        animationTest.init("WALK");
+        animationTest.init("IDLE");
         animationTest.setZIndex(10);
         parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
         parallaxBackground.setZIndex(0);

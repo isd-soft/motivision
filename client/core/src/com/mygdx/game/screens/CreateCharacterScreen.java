@@ -110,9 +110,9 @@ public class CreateCharacterScreen implements Screen {
         labelRaceNumber = new Label("1", skin);
         labelName = new Label("Name", skin);
         labelGender = new Label("Gender", skin);
-        labelHead = new Label("Body", skin);
+        labelHead = new Label("Head", skin);
         labelHeadNumber = new Label("1", skin);
-        labelRace = new Label("Head", skin);
+        labelRace = new Label("Race", skin);
         checkboxMale = new CheckBox("Male", skin);
         checkboxFemale = new CheckBox("Female", skin);
         ButtonGroup genderCheckBoxGroup = new ButtonGroup(checkboxFemale, checkboxMale);
