@@ -72,10 +72,7 @@ public class LoginScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         animationScreenTest = new BackgroundAnimation(parent);
-        // tells our asset manger that we want to load the images set in loadImages method
-        parent.assetsManager.loadImages();
-        // tells the asset manager to load the images and wait until finished loading.
-        parent.assetsManager.aManager.finishLoading();
+
         settingsPopup = new SettingsPopup();
     }
 

@@ -1,19 +1,22 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Array;
-import com.brashmonkey.spriter.*;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.brashmonkey.spriter.Data;
+import com.brashmonkey.spriter.Drawer;
+import com.brashmonkey.spriter.Entity;
+import com.brashmonkey.spriter.Loader;
+import com.brashmonkey.spriter.Player;
+import com.brashmonkey.spriter.SCMLReader;
 import com.mygdx.game.animation.ParallaxBackground;
 import com.mygdx.game.loader.AssetsManager;
 
+public class CharacterFightAnimation extends Image{
 
-public class CharacterWalkAnimation extends Image {
     SpriteBatch batch;
     ShapeRenderer renderer;
     Player player;
@@ -25,12 +28,20 @@ public class CharacterWalkAnimation extends Image {
 
     private int alo = 0;
     private int currentPosition = 1400;
+
+    private int monsterPosition = 800;
+    private int playerPosition = 200;
+
+    private int monsterHealth = 200;
+    private int playerHealth = 250;
+
+
     AssetsManager assetsManager = AssetsManager.getInstance();
     Texture texture;
     Image image;
     ParallaxBackground parallaxBackground;
 
-    public CharacterWalkAnimation() {
+    public CharacterFightAnimation() {
         this.setZIndex(5);
         parallaxBackground = new ParallaxBackground(assetsManager.getLayers());
         texture = assetsManager.aManager.get("universalbg.png");
@@ -48,6 +59,7 @@ public class CharacterWalkAnimation extends Image {
         enemy.flip(true, false);
 
         setPosition();
+        enemy.setAnimation("ATTACK");
         player.setTime(700);
 
         enemy.setTime(700);
@@ -58,7 +70,7 @@ public class CharacterWalkAnimation extends Image {
 //        player.characterMaps[0] = charMaps[0];
 
         //player.
-       // player.setAnimation();
+        // player.setAnimation();
 
         //Animation troll
 
@@ -66,7 +78,7 @@ public class CharacterWalkAnimation extends Image {
 
     public void init(String animation) {
         player.setAnimation(animation);
-        enemy.setAnimation(animation);
+        //enemy.setAnimation(animation);
         loader = new LoaderImplementation(data);
         loader.load(Gdx.files.internal("").path());
         drawer = new DrawerImplementation((LoaderImplementation) loader, batch, renderer);
@@ -88,57 +100,61 @@ public class CharacterWalkAnimation extends Image {
     }
 
     public void setPosition() {
-        currentPosition = 1400;
+        playerPosition = 200;
+        monsterPosition = 800;
     }
 
     @Override
     public void act(float delta) {
 
-        player.setPosition(200, 150);
+        player.setPosition(playerPosition, 150);
+        enemy.setPosition(monsterPosition, 150);
         player.update();
         enemy.update();
-        if (alo > 0)
-            currentPosition += -3;
+
+
         //first is y second is x
 
-        enemy.setPosition(currentPosition, 150);
+
+
+        playerPosition += +2;
+        monsterPosition += -2;
         batch.begin();
 
         batch.draw(texture, 0, 0, 1300, 800);
 
         drawer.draw(player);
-        if (alo > 0) {
-            drawer.draw(enemy);
+        drawer.draw(enemy);
+        if (playerPosition > 450) {
+            monsterPosition = 550;
+            playerPosition = 450;
+            if (monsterHealth > 0) {
+                ;
+                player.getAnimation();
+                enemy.getAnimation();
+            }
+        }
 //            if (currentPosition < 520) {
 //                player.setAnimation("ATTACK");
-                //drawer.draw(player);
+            //drawer.draw(player);
 
-                if (currentPosition < 450) {
-                    currentPosition = 450;
-                    player.setAnimation("ATTACK");
-                    enemy.setAnimation("DIE");
+            if (currentPosition < 450) {
+                currentPosition = 450;
+                player.setAnimation("ATTACK");
+                enemy.setAnimation("DIE");
 
-                    //drawer.draw(enemy);
-                    System.out.println(player.getTime());
-                    if (player.getTime() > 601) {
+                //drawer.draw(enemy);
+                if (enemy.getTime() == 600) {
+                    --alo;
+                    player.setAnimation("WALK");
+                    enemy.setAnimation("WALK");
+                    setPosition();
 
-                        setPosition();
-                        --alo;
-                        player.setAnimation("WALK");
-                        enemy.setAnimation("WALK");
-
-                        //drawer.draw(player);
-                    }
+                    //drawer.draw(player);
                 }
-        //    }
-        }
+            }
+            //    }
+
         batch.end();
     }
-
-
-//    public void animationFinished() {
-//        player.speed = 0;
-//        player.getTime() = player.getAnimation();
-//        player.update();
-//    }
 }

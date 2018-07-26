@@ -49,6 +49,9 @@
         <file id="1" name="TrollHead/troll_2.png" width="183" height="142" pivot_x="0.5" pivot_y="0.5"/>
         <file id="2" name="TrollHead/troll_3.png" width="183" height="142" pivot_x="0.5" pivot_y="0.5"/>
     </folder>
+    <folder id="5">
+        <file id="0" name="head.png" width="512" height="512" pivot_x="0" pivot_y="1"/>
+    </folder>
     <entity id="0" name="Human">
         <obj_info name="bone_003" type="bone" w="25.4777" h="10"/>
         <obj_info name="bone_004" type="bone" w="24.5223" h="10"/>
