@@ -94,6 +94,7 @@ public class CharacterWalkAnimation extends Image {
         player.setPosition(200, 150);
 
         enemy.setPosition(currentPosition, 150);
+        enemy.setScale(MonsterGenerator.getScale());
         player.update();
         enemy.update();
         if (alo > 0)
