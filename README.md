@@ -54,5 +54,5 @@ To build jar in Android Studio just press on Gradle menu from the right corner a
 Executable jar will be saved in following directory:
 /motivision/client/desktop/build/libs
 ```
-
-# Done!
+--------------------------------------------------------------------------------------
+# How to use API:

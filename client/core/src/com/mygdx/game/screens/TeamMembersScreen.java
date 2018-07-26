@@ -153,8 +153,8 @@ public class TeamMembersScreen implements Screen {
         buttonTable.add(settingsButton).fill().pad(0, 0, pad, 0);
         buttonTable.add(backButton).fill().pad(0, 0, pad, 0);
         buttonTable.row();
-        buttonTable.add(teamStats).fill().colspan(2).padBottom(pad);
-        buttonTable.row();
+        //buttonTable.add(teamStats).fill().colspan(2).padBottom(pad);
+        //buttonTable.row();
         buttonTable.add(scrollPane).fillX().expand().top().colspan(2).pad(pad / 2, 0, 0, 0);
 
         Table leftTable = new Table();

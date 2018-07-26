@@ -210,6 +210,12 @@ public class PlayerAccount {
         return (player != null);
     }
 
+    public static int getProfilePower() {
+        if (profile == null)
+            return 0;
+        return profile.getPower();
+    }
+
     public static boolean deletePlayer() throws IOException, JSONException {
         boolean result;
 

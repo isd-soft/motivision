@@ -1,6 +1,7 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -13,6 +14,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -99,6 +102,17 @@ public class CharacterProfileScreen implements Screen {
         stage.clear();
 //        stage.setDebugAll(true);
         float pad = 5;
+
+        stage.addListener(new InputListener() {
+            @Override
+            public boolean keyUp(InputEvent event, int keycode) {
+//                System.out.println("new keycode = " + keycode);
+                if (keycode == Input.Keys.BACK /*|| keycode == Input.Keys.TAB*/) {
+                    parent.changeScreen(parent.getCharacterSelect());
+                }
+                return false;
+            }
+        });
 
         // Character Sprite
         /*Texture texture = null;
@@ -239,7 +253,7 @@ public class CharacterProfileScreen implements Screen {
         Table upButtonsTable = new Table();
         upButtonsTable.add(earnPointsButton).fill().expandX();
         upButtonsTable.add(teamMembersButton).fill().expandX();
-        upButtonsTable.add(lastBattleButton).fill().expandX();
+        //upButtonsTable.add(lastBattleButton).fill().expandX();
 
         itemTable.add(upButtonsTable).fill().expandX();
         itemTable.row();
@@ -470,8 +484,8 @@ public class CharacterProfileScreen implements Screen {
             gameSounds.clickSound();
 
             final TextButton okButton = new TextButton("Ok", skin);
-            final Label buyLabel = new Label("Not enough points!", skin, "big");
-            Dialog dialog = new Dialog("Deny", skin) {
+            final Label buyLabel = new Label("Not enough points!", skin, "error");
+            Dialog dialog = new Dialog("Denied", skin) {
                 public void result(Object obj) {
                     gameSounds.clickSound();
                 }
@@ -480,7 +494,7 @@ public class CharacterProfileScreen implements Screen {
             dialog.getContentTable().add(buyLabel);
             dialog.getContentTable().row();
             //dialog.getContentTable().add(okButton);
-            dialog.button("Ok", "yes");
+            dialog.button("ok", "ok");
             dialog.show(stage);
         }
 
