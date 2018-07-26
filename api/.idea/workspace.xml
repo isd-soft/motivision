@@ -2,46 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ace6fba-ba6f-41f0-9f51-3002ba0a4e38" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/LoaderImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/libs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Animation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Box.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/CCDResolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Calculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Curve.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Data.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Dimension.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Drawer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Entity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/File.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/FileReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Folder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/IKObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/IKResolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Interpolator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/LibGdx/LibGdxAtlasLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/LibGdx/LibGdxDrawer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/LibGdx/LibGdxLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Loader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Mainline.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Meta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/PlayerTweener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Point.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Rectangle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/SCMLReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Spriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/SpriterException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/Timeline.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/TweenedAnimation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/spriter/src/com/brashmonkey/spriter/XmlReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gs-rest-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/gs-rest-service.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/inther/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/inther/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/log/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/log/log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/android/assets/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../client/android/assets/app.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/motivision-rest-service-1.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/motivision-rest-service-1.0.0.jar.original" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/android/assets/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../client/android/assets/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../client/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/EarnPointsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/core/src/com/mygdx/game/screens/EarnPointsScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../client/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/spriter/build/libs/spriter-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../client/spriter/build/libs/spriter-1.0.jar" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,15 +57,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CharacterItemRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/CharacterItemRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="17" column="76" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CharacterItem.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/CharacterItem.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -110,15 +75,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/Character.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="80" selection-start-line="80" selection-end-line="80" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ItemController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/controller/ItemController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -128,11 +84,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
               <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="3" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="25" column="50" lean-forward="true" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/Application.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="39" column="9" lean-forward="true" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+              <folding>
+                <element signature="e#1344#1345#0" expanded="true" />
+                <element signature="e#1407#1408#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestExceptionHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/RestExceptionHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
             </state>
           </provider>
         </entry>
@@ -181,7 +168,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/PlayerRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/inther/Application.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/Player.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/ItemsRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/ActivitiesRepository.java" />
@@ -198,13 +184,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/inther/service/PlayerService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/service/CharacterService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/service/Team.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/TeamRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/CharacterController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/ItemController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/repo/CharacterRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/entity/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/inther/controller/TeamController.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/inther/Application.java" />
       </list>
     </option>
   </component>
@@ -224,7 +211,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="255" />
     <option name="y" value="-20" />
     <option name="width" value="655" />
@@ -238,8 +225,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -278,42 +263,6 @@
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="inther" type="462c0819:PsiDirectoryNode" />
-              <item name="aspect" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="inther" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="inther" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="inther" type="462c0819:PsiDirectoryNode" />
-              <item name="repo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="log" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -323,11 +272,18 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="gs-rest-service" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -441,6 +397,7 @@
       <workItem from="1531732410208" duration="116000" />
       <workItem from="1531734281845" duration="368000" />
       <workItem from="1532331173492" duration="1967000" />
+      <workItem from="1532594237871" duration="2426000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Refactor&quot;">
       <created>1530734533025</created>
@@ -614,7 +571,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88258000" />
+    <option name="totallyTimeSpent" value="90684000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -626,7 +583,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
@@ -647,47 +604,21 @@
       <window_info anchor="bottom" id="Java Enterprise" order="9" sideWeight="0.4969743" weight="0.329582" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4969743" weight="0.32843137" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.38987687" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.38562092" />
       <window_info anchor="bottom" id="Spring" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2747396" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.32843137" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28366113" />
       <window_info anchor="right" id="Bean Validation" order="4" />
       <window_info id="Web" order="6" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Learn" order="1" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50716144" side_tool="true" weight="0.39215687" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2747396" />
-      <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Java Enterprise" order="9" sideWeight="0.4969743" weight="0.329582" />
-      <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49283853" visible="true" weight="0.38987687" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4969743" weight="0.329582" />
-      <window_info id="Structure" order="8" side_tool="true" weight="0.24962178" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info id="Web" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Spring" order="9" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24962178" />
-      <window_info id="Image Layers" order="5" />
-      <window_info anchor="right" id="Bean Validation" order="4" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4969743" weight="0.32843137" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4969743" weight="0.329582" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.3267974" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info id="Designer" order="3" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Learn" order="1" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24962178" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32843137" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -752,13 +683,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/PlayerRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/PlayerRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -910,23 +834,8 @@
     <entry file="file://$PROJECT_DIR$/motivision.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/RestExceptionHandler.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/ApiError.java" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="49" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/service/TeamService.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="44" column="1" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/entity/LastBattle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1011,6 +920,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="14" selection-start-line="14" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/repo/CharacterItemRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="17" column="76" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/RestExceptionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="25" column="50" lean-forward="true" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/inther/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="39" column="9" lean-forward="true" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+          <folding>
+            <element signature="e#1344#1345#0" expanded="true" />
+            <element signature="e#1407#1408#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
