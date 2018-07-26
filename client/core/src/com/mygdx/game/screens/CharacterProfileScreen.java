@@ -64,6 +64,7 @@ public class CharacterProfileScreen implements Screen {
     private Music loginMusic;
     private Drawable profileImage;
 
+    private LastBattleScreen lastBattleScreen;
 
     private SettingsPopup settingsPopup;
 
@@ -113,7 +114,7 @@ public class CharacterProfileScreen implements Screen {
         //create text buttons and give them listeners
         TextButton earnPointsButton = new TextButton("Earn Points", skin);
         TextButton teamMembersButton = new TextButton("Team Members", skin);
-        TextButton lastBattleButton = new TextButton("Last battle", skin);
+        final TextButton lastBattleButton = new TextButton("Last battle", skin);
         TextButton manageTeamButton = new  TextButton("Manage Team", skin);
         TextButton settingsButton = new TextButton("Settings", skin);
         TextButton backButton = new TextButton("Back", skin);
@@ -144,7 +145,8 @@ public class CharacterProfileScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor){
                 gameSounds.clickSound();
-                //        parent.changeScreen(parent.getLastBattle());
+                     parent.changeScreen(parent.getLastBattle());
+
             }
         });
 
