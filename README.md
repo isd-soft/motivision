@@ -55,4 +55,73 @@ Executable jar will be saved in following directory:
 /motivision/client/desktop/build/libs
 ```
 --------------------------------------------------------------------------------------
-# How to use API:
+# How to use API
+
+## List of disponible controllers:
+```
+Team
+Player
+Character
+Activities
+Battle
+Login
+Test
+Item
+```
+
+### Team
+
+/get_team?teamId=X
+```
+/*
+ * Get team info request
+ * Used to get team info by teamId
+ * @param teamId - id of the team to get data
+ * @return if such team exist return Json info about the team
+ * @return if no such team exist return Json fail message
+ * */
+ 
+ Example of output data:
+ 
+ If team is not found you will see this:
+ 
+ {"status":"failed","message":"team not found"}
+ 
+ If team is found it returns following JSON data:
+ {
+    "status": "success",
+    "teamId": 1,
+    "teamName": "Team",
+    "liderId": 24,
+    "teamLogo": "noLogo",
+    "battleFrequency": 7,
+    "teamWins": 172,
+    "teamLoss": 30,
+    "lock": false,
+    "characters": [
+        {
+            "characterId": 25,
+            "characterName": "jijiji",
+            "playerId": 38,
+            "teamId": 17,
+            "isAdmin": "false",
+            "headType": 1,
+            "bodyType": 1,
+            "gender": "M",
+            "points": 0
+        },
+        {
+            "characterId": 29,
+            "characterName": "atdasd",
+            "playerId": 38,
+            "teamId": 17,
+            "isAdmin": "false",
+            "headType": 1,
+            "bodyType": 1,
+            "gender": "M",
+            "points": 0
+        }
+    ]
+}
+ 
+```
