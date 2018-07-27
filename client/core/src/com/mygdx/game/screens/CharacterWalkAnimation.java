@@ -114,7 +114,6 @@ public class CharacterWalkAnimation extends Image {
             if(currentPosition < 520) {
 
                 player.setAnimation("ATTACK");
-               ;
                 if (currentPosition < 450) {
                     currentPosition = 450;
                     if(player.getTime() == 360)

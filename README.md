@@ -52,6 +52,19 @@ And restore the database with
  motivision=# \i cleanDump.sql
  ```
  
+ If you want to run server as a .jar file from terminal just write:
+ ```
+ cd /motivision/api/
+ 
+ Linux/Mac OS:
+  sh mvnw.sh
+ 
+ Windows:
+  mvnw.cmd
+ ```
+
+
+To run it as a .war read following:
 # Tomcat
 Tutorial (google):
 http://www.ntu.edu.sg/home/ehchua/programming/howto/tomcat_howto.html
