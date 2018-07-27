@@ -106,7 +106,7 @@ public class CharacterWalkAnimation extends Image {
         //first is y second is x
 
         batch.begin();
-        batch.draw(texture, 0, 0, 1300, 800);
+        batch.draw(texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         drawer.draw(player);
         if (alo > 0) {
             monsterDrawer.draw(enemy);
