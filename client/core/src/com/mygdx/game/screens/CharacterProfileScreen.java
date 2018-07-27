@@ -201,13 +201,29 @@ public class CharacterProfileScreen implements Screen {
         }
 
         //create and fill table with buttons and labels
+        Label priceLabel;
+        Table priceTable;
+        Stack stack;
         ArrayList<Item> items = PlayerAccount.getStoreItems();
         int i = 0;
         for (Item item : items) {
             i++;
             imageButton = new ImageButton(addImage("store_items/" + item.getImagePath() + ".png", item.getId()));
             imageButton.addListener(new ClickButton(item.getName(), item.getId()));
-            imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
+
+            stack = new Stack();
+            stack.add(imageButton);
+
+            int status = PlayerAccount.getItemStatus(item.getId());
+            if (status == Item.STORE_ITEM) {
+                priceLabel = new Label("" + item.getPrice(), skin, "price");
+                priceLabel.setAlignment(Align.bottomRight);
+                priceTable = new Table();
+                priceTable.add(priceLabel).bottom().right().expand();
+                stack.add(priceTable);
+            }
+
+            imageTable.add(stack).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
             if (imageButton == null) {
                 imageButton = new ImageButton((addImage("store_items/sword_default.png", -1)));
             }
