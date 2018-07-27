@@ -189,7 +189,16 @@ public class TeamController {
         return map;
     }
 
-
+    /*
+     * Update team request
+     * Used to update a team by teamId
+     * @param teamId - team for updating
+     * @param teamLogo - new team logo
+     * @param battleFrequency - new battle frequency
+     * @param lock - lock or unlock a team
+     * @return status failed if no such team exists
+     * @return status success if team was deleted successfully
+     * */
     @RequestMapping(value = "/update_team", method = RequestMethod.POST)
     public Map<String, Object> updateTeam(@RequestParam(value = "teamId") Long teamId,
                                           @RequestParam(value = "teamLogo") String teamLogo,
@@ -214,6 +223,13 @@ public class TeamController {
         return map;
     }
 
+    /*
+     * Team exist request
+     * Used to check if a team exists by teamName
+     * @param teamName - team name for deletion
+     * @return status failed if no such team exists
+     * @return status succes with teamId and with lock status if team is locked
+     * */
     @RequestMapping(value = "/team_exist", method = RequestMethod.POST)
     public Map<String, String> teamExist(@RequestParam(name = "teamName") String name) {
         TreeMap<String, String> map = new TreeMap<>();
