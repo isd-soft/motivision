@@ -52,9 +52,26 @@ And restore the database with
  motivision=# \i cleanDump.sql
  ```
  
-To run the Server you need Apache Tomcat to be installed
-follow tutorial from the bottom of the page
+# Tomcat
+Tutorial (google):
+http://www.ntu.edu.sg/home/ehchua/programming/howto/tomcat_howto.html
 
+Tutorial (motivision):
+
+Download: https://tomcat.apache.org/download-80.cgi
+![Build you own war](readme/apache/1.png?raw=true "Don't click me")
+![Build you own war](readme/apache/2.png?raw=true "Don't click me")
+![Build you own war](readme/apache/2.1.png?raw=true "Don't click me")
+![Build you own war](readme/apache/3.png?raw=true "Don't click me")
+![Build you own war](readme/apache/4.png?raw=true "Don't click me")
+![Build you own war](readme/apache/5.png?raw=true "Don't click me")
+![Build you own war](readme/apache/6.png?raw=true "Don't click me")
+![Build you own war](readme/apache/7.png?raw=true "Don't click me")
+![Build you own war](readme/apache/8.png?raw=true "Don't click me")
+GO:
+![Build you own war](readme/apache/9.png?raw=true "Don't click me")
+
+-------------------------------------------------------------------------
 # Steps to Setup the Client
 
 Deployment can be done on Windows/Linux/Mac OS with these components installed:
@@ -462,25 +479,3 @@ Other requests has POST method
     * @return itemId and itemPrice
     * */
 ```
-
-
-
---------------------------------------------------------------
-# Tomcat
-Tutorial (google):
-http://www.ntu.edu.sg/home/ehchua/programming/howto/tomcat_howto.html
-
-Tutorial (motivision):
-
-Download: https://tomcat.apache.org/download-80.cgi
-![Build you own war](readme/apache/1.png?raw=true "Don't click me")
-![Build you own war](readme/apache/2.png?raw=true "Don't click me")
-![Build you own war](readme/apache/2.1.png?raw=true "Don't click me")
-![Build you own war](readme/apache/3.png?raw=true "Don't click me")
-![Build you own war](readme/apache/4.png?raw=true "Don't click me")
-![Build you own war](readme/apache/5.png?raw=true "Don't click me")
-![Build you own war](readme/apache/6.png?raw=true "Don't click me")
-![Build you own war](readme/apache/7.png?raw=true "Don't click me")
-![Build you own war](readme/apache/8.png?raw=true "Don't click me")
-GO:
-![Build you own war](readme/apache/9.png?raw=true "Don't click me")
