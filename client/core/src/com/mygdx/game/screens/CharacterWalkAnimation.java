@@ -97,6 +97,7 @@ public class CharacterWalkAnimation extends Image {
         player.setPosition(200, 150);
 
         enemy.setPosition(currentPosition, 150);
+
         enemy.setScale(MonsterGenerator.getScale());
         player.update();
         enemy.update();
@@ -109,16 +110,26 @@ public class CharacterWalkAnimation extends Image {
         drawer.draw(player);
         if (alo > 0) {
             monsterDrawer.draw(enemy);
+
             if(currentPosition < 520) {
-                    player.setAnimation("ATTACK");
-                    gameSounds.hitSound();
+
+                player.setAnimation("ATTACK");
+               ;
                 if (currentPosition < 450) {
                     currentPosition = 450;
-                    gameSounds.deathSound();
+                    if(player.getTime() == 360)
+                        gameSounds.hitSound();
+               //     gameSounds.deathSound();
+                    //if(player.getTime() >= 600){
+                    //player.setAnimation("IDLE");
+
+                    if(player.getTime() == 420)
+                        gameSounds.deathSound();
                     enemy.setAnimation("DIE");
 //                    if (player.getTime()>=600) {
 //                        player.setAnimation("IDLE");
-                        System.out.println(player.getTime());
+                        System.out.println("чуй " + player.getTime());
+                        System.out.println("ало форсен " + player.getTime());
                         if (player.getTime() >= 600) {
 
                             setPosition();
@@ -131,6 +142,7 @@ public class CharacterWalkAnimation extends Image {
                         }
                     }
                 }
+                //}
             //}
             //    }
         }

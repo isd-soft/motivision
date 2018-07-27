@@ -42,7 +42,7 @@ public class EarnPointsScreen implements Screen {
     private Texture backgroundTexture;
 
     private AnimationScreen animationScreen;
-    private CharacterAnimation animationTest;
+    private CharacterWalkAnimation animationTest;
     private SpriteBatch batch;
 
 
@@ -60,7 +60,7 @@ public class EarnPointsScreen implements Screen {
     public EarnPointsScreen(GGame g) {
         parent = g;
         dialogs = GDXDialogsSystem.install();
-        animationTest = new CharacterAnimation();
+        animationTest = new CharacterWalkAnimation();
         animationTest.init("IDLE");
         animationTest.setZIndex(10);
         parallaxBackground = new ParallaxBackground(parent.assetsManager.getLayers());
