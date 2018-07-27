@@ -377,17 +377,12 @@ public class PlayerAccount {
     public static Pixmap addProfileStatusOnImage(Pixmap pixmap, int itemId) throws IOException, JSONException {
         Pixmap itemPixmap = null;
         int status;
-        int price;
 
         if (profile == null)
             return pixmap;
 
         status = getItemStatus(itemId);
         switch (status) {
-            case Item.STORE_ITEM:
-                price = Item.getItemPrice(itemId);
-                itemPixmap = new Pixmap(Gdx.files.internal("store_items/price_" + price + ".png"));
-                break;
             case Item.EQUIPPED_ITEM:
                 itemPixmap = new Pixmap(Gdx.files.internal("store_items/equipped.png"));
                 break;
