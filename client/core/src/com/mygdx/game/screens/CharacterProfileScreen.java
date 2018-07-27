@@ -471,7 +471,7 @@ public class CharacterProfileScreen implements Screen {
             gameSounds.clickSound();
 
             final TextButton okButton = new TextButton("Ok", skin);
-            final Label buyLabel = new Label("Not enough points!", skin, "error");
+            final Label buyLabel = new Label("Not enough points!", skin, "big");
             Dialog dialog = new Dialog("Denied", skin) {
                 public void result(Object obj) {
                     gameSounds.clickSound();
