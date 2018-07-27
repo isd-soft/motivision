@@ -51,18 +51,9 @@ And restore the database with
  ```
  motivision=# \i cleanDump.sql
  ```
-          
-To run the Server just write in cmd/terminal:
-
-```
-Linux/Mac OS:
-cd motivision/api
-sh mvnw.sh
-
-Windows:
-cd motivision/api
-mvnw.cmd
-```
+ 
+To run the Server you need Apache Tomcat to be installed
+follow tutorial from the bottom of the page
 
 # Steps to Setup the Client
 
