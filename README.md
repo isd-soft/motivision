@@ -18,33 +18,33 @@ Deployment can be done on Windows/Linux/Mac OS with these components installed:
 ## DataBase
 To setup the database you first need to install a Postgresql server [link](https://www.postgresql.org/download/). After you've installed it add the bin folder to your  Path system variable.Then access command prompt and change your directory to the folder with the db dump.
 
-          ```
-          >cd <path_to_dump>
-          ```
+ ```
+ >cd <path_to_dump>
+ ```
           
 After you have completed the installation you can login as a postgtres user like so
 
-          ```
-          psql postgres -U postgres
-          ```
+ ```
+ psql postgres -U postgres
+ ```
           
 Now you can create the database by running the following command
 
-           ```
-          CREATE DATABASE motivision;
-          ```    
+ ```
+ CREATE DATABASE motivision;
+ ```    
           
 After that try running this command
 
-          ```
-          >psql -h localhost -p 5432 -U postgres motivision
-          ```
+ ```
+ >psql -h localhost -p 5432 -U postgres motivision
+ ```
 
 And restore the database with 
 
-          ```
-          motivision=# \i cleanDump.sql
-          ```
+ ```
+ motivision=# \i cleanDump.sql
+ ```
           
 To run the Server just write in cmd/terminal:
 
