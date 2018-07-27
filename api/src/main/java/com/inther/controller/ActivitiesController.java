@@ -117,6 +117,14 @@ public class ActivitiesController {
         return map;
     }
 
+
+    /*
+     * Delete activity request
+     * @param activityId - Id of the activity for deletion
+     * @param teamId - Id of the team where activity will be deleted
+     * @return status - failed if no such team with teamId exist
+     * @return status - success if activity with activityId was successfully deleted
+     * */
     @Transactional
     @RequestMapping(value = "/delete_activity", method = RequestMethod.DELETE)
     public Map<String, Object> deleteActivity(@RequestParam(value = "teamId") Long teamId,
@@ -186,6 +194,16 @@ public class ActivitiesController {
         }
     }
 
+
+    /*
+     * Update activity request
+     * Used to update a new activity data for our team
+     * @param teamId - team for new activity data updating
+     * @param activityId - activity to be updated
+     * @param activityReward - reward for updated activity
+     * @return status - failed if no such team exist
+     * @return status success if activity was updated
+     * */
     @RequestMapping(value = "/update_activity", method = RequestMethod.POST)
     public Map<String, Object> updateActivity(@RequestParam(value = "teamId") Long teamId,
                                               @RequestParam(value = "activityId") Long activityId,
