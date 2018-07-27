@@ -30,23 +30,22 @@ After you have completed the installation you can login as a postgtres user like
           
 Now you can create the database by running the following command
 
-          ```
+           ```
           CREATE DATABASE motivision;
-          ```
+          ```    
           
 After that try running this command
 
-     ```
-     >psql -h localhost -p 5432 -U postgres motivision
-     ```
-     
+          ```
+          >psql -h localhost -p 5432 -U postgres motivision
+          ```
+
 And restore the database with 
 
-     ```
-     motivision=# \i cleanDump.sql
-     ```
-     
-     
+          ```
+          motivision=# \i cleanDump.sql
+          ```
+          
 To run the Server just write in cmd/terminal:
 
 ```
