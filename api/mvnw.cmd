@@ -4,4 +4,4 @@ psql -U postgres -d postgres -c "grant all on database motivision to postgres"
 cd ..
 psql --username=postgres motivision < motivision.sql
 cd api
-mvn package && java -jar target/motivision-rest-service-1.0.0.jar
+mvn package && java -jar target/motivision-1.jar
