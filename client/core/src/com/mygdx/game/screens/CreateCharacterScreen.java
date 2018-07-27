@@ -1,12 +1,15 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -283,6 +286,19 @@ public class CreateCharacterScreen implements Screen {
     public void show() {
         stage.clear();
         float pad = 5;
+
+        Gdx.input.setCatchBackKey(true);
+        stage.addListener(new InputListener() {
+            @Override
+            public boolean keyUp(InputEvent event, int keycode) {
+//                System.out.println("new keycode = " + keycode);
+                if (keycode == Input.Keys.BACK /*|| keycode == Input.Keys.TAB*/) {
+                    parent.changeScreen(parent.getCharacterSelect());
+                }
+                return false;
+            }
+        });
+
         checkboxTeam = new CheckBox("Create new Team", skin);
         checkboxTeam.setChecked(isTeamChecked);
 
@@ -575,9 +591,9 @@ public class CreateCharacterScreen implements Screen {
                 gender = "F";
             characterParameters.put(Profile.GENDER, gender);
             if(labelRaceNumber.equals("Elf")){
-                characterParameters.put(Profile.HEAD_TYPE, 2 + "");
-            }else {
                 characterParameters.put(Profile.HEAD_TYPE, 1 + "");
+            }else {
+                characterParameters.put(Profile.HEAD_TYPE, 2 + "");
             }
             characterParameters.put(Profile.BODY_TYPE, labelHeadNumber.getText() + "");
 
