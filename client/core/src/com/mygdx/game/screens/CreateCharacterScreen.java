@@ -590,11 +590,12 @@ public class CreateCharacterScreen implements Screen {
             else
                 gender = "F";
             characterParameters.put(Profile.GENDER, gender);
-            if(labelRaceNumber.equals("Elf")){
-                characterParameters.put(Profile.HEAD_TYPE, 1 + "");
-            }else {
-                characterParameters.put(Profile.HEAD_TYPE, 2 + "");
-            }
+            characterParameters.put(Profile.HEAD_TYPE, selectedRaceType + "");
+//            if(labelRaceNumber.equals("Elf")){
+//                characterParameters.put(Profile.HEAD_TYPE, 1 + "");
+//            }else {
+//                characterParameters.put(Profile.HEAD_TYPE, 2 + "");
+//            }
             characterParameters.put(Profile.BODY_TYPE, labelHeadNumber.getText() + "");
 
             teamName = teamText.getText();
