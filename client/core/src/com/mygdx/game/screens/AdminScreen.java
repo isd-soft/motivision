@@ -1,11 +1,14 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -86,6 +89,19 @@ public class AdminScreen implements Screen {
         stage.clear();
         //  stage.setDebugAll(true);
         float pad = 5;
+
+        Gdx.input.setCatchBackKey(true);
+        stage.addListener(new InputListener() {
+            @Override
+            public boolean keyUp(InputEvent event, int keycode) {
+//                System.out.println("new keycode = " + keycode);
+                if (keycode == Input.Keys.BACK /*|| keycode == Input.Keys.TAB*/) {
+                    parent.changeScreen(parent.getCharacterProfile());
+                }
+                return false;
+            }
+        });
+
         if(checkboxLockTeamBoolean)
             checkboxLockTeam = new CheckBox("Private", skin);
         else

@@ -78,6 +78,7 @@ public class CharacterSelectScreen implements Screen {
 //                System.out.println("new keycode = " + keycode);
                 if (keycode == Input.Keys.BACK /*|| keycode == Input.Keys.TAB*/) {
                     PlayerAccount.logOut();
+                    parent.changeScreen(parent.getLogin());
                 }
                 return false;
             }
