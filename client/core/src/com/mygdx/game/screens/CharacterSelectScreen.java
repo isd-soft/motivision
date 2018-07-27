@@ -71,6 +71,7 @@ public class CharacterSelectScreen implements Screen {
         stage.clear();
         float pad = 5;
 
+        Gdx.input.setCatchBackKey(true);
         stage.addListener(new InputListener() {
             @Override
             public boolean keyUp(InputEvent event, int keycode) {

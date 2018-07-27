@@ -9,6 +9,12 @@ import java.util.Map;
 @RestController
 public class TestController {
 
+
+    /*
+     * Test request
+     * Used to ping connection
+     * @return status - success if got connection
+     * */
     @RequestMapping("/test")
     public Map<String, String> testConnection(){
         LinkedHashMap<String, String> map = new LinkedHashMap<>();

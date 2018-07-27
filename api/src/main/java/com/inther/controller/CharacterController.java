@@ -350,6 +350,13 @@ public class CharacterController {
         }
     }
 
+    /*
+     * Unequip item request
+     * @param characterId - character that unequips the item
+     * @param itemId - Item to be unequiped
+     * @return status - failed if no such character exist
+     * @return status - failed if no such item exist
+     * */
     @RequestMapping("/unequip_item")
     public Map<String, Object> unEquipItem(@RequestParam(value = "characterId") Long characterId,
                                            @RequestParam(value = "itemId") Long itemId) {
@@ -394,6 +401,13 @@ public class CharacterController {
         return map;
     }
 
+    /*
+     * Equip item request
+     * @param characterId - character that equips the item
+     * @param itemId - Item to be equiped
+     * @return status - failed if no such character exist
+     * @return status - failed if no such item exist
+     * */
     @RequestMapping("/equip_item")
     public Map<String, Object> equipItem(@RequestParam(value = "characterId") Long characterId,
                                          @RequestParam(value = "itemId") Long itemId) {
@@ -449,7 +463,12 @@ public class CharacterController {
         return map;
     }
 
-
+    /*
+     * Get player if such player request
+     * @param playerId - player to be found
+     * @return status - failed if no such player exist
+     * @return status - succes if player found and returns all data
+     * */
     @RequestMapping(value = "/get_player_characters")
     public Map<String, Object> getPlayerCharacters(@RequestParam(value = "playerId") Long playerId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
@@ -510,14 +529,17 @@ public class CharacterController {
     }
 
     /*
-     * Request points request
-     * Used to get character points
+     * Get points request
+     * Used to get the points of a character
+     * @param characterId - Character to check the amount of points
+     * @return status - failed if the character was not found
+     * @return status - success if the character has int value of points
      * */
     @RequestMapping(value = "/get_points", method = RequestMethod.GET)
-    public Map<String, Object> getPoints(@RequestParam(value = "characterId") Long characterId) {
+    public Map<String, Object> getPoints(@RequestParam(value = "characterId") Long characterId){
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
-        if (!optionalCharacter.isPresent()) {
+        if(!optionalCharacter.isPresent()){
             log.warn("Character with characterId " + characterId + " not found");
             map.put("status", "failed");
             map.put("message", "Character not found");

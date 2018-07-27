@@ -64,13 +64,6 @@ public class MonsterGenerator {
         minPowerForLevel3 = minPowerForLevel1 * 3;
         rand = new Random();
         power = 0;
-//        profilePower = PlayerAccount.getProfilePower();
-//        if (profilePower >= minPowerForLevel1)
-//            minLevel++;
-//        if (profilePower >= minPowerForLevel2)
-//            minLevel++;
-//        if (profilePower >= minPowerForLevel3)
-//            minLevel++;
         itemList = new Item[4];
         for (int i = 0; i < 4; i++) {
             itemList[i] = Item.getMostPowerfulItemByType(types[i]);
@@ -78,9 +71,9 @@ public class MonsterGenerator {
                 power += itemList[i].getPrice();
         }
         normalizeMonsterPower();
-        //System.out.println("Monster Power = " + power);
+        System.out.println("Monster Power = " + power);
         scale = MIN_SCALE + (float) power / maxPower * (MAX_SCALE - MIN_SCALE);
-        //System.out.println("Scale = " + scale);
+        System.out.println("Scale = " + scale);
         head = (int) (rand.nextInt(3)) + 13;
     }
 
@@ -91,7 +84,7 @@ public class MonsterGenerator {
     public static MonsterGenerator getInstance() {
         if (monster == null)
             monster = new MonsterGenerator();
-        else if (monster.power > PlayerAccount.getProfilePower())
+        else if (monster.power > PlayerAccount.getProfilePower() * 1.4f)
             monster = new MonsterGenerator();
         return monster;
     }
