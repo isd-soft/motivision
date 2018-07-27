@@ -13,7 +13,7 @@ public class MonsterGenerator {
 
     public static final String[] types = {"weapon", "armor", "shield", "leggins"};
     public static final int[] POWERS = {0, 333, 555, 777};
-    private static final float MIN_SCALE = 0.5f;
+    private static final float MIN_SCALE = 0.65f;
     private static final float MAX_SCALE = 2f;
 
     private static int maxPower;

@@ -128,8 +128,6 @@ public class CharacterWalkAnimation extends Image {
                     enemy.setAnimation("DIE");
 //                    if (player.getTime()>=600) {
 //                        player.setAnimation("IDLE");
-                        System.out.println("чуй " + player.getTime());
-                        System.out.println("ало форсен " + player.getTime());
                         if (player.getTime() >= 600) {
 
                             setPosition();
