@@ -89,7 +89,9 @@ public class CreateCharacterScreen implements Screen {
         animation = new CharacterAnimation();
         animation.init("IDLE");
         animation.setZIndex(10);
-
+        selectedRaceType = 1;
+        selectedHeadType = 1;
+        selectedGender = 'M';
         skin = new Skin(Gdx.files.internal("skin2/clean-crispy-ui.json"));
         transBlack = new TextureRegionDrawable(new TextureRegion((Texture) parent.assetsManager.aManager.get("transpBlack50.png")));
         stage = new Stage();
@@ -573,9 +575,9 @@ public class CreateCharacterScreen implements Screen {
                 gender = "F";
             characterParameters.put(Profile.GENDER, gender);
             if(labelRaceNumber.equals("Elf")){
-                characterParameters.put(Profile.HEAD_TYPE, 1 + "");
-            }else {
                 characterParameters.put(Profile.HEAD_TYPE, 2 + "");
+            }else {
+                characterParameters.put(Profile.HEAD_TYPE, 1 + "");
             }
             characterParameters.put(Profile.BODY_TYPE, labelHeadNumber.getText() + "");
 
