@@ -386,7 +386,7 @@ public class PlayerAccount {
         switch (status) {
             case Item.STORE_ITEM:
                 price = Item.getItemPrice(itemId);
-                itemPixmap = new Pixmap(Gdx.files.internal("store_items/price_" + price + ".png"));
+//                itemPixmap = new Pixmap(Gdx.files.internal("store_items/price_" + price + ".png"));
                 break;
             case Item.EQUIPPED_ITEM:
                 itemPixmap = new Pixmap(Gdx.files.internal("store_items/equipped.png"));

@@ -56,7 +56,7 @@ public class AdminScreen implements Screen {
     private Integer castleChoice = 1;
     private Label freqChoiceLabel;
     private Integer freqNumber = 0;
-    private String[] freqChoices = {"Weekly", "Monthly"};
+    //private String[] freqChoices = {"Weekly", "Monthly"};
     private CheckBox checkboxLockTeam;
     private Boolean checkboxLockTeamBoolean = PlayerAccount.getProfileTeam().getLock();
     private Drawable transBlack;
@@ -115,7 +115,7 @@ public class AdminScreen implements Screen {
         arrowFrequencyLeft = new TextButton("<", skin);
         arrowFrequencyRight = new TextButton(">", skin);
 
-        int battleFrequency;
+        /*int battleFrequency;
         battleFrequency = PlayerAccount.getBattleFrequency();
         if (battleFrequency != -1) {
             if (battleFrequency == 7)
@@ -124,7 +124,7 @@ public class AdminScreen implements Screen {
                 freqChoiceLabel.setText(freqChoices[1]);
         } else
             freqChoiceLabel.setText("Error!");
-
+*/
         // add the list of already created characters
         List<Activity> serverActivities = PlayerAccount.getActivities();
         List<Activity> teamActivities = new ArrayList<Activity>();
@@ -255,7 +255,7 @@ public class AdminScreen implements Screen {
 
         create.addListener(new CreateActivity());
 
-        arrowFrequencyLeft.addListener(new ChangeListener() {
+      /*  arrowFrequencyLeft.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 if (freqNumber == 1) {
@@ -282,7 +282,7 @@ public class AdminScreen implements Screen {
                 PlayerAccount.setBattleFrequency(freqNumber);
                 PlayerAccount.changeTeamParameters();
             }
-        });
+        });*/
 
         arrowCastleLeft.addListener(new ChangeListener() {
             @Override

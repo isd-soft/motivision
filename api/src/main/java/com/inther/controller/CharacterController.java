@@ -435,20 +435,8 @@ public class CharacterController {
                 findCharacterItemsByCharacterIdAndEquipped(characterId, true);
         if (characterItemsEquipped.isPresent()) {
             for (CharacterItem characterItemEquip : characterItemsEquipped.get()) {
-                if (itemId < 4
-                        && characterItemEquip.getItems().getId() < 4) {
-                    characterItemEquip.setEquipped(false);
-                    characterItemRepository.save(characterItemEquip);
-                } else if (itemId > 3 &&itemId < 7
-                        && characterItemEquip.getItems().getId() > 3 && characterItemEquip.getItems().getId() < 7) {
-                    characterItemEquip.setEquipped(false);
-                    characterItemRepository.save(characterItemEquip);
-                } else if (itemId > 6 && itemId < 10
-                        && characterItemEquip.getItems().getId() > 6 && characterItemEquip.getItems().getId() < 10) {
-                    characterItemEquip.setEquipped(false);
-                    characterItemRepository.save(characterItemEquip);
-                }else if(itemId > 9 && itemId < 13
-                        && characterItemEquip.getItems().getId() > 9 && characterItemEquip.getItems().getId() < 13){
+                Items item = characterItemEquip.getItems();
+                if (item.getType().equals(items.getType())) {
                     characterItemEquip.setEquipped(false);
                     characterItemRepository.save(characterItemEquip);
                 }
@@ -520,15 +508,16 @@ public class CharacterController {
         map.put("status", "success");
         return map;
     }
+
     /*
-    * Request points request
-    * Used to get character points
-    * */
+     * Request points request
+     * Used to get character points
+     * */
     @RequestMapping(value = "/get_points", method = RequestMethod.GET)
-    public Map<String, Object> getPoints(@RequestParam(value = "characterId") Long characterId){
+    public Map<String, Object> getPoints(@RequestParam(value = "characterId") Long characterId) {
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         Optional<Character> optionalCharacter = characterRepository.findById(characterId);
-        if(!optionalCharacter.isPresent()){
+        if (!optionalCharacter.isPresent()) {
             log.warn("Character with characterId " + characterId + " not found");
             map.put("status", "failed");
             map.put("message", "Character not found");

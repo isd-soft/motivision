@@ -51,7 +51,7 @@ public class CreateCharacterScreen implements Screen {
     private Texture textureCastle;
     private Integer castleChoice = 1;
     private Integer headType = 1;
-    private Integer raceType = 1;
+    private String raceType = "Elf";
     private Boolean checkboxMaleBoolean = true;
     private Boolean checkboxFemaleBoolean = false;
     private Boolean checkBoxTeamBoolean = false;
@@ -107,7 +107,7 @@ public class CreateCharacterScreen implements Screen {
         teamText = new TextField(null, skin);
         teamText.setMessageText(defaultTeamText);
         textureCastle = new Texture("teamCastle1.png");
-        labelRaceNumber = new Label("1", skin);
+        labelRaceNumber = new Label("Elf", skin);
         labelName = new Label("Name", skin);
         labelGender = new Label("Gender", skin);
         labelHead = new Label("Head", skin);
@@ -279,8 +279,6 @@ public class CreateCharacterScreen implements Screen {
 
     @Override
     public void show() {
-        Image image;
-
         stage.clear();
         float pad = 5;
         checkboxTeam = new CheckBox("Create new Team", skin);
@@ -288,12 +286,11 @@ public class CreateCharacterScreen implements Screen {
 
         // Character Sprite
         final Image imageCastle = new Image(textureCastle);
-
         buttonOk = new TextButton("Ok", skin);
+
         //making labels
         labelRaceNumber.setText(String.valueOf(raceType));
         labelHeadNumber.setText(String.valueOf(headType));
-
         final Label labelTeam = new Label("Team", skin);
 
         //creating checkboxes for gender
@@ -318,7 +315,7 @@ public class CreateCharacterScreen implements Screen {
         checkboxMale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                gameSounds.clickSound();
+                //gameSounds.clickSound();
                 selectedGender = 'M';
                 checkboxMaleBoolean = true;
                 checkboxFemaleBoolean = false;
@@ -328,7 +325,7 @@ public class CreateCharacterScreen implements Screen {
         checkboxFemale.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                gameSounds.clickSound();
+                //gameSounds.clickSound();
                 selectedGender = 'F';
                 checkboxFemaleBoolean = true;
                 checkboxMaleBoolean = false;
@@ -350,12 +347,13 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 gameSounds.clickSound();
-                if (raceType == 1) {
-                    raceType = 2;
-                } else if (raceType == 2) {
-                    raceType--;
+                if (raceType.equals("Elf")) {
+                    raceType = "Human";
+                    selectedRaceType = 2;
+                } else if (raceType.equals("Human")) {
+                    raceType = "Elf";
+                    selectedRaceType = 1;
                 }
-                selectedRaceType = raceType;
                 show();
             }
         });
@@ -365,12 +363,13 @@ public class CreateCharacterScreen implements Screen {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 gameSounds.clickSound();
-                if (raceType == 2) {
-                    raceType = 1;
-                } else if ( raceType == 1) {
-                    raceType++;
+                if (raceType.equals("Human")) {
+                    raceType = "Elf";
+                    selectedRaceType = 1;
+                } else if (raceType.equals("Elf")) {
+                    raceType = "Human";
+                    selectedRaceType = 2;
                 }
-                selectedRaceType = raceType;
                 show();
             }
         });
@@ -573,7 +572,11 @@ public class CreateCharacterScreen implements Screen {
             else
                 gender = "F";
             characterParameters.put(Profile.GENDER, gender);
-            characterParameters.put(Profile.HEAD_TYPE, labelRaceNumber.getText() + "");
+            if(labelRaceNumber.equals("Elf")){
+                characterParameters.put(Profile.HEAD_TYPE, 1 + "");
+            }else {
+                characterParameters.put(Profile.HEAD_TYPE, 2 + "");
+            }
             characterParameters.put(Profile.BODY_TYPE, labelHeadNumber.getText() + "");
 
             teamName = teamText.getText();

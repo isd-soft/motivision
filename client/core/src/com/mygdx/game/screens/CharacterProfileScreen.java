@@ -59,7 +59,7 @@ public class CharacterProfileScreen implements Screen {
     private GDXDialogs buyItemDialog;
 
     private CharacterAnimation animation;
-
+    private ScrollPane scrollPane;
     private Texture knightTex;
     private GameSounds gameSounds = GameSounds.getInstance();
     private Viewport viewport;
@@ -246,11 +246,12 @@ public class CharacterProfileScreen implements Screen {
         upButtonsTable.add(teamMembersButton).fill().expandX();
         //upButtonsTable.add(lastBattleButton).fill().expandX();
 
+        scrollPane = new ScrollPane(imageTable);
         itemTable.add(upButtonsTable).fill().expandX();
         itemTable.row();
         itemTable.add(pointsLabel);
         itemTable.row();
-        itemTable.add(imageTable).fill().expand();
+        itemTable.add(scrollPane).fill().expand();
         itemTable.row();
 
         Table botButtonTable = new Table();

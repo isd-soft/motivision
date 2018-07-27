@@ -58,11 +58,22 @@ public class AssetsManager {
     private final String ironShield = "Shield/shield_2.png";
     private final String steelShield = "Shield/shield_3.png";
     private final String goldenShield = "Shield/shield_4.png";
+    private final String customShield1 = "Shield/shield_5.png";
+    private final String customShield2 = "Shield/shield_6.png";
+    private final String customShield3 = "Shield/shield_7.png";
 
     private final String defaultWeapon = "Weapon/weapon_1.png";
     private final String ironWeapon = "Weapon/weapon_2.png";
     private final String steelWeapon = "Weapon/weapon_3.png";
     private final String goldWeapon = "Weapon/weapon_4.png";
+    private final String customWeapon1 = "Weapon/weapon_5.png";
+    private final String customWeapon2 = "Weapon/weapon_6.png";
+    private final String customWeapon3 = "Weapon/weapon_7.png";
+    private final String customWeapon4 = "Weapon/weapon_8.png";
+    private final String customWeapon5 = "Weapon/weapon_9.png";
+    private final String customWeapon6 = "Weapon/weapon_10.png";
+    private final String customWeapon7 = "Weapon/weapon_11.png";
+    private final String customWeapon8 = "Weapon/weapon_12.png";
 
     private final String elfHeadMale1 = "HeadTypes/head_1.png";
     private final String elfHeadMale2 = "HeadTypes/head_2.png";
@@ -188,11 +199,25 @@ public class AssetsManager {
         aManager.load(ironShield, Texture.class);
         aManager.load(steelShield, Texture.class);
         aManager.load(goldenShield, Texture.class);
+        aManager.load(customShield1, Texture.class);
+        aManager.load(customShield2, Texture.class);
+        aManager.load(customShield3, Texture.class);
+
 
         aManager.load(defaultWeapon, Texture.class);
         aManager.load(ironWeapon, Texture.class);
         aManager.load(steelWeapon, Texture.class);
         aManager.load(goldWeapon, Texture.class);
+
+        aManager.load(customWeapon1, Texture.class);
+        aManager.load(customWeapon2, Texture.class);
+        aManager.load(customWeapon3, Texture.class);
+        aManager.load(customWeapon4, Texture.class);
+        aManager.load(customWeapon5, Texture.class);
+        aManager.load(customWeapon6, Texture.class);
+        aManager.load(customWeapon7, Texture.class);
+        aManager.load(customWeapon8, Texture.class);
+
 
         aManager.load(emptySprite, Texture.class);
     }

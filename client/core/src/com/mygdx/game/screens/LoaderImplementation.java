@@ -129,12 +129,23 @@ public class LoaderImplementation extends Loader<Sprite> implements Disposable {
         ourResources.put("shield_2", new Sprite((Texture) assetsManager.aManager.get("Shield/shield_2.png")));
         ourResources.put("shield_3", new Sprite((Texture) assetsManager.aManager.get("Shield/shield_3.png")));
         ourResources.put("shield_4", new Sprite((Texture) assetsManager.aManager.get("Shield/shield_4.png")));
+        ourResources.put("shield_5", new Sprite((Texture) assetsManager.aManager.get("Shield/shield_5.png")));
+        ourResources.put("shield_6", new Sprite((Texture) assetsManager.aManager.get("Shield/shield_6.png")));
+        ourResources.put("shield_7", new Sprite((Texture) assetsManager.aManager.get("Shield/shield_7.png")));
+
 
         ourResources.put("weapon_1", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_1.png")));
         ourResources.put("weapon_2", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_2.png")));
         ourResources.put("weapon_3", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_3.png")));
         ourResources.put("weapon_4", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_4.png")));
-
+        ourResources.put("weapon_5", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_5.png")));
+        ourResources.put("weapon_6", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_6.png")));
+        ourResources.put("weapon_7", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_7.png")));
+        ourResources.put("weapon_8", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_8.png")));
+        ourResources.put("weapon_9", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_9.png")));
+        ourResources.put("weapon_10", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_10.png")));
+        ourResources.put("weapon_11", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_11.png")));
+        ourResources.put("weapon_12", new Sprite((Texture) assetsManager.aManager.get("Weapon/weapon_12.png")));
 
         heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_1.png")));
         heads.add(new Sprite((Texture) assetsManager.aManager.get("HeadTypes/head_2.png")));
