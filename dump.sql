@@ -15,6 +15,20 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -32,27 +46,6 @@ CREATE TABLE public.activities (
 
 
 ALTER TABLE public.activities OWNER TO postgres;
-
---
--- Name: activities_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.activities_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.activities_id_seq OWNER TO postgres;
-
---
--- Name: activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.activities_id_seq OWNED BY public.activities.id;
-
 
 --
 -- Name: character; Type: TABLE; Schema: public; Owner: postgres
@@ -73,28 +66,6 @@ CREATE TABLE public."character" (
 ALTER TABLE public."character" OWNER TO postgres;
 
 --
--- Name: character_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.character_id_seq
-    
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.character_id_seq OWNER TO postgres;
-
---
--- Name: character_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.character_id_seq OWNED BY public."character".id;
-
-
---
 -- Name: character_item; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -107,28 +78,6 @@ CREATE TABLE public.character_item (
 
 
 ALTER TABLE public.character_item OWNER TO postgres;
-
---
--- Name: character_item_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.character_item_id_seq
-    
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.character_item_id_seq OWNER TO postgres;
-
---
--- Name: character_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.character_item_id_seq OWNED BY public.character_item.id;
-
 
 --
 -- Name: items; Type: TABLE; Schema: public; Owner: postgres
@@ -145,28 +94,6 @@ CREATE TABLE public.items (
 ALTER TABLE public.items OWNER TO postgres;
 
 --
--- Name: items_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.items_id_seq
-    
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.items_id_seq OWNER TO postgres;
-
---
--- Name: items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.items_id_seq OWNED BY public.items.id;
-
-
---
 -- Name: last_battle; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -181,28 +108,6 @@ CREATE TABLE public.last_battle (
 ALTER TABLE public.last_battle OWNER TO postgres;
 
 --
--- Name: last_battle_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.last_battle_id_seq
-    
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.last_battle_id_seq OWNER TO postgres;
-
---
--- Name: last_battle_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.last_battle_id_seq OWNED BY public.last_battle.id;
-
-
---
 -- Name: player; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -215,28 +120,6 @@ CREATE TABLE public.player (
 
 
 ALTER TABLE public.player OWNER TO postgres;
-
---
--- Name: player_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.player_id_seq
-    
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.player_id_seq OWNER TO postgres;
-
---
--- Name: player_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.player_id_seq OWNED BY public.player.id;
-
 
 --
 -- Name: team; Type: TABLE; Schema: public; Owner: postgres
@@ -257,84 +140,11 @@ CREATE TABLE public.team (
 ALTER TABLE public.team OWNER TO postgres;
 
 --
--- Name: team_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.team_id_seq
-    
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.team_id_seq OWNER TO postgres;
-
---
--- Name: team_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.team_id_seq OWNED BY public.team.id;
-
-
---
--- Name: activities id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.activities ALTER COLUMN id SET DEFAULT nextval('public.activities_id_seq'::regclass);
-
-
---
--- Name: character id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public."character" ALTER COLUMN id SET DEFAULT nextval('public.character_id_seq'::regclass);
-
-
---
--- Name: character_item id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.character_item ALTER COLUMN id SET DEFAULT nextval('public.character_item_id_seq'::regclass);
-
-
---
--- Name: items id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.items ALTER COLUMN id SET DEFAULT nextval('public.items_id_seq'::regclass);
-
-
---
--- Name: last_battle id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.last_battle ALTER COLUMN id SET DEFAULT nextval('public.last_battle_id_seq'::regclass);
-
-
---
--- Name: player id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.player ALTER COLUMN id SET DEFAULT nextval('public.player_id_seq'::regclass);
-
-
---
--- Name: team id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.team ALTER COLUMN id SET DEFAULT nextval('public.team_id_seq'::regclass);
-
-
---
 -- Data for Name: activities; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.activities (id, name, reward, team_id) FROM stdin;
-1	test	100	12
-3	supaTest	99	12
-4	thanks again and	1221	8
+1	Kick ass	10009	1
 \.
 
 
@@ -343,16 +153,8 @@ COPY public.activities (id, name, reward, team_id) FROM stdin;
 --
 
 COPY public."character" (id, player_id, head_type, body_type, gender, points, name, team_id) FROM stdin;
-10	22	2	3	M	17	firstt	9
-9	35	2	1	M	2518	Abgar1	8
-17	35	1	1	M	0	adcchcucu	8
-6	4	1	2	m	0	OurLad	2
-2	27	1	3	M	5	njdcfvgbhnj	2
-7	34	2	1	F	0	ebshdhd	6
-11	22	3	2	M	0	second	10
-13	22	1	2	M	0	thirdd	11
-18	35	3	3	M	124	frolloe	8
-4	32	2	1	M	549	Character	4
+1	1	2	1	M	16466	Abgar1223	1
+2	1	1	1	M	10009	qwerty	1
 \.
 
 
@@ -361,15 +163,12 @@ COPY public."character" (id, player_id, head_type, body_type, gender, points, na
 --
 
 COPY public.character_item (id, character_id, item_id, equipped) FROM stdin;
-7	9	4	t
-1	4	4	f
-4	9	12	t
-3	4	2	f
-2	4	5	f
-6	9	1	t
-5	9	9	t
-9	18	1	t
-8	18	7	t
+1	1	8	t
+3	1	3	f
+4	1	2	t
+5	1	6	f
+6	1	5	t
+2	1	10	f
 \.
 
 
@@ -378,18 +177,18 @@ COPY public.character_item (id, character_id, item_id, equipped) FROM stdin;
 --
 
 COPY public.items (id, type, image_url, price) FROM stdin;
-6	diamond_shield	6	777
-3	diamond_sword	3	777
 8	steel_armor	8	555
-12	diamond_leggins	12	777
-9	diamond_armor	9	777
 1	iron_sword	1	333
 7	iron_armor	7	333
-2	steel_sword	2	555
 4	iron_shield	4	333
 11	steel_leggins	11	555
 10	iron_leggins	10	333
 5	steel_shield	5	555
+2	steel_axe	2	555
+9	gold_armor	9	777
+6	gold_shield	6	777
+3	gold_sword	3	777
+12	gold_leggins	12	777
 \.
 
 
@@ -406,23 +205,7 @@ COPY public.last_battle (id, team_id, enemy_power, team_power) FROM stdin;
 --
 
 COPY public.player (id, login, password, points) FROM stdin;
-4	ab	123	0
-19	vaseok	JYm8SJkl8FmXTN6WiWKDiA==	0
-20	987654	zLkjsnk14xwDbvBxL41Skg==	0
-6	alex	1V/HEhSFe8gsmlW5LOBqjQ==	0
-22	lliviu	mvJjCtKEJiuYKQd/ipDuiw==	0
-23	asdfgh	ZmogiXBxJ12bNP/VvYPRSQ==	0
-24	sghgxbdgbf	oHiSJ1/B383o16oTC0BviQ==	0
-25	nickname	LyCvC65jCgZ JY2o75YbDg==	0
-26	lalala	r0WFlTKXjEbNkXfmACFduQ==	0
-27	qwerty123	ATD qO82ZSmjO7uttJvMhA==	0
-28	esport12	LyCvC65jCgZ JY2o75YbDg==	0
-30	qweqwe	VoFYqqWDwy1kkkxkjwFMYg==	0
-31	qwertq	JYm8SJkl8FmXTN6WiWKDiA==	0
-32	login1	1kd7qVslmOLQFSwpWuVo1g==	0
-33	12341_	rEvhdgrTUaxs/exc 9szkA==	0
-34	alloalo	rEvhdgrTUaxs/exc 9szkA==	0
-35	abgar1223	xQYMg PKe0vDcWtmLz lFQ==	0
+1	abgar1223	xQYMg PKe0vDcWtmLz lFQ==	0
 \.
 
 
@@ -431,64 +214,8 @@ COPY public.player (id, login, password, points) FROM stdin;
 --
 
 COPY public.team (id, name, lider_id, team_logo, battle_frequency, team_wins, team_loss, locked) FROM stdin;
-4	sample	4	teamCastle3	7	0	0	f
-6	Qwerty	7	teamCastle1	7	0	0	f
-8	asdfqw	9	teamCastle1	7	0	0	f
-9	oneteam	10	teamCastle1	7	0	0	f
-10	twoteam	11	teamCastle2	7	0	0	f
-11	threeteam	13	teamCastle3	7	0	0	f
-2	qrfgth	2	teamCastle1	14	0	0	f
-12	Olvo	\N	logo	2	0	0	f
+1	qwerty	1	teamCastle2	7	0	0	f
 \.
-
-
---
--- Name: activities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.activities_id_seq', 1, false);
-
-
---
--- Name: character_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.character_id_seq', 20, true);
-
-
---
--- Name: character_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.character_item_id_seq', 6, true);
-
-
---
--- Name: items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.items_id_seq', 1, false);
-
-
---
--- Name: last_battle_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.last_battle_id_seq', 1, false);
-
-
---
--- Name: player_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.player_id_seq', 5, true);
-
-
---
--- Name: team_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.team_id_seq', 4, true);
 
 
 --
