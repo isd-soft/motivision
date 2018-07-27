@@ -3,7 +3,7 @@
 This project is made to encourage practicing sports such as volleyball, swimming, push ups, pull ups and so on.
 Here you will find an implementation of Restful API (Server) & libGdx Android (Client) App.
 <p align="center">
-![MotiVision](readme/MotiVision.gif)
+ <img width="460" height="300" src="/readme/MotiVision.gif">
 </p>
 ## Getting Started
 
