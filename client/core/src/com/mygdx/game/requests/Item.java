@@ -66,13 +66,18 @@ public class Item implements Comparable<Item> {
         return id;
     }
 
-    public static void  calculateMaxPower() {
+    public static int getMaxPower() {
+        return maxPower;
+    }
+
+    private static void  calculateMaxPower() {
         LinkedHashMap<String, Integer>  maxPowerPerType;
         Set<String> types;
         int power;
 
-        if (storeItems == null)
-            loadPriceList();
+        if (storeItems == null) {
+            return;
+        };
         maxPowerPerType = new LinkedHashMap<String, Integer>();
         for (Item item: storeItems) {
             if (maxPowerPerType.containsKey(item.getType())) {
@@ -104,6 +109,7 @@ public class Item implements Comparable<Item> {
             if (jsonObject == null)
                 return;
             storeItems = readStoreItemsFromJson(jsonObject);
+            calculateMaxPower();
             Collections.sort(storeItems);
         } catch (IOException e) {
             e.printStackTrace();
@@ -212,7 +218,7 @@ public class Item implements Comparable<Item> {
     @Override
     public int compareTo(Item item) {
         if (type.equals(item.getType()))
-            return Integer.compare(id, item.getId());
+            return Integer.compare(price, item.getPrice());
         if (type.equals("weapon"))
             return -1;
         if (item.getType().equals("weapon"))
@@ -233,5 +239,45 @@ public class Item implements Comparable<Item> {
         if (item.getType().equals("leggins"))
             return 1;
         return 0;
+    }
+
+    public static Item getMostPowerfulItemByType(String type) {
+        Item mostPowerfulItem = null;
+
+        if (storeItems == null)
+            loadPriceList();
+        for (Item item: storeItems) {
+            if (item.getType().equals(type)) {
+                if (mostPowerfulItem == null)
+                    mostPowerfulItem = item;
+                else if (item.getPrice() > mostPowerfulItem.getPrice())
+                    mostPowerfulItem = item;
+            }
+        }
+        return mostPowerfulItem;
+    }
+
+    public static Item getNextLessPowerfulItemByType(Item currentItem) {
+        Item lessPowerfulItem = null;
+        String currentItemType;
+        int currentItemPrice;
+
+        if (currentItem == null)
+            return null;
+        if (storeItems == null)
+            loadPriceList();
+        currentItemType = currentItem.getType();
+        currentItemPrice = currentItem.getPrice();
+        for (Item item: storeItems) {
+            if (item.getType().equals(currentItemType)) {
+                if (item.getPrice() >= currentItemPrice)
+                    continue;
+                if (lessPowerfulItem == null)
+                    lessPowerfulItem = item;
+                else if (item.getPrice() > lessPowerfulItem.getPrice())
+                    lessPowerfulItem = item;
+            }
+        }
+        return lessPowerfulItem;
     }
 }

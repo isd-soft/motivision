@@ -25,8 +25,8 @@ public class AssetsManager {
     private final String buySound = "data/hammer.mp3";
     private final String deniedSound = "data/denied.mp3";
     private final String equipArmor = "data/equipp.mp3";
-    private final String monsterDeathSound = "data/monsterDeath.mp3";
-    private final String playerHitSound = "data/weaponBlow.mp3";
+    private final String monsterDeathSound = "data/monsterDeath.wav";
+    private final String playerHitSound = "data/weaponBlow.wav";
     private final String gameOst = "data/game-ost1.mp3";
 
     private final String defaultBody = "Body/body_1.png";

@@ -134,7 +134,7 @@ public class CharacterProfileScreen implements Screen {
         TextButton settingsButton = new TextButton("Settings", skin);
         TextButton backButton = new TextButton("Back", skin);
 
-        ImageButton imageButton = null;
+        Button imageButton = null;
 
         Table imageTable = new Table();
         Table screenTable = new Table();
@@ -208,11 +208,11 @@ public class CharacterProfileScreen implements Screen {
         int i = 0;
         for (Item item : items) {
             i++;
-            imageButton = new ImageButton(addImage("store_items/" + item.getImagePath() + ".png", item.getId()));
+            imageButton = new Button(skin);
             imageButton.addListener(new ClickButton(item.getName(), item.getId()));
 
             stack = new Stack();
-            stack.add(imageButton);
+            stack.add(addImage("store_items/" + item.getImagePath() + ".png", item.getId()));
 
             int status = PlayerAccount.getItemStatus(item.getId());
             if (status == Item.STORE_ITEM) {
@@ -223,18 +223,12 @@ public class CharacterProfileScreen implements Screen {
                 stack.add(priceTable);
             }
 
-            imageTable.add(stack).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
+            imageButton.add(stack);
+            imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
             if (imageButton == null) {
-                imageButton = new ImageButton((addImage("store_items/sword_default.png", -1)));
+                imageButton = new ImageButton(skin);
+//                (addImage("store_items/sword_default.png", -1))
             }
-            //Set the button up
-            //add listener to image button, so item will replace already equipped item
-            imageButton.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    //here should go Yes No pop up screen
-                }
-            });
             if(i%3==0)
                 imageTable.row();
 
@@ -285,7 +279,7 @@ public class CharacterProfileScreen implements Screen {
         bDialog.build().show();
     }
 
-    public TextureRegionDrawable addImage(String imagePath, int itemId) {
+    public Image addImage(String imagePath, int itemId) {
         Pixmap pixmap;
 
         pixmap = new Pixmap(Gdx.files.internal(imagePath));
@@ -299,10 +293,11 @@ public class CharacterProfileScreen implements Screen {
             }
         }
         textureImage = new Texture(pixmap);
-        textureRegion = new TextureRegion(textureImage);
-        textureRegionDrawable = new TextureRegionDrawable(textureRegion);
+//        textureRegion = new TextureRegion(textureImage);
+//        textureRegionDrawable = new TextureRegionDrawable(textureRegion);
         pixmap.dispose();
-        return textureRegionDrawable;
+//        return textureRegionDrawable;
+        return new Image(textureImage);
     }
 
 

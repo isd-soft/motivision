@@ -1,20 +1,29 @@
 package com.mygdx.game.screens;
 
+import com.mygdx.game.requests.Item;
 import com.mygdx.game.requests.PlayerAccount;
 
 import java.util.Random;
 
 public class MonsterGenerator {
-    public static final String[] types = {"1", "2", "3", "4"};
+    private static final int WEAPON_INDEX = 0;
+    private static final int BODY_INDEX = 1;
+    private static final int SHIELD_INDEX = 2;
+    private static final int LEGS_INDEX = 3;
+
+    public static final String[] types = {"weapon", "armor", "shield", "leggins"};
     public static final int[] POWERS = {0, 333, 555, 777};
     private static final float MIN_SCALE = 0.5f;
     private static final float MAX_SCALE = 2f;
 
+    private static int maxPower;
+    private static int minPowerForLevel1;
+    private static int minPowerForLevel2;
+    private static int minPowerForLevel3;
 
-    private int bodyType;
-    private int legsType;
-    private int weaponType;
-    private int shieldType;
+
+    private Item[] itemList;
+
     private int power;
     private int head;
     private static float scale = 1;
@@ -30,53 +39,47 @@ public class MonsterGenerator {
         if (power <= profilePower) {
             return;
         }
-        System.out.println("Normalize: " + profilePower + " vs " + power);
-        if (bodyType > 0)
-            bodyType -= rand.nextInt(2);
-        if (legsType > 0)
-            legsType -= rand.nextInt(2);
-        if (weaponType > 0)
-            weaponType -= rand.nextInt(2);
-        if (shieldType > 0)
-            shieldType -= rand.nextInt(2);
-        power = POWERS[bodyType] + POWERS[legsType];
-        power += POWERS[weaponType] + POWERS[shieldType];
+        //System.out.println("Normalize: " + profilePower + " vs " + power);
+        power = 0;
+        for (int i = 0; i < 4; i++) {
+            if (rand.nextInt(2) == 1)
+                itemList[i] = Item.getNextLessPowerfulItemByType(itemList[i]);
+            if (itemList[i] != null) {
+                power += itemList[i].getPrice();
+            }
+
+        }
         normalizeMonsterPower();
     }
 
     private MonsterGenerator() {
         Random rand;
-        int index;
-        int profilePower = 0;
-        int minLevel = 0;
+//        int index;
+//        int profilePower = 0;
+//        int minLevel = 0;
 
+        maxPower = Item.getMaxPower();
+        minPowerForLevel1 = maxPower / 4;
+        minPowerForLevel2 = minPowerForLevel1 * 2;
+        minPowerForLevel3 = minPowerForLevel1 * 3;
         rand = new Random();
         power = 0;
-        profilePower = PlayerAccount.getProfilePower();
-        if (profilePower >= 333 * 3)
-            minLevel++;
-        if (profilePower >= 555 * 3)
-            minLevel++;
-        if (profilePower >= 777 * 3)
-            minLevel++;
-        index = (int) rand.nextInt(4 - minLevel) + minLevel;
-        bodyType = index;
-        power += POWERS[index];
-
-        index = (int) rand.nextInt(4 - minLevel) + minLevel;
-        legsType = index;
-        power += POWERS[index];
-
-        index = (int) rand.nextInt(4 - minLevel) + minLevel;
-        weaponType = index;
-        power += POWERS[index];
-
-        index = (int) rand.nextInt(4 - minLevel) + minLevel;
-        shieldType = index;
-        power += POWERS[index];
+//        profilePower = PlayerAccount.getProfilePower();
+//        if (profilePower >= minPowerForLevel1)
+//            minLevel++;
+//        if (profilePower >= minPowerForLevel2)
+//            minLevel++;
+//        if (profilePower >= minPowerForLevel3)
+//            minLevel++;
+        itemList = new Item[4];
+        for (int i = 0; i < 4; i++) {
+            itemList[i] = Item.getMostPowerfulItemByType(types[i]);
+            if (itemList[i] != null)
+                power += itemList[i].getPrice();
+        }
         normalizeMonsterPower();
         //System.out.println("Monster Power = " + power);
-        scale = MIN_SCALE + (float) power / 3108 * (MAX_SCALE - MIN_SCALE);
+        scale = MIN_SCALE + (float) power / maxPower * (MAX_SCALE - MIN_SCALE);
         //System.out.println("Scale = " + scale);
         head = (int) (rand.nextInt(3)) + 13;
     }
@@ -105,19 +108,27 @@ public class MonsterGenerator {
         return types;
     }
 
-    public String getBodyType() {
-        return types[bodyType];
+    public String getBodyImagePath() {
+        if (itemList[BODY_INDEX] != null)
+            return itemList[BODY_INDEX].getImagePath();
+        return "armor_1";
     }
 
-    public String getLegsType() {
-        return types[legsType];
+    public String getLegsImagePath() {
+        if (itemList[LEGS_INDEX] != null)
+            return itemList[LEGS_INDEX].getImagePath();
+        return "leggins_1";
     }
 
-    public String getWeaponType() {
-        return types[weaponType];
+    public String getWeaponImagePath() {
+        if (itemList[WEAPON_INDEX] != null)
+            return itemList[WEAPON_INDEX].getImagePath();
+        return "weapon_1";
     }
 
-    public String getShieldType() {
-        return types[shieldType];
+    public String getShieldImagePath() {
+        if (itemList[SHIELD_INDEX] != null)
+            return itemList[SHIELD_INDEX].getImagePath();
+        return "shield_1";
     }
 }

@@ -11,8 +11,8 @@ public class GameSounds {
     private Sound itemSound = assetsManager.aManager.get("data/equipp.mp3");
     private Sound deniedSound = assetsManager.aManager.get("data/denied.mp3");
     private Sound buySound = assetsManager.aManager.get("data/hammer.mp3");
-    private Sound hitSound = assetsManager.aManager.get("data/weaponBlow.mp3");
-    private Sound deathSound = assetsManager.aManager.get("data/monsterDeath.mp3");
+    private Sound hitSound = assetsManager.aManager.get("data/weaponBlow.wav");
+    private Sound deathSound = assetsManager.aManager.get("data/monsterDeath.wav");
     private float VOLUME = 1.0f;
     private float volumeStash = 1.0f;
 

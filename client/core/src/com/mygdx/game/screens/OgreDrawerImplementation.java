@@ -4,12 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.brashmonkey.spriter.Drawer;
-import com.brashmonkey.spriter.Loader;
 import com.brashmonkey.spriter.Timeline;
-import com.mygdx.game.gameSets.GGame;
-import com.mygdx.game.requests.PlayerAccount;
-
-import java.util.ArrayList;
 
 public class OgreDrawerImplementation extends Drawer<Sprite> {
 
@@ -59,31 +54,33 @@ public class OgreDrawerImplementation extends Drawer<Sprite> {
             //String key = BodyParts.getById(object.ref.file).name().toLowerCase()+"_"+
             switch (BodyParts.getById(object.ref.file)) {
                 case BODY:
-                    sprite = loaderImplementation.get("armor_" + monster.getBodyType());
+                    sprite = loaderImplementation.get(monster.getBodyImagePath());
                     return sprite;
                 case HEAD:
                     sprite = loaderImplementation.getHead(monster.getHead());
                     return sprite;
                 case LEFT_ARM:
-                    sprite = loaderImplementation.get("left_arm_" + monster.getBodyType());
+                    sprite = loaderImplementation.get("left_arm_" + monster.getBodyImagePath().replace("armor_", ""));
                     return sprite;
                 case RIGHT_ARM:
-                    sprite = loaderImplementation.get("right_arm_" + monster.getBodyType());
+                    sprite = loaderImplementation.get("right_arm_" + monster.getBodyImagePath().replace("armor_", ""));
                     return sprite;
                 case WEAPON:
-                    sprite = loaderImplementation.get("weapon_" + monster.getWeaponType());
+                    sprite = loaderImplementation.get(monster.getWeaponImagePath());
                     return sprite;
                 case SHIELD:
-                    sprite = loaderImplementation.get("shield_" + monster.getShieldType());
+                    sprite = loaderImplementation.get(monster.getShieldImagePath());
                     return sprite;
                 case RIGHT_LEG:
-                    sprite = loaderImplementation.get("right_leg_" + monster.getLegsType());
+                    sprite = loaderImplementation.get("right_leg_" + monster.getLegsImagePath().replace("leggins_", ""));
                     return sprite;
                 case LEFT_LEG:
-                    sprite = loaderImplementation.get("left_leg_" + monster.getLegsType());
+                    sprite = loaderImplementation.get("left_leg_" + monster.getLegsImagePath().replace("leggins_", ""));
                     return sprite;
             }
         }
+        if (sprite == null)
+            System.out.println("Sprite is null for " + BodyParts.getById(object.ref.file));
         return sprite;
     }
 
