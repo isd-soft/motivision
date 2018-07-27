@@ -59,7 +59,7 @@ public class OgreDrawerImplementation extends Drawer<Sprite> {
             //String key = BodyParts.getById(object.ref.file).name().toLowerCase()+"_"+
             switch (BodyParts.getById(object.ref.file)) {
                 case BODY:
-                    sprite = loaderImplementation.get("body_" + monster.getBodyType());
+                    sprite = loaderImplementation.get("armor_" + monster.getBodyType());
                     return sprite;
                 case HEAD:
                     sprite = loaderImplementation.getHead(monster.getHead());

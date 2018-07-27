@@ -343,9 +343,9 @@ public class Team {
         return teamId;
     }
 
-    public int getTeamLeaderId() {
-        return teamLeaderId;
-    }
+//    public int getTeamLeaderId() {
+//        return teamLeaderId;
+//    }
 
     public String getTeamName() {
         return teamName;
@@ -413,52 +413,52 @@ public class Team {
         return lock;
     }
 
-    public JSONArray getTeamMembersArray() {
-        return teamMembersArray;
-    }
-
-    public void setTeamMembersArray(JSONArray teamMembersArray) {
-        this.teamMembersArray = teamMembersArray;
-    }
+//    public JSONArray getTeamMembersArray() {
+//        return teamMembersArray;
+//    }
+//
+//    public void setTeamMembersArray(JSONArray teamMembersArray) {
+//        this.teamMembersArray = teamMembersArray;
+//    }
 
     public void setLock(Boolean lock) {
         this.lock = lock;
     }
 
-    public static int getTeamMemberId() {
-        return -1;
-    }
+//    public static int getTeamMemberId() {
+//        return -1;
+//    }
+//
+//    public Texture getTeamMemberTexture(String name) throws IOException, JSONException {
+//        int profileId;
+//        String urlParameters;
+//        String url;
+//        Profile profile;
+//
+//        profileId = -1;
+//        profile = null;
+//        // printAllMembers();
+//        for (Profile member : teamMembers) {
+//            if (member.getName().equals(name)) {
+//                profileId = member.getId();
+//                profile = member;
+//                break;
+//            }
+//
+//        }
+//        if (profileId == -1) {
+//            JsonHandler.errorMessage = "Character " + name + " does not exist!";
+//
+//            DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
+//            return new Texture("default.png");
+//        }
+//        if (profile == null)
+//            return new Texture("default.png");
+//        profile.loadItems();
+//        return profile.getProfileTexture();
+//    }
 
-    public Texture getTeamMemberTexture(String name) throws IOException, JSONException {
-        int profileId;
-        String urlParameters;
-        String url;
-        Profile profile;
-
-        profileId = -1;
-        profile = null;
-        // printAllMembers();
-        for (Profile member : teamMembers) {
-            if (member.getName().equals(name)) {
-                profileId = member.getId();
-                profile = member;
-                break;
-            }
-
-        }
-        if (profileId == -1) {
-            JsonHandler.errorMessage = "Character " + name + " does not exist!";
-
-            DialogBox.showInfoDialog("Error", JsonHandler.errorMessage);
-            return new Texture("default.png");
-        }
-        if (profile == null)
-            return new Texture("default.png");
-        profile.loadItems();
-        return profile.getProfileTexture();
-    }
-
-    public ArrayList<String> getTeamMemberEquippedItems(String name) throws IOException, JSONException {
+    public ArrayList<Item> getTeamMemberEquippedItems(String name) {
         int profileId;
         Profile profile;
 

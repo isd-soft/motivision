@@ -187,7 +187,10 @@ public class JsonHandler {
                 bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             }
             else {
-                url = new URL(urlString + "?" + urlParameters);
+                if (urlParameters == "")
+                    url = new URL(urlString);
+                else
+                    url = new URL(urlString + "?" + urlParameters);
                 URLConnection connection = url.openConnection();
                 // set the connection timeout to 5 seconds
                 connection.setConnectTimeout(3000);

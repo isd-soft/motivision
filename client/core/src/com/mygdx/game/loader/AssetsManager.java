@@ -25,6 +25,8 @@ public class AssetsManager {
     private final String buySound = "data/hammer.mp3";
     private final String deniedSound = "data/denied.mp3";
     private final String equipArmor = "data/equipp.mp3";
+    private final String monsterDeathSound = "data/monsterDeath.mp3";
+    private final String playerHitSound = "data/weaponBlow.mp3";
     private final String gameOst = "data/game-ost1.mp3";
 
     private final String defaultBody = "Body/body_1.png";
@@ -60,7 +62,7 @@ public class AssetsManager {
     private final String defaultWeapon = "Weapon/weapon_1.png";
     private final String ironWeapon = "Weapon/weapon_2.png";
     private final String steelWeapon = "Weapon/weapon_3.png";
-    private final String goldWeapon = "Weapon/weapon_4.pngg";
+    private final String goldWeapon = "Weapon/weapon_4.png";
 
     private final String elfHeadMale1 = "HeadTypes/head_1.png";
     private final String elfHeadMale2 = "HeadTypes/head_2.png";
@@ -152,40 +154,6 @@ public class AssetsManager {
         aManager.load(player9, Texture.class);
         aManager.load(player10, Texture.class);
         aManager.load(player11, Texture.class);
-//        aManager.load(knightIronHead, Texture.class);
-//        aManager.load(knightIronBody, Texture.class);
-//        aManager.load(knightIronLeftArm, Texture.class);
-//        aManager.load(knightIronRightArm, Texture.class);
-//        aManager.load(knightIronLeftLeg, Texture.class);
-//        aManager.load(knightIronRightLeg, Texture.class);
-//        aManager.load(knightIronShield, Texture.class);
-//        aManager.load(knightIronWeapon, Texture.class);
-//
-//        aManager.load(knightBronzeHead, Texture.class);
-//        aManager.load(knightBronzeBody, Texture.class);
-//        aManager.load(knightBronzeLeftArm, Texture.class);
-//        aManager.load(knightBronzeRightArm, Texture.class);
-//        aManager.load(knightBronzeLeftLeg, Texture.class);
-//        aManager.load(knightBronzeRightLeg, Texture.class);
-//        aManager.load(knightBronzeShield, Texture.class);
-//        aManager.load(knightBronzeWeapon, Texture.class);
-//
-//        aManager.load(knightGoldenHead, Texture.class);
-//        aManager.load(knightGoldenBody, Texture.class);
-//        aManager.load(knightGoldenLeftArm, Texture.class);
-//        aManager.load(knightGoldenRightArm, Texture.class);
-//        aManager.load(knightGoldenLeftLeg, Texture.class);
-//        aManager.load(knightGoldenRightLeg, Texture.class);
-//        aManager.load(knightGoldenShield, Texture.class);
-//        aManager.load(knightGoldenWeapon, Texture.class);
-
-//        aManager.load(spriteAttackAnimation, Texture.class);
-//        aManager.load(boomAnimation, Texture.class);
-//        aManager.load(warriorWalk, Texture.class);
-//        aManager.load(warriorRun, Texture.class);
-//        aManager.load(warriorAttack, Texture.class);
-//        aManager.load(trollDie, Texture.class);
-//        aManager.load(trollRun, Texture.class);
 
         aManager.load(universal, Texture.class);
     }
@@ -258,6 +226,8 @@ public class AssetsManager {
         aManager.load(buySound, Sound.class);
         aManager.load(deniedSound, Sound.class);
         aManager.load(equipArmor, Sound.class);
+        aManager.load(monsterDeathSound, Sound.class);
+        aManager.load(playerHitSound, Sound.class);
     }
 
     public void loadItems(){

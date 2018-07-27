@@ -201,39 +201,29 @@ public class CharacterProfileScreen implements Screen {
         }
 
         //create and fill table with buttons and labels
+        Label priceLabel;
+        Table priceTable;
+        Stack stack;
+        ArrayList<Item> items = PlayerAccount.getStoreItems();
+        int i = 0;
+        for (Item item : items) {
+            i++;
+            imageButton = new ImageButton(addImage("store_items/" + item.getImagePath() + ".png", item.getId()));
+            imageButton.addListener(new ClickButton(item.getName(), item.getId()));
 
-        for (int i = 1; i < 5; i++) {
-            int x = 0;
-            if (i == 1) {
-                for (int e = 0; e < 3; e++) {
-                    imageButton = new ImageButton((addImage("store_items/sword_" + (i + e) + ".png", 1 + e)));
-                    imageButton.addListener(new ClickButton((i + e) + "_sword", 1 + e));
-                    imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
-                }
-                imageTable.row();
-            } else if (i == 2) {
-                for (int e = 0; e < 3; e++) {
-                    imageButton = new ImageButton((addImage("store_items/shield_" + ((i - 1) + e) + ".png", 4 + e)));
-                    imageButton.addListener(new ClickButton(((i - 1) + e) + "_shield", 4 + e));
-                    imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
-                }
-                imageTable.row();
-            } else if (i == 3) {
-                for (int e = 0; e < 3; e++) {
-                    imageButton = new ImageButton((addImage("store_items/armor_" + ((i - 2) + e) + ".png", 7 + e)));
-                    imageButton.addListener(new ClickButton((i - 2) + e + "_armor", 7 + e));
-                    imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
-                }
-                imageTable.row();
-            } else {
-                for (int e = 0; e < 3; e++) {
-                    imageButton = new ImageButton((addImage("store_items/leggins_" + ((i - 3) + e) + ".png", 10 + e)));
-                    imageButton.addListener(new ClickButton((i - 3) + e + "_leggins", 10 + e));
-                    imageTable.add(imageButton).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
-                    x = e;
-                }
-                imageTable.row();
+            stack = new Stack();
+            stack.add(imageButton);
+
+            int status = PlayerAccount.getItemStatus(item.getId());
+            if (status == Item.STORE_ITEM) {
+                priceLabel = new Label("" + item.getPrice(), skin, "price");
+                priceLabel.setAlignment(Align.bottomRight);
+                priceTable = new Table();
+                priceTable.add(priceLabel).bottom().right().expand();
+                stack.add(priceTable);
             }
+
+            imageTable.add(stack).fill().expand().size(80, 80);//.pad(pad, pad, pad, pad);
             if (imageButton == null) {
                 imageButton = new ImageButton((addImage("store_items/sword_default.png", -1)));
             }
@@ -245,7 +235,8 @@ public class CharacterProfileScreen implements Screen {
                     //here should go Yes No pop up screen
                 }
             });
-
+            if(i%3==0)
+                imageTable.row();
 
         }
 
@@ -402,8 +393,7 @@ public class CharacterProfileScreen implements Screen {
                                     CharacterProfileScreen.this.show();
                                     //buyLabel.setText("Nice, go back");
                                 }
-                            }
-                            else {
+                            } else {
                                 //buyLabel.setText("Already bought!");
                             }
                         } catch (IOException e) {
@@ -480,7 +470,7 @@ public class CharacterProfileScreen implements Screen {
             bDialog.build().show();*/
         }
 
-        public void     denyDialog() {
+        public void denyDialog() {
             gameSounds.clickSound();
 
             final TextButton okButton = new TextButton("Ok", skin);

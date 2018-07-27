@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class PlayerAccount {
         PlayerAccount.profile = profile;
     }
 
-    public static ArrayList<String> getEquippedItems() {
+    public static ArrayList<Item> getEquippedItems() {
         if (profile == null)
             return null;
         return profile.getEquippedItems();
@@ -138,13 +139,6 @@ public class PlayerAccount {
         return player.getId();
     }
 
-    public static void printProfile() {
-        if (profile != null)
-            profile.printProfile();
-        else
-            System.out.println("    is null");
-    }
-
     public static void logOut() {
         player = null;
         profile = null;
@@ -159,22 +153,20 @@ public class PlayerAccount {
         return (player != null);
     }
 
-    public static Texture getProfileTexture(String name) throws IOException, JSONException {
-        selectProfile(name);
-        if (profile == null)
-            return new Texture("default.png");
-        //PlayerAccount.selectProfileTeam();
-        return profile.getProfileTexture();
-        //return null;
-    }
+//    public static Texture getProfileTexture(String name) throws IOException, JSONException {
+//        selectProfile(name);
+//        if (profile == null)
+//            return new Texture("default.png");
+//        //PlayerAccount.selectProfileTeam();
+//        return profile.getProfileTexture();
+//        //return null;
+//    }
 
-
-
-    public static Texture getProfileTexture() throws IOException, JSONException {
-        if (profile == null)
-            return new Texture("default.png");
-        return profile.getProfileTexture();
-    }
+//    public static Texture getProfileTexture() throws IOException, JSONException {
+//        if (profile == null)
+//            return new Texture("default.png");
+//        return profile.getProfileTexture();
+//    }
 
     public static Profile selectProfile(String name) throws IOException, JSONException {
         int profileId;
@@ -284,13 +276,13 @@ public class PlayerAccount {
         return profile.getHeadNumber();
     }
 
-    public static Texture getTexture(int headType, int bodyType) {
-        if (headType <= 0 || headType > 3)
-            return new Texture("default.png");
-        if (bodyType <= 0 || bodyType > 3)
-            return new Texture("default.png");
-        return Profile.changeFaceType(headType, bodyType);
-    }
+//    public static Texture getTexture(int headType, int bodyType) {
+//        if (headType <= 0 || headType > 3)
+//            return new Texture("default.png");
+//        if (bodyType <= 0 || bodyType > 3)
+//            return new Texture("default.png");
+//        return Profile.changeFaceType(headType, bodyType);
+//    }
 
     public static int getProfilePoints() {
         if (profile == null)
@@ -483,23 +475,23 @@ public class PlayerAccount {
         return profile.getName();
     }
 
-    public static Texture getTeamMemberTexture(String name) throws IOException, JSONException {
-        if (profile.getName().equals(name))
-            return getProfileTexture(name);
-        try {
-            selectProfileTeam();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if (team == null)
-            return new Texture("default.png");
-        //printAllMembers();
-        return team.getTeamMemberTexture(name);
-    }
+//    public static Texture getTeamMemberTexture(String name) throws IOException, JSONException {
+//        if (profile.getName().equals(name))
+//            return getProfileTexture(name);
+//        try {
+//            selectProfileTeam();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        if (team == null)
+//            return new Texture("default.png");
+//        //printAllMembers();
+//        return team.getTeamMemberTexture(name);
+//    }
 
-    public static ArrayList<String> getTeamMemberEquippedItems(String name) throws IOException, JSONException {
+    public static ArrayList<Item> getTeamMemberEquippedItems(String name) throws IOException, JSONException {
         if (profile == null)
             return null;
         if (profile.getName().equals(name))
@@ -521,5 +513,9 @@ public class PlayerAccount {
         if (team == null)
             return 0;
         return team.getTeamMemberHeadNumber(name);
+    }
+
+    public static ArrayList<Item>   getStoreItems() {
+        return Item.getStoreItems();
     }
 }

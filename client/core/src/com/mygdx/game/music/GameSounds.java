@@ -11,6 +11,8 @@ public class GameSounds {
     private Sound itemSound = assetsManager.aManager.get("data/equipp.mp3");
     private Sound deniedSound = assetsManager.aManager.get("data/denied.mp3");
     private Sound buySound = assetsManager.aManager.get("data/hammer.mp3");
+    private Sound hitSound = assetsManager.aManager.get("data/weaponBlow.mp3");
+    private Sound deathSound = assetsManager.aManager.get("data/monsterDeath.mp3");
     private float VOLUME = 1.0f;
     private float volumeStash = 1.0f;
 
@@ -66,6 +68,15 @@ public class GameSounds {
     public void deniedSound() {
         if (isEnabled())
             deniedSound.play(VOLUME);
+    }
+
+    public void hitSound(){
+        if(isEnabled())
+            hitSound.play(VOLUME);
+    }
+    public void deathSound(){
+        if(isEnabled())
+            deathSound.play(VOLUME);
     }
 
 }

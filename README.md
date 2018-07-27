@@ -55,4 +55,132 @@ Executable jar will be saved in following directory:
 /motivision/client/desktop/build/libs
 ```
 --------------------------------------------------------------------------------------
-# How to use API:
+# How to use API
+
+## List of disponible controllers:
+```
+Team
+Player
+Character
+Activities
+Battle
+Login
+Test
+Item
+```
+
+### Team has following requests:
+
+/get_team?teamId=X
+```
+/*
+ * Get team info request
+ * Used to get team info by teamId
+ * @param teamId - id of the team to get data
+ * @return if such team exist return Json info about the team
+ * @return if no such team exist return Json fail message
+ * */
+ 
+ Example of output data:
+ 
+  If team is not found you will see this:
+   {"status":"failed","message":"team not found"}
+ 
+  If team is found it returns following JSON data:
+  {
+     "status": "success",
+     "teamId": 1,
+     "teamName": "Team",
+     "liderId": 24,
+     "teamLogo": "noLogo",
+     "battleFrequency": 7,
+     "teamWins": 172,
+     "teamLoss": 30,
+     "lock": false,
+     "characters": [
+         {
+             "characterId": 25,
+             "characterName": "Admin",
+             "playerId": 38,
+             "teamId": 17,
+             "isAdmin": "true",
+             "headType": 1,
+             "bodyType": 1,
+             "gender": "M",
+             "points": 2343
+         },
+         {
+             "characterId": 29,
+             "characterName": "User",
+             "playerId": 38,
+             "teamId": 17,
+             "isAdmin": "false",
+             "headType": 1,
+             "bodyType": 1,
+             "gender": "F",
+             "points": 300
+         }
+     ]
+ }
+ 
+```
+
+/get_team_members?teamId=X
+```
+/*
+* Get team members request
+* Used to get a list of all team members
+* @param teamId - team to search characters in
+* @return status - failed if no such team exist
+* @return status - success if request was successful
+* @return teamMembers - null if no teamMembers
+* @return teamMembers - list of all teamMembers
+* */
+
+ Example of output data:
+ 
+  If team is not found you will see this:
+   {"status":"failed","message":"team not found"}
+ 
+  If team is found it returns following JSON data:
+  {
+      "status": "success",
+      "teamMembers": [
+          {
+              "characterId": "25",
+              "characterName": "jijiji",
+              "headType": 1,
+              "bodyType": 1,
+              "gender": "M",
+              "points": 0
+          },
+          {
+              "characterId": "29",
+              "characterName": "atdasd",
+              "headType": 1,
+              "bodyType": 1,
+              "gender": "M",
+              "points": 0
+          }
+    ]
+}
+```
+--------------------------------------------------------------
+# Tomcat
+Tutorial (google):
+http://www.ntu.edu.sg/home/ehchua/programming/howto/tomcat_howto.html
+
+Tutorial (motivision):
+
+Download: https://tomcat.apache.org/download-80.cgi
+![Build you own war](readme/apache/1.png?raw=true "Don't click me")
+![Build you own war](readme/apache/2.png?raw=true "Don't click me")
+![Build you own war](readme/apache/2.1.png?raw=true "Don't click me")
+![Build you own war](readme/apache/3.png?raw=true "Don't click me")
+![Build you own war](readme/apache/4.png?raw=true "Don't click me")
+![Build you own war](readme/apache/5.png?raw=true "Don't click me")
+![Build you own war](readme/apache/6.png?raw=true "Don't click me")
+![Build you own war](readme/apache/7.png?raw=true "Don't click me")
+![Build you own war](readme/apache/8.png?raw=true "Don't click me")
+GO:
+![Build you own war](readme/apache/9.png?raw=true "Don't click me")

@@ -5,14 +5,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
-import javax.rmi.CORBA.StubDelegate;
+import sun.awt.image.ImageWatched;
 
-public class Item {
+public class Item implements Comparable<Item> {
     public static final String ITEM_ID = "itemId";
-    public static final String ITEM_IMAGE = "itemImageUrl";
+    public static final String ITEM_IMAGE = "itemImagePath";
+    public static final String ITEM_NAME = "itemName";
     public static final String ITEM_PRICE = "itemPrice";
     public static final String ITEM_EQUIPPED = "equipped";
     public static final String ITEM_TYPE = "itemType";
@@ -24,26 +30,29 @@ public class Item {
     private static int  powerLevel1;
     private static int  powerLevel2;
     private static int  powerLevel3;
+    private static int maxPower;
 
     private int id;
-    private int image;
+    private String  name;
+    private String  imagePath;
     private int price;
     private String type;
     private boolean equipped;
-    private static LinkedHashMap<Integer, Integer> priceList = null;
-    private static List<Item> itemList = null;
+//    private static LinkedHashMap<Integer, Integer> storeItems = null;
+    private static ArrayList<Item> storeItems = null;
 
-    public Item(int id, int image, int price, String type, boolean equipped) {
+    public Item(int id, String name, String imagePath, int price, String type, boolean equipped) {
         this.id = id;
-        this.image = image;
+        this.name = name;
+        this.imagePath = imagePath;
         this.price = price;
         this.type = type;
         this.equipped = equipped;
     }
 
-    public void print() {
-        System.out.println("item: id(" + id + "), image(" + image + "), price(" + price + "), type(" + type + ")");
-    }
+//    public void print() {
+//        System.out.println("item: id(" + id + "), image(" + image + "), price(" + price + "), type(" + type + ")");
+//    }
 
     public String getType() {
         return type;
@@ -57,33 +66,115 @@ public class Item {
         return id;
     }
 
-    private static void loadPriceList() throws IOException, JSONException {
+    public static void  calculateMaxPower() {
+        LinkedHashMap<String, Integer>  maxPowerPerType;
+        Set<String> types;
+        int power;
+
+        if (storeItems == null)
+            loadPriceList();
+        maxPowerPerType = new LinkedHashMap<String, Integer>();
+        for (Item item: storeItems) {
+            if (maxPowerPerType.containsKey(item.getType())) {
+                power = maxPowerPerType.get(item.getType());
+                if (power < item.getPrice())
+                    maxPowerPerType.put(item.getType(), item.getPrice());
+            }
+            else
+                maxPowerPerType.put(item.getType(), item.getPrice());
+        }
+        types = maxPowerPerType.keySet();
+        power = 0;
+        for (String type: types) {
+            power += maxPowerPerType.get(type);
+        }
+        maxPower = power;
+    }
+
+    private static void loadPriceList() {
         String url;
         String urlParameters;
         JSONObject jsonObject;
         JSONArray jsonArray;
-        int     maxPower;
-        int     price;
 
-        url = JsonHandler.domain + "/get_item_price";
+        url = JsonHandler.domain + "/get_store_items";
         urlParameters = "";
-        jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
-        if (jsonObject == null)
-            return;
-        jsonArray = jsonObject.getJSONArray("items");
-        priceList = new LinkedHashMap<Integer, Integer>(jsonArray.length());
-        for (int i = 0; i < jsonArray.length(); i++) {
-            priceList.put(jsonArray.getJSONObject(i).getInt(ITEM_ID),
-                    jsonArray.getJSONObject(i).getInt(ITEM_PRICE));
+        try {
+            jsonObject = JsonHandler.readJsonFromUrl(url, urlParameters, "GET");
+            if (jsonObject == null)
+                return;
+            storeItems = readStoreItemsFromJson(jsonObject);
+            Collections.sort(storeItems);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
-    public static int getItemPrice(int itemId) throws IOException, JSONException {
+    private static ArrayList<Item> readStoreItemsFromJson(JSONObject jsonObject) throws JSONException {
+        Item   item;
+        String itemName;
+        String itemType;
+        String itemImage;
+        int itemId;
+        int itemPrice;
+        boolean equipped;
+        ArrayList<Item>  itemsList;
+
+        itemsList = new ArrayList<Item>();
+        if (jsonObject.has("items") == false)
+            return itemsList;
+        if (jsonObject.isNull("items"))
+            return itemsList;
+
+        if (jsonObject.get("items") == null)
+            return itemsList;
+        JSONArray arr;
+        try {
+            arr = jsonObject.getJSONArray("items");
+        } catch (JSONException e) {
+            return itemsList;
+        }
+        if (arr == null)
+            return itemsList;
+
+        for (int i = 0; i < arr.length(); i++) {
+            itemId = arr.getJSONObject(i).getInt(Item.ITEM_ID);
+            itemName = arr.getJSONObject(i).getString(Item.ITEM_NAME);
+            itemImage = arr.getJSONObject(i).getString(Item.ITEM_IMAGE);
+            itemPrice = arr.getJSONObject(i).getInt(Item.ITEM_PRICE);
+            itemType = arr.getJSONObject(i).getString(Item.ITEM_TYPE);
+            item = new Item(itemId, itemName, itemImage, itemPrice, itemType, false);
+            itemsList.add(item);
+        }
+        return itemsList;
+    }
+
+    public static Item getItem(int itemId) throws IOException, JSONException {
         if (itemId == -1)
-            return -1;
-        if (priceList == null)
+            return null;
+        if (storeItems == null)
             loadPriceList();
-        return priceList.get(itemId);
+        return storeItems.get(itemId);
+    }
+
+    public static ArrayList<Item> getStoreItems() {
+        if (storeItems == null) {
+            loadPriceList();
+        }
+        return storeItems;
+    }
+
+    public static int  getItemPrice(int id) {
+        if (storeItems == null) {
+            loadPriceList();
+        }
+        for (Item item: storeItems) {
+            if (item.getId() == id)
+                return item.getPrice();
+        }
+        return -1;
     }
 
     public void equip() {
@@ -95,7 +186,7 @@ public class Item {
     }
 
     public String getName() {
-        return type;
+        return name;
     }
 
     public static int getPowerLevel1() {
@@ -108,5 +199,39 @@ public class Item {
 
     public static int getPowerLevel3() {
         return powerLevel3;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    @Override
+    public int compareTo(Item item) {
+        if (type.equals(item.getType()))
+            return Integer.compare(id, item.getId());
+        if (type.equals("weapon"))
+            return -1;
+        if (item.getType().equals("weapon"))
+            return 1;
+
+        if (type.equals("armor"))
+            return -1;
+        if (item.getType().equals("armor"))
+            return 1;
+
+        if (type.equals("shield"))
+            return -1;
+        if (item.getType().equals("shield"))
+            return 1;
+
+        if (type.equals("leggins"))
+            return -1;
+        if (item.getType().equals("leggins"))
+            return 1;
+        return 0;
     }
 }
