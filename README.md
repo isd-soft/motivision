@@ -5,6 +5,8 @@ Here you will find an implementation of Restful API (Server) & libGdx Android (C
 <p align="center">
  <img width="600" height="300" src="/readme/MotiVision.gif">
 </p>
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment notes from below on how to deploy the project on a live system.
