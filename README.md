@@ -102,7 +102,7 @@ Executable jar will be saved in following directory:
 --------------------------------------------------------------------------------------
 # How to use API
 
-## List of disponible controllers:
+## List of existing controllers:
 ```
 Team
 Login
